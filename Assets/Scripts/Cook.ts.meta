@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: 22413cef26625b6449cfd8f351707cf0
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass CookSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    Start() {\\r\\n        this.plateIndex = 0;\\r\\n        this.plateLimit
+    = this.plateImages.length;\\r\\n        this.InitPlate();\\r\\n        var index
+    = 0;\\r\\n        for (var slot of this.ingredientSlots) {\\r\\n            slot.onClick.AddListener(()
+    => {\\r\\n                this.SetIngredient(index);\\r\\n            });\\r\\n           
+    UnityEngine_1.Debug.Log(index);\\r\\n            index++;\\r\\n        }\\r\\n       
+    this.plate.onClick.AddListener(() => {\\r\\n            this.Serve();\\r\\n       
+    });\\r\\n    }\\r\\n    // \uFFFD\uFFFD\u1E26 \uFFFD\uFFFD\uFFFD\xFF\uFFFD \uFFFD\uFFFD\xB4\uFFFD.\\r\\n   
+    SetIngredient(index) {\\r\\n        // \uFFFD\uFFFD\u1C21 \uFFFD\u02B0\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u02BE\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\\r\\n        if (this.plateLimit
+    > this.plateIndex) {\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u0339\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u0339\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\xFC\uFFFD\u0474\uFFFD.\\r\\n            //this.plateImages[this.plateIndex].image.sprite
+    = this.ingredientSlots[index].image.sprite;\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u0339\uFFFD\uFFFD\uFFFD \u0230\uFFFD\uFFFD\u022D\\r\\n            this.plateImages[this.plateIndex].image.enabled
+    = true;\\r\\n            UnityEngine_1.Debug.Log(this.plateImages[this.plateIndex].image.enabled);\\r\\n           
+    this.plateIndex++;\\r\\n        }\\r\\n    }\\r\\n    // \uFFFD\u4E2E\uFFFD\uFFFD
+    \uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD.\\r\\n    Serve() {\\r\\n        /* \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u4E2E\uFFFD\uFFFD \uFFFD\u05B4\uFFFD\uFFFD\uFFFD \u022E\uFFFD\uFFFD \uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD */\\r\\n        this.InitPlate();\\r\\n    }\\r\\n   
+    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D\\r\\n    InitPlate() {\\r\\n       
+    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u0339\uFFFD\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D\\r\\n       
+    for (var images of this.plateImages) {\\r\\n            // \uFFFD\u0339\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\u0230\uFFFD\uFFFD\u022D\\r\\n            images.image.enabled =
+    false;\\r\\n            UnityEngine_1.Debug.Log(images.image.enabled);\\r\\n       
+    }\\r\\n        // \uFFFD\uFFFD\uFFFD\xFF\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD
+    \uFFFD\u03B5\uFFFD\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D\\r\\n        this.plateIndex
+    = 0;\\r\\n    }\\r\\n}\\r\\nexports.default = CookSlot;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29vay5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNvb2sudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFDckQsNkNBQXlEO0FBR3pELE1BQXFCLFFBQVMsU0FBUSxxQ0FBcUI7SUFVdkQsS0FBSztRQUNELElBQUksQ0FBQyxVQUFVLEdBQUcsQ0FBQyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUM7UUFDMUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1FBRWpCLElBQUksS0FBSyxHQUFRLENBQUMsQ0FBQztRQUNuQixLQUFLLElBQUksSUFBSSxJQUFJLElBQUksQ0FBQyxlQUFlLEVBQUU7WUFDbkMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO2dCQUMxQixJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQzlCLENBQUMsQ0FBQyxDQUFDO1lBQ0gsbUJBQUssQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDakIsS0FBSyxFQUFFLENBQUM7U0FDWDtRQUVELElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDaEMsSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ2pCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELGtCQUFrQjtJQUNsQixhQUFhLENBQUMsS0FBVTtRQUVwQix3QkFBd0I7UUFDeEIsSUFBSSxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxVQUFVLEVBQUU7WUFFbkMsc0NBQXNDO1lBQ3RDLDRGQUE0RjtZQUM1RixrQkFBa0I7WUFDbEIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsS0FBSyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUM7WUFDdkQsbUJBQUssQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQzNELElBQUksQ0FBQyxVQUFVLEVBQUUsQ0FBQztTQUNyQjtJQUNMLENBQUM7SUFFRCxnQkFBZ0I7SUFDaEIsS0FBSztRQUNELG1DQUFtQztRQUVuQyxJQUFJLENBQUMsU0FBUyxFQUFFLENBQUM7SUFDckIsQ0FBQztJQUVELFlBQVk7SUFDWixTQUFTO1FBQ0wsa0JBQWtCO1FBQ2xCLEtBQUssSUFBSSxNQUFNLElBQUksSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUNqQyxlQUFlO1lBQ2YsTUFBTSxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO1lBQzdCLG1CQUFLLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUM7U0FDbkM7UUFDRCw0QkFBNEI7UUFDNUIsSUFBSSxDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUM7SUFDeEIsQ0FBQztDQUNKO0FBOURELDJCQThEQyJ9\",\"assetPath\":\"Assets/Scripts/Cook.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"ingredientSlots\",\"type\":\"UnityEngine.UI.Button[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"plate\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"plateImages\",\"type\":\"UnityEngine.UI.Button[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"plateIndex\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"plateLimit\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"CookSlot\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 7b3352b10af310e13dece7a51e725ccc
+  onlyWriteTrigger: 0

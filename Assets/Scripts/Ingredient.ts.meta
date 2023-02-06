@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: d20db70efeafa5b4490560781208bb11
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.COOK_PRIORITY = void 0;\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\n// \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD \uFFFD\uCF31\uFFFD\uFFFD\uFFFD\uFFFD\\r\\nexports.COOK_PRIORITY
+    = {\\r\\n    Bottom: 0,\\r\\n    Middle: 1,\\r\\n    Top: 2 // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\u05B4\uFFFD \uFFFD\uFFFD\\r\\n};\\r\\nclass Ingredient
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    Start() {\\r\\n    }\\r\\n}\\r\\nexports.default
+    = Ingredient;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5ncmVkaWVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkluZ3JlZGllbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQ0EsaURBQXFEO0FBTXJELGlCQUFpQjtBQUNKLFFBQUEsYUFBYSxHQUFHO0lBQ3pCLE1BQU0sRUFBRSxDQUFDO0lBQ1QsTUFBTSxFQUFFLENBQUM7SUFDVCxHQUFHLEVBQUUsQ0FBQyxDQUFNLHFCQUFxQjtDQUNwQyxDQUFBO0FBRUQsTUFBcUIsVUFBVyxTQUFRLHFDQUFxQjtJQUt6RCxLQUFLO0lBQ0wsQ0FBQztDQUNKO0FBUEQsNkJBT0MifQ==\",\"assetPath\":\"Assets/Scripts/Ingredient.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"type\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"visible_height\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"Ingredient\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 2cafa267a64736c4b43b57f576610a83
+  onlyWriteTrigger: 0

@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: bb375eb55cd9444488be4a7dd4186cbc
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst Timer_1 = require(\\\"./Timer\\\");\\r\\nclass
+    GameManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super();\\r\\n    }\\r\\n    static Instance() {\\r\\n       
+    return this.instance || (this.instance = new this());\\r\\n    }\\r\\n    Awake()
+    {\\r\\n        //this.InvokeRepeating(\\\"DelayedUpdate\\\", 1.0, 1.0);\\r\\n   
+    }\\r\\n    Start() {\\r\\n        this.timer = new Timer_1.default();\\r\\n   
+    }\\r\\n    /*    Update() {\\r\\n    \\r\\n        }*/\\r\\n    DelayedUpdate()
+    {\\r\\n        this.timer.UpdateTime();\\r\\n        //if (UIManager.Instance)
+    UIManager.Instance.call(\\\"DisplayTime\\\", this.timer.GetHour, this.timer.GetMinute);\\r\\n       
+    UnityEngine_1.Debug.Log(this.timer.Hour);\\r\\n        /*\\r\\n         * \uC2DC\uAC04\uC758
+    \uBCC0\uD654\uC5D0 \uB530\uB77C \uBC1D\uAE30 \uBCC0\uD654\\r\\n        */\\r\\n       
+    // \uC2DC\uAC04\uC774 \uBCC0\uD588\uC744 \uACBD\uC6B0\uC5D0\uB9CC \uB3D9\uC791\uD55C\uB2E4.\\r\\n       
+    if (this.lastSavedHour != this.timer.Hour) {\\r\\n        }\\r\\n        // \uB9C8\uC9C0\uB9C9
+    \uC2DC\uAC04 \uC800\uC7A5\\r\\n        this.lastSavedHour = this.timer.Hour;\\r\\n   
+    }\\r\\n}\\r\\nexports.default = GameManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHYW1lTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLGlEQUFxRDtBQUVyRCw2Q0FBd0U7QUFFeEUsbUNBQTRCO0FBRzVCLE1BQXFCLFdBQVksU0FBUSxxQ0FBcUI7SUFJMUQ7UUFDSSxLQUFLLEVBQUUsQ0FBQztJQUNaLENBQUM7SUFFTSxNQUFNLENBQUMsUUFBUTtRQUNsQixPQUFPLElBQUksQ0FBQyxRQUFRLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksSUFBSSxFQUFFLENBQUMsQ0FBQTtJQUN4RCxDQUFDO0lBS0QsS0FBSztRQUNELGtEQUFrRDtJQUN0RCxDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxlQUFLLEVBQUUsQ0FBQztJQUM3QixDQUFDO0lBRUw7O1dBRU87SUFHSCxhQUFhO1FBQ1QsSUFBSSxDQUFDLEtBQUssQ0FBQyxVQUFVLEVBQUUsQ0FBQztRQUN4QiwyR0FBMkc7UUFDM0csbUJBQUssQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUUzQjs7VUFFRTtRQUVGLHFCQUFxQjtRQUNyQixJQUFJLElBQUksQ0FBQyxhQUFhLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUU7U0FFMUM7UUFDRCxZQUFZO1FBQ1osSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQztJQUN6QyxDQUFDO0NBQ0o7QUE1Q0QsOEJBNENDIn0=\",\"assetPath\":\"Assets/Scripts/GameManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"\",\"name\":\"timer\",\"type\":\"C:/Users/Jun/Documents/GitHub/WakKitchen/Assets/Scripts/Timer.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"GameManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 294d1d0308dd588901587882a0624ac2
+  onlyWriteTrigger: 0

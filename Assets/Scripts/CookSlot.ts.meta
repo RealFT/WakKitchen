@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 3d4d320f225b7ea4b900bdb0b20708e6
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_SceneManagement_1 = require(\"UnityEngine.SceneManagement\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass UIEvent extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.startBtn.onClick.AddListener(() => {\r\n           
+    this.MoveScene(this.sceneName);\r\n        });\r\n    }\r\n    MoveScene(scene)
+    {\r\n        UnityEngine_SceneManagement_1.SceneManager.LoadScene(scene);\r\n   
+    }\r\n}\r\nexports.default = UIEvent;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29va1Nsb3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDb29rU2xvdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZFQUEyRDtBQUMzRCxpREFBcUQ7QUFHckQsTUFBcUIsT0FBUSxTQUFRLHFDQUFxQjtJQU10RCxLQUFLO1FBQ0QsSUFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNuQyxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUNuQyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCxTQUFTLENBQUMsS0FBYTtRQUNuQiwwQ0FBWSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNsQyxDQUFDO0NBQ0o7QUFmRCwwQkFlQyJ9","assetPath":"Assets/Scripts/CookSlot.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"sceneName","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"startBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIEvent","description":""},"isCompiled":true}'
+  typescriptHash: 14fe3208272ab1711e6f17e12b6b8ec7
+  onlyWriteTrigger: 0
