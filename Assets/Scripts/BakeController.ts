@@ -11,9 +11,8 @@ export default class BakeController extends ZepetoScriptBehaviour {
     public burntPattySprite: Sprite;
     public bakeTime: number;
     public burnTime: number; 
-    //private currentTime: number = 0;
-    private isBaked: bool;
-    private isFliped: bool;
+    private currentTime: number = 0;
+    private isBaking: bool;
 
     Start() {
         Debug.Log(this.bakedButton.image.sprite);
@@ -23,11 +22,13 @@ export default class BakeController extends ZepetoScriptBehaviour {
         this.bakedButton.interactable = false;
         this.bakedButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
-        this.prepping.onClick.AddListener(this.StartBaking);
+        this.prepping.onClick.AddListener(() => {this.StartBaking();});
     }
 
     // 조리 시작
     private StartBaking() {
+        // 재료 버튼 비활성화
+        this.prepping.gameObject.SetActive(false);
         // 불판 위에 위치한 버튼 이미지를 해당 음식 이미지로 변경
         this.bakedButton.image.sprite = this.prepping.image.sprite;
         // 불판 위 버튼 활성화
@@ -37,48 +38,53 @@ export default class BakeController extends ZepetoScriptBehaviour {
     
         this.bakedButton.onClick.RemoveAllListeners();
         //this.bakedButton.onClick.AddListener(this.FlipPatty);
-        this.isBaked = false;
-        this.isFliped = false;
+        this.isBaking = true;
         this.StartCoroutine(this.DoBaking());
     }
 
     // 베이킹 코루틴
     *DoBaking() {
-        let currentTime = 0;
-        while (!this.isFliped && !this.isBaked) {
-            currentTime += Time.deltaTime;
-            this.bakeSlider.value = currentTime / this.bakeTime;
+        this.currentTime = 0;
+        let flipCount = 0;
+        while (flipCount <2) {
+            this.currentTime += Time.deltaTime;
+            this.bakeSlider.value = this.currentTime / this.burnTime;
 
-            if (currentTime >= this.bakeTime && !this.isBaked) {
+            if (this.currentTime >= this.bakeTime && this.isBaking) {
                 this.bakedButton.image.sprite = this.bakedPattySprite;
-                this.isBaked = true;
+                this.isBaking = false;
                 this.bakedButton.interactable = true;
-                this.bakedButton.onClick.AddListener(this.FlipPatty);
+                this.bakedButton.onClick.RemoveAllListeners();
+                this.bakedButton.onClick.AddListener(() => { this.FlipPatty(); });
+                flipCount++;
             }
-            else if (currentTime >= this.burnTime) {
+            if (this.currentTime >= this.burnTime) {
                 this.bakedButton.image.sprite = this.burntPattySprite;
                 this.StopBaking();
                 break;
             }
             yield new WaitForSeconds(Time.deltaTime);
         }
+        // baking done.
+        this.StopBaking();
     }
 
     private FlipPatty() {
-        this.isBaked = false;
-        this.isFliped = true;
+        this.currentTime = 0;
+        this.isBaking = true;
         this.bakedButton.interactable = false;
         this.bakedButton.image.sprite = this.prepping.image.sprite;
     }
 
     private StopBaking() {
-        this.isBaked = false;
+        this.isBaking = false;
         this.bakedButton.interactable = true;
-        this.bakedButton.onClick.AddListener(this.RemoveBurnt);
+        this.bakedButton.onClick.AddListener(() => { this.ClearGrill(); });
     }
 
-    private RemoveBurnt() {
-        this.isBaked = false;
+    private ClearGrill() {
+        this.prepping.gameObject.SetActive(true);
+        this.isBaking = false;
         this.bakedButton.interactable = false;
         this.bakedButton.onClick.RemoveAllListeners();
         this.bakedButton.gameObject.SetActive(false);
