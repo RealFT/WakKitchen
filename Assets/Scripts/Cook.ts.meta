@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 22413cef26625b6449cfd8f351707cf0
+guid: d63b0a9d883fa434c8faa505f675d91b
 importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
 ScriptedImporter:
   internalIDToNameTable: []
@@ -18,36 +18,23 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
-    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
-    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass CookSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\\r\\n    Start() {\\r\\n        this.plateIndex = 0;\\r\\n        this.plateLimit
-    = this.plateImages.length;\\r\\n        this.InitPlate();\\r\\n        for (var
-    index = 0; index < this.ingredientSlots.length; index++) {\\r\\n            this.SetIngredient(index);\\r\\n       
-    }\\r\\n        this.plate.onClick.AddListener(() => {\\r\\n            this.Serve();\\r\\n       
-    });\\r\\n    }\\r\\n    // \uFFFD\uFFFD\u1E26 \uFFFD\uFFFD\uFFFD\xFF\uFFFD \uFFFD\uFFFD\xB4\uFFFD.\\r\\n   
-    SetIngredient(index) {\\r\\n        // \uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\u01B0\uFFFD\uFFFD
-    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u07F0\uFFFD\\r\\n        this.ingredientSlots[index].onClick.AddListener(()
-    => {\\r\\n            // \uFFFD\uFFFD\u1C21 \uFFFD\u02B0\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
-    \uFFFD\u02BE\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\\r\\n            if (this.plateLimit
-    > this.plateIndex) {\\r\\n                UnityEngine_1.Debug.Log(this.ingredientSlots[index].image.sprite);\\r\\n               
-    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u0339\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
-    \uFFFD\u0339\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\xFC\uFFFD\u0474\uFFFD.\\r\\n               
-    this.plateImages[this.plateIndex].sprite = this.ingredientSlots[index].image.sprite;\\r\\n               
-    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u0339\uFFFD\uFFFD\uFFFD \u0230\uFFFD\uFFFD\u022D\\r\\n               
-    this.plateImages[this.plateIndex].enabled = true;\\r\\n                UnityEngine_1.Debug.Log(this.plateImages[this.plateIndex].enabled);\\r\\n               
-    this.plateIndex++;\\r\\n            }\\r\\n        });\\r\\n        UnityEngine_1.Debug.Log(\\\"SetIngredient:
-    \\\" + index);\\r\\n    }\\r\\n    // \uFFFD\u4E2E\uFFFD\uFFFD \uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD.\\r\\n   
-    Serve() {\\r\\n        /* \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u4E2E\uFFFD\uFFFD
-    \uFFFD\u05B4\uFFFD\uFFFD\uFFFD \u022E\uFFFD\uFFFD \uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD
-    */\\r\\n        this.InitPlate();\\r\\n    }\\r\\n    // \uFFFD\uFFFD\uFFFD\uFFFD
-    \uFFFD\u02B1\uFFFD\u022D\\r\\n    InitPlate() {\\r\\n        // \uFFFD\uFFFD\uFFFD\uFFFD
-    \uFFFD\u0339\uFFFD\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D\\r\\n        for (var
-    images of this.plateImages) {\\r\\n            // \uFFFD\u0339\uFFFD\uFFFD\uFFFD
-    \uFFFD\uFFFD\u0230\uFFFD\uFFFD\u022D\\r\\n            images.enabled = false;\\r\\n           
-    UnityEngine_1.Debug.Log(images.enabled);\\r\\n        }\\r\\n        // \uFFFD\uFFFD\uFFFD\xFF\uFFFD
-    \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD \uFFFD\u03B5\uFFFD\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D\\r\\n       
-    this.plateIndex = 0;\\r\\n    }\\r\\n}\\r\\nexports.default = CookSlot;\\r\\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29vay5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNvb2sudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFDckQsNkNBQXlEO0FBR3pELE1BQXFCLFFBQVMsU0FBUSxxQ0FBcUI7SUFTdkQsS0FBSztRQUNELElBQUksQ0FBQyxVQUFVLEdBQUcsQ0FBQyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUM7UUFDMUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1FBRWpCLEtBQUssSUFBSSxLQUFLLEdBQVEsQ0FBQyxFQUFFLEtBQUssR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsRUFBRTtZQUNuRSxJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDO1NBQzdCO1FBRUQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNoQyxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDakIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQsa0JBQWtCO0lBQ2xCLGFBQWEsQ0FBQyxLQUFVO1FBQ3BCLHVCQUF1QjtRQUN2QixJQUFJLENBQUMsZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3JELHdCQUF3QjtZQUNwQixJQUFJLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsRUFBRTtnQkFFdkMsbUJBQUssQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQ3BELHNDQUFzQztnQkFDdEMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxlQUFlLENBQUMsS0FBSyxDQUFDLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQztnQkFDcEYsa0JBQWtCO2dCQUNsQixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO2dCQUNqRCxtQkFBSyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQztnQkFDckQsSUFBSSxDQUFDLFVBQVUsRUFBRSxDQUFDO2FBQ2pCO1FBQ0wsQ0FBQyxDQUFDLENBQUM7UUFDSCxtQkFBSyxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsR0FBRyxLQUFLLENBQUMsQ0FBQztJQUN6QyxDQUFDO0lBRUQsZ0JBQWdCO0lBQ2hCLEtBQUs7UUFDRCxtQ0FBbUM7UUFFbkMsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO0lBQ3JCLENBQUM7SUFFRCxZQUFZO0lBQ1osU0FBUztRQUNMLGtCQUFrQjtRQUNsQixLQUFLLElBQUksTUFBTSxJQUFJLElBQUksQ0FBQyxXQUFXLEVBQUU7WUFDakMsZUFBZTtZQUNmLE1BQU0sQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO1lBQ3ZCLG1CQUFLLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztTQUM3QjtRQUNELDRCQUE0QjtRQUM1QixJQUFJLENBQUMsVUFBVSxHQUFHLENBQUMsQ0FBQztJQUN4QixDQUFDO0NBQ0o7QUE1REQsMkJBNERDIn0=\",\"assetPath\":\"Assets/Scripts/Cook.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"ingredientSlots\",\"type\":\"UnityEngine.UI.Button[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"plate\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"plateImages\",\"type\":\"UnityEngine.UI.Image[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"plateIndex\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"plateLimit\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"CookSlot\",\"description\":\"\"},\"isCompiled\":true}"
-  typescriptHash: b24685bf8772fb649af4cedec1dd768f
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nclass CookSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.plateIndex = 0;\r\n        this.plateLimit
+    = this.plateImages.length;\r\n        this.InitPlate();\r\n        for (var index
+    = 0; index < this.ingredientSlots.length; index++) {\r\n            this.SetIngredient(index);\r\n       
+    }\r\n        this.plate.onClick.AddListener(() => {\r\n            this.Serve();\r\n       
+    });\r\n    }\r\n    SetIngredient(index) {\r\n        this.ingredientSlots[index].onClick.AddListener(()
+    => {\r\n            if (this.plateLimit > this.plateIndex) {\r\n               
+    UnityEngine_1.Debug.Log(this.ingredientSlots[index].image.sprite);\r\n               
+    this.plateImages[this.plateIndex].sprite = this.ingredientSlots[index].image.sprite;\r\n               
+    this.plateImages[this.plateIndex].enabled = true;\r\n                UnityEngine_1.Debug.Log(this.plateImages[this.plateIndex].enabled);\r\n               
+    this.plateIndex++;\r\n            }\r\n        });\r\n        UnityEngine_1.Debug.Log(\"SetIngredient:
+    \" + index);\r\n    }\r\n    Serve() {\r\n        /**/\r\n        this.InitPlate();\r\n   
+    }\r\n    InitPlate() {\r\n        for (var images of this.plateImages) {\r\n           
+    images.enabled = false;\r\n            UnityEngine_1.Debug.Log(images.enabled);\r\n       
+    }\r\n        this.plateIndex = 0;\r\n    }\r\n}\r\nexports.default = CookSlot;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29vay5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNvb2sudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXlEO0FBR3pELE1BQXFCLFFBQVMsU0FBUSxxQ0FBcUI7SUFTdkQsS0FBSztRQUNELElBQUksQ0FBQyxVQUFVLEdBQUcsQ0FBQyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUM7UUFDMUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1FBRWpCLEtBQUssSUFBSSxLQUFLLEdBQVEsQ0FBQyxFQUFFLEtBQUssR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsRUFBRTtZQUNuRSxJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDO1NBQzdCO1FBRUQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNoQyxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDakIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBR0QsYUFBYSxDQUFDLEtBQVU7UUFFcEIsSUFBSSxDQUFDLGVBQWUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUVqRCxJQUFJLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsRUFBRTtnQkFFbkMsbUJBQUssQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBRXBELElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUM7Z0JBRXBGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUM7Z0JBQ2pELG1CQUFLLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDO2dCQUNyRCxJQUFJLENBQUMsVUFBVSxFQUFFLENBQUM7YUFDckI7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUNILG1CQUFLLENBQUMsR0FBRyxDQUFDLGlCQUFpQixHQUFHLEtBQUssQ0FBQyxDQUFDO0lBQ3pDLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSTtRQUVKLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQztJQUNyQixDQUFDO0lBR0QsU0FBUztRQUVMLEtBQUssSUFBSSxNQUFNLElBQUksSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUVqQyxNQUFNLENBQUMsT0FBTyxHQUFHLEtBQUssQ0FBQztZQUN2QixtQkFBSyxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUM7U0FDN0I7UUFFRCxJQUFJLENBQUMsVUFBVSxHQUFHLENBQUMsQ0FBQztJQUN4QixDQUFDO0NBQ0o7QUEzREQsMkJBMkRDIn0=","assetPath":"Assets/Scripts/Cook.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"ingredientSlots","type":"UnityEngine.UI.Button[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"plate","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"plateImages","type":"UnityEngine.UI.Image[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"plateIndex","type":"System.Int32","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"plateLimit","type":"System.Int32","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"CookSlot","description":""},"isCompiled":true}'
+  typescriptHash: da7f595c59896fe0e956a23fac90c339
   onlyWriteTrigger: 0
