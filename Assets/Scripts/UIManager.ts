@@ -25,6 +25,8 @@ export default class UIManager extends ZepetoScriptBehaviour {
 
     }
 
+
+
     MoveScene(scene: string) {
         SceneManager.LoadScene(scene);
     }

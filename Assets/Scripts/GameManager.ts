@@ -20,34 +20,16 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     private lastSavedHour: int;
     public timer: Timer;
-
+    public playerObject: GameObject;
+    public moveControlUI: GameObject;
     Awake() {
-        //this.InvokeRepeating("DelayedUpdate", 1.0, 1.0);
+
     }
 
     Start() {
         this.timer = new Timer();
+        this.moveControlUI = this.playerObject.transform.Find("UIZepetoPlayerControl").gameObject;
+        this.moveControlUI.SetActive(false);
     }
 
-/*    Update() {
-
-    }*/
-
-
-    DelayedUpdate() {
-        this.timer.UpdateTime();
-        //if (UIManager.Instance) UIManager.Instance.call("DisplayTime", this.timer.GetHour, this.timer.GetMinute);
-        Debug.Log(this.timer.Hour);
-
-        /* 
-         * 시간의 변화에 따라 밝기 변화
-        */
-
-        // 시간이 변했을 경우에만 동작한다.
-        if (this.lastSavedHour != this.timer.Hour) {
-
-        }
-        // 마지막 시간 저장
-        this.lastSavedHour = this.timer.Hour;
-    }
 }
