@@ -1,21 +1,24 @@
 import { SceneManager } from 'UnityEngine.SceneManagement';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text } from "UnityEngine.UI";
-
+import { GameObject } from 'UnityEngine';
 export default class UIManager extends ZepetoScriptBehaviour {
-    // ½Ì±ÛÅæ ÆÐÅÏ
-    private static instance: UIManager;
-    static Instance() {
-        return this.instance || (this.instance = new this());
+    // ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private static Instance: UIManager;
+    public static GetInstance(): UIManager {
+
+        if (!UIManager.Instance) {
+            var _obj = new GameObject("UIManager");
+            GameObject.DontDestroyOnLoad(_obj);
+            UIManager.Instance = _obj.AddComponent<UIManager>();
+        }
+        return UIManager.Instance;
     }
 
     public sceneName: string;
 
     public timeText: Text;
 
-    Start() {
-        UIManager.instance = this;
-    }
 
     DisplayTime(hour: int, min: int) {
         var ampm: string;

@@ -5,31 +5,44 @@ import { GameObject, Random, WaitForSeconds, Debug } from 'UnityEngine';
 import { COOK_PRIORITY } from './Ingredient';
 import Timer from './Timer';
 import UIManager from './UIManager';
+import CharacterController from './CharacterController';
+import QuarterViewController from './QuarterViewController';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
-    private static instance: GameManager
+    private static Instance: GameManager;
+    public static GetInstance(): GameManager {
 
-    private constructor() {
-        super();
-    }
-
-    public static Instance() {
-        return this.instance || (this.instance = new this())
+        if (!GameManager.Instance) {
+            var _obj = new GameObject("GameManager");
+            GameObject.DontDestroyOnLoad(_obj);
+            GameManager.Instance = _obj.AddComponent<GameManager>();
+        }
+        return GameManager.Instance;
     }
 
     private lastSavedHour: int;
     public timer: Timer;
-    public playerObject: GameObject;
-    public moveControlUI: GameObject;
+    public characterControllerObj: GameObject;
+    public quarterViewControllerObj: GameObject;
+    public characterController: CharacterController;
+    public quarterViewController: QuarterViewController;
     Awake() {
 
     }
 
     Start() {
         this.timer = new Timer();
-        this.moveControlUI = this.playerObject.transform.Find("UIZepetoPlayerControl").gameObject;
-        this.moveControlUI.SetActive(false);
+        this.characterControllerObj = GameObject.FindGameObjectWithTag("Character");
+        this.quarterViewControllerObj = GameObject.FindGameObjectWithTag("Quarter");
+        if (this.characterControllerObj) this.characterController = this.characterControllerObj.GetComponent<CharacterController>();
+        if (this.quarterViewControllerObj) this.quarterViewController = this.quarterViewControllerObj.GetComponent<QuarterViewController>();
     }
 
+    SetPlayerMovement(value: bool) {
+        if (this.characterController && this.quarterViewController) {
+            (value) ? this.characterController.EnableMoveControl() : this.characterController.DisableMoveControl();
+            this.quarterViewController.SetMove(value);
+        }
+    }
 }

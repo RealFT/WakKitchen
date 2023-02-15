@@ -6,7 +6,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
 
     public ingredientSlots: Button[];
 
-    public plate: Button;
+    public SurveButton: Button;
     public plateImages: Image[];
     public plateIndex: int;
     public plateLimit: int;
@@ -20,7 +20,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
             this.SetIngredient(index);
         }
 
-        this.plate.onClick.AddListener(() => {
+        this.SurveButton.onClick.AddListener(() => {
             this.Serve();
         });
     }

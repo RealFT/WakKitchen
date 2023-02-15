@@ -10,11 +10,10 @@ export default class MainUIController extends ZepetoScriptBehaviour {
     public startBtn: Button;
 
     Start() {
+        let instance = UIManager.GetInstance();
         this.startBtn.onClick.AddListener(() => {
             //this.MoveScene(this.sceneName);
-            //if (UIManager.Instance) UIManager.Instance.MoveScene(this.sceneName);
+            if (instance) instance.MoveScene(this.sceneName);
         });
     }
-
-
 }

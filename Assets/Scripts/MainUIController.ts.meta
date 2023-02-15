@@ -19,10 +19,11 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
-    MainUIController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
-    {\r\n        this.startBtn.onClick.AddListener(() => {\r\n            //this.MoveScene(this.sceneName);\r\n           
-    //if (UIManager.Instance) UIManager.Instance.MoveScene(this.sceneName);\r\n       
-    });\r\n    }\r\n}\r\nexports.default = MainUIController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFpblVJQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk1haW5VSUNvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFJckQsTUFBcUIsZ0JBQWlCLFNBQVEscUNBQXFCO0lBTS9ELEtBQUs7UUFDRCxJQUFJLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ25DLGlDQUFpQztZQUNqQyx1RUFBdUU7UUFDM0UsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0NBR0o7QUFkRCxtQ0FjQyJ9","assetPath":"Assets/Scripts/MainUIController.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"sceneName","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"startBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"MainUIController","description":""},"isCompiled":true}'
-  typescriptHash: ebc3dbdc9b0facf090bc1218bbb47b09
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UIManager_1 = require(\"./UIManager\");\r\nclass MainUIController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        let instance = UIManager_1.default.GetInstance();\r\n       
+    this.startBtn.onClick.AddListener(() => {\r\n            //this.MoveScene(this.sceneName);\r\n           
+    if (instance)\r\n                instance.MoveScene(this.sceneName);\r\n       
+    });\r\n    }\r\n}\r\nexports.default = MainUIController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFpblVJQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk1haW5VSUNvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFFckQsMkNBQW9DO0FBRXBDLE1BQXFCLGdCQUFpQixTQUFRLHFDQUFxQjtJQU0vRCxLQUFLO1FBQ0QsSUFBSSxRQUFRLEdBQUcsbUJBQVMsQ0FBQyxXQUFXLEVBQUUsQ0FBQztRQUN2QyxJQUFJLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ25DLGlDQUFpQztZQUNqQyxJQUFJLFFBQVE7Z0JBQUUsUUFBUSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDckQsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0NBQ0o7QUFiRCxtQ0FhQyJ9","assetPath":"Assets/Scripts/MainUIController.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"sceneName","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"startBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"MainUIController","description":""},"isCompiled":true}'
+  typescriptHash: 375584d58464a40090a6955cecc34574
   onlyWriteTrigger: 0

@@ -1,8 +1,8 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
-import { Image, Button, Slider } from "UnityEngine.UI";
+import { Image, Button, Slider, Text } from "UnityEngine.UI";
 
-export default class BakeController extends ZepetoScriptBehaviour {
+export default class GrillSlot extends ZepetoScriptBehaviour {
     public bakingButton: Button;    // Putting ingredients in the kitchen
     public bakedButton: Button;
     public bakeSlider: Slider;
@@ -12,17 +12,16 @@ export default class BakeController extends ZepetoScriptBehaviour {
     public failedColor: Color;
     public bakedPattySprite: Sprite;
     public burntPattySprite: Sprite;
-    public bakeTime: number;
+    public bakeTime: number;   
     public burnTime: number; 
+    private startTime: number = 0;
     private currentTime: number = 0;
+    private flipCount: number = 0;
     private isFliped: bool;
     private isBaking: bool;
+    public visibleImages: Image[];
 
     Start() {
-        Debug.Log(this.bakedButton.image.sprite);
-        Debug.Log(this.bakingButton.image.sprite);
-        Debug.Log(this.bakedPattySprite);
-        Debug.Log(this.burntPattySprite);
         this.bakedButton.interactable = false;
         this.bakedButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
@@ -31,7 +30,6 @@ export default class BakeController extends ZepetoScriptBehaviour {
 
     // Start Baking.
     private StartBaking() {
-
         // Disable baking Button
         this.bakingButton.gameObject.SetActive(false);
         // Change grill button's sprite to baking button's sprite
@@ -43,33 +41,35 @@ export default class BakeController extends ZepetoScriptBehaviour {
     
         this.bakedButton.onClick.RemoveAllListeners();
         this.isBaking = true;
+        this.isFliped = false;
+        this.flipCount = 0;
+        this.startTime = Time.time;
+        this.bakeSliderFill.color = this.defaultColor;
         this.StartCoroutine(this.DoBaking());
     }
 
     // Baking Coroutine
     *DoBaking() {
-        this.currentTime = 0;
-        this.isFliped = false;
-        let flipCount = 0;
-        this.bakeSliderFill.color = this.defaultColor;
+        this.currentTime = Time.time - this.startTime;
         while (this.isBaking) {
             this.currentTime += Time.deltaTime;
             this.bakeSlider.value = this.currentTime / this.burnTime;
 
             if (this.currentTime >= this.bakeTime) {
-                if (flipCount > 0 && this.isFliped) {
+                if (this.flipCount > 0 && this.isFliped) {
                     // baking done.
                     this.bakedButton.interactable = true;
                     this.bakedButton.onClick.RemoveAllListeners();
                     this.bakedButton.onClick.AddListener(() => { this.ClearGrill(); });
                     this.bakeSliderFill.color = this.bakedColor;
+                    this.isFliped = false;
                 } 
-                else if (flipCount == 0 && !this.isFliped) {
+                else if (this.flipCount == 0 && !this.isFliped) {
                     this.bakedButton.interactable = true;
                     this.bakedButton.onClick.RemoveAllListeners();
                     this.bakedButton.onClick.AddListener(() => { this.FlipPatty(); });
                     this.bakeSliderFill.color = this.bakedColor;
-                    flipCount++;
+                    this.flipCount++;
                 }
             }
             if (this.currentTime >= this.burnTime) {
@@ -103,5 +103,11 @@ export default class BakeController extends ZepetoScriptBehaviour {
         this.bakedButton.onClick.RemoveAllListeners();
         this.bakedButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
+    }
+
+    SetGrillVisibility(value: bool) {
+        for (let i = 0; i < this.visibleImages.length; i++) {
+            this.visibleImages[i].enabled = value;
+        }
     }
 }
