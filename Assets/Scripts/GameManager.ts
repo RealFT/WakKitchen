@@ -38,14 +38,14 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public startHour: number;    // Stage Start Hour
     public endHour: number;    // Stage End Hour
     private currTime: [number, number]; // current time
-    private isGameOver: boolean;
+    private isInGame: boolean;
 
     Awake() {
         if (this != GameManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {
-        this.InitStage();
+        //this.InitStage();
     }
 
     InitStage() {
@@ -53,15 +53,17 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.timer = new Timer();
         this.timer.SetTimeScale(this.minutesPerDay);
         this.timer.SetTime(this.startHour, 0);
-        this.isGameOver = false;
 
         this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
+        this.isInGame = true;
     }
 
     Update() {
-        if (!this.isGameOver) this.StageUpdate();
+        if (this.isInGame) {
+            this.StageUpdate();
+        }
     }
 
     StageUpdate() {
@@ -72,7 +74,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         if (this.currTime[0] >= this.endHour) {
             this.currTime[1] = 0;
             if (this.stageUIController) this.stageUIController.SetSettlementUI(true);
-            this.isGameOver = true;
+            this.isInGame = false;
         }
         // update UI
         if (this.stageUIController) this.stageUIController.SetTimeUI(this.currTime[0], this.currTime[1]);
