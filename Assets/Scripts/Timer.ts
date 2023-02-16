@@ -5,50 +5,62 @@ import { Mathf, Time } from "UnityEngine";
 import { Button, Image, Slider } from "UnityEngine.UI";
 
 export default class Timer extends ZepetoScriptBehaviour {
-    private SecondsPerMinute: int = 60;
-    private SecondsPerHour: int = 60 * this.SecondsPerMinute;
+    private timeScale: number;    // 시간 배속
 
-    public Hour: int;
-    public Minute: int
-    public Second: int
+    public Day: number;
+    public Hour: number;
+    public Minute: number;
+    public Second: number;
 
-    private initTime: float;
-    private timeScale: float;    // 시간 배속
+    private secondsPerMinute: number = 60;
+    private secondsPerHour: number = 60 * this.secondsPerMinute;
+    private secondsPerDay: number = 24 * this.secondsPerHour;
 
-    Timer() {
-        this.SetTimeScale(360.0);       // 24 * 60(하루 1분) / n. 하루 n분
+    private elapsedTime: number = 0;
+
+    constructor() {
+        super();
         this.InitTime();
     }
 
     // 시간 갱신
     UpdateTime() {
-        // 흘러간 시간 * 시간 배속
-        var seconds = Mathf.RoundToInt((Time.time - this.initTime) * this.timeScale);
+        this.elapsedTime += Time.deltaTime * this.timeScale;
+        let seconds = Math.floor(this.elapsedTime);
 
-        this.Hour = (seconds / this.SecondsPerHour);
-        seconds -= this.Hour * this.SecondsPerHour;
+        this.Day = Math.floor(seconds / this.secondsPerDay);
+        seconds -= this.Day * this.secondsPerDay;
 
-        this.Minute = seconds / this.SecondsPerMinute;
-        seconds -= this.Minute * this.SecondsPerMinute;
+        this.Hour = Math.floor(seconds / this.secondsPerHour);
+        seconds -= this.Hour * this.secondsPerHour;
+
+        this.Minute = Math.floor(seconds / this.secondsPerMinute);
+        seconds -= this.Minute * this.secondsPerMinute;
 
         this.Second = seconds;
     }
 
     // 게임 배속 설정
-    SetTimeScale(scale: float) {
-        this.timeScale = scale;
+    SetTimeScale(minutesPerDay: number) {
+        this.timeScale = 24 * 60 / minutesPerDay; // 24 * 60(하루 1분) / n. 하루 n분
+        Debug.Log(this.timeScale);
+        Debug.Log(this.Hour + ":" + this.Minute);
+    }
+
+    SetTime(hour: number, minute: number) {
+        this.elapsedTime = hour * this.secondsPerHour + minute * this.secondsPerMinute;
     }
 
     // 시간 정보 초기화.
     InitTime() {
-        this.initTime = Time.time;
+        this.elapsedTime = 0;
     }
 
-    GetHour(): int {
+    GetHour(): number {
         return this.Hour;
     }
 
-    GetMinute(): int {
+    GetMinute(): number {
         return this.Minute;
     }
 }

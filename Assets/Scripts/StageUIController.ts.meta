@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: 53d3a6ba062c5b54cbff8771d3b0a5ac
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n//define
+    variable to use\r\nclass StageUIController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.Init();\r\n    }\r\n    Init() {\r\n       
+    this.messageText.text = \" \";\r\n    }\r\n    Announce(text) {\r\n        this.messageText.text
+    = text;\r\n    }\r\n    SetTimeUI(hour, minute) {\r\n        // Convert hour
+    to 12-hour format and add AM/PM\r\n        const ampm = hour >= 12 ? ''PM'' :
+    ''AM'';\r\n        hour = hour % 12 || 12;\r\n        // Add leading zeros to
+    minute and hour if necessary\r\n        const formattedHour = hour < 10 ? `0${hour}`
+    : hour;\r\n        const formattedMinute = minute < 10 ? `0${minute}` : minute;\r\n       
+    // Combine strings to create the desired output\r\n        const time = `${formattedHour}:${formattedMinute}
+    ${ampm}`;\r\n        this.timeText.text = time;\r\n    }\r\n}\r\nexports.default
+    = StageUIController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhZ2VVSUNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdGFnZVVJQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUl0RCx3QkFBd0I7QUFDeEIsTUFBcUIsaUJBQWtCLFNBQVEscUNBQXFCO0lBSWhFLEtBQUs7UUFDRCxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVNLElBQUk7UUFDUCxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksR0FBRyxHQUFHLENBQUM7SUFDaEMsQ0FBQztJQUVNLFFBQVEsQ0FBQyxJQUFZO1FBQ3hCLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztJQUNqQyxDQUFDO0lBRU0sU0FBUyxDQUFDLElBQVMsRUFBRSxNQUFXO1FBQ25DLCtDQUErQztRQUMvQyxNQUFNLElBQUksR0FBRyxJQUFJLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQztRQUN0QyxJQUFJLEdBQUcsSUFBSSxHQUFHLEVBQUUsSUFBSSxFQUFFLENBQUM7UUFFdkIsb0RBQW9EO1FBQ3BELE1BQU0sYUFBYSxHQUFHLElBQUksR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQztRQUNwRCxNQUFNLGVBQWUsR0FBRyxNQUFNLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLE1BQU0sRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUM7UUFFNUQsK0NBQStDO1FBQy9DLE1BQU0sSUFBSSxHQUFHLEdBQUcsYUFBYSxJQUFJLGVBQWUsSUFBSSxJQUFJLEVBQUUsQ0FBQztRQUUzRCxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7SUFDOUIsQ0FBQztDQUVKO0FBL0JELG9DQStCQyJ9","assetPath":"Assets/Scripts/StageUIController.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"messageText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"timeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"StageUIController","description":""},"isCompiled":true}'
+  typescriptHash: 0425ec2a3292e6f1d83cb33a7a43eef9
+  onlyWriteTrigger: 0

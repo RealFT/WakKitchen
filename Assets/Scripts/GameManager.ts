@@ -4,7 +4,7 @@ import { Button, InputField, Slider } from "UnityEngine.UI";
 import { GameObject, Random, WaitForSeconds, Debug } from 'UnityEngine';
 import { COOK_PRIORITY } from './Ingredient';
 import Timer from './Timer';
-import UIManager from './UIManager';
+import StageUIController from './StageUIController';
 import CharacterController from './CharacterController';
 import QuarterViewController from './QuarterViewController';
 
@@ -14,29 +14,48 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public static GetInstance(): GameManager {
 
         if (!GameManager.Instance) {
-            var _obj = new GameObject("GameManager");
+            Debug.LogError("GameManager");
+
+            var _obj = GameObject.Find("GameManager");
+            if (!_obj) {
+                _obj = new GameObject("GameManager");
+                _obj.AddComponent<GameManager>();
+            }
+            GameManager.Instance = _obj.GetComponent<GameManager>();
             GameObject.DontDestroyOnLoad(_obj);
-            GameManager.Instance = _obj.AddComponent<GameManager>();
         }
         return GameManager.Instance;
     }
 
-    private lastSavedHour: int;
-    public timer: Timer;
-    public characterControllerObj: GameObject;
-    public quarterViewControllerObj: GameObject;
+    // components
     public characterController: CharacterController;
     public quarterViewController: QuarterViewController;
-    Awake() {
+    public stageUIController: StageUIController;
+    private timer: Timer;
 
+    private lastSavedDay: number;      // last saved Day(Stage).
+    public minutesPerDay: number;    // n minutes pass in one day.
+    public startHour: number;    // Stage Start Hour
+    public endHour: number;    // Stage End Hour
+
+    Awake() {
+        if (this != GameManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {
         this.timer = new Timer();
-        this.characterControllerObj = GameObject.FindGameObjectWithTag("Character");
-        this.quarterViewControllerObj = GameObject.FindGameObjectWithTag("Quarter");
-        if (this.characterControllerObj) this.characterController = this.characterControllerObj.GetComponent<CharacterController>();
-        if (this.quarterViewControllerObj) this.quarterViewController = this.quarterViewControllerObj.GetComponent<QuarterViewController>();
+        this.timer.SetTimeScale(this.minutesPerDay);
+        this.timer.SetTime(this.startHour, 0);
+
+        this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
+        this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
+        this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
+    }
+
+    Update() {
+        // update the timer
+        if (this.timer) this.timer.UpdateTime();
+        if (this.stageUIController) this.stageUIController.SetTimeUI(this.timer.GetHour(), this.timer.GetMinute());
     }
 
     SetPlayerMovement(value: bool) {

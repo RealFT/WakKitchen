@@ -1666,7 +1666,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &285607150
 MonoBehaviour:
@@ -1682,23 +1682,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     keys:
-    - timer
-    - quarterViewControllerObj
-    - characterControllerObj
     - characterController
     - quarterViewController
+    - minutesPerDay
+    - stageUIController
+    - startHour
+    - endHour
     unityValues:
     - {fileID: 0}
-    - {fileID: 1638856251}
-    - {fileID: 1488889479}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     values:
     - 
     - 
+    - '{"type":"System.Single, mscorlib","value":"5"}'
     - 
-    - 
-    - 
+    - '{"type":"System.Single, mscorlib","value":"8"}'
+    - '{"type":"System.Single, mscorlib","value":"20"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: bb375eb55cd9444488be4a7dd4186cbc, type: 3}
@@ -2101,8 +2104,8 @@ GameObject:
   - component: {fileID: 477989317}
   - component: {fileID: 477989316}
   m_Layer: 0
-  m_Name: UIController
-  m_TagString: Untagged
+  m_Name: StageUIController
+  m_TagString: UIController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2121,10 +2124,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     keys:
-    - messageUI
+    - messageText
+    - timeText
     unityValues:
     - {fileID: 1981357992}
+    - {fileID: 1192740674}
     values:
+    - 
     - 
     unityArrayValues: []
     arrayValues: []
@@ -2142,7 +2148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &487296262
 GameObject:
@@ -3792,7 +3798,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &949240260
 GameObject:
@@ -6222,7 +6228,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1488889481
 MonoBehaviour:
@@ -7054,7 +7060,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1645665556
 GameObject:
@@ -7962,7 +7968,7 @@ Transform:
   m_LocalScale: {x: 0.72, y: 1, z: 1.28}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1912906606
 GameObject:

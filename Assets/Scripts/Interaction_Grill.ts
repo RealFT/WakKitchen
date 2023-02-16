@@ -8,7 +8,7 @@ import CharacterController from './CharacterController';
 import GameManager from './GameManager';
 import GrillSlot from './GrillSlot';
 
-export default class GrillInteraction extends ZepetoScriptBehaviour {
+export default class Interaction_Grill extends ZepetoScriptBehaviour {
     public escapeButton: Button;
     public grillSlotObjects: GameObject[];
     public images: Image[];

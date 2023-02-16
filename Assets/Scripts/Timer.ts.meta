@@ -20,23 +20,28 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
     \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
-    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass Timer extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.SecondsPerMinute
-    = 60;\\r\\n        this.SecondsPerHour = 60 * this.SecondsPerMinute;\\r\\n   
-    }\\r\\n    Timer() {\\r\\n        this.SetTimeScale(360.0); // 24 * 60(\uFFFD\u03F7\uFFFD
-    1\uFFFD\uFFFD) / n. \uFFFD\u03F7\uFFFD n\uFFFD\uFFFD\\r\\n        this.InitTime();\\r\\n   
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_2 = require(\\\"UnityEngine\\\");\\r\\nclass
+    Timer extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super();\\r\\n        this.secondsPerMinute = 60;\\r\\n       
+    this.secondsPerHour = 60 * this.secondsPerMinute;\\r\\n        this.secondsPerDay
+    = 24 * this.secondsPerHour;\\r\\n        this.elapsedTime = 0;\\r\\n        this.InitTime();\\r\\n   
     }\\r\\n    // \uFFFD\xF0\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    UpdateTime()
-    {\\r\\n        // \uFFFD\uADEF\uFFFD\uFFFD \uFFFD\xF0\uFFFD * \uFFFD\xF0\uFFFD
-    \uFFFD\uFFFD\uFFFD\\r\\n        var seconds = UnityEngine_1.Mathf.RoundToInt((UnityEngine_1.Time.time
-    - this.initTime) * this.timeScale);\\r\\n        this.Hour = (seconds / this.SecondsPerHour);\\r\\n       
-    seconds -= this.Hour * this.SecondsPerHour;\\r\\n        this.Minute = seconds
-    / this.SecondsPerMinute;\\r\\n        seconds -= this.Minute * this.SecondsPerMinute;\\r\\n       
+    {\\r\\n        this.elapsedTime += UnityEngine_2.Time.deltaTime * this.timeScale;\\r\\n       
+    let seconds = Math.floor(this.elapsedTime);\\r\\n        this.Day = Math.floor(seconds
+    / this.secondsPerDay);\\r\\n        seconds -= this.Day * this.secondsPerDay;\\r\\n       
+    this.Hour = Math.floor(seconds / this.secondsPerHour);\\r\\n        seconds -=
+    this.Hour * this.secondsPerHour;\\r\\n        this.Minute = Math.floor(seconds
+    / this.secondsPerMinute);\\r\\n        seconds -= this.Minute * this.secondsPerMinute;\\r\\n       
     this.Second = seconds;\\r\\n    }\\r\\n    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD
-    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    SetTimeScale(scale) {\\r\\n        this.timeScale
-    = scale;\\r\\n    }\\r\\n    // \uFFFD\xF0\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D.\\r\\n   
-    InitTime() {\\r\\n        this.initTime = UnityEngine_1.Time.time;\\r\\n    }\\r\\n   
-    GetHour() {\\r\\n        return this.Hour;\\r\\n    }\\r\\n    GetMinute() {\\r\\n       
-    return this.Minute;\\r\\n    }\\r\\n}\\r\\nexports.default = Timer;\\r\\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGltZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaW1lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLGlEQUFxRDtBQUVyRCw2Q0FBMEM7QUFHMUMsTUFBcUIsS0FBTSxTQUFRLHFDQUFxQjtJQUF4RDs7UUFDWSxxQkFBZ0IsR0FBUSxFQUFFLENBQUM7UUFDM0IsbUJBQWMsR0FBUSxFQUFFLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDO0lBNkM3RCxDQUFDO0lBcENHLEtBQUs7UUFDRCxJQUFJLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQU8sZ0NBQWdDO1FBQ2hFLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQztJQUNwQixDQUFDO0lBRUQsV0FBVztJQUNYLFVBQVU7UUFDTixxQkFBcUI7UUFDckIsSUFBSSxPQUFPLEdBQUcsbUJBQUssQ0FBQyxVQUFVLENBQUMsQ0FBQyxrQkFBSSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBRTdFLElBQUksQ0FBQyxJQUFJLEdBQUcsQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1FBQzVDLE9BQU8sSUFBSSxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUM7UUFFM0MsSUFBSSxDQUFDLE1BQU0sR0FBRyxPQUFPLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDO1FBQzlDLE9BQU8sSUFBSSxJQUFJLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQztRQUUvQyxJQUFJLENBQUMsTUFBTSxHQUFHLE9BQU8sQ0FBQztJQUMxQixDQUFDO0lBRUQsZ0JBQWdCO0lBQ2hCLFlBQVksQ0FBQyxLQUFZO1FBQ3JCLElBQUksQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO0lBQzNCLENBQUM7SUFFRCxpQkFBaUI7SUFDakIsUUFBUTtRQUNKLElBQUksQ0FBQyxRQUFRLEdBQUcsa0JBQUksQ0FBQyxJQUFJLENBQUM7SUFDOUIsQ0FBQztJQUVELE9BQU87UUFDSCxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUM7SUFDckIsQ0FBQztJQUVELFNBQVM7UUFDTCxPQUFPLElBQUksQ0FBQyxNQUFNLENBQUM7SUFDdkIsQ0FBQztDQUNKO0FBL0NELHdCQStDQyJ9\",\"assetPath\":\"Assets/Scripts/Timer.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"Hour\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"Minute\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"Second\",\"type\":\"System.Int32\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"Timer\",\"description\":\"\"},\"isCompiled\":true}"
-  typescriptHash: 8f9647a2a7596b6109d8738698f77ba2
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    SetTimeScale(minutesPerDay) {\\r\\n       
+    this.timeScale = 24 * 60 / minutesPerDay; // 24 * 60(\uFFFD\u03F7\uFFFD 1\uFFFD\uFFFD)
+    / n. \uFFFD\u03F7\uFFFD n\uFFFD\uFFFD\\r\\n        UnityEngine_1.Debug.Log(this.timeScale);\\r\\n       
+    UnityEngine_1.Debug.Log(this.Hour + \\\":\\\" + this.Minute);\\r\\n    }\\r\\n   
+    SetTime(hour, minute) {\\r\\n        this.elapsedTime = hour * this.secondsPerHour
+    + minute * this.secondsPerMinute;\\r\\n    }\\r\\n    // \uFFFD\xF0\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u02B1\uFFFD\u022D.\\r\\n    InitTime() {\\r\\n        this.elapsedTime
+    = 0;\\r\\n    }\\r\\n    GetHour() {\\r\\n        return this.Hour;\\r\\n   
+    }\\r\\n    GetMinute() {\\r\\n        return this.Minute;\\r\\n    }\\r\\n}\\r\\nexports.default
+    = Timer;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGltZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaW1lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLGlEQUFxRDtBQUNyRCw2Q0FBZ0Q7QUFDaEQsNkNBQTBDO0FBRzFDLE1BQXFCLEtBQU0sU0FBUSxxQ0FBcUI7SUFjcEQ7UUFDSSxLQUFLLEVBQUUsQ0FBQztRQVBKLHFCQUFnQixHQUFXLEVBQUUsQ0FBQztRQUM5QixtQkFBYyxHQUFXLEVBQUUsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUM7UUFDcEQsa0JBQWEsR0FBVyxFQUFFLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQztRQUVqRCxnQkFBVyxHQUFXLENBQUMsQ0FBQztRQUk1QixJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDcEIsQ0FBQztJQUVELFdBQVc7SUFDWCxVQUFVO1FBQ04sSUFBSSxDQUFDLFdBQVcsSUFBSSxrQkFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO1FBQ3BELElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBRTNDLElBQUksQ0FBQyxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDO1FBQ3BELE9BQU8sSUFBSSxJQUFJLENBQUMsR0FBRyxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUM7UUFFekMsSUFBSSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7UUFDdEQsT0FBTyxJQUFJLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQztRQUUzQyxJQUFJLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1FBQzFELE9BQU8sSUFBSSxJQUFJLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQztRQUUvQyxJQUFJLENBQUMsTUFBTSxHQUFHLE9BQU8sQ0FBQztJQUMxQixDQUFDO0lBRUQsZ0JBQWdCO0lBQ2hCLFlBQVksQ0FBQyxhQUFxQjtRQUM5QixJQUFJLENBQUMsU0FBUyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsYUFBYSxDQUFDLENBQUMsZ0NBQWdDO1FBQzFFLG1CQUFLLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUMxQixtQkFBSyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsSUFBSSxHQUFHLEdBQUcsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDN0MsQ0FBQztJQUVELE9BQU8sQ0FBQyxJQUFZLEVBQUUsTUFBYztRQUNoQyxJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksR0FBRyxJQUFJLENBQUMsY0FBYyxHQUFHLE1BQU0sR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUM7SUFDbkYsQ0FBQztJQUVELGlCQUFpQjtJQUNqQixRQUFRO1FBQ0osSUFBSSxDQUFDLFdBQVcsR0FBRyxDQUFDLENBQUM7SUFDekIsQ0FBQztJQUVELE9BQU87UUFDSCxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUM7SUFDckIsQ0FBQztJQUVELFNBQVM7UUFDTCxPQUFPLElBQUksQ0FBQyxNQUFNLENBQUM7SUFDdkIsQ0FBQztDQUNKO0FBM0RELHdCQTJEQyJ9\",\"assetPath\":\"Assets/Scripts/Timer.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"Day\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"Hour\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"Minute\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"Second\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"Timer\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 99d02b65c13c3418b691e3d2628218fc
   onlyWriteTrigger: 0

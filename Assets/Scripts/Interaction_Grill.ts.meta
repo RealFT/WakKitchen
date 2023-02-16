@@ -1,0 +1,44 @@
+fileFormatVersion: 2
+guid: a18c520b2beb45a499994beee9f61926
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n// import custom script from
+    path\r\nconst CharacterController_1 = require(\"./CharacterController\");\r\nconst
+    GameManager_1 = require(\"./GameManager\");\r\nconst GrillSlot_1 = require(\"./GrillSlot\");\r\nclass
+    Interaction_Grill extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    //private
+    gameMgr: GameManager;\r\n    Start() {\r\n        // Script import\r\n       
+    //this.gameMgr = GameManager.GetInstance();\r\n        /*         for (let i
+    = 0; i < this.grillSlotObjects.length; i++) {\r\n                    this.grillSlots[i]
+    = this.grillSlotObjects[i].GetComponent<GrillSlot>();\r\n                } */\r\n       
+    //Button Hide\r\n        this.grillCanvas.SetActive(true);\r\n        this.kitchen.SetActive(true);\r\n       
+    this.SetKitchenVisibility(false);\r\n        //When Button Click\r\n        this.escapeButton.onClick.AddListener(()
+    => {\r\n            GameManager_1.default.GetInstance().SetPlayerMovement(true);\r\n           
+    this.SetKitchenVisibility(false);\r\n        });\r\n    }\r\n    OnTriggerEnter(collider)
+    {\r\n        this.SetKitchenVisibility(true);\r\n        GameManager_1.default.GetInstance().SetPlayerMovement(false);\r\n   
+    }\r\n    OnTriggerExit(collider) {\r\n        this.SetKitchenVisibility(false);\r\n       
+    GameManager_1.default.GetInstance().SetPlayerMovement(true);\r\n    }\r\n   
+    SetKitchenVisibility(value) {\r\n        this.escapeButton.gameObject.SetActive(value);\r\n       
+    for (let i = 0; i < this.images.length; i++) {\r\n            this.images[i].enabled
+    = value;\r\n        }\r\n        for (let i = 0; i < this.grillSlotObjects.length;
+    i++) {\r\n            this.grillSlotObjects[i].GetComponent($typeof(GrillSlot_1.default)).SetGrillVisibility(value);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = Interaction_Grill;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW50ZXJhY3Rpb25fR3JpbGwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJJbnRlcmFjdGlvbl9HcmlsbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFpRTtBQUdqRSxpREFBc0Q7QUFFdEQsaUNBQWlDO0FBQ2pDLCtEQUF3RDtBQUN4RCwrQ0FBd0M7QUFDeEMsMkNBQW9DO0FBRXBDLE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQU9oRSwrQkFBK0I7SUFFL0IsS0FBSztRQUNELGdCQUFnQjtRQUNoQiwyQ0FBMkM7UUFDbkQ7O29CQUVZO1FBRUosYUFBYTtRQUNiLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2pDLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzdCLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUVqQyxtQkFBbUI7UUFDbkIsSUFBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN2QyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2xELElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCxjQUFjLENBQUMsUUFBUTtRQUNuQixJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDaEMscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBRUQsYUFBYSxDQUFDLFFBQVE7UUFDbEIsSUFBSSxDQUFDLG9CQUFvQixDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ2pDLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEQsQ0FBQztJQUVELG9CQUFvQixDQUFDLEtBQVc7UUFDNUIsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzlDLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN6QyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sR0FBRyxLQUFLLENBQUM7U0FDbEM7UUFDRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUNuRCxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxDQUFDLENBQUMsWUFBWSxTQUFDLG1CQUFTLEdBQUksa0JBQWtCLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDaEY7SUFDTCxDQUFDO0NBQ0o7QUEvQ0Qsb0NBK0NDIn0=","assetPath":"Assets/Scripts/Interaction_Grill.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"escapeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"grillSlotObjects","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"images","type":"UnityEngine.UI.Image[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"grillCanvas","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"kitchen","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"Interaction_Grill","description":""},"isCompiled":true}'
+  typescriptHash: 2aaeec16f03a98f0117c79d260039c92
+  onlyWriteTrigger: 0
