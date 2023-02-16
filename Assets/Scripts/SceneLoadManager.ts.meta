@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: bb1445786a3e125498a423199d7c4271
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.SceneName = void 0;\r\nconst UnityEngine_SceneManagement_1
+    = require(\"UnityEngine.SceneManagement\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst GameManager_1 = require(\"./GameManager\");\r\nvar
+    SceneName;\r\n(function (SceneName) {\r\n    SceneName[\"Main\"] = \"00_Main\";\r\n   
+    SceneName[\"Stage\"] = \"01_Stage\";\r\n    SceneName[\"Shop\"] = \"02_Shop\";\r\n})(SceneName
+    = exports.SceneName || (exports.SceneName = {}));\r\nclass SceneLoadManager extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.inverseNum = 1 / 0.9;\r\n    }\r\n    static GetInstance() {\r\n       
+    if (!SceneLoadManager.Instance) {\r\n            var _obj = UnityEngine_1.GameObject.Find(\"SceneLoadManager\");\r\n           
+    if (!_obj) {\r\n                _obj = new UnityEngine_1.GameObject(\"SceneLoadManager\");\r\n               
+    _obj.AddComponent($typeof(SceneLoadManager));\r\n            }\r\n           
+    SceneLoadManager.Instance = _obj.GetComponent($typeof(SceneLoadManager));\r\n           
+    UnityEngine_1.GameObject.DontDestroyOnLoad(_obj);\r\n        }\r\n        return
+    SceneLoadManager.Instance;\r\n    }\r\n    Awake() {\r\n        if (this != SceneLoadManager.GetInstance())\r\n           
+    UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n    }\r\n    Start() {\r\n       
+    this.loadingScreen.SetActive(false);\r\n    }\r\n    // Load the specified scene\r\n   
+    LoadScene(sceneName) {\r\n        // Show the loading screen\r\n        this.loadingScreen.SetActive(true);\r\n       
+    // Load the specified scene asynchronously\r\n        this.StartCoroutine(this.LoadSceneAsync(sceneName));\r\n   
+    }\r\n    *LoadSceneAsync(sceneName) {\r\n        // Create an AsyncOperation
+    object to track the progress of the scene load\r\n        let asyncOperation
+    = UnityEngine_SceneManagement_1.SceneManager.LoadSceneAsync(sceneName.toString());\r\n       
+    // Wait until the scene is fully loaded\r\n        while (!asyncOperation.isDone)
+    {\r\n            // Update the progress of the loading screen based on the progress
+    of the AsyncOperation\r\n            // You can use this to update a loading
+    bar or display a percentage\r\n            let progress = UnityEngine_1.Mathf.Clamp01(asyncOperation.progress
+    * this.inverseNum);\r\n            UnityEngine_1.Debug.Log(\"Loading progress:
+    \" + progress);\r\n            this.loadingProgressBar.value = progress;\r\n           
+    yield;\r\n        }\r\n        // Hide the loading screen\r\n        this.loadingScreen.SetActive(false);\r\n       
+    if (sceneName == SceneName.Stage) {\r\n            UnityEngine_1.Debug.Log(\"GameManager.GetInstance().InitStage()\");\r\n           
+    GameManager_1.default.GetInstance().InitStage();\r\n        }\r\n    }\r\n}\r\nexports.default
+    = SceneLoadManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NlbmVMb2FkTWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNjZW5lTG9hZE1hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsNkVBQTJEO0FBQzNELGlEQUFxRDtBQUVyRCw2Q0FBMEg7QUFDMUgsK0NBQXdDO0FBRXhDLElBQVksU0FJWDtBQUpELFdBQVksU0FBUztJQUNqQiw2QkFBZ0IsQ0FBQTtJQUNoQiwrQkFBa0IsQ0FBQTtJQUNsQiw2QkFBZ0IsQ0FBQTtBQUNwQixDQUFDLEVBSlcsU0FBUyxHQUFULGlCQUFTLEtBQVQsaUJBQVMsUUFJcEI7QUFFRCxNQUFxQixnQkFBaUIsU0FBUSxxQ0FBcUI7SUFBbkU7O1FBb0JZLGVBQVUsR0FBVyxDQUFDLEdBQUcsR0FBRyxDQUFDO0lBMEN6QyxDQUFDO0lBM0RVLE1BQU0sQ0FBQyxXQUFXO1FBRXJCLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLEVBQUU7WUFDNUIsSUFBSSxJQUFJLEdBQUcsd0JBQVUsQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsQ0FBQztZQUMvQyxJQUFJLENBQUMsSUFBSSxFQUFFO2dCQUNQLElBQUksR0FBRyxJQUFJLHdCQUFVLENBQUMsa0JBQWtCLENBQUMsQ0FBQztnQkFDMUMsSUFBSSxDQUFDLFlBQVksU0FBQyxnQkFBZ0IsR0FBSTthQUN6QztZQUNELGdCQUFnQixDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLGdCQUFnQixFQUFHLENBQUM7WUFDbEUsd0JBQVUsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN0QztRQUNELE9BQU8sZ0JBQWdCLENBQUMsUUFBUSxDQUFDO0lBQ3JDLENBQUM7SUFPRCxLQUFLO1FBQ0QsSUFBSSxJQUFJLElBQUksZ0JBQWdCLENBQUMsV0FBVyxFQUFFO1lBQUUsd0JBQVUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQ3BGLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDeEMsQ0FBQztJQUVELDJCQUEyQjtJQUNwQixTQUFTLENBQUMsU0FBb0I7UUFDakMsMEJBQTBCO1FBQzFCLElBQUksQ0FBQyxhQUFhLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBRW5DLDBDQUEwQztRQUMxQyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztJQUN4RCxDQUFDO0lBRUQsQ0FBQyxjQUFjLENBQUMsU0FBb0I7UUFDaEMsMEVBQTBFO1FBQzFFLElBQUksY0FBYyxHQUFtQiwwQ0FBWSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQztRQUV2Rix1Q0FBdUM7UUFDdkMsT0FBTyxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUU7WUFDM0Isd0ZBQXdGO1lBQ3hGLG1FQUFtRTtZQUNuRSxJQUFJLFFBQVEsR0FBRyxtQkFBSyxDQUFDLE9BQU8sQ0FBQyxjQUFjLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztZQUN4RSxtQkFBSyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsR0FBRyxRQUFRLENBQUMsQ0FBQztZQUMzQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsS0FBSyxHQUFHLFFBQVEsQ0FBQztZQUN6QyxLQUFLLENBQUM7U0FDVDtRQUVELDBCQUEwQjtRQUMxQixJQUFJLENBQUMsYUFBYSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUdwQyxJQUFJLFNBQVMsSUFBSSxTQUFTLENBQUMsS0FBSyxFQUFFO1lBQzlCLG1CQUFLLENBQUMsR0FBRyxDQUFDLHVDQUF1QyxDQUFDLENBQUM7WUFDbkQscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxTQUFTLEVBQUUsQ0FBQztTQUN6QztJQUNMLENBQUM7Q0FDSjtBQTlERCxtQ0E4REMifQ==","assetPath":"Assets/Scripts/SceneLoadManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"loadingScreen","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"loadingProgressBar","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"SceneLoadManager","description":""},"isCompiled":true}'
+  typescriptHash: 3ea3aa62288d1df88026307b75514cfc
+  onlyWriteTrigger: 0

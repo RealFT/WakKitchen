@@ -46,7 +46,7 @@ export default class Interaction_Grill extends ZepetoScriptBehaviour {
         GameManager.GetInstance().SetPlayerMovement(true);
     }
 
-    SetKitchenVisibility(value: bool) {
+    SetKitchenVisibility(value: boolean) {
         this.escapeButton.gameObject.SetActive(value);
         for (let i = 0; i < this.images.length; i++) {
             this.images[i].enabled = value;

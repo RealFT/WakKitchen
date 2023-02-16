@@ -32,7 +32,7 @@ export default class Interaction extends ZepetoScriptBehaviour {
         GameManager.GetInstance().SetPlayerMovement(true);
     }
 
-    SetKitchenVisibility(value: bool) {
+    SetKitchenVisibility(value: boolean) {
         this.escapeButton.gameObject.SetActive(value);
         this.kitchen.gameObject.SetActive(value);
     }

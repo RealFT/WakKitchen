@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 88ac81f4b75e3aa42a490b648ca19a52
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    UnityEngine_SceneManagement_1 = require(\"UnityEngine.SceneManagement\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass SceneMove3D extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        // Zepeto character object\r\n        ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\r\n            this.zepetoCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\r\n       
+    });\r\n    }\r\n    OnTriggerEnter(collider) {\r\n        if (this.zepetoCharacter
+    == null || __UnityEngine__.GameObject.op_Inequality(collider.gameObject, this.zepetoCharacter.gameObject))\r\n           
+    return;\r\n        // Scene moves when the player contacts an object\r\n       
+    UnityEngine_SceneManagement_1.SceneManager.LoadScene(this.sceneName);\r\n   
+    }\r\n    MoveScene() {\r\n        // Scene moves when the player contacts an
+    object\r\n        UnityEngine_SceneManagement_1.SceneManager.LoadScene(this.sceneName);\r\n   
+    }\r\n}\r\nexports.default = SceneMove3D;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NlbmVNb3ZlM0QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY2VuZU1vdmUzRC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFDQSw2RUFBMkQ7QUFDM0QsNkVBQTJGO0FBQzNGLGlEQUE0RTtBQUU1RSxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBSzFELEtBQUs7UUFDRCwwQkFBMEI7UUFDMUIsMkNBQWEsQ0FBQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN2RCxJQUFJLENBQUMsZUFBZSxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDO1FBQ3JGLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELGNBQWMsQ0FBQyxRQUFrQjtRQUM3QixJQUFJLElBQUksQ0FBQyxlQUFlLElBQUksSUFBSSwrQkFZOCtULGFBQWMsQ0FaeC9ULFFBQVEsQ0FBQyxVQUFVLEVBQUksSUFBSSxDQUFDLGVBQWUsQ0FBQyxVQUFVLENBQUE7WUFDdEYsT0FBTztRQUdYLGlEQUFpRDtRQUNqRCwwQ0FBWSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUVELFNBQVM7UUFDTCxpREFBaUQ7UUFDakQsMENBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQzNDLENBQUM7Q0FDSjtBQXpCRCw4QkF5QkMifQ==","assetPath":"Assets/Scripts/SceneMove3D.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"sceneName","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"SceneMove3D","description":""},"isCompiled":true}'
+  typescriptHash: 20aeb024802cd21ca9b93d0b6c13c56b
+  onlyWriteTrigger: 0

@@ -6,6 +6,7 @@ import { GameObject } from 'UnityEngine';
 export default class StageUIController extends ZepetoScriptBehaviour {
     public messageText: Text;
     public timeText: Text;
+    public settlementUI: GameObject;
 
     Start() {
         this.Init();
@@ -13,13 +14,14 @@ export default class StageUIController extends ZepetoScriptBehaviour {
 
     public Init() {
         this.messageText.text = " ";
+        this.SetSettlementUI(false);
     }
 
     public Announce(text: string) {
         this.messageText.text = text;
     }
 
-    public SetTimeUI(hour: int, minute: int) {
+    public SetTimeUI(hour: number, minute: number) {
         // Convert hour to 12-hour format and add AM/PM
         const ampm = hour >= 12 ? 'PM' : 'AM';
         hour = hour % 12 || 12;
@@ -34,4 +36,7 @@ export default class StageUIController extends ZepetoScriptBehaviour {
         this.timeText.text = time;
     }
 
+    public SetSettlementUI(value: boolean) {
+        this.settlementUI.SetActive(value);
+    }
 }

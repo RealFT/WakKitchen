@@ -14,7 +14,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public static GetInstance(): GameManager {
 
         if (!GameManager.Instance) {
-            Debug.LogError("GameManager");
+            //Debug.LogError("GameManager");
 
             var _obj = GameObject.Find("GameManager");
             if (!_obj) {
@@ -37,15 +37,23 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public minutesPerDay: number;    // n minutes pass in one day.
     public startHour: number;    // Stage Start Hour
     public endHour: number;    // Stage End Hour
+    private currTime: [number, number]; // current time
+    private isGameOver: boolean;
 
     Awake() {
         if (this != GameManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {
+        this.InitStage();
+    }
+
+    InitStage() {
+        Debug.Log("InitStage");
         this.timer = new Timer();
         this.timer.SetTimeScale(this.minutesPerDay);
         this.timer.SetTime(this.startHour, 0);
+        this.isGameOver = false;
 
         this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
@@ -53,12 +61,24 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     Update() {
-        // update the timer
-        if (this.timer) this.timer.UpdateTime();
-        if (this.stageUIController) this.stageUIController.SetTimeUI(this.timer.GetHour(), this.timer.GetMinute());
+        if (!this.isGameOver) this.StageUpdate();
     }
 
-    SetPlayerMovement(value: bool) {
+    StageUpdate() {
+        // update timer
+        if (this.timer) this.timer.UpdateTime();
+        this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
+        // stage end
+        if (this.currTime[0] >= this.endHour) {
+            this.currTime[1] = 0;
+            if (this.stageUIController) this.stageUIController.SetSettlementUI(true);
+            this.isGameOver = true;
+        }
+        // update UI
+        if (this.stageUIController) this.stageUIController.SetTimeUI(this.currTime[0], this.currTime[1]);
+    }
+
+    SetPlayerMovement(value: boolean) {
         if (this.characterController && this.quarterViewController) {
             (value) ? this.characterController.EnableMoveControl() : this.characterController.DisableMoveControl();
             this.quarterViewController.SetMove(value);
