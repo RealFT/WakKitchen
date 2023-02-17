@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: 349b7fcf716d0694b87e0ea8fbf45114
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass OrderManager2 extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    Start() {\\r\\n        this.newOrderNumber
+    = 1;\\r\\n        // \uC8FC\uBB38 \uAC00\uB2A5\uD55C \uAC1C\uC218\uB9CC\uD07C
+    \uBE44\uD65C\uC131\uD654\\r\\n        for (let idx = 0; idx < this.orders.length;
+    idx++) {\\r\\n            this.DeActivateOrder(idx);\\r\\n        }\\r\\n       
+    this.StartCoroutine(this.DoOrder());\\r\\n        //this.ActivateOrder(0);\\r\\n   
+    }\\r\\n    Update() {\\r\\n    }\\r\\n    *DoOrder() {\\r\\n        while (true)
+    {\\r\\n            this.ActivateOrder(0);\\r\\n            yield new UnityEngine_1.WaitForSeconds(1.0);\\r\\n           
+    this.DeActivateOrder(0);\\r\\n            yield new UnityEngine_1.WaitForSeconds(1.0);\\r\\n       
+    }\\r\\n    }\\r\\n    // \uD574\uB2F9 \uC778\uB371\uC2A4 \uC8FC\uBB38 \uD65C\uC131\uD654\\r\\n   
+    ActivateOrder(index) {\\r\\n        this.orders[index].gameObject.SetActive(true);\\r\\n       
+    this.customers[index].gameObject.SetActive(true);\\r\\n    }\\r\\n    // \uD574\uB2F9
+    \uC778\uB371\uC2A4 \uC8FC\uBB38 \uBE44\uD65C\uC131\uD654\\r\\n    DeActivateOrder(index)
+    {\\r\\n        this.orders[index].SetActive(false);\\r\\n        this.customers[index].SetActive(false);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = OrderManager2;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiT3JkZXJNYW5hZ2VyMi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk9yZGVyTWFuYWdlcjIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFFckQsNkNBQWlFO0FBRWpFLE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFPNUQsS0FBSztRQUNELElBQUksQ0FBQyxjQUFjLEdBQUcsQ0FBQyxDQUFDO1FBQ3hCLG1CQUFtQjtRQUNuQixLQUFLLElBQUksR0FBRyxHQUFHLENBQUMsRUFBRSxHQUFHLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxNQUFNLEVBQUUsR0FBRyxFQUFFLEVBQUU7WUFDL0MsSUFBSSxDQUFDLGVBQWUsQ0FBQyxHQUFHLENBQUMsQ0FBQztTQUM3QjtRQUNELElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDLENBQUM7UUFDcEMsd0JBQXdCO0lBQzVCLENBQUM7SUFFRCxNQUFNO0lBQ04sQ0FBQztJQUVELENBQUMsT0FBTztRQUNKLE9BQU8sSUFBSSxFQUFFO1lBQ1QsSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUN0QixNQUFNLElBQUksNEJBQWMsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUM5QixJQUFJLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3hCLE1BQU0sSUFBSSw0QkFBYyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1NBRWpDO0lBQ0wsQ0FBQztJQUVELGdCQUFnQjtJQUNoQixhQUFhLENBQUMsS0FBVTtRQUNwQixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDOUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3JELENBQUM7SUFFRCxpQkFBaUI7SUFDakIsZUFBZSxDQUFDLEtBQVU7UUFDdEIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDcEMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDM0MsQ0FBQztDQUNKO0FBekNELGdDQXlDQyJ9\",\"assetPath\":\"Assets/Scripts/OrderManager2.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"orders\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"customers\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"OrderManager2\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: a7487eff56b139b0665d8f1b291a4bd8
+  onlyWriteTrigger: 0
