@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: e51ea9c31d383334b980370c24b7eafc
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nclass Receipt extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    get ingredients() {\r\n        return this._ingredients;\r\n    }\r\n   
+    get drink() {\r\n        return this._drink;\r\n    }\r\n    get side() {\r\n       
+    return this._side;\r\n    }\r\n    get character() {\r\n        return this._character;\r\n   
+    }\r\n    get additionalOrder() {\r\n        return this._additionalOrder;\r\n   
+    }\r\n    setReceipt(ingredients, drink, side, character, additionalOrder) {\r\n       
+    this._ingredients = ingredients;\r\n        this._drink = drink;\r\n        this._side
+    = side;\r\n        this._character = character;\r\n        this._additionalOrder
+    = additionalOrder;\r\n    }\r\n}\r\nexports.default = Receipt;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVjZWlwdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlJlY2VpcHQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQWlEO0FBRWpELE1BQXFCLE9BQVEsU0FBUSxxQ0FBcUI7SUFRdEQsSUFBVyxXQUFXO1FBQ2xCLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FBQztJQUM3QixDQUFDO0lBRUQsSUFBVyxLQUFLO1FBQ1osT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDO0lBQ3ZCLENBQUM7SUFFRCxJQUFXLElBQUk7UUFDWCxPQUFPLElBQUksQ0FBQyxLQUFLLENBQUM7SUFDdEIsQ0FBQztJQUVELElBQVcsU0FBUztRQUNoQixPQUFPLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDM0IsQ0FBQztJQUVELElBQVcsZUFBZTtRQUN0QixPQUFPLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQztJQUNqQyxDQUFDO0lBRUQsVUFBVSxDQUFDLFdBQXFCLEVBQUUsS0FBYSxFQUFFLElBQVksRUFBRSxTQUFpQixFQUFFLGVBQXVCO1FBQ3JHLElBQUksQ0FBQyxZQUFZLEdBQUcsV0FBVyxDQUFDO1FBQ2hDLElBQUksQ0FBQyxNQUFNLEdBQUcsS0FBSyxDQUFDO1FBQ3BCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO1FBQ2xCLElBQUksQ0FBQyxVQUFVLEdBQUcsU0FBUyxDQUFDO1FBQzVCLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxlQUFlLENBQUM7SUFDNUMsQ0FBQztDQUNKO0FBbkNELDBCQW1DQyJ9","assetPath":"Assets/Scripts/Receipt.ts","manifest":{"properties":[],"name":"Receipt","description":""},"isCompiled":true}'
+  typescriptHash: 3ae27fdbdacb1028760f64b81c3bf2af
+  onlyWriteTrigger: 0

@@ -1,6 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { GameObject, Sprite, Dictionary } from 'UnityEngine';
+import { GameObject, Sprite } from 'UnityEngine';
 import ExpandOrderReceipt from './ExpandOrderReceipt';
+import Receipt from './Receipt';
 
 enum Ingredient {
     PATTY = 'patty',
@@ -11,7 +12,7 @@ enum Ingredient {
     PICKLE = 'pickle'
 }
 
-enum Beverage {
+enum Drink {
     COKE = 'Coke',
     SPRITE = 'Sprite',
     ZERO_COKE = 'Zero Coke',
@@ -23,6 +24,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     private difficultyLevel: number = 1;
     public expandOrderReceiptObj: GameObject;
     public expandOrderReceipt: ExpandOrderReceipt;
+    
     // Define the member variables for the ingredient sprites
     public pattySprite: Sprite;
     public lettuceSprite: Sprite;
@@ -39,6 +41,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public zeroCokeSprite: Sprite;
     public fantaSprite: Sprite;
     public waterSprite: Sprite;
+    
+    public receipts: Receipt[];
 
 
     Start() {
@@ -84,10 +88,10 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         return ingredients;
     }
 
-    private generateBeverage(): string {
-        // Randomly select a beverage
-        const beverages: Beverage[] = [Beverage.COKE, Beverage.SPRITE, Beverage.ZERO_COKE, Beverage.FANTA, Beverage.WATER];
-        const beverage = beverages[Math.floor(Math.random() * beverages.length)];
+    private generateDrink(): string {
+        // Randomly select a drink
+        const drinks: Drink[] = [Drink.COKE, Drink.SPRITE, Drink.ZERO_COKE, Drink.FANTA, Drink.WATER];
+        const drink = drinks[Math.floor(Math.random() * drinks.length)];
 
         // Determine the probability of adding ice based on the difficulty level
         const iceProb = Math.min(0.5 + this.difficultyLevel * 0.02, 1);
@@ -95,44 +99,53 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         // Randomly decide whether to add ice based on the probability
         const ice = Math.random() < iceProb ? 'with ice' : 'without ice';
 
-        return `${beverage} ${ice}`;
+        return `${drink} ${ice}`;
     }
 
+    private generateCharacter(): string {
+        return null;
+    }
 
+    public generateAdditionalOrder(character:string,burger:string, fries:string,drink:string): string {
+
+        return `${burger}\n${fries}\n${drink}`;
+    }
 
     public generateOrder(): void {
-        // Generate the order receipt by combining the burger ingredients, fries, and beverage
+        const receipt = new Receipt();
+        // Generate the order receipt by combining the burger ingredients, fries, and drink
         const ingredients = this.getIngredients();
         const burger = `Burger with ${ingredients.join(', ')} on it`;
         const fries = 'Fries';
-        const beverage = this.generateBeverage();
-        const burgerSprites: Sprite[] = [];
+        const drink = this.generateDrink();
+        const character = this.generateCharacter();
+        const additionalOrder = this.generateAdditionalOrder(character,burger,fries,drink);
+        receipt.setReceipt(ingredients, drink, fries, character, additionalOrder);
+        this.receipts.push(receipt);
+    }
 
+    public diplayExpandOrder(index: number): void {
+        const receipt = this.receipts[index];
+
+        const ingredients = receipt.ingredients;
+        const burgerSprites: Sprite[] = [];
         for (const ingredient of ingredients) {
-            const sprite = this.getIngredientSprite(ingredient); 
+            const sprite = this.getIngredientSprite(ingredient);
             if (sprite) {
                 burgerSprites.push(sprite);
             }
         }
 
-        const drinkSprite = this.getDrinkSprite(this.generateBeverage());
-        const sideSprite = this.getSideSprite(fries);
-        const additionalOrder = `${burger}\n${fries}\n${beverage}`;
-        //const characterSprite = this.getCharacterSprite();
+        const drinkSprite = this.getDrinkSprite(receipt.drink);
+        const sideSprite = this.getSideSprite(receipt.side);
+        const additionalOrder = receipt.additionalOrder;
+        const characterSprite = this.getCharacterSprite(receipt.character);
 
-        // Set the order receipt using the ExpandOrderReceipt component
-        //const expandOrderReceipt = this.gameObject.GetComponent<ExpandOrderReceipt>("ExpandOrderReceipt");
-        //expandOrderReceipt.SetOrderReceipt(orderName, ingredients, burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
+        if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
+        this.expandOrderReceipt.SetOrderReceipt(ingredients, burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
     }
 
-    public getAdditionalOrder(): string {
-        // Generate the order receipt by combining the burger ingredients, fries, and beverage
-        const ingredients = this.getIngredients();
-        const burger = `Burger with ${ingredients.join(', ')} on it`;
-        const fries = 'Fries';
-        const beverage = this.generateBeverage();
-        return `${burger}\n${fries}\n${beverage}`;
-    }
+
 
     private getIngredientSprite(ingredient: string): Sprite {
         switch (ingredient) {
@@ -152,7 +165,6 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                 return null;
         }
     }
-
 
     private getDrinkSprite(drinkName: string): Sprite {
         switch (drinkName) {

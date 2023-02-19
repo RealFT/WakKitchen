@@ -4,7 +4,6 @@ import { Sprite } from 'UnityEngine';
 
 export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
 
-    public orderNameText: Text;
     public ingredientImages: Image[];
     public burgerImages: Image[];
     public drinkImage: Image;
@@ -12,10 +11,9 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
     public additionalOrderText: Text;
     public characterImage: Image;
 
-    public SetOrderReceipt(orderName: string, ingredients: string[], burgerSprites: Sprite[],
+    public SetOrderReceipt(ingredients: string[], burgerSprites: Sprite[],
         drinkSprite: Sprite, sideSprite: Sprite, additionalOrder: string,
         characterSprite: Sprite): void {
-        this.orderNameText.text = orderName;
 
         const ingredientCounts: number[] = new Array(ingredients.length).fill(0);
         for (let i = 0; i < ingredients.length; i++) {
