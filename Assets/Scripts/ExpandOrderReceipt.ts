@@ -7,12 +7,12 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
     public panel: GameObject;
     public closePanelButton: Button;
 
-    public ingredientImages: Image[];
+    //private ingredientImages: Image[];
     public burgerImages: Image[];
     public drinkImage: Image;
     public sideImage: Image;
     public additionalOrderText: Text;
-    public characterImage: Image;
+    public customerImage: Image;
 
     Start(){
         this.closePanelButton.onClick.AddListener(() => {
@@ -22,25 +22,32 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
 
     public SetOrderReceipt(ingredients: string[], burgerSprites: Sprite[],
         drinkSprite: Sprite, sideSprite: Sprite, additionalOrder: string,
-        characterSprite: Sprite): void {
+        customerSprite: Sprite): void {
 
-        const ingredientCounts: number[] = new Array(ingredients.length).fill(0);
-        for (let i = 0; i < ingredients.length; i++) {
-            for (let j = 0; j < ingredients.length; j++) {
-                if (ingredients[i] === ingredients[j] && i !== j) {
-                    ingredientCounts[i]++;
-                }
+        // const ingredientCounts: number[] = new Array(ingredients.length).fill(0);
+        // for (let i = 0; i < ingredients.length; i++) {
+        //     for (let j = 0; j < ingredients.length; j++) {
+        //         if (ingredients[i] === ingredients[j] && i !== j) {
+        //             ingredientCounts[i]++;
+        //         }
+        //     }
+        // }
+
+        for (let i = 0; i < this.burgerImages.length; i++) {
+            if (i >= this.burgerImages.length) break;
+            if (i < burgerSprites.length) {
+                this.burgerImages[i].sprite = burgerSprites[i];
+                this.burgerImages[i].enabled = true;
             }
-        }
-
-        for (let i = 0; i < burgerSprites.length; i++) {
-            this.burgerImages[i].sprite = burgerSprites[i];
+            else {
+                this.burgerImages[i].enabled = false;
+            }
         }
 
         this.drinkImage.sprite = drinkSprite;
         this.sideImage.sprite = sideSprite;
         this.additionalOrderText.text = additionalOrder;
-        this.characterImage.sprite = characterSprite;
+        this.customerImage.sprite = customerSprite;
     }
 
     public setPanel(value: boolean) {
