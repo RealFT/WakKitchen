@@ -2,7 +2,6 @@ import { SceneManager } from 'UnityEngine.SceneManagement';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider } from "UnityEngine.UI";
 import { GameObject, Random, WaitForSeconds, Debug } from 'UnityEngine';
-import { COOK_PRIORITY } from './Ingredient';
 import Timer from './Timer';
 import StageUIController from './StageUIController';
 import CharacterController from './CharacterController';

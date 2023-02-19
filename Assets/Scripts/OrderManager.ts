@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { GameObject, Sprite } from 'UnityEngine';
+import { GameObject, Sprite, WaitForSeconds } from 'UnityEngine';
 import ExpandOrderReceipt from './ExpandOrderReceipt';
 import Receipt from './Receipt';
 
@@ -25,6 +25,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public expandOrderReceiptObj: GameObject;
     public expandOrderReceipt: ExpandOrderReceipt;
     
+    private curIngredients: number;
+    private maxIngredients: number;
     // Define the member variables for the ingredient sprites
     public pattySprite: Sprite;
     public lettuceSprite: Sprite;
@@ -43,17 +45,44 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public waterSprite: Sprite;
     
     public receipts: Receipt[];
-
+    public orders: GameObject[];
+    private maxOrderNumber: number;
 
     Start() {
         this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
+        if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
+        this.maxIngredients = 0;
+        this.maxIngredients = 6;
+        this.maxOrderNumber = this.orders.length - 1;
+    }
+
+    public StartOrder(){
+        this.StartCoroutine(this.DoOrder());
+    }
+
+    public StopOrder() {
+        this.StopAllCoroutines();
+    }
+
+    private *DoOrder() {
+        while (true) {
+            this.generateOrder();
+            const waitTime = Math.max(60 - (this.difficultyLevel - 1) * 3, 30) + 30 * Math.random();
+            yield new WaitForSeconds(waitTime);
+        }
+    }
+
+    // the level of difficulty of the order
+    public setDifficultyLevel(difficultyLevel: number): void {
+        this.difficultyLevel = difficultyLevel;
     }
 
     private getIngredient(): Ingredient | null {
         // Calculate the probability of each ingredient and the null value based on the difficulty level
         const nullProb = 1 / (this.difficultyLevel + 1);
-        const pattyProb = (1 - nullProb) * (1 / (6 - this.difficultyLevel));
-        const otherProb = (1 - nullProb - pattyProb) / 5;
+        // Decreases Patty's probability.
+        const pattyProb = (1 - nullProb) * (1 / this.maxIngredients + this.curIngredients);
+        const otherProb = (1 - nullProb - pattyProb) / (this.maxIngredients - 1);
 
         // Randomly select an ingredient or the null value based on the probability distribution
         const random = Math.random();
@@ -84,33 +113,35 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                 ingredients.push(ingredient);
             }
         }
-
         return ingredients;
     }
 
+    // pick a drink randomly and return it.
     private generateDrink(): string {
         // Randomly select a drink
         const drinks: Drink[] = [Drink.COKE, Drink.SPRITE, Drink.ZERO_COKE, Drink.FANTA, Drink.WATER];
         const drink = drinks[Math.floor(Math.random() * drinks.length)];
 
         // Determine the probability of adding ice based on the difficulty level
-        const iceProb = Math.min(0.5 + this.difficultyLevel * 0.02, 1);
+        //const iceProb = Math.min(0.5 + this.difficultyLevel * 0.02, 1);
 
         // Randomly decide whether to add ice based on the probability
-        const ice = Math.random() < iceProb ? 'with ice' : 'without ice';
+        //const ice = Math.random() < iceProb ? 'with ice' : 'without ice';
 
-        return `${drink} ${ice}`;
+        return drink;
     }
 
+    // 
     private generateCharacter(): string {
         return null;
     }
 
-    public generateAdditionalOrder(character:string,burger:string, fries:string,drink:string): string {
+    private generateAdditionalOrder(character:string,burger:string, fries:string,drink:string): string {
 
         return `${burger}\n${fries}\n${drink}`;
     }
 
+    // Create an order and add it to the receipt array
     public generateOrder(): void {
         const receipt = new Receipt();
         // Generate the order receipt by combining the burger ingredients, fries, and drink
@@ -124,6 +155,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.receipts.push(receipt);
     }
 
+    // Enable corresponding index order
     public diplayExpandOrder(index: number): void {
         const receipt = this.receipts[index];
 
@@ -143,10 +175,10 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         this.expandOrderReceipt.SetOrderReceipt(ingredients, burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
+        this.expandOrderReceipt.setPanel(true);
     }
 
-
-
+    // Return sprite of the ingredient
     private getIngredientSprite(ingredient: string): Sprite {
         switch (ingredient) {
             case Ingredient.PATTY:
@@ -183,6 +215,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
+    // Return sprite of the side
     private getSideSprite(sideName: string): Sprite {
         switch (sideName) {
             case 'Fries':
@@ -194,6 +227,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
+    // Return sprite of the character
     private getCharacterSprite(characterName: string): Sprite {
         switch (characterName) {
             default:
@@ -201,7 +235,4 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public setDifficultyLevel(difficultyLevel: number): void {
-        this.difficultyLevel = difficultyLevel;
-    }
 }

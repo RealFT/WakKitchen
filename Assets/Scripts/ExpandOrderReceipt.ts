@@ -1,8 +1,11 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { Image, Text } from 'UnityEngine.UI';
-import { Sprite } from 'UnityEngine';
+import { Image, Text, Button } from 'UnityEngine.UI';
+import { GameObject, Sprite } from 'UnityEngine';
 
 export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
+
+    public panel: GameObject;
+    public closePanelButton: Button;
 
     public ingredientImages: Image[];
     public burgerImages: Image[];
@@ -10,6 +13,12 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
     public sideImage: Image;
     public additionalOrderText: Text;
     public characterImage: Image;
+
+    Start(){
+        this.closePanelButton.onClick.AddListener(() => {
+            this.setPanel(false);
+        });
+    }
 
     public SetOrderReceipt(ingredients: string[], burgerSprites: Sprite[],
         drinkSprite: Sprite, sideSprite: Sprite, additionalOrder: string,
@@ -24,16 +33,6 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
             }
         }
 
-/*        for (let i = 0; i < ingredients.length; i++) {
-            this.ingredientImages[i].sprite = this.GetIngredientSprite(ingredients[i]);
-            if (ingredientCounts[i] > 0) {
-                for (let j = 0; j < ingredientCounts[i]; j++) {
-                    //const starImage;
-                    starImage.sprite = this.GetStarSprite();
-                }
-            }
-        }*/
-
         for (let i = 0; i < burgerSprites.length; i++) {
             this.burgerImages[i].sprite = burgerSprites[i];
         }
@@ -44,8 +43,7 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
         this.characterImage.sprite = characterSprite;
     }
 
-
-/*    private GetStarSprite(): Sprite {
-        // Return the star sprite for indicating additional ingredients
-    }*/
+    public setPanel(value: boolean) {
+        this.panel.SetActive(value);
+    }
 }
