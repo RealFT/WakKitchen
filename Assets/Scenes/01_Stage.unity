@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 86713186}
   - component: {fileID: 86713185}
   m_Layer: 5
-  m_Name: Cabbage
+  m_Name: Item Slot 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3295,7 +3295,7 @@ GameObject:
   - component: {fileID: 857536904}
   - component: {fileID: 857536903}
   m_Layer: 5
-  m_Name: Burn_Top
+  m_Name: Item Slot 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4098,7 +4098,7 @@ GameObject:
   - component: {fileID: 984225686}
   - component: {fileID: 984225685}
   m_Layer: 5
-  m_Name: Cheese
+  m_Name: Item Slot 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4473,7 +4473,7 @@ GameObject:
   - component: {fileID: 1092436836}
   - component: {fileID: 1092436835}
   m_Layer: 5
-  m_Name: Patty
+  m_Name: Item Slot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5411,7 +5411,7 @@ GameObject:
   - component: {fileID: 1378629307}
   - component: {fileID: 1378629306}
   m_Layer: 5
-  m_Name: Burn_Bottom
+  m_Name: Item Slot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6772,7 +6772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1773090512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7345,25 +7345,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     keys:
-    - ingredientSlots
+    - itemSlots
     - plateImages
     - plateIndex
     - plateLimit
     - SurveButton
+    - itemCountText
+    - platedProducts
     unityValues:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 180107201}
+    - {fileID: 0}
+    - {fileID: 0}
     values:
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":5,\"type\":\"UnityEngine.Object,
-      UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":5,\"type\":\"UnityEngine.UI.Button,
+      UnityEngine.UI\",\"isUnity\":true}"}'
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":5,\"length\":7,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - '{"type":"System.Int32, mscorlib","value":"0"}'
     - '{"type":"System.Int32, mscorlib","value":"0"}'
     - 
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":12,\"length\":5,\"type\":\"UnityEngine.UI.Text,
+      UnityEngine.UI\",\"isUnity\":true}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":0,\"type\":\"System.Single,
+      mscorlib\",\"isUnity\":false}"}'
     unityArrayValues:
     - {fileID: 857536903}
     - {fileID: 1378629306}
@@ -7377,6 +7385,11 @@ MonoBehaviour:
     - {fileID: 1094813694}
     - {fileID: 1996527216}
     - {fileID: 592683434}
+    - {fileID: 2098671788}
+    - {fileID: 1335057654}
+    - {fileID: 287368973}
+    - {fileID: 2116585088}
+    - {fileID: 2022695739}
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: d63b0a9d883fa434c8faa505f675d91b, type: 3}
     isExpaned: 0

@@ -92,7 +92,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     public getProduct(index:number): number {
-        return this.products[index];
+        if (index < this.products.length) return this.products[index];
+        return -1;
     }
 
     public getProducts(): number[]{
@@ -130,10 +131,24 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public checkOrder(receipt: Receipt): void {
+    public checkOrder(products: number[]): void {
+        let ingredients: number[] = [];
+        let drink;
+        let side;
+
+        // split ingredients, drink, side
+        for (let i = 0; i < products.length; i++) {
+            if (products[i] < Ingredient.END)
+                ingredients.push(products[i]);
+            else if (products[i] < Drink.END)
+                drink = products[i];
+            else
+                side = products[i];
+        }
+
         // find the same receipt
         for (let index = 0; index < this.receipts.length; index++) {
-            if (this.receipts[index].compareReceipt(receipt.drink, receipt.side, receipt.ingredients)) {
+            if (this.receipts[index].compareReceipt(drink, side, ingredients)) {
                 // earn this receipt's pay
                 GameManager.GetInstance().addMoney(this.receipts[index].pay);
                 // remove this receipt
