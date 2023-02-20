@@ -5,6 +5,7 @@ import { GameObject } from 'UnityEngine';
 //define variable to use
 export default class StageUIController extends ZepetoScriptBehaviour {
     public messageText: Text;
+    public gameMoneyText: Text;
     public timeText: Text;
     public settlementUI: GameObject;
 
@@ -38,5 +39,9 @@ export default class StageUIController extends ZepetoScriptBehaviour {
 
     public SetSettlementUI(value: boolean) {
         this.settlementUI.SetActive(value);
+    }
+
+    public setGameMoney(value: number) {
+        this.gameMoneyText.text = value.toString();
     }
 }

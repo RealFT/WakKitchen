@@ -6,6 +6,7 @@ import Timer from './Timer';
 import StageUIController from './StageUIController';
 import CharacterController from './CharacterController';
 import QuarterViewController from './QuarterViewController';
+import DataManager from './DataManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -38,13 +39,23 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public endHour: number;    // Stage End Hour
     private currTime: [number, number]; // current time
     private isInGame: boolean;
+    private gameMoney: number;
+    private curStage: number;
 
     Awake() {
         if (this != GameManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {
-        //this.InitStage();
+        this.init();
+    }
+
+    init() {
+        /* need load */
+        this.gameMoney = 0;
+        this.lastSavedDay = 0;
+        this.curStage = this.lastSavedDay;
+
     }
 
     InitStage() {
@@ -52,11 +63,14 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.timer = new Timer();
         this.timer.SetTimeScale(this.minutesPerDay);
         this.timer.SetTime(this.startHour, 0);
+        DataManager.GetInstance().setStageReceipts(this.curStage);
 
         this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
         this.isInGame = true;
+
+        this.stageUIController.setGameMoney(this.gameMoney);
     }
 
     Update() {
@@ -84,5 +98,13 @@ export default class GameManager extends ZepetoScriptBehaviour {
             (value) ? this.characterController.EnableMoveControl() : this.characterController.DisableMoveControl();
             this.quarterViewController.SetMove(value);
         }
+    }
+
+    public addMoney(value: number) {
+        this.gameMoney = Math.max(0, this.gameMoney + value);
+    }
+
+    public getCurrentStage(): number {
+        return this.curStage;
     }
 }

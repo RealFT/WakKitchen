@@ -20,18 +20,9 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
         });
     }
 
-    public SetOrderReceipt(ingredients: string[], burgerSprites: Sprite[],
+    public SetOrderReceipt(burgerSprites: Sprite[],
         drinkSprite: Sprite, sideSprite: Sprite, additionalOrder: string,
         customerSprite: Sprite): void {
-
-        // const ingredientCounts: number[] = new Array(ingredients.length).fill(0);
-        // for (let i = 0; i < ingredients.length; i++) {
-        //     for (let j = 0; j < ingredients.length; j++) {
-        //         if (ingredients[i] === ingredients[j] && i !== j) {
-        //             ingredientCounts[i]++;
-        //         }
-        //     }
-        // }
 
         for (let i = 0; i < this.burgerImages.length; i++) {
             if (i >= this.burgerImages.length) break;

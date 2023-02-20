@@ -1,77 +1,103 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { GameObject, Sprite, WaitForSeconds } from 'UnityEngine';
+import { Debug, GameObject, Sprite, WaitForSeconds } from 'UnityEngine';
 import { Button } from 'UnityEngine.UI';
 import ExpandOrderReceipt from './ExpandOrderReceipt';
 import Receipt from './Receipt';
+import GameManager from './GameManager';
+import { System } from 'UnityEngine.Rendering.VirtualTexturing';
+import DataManager from './DataManager';
 
 enum Ingredient {
-    TOP_BURN = 'topBun',
-    BOTTOM_BURN = 'bottomBun',
-    PATTY = 'patty',
-    CABBAGE = 'cabbage',
-    TOMATO = 'tomato',
-    ONION = 'onion',
-    CHEESE = 'cheese',
-    PICKLE = 'pickle'
+    START = 0,
+    TOP_BURN = 0,
+    BOTTOM_BURN = 1,
+    PATTY = 2,
+    CABBAGE = 3,
+    TOMATO = 4,
+    ONION = 5,
+    CHEESE = 6,
+    PICKLE = 7,
+    END = 7
 }
 
 enum Drink {
-    COKE = 'Coke',
-    SPRITE = 'Sprite',
-    ZERO_COKE = 'Zero Coke',
-    FANTA = 'Fanta',
-    WATER = 'Water'
+    START = 8,
+    COKE = 8,
+    SPRITE = 9,
+    ZERO_COKE = 10,
+    FANTA = 11,
+    WATER = 12,
+    END = 12
+}
+
+enum Side {
+    START = 13,
+    FRY = 13,
+    END = 13
+}
+
+enum Customer {
+    START = 14,
+    HAKU = 14,
+    END = 14
 }
 
 export default class OrderManager extends ZepetoScriptBehaviour {
-    private difficultyLevel: number = 1;
+
+    // ΩÃ±€≈Ê ∆–≈œ
+    private static Instance: OrderManager;
+    public static GetInstance(): OrderManager {
+
+        if (!OrderManager.Instance) {
+            //Debug.LogError("OrderManager");
+
+            var _obj = GameObject.Find("OrderManager");
+            if (!_obj) {
+                _obj = new GameObject("OrderManager");
+                _obj.AddComponent<OrderManager>();
+            }
+            OrderManager.Instance = _obj.GetComponent<OrderManager>();
+            //GameObject.DontDestroyOnLoad(_obj);
+        }
+        return OrderManager.Instance;
+    }
+
+/*    private difficultyLevel: number = 1;*/
     public expandOrderReceiptObj: GameObject;
     public expandOrderReceipt: ExpandOrderReceipt;
-    
-    private curIngredients: number;
-    private maxIngredients: number;
 
     // Define the member variables for the ingredient sprites
-    public pattySprite: Sprite;
-    public cabbage: Sprite;
-    public tomatoSprite: Sprite;
-    public onionSprite: Sprite;
-    public cheeseSprite: Sprite;
-    public pickleSprite: Sprite;
-    public topBunSprite: Sprite;
-    public bottomBunSprite: Sprite;
+    public ingredientSprites: Sprite[];
 
-    public friesSprite: Sprite;
-    public cheeseSticksSprite: Sprite;
+    public drinkSprites: Sprite[];
 
-    public cokeSprite: Sprite;
-    public spriteSprite: Sprite;
-    public zeroCokeSprite: Sprite;
-    public fantaSprite: Sprite;
-    public waterSprite: Sprite;
+    public sideSprites: Sprite[];
 
     public characterSprites: Sprite[];
-    
-    public receipts: Receipt[];
+
+    private receipts: Receipt[] = [];
     public orders: Button[];
     private curOrderNumber: number;
     private maxOrderSize: number;
+    private curStage: number;
+
+    Awake() {
+        if (this != OrderManager.GetInstance()) GameObject.Destroy(this.gameObject);
+    }
 
     Start() {
         this.init();
     }
 
-    public init(){
+    public init() {
+        this.curStage = GameManager.GetInstance().getCurrentStage();
         this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
-        this.curIngredients = 0;
-        this.maxIngredients = 6;
         this.curOrderNumber = 0;
         this.maxOrderSize = this.orders.length;
         for (let i = 0; i < this.maxOrderSize; i++) {
             this.initOrderBtn(i);
         }
-        this.receipts = [];
         this.clearOrderBtn();
         this.StartOrder();
     }
@@ -93,16 +119,25 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
-    // the level of difficulty of the order
-    public setDifficultyLevel(difficultyLevel: number): void {
-        this.difficultyLevel = difficultyLevel;
+    public checkOrder(receipt: Receipt): void {
+        // find the same receipt
+        for (let index = 0; index < this.receipts.length; index++) {
+            if (this.receipts[index].compareReceipt(receipt.drink, receipt.side, receipt.ingredients)) {
+                // earn this receipt's pay
+                GameManager.GetInstance().addMoney(this.receipts[index].pay);
+                // remove this receipt
+                this.removeOrder(index);
+                break;
+            }
+        }
     }
 
     // Enable corresponding index order
-    public diplayExpandOrder(index: number): void {
+    public displayExpandOrder(index: number): void {
         if (!this.receipts) return;
+        Debug.Log(this.receipts.length);
         const receipt = this.receipts[index];
-
+        Debug.Log(index + " " + receipt);
         const ingredients = receipt.ingredients;
         const burgerSprites: Sprite[] = [];
         for (const ingredient of ingredients) {
@@ -118,13 +153,31 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         const characterSprite = this.getCharacterSprite(receipt.character);
 
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
-        this.expandOrderReceipt.SetOrderReceipt(ingredients, burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
+        this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
         this.expandOrderReceipt.setPanel(true);
+    }
+
+    public addOrder(): void {
+        if (DataManager.GetInstance()) this.receipts.push(DataManager.GetInstance().getRandomStageReceipt(this.curStage));
+        this.orders[this.curOrderNumber].gameObject.SetActive(true);
+        this.curOrderNumber++;
+    }
+
+    public removeOrder(index: number) {
+        this.orders[this.curOrderNumber].gameObject.SetActive(false);
+        this.curOrderNumber--;
+    }
+
+    public clearOrder() {
+        for (let i = 0; i < this.orders.length; i++) {
+            this.orders[this.curOrderNumber].gameObject.SetActive(false);
+        }
+        this.curOrderNumber = 0;
     }
 
     public initOrderBtn(index: number) {
         this.orders[index].onClick.AddListener(() => {
-            this.diplayExpandOrder(index);
+            this.displayExpandOrder(index);
         });
     }
 
@@ -134,20 +187,14 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public clearOrder() {
-        while (this.receipts.length != 0) {
-            this.receipts.pop();
-        }
-        this.curOrderNumber = 0;
+    private getRandomReceipt(): Receipt{
+        //getReceipt
+        return null;
     }
 
-    public removeOrder(index: number) {
-        this.receipts.splice(index, 1);
-        this.orders[this.curOrderNumber].gameObject.SetActive(false);
-        this.curOrderNumber--;
-    }
 
-    private getIngredient(): Ingredient | null {
+
+/*    private getIngredient(): Ingredient | null {
         // Calculate the probability of each ingredient and the null value based on the difficulty level
         const nullProb = 1 / (this.difficultyLevel + 1);
         // Decreases Patty's probability.
@@ -172,8 +219,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
             return Ingredient.PICKLE;
         }
     }
-
-    private getIngredients(): Ingredient[] {
+*/
+  /*  private getIngredients(): Ingredient[] {
         const numIngredients = Math.floor((2 + this.difficultyLevel * 3 / 20) * Math.random()) + 1;
         const ingredients: Ingredient[] = [];
 
@@ -188,15 +235,11 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
         return ingredients;
     }
+*/
 
-    public addOrder(): void {
-        this.receipts.push(this.generateOrder());
-        this.orders[this.curOrderNumber].gameObject.SetActive(true);
-        this.curOrderNumber++;
-    }
 
     // Create an order and add it to the receipt array
-    public generateOrder(): Receipt {
+/*    public generateOrder(): Receipt {
         const receipt = new Receipt();
         // Generate the order receipt by combining the burger ingredients, fries, and drink
         const ingredients = this.getIngredients();
@@ -204,13 +247,13 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         const fries = 'Fries';
         const drink = this.generateDrink();
         const character = this.generateCharacter();
-        const additionalOrder = this.generateAdditionalOrder(character, burger, fries, drink);
-        receipt.setReceipt(ingredients, drink, fries, character, additionalOrder);
+        //const additionalOrder = this.generateAdditionalOrder(character, burger, fries, drink);
+        //receipt.setReceipt(ingredients, drink, fries, character, additionalOrder);
         return receipt;
     }
-
+*/
     // pick a drink randomly and return it.
-    private generateDrink(): string {
+/*    private generateDrink(): Drink {
         // Randomly select a drink
         const drinks: Drink[] = [Drink.COKE, Drink.SPRITE, Drink.ZERO_COKE, Drink.FANTA, Drink.WATER];
         const drink = drinks[Math.floor(Math.random() * drinks.length)];
@@ -222,77 +265,35 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         //const ice = Math.random() < iceProb ? 'with ice' : 'without ice';
 
         return drink;
-    }
+    }*/
 
     // 
-    private generateCharacter(): string {
+/*    private generateCharacter(): number {
         return null;
-    }
+    }*/
 
-    private generateAdditionalOrder(character:string, burger:string, fries:string,drink:string): string {
+/*    private generateAdditionalOrder(character:Customer, burger:string, fries:string,drink:string): string {
 
         return `${burger}\n${fries}\n${drink}`;
-    }
+    }*/
 
     // Return sprite of the ingredient
-    private getIngredientSprite(ingredient: string): Sprite {
-        switch (ingredient) {
-            case Ingredient.TOP_BURN:
-                return this.topBunSprite;
-            case Ingredient.BOTTOM_BURN:
-                return this.bottomBunSprite;
-            case Ingredient.PATTY:
-                return this.pattySprite;
-            case Ingredient.CABBAGE:
-                return this.cabbage;
-            case Ingredient.TOMATO:
-                return this.tomatoSprite;
-            case Ingredient.ONION:
-                return this.onionSprite;
-            case Ingredient.CHEESE:
-                return this.cheeseSprite;
-            case Ingredient.PICKLE:
-                return this.pickleSprite;
-            default:
-                return null;
-        }
+    private getIngredientSprite(ingredient: Ingredient): Sprite {
+        return this.ingredientSprites[ingredient - Ingredient.START];
     }
 
-    private getDrinkSprite(drinkName: string): Sprite {
-        switch (drinkName) {
-            case Drink.COKE:
-                return this.cokeSprite;
-            case Drink.SPRITE:
-                return this.spriteSprite;
-            case Drink.ZERO_COKE:
-                return this.zeroCokeSprite;
-            case Drink.FANTA:
-                return this.fantaSprite;
-            case Drink.WATER:
-                return this.waterSprite;
-            default:
-                return null;
-        }
+    private getDrinkSprite(drinkName: Drink): Sprite {
+        return this.drinkSprites[drinkName - Drink.START];
     }
 
     // Return sprite of the side
-    private getSideSprite(sideName: string): Sprite {
-        switch (sideName) {
-            case 'Fries':
-                return this.friesSprite;
-            case 'Cheese Sticks':
-                return this.cheeseSticksSprite;
-            default:
-                return null;
-        }
+    private getSideSprite(sideName: Side): Sprite {
+        return this.sideSprites[sideName - Side.START];
     }
 
     // Return sprite of the character
-    private getCharacterSprite(characterName: string): Sprite {
-        switch (characterName) {
-            default:
-                return this.characterSprites[0];
-        }
+    private getCharacterSprite(characterName: Customer): Sprite {
+        return this.characterSprites[characterName - Customer.START];
     }
 
 }

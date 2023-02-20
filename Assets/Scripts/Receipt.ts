@@ -3,25 +3,31 @@ import { GameObject, Sprite } from 'UnityEngine';
 
 export default class Receipt extends ZepetoScriptBehaviour {
 
-    private _ingredients: string[];
-    private _drink: string;
-    private _side: string;
-    private _character: string;
+    private _id: number;
+    private _pay: number;
+    private _drink: number;
+    private _side: number;
+    private _character: number;
     private _additionalOrder: string;
+    private _ingredients: number[];
 
-    public get ingredients(): string[] {
-        return this._ingredients;
+    public get id(): number {
+        return this._id;
     }
 
-    public get drink(): string {
+    public get pay(): number {
+        return this._pay;
+    }
+
+    public get drink(): number {
         return this._drink;
     }
 
-    public get side(): string {
+    public get side(): number {
         return this._side;
     }
 
-    public get character(): string {
+    public get character(): number {
         return this._character;
     }
 
@@ -29,11 +35,22 @@ export default class Receipt extends ZepetoScriptBehaviour {
         return this._additionalOrder;
     }
 
-    setReceipt(ingredients: string[], drink: string, side: string, character: string, additionalOrder: string){
+    public get ingredients(): number[] {
+        return this._ingredients;
+    }
+
+    setReceipt(id: number, drink: number, side: number, character: number, additionalOrder: string, ingredients: number[]){
+        this._id = id;
         this._ingredients = ingredients;
         this._drink = drink;
         this._side = side;
         this._character = character;
         this._additionalOrder = additionalOrder;
+    }
+
+    compareReceipt(drink: number, side: number, ingredients: number[]) {
+        return (this._ingredients == ingredients &&
+            this._drink == drink &&
+            this._side == side) ? true : false;
     }
 }

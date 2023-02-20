@@ -1,6 +1,8 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Vector3, Debug } from "UnityEngine";
 import { Button, Image, Slider } from "UnityEngine.UI";
+import OrderManager from './OrderManager';
+import Receipt from './Receipt';
 
 export default class CookSlot extends ZepetoScriptBehaviour {
 
@@ -10,8 +12,13 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     public plateImages: Image[];
     public plateIndex: int;
     public plateLimit: int;
+    private servedReceipt: Receipt;
 
     Start() {
+        this.init();
+    }
+
+    init() {
         this.plateIndex = 0;
         this.plateLimit = this.plateImages.length;
         this.InitPlate();
@@ -23,8 +30,8 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.SurveButton.onClick.AddListener(() => {
             this.Serve();
         });
+        this.servedReceipt = new Receipt();
     }
-
 
     SetIngredient(index: int) {
 
@@ -46,6 +53,8 @@ export default class CookSlot extends ZepetoScriptBehaviour {
 
     Serve() {
         /**/
+
+        OrderManager.GetInstance().checkOrder(this.servedReceipt);
 
         this.InitPlate();
     }

@@ -21,115 +21,129 @@ ScriptedImporter:
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
     UnityEngine_1 = require(\"UnityEngine\");\r\nconst ExpandOrderReceipt_1 = require(\"./ExpandOrderReceipt\");\r\nconst
-    Receipt_1 = require(\"./Receipt\");\r\nvar Ingredient;\r\n(function (Ingredient)
-    {\r\n    Ingredient[\"TOP_BURN\"] = \"topBun\";\r\n    Ingredient[\"BOTTOM_BURN\"]
-    = \"bottomBun\";\r\n    Ingredient[\"PATTY\"] = \"patty\";\r\n    Ingredient[\"CABBAGE\"]
-    = \"cabbage\";\r\n    Ingredient[\"TOMATO\"] = \"tomato\";\r\n    Ingredient[\"ONION\"]
-    = \"onion\";\r\n    Ingredient[\"CHEESE\"] = \"cheese\";\r\n    Ingredient[\"PICKLE\"]
-    = \"pickle\";\r\n})(Ingredient || (Ingredient = {}));\r\nvar Drink;\r\n(function
-    (Drink) {\r\n    Drink[\"COKE\"] = \"Coke\";\r\n    Drink[\"SPRITE\"] = \"Sprite\";\r\n   
-    Drink[\"ZERO_COKE\"] = \"Zero Coke\";\r\n    Drink[\"FANTA\"] = \"Fanta\";\r\n   
-    Drink[\"WATER\"] = \"Water\";\r\n})(Drink || (Drink = {}));\r\nclass OrderManager
-    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
-    super(...arguments);\r\n        this.difficultyLevel = 1;\r\n    }\r\n    Start()
-    {\r\n        this.init();\r\n    }\r\n    init() {\r\n        this.expandOrderReceipt
-    = this.expandOrderReceiptObj.GetComponent($typeof(ExpandOrderReceipt_1.default));\r\n       
+    Receipt_1 = require(\"./Receipt\");\r\nconst GameManager_1 = require(\"./GameManager\");\r\nconst
+    DataManager_1 = require(\"./DataManager\");\r\nvar Ingredient;\r\n(function (Ingredient)
+    {\r\n    Ingredient[Ingredient[\"START\"] = 0] = \"START\";\r\n    Ingredient[Ingredient[\"TOP_BURN\"]
+    = 0] = \"TOP_BURN\";\r\n    Ingredient[Ingredient[\"BOTTOM_BURN\"] = 1] = \"BOTTOM_BURN\";\r\n   
+    Ingredient[Ingredient[\"PATTY\"] = 2] = \"PATTY\";\r\n    Ingredient[Ingredient[\"CABBAGE\"]
+    = 3] = \"CABBAGE\";\r\n    Ingredient[Ingredient[\"TOMATO\"] = 4] = \"TOMATO\";\r\n   
+    Ingredient[Ingredient[\"ONION\"] = 5] = \"ONION\";\r\n    Ingredient[Ingredient[\"CHEESE\"]
+    = 6] = \"CHEESE\";\r\n    Ingredient[Ingredient[\"PICKLE\"] = 7] = \"PICKLE\";\r\n   
+    Ingredient[Ingredient[\"END\"] = 7] = \"END\";\r\n})(Ingredient || (Ingredient
+    = {}));\r\nvar Drink;\r\n(function (Drink) {\r\n    Drink[Drink[\"START\"] =
+    8] = \"START\";\r\n    Drink[Drink[\"COKE\"] = 8] = \"COKE\";\r\n    Drink[Drink[\"SPRITE\"]
+    = 9] = \"SPRITE\";\r\n    Drink[Drink[\"ZERO_COKE\"] = 10] = \"ZERO_COKE\";\r\n   
+    Drink[Drink[\"FANTA\"] = 11] = \"FANTA\";\r\n    Drink[Drink[\"WATER\"] = 12]
+    = \"WATER\";\r\n    Drink[Drink[\"END\"] = 12] = \"END\";\r\n})(Drink || (Drink
+    = {}));\r\nvar Side;\r\n(function (Side) {\r\n    Side[Side[\"START\"] = 13]
+    = \"START\";\r\n    Side[Side[\"FRY\"] = 13] = \"FRY\";\r\n    Side[Side[\"END\"]
+    = 13] = \"END\";\r\n})(Side || (Side = {}));\r\nvar Customer;\r\n(function (Customer)
+    {\r\n    Customer[Customer[\"START\"] = 14] = \"START\";\r\n    Customer[Customer[\"HAKU\"]
+    = 14] = \"HAKU\";\r\n    Customer[Customer[\"END\"] = 14] = \"END\";\r\n})(Customer
+    || (Customer = {}));\r\nclass OrderManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.receipts
+    = [];\r\n    }\r\n    static GetInstance() {\r\n        if (!OrderManager.Instance)
+    {\r\n            //Debug.LogError(\"OrderManager\");\r\n            var _obj
+    = UnityEngine_1.GameObject.Find(\"OrderManager\");\r\n            if (!_obj)
+    {\r\n                _obj = new UnityEngine_1.GameObject(\"OrderManager\");\r\n               
+    _obj.AddComponent($typeof(OrderManager));\r\n            }\r\n            OrderManager.Instance
+    = _obj.GetComponent($typeof(OrderManager));\r\n            //GameObject.DontDestroyOnLoad(_obj);\r\n       
+    }\r\n        return OrderManager.Instance;\r\n    }\r\n    Awake() {\r\n       
+    if (this != OrderManager.GetInstance())\r\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n   
+    }\r\n    Start() {\r\n        this.init();\r\n    }\r\n    init() {\r\n       
+    this.curStage = GameManager_1.default.GetInstance().getCurrentStage();\r\n       
+    this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent($typeof(ExpandOrderReceipt_1.default));\r\n       
     if (this.expandOrderReceipt)\r\n            this.expandOrderReceipt.setPanel(false);\r\n       
-    this.curIngredients = 0;\r\n        this.maxIngredients = 6;\r\n        this.curOrderNumber
-    = 0;\r\n        this.maxOrderSize = this.orders.length;\r\n        for (let i
-    = 0; i < this.maxOrderSize; i++) {\r\n            this.initOrderBtn(i);\r\n       
-    }\r\n        this.receipts = [];\r\n        this.clearOrderBtn();\r\n       
-    this.StartOrder();\r\n    }\r\n    StartOrder() {\r\n        this.StartCoroutine(this.DoOrder());\r\n   
-    }\r\n    StopOrder() {\r\n        this.StopAllCoroutines();\r\n    }\r\n    *DoOrder()
+    this.curOrderNumber = 0;\r\n        this.maxOrderSize = this.orders.length;\r\n       
+    for (let i = 0; i < this.maxOrderSize; i++) {\r\n            this.initOrderBtn(i);\r\n       
+    }\r\n        this.clearOrderBtn();\r\n        this.StartOrder();\r\n    }\r\n   
+    StartOrder() {\r\n        this.StartCoroutine(this.DoOrder());\r\n    }\r\n   
+    StopOrder() {\r\n        this.StopAllCoroutines();\r\n    }\r\n    *DoOrder()
     {\r\n        while (true) {\r\n            if (this.maxOrderSize > this.curOrderNumber)\r\n               
     this.addOrder();\r\n            const waitTime = 10; //Math.max(60 - (this.difficultyLevel
     - 1) * 3, 30) + 30 * Math.random();\r\n            yield new UnityEngine_1.WaitForSeconds(waitTime);\r\n       
-    }\r\n    }\r\n    // the level of difficulty of the order\r\n    setDifficultyLevel(difficultyLevel)
-    {\r\n        this.difficultyLevel = difficultyLevel;\r\n    }\r\n    // Enable
-    corresponding index order\r\n    diplayExpandOrder(index) {\r\n        if (!this.receipts)\r\n           
-    return;\r\n        const receipt = this.receipts[index];\r\n        const ingredients
-    = receipt.ingredients;\r\n        const burgerSprites = [];\r\n        for (const
-    ingredient of ingredients) {\r\n            const sprite = this.getIngredientSprite(ingredient);\r\n           
-    if (sprite) {\r\n                burgerSprites.push(sprite);\r\n            }\r\n       
+    }\r\n    }\r\n    checkOrder(receipt) {\r\n        // find the same receipt\r\n       
+    for (let index = 0; index < this.receipts.length; index++) {\r\n            if
+    (this.receipts[index].compareReceipt(receipt.drink, receipt.side, receipt.ingredients))
+    {\r\n                // earn this receipt''s pay\r\n                GameManager_1.default.GetInstance().addMoney(this.receipts[index].pay);\r\n               
+    // remove this receipt\r\n                this.removeOrder(index);\r\n               
+    break;\r\n            }\r\n        }\r\n    }\r\n    // Enable corresponding
+    index order\r\n    displayExpandOrder(index) {\r\n        if (!this.receipts)\r\n           
+    return;\r\n        UnityEngine_1.Debug.Log(this.receipts.length);\r\n       
+    const receipt = this.receipts[index];\r\n        UnityEngine_1.Debug.Log(index
+    + \" \" + receipt);\r\n        const ingredients = receipt.ingredients;\r\n       
+    const burgerSprites = [];\r\n        for (const ingredient of ingredients) {\r\n           
+    const sprite = this.getIngredientSprite(ingredient);\r\n            if (sprite)
+    {\r\n                burgerSprites.push(sprite);\r\n            }\r\n       
     }\r\n        const drinkSprite = this.getDrinkSprite(receipt.drink);\r\n       
     const sideSprite = this.getSideSprite(receipt.side);\r\n        const additionalOrder
     = receipt.additionalOrder;\r\n        const characterSprite = this.getCharacterSprite(receipt.character);\r\n       
     if (!this.expandOrderReceipt)\r\n            this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent($typeof(ExpandOrderReceipt_1.default));\r\n       
-    this.expandOrderReceipt.SetOrderReceipt(ingredients, burgerSprites, drinkSprite,
-    sideSprite, additionalOrder, characterSprite);\r\n        this.expandOrderReceipt.setPanel(true);\r\n   
-    }\r\n    initOrderBtn(index) {\r\n        this.orders[index].onClick.AddListener(()
-    => {\r\n            this.diplayExpandOrder(index);\r\n        });\r\n    }\r\n   
-    clearOrderBtn() {\r\n        for (let i = 0; i < this.orders.length; i++) {\r\n           
-    this.orders[i].gameObject.SetActive(false);\r\n        }\r\n    }\r\n    clearOrder()
-    {\r\n        while (this.receipts.length != 0) {\r\n            this.receipts.pop();\r\n       
-    }\r\n        this.curOrderNumber = 0;\r\n    }\r\n    removeOrder(index) {\r\n       
-    this.receipts.splice(index, 1);\r\n        this.orders[this.curOrderNumber].gameObject.SetActive(false);\r\n       
-    this.curOrderNumber--;\r\n    }\r\n    getIngredient() {\r\n        // Calculate
-    the probability of each ingredient and the null value based on the difficulty
-    level\r\n        const nullProb = 1 / (this.difficultyLevel + 1);\r\n       
-    // Decreases Patty''s probability.\r\n        const pattyProb = (1 - nullProb)
-    * (1 / this.maxIngredients + this.curIngredients);\r\n        const otherProb
-    = (1 - nullProb - pattyProb) / (this.maxIngredients - 1);\r\n        // Randomly
-    select an ingredient or the null value based on the probability distribution\r\n       
-    const random = Math.random();\r\n        if (random < nullProb) {\r\n           
-    return null;\r\n        }\r\n        else if (random < nullProb + pattyProb)
-    {\r\n            return Ingredient.PATTY;\r\n        }\r\n        else if (random
-    < nullProb + pattyProb + otherProb) {\r\n            return Ingredient.CABBAGE;\r\n       
-    }\r\n        else if (random < nullProb + pattyProb + 2 * otherProb) {\r\n           
-    return Ingredient.TOMATO;\r\n        }\r\n        else if (random < nullProb
-    + pattyProb + 3 * otherProb) {\r\n            return Ingredient.ONION;\r\n       
-    }\r\n        else if (random < nullProb + pattyProb + 4 * otherProb) {\r\n           
-    return Ingredient.CHEESE;\r\n        }\r\n        else {\r\n            return
-    Ingredient.PICKLE;\r\n        }\r\n    }\r\n    getIngredients() {\r\n       
-    const numIngredients = Math.floor((2 + this.difficultyLevel * 3 / 20) * Math.random())
-    + 1;\r\n        const ingredients = [];\r\n        ingredients.push(Ingredient.BOTTOM_BURN);\r\n       
-    for (let i = 0; i < numIngredients; i++) {\r\n            const ingredient =
-    this.getIngredient();\r\n            if (ingredient) {\r\n                ingredients.push(ingredient);\r\n           
-    }\r\n        }\r\n        ingredients.push(Ingredient.TOP_BURN);\r\n        return
-    ingredients;\r\n    }\r\n    addOrder() {\r\n        this.receipts.push(this.generateOrder());\r\n       
+    this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite,
+    additionalOrder, characterSprite);\r\n        this.expandOrderReceipt.setPanel(true);\r\n   
+    }\r\n    addOrder() {\r\n        if (DataManager_1.default.GetInstance())\r\n           
+    this.receipts.push(DataManager_1.default.GetInstance().getRandomStageReceipt(this.curStage));\r\n       
     this.orders[this.curOrderNumber].gameObject.SetActive(true);\r\n        this.curOrderNumber++;\r\n   
-    }\r\n    // Create an order and add it to the receipt array\r\n    generateOrder()
-    {\r\n        const receipt = new Receipt_1.default();\r\n        // Generate
-    the order receipt by combining the burger ingredients, fries, and drink\r\n       
-    const ingredients = this.getIngredients();\r\n        const burger = `Burger
-    with ${ingredients.join('', '')} on it`;\r\n        const fries = ''Fries'';\r\n       
-    const drink = this.generateDrink();\r\n        const character = this.generateCharacter();\r\n       
-    const additionalOrder = this.generateAdditionalOrder(character, burger, fries,
-    drink);\r\n        receipt.setReceipt(ingredients, drink, fries, character, additionalOrder);\r\n       
-    return receipt;\r\n    }\r\n    // pick a drink randomly and return it.\r\n   
-    generateDrink() {\r\n        // Randomly select a drink\r\n        const drinks
-    = [Drink.COKE, Drink.SPRITE, Drink.ZERO_COKE, Drink.FANTA, Drink.WATER];\r\n       
-    const drink = drinks[Math.floor(Math.random() * drinks.length)];\r\n        //
-    Determine the probability of adding ice based on the difficulty level\r\n       
-    //const iceProb = Math.min(0.5 + this.difficultyLevel * 0.02, 1);\r\n       
-    // Randomly decide whether to add ice based on the probability\r\n        //const
-    ice = Math.random() < iceProb ? ''with ice'' : ''without ice'';\r\n        return
-    drink;\r\n    }\r\n    // \r\n    generateCharacter() {\r\n        return null;\r\n   
-    }\r\n    generateAdditionalOrder(character, burger, fries, drink) {\r\n       
-    return `${burger}\\n${fries}\\n${drink}`;\r\n    }\r\n    // Return sprite of
-    the ingredient\r\n    getIngredientSprite(ingredient) {\r\n        switch (ingredient)
-    {\r\n            case Ingredient.TOP_BURN:\r\n                return this.topBunSprite;\r\n           
-    case Ingredient.BOTTOM_BURN:\r\n                return this.bottomBunSprite;\r\n           
-    case Ingredient.PATTY:\r\n                return this.pattySprite;\r\n           
-    case Ingredient.CABBAGE:\r\n                return this.cabbage;\r\n           
-    case Ingredient.TOMATO:\r\n                return this.tomatoSprite;\r\n           
-    case Ingredient.ONION:\r\n                return this.onionSprite;\r\n           
-    case Ingredient.CHEESE:\r\n                return this.cheeseSprite;\r\n           
-    case Ingredient.PICKLE:\r\n                return this.pickleSprite;\r\n           
-    default:\r\n                return null;\r\n        }\r\n    }\r\n    getDrinkSprite(drinkName)
-    {\r\n        switch (drinkName) {\r\n            case Drink.COKE:\r\n               
-    return this.cokeSprite;\r\n            case Drink.SPRITE:\r\n               
-    return this.spriteSprite;\r\n            case Drink.ZERO_COKE:\r\n               
-    return this.zeroCokeSprite;\r\n            case Drink.FANTA:\r\n               
-    return this.fantaSprite;\r\n            case Drink.WATER:\r\n               
-    return this.waterSprite;\r\n            default:\r\n                return null;\r\n       
-    }\r\n    }\r\n    // Return sprite of the side\r\n    getSideSprite(sideName)
-    {\r\n        switch (sideName) {\r\n            case ''Fries'':\r\n               
-    return this.friesSprite;\r\n            case ''Cheese Sticks'':\r\n               
-    return this.cheeseSticksSprite;\r\n            default:\r\n                return
-    null;\r\n        }\r\n    }\r\n    // Return sprite of the character\r\n    getCharacterSprite(characterName)
-    {\r\n        switch (characterName) {\r\n            default:\r\n               
-    return this.characterSprites[0];\r\n        }\r\n    }\r\n}\r\nexports.default
-    = OrderManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiT3JkZXJNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiT3JkZXJNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBQ3RELDZDQUFpRTtBQUVqRSw2REFBc0Q7QUFDdEQsdUNBQWdDO0FBRWhDLElBQUssVUFTSjtBQVRELFdBQUssVUFBVTtJQUNYLGlDQUFtQixDQUFBO0lBQ25CLHVDQUF5QixDQUFBO0lBQ3pCLDZCQUFlLENBQUE7SUFDZixpQ0FBbUIsQ0FBQTtJQUNuQiwrQkFBaUIsQ0FBQTtJQUNqQiw2QkFBZSxDQUFBO0lBQ2YsK0JBQWlCLENBQUE7SUFDakIsK0JBQWlCLENBQUE7QUFDckIsQ0FBQyxFQVRJLFVBQVUsS0FBVixVQUFVLFFBU2Q7QUFFRCxJQUFLLEtBTUo7QUFORCxXQUFLLEtBQUs7SUFDTixzQkFBYSxDQUFBO0lBQ2IsMEJBQWlCLENBQUE7SUFDakIsZ0NBQXVCLENBQUE7SUFDdkIsd0JBQWUsQ0FBQTtJQUNmLHdCQUFlLENBQUE7QUFDbkIsQ0FBQyxFQU5JLEtBQUssS0FBTCxLQUFLLFFBTVQ7QUFFRCxNQUFxQixZQUFhLFNBQVEscUNBQXFCO0lBQS9EOztRQUNZLG9CQUFlLEdBQVcsQ0FBQyxDQUFDO0lBK1F4QyxDQUFDO0lBOU9HLEtBQUs7UUFDRCxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVNLElBQUk7UUFDUCxJQUFJLENBQUMsa0JBQWtCLEdBQUcsSUFBSSxDQUFDLHFCQUFxQixDQUFDLFlBQVksU0FBQyw0QkFBa0IsRUFBRyxDQUFDO1FBQ3hGLElBQUksSUFBSSxDQUFDLGtCQUFrQjtZQUFFLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDckUsSUFBSSxDQUFDLGNBQWMsR0FBRyxDQUFDLENBQUM7UUFDeEIsSUFBSSxDQUFDLGNBQWMsR0FBRyxDQUFDLENBQUM7UUFDeEIsSUFBSSxDQUFDLGNBQWMs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","assetPath":"Assets/Scripts/OrderManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"expandOrderReceiptObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"expandOrderReceipt","type":"C:/Users/cba08/Documents/GitHub/WakKitchen/Assets/Scripts/ExpandOrderReceipt.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"pattySprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"cabbage","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"tomatoSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"onionSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"cheeseSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"pickleSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"topBunSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"bottomBunSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"friesSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"cheeseSticksSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"cokeSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"spriteSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"zeroCokeSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"fantaSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"waterSprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"characterSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"receipts","type":"C:/Users/cba08/Documents/GitHub/WakKitchen/Assets/Scripts/Receipt.default","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"orders","type":"UnityEngine.UI.Button[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"OrderManager","description":""},"isCompiled":true}'
-  typescriptHash: 197639e5348f46f8490302061adc7259
+    }\r\n    removeOrder(index) {\r\n        this.orders[this.curOrderNumber].gameObject.SetActive(false);\r\n       
+    this.curOrderNumber--;\r\n    }\r\n    clearOrder() {\r\n        for (let i =
+    0; i < this.orders.length; i++) {\r\n            this.orders[this.curOrderNumber].gameObject.SetActive(false);\r\n       
+    }\r\n        this.curOrderNumber = 0;\r\n    }\r\n    initOrderBtn(index) {\r\n       
+    this.orders[index].onClick.AddListener(() => {\r\n            this.displayExpandOrder(index);\r\n       
+    });\r\n    }\r\n    clearOrderBtn() {\r\n        for (let i = 0; i < this.orders.length;
+    i++) {\r\n            this.orders[i].gameObject.SetActive(false);\r\n       
+    }\r\n    }\r\n    getRandomReceipt() {\r\n        //getReceipt\r\n        return
+    null;\r\n    }\r\n    /*    private getIngredient(): Ingredient | null {\r\n           
+    // Calculate the probability of each ingredient and the null value based on the
+    difficulty level\r\n            const nullProb = 1 / (this.difficultyLevel +
+    1);\r\n            // Decreases Patty''s probability.\r\n            const pattyProb
+    = (1 - nullProb) * (1 / this.maxIngredients + this.curIngredients);\r\n           
+    const otherProb = (1 - nullProb - pattyProb) / (this.maxIngredients - 1);\r\n   
+    \r\n            // Randomly select an ingredient or the null value based on the
+    probability distribution\r\n            const random = Math.random();\r\n           
+    if (random < nullProb) {\r\n                return null;\r\n            } else
+    if (random < nullProb + pattyProb) {\r\n                return Ingredient.PATTY;\r\n           
+    } else if (random < nullProb + pattyProb + otherProb) {\r\n                return
+    Ingredient.CABBAGE;\r\n            } else if (random < nullProb + pattyProb +
+    2 * otherProb) {\r\n                return Ingredient.TOMATO;\r\n           
+    } else if (random < nullProb + pattyProb + 3 * otherProb) {\r\n               
+    return Ingredient.ONION;\r\n            } else if (random < nullProb + pattyProb
+    + 4 * otherProb) {\r\n                return Ingredient.CHEESE;\r\n           
+    } else {\r\n                return Ingredient.PICKLE;\r\n            }\r\n       
+    }\r\n    */\r\n    /*  private getIngredients(): Ingredient[] {\r\n         
+    const numIngredients = Math.floor((2 + this.difficultyLevel * 3 / 20) * Math.random())
+    + 1;\r\n          const ingredients: Ingredient[] = [];\r\n  \r\n          ingredients.push(Ingredient.BOTTOM_BURN);\r\n         
+    for (let i = 0; i < numIngredients; i++) {\r\n              const ingredient
+    = this.getIngredient();\r\n              if (ingredient) {\r\n                 
+    ingredients.push(ingredient);\r\n              }\r\n          }\r\n         
+    ingredients.push(Ingredient.TOP_BURN);\r\n  \r\n          return ingredients;\r\n     
+    }\r\n  */\r\n    // Create an order and add it to the receipt array\r\n    /*   
+    public generateOrder(): Receipt {\r\n            const receipt = new Receipt();\r\n           
+    // Generate the order receipt by combining the burger ingredients, fries, and
+    drink\r\n            const ingredients = this.getIngredients();\r\n           
+    const burger = `Burger with ${ingredients.join('', '')} on it`;\r\n           
+    const fries = ''Fries'';\r\n            const drink = this.generateDrink();\r\n           
+    const character = this.generateCharacter();\r\n            //const additionalOrder
+    = this.generateAdditionalOrder(character, burger, fries, drink);\r\n           
+    //receipt.setReceipt(ingredients, drink, fries, character, additionalOrder);\r\n           
+    return receipt;\r\n        }\r\n    */\r\n    // pick a drink randomly and return
+    it.\r\n    /*    private generateDrink(): Drink {\r\n            // Randomly
+    select a drink\r\n            const drinks: Drink[] = [Drink.COKE, Drink.SPRITE,
+    Drink.ZERO_COKE, Drink.FANTA, Drink.WATER];\r\n            const drink = drinks[Math.floor(Math.random()
+    * drinks.length)];\r\n    \r\n            // Determine the probability of adding
+    ice based on the difficulty level\r\n            //const iceProb = Math.min(0.5
+    + this.difficultyLevel * 0.02, 1);\r\n    \r\n            // Randomly decide
+    whether to add ice based on the probability\r\n            //const ice = Math.random()
+    < iceProb ? ''with ice'' : ''without ice'';\r\n    \r\n            return drink;\r\n       
+    }*/\r\n    // \r\n    /*    private generateCharacter(): number {\r\n           
+    return null;\r\n        }*/\r\n    /*    private generateAdditionalOrder(character:Customer,
+    burger:string, fries:string,drink:string): string {\r\n    \r\n            return
+    `${burger}\\n${fries}\\n${drink}`;\r\n        }*/\r\n    // Return sprite of
+    the ingredient\r\n    getIngredientSprite(ingredient) {\r\n        return this.ingredientSprites[ingredient
+    - Ingredient.START];\r\n    }\r\n    getDrinkSprite(drinkName) {\r\n        return
+    this.drinkSprites[drinkName - Drink.START];\r\n    }\r\n    // Return sprite
+    of the side\r\n    getSideSprite(sideName) {\r\n        return this.sideSprites[sideName
+    - Side.START];\r\n    }\r\n    // Return sprite of the character\r\n    getCharacterSprite(characterName)
+    {\r\n        return this.characterSprites[characterName - Customer.START];\r\n   
+    }\r\n}\r\nexports.default = OrderManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiT3JkZXJNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiT3JkZXJNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBQ3RELDZDQUF3RTtBQUV4RSw2REFBc0Q7QUFDdEQsdUNBQWdDO0FBQ2hDLCtDQUF3QztBQUV4QywrQ0FBd0M7QUFFeEMsSUFBSyxVQVdKO0FBWEQsV0FBSyxVQUFVO0lBQ1gsNkNBQVMsQ0FBQTtJQUNULG1EQUFZLENBQUE7SUFDWix5REFBZSxDQUFBO0lBQ2YsNkNBQVMsQ0FBQTtJQUNULGlEQUFXLENBQUE7SUFDWCwrQ0FBVSxDQUFBO0lBQ1YsNkNBQVMsQ0FBQTtJQUNULCtDQUFVLENBQUE7SUFDViwrQ0FBVSxDQUFBO0lBQ1YseUNBQU8sQ0FBQTtBQUNYLENBQUMsRUFYSSxVQUFVLEtBQVYsVUFBVSxRQVdkO0FBRUQsSUFBSyxLQVFKO0FBUkQsV0FBSyxLQUFLO0lBQ04sbUNBQVMsQ0FBQTtJQUNULGlDQUFRLENBQUE7SUFDUixxQ0FBVSxDQUFBO0lBQ1YsNENBQWMsQ0FBQTtJQUNkLG9DQUFVLENBQUE7SUFDVixvQ0FBVSxDQUFBO0lBQ1YsZ0NBQVEsQ0FBQTtBQUNaLENBQUMsRUFSSSxLQUFLLEtBQUwsS0FBSyxRQVFUO0FBRUQsSUFBSyxJQUlKO0FBSkQsV0FBSyxJQUFJO0lBQ0wsa0NBQVUsQ0FBQTtJQUNWLDhCQUFRLENBQUE7SUFDUiw4QkFBUSxDQUFBO0FBQ1osQ0FBQyxFQUpJLElBQUksS0FBSixJQUFJLFFBSVI7QUFFRCxJQUFLLFFBSUo7QUFKRCxXQUFLLFFBQVE7SUFDVCwwQ0FBVSxDQUFBO0lBQ1Ysd0NBQVMsQ0FBQTtJQUNULHNDQUFRLENBQUE7QUFDWixDQUFDLEVBSkksUUFBUSxLQUFSLFFBQVEsUUFJWjtBQUVELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFBL0Q7O1FBaUNZLGFBQVEsR0FBYyxFQUFFLENBQUM7SUE2TnJDLENBQUM7SUExUFUsTUFBTSxD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","assetPath":"Assets/Scripts/OrderManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"expandOrderReceiptObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"expandOrderReceipt","type":"C:/Users/Jun/Documents/GitHub/WakKitchen/Assets/Scripts/ExpandOrderReceipt.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ingredientSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"drinkSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"sideSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"characterSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"orders","type":"UnityEngine.UI.Button[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"OrderManager","description":""},"isCompiled":true}'
+  typescriptHash: 7b1e7b09326d1ca699f8631a0e43f40d
   onlyWriteTrigger: 0
