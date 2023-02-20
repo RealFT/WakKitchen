@@ -39,56 +39,49 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public loadReceiptData() {
-        const rows = this.receiptFile.text.split('\n'); // split the CSV file by row
-        rows.forEach((row) => {
-
-            const values = row.split(','); // split the row by comma to get the values
+        const lines = this.receiptFile.text.split('\n'); // split the CSV file by row
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
+            const values = line.split(','); // split the row by comma to get the values
+            
             // do something with the values
             const receipt = new Receipt();
             const ingredients: number[] = [];
-            for (let i = 5; i < values.length; i++) {
-                ingredients.push(+values[i]);
+            for (let j = 5; j < values.length; j++) {
+                ingredients.push(+values[j]);
             }
             receipt.setReceipt(+values[0], +values[1], +values[2], +values[3], values[4], ingredients);
             this.receipts.push(receipt);
-        });
-        Debug.Log("Loaded Receipt Data:" + rows.length);
+        };
     }
 
     public loadStageData() {
-        const rows = this.stageFile.text.split('\n'); // split the CSV file by row
-        rows.forEach((row) => {
-            const values = row.split(','); // split the row by comma to get the values
+        const lines = this.stageFile.text.split('\n'); // split the CSV file by row
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
+            const values = line.split(','); // split the row by comma to get the values
+            
             // do something with the values
             const stageIndexs = values.slice(1);
             this.stages[values[0]] = stageIndexs;
-        });
-        Debug.Log("Loaded Stage Data:" + rows.length);
+        }
     }
 
     public setStageReceipts(stage: number) {
         this.stageReceipts = [];
-        Debug.Log("setStageReceipts stages[stage].length:" + this.stages[stage].length);
-        for (let index = 0; index < this.stages[stage].length-1; index++) {
-            Debug.Log("setStageReceipts stage index:" + this.stages[stage][index]);
+        for (let index = 0; index < this.stages[stage].length; index++) {
             this.stageReceipts.push(this.getReceipt(this.stages[stage][index]));
-            Debug.Log("setStageReceipts stage id:" + this.stageReceipts[index].id);
         }
-        Debug.Log("setStageReceipts:" + this.stageReceipts.length);
     }
 
     public getRandomStageReceipt(stage: number): Receipt {
-        Debug.Log("getRandomStageReceipt:" + this.stageReceipts.length);
         const index = Math.floor(Random.Range(0, this.stageReceipts.length));
-        Debug.Log("getRandomStageReceipt index:" + index);
-        Debug.Log("getRandomStageReceipt return:" + this.stageReceipts[index].id);
-        return this.stageReceipts[0];
+        return this.stageReceipts[index];
     }
 
     public getReceipt(index: number): Receipt {
         Debug.Log("getReceipt id:" + this.receipts[index].id);
         return this.receipts[index];
     }
-
 
 }

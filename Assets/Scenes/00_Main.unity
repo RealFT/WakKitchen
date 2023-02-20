@@ -284,7 +284,9 @@ MonoBehaviour:
     - stageUIController
     - startHour
     - endHour
+    - orderManager
     unityValues:
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -298,6 +300,7 @@ MonoBehaviour:
     - 
     - '{"type":"System.Single, mscorlib","value":"8"}'
     - '{"type":"System.Single, mscorlib","value":"22"}'
+    - 
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: bb375eb55cd9444488be4a7dd4186cbc, type: 3}
@@ -2278,7 +2281,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1751, y: 750}
+  m_SizeDelta: {x: 1784, y: 754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2130797532
 MonoBehaviour:
@@ -2300,7 +2303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec5e8f7543764c846aea888d2c1b0494, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e8fae2901cf430e469e1f426167b78c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

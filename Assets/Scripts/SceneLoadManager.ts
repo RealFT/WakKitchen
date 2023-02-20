@@ -62,14 +62,15 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
             this.loadingProgressBar.value = progress;
             yield;
         }
-
         // Hide the loading screen
         this.loadingScreen.SetActive(false);
 
 
         if (sceneName == SceneName.Stage) {
             Debug.Log("GameManager.GetInstance().InitStage()");
-            GameManager.GetInstance().InitStage();
+            const Instance = GameManager.GetInstance();
+            Instance.InitStage();
+            Instance.nextStage();
         }
     }
 }

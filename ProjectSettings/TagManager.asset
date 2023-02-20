@@ -7,6 +7,7 @@ TagManager:
   - Character
   - Quarter
   - UIController
+  - Order
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     public plateIndex: int;
     public plateLimit: int;
     private servedReceipt: Receipt;
+    private orderInstance: OrderManager;
 
     Start() {
         this.init();
@@ -31,43 +32,34 @@ export default class CookSlot extends ZepetoScriptBehaviour {
             this.Serve();
         });
         this.servedReceipt = new Receipt();
+        this.orderInstance = OrderManager.GetInstance();
     }
 
     SetIngredient(index: int) {
-
         this.ingredientSlots[index].onClick.AddListener(() => {
-
             if (this.plateLimit > this.plateIndex) {
-
-                Debug.Log(this.ingredientSlots[index].image.sprite);
-
+                
                 this.plateImages[this.plateIndex].sprite = this.ingredientSlots[index].image.sprite;
-
                 this.plateImages[this.plateIndex].enabled = true;
-                Debug.Log(this.plateImages[this.plateIndex].enabled);
                 this.plateIndex++;
+                this.orderInstance.getProduct(this.plateIndex);
             }
         });
-        Debug.Log("SetIngredient: " + index);
     }
 
     Serve() {
         /**/
-
-        OrderManager.GetInstance().checkOrder(this.servedReceipt);
+        this.orderInstance.checkOrder(this.servedReceipt);
 
         this.InitPlate();
     }
 
 
     InitPlate() {
-
         for (var images of this.plateImages) {
-
             images.enabled = false;
             Debug.Log(images.enabled);
         }
-
         this.plateIndex = 0;
     }
 }

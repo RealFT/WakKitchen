@@ -7,6 +7,7 @@ import StageUIController from './StageUIController';
 import CharacterController from './CharacterController';
 import QuarterViewController from './QuarterViewController';
 import DataManager from './DataManager';
+import OrderManager from './OrderManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -31,6 +32,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public characterController: CharacterController;
     public quarterViewController: QuarterViewController;
     public stageUIController: StageUIController;
+    public orderManager: OrderManager;
     private timer: Timer;
 
     private lastSavedDay: number;      // last saved Day(Stage).
@@ -68,8 +70,11 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
-        this.isInGame = true;
+        this.orderManager = GameObject.FindGameObjectWithTag("Order").GetComponent<OrderManager>();
 
+        this.isInGame = true;
+        this.orderManager.init();
+        this.orderManager.StartOrder();
         this.stageUIController.setGameMoney(this.gameMoney);
     }
 
@@ -102,6 +107,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     public addMoney(value: number) {
         this.gameMoney = Math.max(0, this.gameMoney + value);
+    }
+
+    public nextStage(): void {
+        this.curStage++;
     }
 
     public getCurrentStage(): number {

@@ -6006,7 +6006,7 @@ GameObject:
   - component: {fileID: 1528888720}
   m_Layer: 0
   m_Name: OrderManager
-  m_TagString: Untagged
+  m_TagString: Order
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
