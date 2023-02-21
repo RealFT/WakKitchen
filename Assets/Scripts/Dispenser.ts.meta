@@ -1,0 +1,43 @@
+fileFormatVersion: 2
+guid: 3718fda636ccbab49a3e67c33670d077
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass Dispenser extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.init();\r\n    }\r\n    init() {\r\n       
+    this.StopAllCoroutines();\r\n        this.isCatch = false;\r\n        this.cupTransform.position
+    = this.leftMax.position;\r\n        this.StartCoroutine(this.DoMoving());\r\n   
+    }\r\n    // Dispenser Coroutine\r\n    *DoMoving() {\r\n        while (!this.isCatch)
+    {\r\n            this.cupTransform.position.x += UnityEngine_1.Time.deltaTime
+    * this.direction;\r\n            //If the current position (x) is greater than
+    or equal to the maximum value that can be moved rightward\r\n            // Invert
+    the movement speed + direction by multiplying it by -1 and setting the current
+    position to the maximum value that can be moved to the right.\r\n           
+    if (this.cupTransform.position.x >= this.rightMax.position.x) {\r\n               
+    this.direction *= -1;\r\n                this.cupTransform.position.x = this.rightMax.position.x;\r\n           
+    }\r\n            //If the current position (x) is greater than or equal to the
+    maximum left-leasable (x),\r\n            // Invert movement speed + direction
+    by multiplying -1 and setting the current position to the maximum value that
+    can be moved to the left\r\n            else if (this.cupTransform.position.x
+    <= this.leftMax.position.x) {\r\n                this.direction *= -1;\r\n               
+    this.cupTransform.position.x = this.leftMax.position.x;\r\n            }\r\n       
+    }\r\n    }\r\n}\r\nexports.default = Dispenser;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGlzcGVuc2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRGlzcGVuc2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXVEO0FBQ3ZELGlEQUFxRDtBQUVyRCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBT3hELEtBQUs7UUFDRCxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVELElBQUk7UUFDQSxJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztRQUN6QixJQUFJLENBQUMsT0FBTyxHQUFHLEtBQUssQ0FBQztRQUNyQixJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQztRQUNuRCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDO0lBQ3pDLENBQUM7SUFFRCxzQkFBc0I7SUFDdEIsQ0FBQyxRQUFRO1FBQ0wsT0FBTyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUU7WUFDbEIsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQyxJQUFJLGtCQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUM7WUFDaEUsdUdBQXVHO1lBQ3ZHLHNKQUFzSjtZQUN0SixJQUFJLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUMsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDLEVBQUU7Z0JBQzFELElBQUksQ0FBQyxTQUFTLElBQUksQ0FBQyxDQUFDLENBQUM7Z0JBQ3JCLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7YUFDM0Q7WUFDRCx3RkFBd0Y7WUFDeEYsMElBQTBJO2lCQUNySSxJQUFJLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUMsSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxDQUFDLEVBQUU7Z0JBQzlELElBQUksQ0FBQyxTQUFTLElBQUksQ0FBQyxDQUFDLENBQUM7Z0JBQ3JCLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUMsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7YUFDMUQ7U0FDSjtJQUNMLENBQUM7Q0FDSjtBQXBDRCw0QkFvQ0MifQ==","assetPath":"Assets/Scripts/Dispenser.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"leftMax","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"rightMax","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"cupTransform","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"direction","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"Dispenser","description":""},"isCompiled":true}'
+  typescriptHash: c0e022984a406c65c45c0c725a0d4707
+  onlyWriteTrigger: 0

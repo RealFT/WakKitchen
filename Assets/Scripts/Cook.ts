@@ -6,7 +6,6 @@ import { Ingredient } from './OrderManager';
 
 export default class CookSlot extends ZepetoScriptBehaviour {
 
-    private orderManager: OrderManager;
     public serveButton: Button;
 
     // Inventory related variables
@@ -42,7 +41,6 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.serveButton.onClick.AddListener(() => {
             this.Serve();
         });
-        this.orderManager = OrderManager.GetInstance();
 
         // Update inventory display
         this.updateInventoryDisplay();
@@ -53,13 +51,13 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.productButtons[index].onClick.AddListener(() => {
             if (this.plateLimit > this.plateIndex) {
                 // Add the clicked product to the plate and inventory   
-                this.productButtons[index].image.sprite = this.orderManager.getProductSprite(this.orderManager.getProduct(index));
+                this.productButtons[index].image.sprite = OrderManager.GetInstance().getProductSprite(OrderManager.GetInstance().getProduct(index));
                 this.plateImages[this.plateIndex].sprite = this.productButtons[index].image.sprite;  // replace plate's sprite to this sprite
                 this.plateImages[this.plateIndex].enabled = true;
                 this.plateIndex++;
 
                 // Add the product to the inventory
-                const product = this.orderManager.getProduct(this.plateIndex);
+                const product = OrderManager.GetInstance().getProduct(index);
                 if (product != -1)
                     this.platedProducts.push(product);
                 Debug.Log("productButtons: " + product);
@@ -136,8 +134,10 @@ export default class CookSlot extends ZepetoScriptBehaviour {
 
     Serve() {
         /**/
-        this.orderManager.checkOrder(this.platedProducts);
-
+        for(let i=0;i<this.platedProducts.length;i++){
+            this.removeItemFromInventory(this.platedProducts[i]);
+        }
+        OrderManager.GetInstance().checkOrder(this.platedProducts);
         this.InitPlate();
     }
 
@@ -146,6 +146,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
             images.enabled = false;
         }
         this.plateIndex = 0;
+        this.platedProducts = [];
     }
 
     setSlot(index: number, value: boolean) {

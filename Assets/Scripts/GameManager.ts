@@ -8,6 +8,7 @@ import CharacterController from './CharacterController';
 import QuarterViewController from './QuarterViewController';
 import DataManager from './DataManager';
 import OrderManager from './OrderManager';
+import UIManager from './UIManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -31,8 +32,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     // components
     public characterController: CharacterController;
     public quarterViewController: QuarterViewController;
-    public stageUIController: StageUIController;
-    public orderManager: OrderManager;
+    //public stageUIController: StageUIController;
     private timer: Timer;
 
     private lastSavedDay: number;      // last saved Day(Stage).
@@ -57,7 +57,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.gameMoney = 0;
         this.lastSavedDay = 0;
         this.curStage = this.lastSavedDay;
-
     }
 
     InitStage() {
@@ -67,15 +66,15 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.timer.SetTime(this.startHour, 0);
         DataManager.GetInstance().setStageReceipts(this.curStage);
 
-        this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
+        //this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
-        this.orderManager = GameObject.FindGameObjectWithTag("Order").GetComponent<OrderManager>();
 
         this.isInGame = true;
-        this.orderManager.init();
-        this.orderManager.StartOrder();
-        this.stageUIController.setGameMoney(this.gameMoney);
+        OrderManager.GetInstance().init();
+        OrderManager.GetInstance().StartOrder();
+        UIManager.GetInstance().initStageUI();
+        UIManager.GetInstance().setGameMoney(this.gameMoney);
     }
 
     Update() {
@@ -91,11 +90,11 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // stage end
         if (this.currTime[0] >= this.endHour) {
             this.currTime[1] = 0;
-            if (this.stageUIController) this.stageUIController.SetSettlementUI(true);
+            UIManager.GetInstance().SetSettlementUI(true);
             this.isInGame = false;
         }
         // update UI
-        if (this.stageUIController) this.stageUIController.SetTimeUI(this.currTime[0], this.currTime[1]);
+        UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
     }
 
     SetPlayerMovement(value: boolean) {
@@ -107,6 +106,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     public addMoney(value: number) {
         this.gameMoney = Math.max(0, this.gameMoney + value);
+        UIManager.GetInstance().setGameMoney(this.gameMoney);
     }
 
     public nextStage(): void {

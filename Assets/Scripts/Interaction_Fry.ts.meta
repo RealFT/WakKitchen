@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: cc31d61d807bd324e9e691e54fe9685e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n// import custom script from
+    path\r\nconst GameManager_1 = require(\"./GameManager\");\r\nconst FrySlot_1
+    = require(\"./FrySlot\");\r\nclass Interaction_Fry extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        //Button Hide\r\n        this.fryCanvas.SetActive(true);\r\n       
+    this.kitchen.SetActive(true);\r\n        this.SetKitchenVisibility(false);\r\n       
+    //When Button Click\r\n        this.escapeButton.onClick.AddListener(() => {\r\n           
+    GameManager_1.default.GetInstance().SetPlayerMovement(true);\r\n            this.SetKitchenVisibility(false);\r\n       
+    });\r\n    }\r\n    OnTriggerEnter(collider) {\r\n        this.SetKitchenVisibility(true);\r\n       
+    GameManager_1.default.GetInstance().SetPlayerMovement(false);\r\n    }\r\n   
+    OnTriggerExit(collider) {\r\n        this.SetKitchenVisibility(false);\r\n       
+    GameManager_1.default.GetInstance().SetPlayerMovement(true);\r\n    }\r\n   
+    SetKitchenVisibility(value) {\r\n        this.escapeButton.gameObject.SetActive(value);\r\n       
+    for (let i = 0; i < this.images.length; i++) {\r\n            this.images[i].enabled
+    = value;\r\n        }\r\n        for (let i = 0; i < this.frySlotObjects.length;
+    i++) {\r\n            this.frySlotObjects[i].GetComponent($typeof(FrySlot_1.default)).SetFryVisibility(value);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = Interaction_Fry;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW50ZXJhY3Rpb25fRnJ5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiSW50ZXJhY3Rpb25fRnJ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXlDO0FBRXpDLGlEQUFzRDtBQUN0RCxpQ0FBaUM7QUFDakMsK0NBQXdDO0FBQ3hDLHVDQUFnQztBQUVoQyxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQU85RCxLQUFLO1FBQ0QsYUFBYTtRQUNiLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQy9CLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzdCLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUVqQyxtQkFBbUI7UUFDbkIsSUFBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN2QyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2xELElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCxjQUFjLENBQUMsUUFBUTtRQUNuQixJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDaEMscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBRUQsYUFBYSxDQUFDLFFBQVE7UUFDbEIsSUFBSSxDQUFDLG9CQUFvQixDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ2pDLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEQsQ0FBQztJQUVELG9CQUFvQixDQUFDLEtBQWM7UUFDL0IsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzlDLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN6QyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sR0FBRyxLQUFLLENBQUM7U0FDbEM7UUFDRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDakQsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxZQUFZLFNBQUMsaUJBQU8sR0FBSSxnQkFBZ0IsQ0FBQyxLQUFLLENBQUMsQ0FBQztTQUMxRTtJQUNMLENBQUM7Q0FDSjtBQXZDRCxrQ0F1Q0MifQ==","assetPath":"Assets/Scripts/Interaction_Fry.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"escapeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"frySlotObjects","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"images","type":"UnityEngine.UI.Image[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"fryCanvas","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"kitchen","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"Interaction_Fry","description":""},"isCompiled":true}'
+  typescriptHash: 7640ab56d2ce76c9a793409e711fabe3
+  onlyWriteTrigger: 0

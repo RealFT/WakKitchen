@@ -37,7 +37,18 @@ export enum Side {
 export enum Customer {
     START = 14,
     HAKU = 14,
-    END = 14
+    CALLYCARLY = 15,
+    CHUNSIK = 16,
+    DANDAPBUG = 17,
+    HYEJI = 18,
+    DOPAMINE = 19,
+    HIKIKING = 20,
+    KIMCHIMANDU = 21,
+    KWONMIN = 22,
+    ROENTGENIUM = 23,
+    RUSUK = 24,
+    SECRETTO = 25,
+    END = 25
 }
 
 export default class OrderManager extends ZepetoScriptBehaviour {
@@ -54,7 +65,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                 _obj.AddComponent<OrderManager>();
             }
             OrderManager.Instance = _obj.GetComponent<OrderManager>();
-            //GameObject.DontDestroyOnLoad(_obj);
+            GameObject.DontDestroyOnLoad(_obj);
         }
         return OrderManager.Instance;
     }
@@ -72,13 +83,16 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public orders: Button[];
     private curOrderNumber: number;
     private maxOrderSize: number;
-    private curStage: number;
 
     // array of produced Ingredient, Drink, Side.
     private products: number[];
 
+    Awake() {
+        if (this != OrderManager.GetInstance()) GameObject.Destroy(this.gameObject);
+    }
+
     public initProduct() {
-        this.products = [0, 2, 1];
+        this.products = [0, 1];
     }
 
     // Add a product to the end of the products array
@@ -107,14 +121,13 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     public init() {
         this.StopOrder();
-        this.curStage = GameManager.GetInstance().getCurrentStage();
         this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
-        this.curOrderNumber = 0;
         this.maxOrderSize = this.orders.length;
         for (let i = 0; i < this.maxOrderSize; i++) {
             this.initOrderBtn(i);
         }
+        this.clearOrder();
         this.clearOrderBtn();
         this.initProduct();
     }
@@ -139,8 +152,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     public checkOrder(products: number[]): void {
         let ingredients: number[] = [];
-        let drink;
-        let side;
+        let drink = -1;
+        let side = -1;
 
         // split ingredients, drink, side
         for (let i = 0; i < products.length; i++) {
@@ -189,21 +202,23 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     public addOrder(): void {
-        this.receipts.push(DataManager.GetInstance().getRandomStageReceipt(this.curStage));
+        this.receipts.push(DataManager.GetInstance().getRandomStageReceipt());
         this.orders[this.curOrderNumber].gameObject.SetActive(true);
         this.curOrderNumber++;
     }
 
     public removeOrder(index: number) {
-        this.orders[this.curOrderNumber].gameObject.SetActive(false);
         this.curOrderNumber--;
+        this.orders[this.curOrderNumber].gameObject.SetActive(false);
+        for (let i = index; i < this.receipts.length - 1; i++) {
+            this.receipts[i] = this.receipts[i + 1];
+        }
+        this.receipts.pop();
     }
 
     public clearOrder() {
-        for (let i = 0; i < this.orders.length; i++) {
-            this.orders[this.curOrderNumber].gameObject.SetActive(false);
-        }
         this.curOrderNumber = 0;
+        this.receipts = [];
     }
 
     public initOrderBtn(index: number) {
@@ -216,6 +231,13 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         for(let i=0;i<this.orders.length;i++){
             this.orders[i].gameObject.SetActive(false);
         }
+    }
+
+    public disableOrder(){
+        this.StopOrder();
+        this.clearOrder();
+        this.clearOrderBtn();
+        if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
     }
 
     public getProductSprite(product: number): Sprite {

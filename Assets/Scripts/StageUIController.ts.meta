@@ -20,20 +20,11 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    UnityEngine_1 = require(\"UnityEngine\");\r\n//define variable to use\r\nclass
-    StageUIController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
-    {\r\n        this.Init();\r\n    }\r\n    Init() {\r\n        this.messageText.text
-    = \" \";\r\n        this.SetSettlementUI(false);\r\n    }\r\n    Announce(text)
-    {\r\n        this.messageText.text = text;\r\n    }\r\n    SetTimeUI(hour, minute)
-    {\r\n        // Convert hour to 12-hour format and add AM/PM\r\n        const
-    ampm = hour >= 12 ? ''PM'' : ''AM'';\r\n        hour = hour % 12 || 12;\r\n       
-    // Add leading zeros to minute and hour if necessary\r\n        const formattedHour
-    = hour < 10 ? `0${hour}` : hour;\r\n        const formattedMinute = minute <
-    10 ? `0${minute}` : minute;\r\n        // Combine strings to create the desired
-    output\r\n        const time = `${formattedHour}:${formattedMinute} ${ampm}`;\r\n       
-    this.timeText.text = time;\r\n    }\r\n    SetSettlementUI(value) {\r\n       
-    this.settlementUI.SetActive(value);\r\n    }\r\n    setGameMoney(value) {\r\n       
-    this.gameMoneyText.text = value.toString();\r\n    }\r\n}\r\nexports.default
-    = StageUIController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhZ2VVSUNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdGFnZVVJQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUV0RCw2Q0FBeUM7QUFFekMsd0JBQXdCO0FBQ3hCLE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQU1oRSxLQUFLO1FBQ0QsSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDO0lBQ2hCLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEdBQUcsR0FBRyxDQUFDO1FBQzVCLElBQUksQ0FBQyxlQUFlLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDaEMsQ0FBQztJQUVNLFFBQVEsQ0FBQyxJQUFZO1FBQ3hCLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztJQUNqQyxDQUFDO0lBRU0sU0FBUyxDQUFDLElBQVksRUFBRSxNQUFjO1FBQ3pDLCtDQUErQztRQUMvQyxNQUFNLElBQUksR0FBRyxJQUFJLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQztRQUN0QyxJQUFJLEdBQUcsSUFBSSxHQUFHLEVBQUUsSUFBSSxFQUFFLENBQUM7UUFFdkIsb0RBQW9EO1FBQ3BELE1BQU0sYUFBYSxHQUFHLElBQUksR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQztRQUNwRCxNQUFNLGVBQWUsR0FBRyxNQUFNLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLE1BQU0sRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUM7UUFFNUQsK0NBQStDO1FBQy9DLE1BQU0sSUFBSSxHQUFHLEdBQUcsYUFBYSxJQUFJLGVBQWUsSUFBSSxJQUFJLEVBQUUsQ0FBQztRQUUzRCxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7SUFDOUIsQ0FBQztJQUVNLGVBQWUsQ0FBQyxLQUFjO1FBQ2pDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3ZDLENBQUM7SUFFTSxZQUFZLENBQUMsS0FBYTtRQUM3QixJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksR0FBRyxLQUFLLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDL0MsQ0FBQztDQUNKO0FBekNELG9DQXlDQyJ9","assetPath":"Assets/Scripts/StageUIController.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"messageText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"gameMoneyText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"timeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"settlementUI","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"StageUIController","description":""},"isCompiled":true}'
-  typescriptHash: b539b9cccdd46bebfcebb149d57a7bb9
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\n//define
+    variable to use\r\nclass StageUIController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.Init();\r\n    }\r\n    Init() {\r\n       
+    this.SetSettlementUI(false);\r\n    }\r\n    SetSettlementUI(value) {\r\n       
+    this.settlementUI.SetActive(value);\r\n    }\r\n}\r\nexports.default = StageUIController;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhZ2VVSUNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdGFnZVVJQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCxtREFBc0M7QUFDdEMsNkNBQXlDO0FBRXpDLHdCQUF3QjtBQUN4QixNQUFxQixpQkFBa0IsU0FBUSxxQ0FBcUI7SUFHaEUsS0FBSztRQUNELElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUNoQixDQUFDO0lBRU0sSUFBSTtRQUNQLElBQUksQ0FBQyxlQUFlLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDaEMsQ0FBQztJQUVNLGVBQWUsQ0FBQyxLQUFjO1FBQ2pDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3ZDLENBQUM7Q0FDSjtBQWRELG9DQWNDIn0=","assetPath":"Assets/Scripts/StageUIController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"settlementUI","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"StageUIController","description":""},"isCompiled":true}'
+  typescriptHash: 002fd9ebf2c09ec17eae6da5fd493615
   onlyWriteTrigger: 0

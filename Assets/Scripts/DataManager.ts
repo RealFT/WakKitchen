@@ -47,10 +47,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
             // do something with the values
             const receipt = new Receipt();
             const ingredients: number[] = [];
-            for (let j = 5; j < values.length; j++) {
+            for (let j = 6; j < values.length; j++) {
                 ingredients.push(+values[j]);
             }
-            receipt.setReceipt(+values[0], +values[1], +values[2], +values[3], values[4], ingredients);
+            receipt.setReceipt(+values[0], +values[1], +values[2], +values[3], +values[4], values[5], ingredients);
             this.receipts.push(receipt);
         };
     }
@@ -74,7 +74,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public getRandomStageReceipt(stage: number): Receipt {
+    public getRandomStageReceipt(): Receipt {
         const index = Math.floor(Random.Range(0, this.stageReceipts.length));
         return this.stageReceipts[index];
     }

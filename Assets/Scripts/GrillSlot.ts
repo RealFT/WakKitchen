@@ -25,6 +25,11 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
     public visibleImages: Image[];
 
     Start() {
+        this.init();
+    }
+
+    init(){
+        this.StopAllCoroutines();
         this.bakingButton.interactable = false;
         this.bakingButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);

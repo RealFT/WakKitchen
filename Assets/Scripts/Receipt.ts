@@ -39,8 +39,9 @@ export default class Receipt extends ZepetoScriptBehaviour {
         return this._ingredients;
     }
 
-    setReceipt(id: number, drink: number, side: number, character: number, additionalOrder: string, ingredients: number[]){
+    setReceipt(id: number, pay: number, drink: number, side: number, character: number, additionalOrder: string, ingredients: number[]){
         this._id = id;
+        this._pay = pay;
         this._ingredients = ingredients;
         this._drink = drink;
         this._side = side;
@@ -49,8 +50,14 @@ export default class Receipt extends ZepetoScriptBehaviour {
     }
 
     compareReceipt(drink: number, side: number, ingredients: number[]) {
-        return (this._ingredients == ingredients &&
-            this._drink == drink &&
+        // Compare if material order and number are the same
+        if(this.ingredients.length != ingredients.length) return false;
+        for (let i = 0; i < this.ingredients.length; i++) {
+            if (this.ingredients[i] != ingredients[i])
+                return false;
+        }
+        // Compare drink, side
+        return (this._drink == drink &&
             this._side == side) ? true : false;
     }
 }

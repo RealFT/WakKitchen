@@ -1,0 +1,62 @@
+fileFormatVersion: 2
+guid: e52bff79fdf5abb4e8fcba25b6fa8f78
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst OrderManager_1 = require(\"./OrderManager\");\r\nconst
+    OrderManager_2 = require(\"./OrderManager\");\r\nclass FrySlot extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.startTime
+    = 0;\r\n        this.currentTime = 0;\r\n    }\r\n    Start() {\r\n        this.init();\r\n   
+    }\r\n    init() {\r\n        this.StopAllCoroutines();\r\n        this.collectButton.interactable
+    = false;\r\n        this.collectButton.gameObject.SetActive(false);\r\n       
+    this.frySlider.gameObject.SetActive(false);\r\n        this.fryButton.onClick.AddListener(()
+    => { this.StartBaking(); });\r\n    }\r\n    // Start Baking.\r\n    StartBaking()
+    {\r\n        // Disable baking Button\r\n        this.fryButton.gameObject.SetActive(false);\r\n       
+    // Change grill button''s sprite to raw Patty sprite\r\n        this.collectButton.image.sprite
+    = this.rawFrySprite;\r\n        // Activate grill button\r\n        this.collectButton.gameObject.SetActive(true);\r\n       
+    // Enable timer slider\r\n        this.frySlider.gameObject.SetActive(true);\r\n       
+    this.collectButton.onClick.RemoveAllListeners();\r\n        this.isFrying = true;\r\n       
+    this.isFryied = false;\r\n        this.startTime = UnityEngine_1.Time.time;\r\n       
+    this.frySliderFill.color = this.defaultColor;\r\n        this.StartCoroutine(this.DoBaking());\r\n   
+    }\r\n    // Baking Coroutine\r\n    *DoBaking() {\r\n        this.currentTime
+    = UnityEngine_1.Time.time - this.startTime;\r\n        while (this.isFrying)
+    {\r\n            this.currentTime += UnityEngine_1.Time.deltaTime;\r\n           
+    this.frySlider.value = this.currentTime / this.burnTime;\r\n            if (this.currentTime
+    >= this.fryTime) {\r\n                if (!this.isFryied) {\r\n                   
+    // baking done.\r\n                    this.collectButton.image.sprite = this.bakedFrySprite;\r\n                   
+    this.collectButton.interactable = true;\r\n                    this.collectButton.onClick.RemoveAllListeners();\r\n                   
+    this.collectButton.onClick.AddListener(() => {\r\n                        this.ClearFry();\r\n                       
+    OrderManager_1.default.GetInstance().addProduct(OrderManager_2.Side.FRY);\r\n                   
+    });\r\n                    this.frySliderFill.color = this.friedColor;\r\n                   
+    this.isFryied = true;\r\n                }\r\n            }\r\n            if
+    (this.currentTime >= this.burnTime) {\r\n                this.collectButton.image.sprite
+    = this.burntFrySprite;\r\n                this.frySliderFill.color = this.failedColor;\r\n               
+    this.StopBaking();\r\n            }\r\n            yield new UnityEngine_1.WaitForSeconds(UnityEngine_1.Time.deltaTime);\r\n       
+    }\r\n    }\r\n    StopBaking() {\r\n        this.isFrying = false;\r\n       
+    this.collectButton.interactable = true;\r\n        this.collectButton.onClick.AddListener(()
+    => { this.ClearFry(); });\r\n    }\r\n    ClearFry() {\r\n        this.fryButton.gameObject.SetActive(true);\r\n       
+    this.isFrying = false;\r\n        this.isFryied = false;\r\n        this.collectButton.interactable
+    = false;\r\n        this.collectButton.onClick.RemoveAllListeners();\r\n       
+    this.collectButton.gameObject.SetActive(false);\r\n        this.frySlider.gameObject.SetActive(false);\r\n   
+    }\r\n    SetFryVisibility(value) {\r\n        for (let i = 0; i < this.visibleImages.length;
+    i++) {\r\n            this.visibleImages[i].enabled = value;\r\n        }\r\n   
+    }\r\n}\r\nexports.default = FrySlot;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRnJ5U2xvdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkZyeVNsb3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXFGO0FBRXJGLGlEQUEwQztBQUMxQyxpREFBc0M7QUFFdEMsTUFBcUIsT0FBUSxTQUFRLHFDQUFxQjtJQUExRDs7UUFhWSxjQUFTLEdBQVcsQ0FBQyxDQUFDO1FBQ3RCLGdCQUFXLEdBQVcsQ0FBQyxDQUFDO0lBdUZwQyxDQUFDO0lBbEZHLEtBQUs7UUFDRCxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVELElBQUk7UUFDQSxJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztRQUN6QixJQUFJLENBQUMsYUFBYSxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUM7UUFDeEMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQy9DLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUMzQyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFLEdBQUcsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDdEUsQ0FBQztJQUVELGdCQUFnQjtJQUNSLFdBQVc7UUFDZix3QkFBd0I7UUFDeEIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzNDLG1EQUFtRDtRQUNuRCxJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQztRQUNwRCx3QkFBd0I7UUFDeEIsSUFBSSxDQUFDLGFBQWEsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzlDLHNCQUFzQjtRQUN0QixJQUFJ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","assetPath":"Assets/Scripts/FrySlot.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"fryButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"collectButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"frySlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"frySliderFill","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"defaultColor","type":"UnityEngine.Color","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"friedColor","type":"UnityEngine.Color","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"failedColor","type":"UnityEngine.Color","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"rawFrySprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"bakedFrySprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"burntFrySprite","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"fryTime","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"burnTime","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"visibleImages","type":"UnityEngine.UI.Image[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"FrySlot","description":""},"isCompiled":true}'
+  typescriptHash: 6142b9675956edc8081587dc128a1ae0
+  onlyWriteTrigger: 0

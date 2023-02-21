@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: a58aa0487626b544f96382959876b8eb
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_SceneManagement_1 = require(\"UnityEngine.SceneManagement\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass singletonTest extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.nums = [];\r\n        this.numx = 0;\r\n    }\r\n    static GetInstance()
+    {\r\n        if (!singletonTest.Instance) {\r\n            //Debug.LogError(\"OrderManager\");\r\n           
+    var _obj = UnityEngine_1.GameObject.Find(\"singletonTest\");\r\n            if
+    (!_obj) {\r\n                _obj = new UnityEngine_1.GameObject(\"singletonTest\");\r\n               
+    _obj.AddComponent($typeof(singletonTest));\r\n            }\r\n            singletonTest.Instance
+    = _obj.GetComponent($typeof(singletonTest));\r\n            //GameObject.DontDestroyOnLoad(_obj);\r\n       
+    }\r\n        return singletonTest.Instance;\r\n    }\r\n    Start() {\r\n       
+    this.nums.push(1);\r\n        this.nums.push(2);\r\n        this.numx += this.nums.length;\r\n       
+    this.btn.onClick.AddListener(() => {\r\n            UnityEngine_SceneManagement_1.SceneManager.LoadScene(\"test_singleton\");\r\n       
+    });\r\n    }\r\n}\r\nexports.default = singletonTest;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2luZ2xldG9uVGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNpbmdsZXRvblRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBeUM7QUFDekMsNkVBQTJEO0FBRTNELGlEQUFxRDtBQUVyRCxNQUFxQixhQUFjLFNBQVEscUNBQXFCO0lBQWhFOztRQW1CVyxTQUFJLEdBQVksRUFBRSxDQUFDO1FBR25CLFNBQUksR0FBVSxDQUFDLENBQUM7SUFXM0IsQ0FBQztJQTlCVSxNQUFNLENBQUMsV0FBVztRQUVyQixJQUFJLENBQUMsYUFBYSxDQUFDLFFBQVEsRUFBRTtZQUN6QixpQ0FBaUM7WUFFakMsSUFBSSxJQUFJLEdBQUcsd0JBQVUsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDNUMsSUFBSSxDQUFDLElBQUksRUFBRTtnQkFDUCxJQUFJLEdBQUcsSUFBSSx3QkFBVSxDQUFDLGVBQWUsQ0FBQyxDQUFDO2dCQUN2QyxJQUFJLENBQUMsWUFBWSxTQUFDLGFBQWEsR0FBSTthQUN0QztZQUNELGFBQWEsQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyxhQUFhLEVBQUcsQ0FBQztZQUM1RCxxQ0FBcUM7U0FDeEM7UUFDRCxPQUFPLGFBQWEsQ0FBQyxRQUFRLENBQUM7SUFDbEMsQ0FBQztJQU9ELEtBQUs7UUFDRCxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNsQixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNsQixJQUFJLENBQUMsSUFBSSxJQUFJLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDO1FBQzlCLElBQUksQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFFLEVBQUU7WUFDN0IsMENBQVksQ0FBQyxTQUFTLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztRQUM3QyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7Q0FFSjtBQWpDRCxnQ0FpQ0MifQ==","assetPath":"Assets/Scripts/singletonTest.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"nums","type":"System.Single[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"btn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"numx","type":"System.Single","isArray":false,"initValue":["0"],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"singletonTest","description":""},"isCompiled":true}'
+  typescriptHash: bc285fd826903f34252018379a62bb20
+  onlyWriteTrigger: 0
