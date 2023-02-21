@@ -6,7 +6,7 @@ import Receipt from './Receipt';
 import GameManager from './GameManager';
 import DataManager from './DataManager';
 
-enum Ingredient {
+export enum Ingredient {
     START = 0,
     TOP_BURN = 0,
     BOTTOM_BURN = 1,
@@ -19,7 +19,7 @@ enum Ingredient {
     END = 7
 }
 
-enum Drink {
+export enum Drink {
     START = 8,
     COKE = 8,
     SPRITE = 9,
@@ -29,13 +29,13 @@ enum Drink {
     END = 12
 }
 
-enum Side {
+export enum Side {
     START = 13,
     FRY = 13,
     END = 13
 }
 
-enum Customer {
+export enum Customer {
     START = 14,
     HAKU = 14,
     END = 14
@@ -82,20 +82,25 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.products = [0, 2, 1];
     }
 
+    // Add a product to the end of the products array
     public addProduct(index:number){
+        Debug.Log("addProduct: " + index);
         this.products.push(index);
     }
 
+    // Remove a product at the given index from the products array
     public subProduct(index: number) {
         this.products[index] = this.products[this.products.length-1];
         this.products.pop();
     }
 
+    // Get a product at the given index from the products array
     public getProduct(index:number): number {
         if (this.products && index < this.products.length) return this.products[index];
         return -1;
     }
 
+    // Get the entire products array
     public getProducts(): number[]{
         return this.products;
     }
@@ -211,6 +216,16 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         for(let i=0;i<this.orders.length;i++){
             this.orders[i].gameObject.SetActive(false);
         }
+    }
+
+    public getProductSprite(product: number): Sprite {
+        // split ingredients, drink, side
+        if (product < Ingredient.END)
+            return this.getIngredientSprite(product);
+        else if (product < Drink.END)
+            return this.getDrinkSprite(product);
+        else
+            return this.getSideSprite(product);
     }
 
     // Return sprite of the ingredient

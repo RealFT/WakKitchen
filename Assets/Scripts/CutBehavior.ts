@@ -3,6 +3,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Vector3, GameObject, Input, Camera, TouchPhase, Debug, SerializeField } from 'UnityEngine';
 import { Vector2, LineRenderer, RectTransform, Bounds, Rect } from 'UnityEngine';
 import { Image, Slider } from "UnityEngine.UI";
+import OrderManager, { Ingredient } from './OrderManager';
 
 export default class CutBehavior extends ZepetoScriptBehaviour {
     public startPos: RectTransform;
@@ -49,6 +50,7 @@ export default class CutBehavior extends ZepetoScriptBehaviour {
                 Debug.Log("ex: " + this.endPos.position.x + ", ey: " + this.endPos.position.y);
                 Debug.Log("cut");
                 //this.foodImages.push(food);
+                //OrderManager.GetInstance().addProduct();
             }
         }
 

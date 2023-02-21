@@ -2,6 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Debug } from "UnityEngine";
 import { Button, Image, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
+import { Ingredient } from './OrderManager';
 
 export default class CookSlot extends ZepetoScriptBehaviour {
 
@@ -48,10 +49,11 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     }
 
     // Initialize product slot
-    private setupProductButton(index: int) {
+    private setupProductButton(index: number) {
         this.productButtons[index].onClick.AddListener(() => {
             if (this.plateLimit > this.plateIndex) {
-                // Add the clicked product to the plate and inventory                
+                // Add the clicked product to the plate and inventory   
+                this.productButtons[index].image.sprite = this.orderManager.getProductSprite(this.orderManager.getProduct(index));
                 this.plateImages[this.plateIndex].sprite = this.productButtons[index].image.sprite;  // replace plate's sprite to this sprite
                 this.plateImages[this.plateIndex].enabled = true;
                 this.plateIndex++;

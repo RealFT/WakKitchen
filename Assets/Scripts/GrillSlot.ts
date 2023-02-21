@@ -1,6 +1,8 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
 import { Image, Button, Slider, Text } from "UnityEngine.UI";
+import OrderManager from './OrderManager';
+import { Ingredient } from './OrderManager';
 
 export default class GrillSlot extends ZepetoScriptBehaviour {
     public bakingButton: Button;    // Putting ingredients in the kitchen
@@ -67,7 +69,10 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
                 else if (this.flipCount == 0 && !this.isFliped) {
                     this.bakedButton.interactable = true;
                     this.bakedButton.onClick.RemoveAllListeners();
-                    this.bakedButton.onClick.AddListener(() => { this.FlipPatty(); });
+                    this.bakedButton.onClick.AddListener(() => { 
+                        this.FlipPatty(); 
+                        OrderManager.GetInstance().addProduct(Ingredient.PATTY);
+                    });
                     this.bakeSliderFill.color = this.bakedColor;
                     this.flipCount++;
                 }
