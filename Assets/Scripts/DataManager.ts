@@ -80,7 +80,6 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public getReceipt(index: number): Receipt {
-        Debug.Log("getReceipt id:" + this.receipts[index].id);
         return this.receipts[index];
     }
 

@@ -1600,7 +1600,7 @@ GameObject:
   - component: {fileID: 287368974}
   - component: {fileID: 287368973}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5113,7 +5113,7 @@ GameObject:
   - component: {fileID: 1335057655}
   - component: {fileID: 1335057654}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7345,39 +7345,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     keys:
-    - itemSlots
     - plateImages
     - plateIndex
     - plateLimit
-    - SurveButton
-    - itemCountText
-    - platedProducts
+    - productCountTexts
+    - productButtons
+    - serveButton
     unityValues:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 180107201}
-    - {fileID: 0}
-    - {fileID: 0}
     values:
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":5,\"type\":\"UnityEngine.UI.Button,
-      UnityEngine.UI\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":5,\"length\":7,\"type\":\"UnityEngine.Object,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":7,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - '{"type":"System.Int32, mscorlib","value":"0"}'
     - '{"type":"System.Int32, mscorlib","value":"0"}'
-    - 
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":12,\"length\":5,\"type\":\"UnityEngine.UI.Text,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":7,\"length\":5,\"type\":\"UnityEngine.UI.Text,
       UnityEngine.UI\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":0,\"type\":\"System.Single,
-      mscorlib\",\"isUnity\":false}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":12,\"length\":5,\"type\":\"UnityEngine.UI.Button,
+      UnityEngine.UI\",\"isUnity\":true}"}'
+    - 
     unityArrayValues:
-    - {fileID: 857536903}
-    - {fileID: 1378629306}
-    - {fileID: 1092436835}
-    - {fileID: 86713185}
-    - {fileID: 984225685}
     - {fileID: 236247092}
     - {fileID: 1532560457}
     - {fileID: 715538369}
@@ -7390,6 +7381,11 @@ MonoBehaviour:
     - {fileID: 287368973}
     - {fileID: 2116585088}
     - {fileID: 2022695739}
+    - {fileID: 857536903}
+    - {fileID: 1378629306}
+    - {fileID: 1092436835}
+    - {fileID: 86713185}
+    - {fileID: 984225685}
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: d63b0a9d883fa434c8faa505f675d91b, type: 3}
     isExpaned: 0
@@ -7809,7 +7805,7 @@ GameObject:
   - component: {fileID: 2022695740}
   - component: {fileID: 2022695739}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8117,7 +8113,7 @@ GameObject:
   - component: {fileID: 2098671789}
   - component: {fileID: 2098671788}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8196,7 +8192,7 @@ GameObject:
   - component: {fileID: 2116585089}
   - component: {fileID: 2116585088}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -79,7 +79,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     private products: number[];
 
     public initProduct() {
-        this.products = [];
+        this.products = [0, 2, 1];
     }
 
     public addProduct(index:number){
@@ -92,7 +92,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     public getProduct(index:number): number {
-        if (index < this.products.length) return this.products[index];
+        if (this.products && index < this.products.length) return this.products[index];
         return -1;
     }
 
@@ -111,6 +111,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
             this.initOrderBtn(i);
         }
         this.clearOrderBtn();
+        this.initProduct();
     }
 
     public StartOrder(){
@@ -161,7 +162,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     // Enable corresponding index order
     public displayExpandOrder(index: number): void {
         if (!this.receipts) return;
-        Debug.Log(this.receipts.length);
+        Debug.Log("displayExpandOrder: " + this.receipts.length);
         const receipt = this.receipts[index];
         const ingredients = receipt.ingredients;
         const burgerSprites: Sprite[] = [];
