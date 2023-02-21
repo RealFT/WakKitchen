@@ -15,8 +15,7 @@ export enum Ingredient {
     TOMATO = 4,
     ONION = 5,
     CHEESE = 6,
-    PICKLE = 7,
-    END = 7
+    END = 6
 }
 
 export enum Drink {
@@ -85,7 +84,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     // Add a product to the end of the products array
     public addProduct(index:number){
         Debug.Log("addProduct: " + index);
-        this.products.push(index);
+        if (this.products) this.products.push(index);
+        else Debug.LogError("addProduct is null!");
     }
 
     // Remove a product at the given index from the products array

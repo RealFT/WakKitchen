@@ -69,7 +69,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 394301539372725741}
   - component: {fileID: 394301539372725266}
   m_Layer: 5
-  m_Name: Baking Button
+  m_Name: Grill Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aca34324dc62f804fa1e8c967aa12210, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ca194b00aabf473e8b0ca5a3eaafffe, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -449,7 +449,7 @@ MonoBehaviour:
   script:
     keys:
     - bakeSlider
-    - bakedButton
+    - grillButton
     - bakedPattySprite
     - burntPattySprite
     - bakeTime
@@ -460,19 +460,21 @@ MonoBehaviour:
     - bakedColor
     - failedColor
     - visibleImages
+    - rawPattySprite
     unityValues:
     - {fileID: 394301539717935483}
-    - {fileID: 394301540527341107}
-    - {fileID: 21300000, guid: 1d0959319b529874588a64e9ccb07c8f, type: 3}
-    - {fileID: 21300000, guid: 20a42d92d56993543b74dde8f1652838, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 394301539372725266}
+    - {fileID: 21300000, guid: 25828c0f850207345a8e90c0ce092ad1, type: 3}
+    - {fileID: 21300000, guid: f2223ee23c040254491ba77c36a1752b, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 394301540527341107}
     - {fileID: 394301539253099425}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 21300000, guid: d79e95803196b3241a680d540180c8b6, type: 3}
     values:
     - 
     - 
@@ -487,6 +489,7 @@ MonoBehaviour:
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.8396226167678833,\"g\":0.13834689557552339,\"b\":0.0,\"a\":1.0}"}'
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":4,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - 
     unityArrayValues:
     - {fileID: 394301539372725741}
     - {fileID: 394301540527341106}
@@ -508,7 +511,7 @@ GameObject:
   - component: {fileID: 394301540527341106}
   - component: {fileID: 394301540527341107}
   m_Layer: 5
-  m_Name: Baked Button
+  m_Name: Baking Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

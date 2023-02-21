@@ -5,17 +5,18 @@ import OrderManager from './OrderManager';
 import { Ingredient } from './OrderManager';
 
 export default class GrillSlot extends ZepetoScriptBehaviour {
-    public bakingButton: Button;    // Putting ingredients in the kitchen
-    public bakedButton: Button;
+    public grillButton: Button;    // Putting ingredients in the kitchen
+    public bakingButton: Button;
     public bakeSlider: Slider;
     public bakeSliderFill: Image;
     public defaultColor: Color;
     public bakedColor: Color;
     public failedColor: Color;
+    public rawPattySprite: Sprite;
     public bakedPattySprite: Sprite;
     public burntPattySprite: Sprite;
-    public bakeTime: number;   
-    public burnTime: number; 
+    public bakeTime: number;
+    public burnTime: number;
     private startTime: number = 0;
     private currentTime: number = 0;
     private flipCount: number = 0;
@@ -24,24 +25,24 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
     public visibleImages: Image[];
 
     Start() {
-        this.bakedButton.interactable = false;
-        this.bakedButton.gameObject.SetActive(false);
+        this.bakingButton.interactable = false;
+        this.bakingButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
-        this.bakingButton.onClick.AddListener(() => {this.StartBaking();});
+        this.grillButton.onClick.AddListener(() => { this.StartBaking(); });
     }
 
     // Start Baking.
     private StartBaking() {
         // Disable baking Button
-        this.bakingButton.gameObject.SetActive(false);
-        // Change grill button's sprite to baking button's sprite
-        this.bakedButton.image.sprite = this.bakingButton.image.sprite;
+        this.grillButton.gameObject.SetActive(false);
+        // Change grill button's sprite to raw Patty sprite
+        this.bakingButton.image.sprite = this.rawPattySprite;
         // Activate grill button
-        this.bakedButton.gameObject.SetActive(true);
+        this.bakingButton.gameObject.SetActive(true);
         // Enable timer slider
         this.bakeSlider.gameObject.SetActive(true);
-    
-        this.bakedButton.onClick.RemoveAllListeners();
+
+        this.bakingButton.onClick.RemoveAllListeners();
         this.isBaking = true;
         this.isFliped = false;
         this.flipCount = 0;
@@ -60,25 +61,25 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
             if (this.currentTime >= this.bakeTime) {
                 if (this.flipCount > 0 && this.isFliped) {
                     // baking done.
-                    this.bakedButton.interactable = true;
-                    this.bakedButton.onClick.RemoveAllListeners();
-                    this.bakedButton.onClick.AddListener(() => { this.ClearGrill(); });
-                    this.bakeSliderFill.color = this.bakedColor;
-                    this.isFliped = false;
-                } 
-                else if (this.flipCount == 0 && !this.isFliped) {
-                    this.bakedButton.interactable = true;
-                    this.bakedButton.onClick.RemoveAllListeners();
-                    this.bakedButton.onClick.AddListener(() => { 
-                        this.FlipPatty(); 
+                    this.bakingButton.interactable = true;
+                    this.bakingButton.onClick.RemoveAllListeners();
+                    this.bakingButton.onClick.AddListener(() => {
+                        this.ClearGrill();
                         OrderManager.GetInstance().addProduct(Ingredient.PATTY);
                     });
+                    this.bakeSliderFill.color = this.bakedColor;
+                    this.isFliped = false;
+                }
+                else if (this.flipCount == 0 && !this.isFliped) {
+                    this.bakingButton.interactable = true;
+                    this.bakingButton.onClick.RemoveAllListeners();
+                    this.bakingButton.onClick.AddListener(() => { this.FlipPatty(); });
                     this.bakeSliderFill.color = this.bakedColor;
                     this.flipCount++;
                 }
             }
             if (this.currentTime >= this.burnTime) {
-                this.bakedButton.image.sprite = this.burntPattySprite;
+                this.bakingButton.image.sprite = this.burntPattySprite;
                 this.bakeSliderFill.color = this.failedColor;
                 this.StopBaking();
             }
@@ -90,23 +91,23 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
         this.isFliped = true;
         this.bakeSliderFill.color = this.defaultColor;
         this.currentTime = 0;
-        this.bakedButton.interactable = false;
-        this.bakedButton.image.sprite = this.bakedPattySprite;
+        this.bakingButton.interactable = false;
+        this.bakingButton.image.sprite = this.bakedPattySprite;
     }
 
     private StopBaking() {
         this.isBaking = false;
-        this.bakedButton.interactable = true;
-        this.bakedButton.onClick.AddListener(() => { this.ClearGrill(); });
+        this.bakingButton.interactable = true;
+        this.bakingButton.onClick.AddListener(() => { this.ClearGrill(); });
     }
 
     private ClearGrill() {
-        this.bakingButton.gameObject.SetActive(true);
+        this.grillButton.gameObject.SetActive(true);
         this.isBaking = false;
         this.isFliped = false;
-        this.bakedButton.interactable = false;
-        this.bakedButton.onClick.RemoveAllListeners();
-        this.bakedButton.gameObject.SetActive(false);
+        this.bakingButton.interactable = false;
+        this.bakingButton.onClick.RemoveAllListeners();
+        this.bakingButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
     }
 
