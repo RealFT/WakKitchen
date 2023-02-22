@@ -1917,6 +1917,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontStyle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1541389905675158291, guid: ac4db49071164c746955066dcc8ccb18, type: 3}
+      propertyPath: script.values.Array.data[0]
+      value: '{"type":"System.String, mscorlib","value":"01_Stage"}'
+      objectReference: {fileID: 0}
     - target: {fileID: 1541389905675158294, guid: ac4db49071164c746955066dcc8ccb18, type: 3}
       propertyPath: m_Name
       value: SceneMoveBtn
