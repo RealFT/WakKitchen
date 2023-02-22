@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: fcf479c742e70bf4ebdb26e9c5e80dc8, type: 3}
+    - {fileID: 2800000, guid: 83568b8910f26f94d8952b2fd351559e, type: 3}
+    - {fileID: 2800000, guid: 210761d58cb62eb48809e1d7a7940d41, type: 3}
+    - {fileID: 2800000, guid: 8ecd913dfc1bb78459f8751fd001e068, type: 3}
+    - {fileID: 2800000, guid: f4883de0d03c2d742bcb7902da1965ce, type: 3}
+    - {fileID: 2800000, guid: df4985f10e0dabe44ba26131e3e4be41, type: 3}
+    - {fileID: 2800000, guid: bd426ffa7f127b54e8592479df3552b6, type: 3}
+    - {fileID: 2800000, guid: a3e2ad90d49b6504ab419321c77a8945, type: 3}
+    - {fileID: 2800000, guid: 8ae6b2560863e724183baa9bc374e1d5, type: 3}
+    - {fileID: 2800000, guid: 75c2acaf967e6dc4c94ba32fd2599e9e, type: 3}
+    - {fileID: 2800000, guid: 6ae4402261d403b4cac5fad168e95b40, type: 3}
+    - {fileID: 2800000, guid: e256f0084612b324eb1ad3f6242a71bd, type: 3}
+    - {fileID: 2800000, guid: 0973f568ae2756248817536e4a09139d, type: 3}
+    - {fileID: 2800000, guid: fdec733289ba9ec41b304c21641bba1e, type: 3}
+    - {fileID: 2800000, guid: 4a76fd1a78b32cb459b1f465c4c70df7, type: 3}
+    - {fileID: 2800000, guid: 647fd7b2e49bfdc4ab20b53cc83e039b, type: 3}
+    totalSpriteSurfaceArea: 0
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
+  m_RenderDataMap: {}
+  m_Tag: UI
+  m_IsVariant: 0
