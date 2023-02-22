@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7551250795523159949}
   m_Layer: 5
   m_Name: Order Receipt Btn
-  m_TagString: Order
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

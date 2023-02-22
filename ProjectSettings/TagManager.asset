@@ -9,6 +9,11 @@ TagManager:
   - UIController
   - Order
   - OrderManager
+  - Coke
+  - Sprite
+  - Zero
+  - Fanta
+  - Water
   layers:
   - Default
   - TransparentFX
