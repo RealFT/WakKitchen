@@ -70,7 +70,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
                     this.bakingButton.onClick.RemoveAllListeners();
                     this.bakingButton.onClick.AddListener(() => {
                         this.ClearGrill();
-                        OrderManager.GetInstance().addProduct(Ingredient.PATTY);
+                        OrderManager.GetInstance().AddItemToInventory(Ingredient.PATTY);
                     });
                     this.bakeSliderFill.color = this.bakedColor;
                     this.isFliped = false;

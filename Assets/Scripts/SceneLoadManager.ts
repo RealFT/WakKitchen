@@ -65,8 +65,9 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
             let progress = Mathf.Clamp01(asyncOperation.progress * this.inverseNum);
             Debug.Log("Loading progress: " + progress);
             this.loadingProgressBar.value = progress;
-            yield;
+
         }
+        yield new WaitForSeconds(1.5);
         // Hide the loading screen
         this.loadingScreen.SetActive(false);
 

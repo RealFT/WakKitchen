@@ -69,7 +69,7 @@ export default class FrySlot extends ZepetoScriptBehaviour {
                     this.collectButton.onClick.RemoveAllListeners();
                     this.collectButton.onClick.AddListener(() => {
                         this.ClearFry();
-                        OrderManager.GetInstance().addProduct(Side.FRY);
+                        OrderManager.GetInstance().AddItemToInventory(Side.FRY);
                     });
                     this.frySliderFill.color = this.friedColor;
                     this.isFryied = true;

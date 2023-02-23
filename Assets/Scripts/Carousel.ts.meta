@@ -1,0 +1,71 @@
+fileFormatVersion: 2
+guid: f4de9d48fd6ae274490d13bd10f9136f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nclass Customer extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.scroll_pos
+    = 0;\r\n        this.selectedBtn = false;\r\n        //   Update() {\r\n       
+    //     const distance = 1 / (this.pos.length - 1);\r\n        //     if (Input.GetMouseButton(0))
+    {\r\n        //       this.scroll_pos = this.scroll.value;\r\n        //    
+    } else {\r\n        //       if (!this.selectedBtn) {\r\n        //         for
+    (let i = 0; i < this.pos.length; i++) {\r\n        //           if (\r\n       
+    //             this.scroll_pos < this.pos[i] + distance / 2 &&\r\n        //            
+    this.scroll_pos > this.pos[i] - distance / 2\r\n        //           ) {\r\n       
+    //             this.scroll.value = Mathf.Lerp(\r\n        //               this.scroll.value,\r\n       
+    //               this.pos[i],\r\n        //               0.1\r\n        //            
+    );\r\n        //           }\r\n        //         }\r\n        //       }\r\n       
+    //     }\r\n        //     for (let i = 0; i < this.pos.length; i++) {\r\n       
+    //       if (\r\n        //         this.scroll_pos < this.pos[i] + distance
+    / 2 &&\r\n        //         this.scroll_pos > this.pos[i] - distance / 2\r\n       
+    //       ) {\r\n        //         this.transform.GetChild(i).localScale = Vector2.Lerp(\r\n       
+    //           this.transform.GetChild(i).localScale,\r\n        //           new
+    Vector2(1, 1),\r\n        //           0.1\r\n        //         );\r\n       
+    //         for (let j = 0; j < this.pos.length; j++) {\r\n        //          
+    if (j !== i) {\r\n        //             this.transform.GetChild(j).localScale
+    = Vector2.Lerp(\r\n        //               this.transform.GetChild(j).localScale,\r\n       
+    //               new Vector2(0.8, 0.8),\r\n        //               0.1\r\n       
+    //             );\r\n        //           }\r\n        //         }\r\n       
+    //         this.selectButton.transform.GetChild(i).localScale = Vector2.Lerp(\r\n       
+    //           this.selectButton.transform.GetChild(i).localScale,\r\n        //          
+    new Vector2(1, 1),\r\n        //           0.1\r\n        //         );\r\n       
+    //         for (let k = 0; k < this.selectButton.transform.childCount; k++) {\r\n       
+    //           if (k !== i) {\r\n        //             this.selectButton.transform.GetChild(k).localScale
+    = Vector2.Lerp(\r\n        //               this.selectButton.transform.GetChild(k).localScale,\r\n       
+    //               new Vector2(0.7, 0.7),\r\n        //               0.1\r\n       
+    //             );\r\n        //           }\r\n        //         }\r\n       
+    //       }\r\n        //     }\r\n        //   }\r\n        //   public ContentsPosition():
+    void {\r\n        //     const distance = 1 / (this.pos.length - 1);\r\n       
+    //     const selectedValue = parseInt(\r\n        //       EventSystems.EventSystem.current.currentSelectedGameObject.transform.GetComponentInChildren<Text>().text\r\n       
+    //     );\r\n        //     StartCoroutine(this.selectBtn(selectedValue - 1,
+    distance));\r\n        //   }\r\n        //   function* selectBtn(targetValue)
+    {\r\n        //     selectedBtn = true;\r\n        //     while (true) {\r\n       
+    //         yield null;\r\n        //         scroll.value = Mathf.Lerp(scroll.value,
+    targetValue, 0.1);\r\n        //         if (Mathf.Abs(scroll.value - targetValue)
+    <= 0.1) {\r\n        //             scroll_pos = scroll.value;\r\n        //            
+    selectedBtn = false;\r\n        //             break;\r\n        //         }\r\n       
+    //     }\r\n    }\r\n    Start() {\r\n        //this.scrollbar = this.gameObject.Find(''Scrollbar'');\r\n       
+    //this.selectButton = this.gameObject.Find(''SelectButton'');\r\n        //this.scroll
+    = this.scrollbar.GetComponent(Scrollbar);\r\n        this.pos = new Array(this.transform.childCount);\r\n       
+    const distance = 1 / (this.pos.length - 1);\r\n        for (let i = 0; i < this.pos.length;
+    i++) {\r\n            this.pos[i] = distance * i;\r\n        }\r\n    }\r\n}\r\nexports.default
+    = Customer;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2Fyb3VzZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDYXJvdXNlbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCw2Q0FBa0Q7QUFHbEQsTUFBcUIsUUFBUyxTQUFRLHFDQUFxQjtJQUEzRDs7UUFHVSxlQUFVLEdBQUcsQ0FBQyxDQUFDO1FBQ2YsZ0JBQVcsR0FBRyxLQUFLLENBQUM7UUFnQjlCLGVBQWU7UUFDZixrREFBa0Q7UUFFbEQscUNBQXFDO1FBQ3JDLDZDQUE2QztRQUM3QyxlQUFlO1FBQ2YsaUNBQWlDO1FBQ2pDLHNEQUFzRDtRQUN0RCxpQkFBaUI7UUFDakIsOERBQThEO1FBQzlELDJEQUEyRDtRQUMzRCxnQkFBZ0I7UUFDaEIsOENBQThDO1FBQzlDLG1DQUFtQztRQUNuQyw2QkFBNkI7UUFDN0Isb0JBQW9CO1FBQ3BCLGlCQUFpQjtRQUNqQixjQUFjO1FBQ2QsWUFBWTtRQUNaLFVBQVU7UUFDVixRQUFRO1FBRVIsa0RBQWtEO1FBQ2xELGFBQWE7UUFDYiwwREFBMEQ7UUFDMUQsdURBQXVEO1FBQ3ZELFlBQVk7UUFDWixnRUFBZ0U7UUFDaEUsbURBQW1EO1FBQ25ELCtCQUErQjtRQUMvQixnQkFBZ0I7UUFDaEIsYUFBYTtRQUViLHNEQUFzRDtRQUN0RCwyQkFBMkI7UUFDM0Isb0VBQW9FO1FBQ3BFLHVEQUF1RDtRQUN2RCx1Q0FBdUM7UUFDdkMsb0JBQW9CO1FBQ3BCLGlCQUFpQjtRQUNqQixjQUFjO1FBQ2QsWUFBWTtRQUVaLDZFQUE2RTtRQUM3RSxnRUFBZ0U7UUFDaEUsK0JBQStCO1FBQy9CLGdCQUFnQjtRQUNoQixhQUFhO1FBRWIsNkVBQTZFO1FBQzdFLDJCQUEyQjtRQUMzQixpRkFBaUY7UUFDakYsb0VBQW9FO1FBQ3BFLHVDQUF1QztRQUN2QyxvQkFBb0I7UUFDcEIsaUJBQWlCO1FBQ2pCLGNBQWM7UUFDZCxZQUFZO1FBQ1osVUFBVTtRQUNWLFFBQVE7UUFDUixNQUFNO1FBRU4sc0NBQXNDO1FBQ3RDLGtEQUFrRDtRQUNsRCxzQ0FBc0M7UUFDdEMsaUhBQWlIO1FBQ2pILFNBQVM7UUFDVCxtRUFBbUU7UUFDbkUsTUFBTTtRQUVOLHVDQUF1QztRQUN2QywwQkFBMEI7UUFDMUIscUJBQXFCO1FBQ3JCLHNCQUFzQjtRQUN0QixxRUFBcUU7UUFDckUsOERBQThEO1FBQzlELHlDQUF5QztRQUN6QyxtQ0FBbUM7UUFDbkMscUJBQXFCO1FBQ3JCLFlBQVk7UUFDWixRQUFRO0lBQ1IsQ0FBQztJQTdGQyxLQUFLO1FBQ0gscURBQXFEO1FBQ3JELDJEQUEyRDtRQUMzRCx1REFBdUQ7UUFFdkQsSUFBSSxDQUFDLEdBQUcsR0FBRyxJQUFJLEtBQUssQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQ2hELE1BQU0sUUFBUSxHQUFHLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBQzNDLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsR0FBRyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN4QyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxHQUFHLFFBQVEsR0FBRyxDQUFDLENBQUM7U0FDNUI7SUFDSCxDQUFDO0NBbUZGO0FBckdELDJCQXFHQyJ9","assetPath":"Assets/Scripts/Carousel.ts","manifest":{"properties":[],"name":"Customer","description":""},"isCompiled":true}'
+  typescriptHash: 47aca71b12bda27f14b03922c56269bf
+  onlyWriteTrigger: 0

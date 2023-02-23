@@ -3,7 +3,6 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider } from "UnityEngine.UI";
 import { GameObject, Random, WaitForSeconds, Debug } from 'UnityEngine';
 import Timer from './Timer';
-import StageUIController from './StageUIController';
 import CharacterController from './CharacterController';
 import QuarterViewController from './QuarterViewController';
 import DataManager from './DataManager';
@@ -54,7 +53,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     init() {
         /* need load */
-        this.gameMoney = 0;
+        this.gameMoney = 1000;
         this.lastSavedDay = 0;
         this.curStage = this.lastSavedDay;
     }
@@ -74,7 +73,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         OrderManager.GetInstance().init();
         OrderManager.GetInstance().StartOrder();
         UIManager.GetInstance().initStageUI();
-        UIManager.GetInstance().setGameMoney(this.gameMoney);
+        UIManager.GetInstance().setGameMoneyText(this.gameMoney);
     }
 
     Update() {
@@ -104,9 +103,13 @@ export default class GameManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public addMoney(value: number) {
+    public changeMoney(value: number) {
         this.gameMoney = Math.max(0, this.gameMoney + value);
-        UIManager.GetInstance().setGameMoney(this.gameMoney);
+        UIManager.GetInstance().setGameMoneyText(this.gameMoney);
+    }
+
+    public getCurrentMoney(){
+        return this.gameMoney;
     }
 
     public nextStage(): void {

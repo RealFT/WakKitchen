@@ -85,38 +85,72 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     private maxOrderSize: number;
 
     // array of produced Ingredient, Drink, Side.
-    private products: number[];
+    // number of items in inventory indexed by product id
+    private productInventory: Map<number, number> = new Map<number, number>();
 
     Awake() {
         if (this != OrderManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     public initProduct() {
-        this.products = [0, 1];
+        this.RemoveAllItemsFromInventory();
+        this.AddItemToInventory(Ingredient.BOTTOM_BURN, 100);
+        this.AddItemToInventory(Ingredient.TOP_BURN, 100);
+        this.AddItemToInventory(Ingredient.PATTY, 10);
+        this.AddItemToInventory(Ingredient.CABBAGE, 10);
     }
 
-    // Add a product to the end of the products array
-    public addProduct(index:number){
-        Debug.Log("addProduct: " + index);
-        if (this.products) this.products.push(index);
-        else Debug.LogError("addProduct is null!");
+    // Add item to inventory
+    public AddItemToInventory(product: number, quantity: number = 1): void {
+        // if already exist same product
+        if (this.productInventory.has(product)) {
+            this.productInventory.set(product, this.productInventory.get(product) + quantity);
+        } else {
+            this.productInventory.set(product, quantity);
+        }
     }
 
-    // Remove a product at the given index from the products array
-    public subProduct(index: number) {
-        this.products[index] = this.products[this.products.length-1];
-        this.products.pop();
+    // Remove item from inventory
+    public RemoveItemFromInventory(product: number, quantity: number = 1): void {
+        if (this.productInventory.has(product)) {
+            const currentQuantity = this.productInventory.get(product);
+            if (currentQuantity >= quantity) {
+                this.productInventory.set(product, currentQuantity - quantity);
+                // if product doesn't have any quantity
+                if (this.productInventory.get(product) === 0) {
+                    // delete product from productInventory
+                    this.productInventory.delete(product);
+                }
+            } else {
+                Debug.Log(`Not enough ${product} in productInventory`);
+            }
+        } else {
+            Debug.Log(`${product} not found in productInventory`);
+        }
     }
 
-    // Get a product at the given index from the products array
-    public getProduct(index:number): number {
-        if (this.products && index < this.products.length) return this.products[index];
-        return -1;
+    // Remove all items from inventory
+    public RemoveAllItemsFromInventory(): void {
+        this.productInventory.clear();
     }
 
-    // Get the entire products array
-    public getProducts(): number[]{
-        return this.products;
+    public GetQuantityFromInventory(product: number): number {
+        if (this.productInventory.has(product)) {
+            return this.productInventory.get(product);
+        } else {
+            return 0;
+        }
+    }
+
+    // To import an array that stores all products with one or more numbers in the inventory
+    public GetProductsFromInventory(): number[] {
+        const products = [];
+        for (const [key, value] of this.productInventory) {
+            if (value > 0) {
+                products.push(key);
+            }
+        }
+        return products;
     }
 
     public init() {
@@ -150,7 +184,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public checkOrder(products: number[]): void {
+    public checkOrder(products: number[]): boolean {
         let ingredients: number[] = [];
         let drink = -1;
         let side = -1;
@@ -169,12 +203,13 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         for (let index = 0; index < this.receipts.length; index++) {
             if (this.receipts[index].compareReceipt(drink, side, ingredients)) {
                 // earn this receipt's pay
-                GameManager.GetInstance().addMoney(this.receipts[index].pay);
+                GameManager.GetInstance().changeMoney(this.receipts[index].pay);
                 // remove this receipt
                 this.removeOrder(index);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     // Enable corresponding index order

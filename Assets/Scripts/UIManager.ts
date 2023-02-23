@@ -94,7 +94,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
         this.timeText.text = time;
     }
 
-    public setGameMoney(value: number) {
+    public setGameMoneyText(value: number) {
         this.gameMoneyText.text = value.toString();
     }
 }

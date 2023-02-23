@@ -28,7 +28,7 @@ export default class Dispenser extends ZepetoScriptBehaviour {
             else this.CheckDrink();
         });
         this.cupBtn.onClick.AddListener(() => {
-            OrderManager.GetInstance().addProduct(this.curDrink);
+            OrderManager.GetInstance().AddItemToInventory(this.curDrink);
         });
     }
 

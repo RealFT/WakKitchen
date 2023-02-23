@@ -12,8 +12,6 @@ export default class CutBehavior extends ZepetoScriptBehaviour {
 
     private isCutting = false;
 
-    private startPoint: Vector2;
-    private endPoint: Vector2;
     private direction: Vector2;
     private bounds: Bounds; 
 
