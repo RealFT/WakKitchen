@@ -75,10 +75,9 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
                 UIManager.GetInstance().disableStageUI();
                 break;
             case SceneName.Stage:
-                Debug.Log("GameManager.GetInstance().InitStage()");
+                yield new WaitForSeconds(1.0);
                 GameManager.GetInstance().InitStage();
                 GameManager.GetInstance().nextStage();
-                yield new WaitForSeconds(1.0);
                 break;
             default:
                 break;

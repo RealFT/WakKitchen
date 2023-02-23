@@ -1,4 +1,4 @@
-import { Button } from 'UnityEngine.UI';
+import { Button, Image } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
 import { StoreItem } from './Store';
@@ -7,6 +7,9 @@ import UIManager from './UIManager';
 export default class ItemSlot extends ZepetoScriptBehaviour {
 
     public storeItem: StoreItem;
+    public nameText: Text;
+    public itemImage: Image;
+    public priceText: Text;
     public buyBtn: Button;
 
     public SetItemSlot(item: StoreItem) {
