@@ -65,12 +65,8 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
             let progress = Mathf.Clamp01(asyncOperation.progress * this.inverseNum);
             Debug.Log("Loading progress: " + progress);
             this.loadingProgressBar.value = progress;
-
+            yield;
         }
-        yield new WaitForSeconds(1.5);
-        // Hide the loading screen
-        this.loadingScreen.SetActive(false);
-
         this.currentScene = sceneName;
         switch(sceneName){
             case SceneName.Main:
@@ -80,13 +76,15 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
                 break;
             case SceneName.Stage:
                 Debug.Log("GameManager.GetInstance().InitStage()");
-                const Instance = GameManager.GetInstance();
-                Instance.InitStage();
-                Instance.nextStage();
+                GameManager.GetInstance().InitStage();
+                GameManager.GetInstance().nextStage();
+                yield new WaitForSeconds(1.0);
                 break;
             default:
                 break;
         }
+        // Hide the loading screen
+        this.loadingScreen.SetActive(false);
     }
 
     public getCurrentScene(): SceneName{

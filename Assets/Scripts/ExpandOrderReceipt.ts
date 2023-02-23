@@ -39,6 +39,7 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
         this.sideImage.sprite = sideSprite;
         this.additionalOrderText.text = additionalOrder;
         this.customerImage.sprite = customerSprite;
+        this.customerImage.SetNativeSize();
     }
 
     public setPanel(value: boolean) {
