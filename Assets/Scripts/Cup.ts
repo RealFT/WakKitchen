@@ -24,22 +24,9 @@ export default class Cup extends ZepetoScriptBehaviour {
 
     OnTriggerEnter2D(collider2D) {
         this.cupState = collider2D.gameObject.tag;
-        // switch (collider.gameObject.tag) {
-        //     case CupState.COKE:
-        //         break;
-        //     case CupState.SPRITE:
-        //         break;
-        //     case CupState.ZERO_COKE:
-        //         break;
-        //     case CupState.FANTA:
-        //         break;
-        //     case CupState.WATER:
-        //         break;
-        // }
     }
 
     OnTriggerExit2D(collider2D) {
         this.cupState = CupState.DEFAULT;
     }
-
 }

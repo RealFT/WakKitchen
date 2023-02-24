@@ -4,19 +4,20 @@ import { Vector3, GameObject, Input, Camera, TouchPhase, Debug, SerializeField }
 import { Vector2, LineRenderer, RectTransform, Bounds, Rect } from 'UnityEngine';
 import { Image, Slider } from "UnityEngine.UI";
 import OrderManager, { Ingredient } from './OrderManager';
+import Slicable from './Slicable';
 
 export default class CutBehavior extends ZepetoScriptBehaviour {
     public startPos: RectTransform;
     public endPos: RectTransform;
     public foodImages: Image[];
-
+    public slicabes: Slicable[];
+    
     private isCutting = false;
 
     private direction: Vector2;
     private bounds: Bounds; 
 
     Update() {
-        
         if (Input.GetMouseButtonDown(0)) {
             Debug.Log("GetMouseButtonDown");
             this.startPos.position = Input.mousePosition;

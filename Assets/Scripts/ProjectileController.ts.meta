@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: 88a26045845c3d643a66e245d31d684d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass ProjectileController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        // Start
+    the coroutine that shoots the projectiles\r\n        this.StartCoroutine(this.ShootProjectiles());\r\n   
+    }\r\n    *ShootProjectiles() {\r\n        while (true) {\r\n            // Wait
+    for a random amount of time between shots\r\n            let delay = UnityEngine_1.Random.Range(this.minDelay,
+    this.maxDelay);\r\n            yield new UnityEngine_1.WaitForSeconds(delay);\r\n           
+    // Instantiate a new projectile\r\n            let projectile = new UnityEngine_1.GameObject();\r\n           
+    projectile.transform.position = this.transform.position;\r\n            projectile.AddComponent($typeof(UnityEngine_1.SpriteRenderer)).sprite
+    = this.sprites[UnityEngine_1.Random.Range(0, this.sprites.length)];\r\n           
+    projectile.AddComponent($typeof(UnityEngine_1.Rigidbody2D)).gravityScale = this.gravity;\r\n           
+    projectile.GetComponent($typeof(UnityEngine_1.Rigidbody2D)).velocity = UnityEngine_1.Vector2.op_Multiply(this.initialVelocity,
+    this.speed);\r\n            // Destroy the projectile after a certain amount
+    of time\r\n            UnityEngine_1.GameObject.Destroy(projectile, 10);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = ProjectileController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUHJvamVjdGlsZUNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJQcm9qZWN0aWxlQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUE0STtBQUM1SSxpREFBcUQ7QUFFckQsTUFBcUIsb0JBQXFCLFNBQVEscUNBQXFCO0lBaUJuRSxLQUFLO1FBQ0Qsa0RBQWtEO1FBQ2xELElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGdCQUFnQixFQUFFLENBQUMsQ0FBQztJQUNqRCxDQUFDO0lBRU8sQ0FBQyxnQkFBZ0I7UUFDckIsT0FBTyxJQUFJLEVBQUU7WUFDVCxpREFBaUQ7WUFDakQsSUFBSSxLQUFLLEdBQUcsb0JBQU0sQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUM7WUFDdkQsTUFBTSxJQUFJLDRCQUFjLENBQUMsS0FBSyxDQUFDLENBQUM7WUFFaEMsK0JBQStCO1lBQy9CLElBQUksVUFBVSxHQUFHLElBQUksd0JBQVUsRUFBRSxDQUFDO1lBQ2xDLFVBQVUsQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDO1lBQ3hELFVBQVUsQ0FBQyxZQUFZLFNBQUMsNEJBQWMsR0FBSSxNQUFNLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxvQkFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1lBQ3RHLFVBQVUsQ0FBQyxZQUFZLFNBQUMseUJBQVcsR0FBSSxZQUFZLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQztZQUNuRSxVQUFVLENBQUMsWUFBWSxTQUFDLHlCQUFXLEdBQUksUUFBUSxHQXBDMkIscUJBQU8sQ0FnRjhsMUYsV0FBWSxDQTVDem8xRixJQUFJLENBQUMsZUFBZSxFQUFHLElBQUksQ0FBQyxLQUFLLENBQUEsQ0FBQztZQUVwRix3REFBd0Q7WUFDeEQsd0JBQVUsQ0FBQyxPQUFPLENBQUMsVUFBVSxFQUFFLEVBQUUsQ0FBQyxDQUFDO1NBQ3RDO0lBQ0wsQ0FBQztDQXVDSjtBQTdFRCx1Q0E2RUMifQ==","assetPath":"Assets/Scripts/ProjectileController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"initialVelocity","type":"UnityEngine.Vector2","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"gravity","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"speed","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"minDelay","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"maxDelay","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"sprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ProjectileController","description":""},"isCompiled":true}'
+  typescriptHash: d6a86b1bb113c4021b1cd6814d72b4de
+  onlyWriteTrigger: 0

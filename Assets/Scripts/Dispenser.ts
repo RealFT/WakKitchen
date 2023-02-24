@@ -29,6 +29,7 @@ export default class Dispenser extends ZepetoScriptBehaviour {
         });
         this.cupBtn.onClick.AddListener(() => {
             OrderManager.GetInstance().AddItemToInventory(this.curDrink);
+            this.cupBtn.gameObject.SetActive(false);
         });
     }
 
@@ -40,6 +41,7 @@ export default class Dispenser extends ZepetoScriptBehaviour {
         this.StartCoroutine(this.DoMoving());
         this.InitCupImage();
         this.cupBtn.interactable = false;
+        this.cupBtn.gameObject.SetActive(true);
     }
 
     // Dispenser Coroutine

@@ -64,6 +64,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     // Initialize product slot
     private SetupProductButton(index: number) {
         this.productSlots[index].onClick.AddListener(() => {
+            if (this.productCounts[index] == 0) return;
             // Add the clicked product to the plate
             if (this.plateLimit > this.plateIndex) {
                 this.platedProducts.push(this.products[index]);
@@ -72,8 +73,8 @@ export default class CookSlot extends ZepetoScriptBehaviour {
                 this.plateImages[this.plateIndex].enabled = true;
                 this.plateIndex++;
                 this.ReduceProductCount(index);
-                this.UpdateProductDisplay();
             }
+            //this.UpdateProductDisplay();
         });
     }
 
@@ -83,9 +84,8 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.products = OrderManager.GetInstance().GetProductsFromInventory();
         // Update the productSlots, Counts for each item
         for (let i = 0; i < this.products.length; i++) {
-            const product = this.products[i];
-            this.productSlots[i].image.sprite = OrderManager.GetInstance().getProductSprite(product);
-            this.productCounts[i] = OrderManager.GetInstance().GetQuantityFromInventory(product);
+            // const product = this.products[i];
+            this.productCounts[i] = OrderManager.GetInstance().GetQuantityFromInventory(this.products[i]);
         }
     }
 
@@ -94,6 +94,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         for (let i = 0; i < this.productSlots.length; i++) {
             if (i < this.products.length) {
                 const product = this.products[i];
+                this.productSlots[i].image.sprite = OrderManager.GetInstance().getProductSprite(product);
                 this.productCountTexts[i].text = this.productCounts[i].toString();
                 this.SetSlot(i, true);
             }
@@ -136,6 +137,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
 
     private ReduceProductCount(index:number):void{
         this.productCounts[index]--;
+        this.productCountTexts[index].text = this.productCounts[index].toString();
         // if this product doesn't exist anymore
         if(this.productCounts[index] <= 0){
             this.SetSlot(index, false);
