@@ -9,7 +9,6 @@ export default class Slicable extends ZepetoScriptBehaviour {
     public ingredient: Ingredient;
     private isSliced: boolean;
 
-
     public SetSlicable(origin: Sprite, sliced: Sprite, ingredient: Ingredient) {
         this.originImage.sprite = origin;
         this.slicedSprite = sliced;

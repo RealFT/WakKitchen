@@ -1,7 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Debug } from "UnityEngine";
 import { Button, Image, Text } from "UnityEngine.UI";
-import OrderManager from './OrderManager';
+import OrderManager, { Drink, Side } from './OrderManager';
 import { Ingredient } from './OrderManager';
 
 export default class CookSlot extends ZepetoScriptBehaviour {
@@ -13,13 +13,15 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     // must be same index productSlots and productCountTexts
     public productSlots: Button[];  // Slots for stored items
     public productCountTexts: Text[];
-    public productCounts: number[];   // number of products stored in the inventory.
+    private productCounts: number[];   // number of products stored in the inventory.
     private products: number[] = []; // list of products stored in the inventory.
 
     // Plate related variables
+    public plateSideImage: Image;   // Side image to be served on a plate
+    public plateDrinkImage: Image;  // Drink Image to be served on a plate
     public plateImages: Image[];
-    public plateIndex: number;
-    public plateLimit: number;
+    private plateIndex: number;
+    private plateLimit: number;
     private platedProducts: number[] = []; // an array of the indexes for plated Products
 
     Start() {
@@ -66,14 +68,27 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.productSlots[index].onClick.AddListener(() => {
             if (this.productCounts[index] == 0) return;
             // Add the clicked product to the plate
-            if (this.plateLimit > this.plateIndex) {
+            // If the product is Side
+            if (this.products[index] >= Side.START){
+                this.platedProducts.push(this.products[index]);
+                this.plateSideImage.sprite = this.productSlots[index].image.sprite;
+                this.plateSideImage.enabled = true;
+            }
+            // If the product is Drink
+            else if (this.products[index] >= Drink.START){
+                this.platedProducts.push(this.products[index]);
+                this.plateDrinkImage.sprite = this.productSlots[index].image.sprite;
+                this.plateDrinkImage.enabled = true;
+            }
+            // If the product is Burger ingredient
+            else if (this.plateLimit > this.plateIndex) {
                 this.platedProducts.push(this.products[index]);
                 // replace plate's sprite to this sprite
                 this.plateImages[this.plateIndex].sprite = this.productSlots[index].image.sprite;  
                 this.plateImages[this.plateIndex].enabled = true;
                 this.plateIndex++;
-                this.ReduceProductCount(index);
             }
+            this.ReduceProductCount(index);
             //this.UpdateProductDisplay();
         });
     }
@@ -123,10 +138,15 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     }
 
     InitPlate() {
+        // disable plate images
+        this.plateSideImage.enabled = false;
+        this.plateDrinkImage.enabled = false;
         for (var images of this.plateImages) {
             images.enabled = false;
         }
+        // init plate Index
         this.plateIndex = 0;
+        // init plated Products
         this.platedProducts = [];
     }
 
