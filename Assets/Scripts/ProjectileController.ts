@@ -1,4 +1,5 @@
-import { Canvas, GameObject, Quaternion, Random, Rigidbody2D, Sprite, SpriteRenderer, Vector2, Vector3, WaitForSeconds } from 'UnityEngine';
+import { Canvas, Object, GameObject, Quaternion, Random, Rigidbody2D, Sprite, SpriteRenderer, Vector2, Vector3, WaitForSeconds } from 'UnityEngine';
+import { Image, Slider } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 
 export default class ProjectileController extends ZepetoScriptBehaviour {
@@ -18,10 +19,10 @@ export default class ProjectileController extends ZepetoScriptBehaviour {
     // The sprites to use for the projectiles
     public sprites: Sprite[];
 
-    Start() {
-        // Start the coroutine that shoots the projectiles
-        this.StartCoroutine(this.ShootProjectiles());
-    }
+    // Start() {
+    //     // Start the coroutine that shoots the projectiles
+    //     this.StartCoroutine(this.ShootProjectiles());
+    // }
 
     private *ShootProjectiles() {
         while (true) {
@@ -40,42 +41,42 @@ export default class ProjectileController extends ZepetoScriptBehaviour {
             GameObject.Destroy(projectile, 10);
         }
     }
-    // public receiptItemPrefab: GameObject;
-    // public canvas: Canvas;
+    public receiptItemPrefab: GameObject;
+    public canvas: Canvas;
 
-    // private receiptItemsPool: GameObject[] = [];
+    private receiptItemsPool: GameObject[] = [];
 
-    // Start() {
-    //     // Initialize the object pool with 10 instances of the receipt item prefab
-    //     for (let i = 0; i < 10; i++) {
-    //         const obj = Object.Instantiate(this.receiptItemPrefab);
-    //         const receiptItem = GameObject.Instantiate(this.receiptItemPrefab, new Vector3(0, 0, 0), Quaternion.identity, this.canvas.transform);
-    //         receiptItem.SetActive(false);
-    //         this.receiptItemsPool.push(receiptItem);
-    //     }
-    // }
+    Start() {
+        // Initialize the object pool with 10 instances of the receipt item prefab
+        for (let i = 0; i < 10; i++) {
+            const obj = Object.Instantiate(this.receiptItemPrefab) as GameObject;
+            const receiptItem = Object.Instantiate(this.receiptItemPrefab, new Vector3(0, 0, 0), Quaternion.identity, this.canvas.transform) as GameObject;
+            receiptItem.SetActive(false);
+            this.receiptItemsPool.push(receiptItem);
+        }
+    }
 
-    // public ShowReceiptItem(position: Vector3, sprite: Sprite) {
-    //     let receiptItem: GameObject = null;
+    public ShowReceiptItem(position: Vector3, sprite: Sprite) {
+        let receiptItem: GameObject = null;
 
-    //     // Check if there's a deactivated receipt item in the pool
-    //     for (const item of this.receiptItemsPool) {
-    //         if (!item.activeSelf) {
-    //             receiptItem = item;
-    //             break;
-    //         }
-    //     }
+        // Check if there's a deactivated receipt item in the pool
+        for (const item of this.receiptItemsPool) {
+            if (!item.activeSelf) {
+                receiptItem = item;
+                break;
+            }
+        }
 
-    //     // If there's no deactivated item, create a new one and add it to the pool
-    //     if (!receiptItem) {
-    //         receiptItem = GameObject.Instantiate(this.receiptItemPrefab, new Vector3(0, 0, 0), Quaternion.identity, this.canvas.transform);
-    //         receiptItem.SetActive(false);
-    //         this.receiptItemsPool.push(receiptItem);
-    //     }
+        // If there's no deactivated item, create a new one and add it to the pool
+        if (!receiptItem) {
+            receiptItem = Object.Instantiate(this.receiptItemPrefab, new Vector3(0, 0, 0), Quaternion.identity, this.canvas.transform) as GameObject;
+            receiptItem.SetActive(false);
+            this.receiptItemsPool.push(receiptItem);
+        }
 
-    //     // Set the position and sprite of the receipt item and activate it
-    //     receiptItem.transform.position = position;
-    //     receiptItem.GetComponent<Image>().sprite = sprite;
-    //     receiptItem.SetActive(true);
-    // }
+        // Set the position and sprite of the receipt item and activate it
+        receiptItem.transform.position = position;
+        receiptItem.GetComponent<Image>().sprite = sprite;
+        receiptItem.SetActive(true);
+    }
 }

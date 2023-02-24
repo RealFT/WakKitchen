@@ -49,7 +49,7 @@ export default class CutBehavior extends ZepetoScriptBehaviour {
                 Debug.Log("ex: " + this.endPos.position.x + ", ey: " + this.endPos.position.y);
                 Debug.Log("cut");
                 //this.foodImages.push(food);
-                //OrderManager.GetInstance().addProduct();
+                OrderManager.GetInstance().AddItemToInventory(Ingredient.CABBAGE);
             }
         }
 
