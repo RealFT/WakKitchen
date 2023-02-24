@@ -68,26 +68,27 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.productSlots[index].onClick.AddListener(() => {
             if (this.productCounts[index] == 0) return;
             // Add the clicked product to the plate
-            // If the product is Side
-            if (this.products[index] >= Side.START){
-                this.platedProducts.push(this.products[index]);
-                this.plateSideImage.sprite = this.productSlots[index].image.sprite;
-                this.plateSideImage.enabled = true;
-            }
-            // If the product is Drink
-            else if (this.products[index] >= Drink.START){
-                this.platedProducts.push(this.products[index]);
-                this.plateDrinkImage.sprite = this.productSlots[index].image.sprite;
-                this.plateDrinkImage.enabled = true;
-            }
             // If the product is Burger ingredient
-            else if (this.plateLimit > this.plateIndex) {
-                this.platedProducts.push(this.products[index]);
+            if (this.products[index] <= Ingredient.END && this.plateLimit > this.plateIndex) {
                 // replace plate's sprite to this sprite
-                this.plateImages[this.plateIndex].sprite = this.productSlots[index].image.sprite;  
+                this.plateImages[this.plateIndex].sprite = this.productSlots[index].image.sprite;
                 this.plateImages[this.plateIndex].enabled = true;
                 this.plateIndex++;
             }
+            // If the product is Drink
+            else if (this.products[index] >= Drink.START &&
+                this.products[index] <= Drink.END && this.plateDrinkImage.enabled != true){
+                this.plateDrinkImage.sprite = this.productSlots[index].image.sprite;
+                this.plateDrinkImage.enabled = true;
+            }
+            // If the product is Side
+            else if (this.products[index] >= Side.START &&
+                this.products[index] <= Side.END && this.plateSideImage.enabled != true) {
+                this.plateSideImage.sprite = this.productSlots[index].image.sprite;
+                this.plateSideImage.enabled = true;
+            }
+            else return;
+            this.platedProducts.push(this.products[index]);
             this.ReduceProductCount(index);
             //this.UpdateProductDisplay();
         });
