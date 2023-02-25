@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &15963658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,15 +228,30 @@ MonoBehaviour:
     - slicablePrefab
     - canvas
     - originSprites
+    - initialVelocity
+    - gravity
+    - speed
+    - minDelay
+    - maxDelay
     unityValues:
     - {fileID: 1163768469588619952, guid: de8895deeb6b12746a5e2f75967ffbd4, type: 3}
     - {fileID: 303107681}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     values:
     - 
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":1,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - '{"type":"UnityEngine.Vector2, UnityEngine.CoreModule","value":"{\"x\":1.0,\"y\":1.0}"}'
+    - '{"type":"System.Single, mscorlib","value":"9.81"}'
+    - '{"type":"System.Single, mscorlib","value":"320"}'
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"3"}'
     unityArrayValues:
     - {fileID: 21300000, guid: e346d11c193db5d4e9c1044874a9093a, type: 3}
     arrayValues: []
@@ -959,7 +974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &303107678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,6 +1127,7 @@ RectTransform:
   m_Children:
   - {fileID: 743778857}
   - {fileID: 1338106163}
+  - {fileID: 1170052260}
   m_Father: {fileID: 303107682}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1709,8 +1725,12 @@ MonoBehaviour:
     - speed
     - minDelay
     - maxDelay
-    - sprites
+    - slicablePrefab
+    - canvas
+    - originSprites
     unityValues:
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -1723,19 +1743,11 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"2"}'
     - '{"type":"System.Single, mscorlib","value":"0.1"}'
     - '{"type":"System.Single, mscorlib","value":"2"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":10,\"type\":\"UnityEngine.Object,
+    - 
+    - 
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":0,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    unityArrayValues:
-    - {fileID: 21300000, guid: b9359114493167b48973b9c2eef1444b, type: 3}
-    - {fileID: 21300000, guid: 220d95c1bb6440a4d946f656211b09a7, type: 3}
-    - {fileID: 21300000, guid: d73cd97dcc4bc70429633002e12b25b4, type: 3}
-    - {fileID: 21300000, guid: e346d11c193db5d4e9c1044874a9093a, type: 3}
-    - {fileID: 21300000, guid: d9d5b8df8b0bebc42beaa5de66ba37f7, type: 3}
-    - {fileID: 21300000, guid: 122c62f8bd4f513438eec7aa16e6115b, type: 3}
-    - {fileID: 21300000, guid: 6b67cde4f48540e4c8b8a8c4e17b14bf, type: 3}
-    - {fileID: 21300000, guid: f2223ee23c040254491ba77c36a1752b, type: 3}
-    - {fileID: 21300000, guid: 25828c0f850207345a8e90c0ce092ad1, type: 3}
-    - {fileID: 21300000, guid: d79e95803196b3241a680d540180c8b6, type: 3}
+    unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 88a26045845c3d643a66e245d31d684d, type: 3}
     isExpaned: 0
@@ -2058,6 +2070,88 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1170052259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170052260}
+  - component: {fileID: 1170052261}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1170052260
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170052259}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 432603280}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1170052261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170052259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1673316429, guid: 921f0445823004a16a499d629dd566a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script:
+    keys:
+    - slicablePrefab
+    - canvas
+    - originSprites
+    - initialVelocity
+    - gravity
+    - speed
+    - minDelay
+    - maxDelay
+    unityValues:
+    - {fileID: 1163768469588619952, guid: de8895deeb6b12746a5e2f75967ffbd4, type: 3}
+    - {fileID: 303107681}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    values:
+    - 
+    - 
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":1,\"type\":\"UnityEngine.Object,
+      UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - '{"type":"UnityEngine.Vector2, UnityEngine.CoreModule","value":"{\"x\":1.0,\"y\":1.0}"}'
+    - '{"type":"System.Single, mscorlib","value":"9.81"}'
+    - '{"type":"System.Single, mscorlib","value":"320"}'
+    - '{"type":"System.Single, mscorlib","value":"0.1"}'
+    - '{"type":"System.Single, mscorlib","value":"3"}'
+    unityArrayValues:
+    - {fileID: 21300000, guid: e346d11c193db5d4e9c1044874a9093a, type: 3}
+    arrayValues: []
+    script: {fileID: 4458252877524076426, guid: 88a26045845c3d643a66e245d31d684d, type: 3}
+    isExpaned: 0
 --- !u!1 &1247967757
 GameObject:
   m_ObjectHideFlags: 0
