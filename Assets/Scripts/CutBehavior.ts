@@ -9,7 +9,8 @@ import Slicable from './Slicable';
 export default class CutBehavior extends ZepetoScriptBehaviour {
     public startPos: RectTransform;
     public endPos: RectTransform;
-    public foodImages: Image[];
+    public originImages: Image[];
+    public slicedImages: Image[];
     public slicabes: Slicable[];
     
     private isCutting = false;
@@ -34,8 +35,8 @@ export default class CutBehavior extends ZepetoScriptBehaviour {
     private CutObjects() {
         //Debug.Log("cut");
   
-        for (let i = 0; i < this.foodImages.length; i++) {
-            let food = this.foodImages[i];
+        for (let i = 0; i < this.slicedImages.length; i++) {
+            let food = this.slicedImages[i];
             let screenPos = food.transform.position;
             let size = food.GetComponent<RectTransform>().sizeDelta;
             // The target image's position and dimensions
@@ -53,7 +54,7 @@ export default class CutBehavior extends ZepetoScriptBehaviour {
             }
         }
 
-        for (let i = 0; i < this.foodImages.length; i++) {
+        for (let i = 0; i < this.slicedImages.length; i++) {
             //Debug.Log("cut");
             // Implement the logic to cut the objects here
         }
