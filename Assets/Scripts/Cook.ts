@@ -12,8 +12,8 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     // Inventory related variables
     // must be same index productSlots and productCountTexts
     public productSlots: Button[];  // Slots for stored items
-    public productCountTexts: Text[];
-    private productCounts: number[];   // number of products stored in the inventory.
+    public productCountTexts: Text[] = [];
+    private productCounts: number[] = [];   // number of products stored in the inventory.
     private products: number[] = []; // list of products stored in the inventory.
 
     // Plate related variables
@@ -33,8 +33,8 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         this.UpdateProductDisplay();
     }
 
-    private OnDisable() {
-    }
+    // private OnDisable() {
+    // }
 
     init() {
         // Initialize variables
@@ -98,6 +98,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     private GetProductsData(): void {
         // Gets the list of items stored in the inventory.
         this.products = OrderManager.GetInstance().GetProductsFromInventory();
+        if (!this.products) return;
         // Update the productSlots, Counts for each item
         for (let i = 0; i < this.products.length; i++) {
             // const product = this.products[i];

@@ -3,7 +3,7 @@ import { Vector2, RectTransform, Random, Rect, Debug } from 'UnityEngine';
 import { Image, Slider } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
-import { Ingredient } from './OrderManager';
+import OrderManager, { Ingredient } from './OrderManager';
 import Slicable from './Slicable';
 
 export default class SliceController extends ZepetoScriptBehaviour {
@@ -148,7 +148,7 @@ export default class SliceController extends ZepetoScriptBehaviour {
                 Debug.Log("Slice :" + slicable.GetIngredient());
                 slicable.Sliced();
                 //this.foodImages.push(food);
-                //OrderManager.GetInstance().AddItemToInventory(this.slicabes[i].GetIngredient());
+                OrderManager.GetInstance().AddItemToInventory(slicable.GetIngredient());
             }
         }
 

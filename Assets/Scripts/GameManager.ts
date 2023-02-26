@@ -8,6 +8,7 @@ import QuarterViewController from './QuarterViewController';
 import DataManager from './DataManager';
 import OrderManager from './OrderManager';
 import UIManager from './UIManager';
+import Cook from './Cook';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -29,9 +30,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     // components
-    public characterController: CharacterController;
-    public quarterViewController: QuarterViewController;
-    //public stageUIController: StageUIController;
+    @SerializeField() private characterController: CharacterController;
+    @SerializeField() private quarterViewController: QuarterViewController;
+    //@SerializeField() private cookObj: GameObject;
+    //private cook: Cook;
     private timer: Timer;
 
     private lastSavedDay: number;      // last saved Day(Stage).
@@ -68,10 +70,12 @@ export default class GameManager extends ZepetoScriptBehaviour {
         //this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
+        //this.cook = this.cookObj.GetComponent<Cook>();
 
         this.isInGame = true;
         OrderManager.GetInstance().init();
         OrderManager.GetInstance().StartOrder();
+        //this.cook.init();
         UIManager.GetInstance().initStageUI();
         UIManager.GetInstance().setGameMoneyText(this.gameMoney);
     }
