@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: 9eb5772e947130d478bc8f9f790fe584
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nclass MouseChaser extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        // \uCE74\uBA54\uB77C\uB85C\uBD80\uD130\uC758
+    \uAC70\uB9AC\\r\\n        this.distanceFromCamera = 5;\\r\\n        this.ChasingSpeed
+    = 0.1;\\r\\n    }\\r\\n    OnValidate() {\\r\\n        if (this.distanceFromCamera
+    < 0)\\r\\n            this.distanceFromCamera = 0;\\r\\n    }\\r\\n    Update()
+    {\\r\\n        this.mousePos = UnityEngine_1.Input.mousePosition;\\r\\n       
+    this.mousePos.z = this.distanceFromCamera;\\r\\n        this.nextPos = UnityEngine_1.Camera.main.ScreenToWorldPoint(this.mousePos);\\r\\n       
+    this.transform.position = UnityEngine_1.Vector3.Lerp(this.transform.position,
+    this.nextPos, this.ChasingSpeed);\\r\\n    }\\r\\n}\\r\\nexports.default = MouseChaser;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTW91c2VDaGFzZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJNb3VzZUNoYXNlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFxRDtBQUNyRCxpREFBcUQ7QUFFckQsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQUE5RDs7UUFFSSxhQUFhO1FBQ2EsdUJBQWtCLEdBQVUsQ0FBQyxDQUFDO1FBQzlCLGlCQUFZLEdBQVUsR0FBRyxDQUFDO0lBa0J4RCxDQUFDO0lBYlcsVUFBVTtRQUNkLElBQUksSUFBSSxDQUFDLGtCQUFrQixHQUFHLENBQUM7WUFDM0IsSUFBSSxDQUFDLGtCQUFrQixHQUFHLENBQUMsQ0FBQztJQUNwQyxDQUFDO0lBRUQsTUFBTTtRQUNGLElBQUksQ0FBQyxRQUFRLEdBQUcsbUJBQUssQ0FBQyxhQUFhLENBQUM7UUFDcEMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDO1FBRTFDLElBQUksQ0FBQyxPQUFPLEdBQUcsb0JBQU0sQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQzdELElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLHFCQUFPLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDO0lBQ3JHLENBQUM7Q0FFSjtBQXRCRCw4QkFzQkMifQ==\",\"assetPath\":\"Assets/Scripts/MouseChaser.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"distanceFromCamera\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"5\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"mscorlib\",\"name\":\"ChasingSpeed\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0.1\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"MouseChaser\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 552e08c91f3da6c5a88b0871d42e72d7
+  onlyWriteTrigger: 0
