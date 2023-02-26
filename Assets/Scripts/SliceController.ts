@@ -8,7 +8,7 @@ import Slicable from './Slicable';
 
 export default class SliceController extends ZepetoScriptBehaviour {
     public slicablePrefab: GameObject;  // The prefab for the ingredient that will be sliced
-    public canvas: Canvas;  // The canvas on which the ingredients will be spawned
+    public mask: GameObject;  // The mask on which the ingredients will be spawned
 
     public originSprites: Sprite[]; // The original sprites for each type of ingredient
     private ingredients: Map<number, Ingredient>;   // A map of ingredient indices to their corresponding enum values
@@ -123,7 +123,7 @@ export default class SliceController extends ZepetoScriptBehaviour {
 
     private CreateSlicable(): GameObject {
         let slicableObj: GameObject = null;
-        slicableObj = Object.Instantiate(this.slicablePrefab, new Vector3(0, 0, 0), Quaternion.identity, this.canvas.transform) as GameObject;
+        slicableObj = Object.Instantiate(this.slicablePrefab, new Vector3(0, 0, 0), Quaternion.identity, this.mask.transform) as GameObject;
         slicableObj.SetActive(false);
         return slicableObj;
     }
