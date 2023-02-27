@@ -273,13 +273,14 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     public removeOrder(index: number) {
         this.curOrderNumber--;
-        this.orders[this.curOrderNumber].gameObject.SetActive(false);
         for (let i = index; i < this.receipts.length - 1; i++) {
             this.receipts[i] = this.receipts[i + 1];
             this.StopCoroutine(this.waitCorutines[i]);
-            this.waitCorutines[i] = this.StartCoroutine(this.WaitOrder(i,this.waitSliders[i + 1].value));
+            const curTime = (1 - this.waitSliders[i + 1].value) * this.waitTime;
+            this.waitCorutines[i] = this.StartCoroutine(this.WaitOrder(i, curTime));
         }
         this.receipts.pop();
+        this.orders[this.curOrderNumber].gameObject.SetActive(false);
     }
 
     public clearOrder() {
