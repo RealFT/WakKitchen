@@ -674,7 +674,7 @@ MonoBehaviour:
   script:
     keys:
     - slicablePrefab
-    - canvas
+    - mask
     - originSprites
     - initialVelocity
     - tiltAngle
@@ -686,9 +686,14 @@ MonoBehaviour:
     - rightSpawnPos
     - startSlicePoint
     - endSlicePoint
+    - timerDelay
+    - slicePoints
+    - drawMaterial
+    - drawColor
+    - lineWidth
     unityValues:
     - {fileID: 1163768469588619952, guid: de8895deeb6b12746a5e2f75967ffbd4, type: 3}
-    - {fileID: 303107681}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -700,6 +705,11 @@ MonoBehaviour:
     - {fileID: 949339394}
     - {fileID: 684050593}
     - {fileID: 225009899}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     values:
     - 
     - 
@@ -715,6 +725,12 @@ MonoBehaviour:
     - 
     - 
     - 
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":0,\"type\":\"UnityEngine.Vector3,
+      UnityEngine.CoreModule\",\"isUnity\":false}"}'
+    - 
+    - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.0,\"g\":0.0,\"b\":0.0,\"a\":0.0}"}'
+    - '{"type":"System.Single, mscorlib","value":"0"}'
     unityArrayValues:
     - {fileID: 21300000, guid: affeade9874cf2347abb155e8d0db4d8, type: 3}
     - {fileID: 21300000, guid: 0029170d14ce6c04c9f45c22cdae5559, type: 3}
@@ -1229,6 +1245,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &746590581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 746590583}
+  - component: {fileID: 746590582}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &746590582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746590581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1673316429, guid: 921f0445823004a16a499d629dd566a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script:
+    keys:
+    - timerDelay
+    - maxDistance
+    - layerMask
+    - drawMaterial
+    - drawColor
+    - lineWidth
+    unityValues:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 678893513312951559, guid: 6d994e6b740a17f4d89c0c708ee11304, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    values:
+    - '{"type":"System.Single, mscorlib","value":"0"}'
+    - '{"type":"System.Single, mscorlib","value":"0.2"}'
+    - '{"type":"UnityEngine.LayerMask, UnityEngine.CoreModule","value":"{\"value\":0}"}'
+    - 
+    - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.0,\"g\":0.0,\"b\":0.0,\"a\":1.0}"}'
+    - '{"type":"System.Single, mscorlib","value":"0.5"}'
+    unityArrayValues: []
+    arrayValues: []
+    script: {fileID: 4458252877524076426, guid: 0ce9a8e87805cc140913d73dbea3a508, type: 3}
+    isExpaned: 0
+--- !u!4 &746590583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746590581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 464.5981, y: 313.4001, z: -261.01434}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884604635
 GameObject:
   m_ObjectHideFlags: 0

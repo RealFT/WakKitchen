@@ -48,7 +48,10 @@ export enum Customer {
     ROENTGENIUM = 23,
     RUSUK = 24,
     SECRETTO = 25,
-    END = 25
+    BUSINESSKIM = 26,
+    WAKPHAGO = 27,
+    WAKGOOD = 28,
+    END = 28
 }
 
 export default class OrderManager extends ZepetoScriptBehaviour {

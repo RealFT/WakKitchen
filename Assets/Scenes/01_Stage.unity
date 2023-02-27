@@ -2342,7 +2342,7 @@ MonoBehaviour:
     - {fileID: 1179887285}
     values:
     - 
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Sprite,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - '{"type":"UnityEngine.Vector2, UnityEngine.CoreModule","value":"{\"x\":0.0,\"y\":1.0}"}'
     - '{"type":"System.Single, mscorlib","value":"0.2"}'
@@ -8171,13 +8171,13 @@ MonoBehaviour:
     values:
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":3,\"length\":12,\"type\":\"UnityEngine.Object,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":3,\"length\":15,\"type\":\"UnityEngine.Sprite,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":15,\"length\":1,\"type\":\"UnityEngine.Object,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":18,\"length\":1,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":16,\"length\":5,\"type\":\"UnityEngine.Object,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":19,\"length\":5,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":21,\"length\":7,\"type\":\"UnityEngine.Object,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":24,\"length\":7,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - 
     - 
@@ -8197,6 +8197,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: aea598d49a46720448d6cfc87ab47b26, type: 3}
     - {fileID: 21300000, guid: b5741e6e79320ba4bb7d0f141bebf72f, type: 3}
     - {fileID: 21300000, guid: feef30f80a8ac4d4ea664973876e3a14, type: 3}
+    - {fileID: 21300000, guid: 7f49d62704f872e479a29da020890912, type: 3}
+    - {fileID: 21300000, guid: 5b2409fd770bc744280070dfba6b0837, type: 3}
+    - {fileID: 21300000, guid: f10ff8df232e8c641bc1113469376251, type: 3}
     - {fileID: 21300000, guid: d0b7d4b2a80f7a146a20785f37451195, type: 3}
     - {fileID: 21300000, guid: e5b3a034ed7674c4c844f881633d9314, type: 3}
     - {fileID: 21300000, guid: d3ec931220f709944bf44d232ae6781c, type: 3}
@@ -32777,7 +32780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459788423159908662, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f998a15c200783c409447dace822dfce, type: 3}
