@@ -1,6 +1,6 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { Debug, GameObject, Sprite, WaitForSeconds } from 'UnityEngine';
-import { Button } from 'UnityEngine.UI';
+import { Coroutine, Debug, GameObject, Sprite, WaitForSeconds } from 'UnityEngine';
+import { Button, Slider } from 'UnityEngine.UI';
 import ExpandOrderReceipt from './ExpandOrderReceipt';
 import Receipt from './Receipt';
 import GameManager from './GameManager';
@@ -73,19 +73,23 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         return OrderManager.Instance;
     }
 
-    public expandOrderReceiptObj: GameObject;
-    public expandOrderReceipt: ExpandOrderReceipt;
+    @SerializeField() private expandOrderReceiptObj: GameObject;
+    @SerializeField() private expandOrderReceipt: ExpandOrderReceipt;
 
     // Define the member variables for the Receipt's sprites
-    public ingredientSprites: Sprite[];
-    public drinkSprites: Sprite[];
-    public sideSprites: Sprite[];
-    public characterSprites: Sprite[];
+    @SerializeField() private ingredientSprites: Sprite[];
+    @SerializeField() private drinkSprites: Sprite[];
+    @SerializeField() private sideSprites: Sprite[];
+    @SerializeField() private characterSprites: Sprite[];
 
-    private receipts: Receipt[] = [];
-    public orders: Button[];
+    @SerializeField() private orders: Button[];
     private curOrderNumber: number;
     private maxOrderSize: number;
+    private receipts: Receipt[] = [];
+
+    @SerializeField() private waitTime: number; // time to wait order
+    @SerializeField() private waitSliders: Slider[] = []; // 
+    private waitCorutines:Coroutine[] = [];
 
     // array of produced Ingredient, Drink, Side.
     // number of items in inventory indexed by product id
@@ -93,6 +97,21 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     Awake() {
         if (this != OrderManager.GetInstance()) GameObject.Destroy(this.gameObject);
+    }
+
+    public init() {
+        this.StopOrder();
+        this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
+        if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
+        this.maxOrderSize = this.orders.length;
+        for (let i = 0; i < this.maxOrderSize; i++) {
+            this.initOrderBtn(i);
+        }
+        this.clearOrder();
+        this.clearOrderBtn();
+        this.initProduct();
+        /**/ 
+        this.setWaitTime(10);
     }
 
     public initProduct() {
@@ -156,19 +175,6 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         return products;
     }
 
-    public init() {
-        this.StopOrder();
-        this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
-        if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
-        this.maxOrderSize = this.orders.length;
-        for (let i = 0; i < this.maxOrderSize; i++) {
-            this.initOrderBtn(i);
-        }
-        this.clearOrder();
-        this.clearOrderBtn();
-        this.initProduct();
-    }
-
     public StartOrder(){
         this.StartCoroutine(this.DoOrder());
     }
@@ -205,6 +211,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         // find the same receipt
         for (let index = 0; index < this.receipts.length; index++) {
             if (this.receipts[index].compareReceipt(drink, side, ingredients)) {
+                // stop wait Corutine
+                this.StopCoroutine(this.waitCorutines[index]);
                 // earn this receipt's pay
                 GameManager.GetInstance().changeMoney(this.receipts[index].pay);
                 // remove this receipt
@@ -242,7 +250,25 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public addOrder(): void {
         this.receipts.push(DataManager.GetInstance().getRandomStageReceipt());
         this.orders[this.curOrderNumber].gameObject.SetActive(true);
+        this.waitCorutines[this.curOrderNumber] = this.StartCoroutine(this.WaitOrder(this.curOrderNumber));
         this.curOrderNumber++;
+    }
+
+    public setWaitTime(waitTime:number){
+        this.waitTime = waitTime;
+    }
+
+    *WaitOrder(index: number, waitTime: number = 0) {
+        const period = 0.2;
+        let curTime = waitTime;
+        this.waitSliders[index].value = 1;
+        // loop until waitSlider's value is 0
+        while(this.waitSliders[index].value > 0){
+            this.waitSliders[index].value = 1 - curTime / this.waitTime;
+            yield new WaitForSeconds(period);
+            curTime += period;
+        }
+        this.removeOrder(index);
     }
 
     public removeOrder(index: number) {
@@ -250,6 +276,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.orders[this.curOrderNumber].gameObject.SetActive(false);
         for (let i = index; i < this.receipts.length - 1; i++) {
             this.receipts[i] = this.receipts[i + 1];
+            this.StopCoroutine(this.waitCorutines[i]);
+            this.waitCorutines[i] = this.StartCoroutine(this.WaitOrder(i,this.waitSliders[i + 1].value));
         }
         this.receipts.pop();
     }
