@@ -89,7 +89,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     @SerializeField() private waitTime: number; // time to wait order
     @SerializeField() private waitSliders: Slider[] = []; // 
-    private waitCorutines:Coroutine[] = [];
+    private waitCoroutines:Coroutine[] = [];
 
     // array of produced Ingredient, Drink, Side.
     // number of items in inventory indexed by product id
@@ -212,10 +212,10 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         for (let index = 0; index < this.receipts.length; index++) {
             if (this.receipts[index].compareReceipt(drink, side, ingredients)) {
                 // stop wait Corutine
-                this.StopCoroutine(this.waitCorutines[index]);
+                this.StopCoroutine(this.waitCoroutines[index]);
                 // earn this receipt's pay
                 GameManager.GetInstance().changeMoney(this.receipts[index].pay);
-                // remove this receipt
+                // if waitSlider isn't 0, remove this receipt
                 this.removeOrder(index);
                 return true;
             }
@@ -226,7 +226,6 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     // Enable corresponding index order
     public displayExpandOrder(index: number): void {
         if (!this.receipts) return;
-        Debug.Log("displayExpandOrder: " + this.receipts.length);
         const receipt = this.receipts[index];
         const ingredients = receipt.ingredients;
         const burgerSprites: Sprite[] = [];
@@ -250,7 +249,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public addOrder(): void {
         this.receipts.push(DataManager.GetInstance().getRandomStageReceipt());
         this.orders[this.curOrderNumber].gameObject.SetActive(true);
-        this.waitCorutines[this.curOrderNumber] = this.StartCoroutine(this.WaitOrder(this.curOrderNumber));
+        this.waitCoroutines[this.curOrderNumber] = this.StartCoroutine(this.WaitOrder(this.curOrderNumber, 0))
         this.curOrderNumber++;
     }
 
@@ -264,7 +263,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.waitSliders[index].value = 1;
         // loop until waitSlider's value is 0
         while(this.waitSliders[index].value > 0){
-            this.waitSliders[index].value = 1 - curTime / this.waitTime;
+            this.waitSliders[index].value = Math.max(0, 1 - curTime / this.waitTime);
             yield new WaitForSeconds(period);
             curTime += period;
         }
@@ -273,12 +272,18 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     public removeOrder(index: number) {
         this.curOrderNumber--;
+        // stop coroutines and reset sliders
+        for(let i=index; i<this.waitCoroutines.length;i++){
+            this.StopCoroutine(this.waitCoroutines[i]);
+            this.waitSliders[index].value = 1
+        }
+        // shift orders to fill the gap
         for (let i = index; i < this.receipts.length - 1; i++) {
             this.receipts[i] = this.receipts[i + 1];
-            this.StopCoroutine(this.waitCorutines[i]);
             const curTime = (1 - this.waitSliders[i + 1].value) * this.waitTime;
-            this.waitCorutines[i] = this.StartCoroutine(this.WaitOrder(i, curTime));
+            this.waitCoroutines[i] = this.StartCoroutine(this.WaitOrder(i, curTime));
         }
+        // remove the last order
         this.receipts.pop();
         this.orders[this.curOrderNumber].gameObject.SetActive(false);
     }

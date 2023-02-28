@@ -6,6 +6,8 @@ import { GameObject, Vector3 } from 'UnityEngine';
 export default class CharacterController extends ZepetoScriptBehaviour {
     public playerObject: GameObject;
     public moveControlUI: GameObject;
+    public safeArea: GameObject;
+    public jumpButton: GameObject;
     public touchPad: ZepetoScreenTouchpad;
     public handlePos: Vector3;
     public handleOriginPos: Vector3;
@@ -21,6 +23,8 @@ export default class CharacterController extends ZepetoScriptBehaviour {
 
     TryGetMoveControl() {
         this.moveControlUI = this.playerObject.transform.Find("UIZepetoPlayerControl").gameObject;
+        this.safeArea = this.moveControlUI.transform.Find("SafeArea").gameObject;
+        this.jumpButton = this.safeArea.transform.Find("Jump").gameObject;
         this.touchPad = this.moveControlUI.GetComponentInChildren<ZepetoScreenTouchpad>();
         this.handlePos = this.touchPad.touchHandle.position;
         this.handleOriginPos = this.touchPad.touchHandleOrigin.position;
@@ -33,6 +37,12 @@ export default class CharacterController extends ZepetoScriptBehaviour {
             this.touchPad.touchHandleOrigin.position = this.handleOriginPos;
             this.touchPad.canvasGroupTouchPadBackground.alpha = 0;
             this.moveControlUI.SetActive(false);
+        }
+    }
+
+    SetJump(value: boolean) {
+        if (this.jumpButton) {
+            this.jumpButton.SetActive(value);
         }
     }
 

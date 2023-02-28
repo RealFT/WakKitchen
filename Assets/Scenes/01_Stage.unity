@@ -642,8 +642,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7551250795523159948, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
       propertyPath: m_Type
@@ -5258,8 +5266,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7551250795523159950, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
       propertyPath: m_Pivot.x
@@ -8240,8 +8256,8 @@ MonoBehaviour:
     - 
     - 
     - '{"type":"System.Single, mscorlib","value":"10"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":31,\"length\":3,\"type\":\"UnityEngine.UI.Slider,
-      UnityEngine.UI\",\"isUnity\":true}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":31,\"length\":3,\"type\":\"UnityEngine.Object,
+      UnityEngine.CoreModule\",\"isUnity\":true}"}'
     unityArrayValues:
     - {fileID: 7551250797042926536}
     - {fileID: 69108582}
@@ -33598,8 +33614,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471876256888743035, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7551250795523159948, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
       propertyPath: m_Type

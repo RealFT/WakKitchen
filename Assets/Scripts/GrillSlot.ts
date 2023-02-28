@@ -103,6 +103,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
     private StopBaking() {
         this.isBaking = false;
         this.bakingButton.interactable = true;
+        this.bakingButton.onClick.RemoveAllListeners();
         this.bakingButton.onClick.AddListener(() => { this.ClearGrill(); });
     }
 

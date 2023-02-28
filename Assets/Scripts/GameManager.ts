@@ -78,6 +78,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         //this.cook.init();
         UIManager.GetInstance().initStageUI();
         UIManager.GetInstance().setGameMoneyText(this.gameMoney);
+        this.SetPlayerJump(false);
     }
 
     Update() {
@@ -104,6 +105,12 @@ export default class GameManager extends ZepetoScriptBehaviour {
         if (this.characterController && this.quarterViewController) {
             (value) ? this.characterController.EnableMoveControl() : this.characterController.DisableMoveControl();
             this.quarterViewController.SetMove(value);
+        }
+    }
+
+    SetPlayerJump(value: boolean) {
+        if (this.characterController && this.quarterViewController) {
+            this.characterController.SetJump(value);
         }
     }
 

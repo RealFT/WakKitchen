@@ -87,6 +87,7 @@ export default class FrySlot extends ZepetoScriptBehaviour {
     private StopBaking() {
         this.isFrying = false;
         this.collectButton.interactable = true;
+        this.collectButton.onClick.RemoveAllListeners();
         this.collectButton.onClick.AddListener(() => { this.ClearFry(); });
     }
 
