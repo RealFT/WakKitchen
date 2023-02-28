@@ -7,28 +7,40 @@ import CharacterController from './CharacterController';
 import GameManager from './GameManager';
 
 export default class Interaction extends ZepetoScriptBehaviour {
-    public escapeButton: Button;
-    public kitchen: GameObject;
+    @SerializeField() private openButton: Button;
+    @SerializeField() private escapeButton: Button;
+    @SerializeField() private kitchen: GameObject;
 
     Start() {
         // Script import
 
         //Button Hide
         this.SetKitchenVisibility(false);
+        this.openButton.gameObject.SetActive(false);
+
+        //When Button Click
+        this.openButton.onClick.AddListener(() => {
+            this.SetKitchenVisibility(true);
+            GameManager.GetInstance().SetPlayerMovement(false);
+            this.openButton.gameObject.SetActive(false);
+        });
 
         //When Button Click
         this.escapeButton.onClick.AddListener(() => {
             GameManager.GetInstance().SetPlayerMovement(true);
             this.SetKitchenVisibility(false);
+            this.openButton.gameObject.SetActive(true);
         });
     }
 
     OnTriggerEnter(collider) {
-        this.SetKitchenVisibility(true);
-        GameManager.GetInstance().SetPlayerMovement(false);
+        // this.SetKitchenVisibility(true);
+        // GameManager.GetInstance().SetPlayerMovement(false);
+        this.openButton.gameObject.SetActive(true);
     }
     OnTriggerExit(collider) {
         this.SetKitchenVisibility(false);
+        this.openButton.gameObject.SetActive(false);
         GameManager.GetInstance().SetPlayerMovement(true);
     }
 
