@@ -1,4 +1,5 @@
-import { Button, Image } from 'UnityEngine.UI';
+import { Button, Image, Text } from 'UnityEngine.UI';
+import {GameObject} from 'UnityEngine'
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
 import { StoreItem } from './Store';
@@ -7,10 +8,12 @@ import UIManager from './UIManager';
 export default class ItemSlot extends ZepetoScriptBehaviour {
 
     public storeItem: StoreItem;
-    public nameText: Text;
-    public itemImage: Image;
-    public priceText: Text;
-    public buyBtn: Button;
+    public itemImage:Image;
+    
+    @SerializeField() private starObjs : GameObject[] = [];
+    @SerializeField() private nameTxt :Text;
+    @SerializeField() private priceTxt :Text;
+    @SerializeField() private buyBtn: Button;
 
     public SetItemSlot(item: StoreItem) {
         this.storeItem = item;
