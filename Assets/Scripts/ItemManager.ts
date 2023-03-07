@@ -38,9 +38,11 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     }
 
     Start() {    
-        this.RefreshAllBalanceUI();
+        //this.RefreshAllBalanceUI();
         //this.RefreshStageUI();
         this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+
+        this.StartCoroutine(this.LoadAllItems());
 
         this._multiplay.RoomJoined += (room: Room) => {
             this._room = room;
@@ -53,6 +55,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
             this.OpenInformation(`${message.currencyId} a Increase or decrease: ${message.quantity}`);
         });
+        
         this._multiplay.Room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
             this.OpenInformation(`${message.productId} has been ${InventoryAction[message.inventoryAction]} in the inventory.`);
             // item use sample
@@ -99,41 +102,41 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         }
     }
     
-    private RefreshAllBalanceUI(){
-        this.StartCoroutine(this.RefreshBalanceUI());
-    }
+    // private RefreshAllBalanceUI(){
+    //     this.StartCoroutine(this.RefreshBalanceUI());
+    // }
     
-    private *RefreshBalanceUI(){
-        const request = CurrencyService.GetUserCurrencyBalancesAsync();
-        yield new WaitUntil(()=>request.keepWaiting == false);
-        if(request.responseData.isSuccess) {
-            this.possessionMoneyTxt.text = request.responseData.currencies?.ContainsKey(Currency.wak) ? request.responseData.currencies?.get_Item(Currency.wak).toString() :"0";
-        }
-    }
+    // private *RefreshBalanceUI(){
+    //     const request = CurrencyService.GetUserCurrencyBalancesAsync();
+    //     yield new WaitUntil(()=>request.keepWaiting == false);
+    //     if(request.responseData.isSuccess) {
+    //         this.possessionMoneyTxt.text = request.responseData.currencies?.ContainsKey(Currency.wak) ? request.responseData.currencies?.get_Item(Currency.wak).toString() :"0";
+    //     }
+    // }
 
-    private OpenInformation(message:string){
-        //const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent) as GameObject;
-        //inforObj.GetComponentInChildren<Text>().text = message;
+    public OpenInformation(message:string){
+        const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent) as GameObject;
+        inforObj.GetComponentInChildren<Text>().text = message;
     }
     
-    public OnClickGainBalance(currencyId: string, quantity: number) {
+    public GainBalance(currencyId: string, quantity: number) {
         const data = new RoomData();
         data.Add("currencyId", currencyId);
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onCredit", data.GetObject());
-        console.warn("OnClickGainBalance");
+        console.warn("GainBalance");
     }
 
-    public OnClickUseBalance(currencyId: string, quantity: number) {
+    public UseBalance(currencyId: string, quantity: number) {
         const data = new RoomData();
         data.Add("currencyId", currencyId);
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onDebit", data.GetObject());
-        console.warn("OnClickUseBalance");
+        console.warn("UseBalance");
     }
 
     // an immediate purchase
-    public* OnClickPurchaseItemImmediately(productId: string) {
+    public* PurchaseItemImmediately(productId: string) {
         const request = ProductService.PurchaseProductAsync(productId);
         yield new WaitUntil(() => request.keepWaiting == false);
         if (request.responseData.isSuccess) {

@@ -5,6 +5,7 @@ import {ProductRecord, ProductService, ProductType, PurchaseType} from "ZEPETO.P
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
 import UIBallances, {BalanceSync, Currency, InventoryAction, InventorySync} from "./UIBalances";
+import ItemManager from '../ItemManager';
 
 export default class UIFoodShop extends ZepetoScriptBehaviour {
     @SerializeField() private allBtns: Button[] = [];
@@ -38,43 +39,43 @@ export default class UIFoodShop extends ZepetoScriptBehaviour {
     
     private InitMessageHandler() {
         //button listener
-        this.gainBalanceBtn.onClick.AddListener(() =>this.OnClickGainBalance(Currency.wak, 1000));
-        this.useBalanceBtn.onClick.AddListener(() => this.OnClickUseBalance(Currency.wak, 100));
+        this.gainBalanceBtn.onClick.AddListener(() => ItemManager.GetInstance().GainBalance(Currency.wak, 1000));
+        this.useBalanceBtn.onClick.AddListener(() => ItemManager.GetInstance().UseBalance(Currency.wak, 100));
         //sell items with id called potion1.
-        this.purchaseImmediatelyBtn.onClick.AddListener(() => this.StartCoroutine(this.OnClickPurchaseItemImmediately("food_test")));
+        this.purchaseImmediatelyBtn.onClick.AddListener(() => this.StartCoroutine(ItemManager.GetInstance().PurchaseItemImmediately("food_test")));
         this.purchaseOfficialUIBtn.onClick.AddListener(() => {
             //The first non-consumable item is sold through the official ui.
             const nonConsumableItem = this._itemsCache.find(ir => ir.PurchaseType === PurchaseType.NonConsumable);
             if (nonConsumableItem) {
-                this.OnClickPurchaseItem(nonConsumableItem);
+                //ItemManager.GetInstance().PurchaseItem(nonConsumableItem);
             }
             else{
-                this.OpenInformation(`Non-consumable product does not exist.`);
+                ItemManager.GetInstance().OpenInformation(`Non-consumable product does not exist.`);
             }
         });
 
         // log message handler
-        this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
-            this.OpenInformation(`${message.currencyId} a Increase or decrease: ${message.quantity}`);
-        });
-        this._multiplay.Room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
-            this.OpenInformation(`${message.productId} has been ${InventoryAction[message.inventoryAction]} in the inventory.`);
-            // item use sample
-            /*if(message.inventoryAction == InventoryAction.Used){
-                if(message.productId == "potion1"){
-                    console.log("potion use!");
-                }
-            }*/
-        });
-        this._room.AddMessageHandler<string>("DebitError", (message) => {
-            this.OpenInformation(message);
-        });
-        ProductService.OnPurchaseCompleted.AddListener((product, response) => {
-            this.OpenInformation(`${response.productId} Purchase Completed`);
-        });
-        ProductService.OnPurchaseFailed.AddListener((product, response) => {
-            this.OpenInformation(response.message);
-        });
+        // this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
+        //     ItemManager.GetInstance().OpenInformation(`${message.currencyId} a Increase or decrease: ${message.quantity}`);
+        // });
+        // this._multiplay.Room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
+        //     ItemManager.GetInstance().OpenInformation(`${message.productId} has been ${InventoryAction[message.inventoryAction]} in the inventory.`);
+        //     // item use sample
+        //     /*if(message.inventoryAction == InventoryAction.Used){
+        //         if(message.productId == "potion1"){
+        //             console.log("potion use!");
+        //         }
+        //     }*/
+        // });
+        // this._room.AddMessageHandler<string>("DebitError", (message) => {
+        //     ItemManager.GetInstance().OpenInformation(message);
+        // });
+        // ProductService.OnPurchaseCompleted.AddListener((product, response) => {
+        //     ItemManager.GetInstance().OpenInformation(`${response.productId} Purchase Completed`);
+        // });
+        // ProductService.OnPurchaseFailed.AddListener((product, response) => {
+        //     ItemManager.GetInstance().OpenInformation(response.message);
+        // });
     }
 
     private* LoadAllItems() {
@@ -101,42 +102,42 @@ export default class UIFoodShop extends ZepetoScriptBehaviour {
         }
     }
     
-    private OpenInformation(message:string){
-        //const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent) as GameObject;
-        //inforObj.GetComponentInChildren<Text>().text = message;
-    }
+    // private OpenInformation(message:string){
+    //     //const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent) as GameObject;
+    //     //inforObj.GetComponentInChildren<Text>().text = message;
+    // }
     
-    // open offical ui
-    private OnClickPurchaseItem(productRecord: ProductRecord) {
-        ProductService.OpenPurchaseUI(productRecord);
-    }
+    // // open offical ui
+    // private OnClickPurchaseItem(productRecord: ProductRecord) {
+    //     //ProductService.OpenPurchaseUI(productRecord);
+    // }
 
-    private OnClickGainBalance(currencyId: string, quantity: number) {
-        const data = new RoomData();
-        data.Add("currencyId", currencyId);
-        data.Add("quantity", quantity);
-        this._multiplay.Room?.Send("onCredit", data.GetObject());
-        console.warn("OnClickGainBalance");
-    }
+    // private OnClickGainBalance(currencyId: string, quantity: number) {
+    //     const data = new RoomData();
+    //     data.Add("currencyId", currencyId);
+    //     data.Add("quantity", quantity);
+    //     this._multiplay.Room?.Send("onCredit", data.GetObject());
+    //     console.warn("OnClickGainBalance");
+    // }
 
-    private OnClickUseBalance(currencyId: string, quantity: number) {
-        const data = new RoomData();
-        data.Add("currencyId", currencyId);
-        data.Add("quantity", quantity);
-        this._multiplay.Room?.Send("onDebit", data.GetObject());
-        console.warn("OnClickUseBalance");
-    }
+    // private OnClickUseBalance(currencyId: string, quantity: number) {
+    //     const data = new RoomData();
+    //     data.Add("currencyId", currencyId);
+    //     data.Add("quantity", quantity);
+    //     this._multiplay.Room?.Send("onDebit", data.GetObject());
+    //     console.warn("OnClickUseBalance");
+    // }
 
     // an immediate purchase
-    private* OnClickPurchaseItemImmediately(productId: string) {
-        const request = ProductService.PurchaseProductAsync(productId);
-        yield new WaitUntil(() => request.keepWaiting == false);
-        if (request.responseData.isSuccess) {
-            // is purchase success
-        } else {
-            // is purchase fail
-        }
-    }
+    // private* OnClickPurchaseItemImmediately(productId: string) {
+    //     const request = ProductService.PurchaseProductAsync(productId);
+    //     yield new WaitUntil(() => request.keepWaiting == false);
+    //     if (request.responseData.isSuccess) {
+    //         // is purchase success
+    //     } else {
+    //         // is purchase fail
+    //     }
+    // }
 
     private * BtnInterval(btn:Button){
         btn.interactable = false;
