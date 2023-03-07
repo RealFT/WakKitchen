@@ -130,4 +130,23 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public getCurrentStage(): number {
         return this.curStage;
     }
+
+    public Reset() {
+        // reset all variables to their initial values
+        this.timer.SetTime(this.startHour, 0);
+        this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
+        this.isInGame = false;
+    
+        // reset UI
+        UIManager.GetInstance().SetSettlementUI(false);
+        UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
+        UIManager.GetInstance().setGameMoneyText(this.gameMoney);
+    
+        // reset managers
+        //OrderManager.GetInstance().Reset();
+        //DataManager.GetInstance().Reset();
+    
+        // initialize the game
+        this.init();
+    }
 }

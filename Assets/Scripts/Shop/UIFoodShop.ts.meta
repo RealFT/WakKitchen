@@ -1,0 +1,89 @@
+fileFormatVersion: 2
+guid: 2d4c89c1a5947c848a2c7b9e9d02c8e2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Product_1 = require(\"ZEPETO.Product\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst
+    UIBalances_1 = require(\"./UIBalances\");\r\nclass UIFoodShop extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.allBtns
+    = [];\r\n        this._itemsCache = [];\r\n        this._itemsPackageCache =
+    [];\r\n    }\r\n    //private _uiBallances: UIBallances;\r\n    Start() {\r\n       
+    this._multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    //this._uiBallances = Object.FindObjectOfType<UIBallances>();\r\n        // button
+    Interval\r\n        //let allBtns : Button[] = this.GetComponentsInChildren<Button>();\r\n       
+    this.allBtns.forEach(btn => btn.onClick.AddListener(() => this.StartCoroutine(this.BtnInterval(btn))));\r\n       
+    this.StartCoroutine(this.LoadAllItems());\r\n        this._multiplay.add_RoomJoined((room)
+    => {\r\n            this._room = room;\r\n            this.InitMessageHandler();\r\n       
+    });\r\n    }\r\n    InitMessageHandler() {\r\n        //button listener\r\n       
+    this.gainBalanceBtn.onClick.AddListener(() => this.OnClickGainBalance(UIBalances_1.Currency.wak,
+    1000));\r\n        this.useBalanceBtn.onClick.AddListener(() => this.OnClickUseBalance(UIBalances_1.Currency.wak,
+    100));\r\n        //sell items with id called potion1.\r\n        this.purchaseImmediatelyBtn.onClick.AddListener(()
+    => this.StartCoroutine(this.OnClickPurchaseItemImmediately(\"food_test\")));\r\n       
+    this.purchaseOfficialUIBtn.onClick.AddListener(() => {\r\n            //The first
+    non-consumable item is sold through the official ui.\r\n            const nonConsumableItem
+    = this._itemsCache.find(ir => ir.PurchaseType === ZEPETO_Product_1.PurchaseType.NonConsumable);\r\n           
+    if (nonConsumableItem) {\r\n                this.OnClickPurchaseItem(nonConsumableItem);\r\n           
+    }\r\n            else {\r\n                this.OpenInformation(`Non-consumable
+    product does not exist.`);\r\n            }\r\n        });\r\n        // log
+    message handler\r\n        this._room.AddMessageHandler(\"SyncBalances\", (message)
+    => {\r\n            this.OpenInformation(`${message.currencyId} a Increase or
+    decrease: ${message.quantity}`);\r\n        });\r\n        this._multiplay.Room.AddMessageHandler(\"SyncInventories\",
+    (message) => {\r\n            this.OpenInformation(`${message.productId} has
+    been ${UIBalances_1.InventoryAction[message.inventoryAction]} in the inventory.`);\r\n           
+    // item use sample\r\n            /*if(message.inventoryAction == InventoryAction.Used){\r\n               
+    if(message.productId == \"potion1\"){\r\n                    console.log(\"potion
+    use!\");\r\n                }\r\n            }*/\r\n        });\r\n        this._room.AddMessageHandler($typeof($typeof(\"System.String\")),
+    \"DebitError\", (message) => {\r\n            this.OpenInformation(message);\r\n       
+    });\r\n        ZEPETO_Product_1.ProductService.OnPurchaseCompleted.AddListener((product,
+    response) => {\r\n            this.OpenInformation(`${response.productId} Purchase
+    Completed`);\r\n        });\r\n        ZEPETO_Product_1.ProductService.OnPurchaseFailed.AddListener((product,
+    response) => {\r\n            this.OpenInformation(response.message);\r\n       
+    });\r\n    }\r\n    *LoadAllItems() {\r\n        const request = ZEPETO_Product_1.ProductService.GetProductsAsync();\r\n       
+    yield new UnityEngine_1.WaitUntil(() => request.keepWaiting == false);\r\n       
+    if (request.responseData.isSuccess) {\r\n            this._itemsCache = [];\r\n           
+    request.responseData.products.forEach((pr) => {\r\n                if (pr.ProductType
+    == ZEPETO_Product_1.ProductType.Item) {\r\n                    this._itemsCache.push(pr);\r\n               
+    }\r\n                if (pr.ProductType == ZEPETO_Product_1.ProductType.ItemPackage)
+    {\r\n                    this._itemsPackageCache.push(pr);\r\n               
+    }\r\n            });\r\n            if (this._itemsCache.length == 0) {\r\n               
+    console.warn(\"no Item information\");\r\n                return;\r\n           
+    }\r\n        }\r\n        else {\r\n            console.warn(\"Product Load Failed\");\r\n       
+    }\r\n    }\r\n    OpenInformation(message) {\r\n        //const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent)
+    as GameObject;\r\n        //inforObj.GetComponentInChildren<Text>().text = message;\r\n   
+    }\r\n    // open offical ui\r\n    OnClickPurchaseItem(productRecord) {\r\n       
+    ZEPETO_Product_1.ProductService.OpenPurchaseUI(productRecord);\r\n    }\r\n   
+    OnClickGainBalance(currencyId, quantity) {\r\n        const data = new ZEPETO_Multiplay_1.RoomData();\r\n       
+    data.Add(\"currencyId\", currencyId);\r\n        data.Add(\"quantity\", quantity);\r\n       
+    this._multiplay.Room?.Send(\"onCredit\", data.GetObject());\r\n        console.warn(\"OnClickGainBalance\");\r\n   
+    }\r\n    OnClickUseBalance(currencyId, quantity) {\r\n        const data = new
+    ZEPETO_Multiplay_1.RoomData();\r\n        data.Add(\"currencyId\", currencyId);\r\n       
+    data.Add(\"quantity\", quantity);\r\n        this._multiplay.Room?.Send(\"onDebit\",
+    data.GetObject());\r\n        console.warn(\"OnClickUseBalance\");\r\n    }\r\n   
+    // an immediate purchase\r\n    *OnClickPurchaseItemImmediately(productId) {\r\n       
+    const request = ZEPETO_Product_1.ProductService.PurchaseProductAsync(productId);\r\n       
+    yield new UnityEngine_1.WaitUntil(() => request.keepWaiting == false);\r\n       
+    if (request.responseData.isSuccess) {\r\n            // is purchase success\r\n       
+    }\r\n        else {\r\n            // is purchase fail\r\n        }\r\n    }\r\n   
+    *BtnInterval(btn) {\r\n        btn.interactable = false;\r\n        yield new
+    UnityEngine_1.WaitForSeconds(0.2);\r\n        btn.interactable = true;\r\n   
+    }\r\n}\r\nexports.default = UIFoodShop;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlGb29kU2hvcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJRm9vZFNob3AudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBbUQ7QUFFbkQsNkNBQXlFO0FBQ3pFLG1EQUF3RjtBQUN4RiwrQ0FBa0Q7QUFDbEQsdURBQWdEO0FBQ2hELDZDQUFnRztBQUVoRyxNQUFxQixVQUFXLFNBQVEscUNBQXFCO0lBQTdEOztRQUM4QixZQUFPLEdBQWEsRUFBRSxDQUFDO1FBT3pDLGdCQUFXLEdBQW9CLEVBQUUsQ0FBQztRQUNsQyx1QkFBa0IsR0FBb0IsRUFBRSxDQUFBO0lBaUlwRCxDQUFDO0lBOUhHLG9DQUFvQztJQUU1QixLQUFLO1FBQ1QsSUFBSSxDQUFDLFVBQVUsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLG1DQUFvQixFQUFHLENBQUM7UUFDbEUsNkRBQTZEO1FBRTdELGtCQUFrQjtRQUNsQixrRUFBa0U7UUFDbEUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFFdkcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsWUFBWSxFQUFFLENBQUMsQ0FBQztRQUV6QyxJQUFJLENBQUMsVUFBVSxnQkFBZSxDQUFDLElBQVUsRUFBRSxFQUFFO1lBQ3pDLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO1lBQ2xCLElBQUksQ0FBQyxrQkFBa0IsRUFBRSxDQUFDO1FBQzlCLENBQUMsRUFBQTtJQUNMLENBQUM7SUFFTyxrQkFBa0I7UUFDdEIsaUJBQWlCO1FBQ2pCLElBQUksQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUUsQ0FBQSxJQUFJ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","assetPath":"Assets/Scripts/Shop/UIFoodShop.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"allBtns","type":"UnityEngine.UI.Button[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"gainBalanceBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"useBalanceBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"purchaseOfficialUIBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"purchaseImmediatelyBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"informationPref","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"UIFoodShop","description":""},"isCompiled":true}'
+  typescriptHash: b828586a2395e521f076ef13bc49e483
+  onlyWriteTrigger: 0
