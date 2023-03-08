@@ -1,11 +1,11 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import {Button, Text} from 'UnityEngine.UI'
-import {GameObject, Object, WaitUntil, WaitForSeconds} from 'UnityEngine'
+import {GameObject, Object, WaitUntil, WaitForSeconds, Debug} from 'UnityEngine'
 import {ProductRecord, ProductService, ProductType, PurchaseType} from "ZEPETO.Product";
 import {BalanceListResponse, CurrencyService, CurrencyError} from "ZEPETO.Currency";
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
-import UIBallances, {BalanceSync, Currency, InventoryAction, InventorySync} from "./Shop/UIBalances";
+import UIBallances, {BalanceSync, Currency, ItemType, InventoryAction, InventorySync} from "./Shop/UIBalances";
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -29,9 +29,12 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     @SerializeField() private possessionMoneyTxt : Text;
     @SerializeField() private informationPref: GameObject;
 
-    private _itemsCache: ProductRecord[] = [];
+    private _foodCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
+    private _upgradeCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
+    private _cardCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
     private _multiplay: ZepetoWorldMultiplay;
     private _room : Room;
+
 
     Awake() {
         if (this != ItemManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -77,31 +80,45 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         });
     }
 
-
+    
     private* LoadAllItems() {
         const request = ProductService.GetProductsAsync();
         yield new WaitUntil(() => request.keepWaiting == false);
         if (request.responseData.isSuccess) {
-            this._itemsCache = [];
             request.responseData.products.forEach((pr) => {
-                if (pr.ProductType == ProductType.Item) {
-                    this._itemsCache.push(pr);
+                // Determine the prefix of the productId and add the product to the appropriate map.
+                const prefix = pr.productId.split('_')[0];
+                switch (prefix) {
+                    case ItemType.food:
+                        this._foodCache.set(pr.productId, pr);
+                        break;
+                    case ItemType.upgrade:
+                        this._upgradeCache.set(pr.productId, pr);
+                        break;
+                    case ItemType.card:
+                        this._cardCache.set(pr.productId, pr);
+                        break;
+                    default:
+                        // Ignore products with unrecognized prefixes.
+                        break;
                 }
-                // if (pr.ProductType == ProductType.ItemPackage) {
-                //     this._itemsPackageCache.push(pr);
-                // }
             });
-
-            if (this._itemsCache.length == 0) {
-                console.warn("no Item information");
-                return;
-            }
         }
-        else{
-            console.warn("Product Load Failed");
-        }
+        // this.StartCoroutine(this.RefreshInventoryUI());
+        // this.StartCoroutine(this.RefreshBalanceUI());
     }
-    
+
+    public getFoodCache(): Map<string, ProductRecord> {
+        return this._foodCache;
+    }
+
+    public getUpgradeCache(): Map<string, ProductRecord> {
+        return this._upgradeCache;
+    }
+
+    public getCardCache(): Map<string, ProductRecord> {
+        return this._cardCache;
+    }
     // private RefreshAllBalanceUI(){
     //     this.StartCoroutine(this.RefreshBalanceUI());
     // }
@@ -143,6 +160,30 @@ export default class ItemManager extends ZepetoScriptBehaviour {
             // is purchase success
         } else {
             // is purchase fail
+        }
+    }
+
+    public* PurchaseItem(productId: string) {
+        const request = ProductService.PurchaseProductAsync(productId);
+        yield new WaitUntil(() => request.keepWaiting == false);
+        if (request.responseData.isSuccess) {
+            // is purchase success
+        } else {
+            // is purchase fail
+        }
+    }
+    
+    public GetProduct(productId: string): ProductRecord | undefined {
+        const prefix = productId.split('_')[0];
+        switch (prefix) {
+            case ItemType.food:
+                return this._foodCache.get(productId);
+            case ItemType.upgrade:
+                return this._upgradeCache.get(productId);
+            case ItemType.card:
+                return this._cardCache.get(productId);
+            default:
+                return undefined; // Return undefined for products with unrecognized prefixes.
         }
     }
 

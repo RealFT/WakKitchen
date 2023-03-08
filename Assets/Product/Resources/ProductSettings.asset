@@ -15,6 +15,16 @@ MonoBehaviour:
   productTextureInfo:
   - targetId: food_test
     targetAssetPath: Assets/Resources/Sprites/Ingredients/00_Bun_Top.png
+  - targetId: upgrade_dispenser_1
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Dispenser.png
+  - targetId: upgrade_frier_1
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Frier.png
+  - targetId: upgrade_gril_1
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Grill.png
+  - targetId: upgrade_ingredient_1
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Ingredient.png
+  - targetId: upgrade_slice_1
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Slice.png
   currencyTextureInfo:
   - targetId: wak
     targetAssetPath: Assets/Resources/Sprites/UI/MONEY icon.png

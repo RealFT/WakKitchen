@@ -66,8 +66,6 @@ export default class UIBalances extends ZepetoScriptBehaviour {
     // }
 }
 
-
-
 export interface BalanceSync {
     currencyId: string,
     quantity: number,
@@ -86,4 +84,10 @@ export enum InventoryAction{
 
 export enum Currency{
     wak = "wak",
+}
+
+export enum ItemType{
+    food = "food",
+    upgrade = "upgrade",
+    card = "card",
 }

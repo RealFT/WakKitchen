@@ -1,0 +1,47 @@
+fileFormatVersion: 2
+guid: e05e0932d93802c48921f478b8fc1f77
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ItemSlot_Upgrade_1 = require(\"./ItemSlot_Upgrade\");\r\nconst
+    ItemManager_1 = require(\"../ItemManager\");\r\nclass Shop_Upgrade extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.CreateSlot(ItemManager_1.default.GetInstance().getUpgradeCache());\r\n   
+    }\r\n    CreateSlot(items) {\r\n        // // Clear the existing items in the
+    content parent.\r\n        // this.horizontalContent.GetComponentsInChildren<ItemSlot_Upgrade>().forEach((child)
+    => {\r\n        //     GameObject.Destroy(child.gameObject);\r\n        // });\r\n       
+    // Create an Upgrade Slot for each item in the list.\r\n        Array.from(items.values()).forEach((productRecord)
+    => {\r\n            UnityEngine_1.Debug.Log(items.values());\r\n            this.SetupUpgradeSlot(productRecord);\r\n       
+    });\r\n    }\r\n    SetupUpgradeSlot(itemRecord) {\r\n        // Instantiate
+    a new item object and set its parent to the content parent object.\r\n       
+    const slotObj = UnityEngine_1.Object.Instantiate(this.upgradeSlotPref, this.horizontalContent.transform);\r\n       
+    // Calculate the new width of the Content object based on the width of the prefabs
+    and the spacing.\r\n        let prefabWidth = slotObj.GetComponent($typeof(UnityEngine_1.RectTransform)).rect.width;\r\n       
+    let spacing = this.layoutGroup.spacing;\r\n        let newWidth = this.horizontalContent.rect.width
+    + prefabWidth + spacing;\r\n        // Set the size of the Content object using
+    its sizeDelta property.\r\n        this.horizontalContent.sizeDelta = new UnityEngine_1.Vector2(newWidth,
+    this.horizontalContent.sizeDelta.y);\r\n        // Set up the item''s image using
+    the itemImage array.\r\n        const itemImageIndex = this.itemImage.findIndex((s)
+    => s.name == itemRecord.productId);\r\n        const itemImage = this.itemImage[itemImageIndex];\r\n       
+    // Set up the item''s properties using its ITM_Inventory component.\r\n       
+    const itemScript = slotObj.GetComponent($typeof(ItemSlot_Upgrade_1.default));\r\n       
+    itemScript.itemImage.sprite = itemImage;\r\n        itemScript.SetItem(itemRecord);\r\n   
+    }\r\n}\r\nexports.default = Shop_Upgrade;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9VcGdyYWRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9VcGdyYWRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW1HO0FBRW5HLGlEQUFxRDtBQUNyRCx5REFBa0Q7QUFFbEQsZ0RBQXlDO0FBRXpDLE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFPM0QsS0FBSztRQUNELElBQUksQ0FBQyxVQUFVLENBQUMscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxDQUFDO0lBQ2pFLENBQUM7SUFFTyxVQUFVLENBQUMsS0FBaUM7UUFDaEQscURBQXFEO1FBQ3JELDBGQUEwRjtRQUMxRiw0Q0FBNEM7UUFDNUMsTUFBTTtRQUVOLG9EQUFvRDtRQUNwRCxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLGFBQWEsRUFBRSxFQUFFO1lBQ2pELG1CQUFLLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLEVBQUUsQ0FBQyxDQUFDO1lBQzFCLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxhQUFhLENBQUMsQ0FBQztRQUN6QyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFTyxnQkFBZ0IsQ0FBQyxVQUF5QjtRQUM5QyxpRkFBaUY7UUFDakYsTUFBTSxPQUFPLEdBQUcsb0JBQU0sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLGVBQWUsRUFBRSxJQUFJLENBQUMsaUJBQWlCLENBQUMsU0FBUyxDQUFlLENBQUM7UUFFekcsbUdBQW1HO1FBQ25HLElBQUksV0FBVyxHQUFHLE9BQU8sQ0FBQyxZQUFZLFNBQUMsMkJBQWEsR0FBSSxJQUFJLENBQUMsS0FBSyxDQUFDO1FBQ25FLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDO1FBQ3ZDLElBQUksUUFBUSxHQUFHLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsS0FBSyxHQUFHLFdBQVcsR0FBRyxPQUFPLENBQUM7UUFFekUsbUVBQW1FO1FBQ25FLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLEdBQUcsSUFBSSxxQkFBTyxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsaUJBQWlCLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBRTdGLHFEQUFxRDtRQUNyRCxNQUFNLGNBQWMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxVQUFVLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDdkYsTUFBTSxTQUFTLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxjQUFjLENBQUMsQ0FBQztRQUVqRCxrRUFBa0U7UUFDbEUsTUFBTSxVQUFVLEdBQUcsT0FBTyxDQUFDLFlBQVksU0FBQywwQkFBZ0IsRUFBRyxDQUFDO1FBQzVELFVBQVUsQ0FBQyxTQUFTLENBQUMsTUFBTSxHQUFHLFNBQVMsQ0FBQztRQUN4QyxVQUFVLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQ25DLENBQUM7Q0FFSjtBQTlDRCwrQkE4Q0MifQ==","assetPath":"Assets/Scripts/Shop/Shop_Upgrade.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"upgradeSlotPref","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"horizontalContent","type":"UnityEngine.RectTransform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"layoutGroup","type":"UnityEngine.UI.HorizontalLayoutGroup","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"itemImage","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Shop_Upgrade","description":""},"isCompiled":true}'
+  typescriptHash: 0c4e23b863b1910804315da121550302
+  onlyWriteTrigger: 0

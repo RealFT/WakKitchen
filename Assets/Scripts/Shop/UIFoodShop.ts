@@ -22,19 +22,19 @@ export default class UIFoodShop extends ZepetoScriptBehaviour {
     //private _uiBallances: UIBallances;
 
     private Start() {
-        this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+        //this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
         //this._uiBallances = Object.FindObjectOfType<UIBallances>();
 
         // button Interval
         //let allBtns : Button[] = this.GetComponentsInChildren<Button>();
         this.allBtns.forEach(btn => btn.onClick.AddListener(() => this.StartCoroutine(this.BtnInterval(btn))));
         
-        this.StartCoroutine(this.LoadAllItems());
-
-        this._multiplay.RoomJoined += (room: Room) => {
-            this._room = room;
-            this.InitMessageHandler();
-        }
+        // this.StartCoroutine(this.LoadAllItems());
+        this.InitMessageHandler();
+        // this._multiplay.RoomJoined += (room: Room) => {
+        //     this._room = room;
+        //     this.InitMessageHandler();
+        // }
     }
     
     private InitMessageHandler() {
@@ -78,29 +78,29 @@ export default class UIFoodShop extends ZepetoScriptBehaviour {
         // });
     }
 
-    private* LoadAllItems() {
-        const request = ProductService.GetProductsAsync();
-        yield new WaitUntil(() => request.keepWaiting == false);
-        if (request.responseData.isSuccess) {
-            this._itemsCache = [];
-            request.responseData.products.forEach((pr) => {
-                if (pr.ProductType == ProductType.Item) {
-                    this._itemsCache.push(pr);
-                }
-                if (pr.ProductType == ProductType.ItemPackage) {
-                    this._itemsPackageCache.push(pr);
-                }
-            });
+    // private* LoadAllItems() {
+    //     const request = ProductService.GetProductsAsync();
+    //     yield new WaitUntil(() => request.keepWaiting == false);
+    //     if (request.responseData.isSuccess) {
+    //         this._itemsCache = [];
+    //         request.responseData.products.forEach((pr) => {
+    //             if (pr.ProductType == ProductType.Item) {
+    //                 this._itemsCache.push(pr);
+    //             }
+    //             if (pr.ProductType == ProductType.ItemPackage) {
+    //                 this._itemsPackageCache.push(pr);
+    //             }
+    //         });
 
-            if (this._itemsCache.length == 0) {
-                console.warn("no Item information");
-                return;
-            }
-        }
-        else{
-            console.warn("Product Load Failed");
-        }
-    }
+    //         if (this._itemsCache.length == 0) {
+    //             console.warn("no Item information");
+    //             return;
+    //         }
+    //     }
+    //     else{
+    //         console.warn("Product Load Failed");
+    //     }
+    // }
     
     // private OpenInformation(message:string){
     //     //const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent) as GameObject;
