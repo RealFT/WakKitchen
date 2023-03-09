@@ -29,7 +29,7 @@ export default class UICommonBtn extends ZepetoScriptBehaviour {
         //let allBtns : Button[] = this.GetComponentsInChildren<Button>();
         this.allBtns.forEach(btn => btn.onClick.AddListener(() => this.StartCoroutine(this.BtnInterval(btn))));
         
-        this.StartCoroutine(this.LoadAllItems());
+        //this.StartCoroutine(this.LoadAllItems());
 
         this._multiplay.RoomJoined += (room: Room) => {
             this._room = room;

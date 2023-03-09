@@ -19,14 +19,8 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    ItemManager_1 = require(\"../ItemManager\");\r\nclass ItemSlot_Food extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    Start() {\r\n        this.purchaseButton.onClick.AddListener(() => {\r\n           
-    ItemManager_1.default.GetInstance().PurchaseItem(this.productId);\r\n       
-    });\r\n        this.priceText.text = ItemManager_1.default.GetInstance().GetProduct(this.productId).price.toString();\r\n   
-    }\r\n    SetItem(productId) {\r\n        this.productId = productId;\r\n       
-    this.priceText.text = ItemManager_1.default.GetInstance().GetProduct(this.productId).price.toString();\r\n       
-    this.purchaseButton.onClick.AddListener(() => {\r\n            ItemManager_1.default.GetInstance().PurchaseItem(this.productId);\r\n       
-    });\r\n    }\r\n}\r\nexports.default = ItemSlot_Food;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSXRlbVNsb3RfRm9vZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkl0ZW1TbG90X0Zvb2QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFDckQsZ0RBQXlDO0FBRXpDLE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFNNUQsS0FBSztRQUNELElBQUksQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFFLEVBQUU7WUFDeEMscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxZQUFZLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBQzNELENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEdBQUcscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxRQUFRLEVBQUUsQ0FBQztJQUNoRyxDQUFDO0lBRU0sT0FBTyxDQUFDLFNBQWdCO1FBQzNCLElBQUksQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO1FBQzNCLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxLQUFLLENBQUMsUUFBUSxFQUFFLENBQUM7UUFDNUYsSUFBSSxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUUsRUFBRTtZQUN4QyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDM0QsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0NBQ0o7QUFwQkQsZ0NBb0JDIn0=","assetPath":"Assets/Scripts/Shop/ItemSlot_Food.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"productId","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"purchaseButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"priceText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"ItemSlot_Food","description":""},"isCompiled":true}'
-  typescriptHash: 8a697be49c3740e888d0cb536c19e49b
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    ItemSlot_Food extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n}\r\nexports.default
+    = ItemSlot_Food;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSXRlbVNsb3RfRm9vZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkl0ZW1TbG90X0Zvb2QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxpREFBcUQ7QUFHckQsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtDQW9CL0Q7QUFwQkQsZ0NBb0JDIn0=","assetPath":"Assets/Scripts/Shop/ItemSlot_Food.ts","manifest":{"properties":[],"name":"ItemSlot_Food","description":""},"isCompiled":true}'
+  typescriptHash: ab8b4d7093d4b65160b2789154901bf7
   onlyWriteTrigger: 0

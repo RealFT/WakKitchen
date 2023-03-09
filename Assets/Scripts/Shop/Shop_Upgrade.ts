@@ -1,5 +1,5 @@
 import { Object, GameObject, Quaternion, RectTransform, Vector2, Sprite, Debug } from 'UnityEngine'
-import { HorizontalLayoutGroup } from "UnityEngine.UI";
+import { HorizontalLayoutGroup,Button } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import ItemSlot_Upgrade from './ItemSlot_Upgrade';
 import { ProductRecord } from 'ZEPETO.Product';
@@ -12,24 +12,46 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
     @SerializeField() private layoutGroup: HorizontalLayoutGroup;
     @SerializeField() private itemImage: Sprite[];
 
+    public debugBtn:Button;
+
     Start() {
-        this.CreateSlot(ItemManager.GetInstance().getUpgradeCache());
+        //this.CreateSlot(ItemManager.GetInstance().getUpgradeCache());
+        this.debugBtn.onClick.AddListener(()=>{
+            this.CreateSlot(ItemManager.GetInstance().getUpgradeCache());
+        });
     }
 
-    private CreateSlot(items: Map<string, ProductRecord>): void {
+    private CreateSlot(items: ProductRecord[]): void {
         // // Clear the existing items in the content parent.
         // this.horizontalContent.GetComponentsInChildren<ItemSlot_Upgrade>().forEach((child) => {
         //     GameObject.Destroy(child.gameObject);
         // });
-    
+
+        const regex = /(\w+)_(\w+)_(\d)/;
         // Create an Upgrade Slot for each item in the list.
-        Array.from(items.values()).forEach((productRecord) => {
-            Debug.Log(items.values());
-            this.SetupUpgradeSlot(productRecord);
-        });
+        for(let productRecord of items ){
+            // only not Purchased Items
+            if (!productRecord.isPurchased) {
+                // Set up the item's image using the itemImage array.
+                const match = productRecord.productId.match(regex);
+                const itemName = match ? match[2] : "";
+                Debug.Log(productRecord);
+                this.SetupUpgradeSlot(productRecord, match[2]);
+            }
+        }
+        // items.forEach((productRecord) => {
+        //     // only not Purchased Items
+        //     if (!productRecord.isPurchased) {
+        //         // Set up the item's image using the itemImage array.
+        //         const match = productRecord.productId.match(regex);
+        //         const itemName = match ? match[1] : "";
+        //         Debug.Log(productRecord);
+        //         this.SetupUpgradeSlot(productRecord, match[1]);
+        //     }
+        // });
     }
 
-    private SetupUpgradeSlot(itemRecord: ProductRecord) {
+    private SetupUpgradeSlot(itemRecord: ProductRecord, itemName: string) {
         // Instantiate a new item object and set its parent to the content parent object.
         const slotObj = Object.Instantiate(this.upgradeSlotPref, this.horizontalContent.transform) as GameObject;
     
@@ -41,14 +63,14 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
         // Set the size of the Content object using its sizeDelta property.
         this.horizontalContent.sizeDelta = new Vector2(newWidth, this.horizontalContent.sizeDelta.y);
     
-        // Set up the item's image using the itemImage array.
-        const itemImageIndex = this.itemImage.findIndex((s) => s.name == itemRecord.productId);
+        const itemImageIndex = this.itemImage.findIndex((s) => s.name === itemName);
+
+        // const itemImageIndex = this.itemImage.findIndex((s) => s.name == itemRecord.productId);
         const itemImage = this.itemImage[itemImageIndex];
     
         // Set up the item's properties using its ITM_Inventory component.
         const itemScript = slotObj.GetComponent<ItemSlot_Upgrade>();
-        itemScript.itemImage.sprite = itemImage;
-        itemScript.SetItem(itemRecord);
+        itemScript.SetItem(itemRecord, itemImage);
     }
 
 }

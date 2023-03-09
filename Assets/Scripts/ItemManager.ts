@@ -29,9 +29,9 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     @SerializeField() private possessionMoneyTxt : Text;
     @SerializeField() private informationPref: GameObject;
 
-    private _foodCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
-    private _upgradeCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
-    private _cardCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
+    private _foodCache: ProductRecord[] = [];
+    private _upgradeCache: ProductRecord[] = [];
+    private _cardCache: ProductRecord[] = [];
     private _multiplay: ZepetoWorldMultiplay;
     private _room : Room;
 
@@ -90,13 +90,13 @@ export default class ItemManager extends ZepetoScriptBehaviour {
                 const prefix = pr.productId.split('_')[0];
                 switch (prefix) {
                     case ItemType.food:
-                        this._foodCache.set(pr.productId, pr);
+                        this._foodCache.push(pr);
                         break;
                     case ItemType.upgrade:
-                        this._upgradeCache.set(pr.productId, pr);
+                        this._upgradeCache.push(pr);
                         break;
                     case ItemType.card:
-                        this._cardCache.set(pr.productId, pr);
+                        this._cardCache.push(pr);
                         break;
                     default:
                         // Ignore products with unrecognized prefixes.
@@ -108,15 +108,15 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         // this.StartCoroutine(this.RefreshBalanceUI());
     }
 
-    public getFoodCache(): Map<string, ProductRecord> {
+    public getFoodCache(): ProductRecord[]  {
         return this._foodCache;
     }
 
-    public getUpgradeCache(): Map<string, ProductRecord> {
+    public getUpgradeCache(): ProductRecord[]  {
         return this._upgradeCache;
     }
 
-    public getCardCache(): Map<string, ProductRecord> {
+    public getCardCache(): ProductRecord[]  {
         return this._cardCache;
     }
     // private RefreshAllBalanceUI(){
@@ -173,19 +173,19 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         }
     }
     
-    public GetProduct(productId: string): ProductRecord | undefined {
-        const prefix = productId.split('_')[0];
-        switch (prefix) {
-            case ItemType.food:
-                return this._foodCache.get(productId);
-            case ItemType.upgrade:
-                return this._upgradeCache.get(productId);
-            case ItemType.card:
-                return this._cardCache.get(productId);
-            default:
-                return undefined; // Return undefined for products with unrecognized prefixes.
-        }
-    }
+    // public GetProduct(productId: string): ProductRecord | undefined {
+    //     const prefix = productId.split('_')[0];
+    //     switch (prefix) {
+    //         case ItemType.food:
+    //             return this._foodCache.get(productId);
+    //         case ItemType.upgrade:
+    //             return this._upgradeCache.get(productId);
+    //         case ItemType.card:
+    //             return this._cardCache.get(productId);
+    //         default:
+    //             return undefined; // Return undefined for products with unrecognized prefixes.
+    //     }
+    // }
 
     private * BtnInterval(btn:Button){
         btn.interactable = false;

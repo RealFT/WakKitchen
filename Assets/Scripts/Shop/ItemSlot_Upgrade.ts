@@ -1,5 +1,5 @@
 import { Button, Image, Text } from 'UnityEngine.UI';
-import {GameObject} from 'UnityEngine'
+import {GameObject, Sprite} from 'UnityEngine'
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ProductRecord } from 'ZEPETO.Product';
 import ItemManager from '../ItemManager';
@@ -7,8 +7,7 @@ import ItemManager from '../ItemManager';
 export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
 
     private itemRecord: ProductRecord;
-    public itemImage: Image;
-    
+    @SerializeField() private  itemImage: Image;
     @SerializeField() private starObjs : GameObject[] = [];
     @SerializeField() private nameTxt :Text;
     @SerializeField() private priceTxt :Text;
@@ -21,7 +20,8 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
     //     });
     // }
 
-    public SetItem(ir :ProductRecord){
+    public SetItem(ir :ProductRecord, sprite: Sprite){
+        this.itemImage.sprite = sprite;
         this.itemRecord = ir;
         this.nameTxt.text = ir.name.toString();
         this.priceTxt.text = ir.price.toString();
