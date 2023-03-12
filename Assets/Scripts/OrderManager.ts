@@ -5,6 +5,7 @@ import ExpandOrderReceipt from './ExpandOrderReceipt';
 import Receipt from './Receipt';
 import GameManager from './GameManager';
 import DataManager from './DataManager';
+import OrderReceipt from './OrderReceipt';
 
 export enum Ingredient {
     START = 0,
@@ -82,7 +83,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     @SerializeField() private sideSprites: Sprite[];
     @SerializeField() private characterSprites: Sprite[];
 
-    @SerializeField() private orders: Button[];
+    @SerializeField() private orderReceipts: GameObject[];
     private curOrderNumber: number;
     private maxOrderSize: number;
     private receipts: Receipt[] = [];
@@ -103,15 +104,15 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.StopOrder();
         this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
-        this.maxOrderSize = this.orders.length;
+        this.maxOrderSize = this.orderReceipts.length;
         for (let i = 0; i < this.maxOrderSize; i++) {
             this.initOrderBtn(i);
         }
         this.clearOrder();
-        this.clearOrderBtn();
+        this.clearOrderReceipts();
         this.initProduct();
         /**/ 
-        this.setWaitTime(10);
+        if(this.waitTime == 0) this.setWaitTime(20);
     }
 
     public initProduct() {
@@ -248,7 +249,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     public addOrder(): void {
         this.receipts.push(DataManager.GetInstance().getRandomStageReceipt());
-        this.orders[this.curOrderNumber].gameObject.SetActive(true);
+        this.orderReceipts[this.curOrderNumber].gameObject.SetActive(true);
         this.waitCoroutines[this.curOrderNumber] = this.StartCoroutine(this.WaitOrder(this.curOrderNumber, 0))
         this.curOrderNumber++;
     }
@@ -277,7 +278,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
             this.StopCoroutine(this.waitCoroutines[i]);
             this.waitSliders[index].value = 1
         }
-        // shift orders to fill the gap
+        // shift orderReceipts to fill the gap
         for (let i = index; i < this.receipts.length - 1; i++) {
             this.receipts[i] = this.receipts[i + 1];
             const curTime = (1 - this.waitSliders[i + 1].value) * this.waitTime;
@@ -285,7 +286,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
         // remove the last order
         this.receipts.pop();
-        this.orders[this.curOrderNumber].gameObject.SetActive(false);
+        this.orderReceipts[this.curOrderNumber].gameObject.SetActive(false);
     }
 
     public clearOrder() {
@@ -294,21 +295,22 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     public initOrderBtn(index: number) {
-        this.orders[index].onClick.AddListener(() => {
+        var openReceiptBtn = this.orderReceipts[index].GetComponent<OrderReceipt>().GetReceiptButton();
+        openReceiptBtn.onClick.AddListener(() => {
             this.displayExpandOrder(index);
         });
     }
 
-    public clearOrderBtn() {
-        for(let i=0;i<this.orders.length;i++){
-            this.orders[i].gameObject.SetActive(false);
+    public clearOrderReceipts() {
+        for(let i=0;i<this.orderReceipts.length;i++){
+            this.orderReceipts[i].gameObject.SetActive(false);
         }
     }
 
     public disableOrder(){
         this.StopOrder();
         this.clearOrder();
-        this.clearOrderBtn();
+        this.clearOrderReceipts();
         if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
     }
 

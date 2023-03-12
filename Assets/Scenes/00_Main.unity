@@ -550,7 +550,7 @@ MonoBehaviour:
     values:
     - 
     - 
-    - '{"type":"System.Single, mscorlib","value":"2"}'
+    - '{"type":"System.Single, mscorlib","value":"3"}'
     - '{"type":"System.Single, mscorlib","value":"8"}'
     - '{"type":"System.Single, mscorlib","value":"22"}'
     unityArrayValues: []
@@ -845,13 +845,10 @@ MonoBehaviour:
     keys:
     - receiptFile
     - stageFile
-    - storeFile
     unityValues:
     - {fileID: 4900000, guid: 027fe01a42d8b704aa51d4512cb216ca, type: 3}
     - {fileID: 4900000, guid: e5f99d487b4296342ae548fd1ee30c2e, type: 3}
-    - {fileID: 4900000, guid: 636bd913b04764c48aff97e093617ac6, type: 3}
     values:
-    - 
     - 
     - 
     unityArrayValues: []

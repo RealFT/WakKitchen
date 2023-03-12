@@ -18,21 +18,23 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nexports.StoreItem = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    DataManager_1 = require(\"./DataManager\");\r\n// Define a product interface\r\nclass
-    StoreItem {\r\n    SetItem(id, name, price) {\r\n        this.id = id;\r\n       
-    this.name = name;\r\n        this.price = price;\r\n    }\r\n}\r\nexports.StoreItem
-    = StoreItem;\r\nclass Store extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
-    constructor() {\r\n        super(...arguments);\r\n        this.items = [];\r\n       
-    this.itemSlots = [];\r\n    }\r\n    Start() {\r\n        this.initItems();\r\n       
-    this.initItemSlots();\r\n    }\r\n    initItems() {\r\n        this.items = DataManager_1.default.GetInstance().getItems();\r\n   
-    }\r\n    initItemSlots() {\r\n        for (let i = 0; i < this.itemSlots.length;
-    i++) {\r\n            if (i < this.items.length) {\r\n                this.itemSlots[i].gameObject.SetActive(true);\r\n               
-    this.itemSlots[i].SetItemSlot(this.items[i]);\r\n            }\r\n           
-    else\r\n                this.itemSlots[i].gameObject.SetActive(false);\r\n       
-    }\r\n    }\r\n    // Get all items\r\n    getAllItems() {\r\n        return this.items;\r\n   
-    }\r\n    // Get a product by ID\r\n    getItemById(id) {\r\n        return this.items.find((p)
-    => p.id === id);\r\n    }\r\n}\r\nexports.default = Store;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RvcmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdG9yZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBcUQ7QUFDckQsK0NBQXdDO0FBS3hDLDZCQUE2QjtBQUM3QixNQUFhLFNBQVM7SUFLbEIsT0FBTyxDQUFDLEVBQVUsRUFBRSxJQUFZLEVBQUUsS0FBYTtRQUMzQyxJQUFJLENBQUMsRUFBRSxHQUFHLEVBQUUsQ0FBQztRQUNiLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2pCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDO0lBQ3ZCLENBQUM7Q0FDSjtBQVZELDhCQVVDO0FBRUQsTUFBcUIsS0FBTSxTQUFRLHFDQUFxQjtJQUF4RDs7UUFDWSxVQUFLLEdBQWdCLEVBQUUsQ0FBQztRQUN4QixjQUFTLEdBQWUsRUFBRSxDQUFDO0lBOEJ2QyxDQUFDO0lBNUJHLEtBQUs7UUFDRCxJQUFJLENBQUMsU0FBUyxFQUFFLENBQUM7UUFDakIsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO0lBQ3pCLENBQUM7SUFFRCxTQUFTO1FBQ0wsSUFBSSxDQUFDLEtBQUssR0FBRyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDO0lBQ3RELENBQUM7SUFFRCxhQUFhO1FBQ1QsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzVDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxFQUFFO2dCQUN2QixJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBQzdDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUNoRDs7Z0JBQ0ksSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1NBQ3REO0lBQ0wsQ0FBQztJQUVELGdCQUFnQjtJQUNoQixXQUFXO1FBQ1AsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDO0lBQ3RCLENBQUM7SUFFRCxzQkFBc0I7SUFDdEIsV0FBVyxDQUFDLEVBQVU7UUFDbEIsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUUsS0FBSyxFQUFFLENBQUMsQ0FBQztJQUMvQyxDQUFDO0NBQ0o7QUFoQ0Qsd0JBZ0NDIn0=","assetPath":"Assets/Scripts/Store.ts","manifest":{"properties":[],"name":"StoreItem","description":""},"isCompiled":true}'
-  typescriptHash: 2fa8f9db79df9a8266c82c28c582ec8f
+  compiledResult: '{"source":"// import { ZepetoScriptBehaviour } from ''ZEPETO.Script''\r\n//
+    import DataManager from ''./DataManager'';\r\n// import GameManager from ''./GameManager'';\r\n//
+    import UIManager from ''./UIManager'';\r\n// // Define a product interface\r\n//
+    export class StoreItem {\r\n//     id: number;\r\n//     name: string;\r\n//    
+    price: number;\r\n//     SetItem(id: number, name: string, price: number) {\r\n//        
+    this.id = id;\r\n//         this.name = name;\r\n//         this.price = price;\r\n//    
+    }\r\n// }\r\n// export default class Store extends ZepetoScriptBehaviour {\r\n//    
+    private items: StoreItem[] = [];\r\n//     Start() {\r\n//         this.initItems();\r\n//        
+    this.initItemSlots();\r\n//     }\r\n//     initItems() {\r\n//         this.items
+    = DataManager.GetInstance().getItems();\r\n//     }\r\n//     initItemSlots()
+    {\r\n//         // for (let i = 0; i < this.itemSlots.length; i++) {\r\n//        
+    //     if (i < this.items.length) {\r\n//         //         this.itemSlots[i].gameObject.SetActive(true);\r\n//        
+    //         this.itemSlots[i].SetItemSlot(this.items[i]);\r\n//         //    
+    }\r\n//         //     else this.itemSlots[i].gameObject.SetActive(false);\r\n//        
+    // }\r\n//     }\r\n//     // Get all items\r\n//     getAllItems(): StoreItem[]
+    {\r\n//         return this.items;\r\n//     }\r\n//     // Get a product by
+    ID\r\n//     getItemById(id: number): StoreItem | undefined {\r\n//         return
+    this.items.find((p) => p.id === id);\r\n//     }\r\n// }\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RvcmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdG9yZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSx3REFBd0Q7QUFDeEQsMkNBQTJDO0FBQzNDLDJDQUEyQztBQUMzQyx1Q0FBdUM7QUFFdkMsZ0NBQWdDO0FBQ2hDLDJCQUEyQjtBQUMzQixrQkFBa0I7QUFDbEIsb0JBQW9CO0FBQ3BCLHFCQUFxQjtBQUVyQix5REFBeUQ7QUFDekQsd0JBQXdCO0FBQ3hCLDRCQUE0QjtBQUM1Qiw4QkFBOEI7QUFDOUIsUUFBUTtBQUNSLElBQUk7QUFFSiw2REFBNkQ7QUFDN0QsdUNBQXVDO0FBRXZDLGdCQUFnQjtBQUNoQiw0QkFBNEI7QUFDNUIsZ0NBQWdDO0FBQ2hDLFFBQVE7QUFFUixvQkFBb0I7QUFDcEIsNkRBQTZEO0FBQzdELFFBQVE7QUFFUix3QkFBd0I7QUFDeEIsK0RBQStEO0FBQy9ELDhDQUE4QztBQUM5QyxtRUFBbUU7QUFDbkUsbUVBQW1FO0FBQ25FLG1CQUFtQjtBQUNuQixxRUFBcUU7QUFDckUsZUFBZTtBQUNmLFFBQVE7QUFFUix1QkFBdUI7QUFDdkIsbUNBQW1DO0FBQ25DLDZCQUE2QjtBQUM3QixRQUFRO0FBRVIsNkJBQTZCO0FBQzdCLHVEQUF1RDtBQUN2RCxzREFBc0Q7QUFDdEQsUUFBUTtBQUNSLElBQUkifQ==","assetPath":"Assets/Scripts/Store.ts","manifest":{"properties":[],"name":"Store","description":""},"isCompiled":true}'
+  typescriptHash: 0c78decc5a08cf4a8137d1b5c1582c9f
   onlyWriteTrigger: 0

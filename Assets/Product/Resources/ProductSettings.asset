@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 34
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -21,6 +21,8 @@ MonoBehaviour:
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Frier.png
   - targetId: upgrade_gril_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Grill.png
+  - targetId: upgrade_grill_1
+    targetAssetPath: 
   - targetId: upgrade_ingredient_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Ingredient.png
   - targetId: upgrade_slice_1

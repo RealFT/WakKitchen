@@ -10,7 +10,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
     @SerializeField() private upgradeSlotPref: GameObject;
     @SerializeField() private horizontalContent: RectTransform;
     @SerializeField() private layoutGroup: HorizontalLayoutGroup;
-    @SerializeField() private itemImage: Sprite[];
+    @SerializeField() private itemImages: Sprite[];
 
     public debugBtn:Button;
 
@@ -32,7 +32,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
         for(let productRecord of items ){
             // only not Purchased Items
             if (!productRecord.isPurchased) {
-                // Set up the item's image using the itemImage array.
+                // Set up the item's image using the itemImages array.
                 const match = productRecord.productId.match(regex);
                 const itemName = match ? match[2] : "";
                 Debug.Log(productRecord);
@@ -42,7 +42,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
         // items.forEach((productRecord) => {
         //     // only not Purchased Items
         //     if (!productRecord.isPurchased) {
-        //         // Set up the item's image using the itemImage array.
+        //         // Set up the item's image using the itemImages array.
         //         const match = productRecord.productId.match(regex);
         //         const itemName = match ? match[1] : "";
         //         Debug.Log(productRecord);
@@ -63,10 +63,10 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
         // Set the size of the Content object using its sizeDelta property.
         this.horizontalContent.sizeDelta = new Vector2(newWidth, this.horizontalContent.sizeDelta.y);
     
-        const itemImageIndex = this.itemImage.findIndex((s) => s.name === itemName);
+        const itemImageIndex = this.itemImages.findIndex((s) => s.name === itemName);
 
-        // const itemImageIndex = this.itemImage.findIndex((s) => s.name == itemRecord.productId);
-        const itemImage = this.itemImage[itemImageIndex];
+        // const itemImageIndex = this.itemImages.findIndex((s) => s.name == itemRecord.productId);
+        const itemImage = this.itemImages[itemImageIndex];
     
         // Set up the item's properties using its ITM_Inventory component.
         const itemScript = slotObj.GetComponent<ItemSlot_Upgrade>();

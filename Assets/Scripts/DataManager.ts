@@ -2,7 +2,6 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Random, Resources, TextAsset } from 'UnityEngine';
 import Receipt from './Receipt';
 import { GameObject, Debug } from 'UnityEngine';
-import { StoreItem } from './Store';
 
 export default class DataManager extends ZepetoScriptBehaviour {
     // singleton
@@ -25,9 +24,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public receiptFile: TextAsset;
     public stageFile: TextAsset;
-    public storeFile: TextAsset;
     private receipts: Receipt[] = [];
-    private items: StoreItem[] = [];
     private stageReceipts: Receipt[] = [];
     private stages: number[][] = [];
 
@@ -70,19 +67,6 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public loadStoreItemData() {
-        const lines = this.storeFile.text.split('\n'); // split the CSV file by row
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
-            const values = line.split(','); // split the row by comma to get the values
-            
-            // do something with the values
-            const item = new StoreItem();
-            item.SetItem(+values[0], values[1], +values[2]);
-            this.items.push(item);
-        };
-    }
-
     public setStageReceipts(stage: number) {
         this.stageReceipts = [];
         for (let index = 0; index < this.stages[stage].length; index++) {
@@ -97,9 +81,5 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public getReceipt(index: number): Receipt {
         return this.receipts[index];
-    }
-
-    public getItems(): StoreItem[] {
-        return this.items;
     }
 }

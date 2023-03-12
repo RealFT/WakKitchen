@@ -27,21 +27,22 @@ export default class Interaction extends ZepetoScriptBehaviour {
 
         //When Button Click
         this.escapeButton.onClick.AddListener(() => {
-            GameManager.GetInstance().SetPlayerMovement(true);
             this.SetKitchenVisibility(false);
+            GameManager.GetInstance().SetPlayerMovement(true);
             this.openButton.gameObject.SetActive(true);
         });
     }
 
     OnTriggerEnter(collider) {
         // this.SetKitchenVisibility(true);
-        // GameManager.GetInstance().SetPlayerMovement(false);
+        GameManager.GetInstance().SetPlayerJump(false);
         this.openButton.gameObject.SetActive(true);
     }
     OnTriggerExit(collider) {
         this.SetKitchenVisibility(false);
         this.openButton.gameObject.SetActive(false);
-        GameManager.GetInstance().SetPlayerMovement(true);
+        GameManager.GetInstance().SetPlayerJump(true);
+        //GameManager.GetInstance().SetPlayerMovement(true);
     }
 
     SetKitchenVisibility(value: boolean) {
