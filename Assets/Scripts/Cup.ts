@@ -1,11 +1,11 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 
 export enum CupState {
-    COKE = "Coke",
-    SPRITE = "Sprite",
-    ZERO = "Zero",
-    FANTA = "Fanta",
-    WATER = "Water",
+    PAENCHI = "Paenchi",
+    NECKSRITE = "Necksrite",
+    HOTCHS = "Hotchs",
+    ORANGE = "Orange",
+    PINEAPPLE = "Pineapple",
     DEFAULT = "Default"
 }
 

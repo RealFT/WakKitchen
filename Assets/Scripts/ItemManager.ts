@@ -1,11 +1,11 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import {Button, Text} from 'UnityEngine.UI'
-import {GameObject, Object, WaitUntil, WaitForSeconds, Debug} from 'UnityEngine'
-import {ProductRecord, ProductService, ProductType, PurchaseType} from "ZEPETO.Product";
-import {BalanceListResponse, CurrencyService, CurrencyError} from "ZEPETO.Currency";
-import {ZepetoWorldMultiplay} from "ZEPETO.World";
-import {Room, RoomData} from "ZEPETO.Multiplay";
-import UIBallances, {BalanceSync, Currency, ItemType, InventoryAction, InventorySync} from "./Shop/UIBalances";
+import { Button, Text } from 'UnityEngine.UI'
+import { GameObject, Object, WaitUntil, WaitForSeconds, Debug } from 'UnityEngine'
+import { ProductRecord, ProductService, ProductStatus, ProductType, PurchaseType } from "ZEPETO.Product";
+import { BalanceListResponse, CurrencyService, CurrencyError } from "ZEPETO.Currency";
+import { ZepetoWorldMultiplay } from "ZEPETO.World";
+import { Room, RoomData } from "ZEPETO.Multiplay";
+import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, InventorySync } from "./Shop/UIBalances";
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -26,21 +26,21 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         return ItemManager.Instance;
     }
 
-    @SerializeField() private possessionMoneyTxt : Text;
+    //@SerializeField() private possessionMoneyTxt : Text;
     @SerializeField() private informationPref: GameObject;
 
     private _foodCache: ProductRecord[] = [];
     private _upgradeCache: ProductRecord[] = [];
     private _cardCache: ProductRecord[] = [];
     private _multiplay: ZepetoWorldMultiplay;
-    private _room : Room;
+    private _room: Room;
 
 
     Awake() {
         if (this != ItemManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
-    Start() {    
+    Start() {
         //this.RefreshAllBalanceUI();
         //this.RefreshStageUI();
         this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
@@ -58,7 +58,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
             this.OpenInformation(`${message.currencyId} a Increase or decrease: ${message.quantity}`);
         });
-        
+
         this._multiplay.Room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
             this.OpenInformation(`${message.productId} has been ${InventoryAction[message.inventoryAction]} in the inventory.`);
             // item use sample
@@ -68,7 +68,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
                 }
             }*/
         });
-        
+
         this._room.AddMessageHandler<string>("DebitError", (message) => {
             this.OpenInformation(message);
         });
@@ -80,27 +80,29 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         });
     }
 
-    
-    private* LoadAllItems() {
+
+    private * LoadAllItems() {
         const request = ProductService.GetProductsAsync();
         yield new WaitUntil(() => request.keepWaiting == false);
         if (request.responseData.isSuccess) {
             request.responseData.products.forEach((pr) => {
                 // Determine the prefix of the productId and add the product to the appropriate map.
-                const prefix = pr.productId.split('_')[0];
-                switch (prefix) {
-                    case ItemType.food:
-                        this._foodCache.push(pr);
-                        break;
-                    case ItemType.upgrade:
-                        this._upgradeCache.push(pr);
-                        break;
-                    case ItemType.card:
-                        this._cardCache.push(pr);
-                        break;
-                    default:
-                        // Ignore products with unrecognized prefixes.
-                        break;
+                if (pr.ProductStatus == ProductStatus.Active) {
+                    const prefix = pr.productId.split('_')[0];
+                    switch (prefix) {
+                        case ItemType.food:
+                            this._foodCache.push(pr);
+                            break;
+                        case ItemType.upgrade:
+                            this._upgradeCache.push(pr);
+                            break;
+                        case ItemType.card:
+                            this._cardCache.push(pr);
+                            break;
+                        default:
+                            // Ignore products with unrecognized prefixes.
+                            break;
+                    }
                 }
             });
         }
@@ -108,21 +110,21 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         // this.StartCoroutine(this.RefreshBalanceUI());
     }
 
-    public getFoodCache(): ProductRecord[]  {
+    public getFoodCache(): ProductRecord[] {
         return this._foodCache;
     }
 
-    public getUpgradeCache(): ProductRecord[]  {
+    public getUpgradeCache(): ProductRecord[] {
         return this._upgradeCache;
     }
 
-    public getCardCache(): ProductRecord[]  {
+    public getCardCache(): ProductRecord[] {
         return this._cardCache;
     }
     // private RefreshAllBalanceUI(){
     //     this.StartCoroutine(this.RefreshBalanceUI());
     // }
-    
+
     // private *RefreshBalanceUI(){
     //     const request = CurrencyService.GetUserCurrencyBalancesAsync();
     //     yield new WaitUntil(()=>request.keepWaiting == false);
@@ -131,11 +133,11 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     //     }
     // }
 
-    public OpenInformation(message:string){
-        const inforObj = GameObject.Instantiate(this.informationPref,this.transform.parent) as GameObject;
+    public OpenInformation(message: string) {
+        const inforObj = GameObject.Instantiate(this.informationPref, this.transform.parent) as GameObject;
         inforObj.GetComponentInChildren<Text>().text = message;
     }
-    
+
     public GainBalance(currencyId: string, quantity: number) {
         const data = new RoomData();
         data.Add("currencyId", currencyId);
@@ -153,7 +155,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     }
 
     // an immediate purchase
-    public* PurchaseItemImmediately(productId: string) {
+    public * PurchaseItemImmediately(productId: string) {
         const request = ProductService.PurchaseProductAsync(productId);
         yield new WaitUntil(() => request.keepWaiting == false);
         if (request.responseData.isSuccess) {
@@ -163,7 +165,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public* PurchaseItem(productId: string) {
+    public * PurchaseItem(productId: string) {
         const request = ProductService.PurchaseProductAsync(productId);
         yield new WaitUntil(() => request.keepWaiting == false);
         if (request.responseData.isSuccess) {
@@ -172,7 +174,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
             // is purchase fail
         }
     }
-    
+
     // public GetProduct(productId: string): ProductRecord | undefined {
     //     const prefix = productId.split('_')[0];
     //     switch (prefix) {
@@ -187,7 +189,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     //     }
     // }
 
-    private * BtnInterval(btn:Button){
+    private * BtnInterval(btn: Button) {
         btn.interactable = false;
         yield new WaitForSeconds(0.2);
 

@@ -20,15 +20,15 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nexports.CupState = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nvar
-    CupState;\r\n(function (CupState) {\r\n    CupState[\"COKE\"] = \"Coke\";\r\n   
-    CupState[\"SPRITE\"] = \"Sprite\";\r\n    CupState[\"ZERO\"] = \"Zero\";\r\n   
-    CupState[\"FANTA\"] = \"Fanta\";\r\n    CupState[\"WATER\"] = \"Water\";\r\n   
+    CupState;\r\n(function (CupState) {\r\n    CupState[\"PAENCHI\"] = \"Paenchi\";\r\n   
+    CupState[\"NECKSRITE\"] = \"Necksrite\";\r\n    CupState[\"HOTCHS\"] = \"Hotchs\";\r\n   
+    CupState[\"ORANGE\"] = \"Orange\";\r\n    CupState[\"PINEAPPLE\"] = \"Pineapple\";\r\n   
     CupState[\"DEFAULT\"] = \"Default\";\r\n})(CupState = exports.CupState || (exports.CupState
     = {}));\r\nclass Cup extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
     {\r\n        this.cupState = CupState.DEFAULT;\r\n    }\r\n    GetState() {\r\n       
     return this.cupState;\r\n    }\r\n    OnTriggerEnter2D(collider2D) {\r\n       
     this.cupState = collider2D.gameObject.tag;\r\n    }\r\n    OnTriggerExit2D(collider2D)
     {\r\n        this.cupState = CupState.DEFAULT;\r\n    }\r\n}\r\nexports.default
-    = Cup;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ3VwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQ3VwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUVyRCxJQUFZLFFBT1g7QUFQRCxXQUFZLFFBQVE7SUFDaEIseUJBQWEsQ0FBQTtJQUNiLDZCQUFpQixDQUFBO0lBQ2pCLHlCQUFhLENBQUE7SUFDYiwyQkFBZSxDQUFBO0lBQ2YsMkJBQWUsQ0FBQTtJQUNmLCtCQUFtQixDQUFBO0FBQ3ZCLENBQUMsRUFQVyxRQUFRLEdBQVIsZ0JBQVEsS0FBUixnQkFBUSxRQU9uQjtBQUVELE1BQXFCLEdBQUksU0FBUSxxQ0FBcUI7SUFLbEQsS0FBSztRQUNELElBQUksQ0FBQyxRQUFRLEdBQUcsUUFBUSxDQUFDLE9BQU8sQ0FBQztJQUNyQyxDQUFDO0lBRU0sUUFBUTtRQUNYLE9BQU8sSUFBSSxDQUFDLFFBQVEsQ0FBQztJQUN6QixDQUFDO0lBRUQsZ0JBQWdCLENBQUMsVUFBVTtRQUN2QixJQUFJLENBQUMsUUFBUSxHQUFHLFVBQVUsQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDO0lBQzlDLENBQUM7SUFFRCxlQUFlLENBQUMsVUFBVTtRQUN0QixJQUFJLENBQUMsUUFBUSxHQUFHLFFBQVEsQ0FBQyxPQUFPLENBQUM7SUFDckMsQ0FBQztDQUNKO0FBcEJELHNCQW9CQyJ9","assetPath":"Assets/Scripts/Cup.ts","manifest":{"properties":[],"name":"Cup","description":""},"isCompiled":true}'
-  typescriptHash: 513f7668ce7b6830a83c1f9c4dcb2c2e
+    = Cup;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ3VwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQ3VwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUVyRCxJQUFZLFFBT1g7QUFQRCxXQUFZLFFBQVE7SUFDaEIsK0JBQW1CLENBQUE7SUFDbkIsbUNBQXVCLENBQUE7SUFDdkIsNkJBQWlCLENBQUE7SUFDakIsNkJBQWlCLENBQUE7SUFDakIsbUNBQXVCLENBQUE7SUFDdkIsK0JBQW1CLENBQUE7QUFDdkIsQ0FBQyxFQVBXLFFBQVEsR0FBUixnQkFBUSxLQUFSLGdCQUFRLFFBT25CO0FBRUQsTUFBcUIsR0FBSSxTQUFRLHFDQUFxQjtJQUtsRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLFFBQVEsR0FBRyxRQUFRLENBQUMsT0FBTyxDQUFDO0lBQ3JDLENBQUM7SUFFTSxRQUFRO1FBQ1gsT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDO0lBQ3pCLENBQUM7SUFFRCxnQkFBZ0IsQ0FBQyxVQUFVO1FBQ3ZCLElBQUksQ0FBQyxRQUFRLEdBQUcsVUFBVSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUM7SUFDOUMsQ0FBQztJQUVELGVBQWUsQ0FBQyxVQUFVO1FBQ3RCLElBQUksQ0FBQyxRQUFRLEdBQUcsUUFBUSxDQUFDLE9BQU8sQ0FBQztJQUNyQyxDQUFDO0NBQ0o7QUFwQkQsc0JBb0JDIn0=","assetPath":"Assets/Scripts/Cup.ts","manifest":{"properties":[],"name":"Cup","description":""},"isCompiled":true}'
+  typescriptHash: df28fe93bd567c9446da46be1a1ba4d0
   onlyWriteTrigger: 0

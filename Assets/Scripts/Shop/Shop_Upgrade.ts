@@ -15,17 +15,17 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour {
     public debugBtn:Button;
 
     Start() {
-        //this.CreateSlot(ItemManager.GetInstance().getUpgradeCache());
+        this.CreateSlot(ItemManager.GetInstance().getUpgradeCache());
         this.debugBtn.onClick.AddListener(()=>{
             this.CreateSlot(ItemManager.GetInstance().getUpgradeCache());
         });
     }
 
     private CreateSlot(items: ProductRecord[]): void {
-        // // Clear the existing items in the content parent.
-        // this.horizontalContent.GetComponentsInChildren<ItemSlot_Upgrade>().forEach((child) => {
-        //     GameObject.Destroy(child.gameObject);
-        // });
+        // Clear the existing items in the content parent.
+        this.horizontalContent.GetComponentsInChildren<ItemSlot_Upgrade>().forEach((child) => {
+            GameObject.Destroy(child.gameObject);
+        });
 
         const regex = /(\w+)_(\w+)_(\d)/;
         // Create an Upgrade Slot for each item in the list.

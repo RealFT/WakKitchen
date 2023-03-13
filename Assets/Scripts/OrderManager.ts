@@ -21,11 +21,11 @@ export enum Ingredient {
 
 export enum Drink {
     START = 8,
-    COKE = 8,
-    SPRITE = 9,
-    ZERO_COKE = 10,
-    FANTA = 11,
-    WATER = 12,
+    PAENCHI = 8,
+    NECKSRITE = 9,
+    HOTCHS = 10,
+    ORANGE = 11,
+    PINEAPPLE = 12,
     END = 12
 }
 

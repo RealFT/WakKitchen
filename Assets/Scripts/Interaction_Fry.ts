@@ -6,33 +6,45 @@ import GameManager from './GameManager';
 import FrySlot from './FrySlot';
 
 export default class Interaction_Fry extends ZepetoScriptBehaviour {
-    public escapeButton: Button;
-    public frySlotObjects: GameObject[];
-    public images: Image[];
-    public fryCanvas: GameObject;
-    public kitchen: GameObject;
+    @SerializeField() private openButton: Button;
+    @SerializeField() private escapeButton: Button;
+    @SerializeField() private frySlotObjects: GameObject[];
+    @SerializeField() private images: Image[];
+    @SerializeField() private fryPanel: GameObject;
+    @SerializeField() private kitchen: GameObject;
 
     Start() {
         //Button Hide
-        this.fryCanvas.SetActive(true);
+        this.fryPanel.SetActive(true);
         this.kitchen.SetActive(true);
         this.SetKitchenVisibility(false);
+        this.openButton.gameObject.SetActive(false);
 
         //When Button Click
+        this.openButton.onClick.AddListener(() => {
+            this.SetKitchenVisibility(true);
+            GameManager.GetInstance().SetPlayerMovement(false);
+            this.openButton.gameObject.SetActive(false);
+        });
+        
+        //When Button Click
         this.escapeButton.onClick.AddListener(() => {
-            GameManager.GetInstance().SetPlayerMovement(true);
             this.SetKitchenVisibility(false);
+            GameManager.GetInstance().SetPlayerMovement(true);
+            this.openButton.gameObject.SetActive(true);
         });
     }
 
     OnTriggerEnter(collider) {
-        this.SetKitchenVisibility(true);
-        GameManager.GetInstance().SetPlayerMovement(false);
+        // this.SetKitchenVisibility(true);
+        GameManager.GetInstance().SetPlayerJump(false);
+        this.openButton.gameObject.SetActive(true);
     }
-
     OnTriggerExit(collider) {
         this.SetKitchenVisibility(false);
-        GameManager.GetInstance().SetPlayerMovement(true);
+        this.openButton.gameObject.SetActive(false);
+        GameManager.GetInstance().SetPlayerJump(true);
+        //GameManager.GetInstance().SetPlayerMovement(true);
     }
 
     SetKitchenVisibility(value: boolean) {

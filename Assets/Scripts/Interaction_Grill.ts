@@ -9,13 +9,12 @@ import GameManager from './GameManager';
 import GrillSlot from './GrillSlot';
 
 export default class Interaction_Grill extends ZepetoScriptBehaviour {
-    public escapeButton: Button;
-    public grillSlotObjects: GameObject[];
-    public images: Image[];
-    //private grillSlots: GrillSlot[];
-    public grillCanvas: GameObject;
-    public kitchen: GameObject;
-    //private gameMgr: GameManager;
+    @SerializeField() private openButton: Button;
+    @SerializeField() private escapeButton: Button;
+    @SerializeField() private grillSlotObjects: GameObject[];
+    @SerializeField() private images: Image[];
+    @SerializeField() private grillPanel: GameObject;
+    @SerializeField() private kitchen: GameObject;
 
     Start() {
         // Script import
@@ -25,10 +24,18 @@ export default class Interaction_Grill extends ZepetoScriptBehaviour {
         } */
 
         //Button Hide
-        this.grillCanvas.SetActive(true);
+        this.grillPanel.SetActive(true);
         this.kitchen.SetActive(true);
         this.SetKitchenVisibility(false);
+        this.openButton.gameObject.SetActive(false);
 
+        //When Button Click
+        this.openButton.onClick.AddListener(() => {
+            this.SetKitchenVisibility(true);
+            GameManager.GetInstance().SetPlayerMovement(false);
+            this.openButton.gameObject.SetActive(false);
+        });
+        
         //When Button Click
         this.escapeButton.onClick.AddListener(() => {
             GameManager.GetInstance().SetPlayerMovement(true);
@@ -37,13 +44,15 @@ export default class Interaction_Grill extends ZepetoScriptBehaviour {
     }
 
     OnTriggerEnter(collider) {
-        this.SetKitchenVisibility(true);
-        GameManager.GetInstance().SetPlayerMovement(false);
+        // this.SetKitchenVisibility(true);
+        GameManager.GetInstance().SetPlayerJump(false);
+        this.openButton.gameObject.SetActive(true);
     }
-
     OnTriggerExit(collider) {
         this.SetKitchenVisibility(false);
-        GameManager.GetInstance().SetPlayerMovement(true);
+        this.openButton.gameObject.SetActive(false);
+        GameManager.GetInstance().SetPlayerJump(true);
+        //GameManager.GetInstance().SetPlayerMovement(true);
     }
 
     SetKitchenVisibility(value: boolean) {

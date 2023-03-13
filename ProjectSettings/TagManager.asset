@@ -9,11 +9,11 @@ TagManager:
   - UIController
   - Order
   - OrderManager
-  - Coke
-  - Sprite
-  - Zero
-  - Fanta
-  - Water
+  - Paenchi
+  - Necksrite
+  - Hotchs
+  - Orange
+  - Pineapple
   layers:
   - Default
   - TransparentFX
