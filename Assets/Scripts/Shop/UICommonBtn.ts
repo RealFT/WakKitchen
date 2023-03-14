@@ -4,7 +4,7 @@ import {GameObject, Object, WaitUntil, WaitForSeconds} from 'UnityEngine'
 import {ProductRecord, ProductService, ProductType, PurchaseType} from "ZEPETO.Product";
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
-import UIBallances, {BalanceSync, Currency, InventoryAction, InventorySync} from "./UIBalances";
+import UIBallances, {BalanceSync, Currency, InventoryAction, InventorySync} from "./BalanceManager";
 
 export default class UICommonBtn extends ZepetoScriptBehaviour {
     @SerializeField() private allBtns: Button[] = [];

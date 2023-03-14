@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productTextureInfo:
   - targetId: food_test
-    targetAssetPath: Assets/Resources/Sprites/Ingredients/00_Bun_Top.png
+    targetAssetPath: 
   - targetId: upgrade_dispenser_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Dispenser.png
   - targetId: upgrade_frier_1
@@ -22,7 +22,7 @@ MonoBehaviour:
   - targetId: upgrade_gril_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Grill.png
   - targetId: upgrade_grill_1
-    targetAssetPath: 
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/grill.png
   - targetId: upgrade_ingredient_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Ingredient.png
   - targetId: upgrade_slice_1

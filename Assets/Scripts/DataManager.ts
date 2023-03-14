@@ -10,10 +10,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
         if (!DataManager.Instance) {
 
-            var _obj = GameObject.Find("DataManager");
+            var _obj = GameObject.Find("Managers");
             if (!_obj) {
                 Debug.LogError("New DataManager");
-                _obj = new GameObject("DataManager");
+                _obj = new GameObject("Managers");
                 _obj.AddComponent<DataManager>();
             }
             DataManager.Instance = _obj.GetComponent<DataManager>();

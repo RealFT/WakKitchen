@@ -1,54 +1,32 @@
 import { GameObject } from 'UnityEngine';
-import { Button, Image } from 'UnityEngine.UI';
-import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-// import custom script from path
-import GameManager from './GameManager';
+import { Image } from 'UnityEngine.UI';
 import FrySlot from './FrySlot';
+import InteractionBase from './InteractionBase';
 
-export default class Interaction_Fry extends ZepetoScriptBehaviour {
-    @SerializeField() private openButton: Button;
-    @SerializeField() private escapeButton: Button;
+export default class Interaction_Fry extends InteractionBase {
     @SerializeField() private frySlotObjects: GameObject[];
     @SerializeField() private images: Image[];
     @SerializeField() private fryPanel: GameObject;
-    @SerializeField() private kitchen: GameObject;
 
     Start() {
+        super.Start();
         //Button Hide
         this.fryPanel.SetActive(true);
         this.kitchen.SetActive(true);
         this.SetKitchenVisibility(false);
         this.openButton.gameObject.SetActive(false);
-
-        //When Button Click
-        this.openButton.onClick.AddListener(() => {
-            this.SetKitchenVisibility(true);
-            GameManager.GetInstance().SetPlayerMovement(false);
-            this.openButton.gameObject.SetActive(false);
-        });
-        
-        //When Button Click
-        this.escapeButton.onClick.AddListener(() => {
-            this.SetKitchenVisibility(false);
-            GameManager.GetInstance().SetPlayerMovement(true);
-            this.openButton.gameObject.SetActive(true);
-        });
     }
 
     OnTriggerEnter(collider) {
-        // this.SetKitchenVisibility(true);
-        GameManager.GetInstance().SetPlayerJump(false);
-        this.openButton.gameObject.SetActive(true);
+        super.OnTriggerEnter(collider);
     }
+
     OnTriggerExit(collider) {
-        this.SetKitchenVisibility(false);
-        this.openButton.gameObject.SetActive(false);
-        GameManager.GetInstance().SetPlayerJump(true);
-        //GameManager.GetInstance().SetPlayerMovement(true);
+        super.OnTriggerExit(collider);
     }
 
     SetKitchenVisibility(value: boolean) {
-        this.escapeButton.gameObject.SetActive(value);
+        super.SetKitchenVisibility(value);
         for (let i = 0; i < this.images.length; i++) {
             this.images[i].enabled = value;
         }

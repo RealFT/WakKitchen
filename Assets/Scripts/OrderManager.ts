@@ -6,6 +6,7 @@ import Receipt from './Receipt';
 import GameManager from './GameManager';
 import DataManager from './DataManager';
 import OrderReceipt from './OrderReceipt';
+import BalanceManager, { Currency } from './Shop/BalanceManager';
 
 export enum Ingredient {
     START = 0,
@@ -215,7 +216,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                 // stop wait Corutine
                 this.StopCoroutine(this.waitCoroutines[index]);
                 // earn this receipt's pay
-                GameManager.GetInstance().changeMoney(this.receipts[index].pay);
+                BalanceManager.GetInstance().GainBalance(Currency.wak, this.receipts[index].pay);
                 // if waitSlider isn't 0, remove this receipt
                 this.removeOrder(index);
                 return true;

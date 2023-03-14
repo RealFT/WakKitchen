@@ -2,6 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text } from "UnityEngine.UI";
 import { GameObject } from 'UnityEngine';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
+import UIBalances from './Shop/BalanceManager';
 export default class UIManager extends ZepetoScriptBehaviour {
     // singleton
     private static Instance: UIManager;
@@ -10,9 +11,9 @@ export default class UIManager extends ZepetoScriptBehaviour {
         if (!UIManager.Instance) {
             //Debug.LogError("GameManager");
 
-            var _obj = GameObject.Find("UIManager");
+            var _obj = GameObject.Find("Managers");
             if (!_obj) {
-                _obj = new GameObject("UIManager");
+                _obj = new GameObject("Managers");
                 _obj.AddComponent<UIManager>();
             }
             UIManager.Instance = _obj.GetComponent<UIManager>();
@@ -21,14 +22,14 @@ export default class UIManager extends ZepetoScriptBehaviour {
         return UIManager.Instance;
     }
 
-    public settlementUI: GameObject;
-    public mainUI: GameObject[];
-    public gameUI: GameObject[];
-    public gameMoneyText: Text;
-    public timeText: Text;
+    @SerializeField() private settlementUI: GameObject;
+    @SerializeField() private mainUI: GameObject[];
+    @SerializeField() private gameUI: GameObject[];
+    @SerializeField() private timeText: Text;
 
     Awake() {
         if (this != UIManager.GetInstance()) GameObject.Destroy(this.gameObject);
+
     }
 
     Start() {
@@ -92,9 +93,5 @@ export default class UIManager extends ZepetoScriptBehaviour {
         const time = `${formattedHour}:${formattedMinute} ${ampm}`;
 
         this.timeText.text = time;
-    }
-
-    public setGameMoneyText(value: number) {
-        this.gameMoneyText.text = value.toString();
     }
 }

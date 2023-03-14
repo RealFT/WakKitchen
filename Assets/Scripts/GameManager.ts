@@ -8,7 +8,7 @@ import QuarterViewController from './QuarterViewController';
 import DataManager from './DataManager';
 import OrderManager from './OrderManager';
 import UIManager from './UIManager';
-import Cook from './Cook';
+import BalanceManager from './Shop/BalanceManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -18,9 +18,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
         if (!GameManager.Instance) {
             //Debug.LogError("GameManager");
 
-            var _obj = GameObject.Find("GameManager");
+            var _obj = GameObject.Find("Managers");
             if (!_obj) {
-                _obj = new GameObject("GameManager");
+                _obj = new GameObject("Managers");
                 _obj.AddComponent<GameManager>();
             }
             GameManager.Instance = _obj.GetComponent<GameManager>();
@@ -42,7 +42,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
     public endHour: number;    // Stage End Hour
     private currTime: [number, number]; // current time
     private isInGame: boolean;
-    private gameMoney: number;
     private curStage: number;
 
     Awake() {
@@ -55,7 +54,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     init() {
         /* need load */
-        this.gameMoney = 1000;
         this.lastSavedDay = 0;
         this.curStage = this.lastSavedDay;
     }
@@ -77,7 +75,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         OrderManager.GetInstance().StartOrder();
         //this.cook.init();
         UIManager.GetInstance().initStageUI();
-        UIManager.GetInstance().setGameMoneyText(this.gameMoney);
+        BalanceManager.GetInstance().RefreshAllBalanceUI();
         this.SetPlayerJump(false);
     }
 
@@ -114,15 +112,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public changeMoney(value: number) {
-        this.gameMoney = Math.max(0, this.gameMoney + value);
-        UIManager.GetInstance().setGameMoneyText(this.gameMoney);
-    }
-
-    public getCurrentMoney(){
-        return this.gameMoney;
-    }
-
     public nextStage(): void {
         this.curStage++;
     }
@@ -140,7 +129,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // reset UI
         UIManager.GetInstance().SetSettlementUI(false);
         UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
-        UIManager.GetInstance().setGameMoneyText(this.gameMoney);
+        BalanceManager.GetInstance().RefreshAllBalanceUI();
     
         // reset managers
         //OrderManager.GetInstance().Reset();

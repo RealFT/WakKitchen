@@ -5,7 +5,7 @@ import { ProductRecord, ProductService, ProductStatus, ProductType, PurchaseType
 import { BalanceListResponse, CurrencyService, CurrencyError } from "ZEPETO.Currency";
 import { ZepetoWorldMultiplay } from "ZEPETO.World";
 import { Room, RoomData } from "ZEPETO.Multiplay";
-import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, InventorySync } from "./Shop/UIBalances";
+import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, InventorySync } from "./Shop/BalanceManager";
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -15,9 +15,9 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         if (!ItemManager.Instance) {
             //Debug.LogError("ItemManager");
 
-            var _obj = GameObject.Find("ItemManager");
+            var _obj = GameObject.Find("Managers");
             if (!_obj) {
-                _obj = new GameObject("ItemManager");
+                _obj = new GameObject("Managers");
                 _obj.AddComponent<ItemManager>();
             }
             ItemManager.Instance = _obj.GetComponent<ItemManager>();
@@ -26,7 +26,6 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         return ItemManager.Instance;
     }
 
-    //@SerializeField() private possessionMoneyTxt : Text;
     @SerializeField() private informationPref: GameObject;
 
     private _foodCache: ProductRecord[] = [];
@@ -34,7 +33,6 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     private _cardCache: ProductRecord[] = [];
     private _multiplay: ZepetoWorldMultiplay;
     private _room: Room;
-
 
     Awake() {
         if (this != ItemManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -121,7 +119,8 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     public getCardCache(): ProductRecord[] {
         return this._cardCache;
     }
-    // private RefreshAllBalanceUI(){
+
+    // public RefreshAllBalanceUI(){
     //     this.StartCoroutine(this.RefreshBalanceUI());
     // }
 
@@ -138,21 +137,21 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         inforObj.GetComponentInChildren<Text>().text = message;
     }
 
-    public GainBalance(currencyId: string, quantity: number) {
-        const data = new RoomData();
-        data.Add("currencyId", currencyId);
-        data.Add("quantity", quantity);
-        this._multiplay.Room?.Send("onCredit", data.GetObject());
-        console.warn("GainBalance");
-    }
+    // public GainBalance(currencyId: string, quantity: number) {
+    //     const data = new RoomData();
+    //     data.Add("currencyId", currencyId);
+    //     data.Add("quantity", quantity);
+    //     this._multiplay.Room?.Send("onCredit", data.GetObject());
+    //     console.warn("GainBalance");
+    // }
 
-    public UseBalance(currencyId: string, quantity: number) {
-        const data = new RoomData();
-        data.Add("currencyId", currencyId);
-        data.Add("quantity", quantity);
-        this._multiplay.Room?.Send("onDebit", data.GetObject());
-        console.warn("UseBalance");
-    }
+    // public UseBalance(currencyId: string, quantity: number) {
+    //     const data = new RoomData();
+    //     data.Add("currencyId", currencyId);
+    //     data.Add("quantity", quantity);
+    //     this._multiplay.Room?.Send("onDebit", data.GetObject());
+    //     console.warn("UseBalance");
+    // }
 
     // an immediate purchase
     public * PurchaseItemImmediately(productId: string) {

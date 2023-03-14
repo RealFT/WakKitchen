@@ -1,0 +1,45 @@
+fileFormatVersion: 2
+guid: 22c629a8765b1dc48897cc92337e2872
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.Grade = void 0;\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nvar Grade;\\r\\n(function
+    (Grade) {\\r\\n    Grade[\\\"F\\\"] = \\\"F\\\";\\r\\n    Grade[\\\"D\\\"] =
+    \\\"D\\\";\\r\\n    Grade[\\\"C\\\"] = \\\"C\\\";\\r\\n    Grade[\\\"B\\\"] =
+    \\\"B\\\";\\r\\n    Grade[\\\"A\\\"] = \\\"A\\\";\\r\\n    Grade[\\\"S\\\"] =
+    \\\"S\\\";\\r\\n    Grade[\\\"SS\\\"] = \\\"SS\\\";\\r\\n})(Grade = exports.Grade
+    || (exports.Grade = {}));\\r\\nclass Gacha extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    // \uAC00\uCC60 \uC2E4\uD589 \uBA54\uC11C\uB4DC\\r\\n    executeGacha()
+    {\\r\\n        // \uBB34\uC791\uC704\uB85C \uC544\uC774\uD15C\uC744 \uC120\uD0DD\\r\\n       
+    const random = Math.random();\\r\\n        let cumulativeProbability = 0;\\r\\n       
+    for (const card of this.cardPool.getCards()) {\\r\\n            cumulativeProbability
+    += card.getProbability();\\r\\n            if (random <= cumulativeProbability)
+    {\\r\\n                return card;\\r\\n            }\\r\\n        }\\r\\n       
+    // \uC544\uC774\uD15C\uC744 \uC120\uD0DD\uD558\uC9C0 \uBABB\uD55C \uACBD\uC6B0\\r\\n       
+    return null;\\r\\n    }\\r\\n    getProbabilityByGrade(grade) {\\r\\n       
+    switch (grade) {\\r\\n            case Grade.F:\\r\\n                return 0.05;\\r\\n           
+    case Grade.D:\\r\\n                return 0.1;\\r\\n            case Grade.C:\\r\\n               
+    return 0.2;\\r\\n            case Grade.B:\\r\\n                return 0.3;\\r\\n           
+    case Grade.A:\\r\\n                return 0.2;\\r\\n            case Grade.S:\\r\\n               
+    return 0.04;\\r\\n            case Grade.SS:\\r\\n                return 0.01;\\r\\n           
+    default:\\r\\n                return 0;\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default
+    = Gacha;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FjaGEuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHYWNoYS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBcUQ7QUFJckQsSUFBWSxLQVFYO0FBUkQsV0FBWSxLQUFLO0lBQ2IsZ0JBQU8sQ0FBQTtJQUNQLGdCQUFPLENBQUE7SUFDUCxnQkFBTyxDQUFBO0lBQ1AsZ0JBQU8sQ0FBQTtJQUNQLGdCQUFPLENBQUE7SUFDUCxnQkFBTyxDQUFBO0lBQ1Asa0JBQVMsQ0FBQTtBQUNiLENBQUMsRUFSVyxLQUFLLEdBQUwsYUFBSyxLQUFMLGFBQUssUUFRaEI7QUFFRCxNQUFxQixLQUFNLFNBQVEscUNBQXFCO0lBR3BELFlBQVk7SUFDTCxZQUFZO1FBQ2YsZUFBZTtRQUNmLE1BQU0sTUFBTSxHQUFHLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQztRQUM3QixJQUFJLHFCQUFxQixHQUFHLENBQUMsQ0FBQztRQUM5QixLQUFLLE1BQU0sSUFBSSxJQUFJLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLEVBQUU7WUFDekMscUJBQXFCLElBQUksSUFBSSxDQUFDLGNBQWMsRUFBRSxDQUFDO1lBQy9DLElBQUksTUFBTSxJQUFJLHFCQUFxQixFQUFFO2dCQUNqQyxPQUFPLElBQUksQ0FBQzthQUNmO1NBQ0o7UUFFRCxrQkFBa0I7UUFDbEIsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVNLHFCQUFxQixDQUFDLEtBQWE7UUFDdEMsUUFBUSxLQUFLLEVBQUU7WUFDWCxLQUFLLEtBQUssQ0FBQyxDQUFDO2dCQUNSLE9BQU8sSUFBSSxDQUFDO1lBQ2hCLEtBQUssS0FBSyxDQUFDLENBQUM7Z0JBQ1IsT0FBTyxHQUFHLENBQUM7WUFDZixLQUFLLEtBQUssQ0FBQyxDQUFDO2dCQUNSLE9BQU8sR0FBRyxDQUFDO1lBQ2YsS0FBSyxLQUFLLENBQUMsQ0FBQztnQkFDUixPQUFPLEdBQUcsQ0FBQztZQUNmLEtBQUssS0FBSyxDQUFDLENBQUM7Z0JBQ1IsT0FBTyxHQUFHLENBQUM7WUFDZixLQUFLLEtBQUssQ0FBQyxDQUFDO2dCQUNSLE9BQU8sSUFBSSxDQUFDO1lBQ2hCLEtBQUssS0FBSyxDQUFDLEVBQUU7Z0JBQ1QsT0FBTyxJQUFJLENBQUM7WUFDaEI7Z0JBQ0ksT0FBTyxDQUFDLENBQUM7U0FDaEI7SUFDTCxDQUFDO0NBQ0o7QUF2Q0Qsd0JBdUNDIn0=\",\"assetPath\":\"Assets/Scripts/Gacha/Gacha.ts\",\"manifest\":{\"properties\":[],\"name\":\"Gacha\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: d8d44c82583770af863a86a8318ddd4f
+  onlyWriteTrigger: 0
