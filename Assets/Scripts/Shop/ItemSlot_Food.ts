@@ -1,25 +1,27 @@
 import { Button, Text } from 'UnityEngine.UI';
+import { GameObject, Sprite } from 'UnityEngine'
+import { ProductRecord } from 'ZEPETO.Product';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import ItemManager from '../ItemManager';
 
 export default class ItemSlot_Food extends ZepetoScriptBehaviour {
     
-    // @SerializeField() private productId: string;
-    // @SerializeField() private purchaseButton: Button;
-    // @SerializeField() private priceText: Text;
+    private itemRecord: ProductRecord;
+    @SerializeField() private foodParent: GameObject;
+    @SerializeField() private foodPref: GameObject;
+    @SerializeField() private priceTxt :Text;
+    @SerializeField() private buyBtn: Button;
 
-    // Start(){
-    //     this.purchaseButton.onClick.AddListener(()=>{
-    //         ItemManager.GetInstance().PurchaseItem(this.productId);
-    //     });
-    //     //this.priceText.text = ItemManager.GetInstance().GetProduct(this.productId).price.toString();
-    // }
+    public SetItem(ir :ProductRecord, foodPref: GameObject){
+        this.foodPref = foodPref;
+        this.itemRecord = ir;
+        this.priceTxt.text = ir.price.toString();
+        this.buyBtn.onClick.AddListener(() => {
+            this.StartCoroutine(ItemManager.GetInstance().PurchaseItem(ir.productId));
+        });
+    }
 
-    // public SetItem(productId:string){
-    //     this.productId = productId;
-    //     //this.priceText.text = ItemManager.GetInstance().GetProduct(this.productId).price.toString();
-    //     this.purchaseButton.onClick.AddListener(()=>{
-    //         ItemManager.GetInstance().PurchaseItem(this.productId);
-    //     });
-    // }
+    public GetItemRecord(): ProductRecord {
+        return this.itemRecord;
+    }
 }
