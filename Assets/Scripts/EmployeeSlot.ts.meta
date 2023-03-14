@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+guid: 7ff1679e4e3ff81459dea9ea12abaf39
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst OrderManager_1 = require(\"./OrderManager\");\r\nclass
+    EmployeeSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.foodId = 8;\r\n        this.workTime
+    = 10;\r\n        this.currentTime = 0;\r\n    }\r\n    Start() {\r\n        this.init();\r\n       
+    this.StartWorking();\r\n    }\r\n    init() {\r\n        this.StopAllCoroutines();\r\n       
+    this.workSlider.value = 0;\r\n        this.currentTime = 0;\r\n        this.isWorking
+    = false;\r\n    }\r\n    // Start Baking.\r\n    StartWorking() {\r\n       
+    this.isWorking = true;\r\n        this.StartCoroutine(this.DoWorking());\r\n   
+    }\r\n    // Working Coroutine\r\n    *DoWorking() {\r\n        while (this.isWorking)
+    {\r\n            if (this.pauseResumeToggle.isOn) {\r\n                // Pause
+    the work\r\n                yield new UnityEngine_1.WaitForSeconds(UnityEngine_1.Time.deltaTime);\r\n               
+    continue;\r\n            }\r\n            this.currentTime += UnityEngine_1.Time.deltaTime;\r\n           
+    this.workSlider.value = this.currentTime / this.workTime;\r\n            if (this.currentTime
+    >= this.workTime) {\r\n                // Work done.\r\n                OrderManager_1.default.GetInstance().AddItemToInventory(this.foodId);\r\n               
+    this.workSlider.value = 0;\r\n                this.currentTime = 0;\r\n           
+    }\r\n            yield new UnityEngine_1.WaitForSeconds(UnityEngine_1.Time.deltaTime);\r\n       
+    }\r\n    }\r\n    ToggleWorking() {\r\n        this.isWorking = !this.isWorking;\r\n   
+    }\r\n}\r\nexports.default = EmployeeSlot;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRW1wbG95ZWVTbG90LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRW1wbG95ZWVTbG90LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFxRjtBQUVyRixpREFBMEM7QUFHMUMsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQUEvRDs7UUFJWSxXQUFNLEdBQVcsQ0FBQyxDQUFDO1FBQ25CLGFBQVEsR0FBVyxFQUFFLENBQUM7UUFDdEIsZ0JBQVcsR0FBVyxDQUFDLENBQUM7SUErQ3BDLENBQUM7SUE1Q0csS0FBSztRQUNELElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUNaLElBQUksQ0FBQyxZQUFZLEVBQUUsQ0FBQztJQUN4QixDQUFDO0lBRUQsSUFBSTtRQUNBLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO1FBQ3pCLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxHQUFHLENBQUMsQ0FBQztRQUMxQixJQUFJLENBQUMsV0FBVyxHQUFHLENBQUMsQ0FBQztRQUNyQixJQUFJLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztJQUMzQixDQUFDO0lBRUQsZ0JBQWdCO0lBQ1IsWUFBWTtRQUNoQixJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQztRQUN0QixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO0lBQzFDLENBQUM7SUFFRCxvQkFBb0I7SUFDcEIsQ0FBQyxTQUFTO1FBQ04sT0FBTyxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ25CLElBQUksSUFBSSxDQUFDLGlCQUFpQixDQUFDLElBQUksRUFBRTtnQkFDN0IsaUJBQWlCO2dCQUNqQixNQUFNLElBQUksNEJBQWMsQ0FBQyxrQkFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO2dCQUN6QyxTQUFTO2FBQ1o7WUFFRCxJQUFJLENBQUMsV0FBVyxJQUFJLGtCQUFJLENBQUMsU0FBUyxDQUFDO1lBQ25DLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztZQUV6RCxJQUFJLElBQUksQ0FBQyxXQUFXLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtnQkFDbkMsYUFBYTtnQkFDYixzQkFBWSxDQUFDLFdBQVcsRUFBRSxDQUFDLGtCQUFrQixDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztnQkFDM0QsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLEdBQUcsQ0FBQyxDQUFDO2dCQUMxQixJQUFJLENBQUMsV0FBVyxHQUFHLENBQUMsQ0FBQzthQUN4QjtZQUVELE1BQU0sSUFBSSw0QkFBYyxDQUFDLGtCQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7U0FDNUM7SUFDTCxDQUFDO0lBRU8sYUFBYTtRQUNqQixJQUFJLENBQUMsU0FBUyxHQUFHLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQztJQUNyQyxDQUFDO0NBQ0o7QUFyREQsK0JBcURDIn0=","assetPath":"Assets/Scripts/EmployeeSlot.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"pauseResumeToggle","type":"UnityEngine.UI.Toggle","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"employeeImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"workSlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"EmployeeSlot","description":""},"isCompiled":true}'
+  typescriptHash: 2865a36900d71e703db98ff590c82493
+  onlyWriteTrigger: 0

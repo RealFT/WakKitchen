@@ -5,24 +5,25 @@ import OrderManager from './OrderManager';
 import { Ingredient } from './OrderManager';
 
 export default class GrillSlot extends ZepetoScriptBehaviour {
-    public grillButton: Button;    // Putting ingredients in the kitchen
-    public bakingButton: Button;
-    public bakeSlider: Slider;
-    public bakeSliderFill: Image;
-    public defaultColor: Color;
-    public bakedColor: Color;
-    public failedColor: Color;
-    public rawPattySprite: Sprite;
-    public bakedPattySprite: Sprite;
-    public burntPattySprite: Sprite;
-    public bakeTime: number;
-    public burnTime: number;
+    @SerializeField() private grillButton: Button;    // Putting ingredients in the kitchen
+    @SerializeField() private bakingButton: Button;
+    @SerializeField() private bakeSlider: Slider;
+    @SerializeField() private bakeSliderFill: Image;
+    @SerializeField() private defaultColor: Color;
+    @SerializeField() private bakedColor: Color;
+    @SerializeField() private failedColor: Color;
+    @SerializeField() private rawPattySprite: Sprite;
+    @SerializeField() private bakedPattySprite: Sprite;
+    @SerializeField() private burntPattySprite: Sprite;
+    @SerializeField() private bakeTime: number;
+    @SerializeField() private burnTime: number;
+    @SerializeField() private visibleImages: Image[];
     private startTime: number = 0;
     private currentTime: number = 0;
     private flipCount: number = 0;
     private isFliped: bool;
     private isBaking: bool;
-    public visibleImages: Image[];
+
 
     Start() {
         this.init();

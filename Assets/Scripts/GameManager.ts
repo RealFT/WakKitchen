@@ -37,9 +37,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
     private timer: Timer;
 
     private lastSavedDay: number;      // last saved Day(Stage).
-    public minutesPerDay: number;    // n minutes pass in one day.
-    public startHour: number;    // Stage Start Hour
-    public endHour: number;    // Stage End Hour
+    @SerializeField() private minutesPerDay: number;    // n minutes pass in one day.
+    @SerializeField() private startHour: number;    // Stage Start Hour
+    @SerializeField() private endHour: number;    // Stage End Hour
     private currTime: [number, number]; // current time
     private isInGame: boolean;
     private curStage: number;

@@ -5,23 +5,24 @@ import OrderManager from './OrderManager';
 import { Side } from './OrderManager';
 
 export default class FrySlot extends ZepetoScriptBehaviour {
-    public fryButton: Button;    // Putting ingredients in the kitchen
-    public collectButton: Button;
-    public frySlider: Slider;
-    public frySliderFill: Image;
-    public defaultColor: Color;
-    public friedColor: Color;
-    public failedColor: Color;
-    public rawFrySprite: Sprite;
-    public bakedFrySprite: Sprite;
-    public burntFrySprite: Sprite;
-    public fryTime: number;
-    public burnTime: number;
+    @SerializeField() private fryButton: Button;    // Putting ingredients in the kitchen
+    @SerializeField() private collectButton: Button;
+    @SerializeField() private frySlider: Slider;
+    @SerializeField() private frySliderFill: Image;
+    @SerializeField() private defaultColor: Color;
+    @SerializeField() private friedColor: Color;
+    @SerializeField() private failedColor: Color;
+    @SerializeField() private rawFrySprite: Sprite;
+    @SerializeField() private bakedFrySprite: Sprite;
+    @SerializeField() private burntFrySprite: Sprite;
+    @SerializeField() private fryTime: number;
+    @SerializeField() private burnTime: number;
+    @SerializeField() private visibleImages: Image[];
     private startTime: number = 0;
     private currentTime: number = 0;
     private isFrying: bool;
     private isFryied: bool;
-    public visibleImages: Image[];
+
 
     Start() {
         this.init();

@@ -6,19 +6,20 @@ import OrderManager, { Drink } from './OrderManager';
 
 export default class Dispenser extends ZepetoScriptBehaviour {
 
-    public leftMax: RectTransform; // Max value that can be moved to the left
-    public rightMax: RectTransform; // Max value that can be moved to the right
-    public cupTransform: RectTransform; // Cup's Transform
-    public speed: number; //이동속도+방향
-    public speedRange: number = 0.1; //이동속도 오차
-    public direction: number; //이동속도+방향
-    private isCatch: boolean;
-    public stopBtn: Button;
-    public cupBtn: Button;
-    public cup: Cup;
+    @SerializeField() private leftMax: RectTransform; // Max value that can be moved to the left
+    @SerializeField() private rightMax: RectTransform; // Max value that can be moved to the right
+    @SerializeField() private cupTransform: RectTransform; // Cup's Transform
+    @SerializeField() private speed: number; //이동속도+방향
+    @SerializeField() private speedRange: number = 0.1; //이동속도 오차
+    @SerializeField() private direction: number; //이동속도+방향
+    @SerializeField() private stopBtn: Button;
+    @SerializeField() private cupBtn: Button;
+    @SerializeField() private cup: Cup;
+    @SerializeField() private defaultCupSprite: Sprite;
+    @SerializeField() private cupSprites: Sprite[];
     private curDrink: number;
-    public defaultCupSprite: Sprite;
-    public cupSprites: Sprite[];
+    private isCatch: boolean;
+
 
     Start() {
         this.cup = this.cupBtn.gameObject.GetComponent<Cup>();

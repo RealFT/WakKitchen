@@ -4,13 +4,14 @@ import { WorldService } from 'ZEPETO.World';
 import { GameObject, Vector3 } from 'UnityEngine';
 
 export default class CharacterController extends ZepetoScriptBehaviour {
-    public playerObject: GameObject;
-    public moveControlUI: GameObject;
-    public safeArea: GameObject;
-    public jumpButton: GameObject;
-    public touchPad: ZepetoScreenTouchpad;
-    public handlePos: Vector3;
-    public handleOriginPos: Vector3;
+    @SerializeField() private playerObject: GameObject;
+    @SerializeField() private moveControlUI: GameObject;
+    @SerializeField() private safeArea: GameObject;
+    @SerializeField() private jumpButton: GameObject;
+    @SerializeField() private touchPad: ZepetoScreenTouchpad;
+    @SerializeField() private handlePos: Vector3;
+    @SerializeField() private handleOriginPos: Vector3;
+    
     Awake() {
         // Grab the user id specified from logging into zepeto through the editor. 
         ZepetoPlayers.instance.CreatePlayerWithUserId(WorldService.userId, new SpawnInfo(), true);

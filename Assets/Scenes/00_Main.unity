@@ -1765,7 +1765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8614037108539310944, guid: ed5fc7f5016e44f439c63a191b93d1ea, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8614037108539310944, guid: ed5fc7f5016e44f439c63a191b93d1ea, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2302,7 +2302,7 @@ MonoBehaviour:
     values:
     - 
     - 
-    - '{"type":"System.Single, mscorlib","value":"1"}'
+    - '{"type":"System.Single, mscorlib","value":"3"}'
     - '{"type":"System.Single, mscorlib","value":"8"}'
     - '{"type":"System.Single, mscorlib","value":"22"}'
     unityArrayValues: []
@@ -2742,7 +2742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2607189331095998211, guid: 5a479d30909b1e3409bbd0db2e5d8c04, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2607189331095998211, guid: 5a479d30909b1e3409bbd0db2e5d8c04, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2843,7 +2843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7966424733526562651, guid: cb2cd55019b645c4f80db4b493ce3749, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7966424733526562651, guid: cb2cd55019b645c4f80db4b493ce3749, type: 3}
       propertyPath: m_AnchorMax.x

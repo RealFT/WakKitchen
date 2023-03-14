@@ -4,15 +4,15 @@ import { GameObject, Sprite } from 'UnityEngine';
 
 export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
 
-    public panel: GameObject;
-    public closePanelButton: Button;
+    @SerializeField() private panel: GameObject;
+    @SerializeField() private closePanelButton: Button;
 
     //private ingredientImages: Image[];
-    public burgerImages: Image[];
-    public drinkImage: Image;
-    public sideImage: Image;
-    public additionalOrderText: Text;
-    public customerImage: Image;
+    @SerializeField() private burgerImages: Image[];
+    @SerializeField() private drinkImage: Image;
+    @SerializeField() private sideImage: Image;
+    @SerializeField() private additionalOrderText: Text;
+    @SerializeField() private customerImage: Image;
 
     Start(){
         this.closePanelButton.onClick.AddListener(() => {

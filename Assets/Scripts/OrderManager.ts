@@ -3,7 +3,6 @@ import { Coroutine, Debug, GameObject, Sprite, WaitForSeconds } from 'UnityEngin
 import { Button, Slider } from 'UnityEngine.UI';
 import ExpandOrderReceipt from './ExpandOrderReceipt';
 import Receipt from './Receipt';
-import GameManager from './GameManager';
 import DataManager from './DataManager';
 import OrderReceipt from './OrderReceipt';
 import BalanceManager, { Currency } from './Shop/BalanceManager';

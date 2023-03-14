@@ -6,20 +6,20 @@ import { Ingredient } from './OrderManager';
 
 export default class CookSlot extends ZepetoScriptBehaviour {
 
-    public serveButton: Button; // Button to try serving after plating is finished
-    public treshButton: Button; // Button to throwing away food in the trash
+    @SerializeField() private serveButton: Button; // Button to try serving after plating is finished
+    @SerializeField() private treshButton: Button; // Button to throwing away food in the trash
 
     // Inventory related variables
     // must be same index productSlots and productCountTexts
-    public productSlots: Button[];  // Slots for stored items
-    public productCountTexts: Text[] = [];
+    @SerializeField() private productSlots: Button[];  // Slots for stored items
+    @SerializeField() private productCountTexts: Text[] = [];
     private productCounts: number[] = [];   // number of products stored in the inventory.
     private products: number[] = []; // list of products stored in the inventory.
 
     // Plate related variables
-    public plateSideImage: Image;   // Side image to be served on a plate
-    public plateDrinkImage: Image;  // Drink Image to be served on a plate
-    public plateImages: Image[];
+    @SerializeField() private plateSideImage: Image;   // Side image to be served on a plate
+    @SerializeField() private plateDrinkImage: Image;  // Drink Image to be served on a plate
+    @SerializeField() private plateImages: Image[];
     private plateIndex: number;
     private plateLimit: number;
     private platedProducts: number[] = []; // an array of the indexes for plated Products

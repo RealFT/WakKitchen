@@ -22,8 +22,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
         return DataManager.Instance;
     }
 
-    public receiptFile: TextAsset;
-    public stageFile: TextAsset;
+    @SerializeField() private receiptFile: TextAsset;
+    @SerializeField() private stageFile: TextAsset;
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
     private stages: number[][] = [];
