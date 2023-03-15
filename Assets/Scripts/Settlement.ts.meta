@@ -1,0 +1,77 @@
+fileFormatVersion: 2
+guid: 3be5c7b313a2b5a4da453620a4e110c9
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst GameManager_1 = require(\"./GameManager\");\r\nconst
+    BalanceManager_1 = require(\"./Shop/BalanceManager\");\r\n// Settlement UI class
+    that displays information about daily profits and costs.\r\nclass Settlement
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.animationInProgress = false;\r\n       
+    // Array of Generator functions that will be stored in the animations array.\r\n       
+    // Each function animates a single UI element with a corresponding value.\r\n       
+    this.animations = [\r\n            () => this.NumberAnimation(this.totalSaleText,
+    this.totalSale, this.animationDuration),\r\n            () => this.NumberAnimation(this.employeeText,
+    -this.employeeCost, this.animationDuration),\r\n            () => this.NumberAnimation(this.IngredientsText,
+    -this.ingredientsCost, this.animationDuration),\r\n            () => this.NumberAnimation(this.netIncomeText,
+    this.netIncome, this.animationDuration)\r\n        ];\r\n    }\r\n    Start()
+    {\r\n        this.doubleIncomeButton.onClick.AddListener(() => {\r\n           
+    this.OnDoubleIncome();\r\n        });\r\n    }\r\n    /**\r\n     * Coroutine
+    function that animates a number on a Text UI element from 0 to the specified
+    endNumber.\r\n     * @param targetText Text UI element that will display the
+    animated number.\r\n     * @param endNumber The number that the animation will
+    end on.\r\n     * @param duration The duration of the animation in seconds.\r\n    
+    */\r\n    *NumberAnimation(targetText, endNumber, duration) {\r\n        let
+    timer = 0;\r\n        while (timer < duration) {\r\n            const progress
+    = timer / duration;\r\n            const currentNumber = Math.floor(UnityEngine_1.Mathf.Lerp(0,
+    endNumber, progress));\r\n            targetText.text = currentNumber.toLocaleString();\r\n           
+    yield new UnityEngine_1.WaitForSeconds(UnityEngine_1.Time.deltaTime);\r\n           
+    timer += UnityEngine_1.Time.deltaTime;\r\n        }\r\n        targetText.text
+    = `${endNumber}`;\r\n    }\r\n    //  Coroutine function that plays a sequence
+    of animations stored in the animations array.\r\n    *AnimationSequence() {\r\n       
+    for (const animation of this.animations) {\r\n            this.animationInProgress
+    = true;\r\n            yield* animation();\r\n            this.animationInProgress
+    = false;\r\n        }\r\n    }\r\n    // Called when the Settlement UI is enabled.\r\n   
+    // Resets all Text UI elements to empty strings and starts the AnimationSequence
+    coroutine.\r\n    OnEnable() {\r\n        this.doubleIncomeButton.gameObject.SetActive(true);\r\n       
+    this.ResetPriceTexts();\r\n        this.GetPriceInformation();\r\n        this.StartCoroutine(this.AnimationSequence());\r\n   
+    }\r\n    // Resets all Text UI elements to empty strings.\r\n    ResetPriceTexts()
+    {\r\n        this.dateText.text = `Day ${GameManager_1.default.GetInstance().GetCurrentStage()}`;\r\n       
+    this.totalSaleText.text = \"\";\r\n        this.employeeText.text = \"\";\r\n       
+    this.IngredientsText.text = \"\";\r\n        this.netIncomeText.text = \"\";\r\n   
+    }\r\n    // Gets daily profit and cost information from the BalanceManager class
+    and calculates net income.\r\n    GetPriceInformation() {\r\n        this.totalSale
+    = BalanceManager_1.default.GetInstance().GetTotalGainBalanceHistory();\r\n       
+    this.ingredientsCost = BalanceManager_1.default.GetInstance().GetTotalUseBalanceHistory();\r\n       
+    this.employeeCost = 300;\r\n        this.netIncome = this.totalSale - this.ingredientsCost
+    - this.employeeCost;\r\n        this.netIncomeText.color = this.netIncome >=
+    0 ? this.totalSaleText.color : this.IngredientsText.color;\r\n    }\r\n    //
+    Doubles the current net income and displays the result using animation.\r\n   
+    OnDoubleIncome() {\r\n        if (this.animationInProgress) {\r\n           
+    return; // Ignore the click event if the animation is in progress.\r\n       
+    }\r\n        this.doubleIncomeButton.gameObject.SetActive(false);\r\n       
+    // Double the current net income and add the previous net income as profit.\r\n       
+    BalanceManager_1.default.GetInstance().GainBalance(BalanceManager_1.Currency.wak,
+    this.netIncome);\r\n        this.netIncome *= 2;\r\n        // Run the ScoreAnimation
+    coroutine.\r\n        this.animationInProgress = true;\r\n        this.StartCoroutine(this.NumberAnimation(this.netIncomeText,
+    this.netIncome, this.animationDuration));\r\n    }\r\n}\r\nexports.default =
+    Settlement;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2V0dGxlbWVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNldHRsZW1lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBaUU7QUFFakUsaURBQXFEO0FBQ3JELCtDQUF3QztBQUN4QywwREFBaUU7QUFFakUsK0VBQStFO0FBQy9FLE1BQXFCLFVBQVcsU0FBUSxxQ0FBcUI7SUFBN0Q7O1FBU1ksd0JBQW1CLEdBQVksS0FBSyxDQUFDO1FBRTdDLDRFQUE0RTtRQUM1RSx5RUFBeUU7UUFDakUsZUFBVSxHQUF3QjtZQUN0QyxHQUFHLEVBQUUsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUUsSUFBSSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsaUJBQWlCLENBQUM7WUFDdEYsR0FBRyxFQUFFLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsWUFBWSxFQUFFLENBQUMsSUFBSSxDQUFDLFlBQVksRUFBRSxJQUFJLENBQUMsaUJBQWlCLENBQUM7WUFDekYsR0FBRyxFQUFFLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsZUFBZSxFQUFFLENBQUMsSUFBSSxDQUFDLGVBQWUsRUFBRSxJQUFJLENBQUMsaUJBQWlCLENBQUM7WUFDL0YsR0FBRyxFQUFFLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsYUFBYSxFQUFFLElBQUksQ0FBQyxTQUFTLEVBQUUsSUFBSSxDQUFDLGlCQUFpQixDQUFDO1NBQ3pGLENBQUM7SUFzRk4sQ0FBQztJQS9FRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLGtCQUFrQixDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQzdDLElBQUksQ0FBQyxjQUFjLEVBQUUsQ0FBQztRQUMxQixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRDs7Ozs7T0FLRztJQUNLLENBQUMsZUFBZSxDQUFDLFVBQWdCLEVBQUUsU0FBaUIs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","assetPath":"Assets/Scripts/Settlement.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"dateText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"totalSaleText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"employeeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"IngredientsText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"netIncomeText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"doubleIncomeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"animationDuration","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Settlement","description":""},"isCompiled":true}'
+  typescriptHash: 460615dd27e91ebc4d0608e749513553
+  onlyWriteTrigger: 0

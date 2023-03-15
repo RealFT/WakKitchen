@@ -39,7 +39,7 @@ export default class Receipt extends ZepetoScriptBehaviour {
         return this._ingredients;
     }
 
-    setReceipt(id: number, pay: number, drink: number, side: number, character: number, additionalOrder: string, ingredients: number[]){
+    SetReceipt(id: number, pay: number, drink: number, side: number, character: number, additionalOrder: string, ingredients: number[]){
         this._id = id;
         this._pay = pay;
         this._ingredients = ingredients;

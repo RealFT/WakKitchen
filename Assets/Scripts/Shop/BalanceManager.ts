@@ -6,7 +6,8 @@ import { BalanceListResponse, CurrencyService, CurrencyError } from "ZEPETO.Curr
 import { ProductRecord, ProductService } from "ZEPETO.Product";
 import { ZepetoWorldMultiplay } from "ZEPETO.World";
 import { RoomData, Room } from "ZEPETO.Multiplay";
-import Mediator, { EventNames } from '../Notification/Mediator';
+import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import GameManager from '../GameManager';
 
 export default class BalanceManager extends ZepetoScriptBehaviour implements IListener {
     // 싱글톤 패턴
@@ -29,6 +30,9 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
     Awake() {
         if (this != BalanceManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
+
+    private gainBalanceHistory: { currencyId: string, quantity: number }[] = [];
+    private useBalanceHistory: { currencyId: string, quantity: number }[] = [];
 
     private _multiplay: ZepetoWorldMultiplay;
     private _room: Room
@@ -73,6 +77,8 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onCredit", data.GetObject());
         console.warn("GainBalance");
+        // if in Game, Add balance to history
+        if (GameManager.GetInstance().isInGame) this.gainBalanceHistory.push({ currencyId, quantity });
     }
 
     public UseBalance(currencyId: string, quantity: number) {
@@ -81,6 +87,21 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onDebit", data.GetObject());
         console.warn("UseBalance");
+        // if in Game, Add balance to history
+        if(GameManager.GetInstance().isInGame) this.useBalanceHistory.push({ currencyId, quantity });
+    }
+
+    public GetTotalGainBalanceHistory(): number {
+        return this.gainBalanceHistory.reduce((total, curr) => total + curr.quantity, 0);
+    }
+
+    public GetTotalUseBalanceHistory(): number {
+        return this.useBalanceHistory.reduce((total, curr) => total + curr.quantity, 0);
+    }
+
+    public ClearAllBalanceHistory() {
+        this.gainBalanceHistory = [];
+        this.useBalanceHistory = [];
     }
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {

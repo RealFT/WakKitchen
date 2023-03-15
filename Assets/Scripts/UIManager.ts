@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text } from "UnityEngine.UI";
 import { GameObject, WaitForSeconds } from 'UnityEngine';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
-import Mediator, { EventNames } from './Notification/Mediator';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
 export default class UIManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
@@ -28,7 +28,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private gameUI: GameObject[];
     @SerializeField() private timeText: Text;
     @SerializeField() private possessionMoneyTxt: Text;
-    @SerializeField() private informationPref: GameObject;
+    @SerializeField() private informationObj: GameObject;
     @SerializeField() private displayDelay: number = 0.7;
 
     Awake() {
@@ -39,23 +39,23 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     Start() {
         Mediator.GetInstance().RegisterListener(this);
         this.Init();
-        this.setGameUI(false);
-        this.setMainUI(true);
-        //this.setSceneUI();
+        this.SetGameUI(false);
+        this.SetMainUI(true);
+        //this.SetSceneUI();
     }
 
     public Init() {
-        this.setSceneUI();
+        this.SetSceneUI();
         this.SetSettlementUI(false);
-        this.informationPref.SetActive(false);
+        this.informationObj.SetActive(false);
     }
 
-    public initStageUI(){
-        this.setMainUI(false);
-        this.setGameUI(true);
+    public InitStageUI(){
+        this.SetMainUI(false);
+        this.SetGameUI(true);
     }
     
-    public disableStageUI(){
+    public DisableStageUI(){
         this.SetSettlementUI(false);
     }
 
@@ -63,26 +63,26 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.settlementUI.SetActive(value);
     }
 
-    private setMainUI(value:boolean){
+    private SetMainUI(value:boolean){
         for(let i=0;i<this.mainUI.length;i++){
             this.mainUI[i].SetActive(value);
         }
     }
     
-    private setGameUI(value:boolean){
+    private SetGameUI(value:boolean){
         for(let i=0;i<this.gameUI.length;i++){
             this.gameUI[i].SetActive(value);
         }
     }
 
-    public setSceneUI(){
+    public SetSceneUI(){
         if (SceneLoadManager.GetInstance().getCurrentScene() == SceneName.Main) {
-            this.setGameUI(false);
-            this.setMainUI(true);
+            this.SetGameUI(false);
+            this.SetMainUI(true);
         }
         else {
-            this.setMainUI(false);
-            this.setGameUI(true);
+            this.SetMainUI(false);
+            this.SetGameUI(true);
         }
     }
 
@@ -102,14 +102,14 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     }
 
     public OpenInformation(message: string) {
-        this.informationPref.GetComponentInChildren<Text>().text = message;
+        this.informationObj.GetComponentInChildren<Text>().text = message;
         this.StartCoroutine(this.DisaplayInformation());
     }
 
     private * DisaplayInformation(){
-        this.informationPref.SetActive(true);
+        this.informationObj.SetActive(true);
         yield new WaitForSeconds(this.displayDelay);
-        this.informationPref.SetActive(false);
+        this.informationObj.SetActive(false);
     }
 
     private SetPossessionMoneyText(money: string) {

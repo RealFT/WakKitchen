@@ -30,15 +30,15 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
-        this.loadData();
+        this.LoadData();
     }
 
-    public loadData() {    
-        this.loadReceiptData();
-        this.loadStageData();
+    public LoadData() {    
+        this.LoadReceiptData();
+        this.LoadStageData();
     }
 
-    public loadReceiptData() {
+    public LoadReceiptData() {
         const lines = this.receiptFile.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
@@ -50,12 +50,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
             for (let j = 6; j < values.length; j++) {
                 ingredients.push(+values[j]);
             }
-            receipt.setReceipt(+values[0], +values[1], +values[2], +values[3], +values[4], values[5], ingredients);
+            receipt.SetReceipt(+values[0], +values[1], +values[2], +values[3], +values[4], values[5], ingredients);
             this.receipts.push(receipt);
         };
     }
 
-    public loadStageData() {
+    public LoadStageData() {
         const lines = this.stageFile.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
@@ -67,19 +67,19 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public setStageReceipts(stage: number) {
+    public SetStageReceipts(stage: number) {
         this.stageReceipts = [];
         for (let index = 0; index < this.stages[stage].length; index++) {
-            this.stageReceipts.push(this.getReceipt(this.stages[stage][index]));
+            this.stageReceipts.push(this.GetReceipt(this.stages[stage][index]));
         }
     }
 
-    public getRandomStageReceipt(): Receipt {
+    public GetRandomStageReceipt(): Receipt {
         const index = Math.floor(Random.Range(0, this.stageReceipts.length));
         return this.stageReceipts[index];
     }
 
-    public getReceipt(index: number): Receipt {
+    public GetReceipt(index: number): Receipt {
         return this.receipts[index];
     }
 }

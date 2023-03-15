@@ -33,55 +33,54 @@ export default class GameManager extends ZepetoScriptBehaviour {
     // components
     @SerializeField() private characterController: CharacterController;
     @SerializeField() private quarterViewController: QuarterViewController;
-    //@SerializeField() private cookObj: GameObject;
-    //private cook: Cook;
-    private timer: Timer;
-
-    private lastSavedDay: number;      // last saved Day(Stage).
     @SerializeField() private minutesPerDay: number;    // n minutes pass in one day.
     @SerializeField() private startHour: number;    // Stage Start Hour
     @SerializeField() private endHour: number;    // Stage End Hour
+    private timer: Timer;
+    private lastSavedDay: number;      // last saved Day(Stage).
     private currTime: [number, number]; // current time
-    private isInGame: boolean;
     private curStage: number;
-
+    public _isInGame: boolean;
+    public get isInGame(): boolean {
+        return this._isInGame;
+    }
     Awake() {
         if (this != GameManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {
-        this.init();
+        this.Init();
     }
 
-    init() {
+    Init() {
         /* need load */
         this.lastSavedDay = 0;
         this.curStage = this.lastSavedDay;
     }
-
+    
+    // Initializes the stage
     InitStage() {
         Debug.Log("InitStage");
         this.timer = new Timer();
         this.timer.SetTimeScale(this.minutesPerDay);
         this.timer.SetTime(this.startHour, 0);
-        DataManager.GetInstance().setStageReceipts(this.curStage);
+        DataManager.GetInstance().SetStageReceipts(this.curStage);
 
-        //this.stageUIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<StageUIController>();
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
-        //this.cook = this.cookObj.GetComponent<Cook>();
 
-        this.isInGame = true;
-        OrderManager.GetInstance().init();
+        this._isInGame = true;
+        OrderManager.GetInstance().Init();
         OrderManager.GetInstance().StartOrder();
-        //this.cook.init();
-        UIManager.GetInstance().initStageUI();
+        //this.cook.Init();
+        UIManager.GetInstance().InitStageUI();
+        BalanceManager.GetInstance().ClearAllBalanceHistory();
         Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
         this.SetPlayerJump(false);
     }
 
     Update() {
-        if (this.isInGame) {
+        if (this._isInGame) {
             this.StageUpdate();
         }
     }
@@ -94,7 +93,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         if (this.currTime[0] >= this.endHour) {
             this.currTime[1] = 0;
             UIManager.GetInstance().SetSettlementUI(true);
-            this.isInGame = false;
+            this._isInGame = false;
         }
         // update UI
         UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
@@ -113,19 +112,19 @@ export default class GameManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public nextStage(): void {
+    public NextStage(): void {
         this.curStage++;
     }
 
-    public getCurrentStage(): number {
+    public GetCurrentStage(): number {
         return this.curStage;
     }
 
     public Reset() {
-        // reset all variables to their initial values
+        // reset all variables to their Initial values
         this.timer.SetTime(this.startHour, 0);
         this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
-        this.isInGame = false;
+        this._isInGame = false;
     
         // reset UI
         UIManager.GetInstance().SetSettlementUI(false);
@@ -136,7 +135,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         //OrderManager.GetInstance().Reset();
         //DataManager.GetInstance().Reset();
     
-        // initialize the game
-        this.init();
+        // Initialize the game
+        this.Init();
     }
 }

@@ -1,6 +1,9 @@
 import { GameObject } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 
+export interface IListener {
+    OnNotify(sender: any, eventName: string, eventData: any): void;
+}
 
 export class EventNames {
     public static CurrencyUpdatedEvent: string = "CurrencyUpdatedEvent";
