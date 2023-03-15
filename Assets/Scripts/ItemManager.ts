@@ -6,6 +6,7 @@ import { BalanceListResponse, CurrencyService, CurrencyError } from "ZEPETO.Curr
 import { ZepetoWorldMultiplay } from "ZEPETO.World";
 import { Room, RoomData } from "ZEPETO.Multiplay";
 import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, InventorySync } from "./Shop/BalanceManager";
+import UIManager from './UIManager';
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -15,9 +16,9 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         if (!ItemManager.Instance) {
             //Debug.LogError("ItemManager");
 
-            var _obj = GameObject.Find("Managers");
+            var _obj = GameObject.Find("ItemManager");
             if (!_obj) {
-                _obj = new GameObject("Managers");
+                _obj = new GameObject("ItemManager");
                 _obj.AddComponent<ItemManager>();
             }
             ItemManager.Instance = _obj.GetComponent<ItemManager>();
@@ -25,8 +26,6 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         }
         return ItemManager.Instance;
     }
-
-    @SerializeField() private informationPref: GameObject;
 
     private _foodCache: ProductRecord[] = [];
     private _upgradeCache: ProductRecord[] = [];
@@ -54,11 +53,11 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     private InitMessageHandler() {
         // log message handler
         this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
-            this.OpenInformation(`${message.currencyId} a Increase or decrease: ${message.quantity}`);
+            //UIManager.GetInstance().OpenInformation(`${message.currencyId} a Increase or decrease: ${message.quantity}`);
         });
 
         this._multiplay.Room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
-            this.OpenInformation(`${message.productId} has been ${InventoryAction[message.inventoryAction]} in the inventory.`);
+            UIManager.GetInstance().OpenInformation(`${message.productId} has been ${InventoryAction[message.inventoryAction]} in the inventory.`);
             // item use sample
             /*if(message.inventoryAction == InventoryAction.Used){
                 if(message.productId == "potion1"){
@@ -68,16 +67,15 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         });
 
         this._room.AddMessageHandler<string>("DebitError", (message) => {
-            this.OpenInformation(message);
+            UIManager.GetInstance().OpenInformation(message);
         });
         ProductService.OnPurchaseCompleted.AddListener((product, response) => {
-            this.OpenInformation(`${response.productId} Purchase Completed`);
+            UIManager.GetInstance().OpenInformation(`${response.productId} Purchase Completed`);
         });
         ProductService.OnPurchaseFailed.AddListener((product, response) => {
-            this.OpenInformation(response.message);
+            UIManager.GetInstance().OpenInformation(response.message);
         });
     }
-
 
     private * LoadAllItems() {
         const request = ProductService.GetProductsAsync();
@@ -118,23 +116,6 @@ export default class ItemManager extends ZepetoScriptBehaviour {
 
     public getCardCache(): ProductRecord[] {
         return this._cardCache;
-    }
-
-    // public RefreshAllBalanceUI(){
-    //     this.StartCoroutine(this.RefreshBalanceUI());
-    // }
-
-    // private *RefreshBalanceUI(){
-    //     const request = CurrencyService.GetUserCurrencyBalancesAsync();
-    //     yield new WaitUntil(()=>request.keepWaiting == false);
-    //     if(request.responseData.isSuccess) {
-    //         this.possessionMoneyTxt.text = request.responseData.currencies?.ContainsKey(Currency.wak) ? request.responseData.currencies?.get_Item(Currency.wak).toString() :"0";
-    //     }
-    // }
-
-    public OpenInformation(message: string) {
-        const inforObj = GameObject.Instantiate(this.informationPref, this.transform.parent) as GameObject;
-        inforObj.GetComponentInChildren<Text>().text = message;
     }
 
     // public GainBalance(currencyId: string, quantity: number) {

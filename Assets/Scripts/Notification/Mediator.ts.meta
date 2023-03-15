@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+guid: 121042ae03b674a4db128caf2b98c056
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.EventNames = void 0;\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass EventNames {\r\n}\r\nexports.EventNames
+    = EventNames;\r\nEventNames.CurrencyUpdatedEvent = \"CurrencyUpdatedEvent\";\r\nEventNames.IngredientCountUpdated
+    = \"IngredientCountUpdated\";\r\nEventNames.PossessionMoneyUpdated = \"PossessionMoneyUpdated\";\r\nclass
+    Mediator extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.listeners = [];\r\n    }\r\n   
+    static GetInstance() {\r\n        if (!Mediator.Instance) {\r\n            //Debug.LogError(\"Mediator\");\r\n           
+    var _obj = UnityEngine_1.GameObject.Find(\"Mediator\");\r\n            if (!_obj)
+    {\r\n                _obj = new UnityEngine_1.GameObject(\"Mediator\");\r\n               
+    _obj.AddComponent($typeof(Mediator));\r\n            }\r\n            Mediator.Instance
+    = _obj.GetComponent($typeof(Mediator));\r\n            UnityEngine_1.GameObject.DontDestroyOnLoad(_obj);\r\n       
+    }\r\n        return Mediator.Instance;\r\n    }\r\n    Awake() {\r\n        if
+    (this != Mediator.GetInstance())\r\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n   
+    }\r\n    RegisterListener(listener) {\r\n        this.listeners.push(listener);\r\n   
+    }\r\n    UnregisterListener(listener) {\r\n        const index = this.listeners.indexOf(listener);\r\n       
+    if (index > -1) {\r\n            this.listeners.splice(index, 1);\r\n       
+    }\r\n    }\r\n    Notify(sender, eventName, eventData) {\r\n        this.listeners.forEach(listener
+    => {\r\n            listener.OnNotify(sender, eventName, eventData);\r\n       
+    });\r\n    }\r\n}\r\nexports.default = Mediator;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWVkaWF0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJNZWRpYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSw2Q0FBeUM7QUFDekMsaURBQXFEO0FBR3JELE1BQWEsVUFBVTs7QUFBdkIsZ0NBSUM7QUFIaUIsK0JBQW9CLEdBQVcsc0JBQXNCLENBQUM7QUFDdEQsaUNBQXNCLEdBQVcsd0JBQXdCLENBQUM7QUFDMUQsaUNBQXNCLEdBQVcsd0JBQXdCLENBQUM7QUFHNUUsTUFBcUIsUUFBUyxTQUFRLHFDQUFxQjtJQUEzRDs7UUFtQlksY0FBUyxHQUFnQixFQUFFLENBQUM7SUF3QnhDLENBQUM7SUF4Q1UsTUFBTSxDQUFDLFdBQVc7UUFFckIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUU7WUFDcEIsNkJBQTZCO1lBRTdCLElBQUksSUFBSSxHQUFHLHdCQUFVLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1lBQ3ZDLElBQUksQ0FBQyxJQUFJLEVBQUU7Z0JBQ1AsSUFBSSxHQUFHLElBQUksd0JBQVUsQ0FBQyxVQUFVLENBQUMsQ0FBQztnQkFDbEMsSUFBSSxDQUFDLFlBQVksU0FBQyxRQUFRLEdBQUk7YUFDakM7WUFDRCxRQUFRLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsUUFBUSxFQUFHLENBQUM7WUFDbEQsd0JBQVUsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN0QztRQUNELE9BQU8sUUFBUSxDQUFDLFFBQVEsQ0FBQztJQUM3QixDQUFDO0lBSUQsS0FBSztRQUNELElBQUksSUFBSSxJQUFJLFFBQVEsQ0FBQyxXQUFXLEVBQUU7WUFBRSx3QkFBVSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7SUFDNUUsQ0FBQztJQUdNLGdCQUFnQixDQUFDLFFBQW1CO1FBQ3ZDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ2xDLENBQUM7SUFFTSxrQkFBa0IsQ0FBQyxRQUFtQjtRQUN6QyxNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUMvQyxJQUFJLEtBQUssR0FBRyxDQUFDLENBQUMsRUFBRTtZQUNaLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxDQUFDLENBQUMsQ0FBQztTQUNuQztJQUNMLENBQUM7SUFFTSxNQUFNLENBQUMsTUFBVyxFQUFFLFNBQWlCLEVBQUUsU0FBYztRQUN4RCxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsRUFBRTtZQUM5QixRQUFRLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRSxTQUFTLEVBQUUsU0FBUyxDQUFDLENBQUM7UUFDcEQsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0NBRUo7QUEzQ0QsMkJBMkNDIn0=","assetPath":"Assets/Scripts/Notification/Mediator.ts","manifest":{"properties":[],"name":"EventNames","description":""},"isCompiled":true}'
+  typescriptHash: f08a8c57c08d4a673cdcecfdfd9dd010
+  onlyWriteTrigger: 0

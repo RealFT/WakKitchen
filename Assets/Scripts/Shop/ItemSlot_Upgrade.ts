@@ -1,5 +1,5 @@
 import { Button, Image, Text } from 'UnityEngine.UI';
-import {GameObject, Sprite} from 'UnityEngine'
+import { GameObject, Sprite } from 'UnityEngine'
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ProductRecord } from 'ZEPETO.Product';
 import ItemManager from '../ItemManager';

@@ -3,8 +3,9 @@ import { GameObject, Debug } from "UnityEngine";
 import { Button, Image, Text } from "UnityEngine.UI";
 import OrderManager, { Drink, Side } from './OrderManager';
 import { Ingredient } from './OrderManager';
+import Mediator, { EventNames } from './Notification/Mediator';
 
-export default class CookSlot extends ZepetoScriptBehaviour {
+export default class CookSlot extends ZepetoScriptBehaviour implements IListener{
 
     @SerializeField() private serveButton: Button; // Button to try serving after plating is finished
     @SerializeField() private treshButton: Button; // Button to throwing away food in the trash
@@ -27,14 +28,6 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     Start() {
         this.init();
     }
-
-    private OnEnable() {
-        this.GetProductsData();
-        this.UpdateProductDisplay();
-    }
-
-    // private OnDisable() {
-    // }
 
     init() {
         // Initialize variables
@@ -106,6 +99,7 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         }
     }
 
+
     // Update the display of the product inventory
     private UpdateProductDisplay(): void {
         for (let i = 0; i < this.productSlots.length; i++) {
@@ -164,5 +158,28 @@ export default class CookSlot extends ZepetoScriptBehaviour {
         if(this.productCounts[index] <= 0){
             this.SetSlot(index, false);
         }
+    }
+
+    private OnEnable() {
+        this.GetProductsData();
+        this.UpdateProductDisplay();
+        Mediator.GetInstance().RegisterListener(this);
+    }
+
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if (eventName == EventNames.IngredientCountUpdated) {
+            this.GetProductsData();
+            this.UpdateProductDisplay();
+        }
+    }
+    
+    Reset() {
+        this.InitPlate();
+        this.GetProductsData();
+        this.UpdateProductDisplay();
     }
 }

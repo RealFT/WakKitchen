@@ -9,6 +9,7 @@ import DataManager from './DataManager';
 import OrderManager from './OrderManager';
 import UIManager from './UIManager';
 import BalanceManager from './Shop/BalanceManager';
+import Mediator, { EventNames } from './Notification/Mediator';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -18,9 +19,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
         if (!GameManager.Instance) {
             //Debug.LogError("GameManager");
 
-            var _obj = GameObject.Find("Managers");
+            var _obj = GameObject.Find("GameManager");
             if (!_obj) {
-                _obj = new GameObject("Managers");
+                _obj = new GameObject("GameManager");
                 _obj.AddComponent<GameManager>();
             }
             GameManager.Instance = _obj.GetComponent<GameManager>();
@@ -75,7 +76,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         OrderManager.GetInstance().StartOrder();
         //this.cook.init();
         UIManager.GetInstance().initStageUI();
-        BalanceManager.GetInstance().RefreshAllBalanceUI();
+        Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
         this.SetPlayerJump(false);
     }
 
@@ -129,7 +130,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // reset UI
         UIManager.GetInstance().SetSettlementUI(false);
         UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
-        BalanceManager.GetInstance().RefreshAllBalanceUI();
+        Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
     
         // reset managers
         //OrderManager.GetInstance().Reset();

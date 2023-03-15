@@ -3,6 +3,7 @@ import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEng
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Side } from './OrderManager';
+import Mediator, { EventNames } from './Notification/Mediator';
 
 export default class EmployeeSlot extends ZepetoScriptBehaviour {
     @SerializeField() private pauseResumeToggle: Toggle;
@@ -46,6 +47,7 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
             if (this.currentTime >= this.workTime) {
                 // Work done.
                 OrderManager.GetInstance().AddItemToInventory(this.foodId);
+                Mediator.GetInstance().Notify(this, EventNames.IngredientCountUpdated, null);
                 this.workSlider.value = 0;
                 this.currentTime = 0;
             }

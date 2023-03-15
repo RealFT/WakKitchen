@@ -1,9 +1,10 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text } from "UnityEngine.UI";
-import { GameObject } from 'UnityEngine';
+import { GameObject, WaitForSeconds } from 'UnityEngine';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
-import UIBalances from './Shop/BalanceManager';
-export default class UIManager extends ZepetoScriptBehaviour {
+import Mediator, { EventNames } from './Notification/Mediator';
+
+export default class UIManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
     private static Instance: UIManager;
     public static GetInstance(): UIManager {
@@ -11,9 +12,9 @@ export default class UIManager extends ZepetoScriptBehaviour {
         if (!UIManager.Instance) {
             //Debug.LogError("GameManager");
 
-            var _obj = GameObject.Find("Managers");
+            var _obj = GameObject.Find("UIManager");
             if (!_obj) {
-                _obj = new GameObject("Managers");
+                _obj = new GameObject("UIManager");
                 _obj.AddComponent<UIManager>();
             }
             UIManager.Instance = _obj.GetComponent<UIManager>();
@@ -26,6 +27,9 @@ export default class UIManager extends ZepetoScriptBehaviour {
     @SerializeField() private mainUI: GameObject[];
     @SerializeField() private gameUI: GameObject[];
     @SerializeField() private timeText: Text;
+    @SerializeField() private possessionMoneyTxt: Text;
+    @SerializeField() private informationPref: GameObject;
+    @SerializeField() private displayDelay: number = 0.7;
 
     Awake() {
         if (this != UIManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -33,6 +37,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
     }
 
     Start() {
+        Mediator.GetInstance().RegisterListener(this);
         this.Init();
         this.setGameUI(false);
         this.setMainUI(true);
@@ -42,6 +47,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
     public Init() {
         this.setSceneUI();
         this.SetSettlementUI(false);
+        this.informationPref.SetActive(false);
     }
 
     public initStageUI(){
@@ -93,5 +99,30 @@ export default class UIManager extends ZepetoScriptBehaviour {
         const time = `${formattedHour}:${formattedMinute} ${ampm}`;
 
         this.timeText.text = time;
+    }
+
+    public OpenInformation(message: string) {
+        this.informationPref.GetComponentInChildren<Text>().text = message;
+        this.StartCoroutine(this.DisaplayInformation());
+    }
+
+    private * DisaplayInformation(){
+        this.informationPref.SetActive(true);
+        yield new WaitForSeconds(this.displayDelay);
+        this.informationPref.SetActive(false);
+    }
+
+    private SetPossessionMoneyText(money: string) {
+        this.possessionMoneyTxt.text = money;
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if (eventName == EventNames.PossessionMoneyUpdated) {
+            this.SetPossessionMoneyText(eventData);
+        }
+    }
+
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
     }
 }

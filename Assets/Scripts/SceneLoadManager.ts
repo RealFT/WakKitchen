@@ -18,9 +18,9 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
     public static GetInstance(): SceneLoadManager {
 
         if (!SceneLoadManager.Instance) {
-            var _obj = GameObject.Find("Managers");
+            var _obj = GameObject.Find("SceneLoadManager");
             if (!_obj) {
-                _obj = new GameObject("Managers");
+                _obj = new GameObject("SceneLoadManager");
                 _obj.AddComponent<SceneLoadManager>();
             }
             SceneLoadManager.Instance = _obj.GetComponent<SceneLoadManager>();
