@@ -9,6 +9,7 @@ export class EventNames {
     public static CurrencyUpdatedEvent: string = "CurrencyUpdatedEvent";
     public static IngredientCountUpdated: string = "IngredientCountUpdated";
     public static PossessionMoneyUpdated: string = "PossessionMoneyUpdated";
+    public static UpgradeUpdated: string = "UpgradeUpdated";
 }
 
 export default class Mediator extends ZepetoScriptBehaviour {

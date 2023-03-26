@@ -13,21 +13,31 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
     @SerializeField() private priceTxt :Text;
     @SerializeField() private buyBtn: Button;
 
-    // public SetItemSlot(item: StoreItem) {
-    //     this.storeItem = item;
-    //     this.buyBtn.onClick.AddListener(() => {
-    //         this.buyItem(item);
-    //     });
-    // }
-
-    public SetItem(ir :ProductRecord, sprite: Sprite){
+    public SetItem(ir: ProductRecord, sprite: Sprite, upgradeLevel: number, isFullyUpgraded: boolean) {
         this.itemImage.sprite = sprite;
         this.itemRecord = ir;
         this.nameTxt.text = ir.name.toString();
         this.priceTxt.text = ir.price.toString();
-        this.buyBtn.onClick.AddListener(() => {
-            this.StartCoroutine(ItemManager.GetInstance().PurchaseItem(ir.productId));
-        });
+        if (!isFullyUpgraded) {
+            this.buyBtn.onClick.AddListener(() => {
+                this.StartCoroutine(ItemManager.GetInstance().PurchaseItem(ir.productId));
+            });
+            this.SetStar(upgradeLevel);
+        }
+        else{
+            this.buyBtn.gameObject.SetActive(false);
+            this.SetStar(upgradeLevel+1);
+        }
+        
+    }
+
+    private SetStar(upgradeLevel: number) {
+        for (const index in this.starObjs) {
+            this.starObjs[index].SetActive(false);
+        }
+        for (let visibleIndex = 0; visibleIndex < upgradeLevel - 1; visibleIndex++) {
+            this.starObjs[visibleIndex].SetActive(true);
+        }
     }
 
     public GetItemRecord(): ProductRecord {

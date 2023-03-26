@@ -18,31 +18,66 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+  compiledResult: '{"source":"\"use strict\";\r\nvar __decorate = (this && this.__decorate)
+    || function (decorators, target, key, desc) {\r\n    var c = arguments.length,
+    r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target,
+    key) : desc, d;\r\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate
+    === \"function\") r = Reflect.decorate(decorators, target, key, desc);\r\n   
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i])
+    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\r\n   
+    return c > 3 && r && Object.defineProperty(target, key, r), r;\r\n};\r\nObject.defineProperty(exports,
+    \"__esModule\", { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
     ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ItemSlot_Upgrade_1 = require(\"./ItemSlot_Upgrade\");\r\nconst
-    ItemManager_1 = require(\"../ItemManager\");\r\nclass Shop_Upgrade extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    Start() {\r\n        this.CreateSlot(ItemManager_1.default.GetInstance().getUpgradeCache());\r\n   
-    }\r\n    CreateSlot(items) {\r\n        // Clear the existing items in the content
-    parent.\r\n        const itemSlots = this.horizontalContent.GetComponentsInChildren($typeof(ItemSlot_Upgrade_1.default));\r\n       
-    if (itemSlots) {\r\n            for (let i = 0; i < itemSlots.length; i++) {\r\n               
-    UnityEngine_1.GameObject.Destroy(itemSlots[i].gameObject);\r\n            }\r\n       
-    }\r\n        const regex = /(\\w+)_(\\w+)_(\\d)/;\r\n        // Create an Upgrade
-    Slot for each item in the list.\r\n        for (let productRecord of items) {\r\n           
-    // only not Purchased Items\r\n            if (!productRecord.isPurchased) {\r\n               
-    // Set up the item''s image using the itemImages array.\r\n                const
-    match = productRecord.productId.match(regex);\r\n                const itemName
-    = match ? match.get_Item(2) : \"\";\r\n                UnityEngine_1.Debug.Log(productRecord);\r\n               
-    this.SetupUpgradeSlot(productRecord, match.get_Item(2));\r\n            }\r\n       
-    }\r\n        // items.forEach((productRecord) => {\r\n        //     // only
-    not Purchased Items\r\n        //     if (!productRecord.isPurchased) {\r\n       
-    //         // Set up the item''s image using the itemImages array.\r\n       
-    //         const match = productRecord.productId.match(regex);\r\n        //        
-    const itemName = match ? match[1] : \"\";\r\n        //         Debug.Log(productRecord);\r\n       
-    //         this.SetupUpgradeSlot(productRecord, match[1]);\r\n        //    
-    }\r\n        // });\r\n    }\r\n    SetupUpgradeSlot(itemRecord, itemName) {\r\n       
-    // Instantiate a new item object and set its parent to the content parent object.\r\n       
-    const slotObj = UnityEngine_1.Object.Instantiate(this.upgradeSlotPref, this.horizontalContent.transform);\r\n       
+    ItemManager_1 = require(\"../ItemManager\");\r\nconst Mediator_1 = require(\"../Notification/Mediator\");\r\nclass
+    Shop_Upgrade extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n       
+    this.CreateUpgradeSlots(ItemManager_1.default.GetInstance().getUpgradeCache());\r\n   
+    }\r\n    OnNotify(sender, eventName, eventData) {\r\n        if (eventName ==
+    Mediator_1.EventNames.CurrencyUpdatedEvent) {\r\n            const product =
+    ItemManager_1.default.GetInstance().GetProduct(eventData);\r\n            if
+    (product) {\r\n                const match = product.productId.split(''_'');\r\n               
+    //product.Name\r\n            }\r\n        }\r\n    }\r\n    CreateUpgradeSlots(items)
+    {\r\n        // Clear the existing items in the content parent.\r\n        const
+    existingSlots = this.horizontalContent.GetComponentsInChildren($typeof(ItemSlot_Upgrade_1.default));\r\n       
+    if (existingSlots) {\r\n            for (let i = 0; i < existingSlots.length;
+    i++) {\r\n                UnityEngine_1.GameObject.Destroy(existingSlots[i].gameObject);\r\n           
+    }\r\n        }\r\n        // /^(.+)_(.+)_(\\d+)$/ captures 3 groups separated
+    by underscore:\r\n        // 1: Shop Category, 2: item Name, 3: upgrade level\r\n       
+    // third matches single digit separated by underscore.\r\n        //const regex:
+    RegExp = /^(.+)_(.+)_(\\d+)$/;\r\n        // Create groups based on match[2]
+    value to extract items with the lowest match[3] value.\r\n        const upgradeGroups
+    = {};\r\n        const fullyUpgradedGroups = {};\r\n        for (let item of
+    items) {\r\n            const match = item.productId.split(''_'');\r\n           
+    const itemName = match[1];\r\n            if (match) {\r\n                //
+    Only retrieve unpurchased items.\r\n                if (item.isPurchased) {\r\n                   
+    // if item is fully upgraded, add to fullyUpgradedGroups.\r\n                   
+    if (parseInt(match[2]) === Shop_Upgrade.MaxUpgradeLevel) {\r\n                       
+    if (!fullyUpgradedGroups[itemName]) {\r\n                            fullyUpgradedGroups[itemName]
+    = [];\r\n                        }\r\n                        fullyUpgradedGroups[itemName].push(item);\r\n                   
+    }\r\n                    continue;\r\n                }\r\n                if
+    (!upgradeGroups[itemName]) {\r\n                    upgradeGroups[itemName] =
+    [];\r\n                }\r\n                upgradeGroups[itemName].push(item);\r\n           
+    }\r\n        }\r\n        // Extract items with the lowest match[3] value from
+    each group.\r\n        for (let groupName in upgradeGroups) {\r\n           
+    const groupItems = upgradeGroups[groupName];\r\n            let minItem = groupItems[0];\r\n           
+    for (let i = 1; i < groupItems.length; i++) {\r\n                const currentItem
+    = groupItems[i];\r\n                const currentUpgradeLevel = parseInt(currentItem.productId.split(''_'')[2]);\r\n               
+    const minUpgradeLevel = parseInt(minItem.productId.split(''_'')[2]);\r\n               
+    if (currentUpgradeLevel < minUpgradeLevel) {\r\n                    minItem =
+    currentItem;\r\n                }\r\n            }\r\n            // Create an
+    Upgrade Slot for each item in the list.\r\n            const match = minItem.productId.split(''_'');\r\n           
+    const itemName = match ? match[1] : \"\";\r\n            const upgradeLevel =
+    match ? parseInt(match[2]) : 0;\r\n            this.SetupUpgradeSlot(minItem,
+    itemName, upgradeLevel, false);\r\n        }\r\n        // Extract items with
+    the lowest match[3] value from each group.\r\n        for (let groupName in fullyUpgradedGroups)
+    {\r\n            const groupItems = fullyUpgradedGroups[groupName];\r\n           
+    let minItem = groupItems[0];\r\n            // Create an Upgrade Slot for each
+    item in the list.\r\n            const match = minItem.productId.split(''_'');\r\n           
+    const itemName = match ? match[1] : \"\";\r\n            const upgradeLevel =
+    match ? parseInt(match[2]) : 0;\r\n            this.SetupUpgradeSlot(minItem,
+    itemName, upgradeLevel, true);\r\n        }\r\n    }\r\n    SetupUpgradeSlot(itemRecord,
+    itemName, upgradeLevel, isFullyUpgraded) {\r\n        // Instantiate a new item
+    object and set its parent to the content parent object.\r\n        const slotObj
+    = UnityEngine_1.Object.Instantiate(this.upgradeSlotPref, this.horizontalContent.transform);\r\n       
     // Calculate the new width of the Content object based on the width of the prefabs
     and the spacing.\r\n        let prefabWidth = slotObj.GetComponent($typeof(UnityEngine_1.RectTransform)).rect.width;\r\n       
     let spacing = this.layoutGroup.spacing;\r\n        let newWidth = this.horizontalContent.rect.width
@@ -53,7 +88,11 @@ ScriptedImporter:
     => s.name == itemRecord.productId);\r\n        const itemImage = this.itemImages[itemImageIndex];\r\n       
     // Set up the item''s properties using its ITM_Inventory component.\r\n       
     const itemScript = slotObj.GetComponent($typeof(ItemSlot_Upgrade_1.default));\r\n       
-    itemScript.SetItem(itemRecord, itemImage);\r\n    }\r\n}\r\nexports.default =
-    Shop_Upgrade;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9VcGdyYWRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9VcGdyYWRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW1HO0FBRW5HLGlEQUFxRDtBQUNyRCx5REFBa0Q7QUFFbEQsZ0RBQXlDO0FBRXpDLE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFPM0QsS0FBSztRQUNELElBQUksQ0FBQyxVQUFVLENBQUMscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxDQUFDO0lBQ2pFLENBQUM7SUFFTyxVQUFVLENBQUMsS0FBc0I7UUFDckMsa0RBQWtEO1FBQ2xELE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyx1QkFBdUIsU0FBQywwQkFBZ0IsRUFBRyxDQUFDO1FBQ3JGLElBQUksU0FBUyxFQUFFO1lBQ1gsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLFNBQVMsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQ3ZDLHdCQUFVLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQzthQUMvQztTQUNKO1FBRUQsTUFBTSxLQUFLLEdBQUcsa0JBQWtCLENBQUM7UUFDakMsb0RBQW9EO1FBQ3BELEtBQUksSUFBSSxhQUFhLElBQUksS0FBSyxFQUFFO1lBQzVCLDJCQUEyQjtZQUMzQixJQUFJLENBQUMsYUFBYSxDQUFDLFdBQVcsRUFBRTtnQkFDNUIsc0RBQXNEO2dCQUN0RCxNQUFNLEtBQUssR0FBRyxhQUFhLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDbkQsTUFBTSxRQUFRLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxLQUFLLFVBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxFQUFFLENBQUM7Z0JBQ3ZDLG1CQUFLLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQyxDQUFDO2dCQUN6QixJQUFJLENBQUMsZ0JBQWdCLENBQUMsYUFBYSxFQUFFLEtBQUssVUFBQyxDQUFDLEVBQUUsQ0FBQzthQUNsRDtTQUNKO1FBQ0QscUNBQXFDO1FBQ3JDLGtDQUFrQztRQUNsQyx3Q0FBd0M7UUFDeEMsaUVBQWlFO1FBQ2pFLDhEQUE4RDtRQUM5RCxrREFBa0Q7UUFDbEQsb0NBQW9DO1FBQ3BDLDBEQUEwRDtRQUMxRCxRQUFRO1FBQ1IsTUFBTTtJQUNWLENBQUM7SUFFTyxnQkFBZ0IsQ0FBQyxVQUF5QixFQUFFLFFBQWdCO1FBQ2hFLGlGQUFpRjtRQUNqRixNQUFNLE9BQU8sR0FBRyxvQkFBTSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsZUFBZSxFQUFFLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQWUsQ0FBQztRQUV6RyxtR0FBbUc7UUFDbkcsSUFBSSxXQUFXLEdBQUcsT0FBTyxDQUFDLFlBQVksU0FBQywyQkFBYSxHQUFJLElBQUksQ0FBQyxLQUFLLENBQUM7UUFDbkUsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUM7UUFDdkMsSUFBSSxRQUFRLEdBQUcsSUFBSSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxLQUFLLEdBQUcsV0FBVyxHQUFHLE9BQU8sQ0FBQztRQUV6RSxtRUFBbUU7UUFDbkUsSUFBSSxDQUFDLGlCQUFpQixDQUFDLFNBQVMsR0FBRyxJQUFJLHFCQUFPLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFFN0YsTUFBTSxjQUFjLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEtBQUssUUFBUSxDQUFDLENBQUM7UUFFN0UsMkZBQTJGO1FBQzNGLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsY0FBYyxDQUFDLENBQUM7UUFFbEQsa0VBQWtFO1FBQ2xFLE1BQU0sVUFBVSxHQUFHLE9BQU8sQ0FBQyxZQUFZLFNBQUMsMEJBQWdCLEVBQUcsQ0FBQztRQUM1RCxVQUFVLENBQUMsT0FBTyxDQUFDLFVBQVUsRUFBRSxTQUFTLENBQUMsQ0FBQztJQUM5QyxDQUFDO0NBRUo7QUFsRUQsK0JBa0VDIn0=","assetPath":"Assets/Scripts/Shop/Shop_Upgrade.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"upgradeSlotPref","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"horizontalContent","type":"UnityEngine.RectTransform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"layoutGroup","type":"UnityEngine.UI.HorizontalLayoutGroup","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"itemImages","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Shop_Upgrade","description":""},"isCompiled":true}'
-  typescriptHash: 6f713f75650f4e72161b625b757eb752
+    itemScript.SetItem(itemRecord, itemImage, upgradeLevel, isFullyUpgraded);\r\n   
+    }\r\n}\r\nShop_Upgrade.MaxUpgradeLevel = 3;\r\n__decorate([], Shop_Upgrade.prototype,
+    \"upgradeSlotPref\", void 0);\r\n__decorate([], Shop_Upgrade.prototype, \"horizontalContent\",
+    void 0);\r\n__decorate([], Shop_Upgrade.prototype, \"layoutGroup\", void 0);\r\n__decorate([],
+    Shop_Upgrade.prototype, \"itemImages\", void 0);\r\nexports.default = Shop_Upgrade;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9VcGdyYWRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9VcGdyYWRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUEsNkNBQW1HO0FBRW5HLGlEQUFxRDtBQUNyRCx5REFBa0Q7QUFFbEQsZ0RBQXlDO0FBQ3pDLHVEQUEyRTtBQUUzRSxNQUFxQixZQUFhLFNBQVEscUNBQXFCO0lBTzNELEtBQUs7UUFDRCxJQUFJLENBQUMsa0JBQWtCLENBQUMscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxDQUFDO0lBQ3pFLENBQUM7SUFFTSxRQUFRLENBQUMsTUFBVyxFQUFFLFNBQWlCLEVBQUUsU0FBYztRQUMxRCxJQUFJLFNBQVMsSUFBSSxxQkFBVSxDQUFDLG9CQUFvQixFQUFFO1lBQzlDLE1BQU0sT0FBTyxHQUFHLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1lBQ2hFLElBQUksT0FBTyxFQUFDO2dCQUNSLE1BQU0sS0FBSyxHQUFHLE9BQU8sQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2dCQUMzQyxjQUFjO2FBQ2pCO1NBQ0o7SUFDTCxDQUFDO0lBRU8sa0JBQWtCLENBQUMsS0FBc0I7UUFDN0Msa0RBQWtEO1FBQ2xELE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyx1QkFBdUIsU0FBQywwQkFBZ0IsRUFBRyxDQUFDO1FBQ3pGLElBQUksYUFBYSxFQUFFO1lBQ2YsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLGFBQWEsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQzNDLHdCQUFVLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQzthQUNuRDtTQUNKO1FBRUQsaUVBQWlFO1FBQ2pFLG1EQUFtRDtRQUNuRCxz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","assetPath":"Assets/Scripts/Shop/Shop_Upgrade.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"upgradeSlotPref","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"horizontalContent","type":"UnityEngine.RectTransform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"layoutGroup","type":"UnityEngine.UI.HorizontalLayoutGroup","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"itemImages","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Shop_Upgrade","description":""},"isCompiled":true}'
+  typescriptHash: 447a6de158837e7cccd2b1b34735af01
   onlyWriteTrigger: 0

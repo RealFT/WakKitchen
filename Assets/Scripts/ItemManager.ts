@@ -7,6 +7,7 @@ import { ZepetoWorldMultiplay } from "ZEPETO.World";
 import { Room, RoomData } from "ZEPETO.Multiplay";
 import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, InventorySync } from "./Shop/BalanceManager";
 import UIManager from './UIManager';
+import Mediator from './Notification/Mediator';
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -150,24 +151,26 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         yield new WaitUntil(() => request.keepWaiting == false);
         if (request.responseData.isSuccess) {
             // is purchase success
+            // Mediator를 통해 UI 클래스에 possessionMoney값 전달
+            Mediator.GetInstance().Notify(this, "UpgradeUpdated", productId);
         } else {
             // is purchase fail
         }
     }
 
-    // public GetProduct(productId: string): ProductRecord | undefined {
-    //     const prefix = productId.split('_')[0];
-    //     switch (prefix) {
-    //         case ItemType.food:
-    //             return this._foodCache.get(productId);
-    //         case ItemType.upgrade:
-    //             return this._upgradeCache.get(productId);
-    //         case ItemType.card:
-    //             return this._cardCache.get(productId);
-    //         default:
-    //             return undefined; // Return undefined for products with unrecognized prefixes.
-    //     }
-    // }
+    public GetProduct(productId: string): ProductRecord | undefined {
+        const prefix = productId.split('_')[0];
+        switch (prefix) {
+            case ItemType.food:
+                return this._foodCache.find((item) => item.productId === productId);
+            case ItemType.upgrade:
+                return this._upgradeCache.find((item) => item.productId === productId);
+            case ItemType.card:
+                return this._cardCache.find((item) => item.productId === productId);;
+            default:
+                return undefined; // Return undefined for products with unrecognized prefixes.
+        }
+    }
 
     private * BtnInterval(btn: Button) {
         btn.interactable = false;

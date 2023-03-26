@@ -17,16 +17,36 @@ MonoBehaviour:
     targetAssetPath: 
   - targetId: upgrade_dispenser_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Dispenser.png
+  - targetId: upgrade_dispenser_2
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/dispenser.png
+  - targetId: upgrade_dispenser_3
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/dispenser.png
   - targetId: upgrade_frier_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Frier.png
+  - targetId: upgrade_frier_2
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/frier.png
+  - targetId: upgrade_frier_3
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/frier.png
   - targetId: upgrade_gril_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Grill.png
   - targetId: upgrade_grill_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/grill.png
+  - targetId: upgrade_grill_2
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/grill.png
+  - targetId: upgrade_grill_3
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/grill.png
   - targetId: upgrade_ingredient_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Ingredient.png
+  - targetId: upgrade_ingredient_2
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/ingredient.png
+  - targetId: upgrade_ingredient_3
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/ingredient.png
   - targetId: upgrade_slice_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Slice.png
+  - targetId: upgrade_slice_2
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/slice.png
+  - targetId: upgrade_slice_3
+    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/slice.png
   currencyTextureInfo:
   - targetId: wak
     targetAssetPath: Assets/Resources/Sprites/UI/MONEY icon.png
