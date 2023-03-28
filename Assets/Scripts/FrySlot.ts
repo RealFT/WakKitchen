@@ -3,8 +3,9 @@ import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEng
 import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Side } from './OrderManager';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
-export default class FrySlot extends ZepetoScriptBehaviour {
+export default class FrySlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private fryButton: Button;    // Putting ingredients in the kitchen
     @SerializeField() private collectButton: Button;
     @SerializeField() private frySlider: Slider;
@@ -25,15 +26,26 @@ export default class FrySlot extends ZepetoScriptBehaviour {
 
 
     Start() {
-        this.init();
+        this.fryButton.onClick.AddListener(() => { this.StartBaking(); });
+        this.Init();
+        Mediator.GetInstance().RegisterListener(this);
+    }
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
     }
 
-    init(){
+    private Init(){
         this.StopAllCoroutines();
-        this.collectButton.interactable = false;
-        this.collectButton.gameObject.SetActive(false);
-        this.frySlider.gameObject.SetActive(false);
-        this.fryButton.onClick.AddListener(() => { this.StartBaking(); });
+        this.ClearFry();
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        switch(eventName){
+            case EventNames.StageStarted:
+            case EventNames.StageEnded:
+                this.Init();
+                break;
+        }
     }
 
     // Start Baking.

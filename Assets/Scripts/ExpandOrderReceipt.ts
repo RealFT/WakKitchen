@@ -20,26 +20,35 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
         });
     }
 
-    public SetOrderReceipt(burgerSprites: Sprite[],
-        drinkSprite: Sprite, sideSprite: Sprite, additionalOrder: string,
-        customerSprite: Sprite): void {
-
-        for (let i = 0; i < this.burgerImages.length; i++) {
-            if (i >= this.burgerImages.length) break;
-            if (i < burgerSprites.length) {
-                this.burgerImages[i].sprite = burgerSprites[i];
-                this.burgerImages[i].enabled = true;
-            }
-            else {
-                this.burgerImages[i].enabled = false;
-            }
+    public SetOrderReceipt(burgerSprites: Sprite[], drinkSprite: Sprite, 
+        sideSprite: Sprite, additionalOrder: string, customerSprite: Sprite): void {
+            
+        this.ClearOrderReceipt();
+        for (let i = 0; i < burgerSprites.length; i++) {
+            this.burgerImages[i].sprite = burgerSprites[i];
+            this.burgerImages[i].enabled = true;
         }
 
-        this.drinkImage.sprite = drinkSprite;
-        this.sideImage.sprite = sideSprite;
-        this.additionalOrderText.text = additionalOrder;
-        this.customerImage.sprite = customerSprite;
+        if(drinkSprite) this.EnableImage(this.drinkImage, drinkSprite);
+        if(sideSprite) this.EnableImage(this.sideImage, sideSprite);
+        if(customerSprite) this.EnableImage(this.customerImage, customerSprite);
         this.customerImage.SetNativeSize();
+        if(additionalOrder) this.additionalOrderText.text = additionalOrder;
+    }
+
+    private ClearOrderReceipt(){
+        for (let i = 0; i < this.burgerImages.length; i++) {
+            this.burgerImages[i].enabled = false;
+        }
+        this.drinkImage.enabled = false;
+        this.sideImage.enabled = false;
+        this.additionalOrderText.text = "";
+        this.customerImage.enabled = false;
+    }
+
+    private EnableImage(image:Image, sprite: Sprite){
+        image.sprite = sprite;
+        image.enabled = true;
     }
 
     public setPanel(value: boolean) {

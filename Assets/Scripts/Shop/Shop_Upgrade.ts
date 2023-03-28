@@ -1,4 +1,4 @@
-import { Object, GameObject, Quaternion, RectTransform, Vector2, Sprite, Debug } from 'UnityEngine'
+import { Object, GameObject, Quaternion, RectTransform, Vector2, Sprite, Debug, Rect } from 'UnityEngine'
 import { HorizontalLayoutGroup,Button } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import ItemSlot_Upgrade from './ItemSlot_Upgrade';
@@ -12,13 +12,19 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
     @SerializeField() private horizontalContent: RectTransform;
     @SerializeField() private layoutGroup: HorizontalLayoutGroup;
     @SerializeField() private itemImages: Sprite[];
-
+    @SerializeField() private contentHeight: number;
     Start() {
+        Mediator.GetInstance().RegisterListener(this);
+    }
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+    public InitUpgradeShop(){
         this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
     }
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
-        if (eventName == EventNames.CurrencyUpdatedEvent) {
+        if (eventName == EventNames.UpgradeUpdated) {
             const product = ItemManager.GetInstance().GetProduct(eventData);
             if (product){
                 const match = product.productId.split('_');
@@ -35,6 +41,8 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
                 GameObject.Destroy(existingSlots[i].gameObject);
             }
         }
+        // reset horizontalContent width.
+        this.horizontalContent.sizeDelta = new Vector2(0, this.contentHeight);
 
         // /^(.+)_(.+)_(\d+)$/ captures 3 groups separated by underscore:
         // 1: Shop Category, 2: item Name, 3: upgrade level
@@ -47,6 +55,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const match = item.productId.split('_');
             const itemName = match[1];
             if (match) {
+                console.log(match[1]+match[2]+item.isPurchased);
                 // Only retrieve unpurchased items.
                 if (item.isPurchased) {
                     // if item is fully upgraded, add to fullyUpgradedGroups.
@@ -106,7 +115,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         let newWidth = this.horizontalContent.rect.width + prefabWidth + spacing;
     
         // Set the size of the Content object using its sizeDelta property.
-        this.horizontalContent.sizeDelta = new Vector2(newWidth, this.horizontalContent.sizeDelta.y);
+        this.horizontalContent.sizeDelta = new Vector2(newWidth, this.contentHeight);
     
         const itemImageIndex = this.itemImages.findIndex((s) => s.name === itemName);
 

@@ -307,7 +307,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         }
     }
 
-    public disableOrder(){
+    public DisableOrder(){
         this.StopOrder();
         this.clearOrder();
         this.clearOrderReceipts();

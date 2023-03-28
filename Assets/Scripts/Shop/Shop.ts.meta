@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 3327af4b14bde7745b5cfd2e6034277c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Shop_Hire_1 = require(\"./Shop_Hire\");\r\nconst
+    Shop_Upgrade_1 = require(\"./Shop_Upgrade\");\r\nconst Shop_Food_1 = require(\"./Shop_Food\");\r\nconst
+    GameManager_1 = require(\"../GameManager\");\r\nclass Shop extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        for (let i = 0; i < this.categoryBtns.length; i++)
+    {\r\n            const categoryBtn = this.categoryBtns[i];\r\n            const
+    categoryPanel = this.panels[i];\r\n            categoryBtn.onClick.AddListener(()
+    => {\r\n                for (let j = 0; j < this.categoryBtns.length; j++) {\r\n                   
+    const btn = this.categoryBtns[j];\r\n                    const panel = this.panels[j];\r\n                   
+    panel.SetActive(categoryPanel === panel);\r\n                    btn.interactable
+    = (categoryBtn != btn);\r\n                }\r\n            });\r\n        }\r\n       
+    this.toStageBtn.onClick.AddListener(() => {\r\n            GameManager_1.default.GetInstance().NextStage();\r\n       
+    });\r\n    }\r\n    InitShop() {\r\n        var hireShop = this.panels[0].GetComponent($typeof(Shop_Hire_1.default));\r\n       
+    if (hireShop)\r\n            hireShop.InitHireShop();\r\n        var upgradeShop
+    = this.panels[1].GetComponent($typeof(Shop_Upgrade_1.default));\r\n        if
+    (upgradeShop)\r\n            upgradeShop.InitUpgradeShop();\r\n        var foodShop
+    = this.panels[2].GetComponent($typeof(Shop_Food_1.default));\r\n        if (foodShop)\r\n           
+    foodShop.InitFoodShop();\r\n    }\r\n}\r\nexports.default = Shop;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNob3AudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBeUM7QUFFekMsaURBQXNEO0FBQ3RELDJDQUFvQztBQUNwQyxpREFBMEM7QUFDMUMsMkNBQW9DO0FBQ3BDLGdEQUF5QztBQUV6QyxNQUFxQixJQUFLLFNBQVEscUNBQXFCO0lBS25ELEtBQUs7UUFDRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDL0MsTUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUN6QyxNQUFNLGFBQWEsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBRXJDLFdBQVcsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtnQkFDakMsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO29CQUMvQyxNQUFNLEdBQUcsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxDQUFDO29CQUNqQyxNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO29CQUU3QixLQUFLLENBQUMsU0FBUyxDQUFDLGFBQWEsS0FBSyxLQUFLLENBQUMsQ0FBQztvQkFDekMsR0FBRyxDQUFDLFlBQVksR0FBRyxDQUFDLFdBQVcsSUFBSSxHQUFHLENBQUMsQ0FBQztpQkFDM0M7WUFDTCxDQUFDLENBQUMsQ0FBQztTQUNOO1FBQ0QsSUFBSSxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLFNBQVMsRUFBRSxDQUFDO1FBQzFDLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVNLFFBQVE7UUFDWCxJQUFJLFFBQVEsR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLFlBQVksU0FBQyxtQkFBUyxFQUFHLENBQUM7UUFDeEQsSUFBRyxRQUFRO1lBQUUsUUFBUSxDQUFDLFlBQVksRUFBRSxDQUFDO1FBQ3JDLElBQUksV0FBVyxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUMsWUFBWSxTQUFDLHNCQUFZLEVBQUcsQ0FBQztRQUM5RCxJQUFHLFdBQVc7WUFBRSxXQUFXLENBQUMsZUFBZSxFQUFFLENBQUM7UUFDOUMsSUFBSSxRQUFRLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxZQUFZLFNBQUMsbUJBQVMsRUFBRyxDQUFDO1FBQ3hELElBQUcsUUFBUTtZQUFFLFFBQVEsQ0FBQyxZQUFZLEVBQUUsQ0FBQztJQUN6QyxDQUFDO0NBQ0o7QUFqQ0QsdUJBaUNDIn0=","assetPath":"Assets/Scripts/Shop/Shop.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"categoryBtns","type":"UnityEngine.UI.Button[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"toStageBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"panels","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Shop","description":""},"isCompiled":true}'
+  typescriptHash: 049ebdfaddbc69b43653c86c35f1a84f
+  onlyWriteTrigger: 0

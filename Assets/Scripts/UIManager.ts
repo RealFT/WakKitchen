@@ -3,6 +3,7 @@ import { Button, InputField, Slider, Text } from "UnityEngine.UI";
 import { GameObject, WaitForSeconds } from 'UnityEngine';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
+import Shop from './Shop/Shop';
 
 export default class UIManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
@@ -24,6 +25,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     }
 
     @SerializeField() private settlementUI: GameObject;
+    @SerializeField() private shopUI: GameObject;
     @SerializeField() private mainUI: GameObject[];
     @SerializeField() private gameUI: GameObject[];
     @SerializeField() private timeText: Text;
@@ -46,6 +48,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
 
     public Init() {
         this.SetSceneUI();
+        this.SetShopUI(false);
         this.SetSettlementUI(false);
         this.informationObj.SetActive(false);
     }
@@ -57,6 +60,20 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     
     public DisableStageUI(){
         this.SetSettlementUI(false);
+    }
+
+    public ToShop(){
+        console.log("ToShop");
+        this.SetSettlementUI(false);
+        this.SetShopUI(true);
+    }
+
+    public InitShopUI(){
+        this.shopUI.GetComponent<Shop>().InitShop();
+    }
+    
+    public SetShopUI(value: boolean) {
+        this.shopUI.SetActive(value);
     }
 
     public SetSettlementUI(value: boolean) {

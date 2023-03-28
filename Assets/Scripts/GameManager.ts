@@ -61,22 +61,52 @@ export default class GameManager extends ZepetoScriptBehaviour {
     // Initializes the stage
     InitStage() {
         Debug.Log("InitStage");
-        this.timer = new Timer();
-        this.timer.SetTimeScale(this.minutesPerDay);
-        this.timer.SetTime(this.startHour, 0);
-        DataManager.GetInstance().SetStageReceipts(this.curStage);
-
         this.characterController = GameObject.FindGameObjectWithTag("Character").GetComponent<CharacterController>();
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
+        
+        this.timer = new Timer();
+        this.timer.SetTimeScale(this.minutesPerDay);
 
-        this._isInGame = true;
+        Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
+        
+        UIManager.GetInstance().InitStageUI();
+        UIManager.GetInstance().InitShopUI();
+        //this.SetPlayerJump(false);
+    }
+
+    public StartStage(){
+        // reset all variables to their Initial values
+        this.timer.SetTime(this.startHour, 0);
+        this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
+
+        DataManager.GetInstance().SetStageReceipts(this.curStage);
+
         OrderManager.GetInstance().Init();
         OrderManager.GetInstance().StartOrder();
-        //this.cook.Init();
-        UIManager.GetInstance().InitStageUI();
+
         BalanceManager.GetInstance().ClearAllBalanceHistory();
-        Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
-        this.SetPlayerJump(false);
+
+        // reset UI
+        UIManager.GetInstance().SetSettlementUI(false);
+        UIManager.GetInstance().SetShopUI(false);
+        UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
+
+        if(this.characterController) this.characterController.InitPlayer();
+        this.SetPlayerMovement(true);
+
+        this._isInGame = true;
+
+        Mediator.GetInstance().Notify(this, EventNames.StageStarted, null);
+    }
+
+    public EndStage(){
+        UIManager.GetInstance().SetSettlementUI(true);
+        OrderManager.GetInstance().DisableOrder();
+
+        this.SetPlayerMovement(false);
+        this._isInGame = false;
+        
+        Mediator.GetInstance().Notify(this, EventNames.StageEnded, null);
     }
 
     Update() {
@@ -92,12 +122,12 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // stage end
         if (this.currTime[0] >= this.endHour) {
             this.currTime[1] = 0;
-            UIManager.GetInstance().SetSettlementUI(true);
-            this._isInGame = false;
+            this.EndStage();
         }
         // update UI
         UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
     }
+
 
     SetPlayerMovement(value: boolean) {
         if (this.characterController && this.quarterViewController) {
@@ -114,28 +144,31 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     public NextStage(): void {
         this.curStage++;
+        this.StartStage();
+        console.log(this.curStage);
     }
 
     public GetCurrentStage(): number {
         return this.curStage;
     }
 
-    public Reset() {
+    public RestartGame() {
         // reset all variables to their Initial values
         this.timer.SetTime(this.startHour, 0);
         this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
-        this._isInGame = false;
-    
+
+        DataManager.GetInstance().SetStageReceipts(this.curStage);
+        OrderManager.GetInstance().Init();
+        OrderManager.GetInstance().StartOrder();
+
         // reset UI
         UIManager.GetInstance().SetSettlementUI(false);
+        UIManager.GetInstance().SetShopUI(false);
         UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
-        Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
     
         // reset managers
         //OrderManager.GetInstance().Reset();
         //DataManager.GetInstance().Reset();
-    
-        // Initialize the game
-        this.Init();
+        this._isInGame = true;
     }
 }

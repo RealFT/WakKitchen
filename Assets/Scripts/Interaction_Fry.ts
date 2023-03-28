@@ -2,19 +2,35 @@ import { GameObject } from 'UnityEngine';
 import { Image } from 'UnityEngine.UI';
 import FrySlot from './FrySlot';
 import InteractionBase from './InteractionBase';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
-export default class Interaction_Fry extends InteractionBase {
+export default class Interaction_Fry extends InteractionBase implements IListener {
     @SerializeField() private frySlotObjects: GameObject[];
     @SerializeField() private images: Image[];
     @SerializeField() private fryPanel: GameObject;
 
     Start() {
         super.Start();
-        //Button Hide
         this.fryPanel.SetActive(true);
         this.kitchen.SetActive(true);
+        Mediator.GetInstance().RegisterListener(this);
+    }
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+    private Init(){
+        //Button Hide
         this.SetKitchenVisibility(false);
         this.openButton.gameObject.SetActive(false);
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        switch(eventName){
+            case EventNames.StageStarted:
+            case EventNames.StageEnded:
+                this.Init();
+                break;
+        }
     }
 
     OnTriggerEnter(collider) {

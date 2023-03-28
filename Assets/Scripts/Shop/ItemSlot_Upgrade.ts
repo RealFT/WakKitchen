@@ -32,7 +32,7 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
     }
 
     private SetStar(upgradeLevel: number) {
-        for (const index in this.starObjs) {
+        for (let index = 0; index < this.starObjs.length; index++) {
             this.starObjs[index].SetActive(false);
         }
         for (let visibleIndex = 0; visibleIndex < upgradeLevel - 1; visibleIndex++) {

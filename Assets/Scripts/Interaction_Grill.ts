@@ -2,8 +2,9 @@ import { GameObject } from 'UnityEngine';
 import { Image } from 'UnityEngine.UI';
 import GrillSlot from './GrillSlot';
 import InteractionBase from './InteractionBase';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
-export default class Interaction_Grill extends InteractionBase {
+export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private grillSlotObjects: GameObject[];
     @SerializeField() private images: Image[];
     @SerializeField() private grillPanel: GameObject;
@@ -14,6 +15,24 @@ export default class Interaction_Grill extends InteractionBase {
         // Set panels and kitchen active
         this.grillPanel.SetActive(true);
         this.kitchen.SetActive(true);
+        Mediator.GetInstance().RegisterListener(this);
+    }
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+    private Init(){
+        //Button Hide
+        this.SetKitchenVisibility(false);
+        this.openButton.gameObject.SetActive(false);
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        switch(eventName){
+            case EventNames.StageStarted:
+            case EventNames.StageEnded:
+                this.Init();
+                break;
+        }
     }
 
     OnTriggerEnter(collider) {

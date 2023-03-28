@@ -1,7 +1,9 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { SpawnInfo, ZepetoPlayers, LocalPlayer, ZepetoCharacter, UIZepetoPlayerControl, ZepetoScreenTouchpad } from 'ZEPETO.Character.Controller';
 import { WorldService } from 'ZEPETO.World';
-import { GameObject, Vector3 } from 'UnityEngine';
+import { GameObject, Quaternion, Vector3 } from 'UnityEngine';
+import SceneLoadManager from './SceneLoadManager';
+import GameManager from './GameManager';
 
 export default class CharacterController extends ZepetoScriptBehaviour {
     @SerializeField() private playerObject: GameObject;
@@ -11,6 +13,9 @@ export default class CharacterController extends ZepetoScriptBehaviour {
     @SerializeField() private touchPad: ZepetoScreenTouchpad;
     @SerializeField() private handlePos: Vector3;
     @SerializeField() private handleOriginPos: Vector3;
+    @SerializeField() private playerOriginPos: Vector3;
+    private zepetoCharacter: ZepetoCharacter;
+
     
     Awake() {
         // Grab the user id specified from logging into zepeto through the editor. 
@@ -18,8 +23,17 @@ export default class CharacterController extends ZepetoScriptBehaviour {
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
             //let _player: LocalPlayer = ZepetoPlayers.instance.LocalPlayer;
             let _player = ZepetoPlayers.instance.LocalPlayer;
+            this.zepetoCharacter = _player.zepetoPlayer.character;
+            this.playerOriginPos = _player.transform.position;
             this.TryGetMoveControl();
+            SceneLoadManager.GetInstance().SetCharacterLoaded();
+            GameManager.GetInstance().InitStage();
+            GameManager.GetInstance().StartStage();
         });
+    }
+
+    public InitPlayer(){
+        if(this.zepetoCharacter) this.zepetoCharacter.Teleport(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
     }
 
     TryGetMoveControl() {

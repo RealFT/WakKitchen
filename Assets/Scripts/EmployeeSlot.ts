@@ -3,9 +3,9 @@ import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEng
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Side } from './OrderManager';
-import Mediator, { EventNames } from './Notification/Mediator';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
-export default class EmployeeSlot extends ZepetoScriptBehaviour {
+export default class EmployeeSlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private pauseResumeToggle: Toggle;
     @SerializeField() private employeeImage: Image;    
     @SerializeField() private workSlider: Slider;
@@ -14,9 +14,11 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
     private currentTime: number = 0;
     private isWorking: boolean;
 
-    Start() {
-        this.init();
-        this.StartWorking();
+    Start(){
+        Mediator.GetInstance().RegisterListener(this);
+    }
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
     }
 
     init(){
@@ -26,6 +28,19 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
         this.isWorking = false;
     }
 
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        switch(eventName){
+            case EventNames.StageStarted:
+                console.log("StageStarted: employee");
+                this.init();
+                this.StartWorking();
+                break;
+            case EventNames.StageEnded:
+                this.init();
+                break;
+        }
+    }
+    
     // Start Baking.
     private StartWorking() {
         this.isWorking = true;
@@ -54,9 +69,5 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
 
             yield new WaitForSeconds(Time.deltaTime);
         }
-    }
-
-    private ToggleWorking() {
-        this.isWorking = !this.isWorking;
     }
 }

@@ -3,8 +3,9 @@ import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEng
 import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Ingredient } from './OrderManager';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
-export default class GrillSlot extends ZepetoScriptBehaviour {
+export default class GrillSlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private grillButton: Button;    // Putting ingredients in the kitchen
     @SerializeField() private bakingButton: Button;
     @SerializeField() private bakeSlider: Slider;
@@ -24,19 +25,29 @@ export default class GrillSlot extends ZepetoScriptBehaviour {
     private isFliped: bool;
     private isBaking: bool;
 
-
     Start() {
-        this.init();
-    }
-
-    init(){
-        this.StopAllCoroutines();
         this.bakingButton.interactable = false;
-        this.bakingButton.gameObject.SetActive(false);
-        this.bakeSlider.gameObject.SetActive(false);
         this.grillButton.onClick.AddListener(() => { this.StartBaking(); });
+        Mediator.GetInstance().RegisterListener(this);
+    }
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+ 
+    private Init(){
+        this.StopAllCoroutines();
+        this.ClearGrill();
     }
 
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        switch(eventName){
+            case EventNames.StageStarted:
+            case EventNames.StageEnded:
+                this.Init();
+                break;
+        }
+    }
+    
     // Start Baking.
     private StartBaking() {
         // Disable baking Button

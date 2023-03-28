@@ -10,6 +10,8 @@ export class EventNames {
     public static IngredientCountUpdated: string = "IngredientCountUpdated";
     public static PossessionMoneyUpdated: string = "PossessionMoneyUpdated";
     public static UpgradeUpdated: string = "UpgradeUpdated";
+    public static StageEnded: string = "StageEnded";
+    public static StageStarted: string = "StageStarted";
 }
 
 export default class Mediator extends ZepetoScriptBehaviour {
@@ -34,9 +36,10 @@ export default class Mediator extends ZepetoScriptBehaviour {
     private listeners: IListener[] = [];
 
     Awake() {
-        if (this != Mediator.GetInstance()) GameObject.Destroy(this.gameObject);
+        if (this != Mediator.GetInstance()) {
+            GameObject.Destroy(this.gameObject);
+        }
     }
-
 
     public RegisterListener(listener: IListener): void {
         this.listeners.push(listener);
@@ -54,5 +57,4 @@ export default class Mediator extends ZepetoScriptBehaviour {
             listener.OnNotify(sender, eventName, eventData);
         });
     }
-
 }

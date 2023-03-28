@@ -10,6 +10,9 @@ EditorBuildSettings:
     guid: 1d749fe6ab9b18f4f8c39db651958c5d
   - enabled: 1
     path: Assets/Scenes/01_Stage.unity
+    guid: 9a9e997eff2000044ae649029688c626
+  - enabled: 1
+    path: Assets/Scenes/01_Stage_Legacy.unity
     guid: 1464bdb1d56c1f747a17d3fd23c91848
   - enabled: 1
     path: Assets/Scenes/02_Shop.unity

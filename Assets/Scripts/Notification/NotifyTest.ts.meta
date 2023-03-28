@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: c3906335f85f52f439a93606fab31ae3
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Mediator_1 = require(\"./Mediator\");\r\nclass NotifyTest extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.debugBtn.onClick.AddListener(() => {\r\n           
+    Mediator_1.default.GetInstance().Notify(this, Mediator_1.EventNames.StageStarted,
+    null);\r\n        });\r\n    }\r\n}\r\nexports.default = NotifyTest;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTm90aWZ5VGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk5vdGlmeVRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFFckQseUNBQWtEO0FBQ2xELE1BQXFCLFVBQVcsU0FBUSxxQ0FBcUI7SUFJekQsS0FBSztRQUNELElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFFLEVBQUU7WUFDbEMsa0JBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLHFCQUFVLENBQUMsWUFBWSxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQ3ZFLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztDQUNKO0FBVEQsNkJBU0MifQ==","assetPath":"Assets/Scripts/Notification/NotifyTest.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"debugBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"NotifyTest","description":""},"isCompiled":true}'
+  typescriptHash: 688d3a6b13f2bf831b012fd8b81e8776
+  onlyWriteTrigger: 0

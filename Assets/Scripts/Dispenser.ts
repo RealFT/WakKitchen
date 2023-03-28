@@ -20,13 +20,11 @@ export default class Dispenser extends ZepetoScriptBehaviour {
     private curDrink: number;
     private isCatch: boolean;
 
-
     Start() {
         this.cup = this.cupBtn.gameObject.GetComponent<Cup>();
-        this.init();
         this.stopBtn.onClick.AddListener(() => {
             this.isCatch = (this.isCatch) ? false : true;
-            if (!this.isCatch) this.init();
+            if (!this.isCatch) this.StartMoving();
             else this.CheckDrink();
         });
         this.cupBtn.onClick.AddListener(() => {
@@ -35,7 +33,11 @@ export default class Dispenser extends ZepetoScriptBehaviour {
         });
     }
 
-    init() {
+    private OnEnable(){
+        this.StartMoving();
+    }
+
+    StartMoving() {
         this.StopAllCoroutines();
         this.isCatch = false;
         // const startPos = new Vector2(Random.Range(this.leftMax.anchoredPosition.x, this.rightMax.anchoredPosition.x), this.cupTransform.anchoredPosition.y);

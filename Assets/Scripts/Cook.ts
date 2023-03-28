@@ -3,7 +3,7 @@ import { GameObject, Debug } from "UnityEngine";
 import { Button, Image, Text } from "UnityEngine.UI";
 import OrderManager, { Drink, Side } from './OrderManager';
 import { Ingredient } from './OrderManager';
-import Mediator, { EventNames } from './Notification/Mediator';
+import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
 export default class CookSlot extends ZepetoScriptBehaviour implements IListener{
 
@@ -27,8 +27,11 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
 
     Start() {
         this.init();
+        Mediator.GetInstance().RegisterListener(this);
     }
-
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
     init() {
         // Initialize variables
         this.plateIndex = 0;
@@ -163,17 +166,17 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
     private OnEnable() {
         this.GetProductsData();
         this.UpdateProductDisplay();
-        Mediator.GetInstance().RegisterListener(this);
     }
 
-    private OnDestroy() {
-        Mediator.GetInstance().UnregisterListener(this);
-    }
+
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
         if (eventName == EventNames.IngredientCountUpdated) {
             this.GetProductsData();
             this.UpdateProductDisplay();
+        }
+        if (eventName == EventNames.StageEnded) {
+            this.Reset();
         }
     }
     

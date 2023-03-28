@@ -33,8 +33,8 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
     public loadingScreen: GameObject;
     public loadingProgressBar: Slider;
     private inverseNum: number = 1 / 0.9;
-
     private currentScene: SceneName;
+    private isCharacterLoaded: boolean;
 
     Awake() {
         if (this != SceneLoadManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -55,14 +55,15 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
     }
 
     *LoadSceneAsync(sceneName: SceneName) {
+        this.isCharacterLoaded = false;
         // Create an AsyncOperation object to track the progress of the scene load
         let asyncOperation: AsyncOperation = SceneManager.LoadSceneAsync(sceneName.toString());
-
+        let progress = 0;
         // Wait until the scene is fully loaded
         while (!asyncOperation.isDone) {
             // Update the progress of the loading screen based on the progress of the AsyncOperation
             // You can use this to update a loading bar or display a percentage
-            let progress = Mathf.Clamp01(asyncOperation.progress * this.inverseNum);
+            progress = Mathf.Clamp01(asyncOperation.progress * this.inverseNum);
             Debug.Log("Loading progress: " + progress);
             this.loadingProgressBar.value = progress;
             yield;
@@ -71,19 +72,23 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
         switch(sceneName){
             case SceneName.Main:
             case SceneName.Shop:
-                OrderManager.GetInstance().disableOrder();
+                OrderManager.GetInstance().DisableOrder();
                 UIManager.GetInstance().DisableStageUI();
                 break;
             case SceneName.Stage:
                 yield new WaitForSeconds(1.0);
-                GameManager.GetInstance().InitStage();
-                GameManager.GetInstance().NextStage();
+                // GameManager.GetInstance().InitStage();
+                // GameManager.GetInstance().NextStage();
                 break;
             default:
                 break;
         }
         // Hide the loading screen
         this.loadingScreen.SetActive(false);
+    }
+
+    public SetCharacterLoaded(){
+        this.isCharacterLoaded = true;
     }
 
     public getCurrentScene(): SceneName{

@@ -2,6 +2,7 @@ import { Color, Mathf, Time, WaitForSeconds } from 'UnityEngine';
 import { Text, Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
+import UIManager from './UIManager';
 import BalanceManager, { Currency } from './Shop/BalanceManager';
 
 // Settlement UI class that displays information about daily profits and costs.
@@ -13,6 +14,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     @SerializeField() private IngredientsText: Text;
     @SerializeField() private netIncomeText: Text;
     @SerializeField() private doubleIncomeButton: Button;
+    @SerializeField() private toShopButton: Button;
     @SerializeField() private animationDuration: number;
     private animationInProgress: boolean = false;
 
@@ -33,6 +35,9 @@ export default class Settlement extends ZepetoScriptBehaviour {
     Start() {
         this.doubleIncomeButton.onClick.AddListener(() => {
             this.OnDoubleIncome();
+        });
+        this.toShopButton.onClick.AddListener(() => {
+            UIManager.GetInstance().ToShop();
         });
     }
 
