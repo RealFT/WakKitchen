@@ -20,11 +20,18 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
-    Card extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    setCard(cardName,
-    grade, probability) {\r\n        this.cardName = cardName;\r\n        this.grade
-    = grade;\r\n        this.probability = probability;\r\n    }\r\n    getCardName()
-    {\r\n        return this.cardName;\r\n    }\r\n    getGrade() {\r\n        return
-    this.grade;\r\n    }\r\n    getProbability() {\r\n        return this.probability;\r\n   
-    }\r\n}\r\nexports.default = Card;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FyZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNhcmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFFckQsTUFBcUIsSUFBSyxTQUFRLHFDQUFxQjtJQUtuRCxPQUFPLENBQUMsUUFBZ0IsRUFBRSxLQUFhLEVBQUUsV0FBbUI7UUFDeEQsSUFBSSxDQUFDLFFBQVEsR0FBRyxRQUFRLENBQUM7UUFDekIsSUFBSSxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7UUFDbkIsSUFBSSxDQUFDLFdBQVcsR0FBRyxXQUFXLENBQUM7SUFDbkMsQ0FBQztJQUVNLFdBQVc7UUFDZCxPQUFPLElBQUksQ0FBQyxRQUFRLENBQUM7SUFDekIsQ0FBQztJQUVNLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQyxLQUFLLENBQUM7SUFDdEIsQ0FBQztJQUVNLGNBQWM7UUFDakIsT0FBTyxJQUFJLENBQUMsV0FBVyxDQUFDO0lBQzVCLENBQUM7Q0FDSjtBQXRCRCx1QkFzQkMifQ==","assetPath":"Assets/Scripts/Gacha/Card.ts","manifest":{"properties":[],"name":"Card","description":""},"isCompiled":true}'
-  typescriptHash: 67eca931fe693747f80a71333f69f078
+    Card extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetCard(productId,
+    grade, characterSprite) {\r\n        this.productId = productId;\r\n        this.grade
+    = grade;\r\n        this.characterImage.sprite = characterSprite;\r\n    }\r\n   
+    // public SetCard2(productId: string, grade: string, characterSprite: Sprite,
+    \r\n    //     dispenserProficiency: number, frierProficiency: number, grillProficiency:
+    number, sliceProficiency: number): void {\r\n    //     this.productId = productId;\r\n   
+    //     this.grade = grade;\r\n    //     this.characterImage.sprite = characterSprite;\r\n   
+    //     this.dispenserProficiencySlider.value = dispenserProficiency;\r\n    //    
+    this.frierProficiencySlider.value = frierProficiency;\r\n    //     this.grillProficiencySlider.value
+    = grillProficiency;\r\n    //     this.sliceProficiencySlider.value = sliceProficiency;\r\n   
+    // }\r\n    GetCardId() {\r\n        return this.productId;\r\n    }\r\n    GetGrade()
+    {\r\n        return this.grade;\r\n    }\r\n}\r\nexports.default = Card;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FyZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNhcmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFHckQsTUFBcUIsSUFBSyxTQUFRLHFDQUFxQjtJQVU1QyxPQUFPLENBQUMsU0FBaUIsRUFBRSxLQUFhLEVBQUUsZUFBdUI7UUFDcEUsSUFBSSxDQUFDLFNBQVMsR0FBRyxTQUFTLENBQUM7UUFDM0IsSUFBSSxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7UUFDbkIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEdBQUcsZUFBZSxDQUFDO0lBQ2pELENBQUM7SUFFRCw4RUFBOEU7SUFDOUUsMEhBQTBIO0lBQzFILGtDQUFrQztJQUNsQywwQkFBMEI7SUFDMUIsb0RBQW9EO0lBQ3BELG9FQUFvRTtJQUNwRSw0REFBNEQ7SUFDNUQsNERBQTREO0lBQzVELDREQUE0RDtJQUM1RCxJQUFJO0lBRUcsU0FBUztRQUNaLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQztJQUMxQixDQUFDO0lBRU0sUUFBUTtRQUNYLE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQztJQUN0QixDQUFDO0NBQ0o7QUFsQ0QsdUJBa0NDIn0=","assetPath":"Assets/Scripts/Gacha/Card.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"characterImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Card","description":""},"isCompiled":true}'
+  typescriptHash: 9ce5462448854bbcd07f9978db0957f8
   onlyWriteTrigger: 0

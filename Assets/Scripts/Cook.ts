@@ -1,9 +1,9 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Debug } from "UnityEngine";
 import { Button, Image, Text } from "UnityEngine.UI";
-import OrderManager, { Drink, Side } from './OrderManager';
-import { Ingredient } from './OrderManager';
+import OrderManager from './OrderManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
+import DataManager, { Ingredient, Drink, Side } from './DataManager';
 
 export default class CookSlot extends ZepetoScriptBehaviour implements IListener{
 
@@ -108,7 +108,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
         for (let i = 0; i < this.productSlots.length; i++) {
             if (i < this.products.length) {
                 const product = this.products[i];
-                this.productSlots[i].image.sprite = OrderManager.GetInstance().getProductSprite(product);
+                this.productSlots[i].image.sprite = DataManager.GetInstance().getProductSprite(product);
                 this.productCountTexts[i].text = this.productCounts[i].toString();
                 this.SetSlot(i, true);
             }
@@ -167,8 +167,6 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
         this.GetProductsData();
         this.UpdateProductDisplay();
     }
-
-
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
         if (eventName == EventNames.IngredientCountUpdated) {

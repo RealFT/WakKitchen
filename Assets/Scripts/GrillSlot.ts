@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
 import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
-import { Ingredient } from './OrderManager';
+import { Ingredient } from './DataManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
 export default class GrillSlot extends ZepetoScriptBehaviour implements IListener {

@@ -1,6 +1,6 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text, Image } from "UnityEngine.UI";
-import OrderManager, { Ingredient } from './OrderManager';
+import DataManager, { Ingredient } from './DataManager';
 import { Sprite } from 'UnityEngine';
 
 export default class Slicable extends ZepetoScriptBehaviour {
@@ -12,7 +12,7 @@ export default class Slicable extends ZepetoScriptBehaviour {
 
     public SetSlicable(origin: Sprite, ingredient: Ingredient) {
         this.originImage.sprite = origin;
-        this.slicedSprite = OrderManager.GetInstance().getIngredientSprite(ingredient);
+        this.slicedSprite = DataManager.GetInstance().getIngredientSprite(ingredient);
         this.ingredient = ingredient;
         this.isSliced = false;
     }

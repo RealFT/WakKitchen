@@ -3,7 +3,8 @@ import { Vector2, RectTransform, Random, Rect, Debug } from 'UnityEngine';
 import { Image, Slider } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
-import OrderManager, { Ingredient } from './OrderManager';
+import OrderManager from './OrderManager';
+import DataManager, { Ingredient } from './DataManager';
 import Slicable from './Slicable';
 
 export default class SliceController extends ZepetoScriptBehaviour {

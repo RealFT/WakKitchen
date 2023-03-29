@@ -1,6 +1,6 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, Text } from 'UnityEngine.UI'
-import { GameObject, Object, WaitUntil, WaitForSeconds, Debug } from 'UnityEngine'
+import { GameObject, Object, WaitUntil, WaitForSeconds, Debug, Random } from 'UnityEngine'
 import { ProductRecord, ProductService, ProductStatus, ProductType, PurchaseType } from "ZEPETO.Product";
 import { BalanceListResponse, CurrencyService, CurrencyError } from "ZEPETO.Currency";
 import { ZepetoWorldMultiplay } from "ZEPETO.World";
@@ -108,15 +108,31 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     }
 
     public getFoodCache(): ProductRecord[] {
+        if (this._foodCache.Length == 0) {
+            return null;
+        }
         return this._foodCache;
     }
 
     public getUpgradeCache(): ProductRecord[] {
+        if (this._upgradeCache.Length == 0) {
+            return null;
+        }
         return this._upgradeCache;
     }
 
     public getCardCache(): ProductRecord[] {
+        if (this._cardCache.Length == 0) {
+            return null;
+        }
         return this._cardCache;
+    }
+
+    public GetRandomCardId(): string{
+        if (this._cardCache.Length == 0) {
+            return null;
+        }
+        return this._cardCache[Random.Range(0,this._cardCache.Length)].productId;
     }
 
     // public GainBalance(currencyId: string, quantity: number) {

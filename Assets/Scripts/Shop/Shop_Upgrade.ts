@@ -5,13 +5,13 @@ import ItemSlot_Upgrade from './ItemSlot_Upgrade';
 import { ProductRecord } from 'ZEPETO.Product';
 import ItemManager from '../ItemManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import DataManager from '../DataManager';
 
 export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IListener {
     static readonly MaxUpgradeLevel: number = 3;
     @SerializeField() private upgradeSlotPref: GameObject;
     @SerializeField() private horizontalContent: RectTransform;
     @SerializeField() private layoutGroup: HorizontalLayoutGroup;
-    @SerializeField() private itemImages: Sprite[];
     @SerializeField() private contentHeight: number;
     Start() {
         Mediator.GetInstance().RegisterListener(this);
@@ -117,13 +117,10 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         // Set the size of the Content object using its sizeDelta property.
         this.horizontalContent.sizeDelta = new Vector2(newWidth, this.contentHeight);
     
-        const itemImageIndex = this.itemImages.findIndex((s) => s.name === itemName);
-
-        // const itemImageIndex = this.itemImages.findIndex((s) => s.name == itemRecord.productId);
-        const itemImage = this.itemImages[itemImageIndex];
+        const itemSprite = DataManager.GetInstance().GetSectionSpritesByName(itemName);
     
         // Set up the item's properties using its ITM_Inventory component.
         const itemScript = slotObj.GetComponent<ItemSlot_Upgrade>();
-        itemScript.SetItem(itemRecord, itemImage, upgradeLevel, isFullyUpgraded);
+        itemScript.SetItem(itemRecord, itemSprite, upgradeLevel, isFullyUpgraded);
     }
 }

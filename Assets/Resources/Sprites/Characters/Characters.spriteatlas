@@ -58,6 +58,17 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 7f49d62704f872e479a29da020890912, type: 3}
     - {fileID: 2800000, guid: 5b2409fd770bc744280070dfba6b0837, type: 3}
     - {fileID: 2800000, guid: f10ff8df232e8c641bc1113469376251, type: 3}
+    - {fileID: 2800000, guid: dcfe13d983e88264aa80b8ec3fd920bc, type: 3}
+    - {fileID: 2800000, guid: 981f6f60ae791b84e894161d40fd3680, type: 3}
+    - {fileID: 2800000, guid: 6e83cf79fb9a3ee438251ba148fee7c9, type: 3}
+    - {fileID: 2800000, guid: edf12f42a5e1bed4bab88ea9463759e2, type: 3}
+    - {fileID: 2800000, guid: 7fff3a6c7c4a5b54b8555e9b1ca7c1cc, type: 3}
+    - {fileID: 2800000, guid: 0728f98442c7a614fa1d6ad705199a0e, type: 3}
+    - {fileID: 2800000, guid: df76101d9e0a5194db08793c26cbd599, type: 3}
+    - {fileID: 2800000, guid: 7fef3ba8c45a9df4b8055c4ebfee1132, type: 3}
+    - {fileID: 2800000, guid: 130af6dea9b46b34bb4647555a92fe9b, type: 3}
+    - {fileID: 2800000, guid: 3f2e63ecd0d919d4e94ea0a2319662e2, type: 3}
+    - {fileID: 2800000, guid: 9fdde6905ca1ebe40a4be5fc73f2fe5e, type: 3}
     totalSpriteSurfaceArea: 0
     bindAsDefault: 1
     isAtlasV2: 0

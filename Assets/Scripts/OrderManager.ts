@@ -3,57 +3,9 @@ import { Coroutine, Debug, GameObject, Sprite, WaitForSeconds } from 'UnityEngin
 import { Button, Slider } from 'UnityEngine.UI';
 import ExpandOrderReceipt from './ExpandOrderReceipt';
 import Receipt from './Receipt';
-import DataManager from './DataManager';
+import DataManager, { Ingredient, Drink, Side } from './DataManager';
 import OrderReceipt from './OrderReceipt';
 import BalanceManager, { Currency } from './Shop/BalanceManager';
-
-export enum Ingredient {
-    START = 0,
-    TOP_BURN = 0,
-    BOTTOM_BURN = 1,
-    PATTY = 2,
-    CABBAGE = 3,
-    TOMATO = 4,
-    ONION = 5,
-    CHEESE = 6,
-    END = 6
-}
-
-export enum Drink {
-    START = 8,
-    PAENCHI = 8,
-    NECKSRITE = 9,
-    HOTCHS = 10,
-    ORANGE = 11,
-    PINEAPPLE = 12,
-    END = 12
-}
-
-export enum Side {
-    START = 13,
-    FRY = 13,
-    END = 13
-}
-
-export enum Customer {
-    START = 14,
-    HAKU = 14,
-    CALLYCARLY = 15,
-    CHUNSIK = 16,
-    DANDAPBUG = 17,
-    HYEJI = 18,
-    DOPAMINE = 19,
-    HIKIKING = 20,
-    KIMCHIMANDU = 21,
-    KWONMIN = 22,
-    ROENTGENIUM = 23,
-    RUSUK = 24,
-    SECRETTO = 25,
-    BUSINESSKIM = 26,
-    WAKPHAGO = 27,
-    WAKGOOD = 28,
-    END = 28
-}
 
 export default class OrderManager extends ZepetoScriptBehaviour {
     // singleton
@@ -76,13 +28,6 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     @SerializeField() private expandOrderReceiptObj: GameObject;
     @SerializeField() private expandOrderReceipt: ExpandOrderReceipt;
-
-    // Define the member variables for the Receipt's sprites
-    @SerializeField() private ingredientSprites: Sprite[];
-    @SerializeField() private drinkSprites: Sprite[];
-    @SerializeField() private sideSprites: Sprite[];
-    @SerializeField() private characterSprites: Sprite[];
-
     @SerializeField() private orderReceipts: GameObject[];
     private curOrderNumber: number;
     private maxOrderSize: number;
@@ -231,16 +176,16 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         const ingredients = receipt.ingredients;
         const burgerSprites: Sprite[] = [];
         for (const ingredient of ingredients) {
-            const sprite = this.getIngredientSprite(ingredient);
+            const sprite = DataManager.GetInstance().getIngredientSprite(ingredient);
             if (sprite) {
                 burgerSprites.push(sprite);
             }
         }
 
-        const drinkSprite = this.getDrinkSprite(receipt.drink);
-        const sideSprite = this.getSideSprite(receipt.side);
+        const drinkSprite = DataManager.GetInstance().getDrinkSprite(receipt.drink);
+        const sideSprite = DataManager.GetInstance().getSideSprite(receipt.side);
         const additionalOrder = receipt.additionalOrder;
-        const characterSprite = this.getCharacterSprite(receipt.character);
+        const characterSprite = DataManager.GetInstance().getCharacterSprite(receipt.character);
 
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
@@ -314,33 +259,33 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
     }
 
-    public getProductSprite(product: number): Sprite {
-        // split ingredients, drink, side
-        if (product < Ingredient.END)
-            return this.getIngredientSprite(product);
-        else if (product < Drink.END)
-            return this.getDrinkSprite(product);
-        else
-            return this.getSideSprite(product);
-    }
+    // public getProductSprite(product: number): Sprite {
+    //     // split ingredients, drink, side
+    //     if (product < Ingredient.END)
+    //         return this.getIngredientSprite(product);
+    //     else if (product < Drink.END)
+    //         return this.getDrinkSprite(product);
+    //     else
+    //         return this.getSideSprite(product);
+    // }
 
-    // Return sprite of the ingredient
-    public getIngredientSprite(ingredient: Ingredient): Sprite {
-        return this.ingredientSprites[ingredient - Ingredient.START];
-    }
+    // // Return sprite of the ingredient
+    // public getIngredientSprite(ingredient: Ingredient): Sprite {
+    //     return this.ingredientSprites[ingredient - Ingredient.START];
+    // }
 
-    public getDrinkSprite(drinkName: Drink): Sprite {
-        return this.drinkSprites[drinkName - Drink.START];
-    }
+    // public getDrinkSprite(drinkName: Drink): Sprite {
+    //     return this.drinkSprites[drinkName - Drink.START];
+    // }
 
-    // Return sprite of the side
-    public getSideSprite(sideName: Side): Sprite {
-        return this.sideSprites[sideName - Side.START];
-    }
+    // // Return sprite of the side
+    // public getSideSprite(sideName: Side): Sprite {
+    //     return this.sideSprites[sideName - Side.START];
+    // }
 
-    // Return sprite of the character
-    public getCharacterSprite(characterName: Customer): Sprite {
-        return this.characterSprites[characterName - Customer.START];
-    }
+    // // Return sprite of the character
+    // public getCharacterSprite(characterName: Customer): Sprite {
+    //     return this.characterSprites[characterName - Customer.START];
+    // }
 
 }

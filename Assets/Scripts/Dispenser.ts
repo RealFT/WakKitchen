@@ -2,7 +2,8 @@ import { GameObject, Random, RectTransform, Sprite, Time, Transform, Vector2, Ve
 import { Button, Image } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import Cup, { CupState } from './Cup';
-import OrderManager, { Drink } from './OrderManager';
+import OrderManager from './OrderManager';
+import { Drink } from './DataManager';
 
 export default class Dispenser extends ZepetoScriptBehaviour {
 
