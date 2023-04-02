@@ -4,14 +4,14 @@
 		{
 			"name": "Zepeto Script",
 			"address": "127.0.0.1",
-			"port": 59538,
+			"port": 63292,
 			"request": "attach",
 			"type": "pwa-node"
 		},
 		{
 			"name": "Zepeto Multiplay Script",
 			"address": "127.0.0.1",
-			"port": 59539,
+			"port": 63293,
 			"request": "attach",
 			"type": "pwa-node"
 		}

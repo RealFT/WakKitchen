@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 2e5b0fc4b19ede9438ae6c29ea25f4bc
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    CardInfoWindow extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetCardInfoWindow(productId,
+    grade, characterSprite, dispenserProficiency, frierProficiency, grillProficiency,
+    sliceProficiency) {\r\n        this.productId = productId;\r\n        this.grade
+    = grade;\r\n        this.characterImage.sprite = characterSprite;\r\n       
+    this.dispenserProficiencySlider.value = dispenserProficiency;\r\n        this.frierProficiencySlider.value
+    = frierProficiency;\r\n        this.grillProficiencySlider.value = grillProficiency;\r\n       
+    this.sliceProficiencySlider.value = sliceProficiency;\r\n    }\r\n    GetCardId()
+    {\r\n        return this.productId;\r\n    }\r\n}\r\nexports.default = CardInfoWindow;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FyZEluZm9XaW5kb3cuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDYXJkSW5mb1dpbmRvdy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUlyRCxNQUFxQixjQUFlLFNBQVEscUNBQXFCO0lBU3RELGlCQUFpQixDQUFDLFNBQWlCLEVBQUUsS0FBYSxFQUFFLGVBQXVCLEVBQzlFLG9CQUE0QixFQUFFLGdCQUF3QixFQUFFLGdCQUF3QixFQUFFLGdCQUF3QjtRQUMxRyxJQUFJLENBQUMsU0FBUyxHQUFHLFNBQVMsQ0FBQztRQUMzQixJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztRQUNuQixJQUFJLENBQUMsY0FBYyxDQUFDLE1BQU0sR0FBRyxlQUFlLENBQUM7UUFDN0MsSUFBSSxDQUFDLDBCQUEwQixDQUFDLEtBQUssR0FBRyxvQkFBb0IsQ0FBQztRQUM3RCxJQUFJLENBQUMsc0JBQXNCLENBQUMsS0FBSyxHQUFHLGdCQUFnQixDQUFDO1FBQ3JELElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxLQUFLLEdBQUcsZ0JBQWdCLENBQUM7UUFDckQsSUFBSSxDQUFDLHNCQUFzQixDQUFDLEtBQUssR0FBRyxnQkFBZ0IsQ0FBQztJQUN6RCxDQUFDO0lBRU0sU0FBUztRQUNaLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQztJQUMxQixDQUFDO0NBQ0o7QUF2QkQsaUNBdUJDIn0=","assetPath":"Assets/Scripts/Employee/CardInfoWindow.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"characterImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"dispenserProficiencySlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"frierProficiencySlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"grillProficiencySlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"sliceProficiencySlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"CardInfoWindow","description":""},"isCompiled":true}'
+  typescriptHash: aa147dd056c4205db5131a9851318040
+  onlyWriteTrigger: 0

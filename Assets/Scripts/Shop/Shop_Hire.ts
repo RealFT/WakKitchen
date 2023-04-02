@@ -3,7 +3,7 @@ import { HorizontalLayoutGroup,Button } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ProductRecord } from 'ZEPETO.Product';
 import ItemManager from '../ItemManager';
-import Card from '../Gacha/Card';
+import Card from '../Employee/Card';
 import DataManager from '../DataManager';
 
 export default class Shop_Hire extends ZepetoScriptBehaviour{
@@ -42,5 +42,4 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
         this.card.SetCard(cardId, grade, DataManager.GetInstance().GetCharacterSpriteByName(characterName));
         this.resultPanel.SetActive(true);
     }
-
 }

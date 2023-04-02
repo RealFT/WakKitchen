@@ -1,9 +1,9 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
-import OrderManager from './OrderManager';
-import { Side } from './DataManager';
-import Mediator, { EventNames, IListener } from './Notification/Mediator';
+import OrderManager from '../OrderManager';
+import { Side } from '../DataManager';
+import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 
 export default class EmployeeSlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private pauseResumeToggle: Toggle;

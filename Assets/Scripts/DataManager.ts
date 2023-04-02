@@ -2,6 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Random, Sprite, Resources, TextAsset } from 'UnityEngine';
 import Receipt from './Receipt';
 import { GameObject, Debug } from 'UnityEngine';
+import CardData from './Employee/CardData';
 
 export enum Ingredient {
     START = 0,
@@ -72,6 +73,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     @SerializeField() private receiptFile: TextAsset;
     @SerializeField() private stageFile: TextAsset;
+    @SerializeField() private cardFile: TextAsset;
     // Define the member variables for the Receipt's sprites
     @SerializeField() private ingredientSprites: Sprite[];
     @SerializeField() private drinkSprites: Sprite[];
@@ -81,6 +83,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
     private stages: number[][] = [];
+    private cardDatas: CardData[] = [];
 
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -122,14 +125,19 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public LoadCardData() {
-        const lines = this.stageFile.text.split('\n'); // split the CSV file by row
+        const lines = this.cardFile.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
             const values = line.split(','); // split the row by comma to get the values
             
             // do something with the values
-            const stageIndexs = values.slice(1);
-            this.stages[values[0]] = stageIndexs;
+            const cardData = new CardData();
+            const ingredients: number[] = [];
+            for (let j = 6; j < values.length; j++) {
+                ingredients.push(+values[j]);
+            }
+            cardData.SetCardData(values[1], +values[2], values[3], values[4], +values[5], +values[6], +values[7], +values[8]);
+            this.cardDatas.push(cardData);
         }
     }
 
@@ -183,8 +191,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
         return this.characterSprites[spriteIndex];
     }
 
-    public GetSectionSpritesByName(sectionName: string): Sprite{
+    public GetSectionSpriteByName(sectionName: string): Sprite{
         const spriteIndex = this.sectionSprites.findIndex((s) => s.name.toLowerCase() === sectionName);
         return this.sectionSprites[spriteIndex];
     }
+    public GetSectionSprites(): Sprite[] {
+        return this.sectionSprites;
+    }
+
 }

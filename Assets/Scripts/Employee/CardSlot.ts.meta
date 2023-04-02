@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: ef39647c4c24c9b47909eb474f4d39b8
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nclass CardSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Start() {\r\n        this.GetComponent($typeof(UnityEngine_UI_1.Toggle)).group
+    = this.transform.parent.GetComponent($typeof(UnityEngine_UI_1.ToggleGroup));\r\n   
+    }\r\n    RefreshItem(ir, isShowQuantity = true) {\r\n        this.itemRecord
+    = ir;\r\n        this.quantityTxt.text = isShowQuantity ? this.itemRecord.quantity.toString()
+    : \"\";\r\n    }\r\n    isOn(boolean) {\r\n        this.GetComponent($typeof(UnityEngine_UI_1.Toggle)).isOn
+    = boolean;\r\n        this.isOnUIObj.SetActive(boolean);\r\n    }\r\n}\r\nexports.default
+    = CardSlot;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FyZFNsb3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDYXJkU2xvdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxtREFBK0Q7QUFHL0QsTUFBcUIsUUFBUyxTQUFRLHFDQUFxQjtJQU8vQyxLQUFLO1FBQ1QsSUFBSSxDQUFDLFlBQVksU0FBQyx1QkFBTSxHQUFJLEtBQUssR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxZQUFZLFNBQUMsNEJBQVcsRUFBRyxDQUFDO0lBQzFGLENBQUM7SUFFTSxXQUFXLENBQUMsRUFBa0IsRUFBRSxpQkFBeUIsSUFBSTtRQUNoRSxJQUFJLENBQUMsVUFBVSxHQUFHLEVBQUUsQ0FBQztRQUNyQixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksR0FBRyxjQUFjLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUM7SUFDdEYsQ0FBQztJQUVNLElBQUksQ0FBQyxPQUFlO1FBQ3ZCLElBQUksQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxJQUFJLEdBQUcsT0FBTyxDQUFDO1FBQzNDLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ3RDLENBQUM7Q0FFSjtBQXJCRCwyQkFxQkMifQ==","assetPath":"Assets/Scripts/Employee/CardSlot.ts","manifest":{"properties":[{"assembly":"ZEPETO.Product","name":"itemRecord","type":"ZEPETO.Inventory.InventoryRecord","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"itemImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"quantityTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"isOnUIObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"CardSlot","description":""},"isCompiled":true}'
+  typescriptHash: 1c5380740bee319454f2aae0327ad9de
+  onlyWriteTrigger: 0

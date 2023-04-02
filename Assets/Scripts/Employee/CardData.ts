@@ -1,9 +1,8 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { GameObject, Sprite, Debug } from 'UnityEngine'
-import { Image, Button, Slider } from "UnityEngine.UI";
-import { Character } from '../DataManager';
+
 export default class CardData extends ZepetoScriptBehaviour {
     private productId: string;
+    private characterIndex: number;
     private characterName: string;
     private grade: string;
     private dispenserProficiency: number;
@@ -12,9 +11,10 @@ export default class CardData extends ZepetoScriptBehaviour {
     private sliceProficiency: number;
     private quantity: number;
 
-    public SetCardData(productId: string, characterName: string, grade: string, 
+    public SetCardData(productId: string, characterIndex: number, characterName: string, grade: string, 
         dispenserProficiency: number, frierProficiency: number, grillProficiency: number, sliceProficiency: number): void {
         this.productId = productId;
+        this.characterIndex = characterIndex;
         this.characterName = characterName;
         this.grade = grade;
         this.dispenserProficiency = dispenserProficiency;

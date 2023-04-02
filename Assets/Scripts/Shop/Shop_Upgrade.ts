@@ -117,7 +117,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         // Set the size of the Content object using its sizeDelta property.
         this.horizontalContent.sizeDelta = new Vector2(newWidth, this.contentHeight);
     
-        const itemSprite = DataManager.GetInstance().GetSectionSpritesByName(itemName);
+        const itemSprite = DataManager.GetInstance().GetSectionSpriteByName(itemName);
     
         // Set up the item's properties using its ITM_Inventory component.
         const itemScript = slotObj.GetComponent<ItemSlot_Upgrade>();

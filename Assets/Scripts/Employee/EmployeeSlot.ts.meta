@@ -1,0 +1,48 @@
+fileFormatVersion: 2
+guid: 7ff1679e4e3ff81459dea9ea12abaf39
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst OrderManager_1 = require(\"../OrderManager\");\r\nconst
+    Mediator_1 = require(\"../Notification/Mediator\");\r\nclass EmployeeSlot extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.foodId = 8;\r\n        this.workTime = 10;\r\n        this.currentTime =
+    0;\r\n    }\r\n    Start() {\r\n        Mediator_1.default.GetInstance().RegisterListener(this);\r\n   
+    }\r\n    OnDestroy() {\r\n        Mediator_1.default.GetInstance().UnregisterListener(this);\r\n   
+    }\r\n    init() {\r\n        this.StopAllCoroutines();\r\n        this.workSlider.value
+    = 0;\r\n        this.currentTime = 0;\r\n        this.isWorking = false;\r\n   
+    }\r\n    OnNotify(sender, eventName, eventData) {\r\n        switch (eventName)
+    {\r\n            case Mediator_1.EventNames.StageStarted:\r\n               
+    console.log(\"StageStarted: employee\");\r\n                this.init();\r\n               
+    this.StartWorking();\r\n                break;\r\n            case Mediator_1.EventNames.StageEnded:\r\n               
+    this.init();\r\n                break;\r\n        }\r\n    }\r\n    // Start
+    Baking.\r\n    StartWorking() {\r\n        this.isWorking = true;\r\n       
+    this.StartCoroutine(this.DoWorking());\r\n    }\r\n    // Working Coroutine\r\n   
+    *DoWorking() {\r\n        while (this.isWorking) {\r\n            if (this.pauseResumeToggle.isOn)
+    {\r\n                // Pause the work\r\n                yield new UnityEngine_1.WaitForSeconds(UnityEngine_1.Time.deltaTime);\r\n               
+    continue;\r\n            }\r\n            this.currentTime += UnityEngine_1.Time.deltaTime;\r\n           
+    this.workSlider.value = this.currentTime / this.workTime;\r\n            if (this.currentTime
+    >= this.workTime) {\r\n                // Work done.\r\n                OrderManager_1.default.GetInstance().AddItemToInventory(this.foodId);\r\n               
+    Mediator_1.default.GetInstance().Notify(this, Mediator_1.EventNames.IngredientCountUpdated,
+    null);\r\n                this.workSlider.value = 0;\r\n                this.currentTime
+    = 0;\r\n            }\r\n            yield new UnityEngine_1.WaitForSeconds(UnityEngine_1.Time.deltaTime);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = EmployeeSlot;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRW1wbG95ZWVTbG90LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRW1wbG95ZWVTbG90LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFxRjtBQUVyRixrREFBMkM7QUFFM0MsdURBQTJFO0FBRTNFLE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFBL0Q7O1FBSVksV0FBTSxHQUFXLENBQUMsQ0FBQztRQUNuQixhQUFRLEdBQVcsRUFBRSxDQUFDO1FBQ3RCLGdCQUFXLEdBQVcsQ0FBQyxDQUFDO0lBMkRwQyxDQUFDO0lBeERHLEtBQUs7UUFDRCxrQkFBUSxDQUFDLFdBQVcsRUFBRSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xELENBQUM7SUFDTyxTQUFTO1FBQ2Isa0JBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNwRCxDQUFDO0lBRUQsSUFBSTtRQUNBLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO1FBQ3pCLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxHQUFHLENBQUMsQ0FBQztRQUMxQixJQUFJLENBQUMsV0FBVyxHQUFHLENBQUMsQ0FBQztRQUNyQixJQUFJLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztJQUMzQixDQUFDO0lBRU0sUUFBUSxDQUFDLE1BQVcsRUFBRSxTQUFpQixFQUFFLFNBQWM7UUFDMUQsUUFBTyxTQUFTLEVBQUM7WUFDYixLQUFLLHFCQUFVLENBQUMsWUFBWTtnQkFDeEIsT0FBTyxDQUFDLEdBQUcsQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDO2dCQUN0QyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7Z0JBQ1osSUFBSSxDQUFDLFlBQVksRUFBRSxDQUFDO2dCQUNwQixNQUFNO1lBQ1YsS0FBSyxxQkFBVSxDQUFDLFVBQVU7Z0JBQ3RCLElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQztnQkFDWixNQUFNO1NBQ2I7SUFDTCxDQUFDO0lBRUQsZ0JBQWdCO0lBQ1IsWUFBWTtRQUNoQixJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQztRQUN0QixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO0lBQzFDLENBQUM7SUFFRCxvQkFBb0I7SUFDcEIsQ0FBQyxTQUFTO1FBQ04sT0FBTyxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ25CLElBQUksSUFBSSxDQUFDLGlCQUFpQixDQUFDLElBQUksRUFBRTtnQkFDN0IsaUJBQWlCO2dCQUNqQixNQUFNLElBQUksNEJBQWMsQ0FBQyxrQkFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO2dCQUN6QyxTQUFTO2FBQ1o7WUFFRCxJQUFJLENBQUMsV0FBVyxJQUFJLGtCQUFJLENBQUMsU0FBUyxDQUFDO1lBQ25DLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztZQUV6RCxJQUFJLElBQUksQ0FBQyxXQUFXLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtnQkFDbkMsYUFBYTtnQkFDYixzQkFBWSxDQUFDLFdBQVcsRUFBRSxDQUFDLGtCQUFrQixDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztnQkFDM0Qsa0JBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLHFCQUFVLENBQUMsc0JBQXNCLEVBQUUsSUFBSSxDQUFDLENBQUM7Z0JBQzdFLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxHQUFHLENBQUMsQ0FBQztnQkFDMUIsSUFBSSxDQUFDLFdBQVcsR0FBRyxDQUFDLENBQUM7YUFDeEI7WUFFRCxNQUFNLElBQUksNEJBQWMsQ0FBQyxrQkFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1NBQzVDO0lBQ0wsQ0FBQztDQUNKO0FBakVELCtCQWlFQyJ9","assetPath":"Assets/Scripts/Employee/EmployeeSlot.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"pauseResumeToggle","type":"UnityEngine.UI.Toggle","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"employeeImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"workSlider","type":"UnityEngine.UI.Slider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"EmployeeSlot","description":""},"isCompiled":true}'
+  typescriptHash: 0c2ccc56f7b18f36a9c03345a2455e44
+  onlyWriteTrigger: 0

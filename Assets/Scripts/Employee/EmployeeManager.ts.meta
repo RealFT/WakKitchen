@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 5f832a3d001d0a94eb482fc329270d44
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    EmployeeManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
+    {\r\n    }\r\n}\r\nexports.default = EmployeeManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRW1wbG95ZWVNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRW1wbG95ZWVNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBRXJELE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBRTlELEtBQUs7SUFFTCxDQUFDO0NBRUo7QUFORCxrQ0FNQyJ9","assetPath":"Assets/Scripts/EmployeeManager.ts","manifest":{"properties":[],"name":"EmployeeManager","description":""},"isCompiled":true}'
+  typescriptHash: b9317c9e11afe8fb0eb5a1040aa4480c
+  onlyWriteTrigger: 0
