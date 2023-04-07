@@ -183,8 +183,6 @@ export default class extends Sandbox {
         }
     }
 
-
-
     async AddCredit(client: SandboxPlayer, currencyId: string, quantity: number) {
 
         try {
@@ -224,9 +222,8 @@ export default class extends Sandbox {
         }
     }
 
+    async onJoin(client: SandboxPlayer) {
 
-    onJoin(client: SandboxPlayer) {
-        
     }
 
     onTick(deltaTime: number): void {
@@ -234,7 +231,7 @@ export default class extends Sandbox {
     }
 
     onLeave(client: SandboxPlayer, consented?: boolean) {
-        
+
     }
     
 }
