@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { Random, Sprite, Resources, TextAsset } from 'UnityEngine';
+import { Random, Sprite, Resources, TextAsset, PlayerPrefs } from 'UnityEngine';
 import Receipt from './Receipt';
 import { GameObject, Debug } from 'UnityEngine';
 import CardData from './Employee/CardData';
@@ -49,7 +49,18 @@ export enum Character {
     BUSINESSKIM = 26,
     WAKPHAGO = 27,
     WAKGOOD = 28,
-    END = 28
+    PUNGSIN = 29,
+    SOPHIA = 30,
+    FREETER = 31,
+    CARNARJUNGTUR = 32,
+    LEEDEOKSU = 33,
+    NOSFERATUHODD = 34,
+    BUJUNGINGAN = 35,
+    DOVE = 36,
+    PARROT = 37,
+    PAENCHI = 38,
+    LION = 39,
+    END = 39
 }
 
 export default class DataManager extends ZepetoScriptBehaviour {
@@ -79,20 +90,50 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private drinkSprites: Sprite[];
     @SerializeField() private sideSprites: Sprite[];
     @SerializeField() private characterSprites: Sprite[];
+    @SerializeField() private characterIcons: Sprite[];
+    @SerializeField() private gradeIcons: Sprite[];
     @SerializeField() private sectionSprites: Sprite[];
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
     private stages: number[][] = [];
-    private cardDatas: CardData[] = [];
+    private cardDatas: Map<string, CardData> = new Map<string, CardData>();
+    private inventoryCache: Map<string, number> = new Map<string, number>();
+    private playStage: string = 'Stage';
 
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
         this.LoadData();
     }
 
+    Start() {
+        // 사용 예시
+        // const itemId = 'health_potion';
+        // console.log(`Current ${itemId} count: ${this.getItemCount(itemId)}`);
+        // this.addItem(itemId, 1);
+        // console.log(`Added 1 ${itemId}, now count: ${this.getItemCount(itemId)}`);
+        // const success = this.useItem(itemId,10);
+        // console.log(`Tried to use ${itemId}, success: ${success}, now count: ${this.getItemCount(itemId)}`);
+    }
+
+    // Returns the value of a given key from PlayerPrefs as an integer. 
+    public GetValue(key: string): number {
+        if (PlayerPrefs.HasKey(key)) {
+            return PlayerPrefs.GetInt(key);
+        } else {
+            // Returns 0 if key does not exist.
+            return 0;
+        }
+    }
+
+    // Sets the value of a given key in PlayerPrefs to a given value.
+    public SetValue(key: string, value: number): void {
+        PlayerPrefs.SetInt(key, value);
+    }
+
     public LoadData() {    
         this.LoadReceiptData();
         this.LoadStageData();
+        this.LoadCardData();
     }
 
     public LoadReceiptData() {
@@ -136,8 +177,50 @@ export default class DataManager extends ZepetoScriptBehaviour {
             for (let j = 6; j < values.length; j++) {
                 ingredients.push(+values[j]);
             }
-            cardData.SetCardData(values[1], +values[2], values[3], values[4], +values[5], +values[6], +values[7], +values[8]);
-            this.cardDatas.push(cardData);
+            const cardId = values[1];
+            cardData.SetCardData(cardId, +values[2], values[3], values[4], +values[5], +values[6], +values[7], +values[8]);
+            this.cardDatas.set(cardId, cardData);
+
+            const cardQuantity = this.GetValue(cardId);
+            this.SetValue(cardId, cardQuantity);
+            this.inventoryCache.set(cardId, cardQuantity);
+        }
+    }
+
+    public GetCardData(id: string): CardData {
+        return this.cardDatas.get(id);
+    }
+
+    public GetInventoryCache(): Map<string, number> {
+        return this.inventoryCache;
+    }
+
+    public GetCardQuantity(id: string): number {
+        return this.inventoryCache.get(id) || 0;
+    }
+
+    // Adds a given quantity of cards with a given ID to the inventory.
+    public AddCard(id: string, quantity: number): void {
+        const currentQuantity = this.inventoryCache.get(id) || 0;
+        const newQuantity = currentQuantity + quantity;
+        this.inventoryCache.set(id, newQuantity);
+        this.SetValue(id, newQuantity);
+    }
+
+    // Uses a given quantity of cards with a given ID from the inventory.
+    // Returns true if the operation is successful, false otherwise.
+    public UseCard(id: string, quantity: number): boolean {
+        const currentQuantity = this.inventoryCache.get(id) || 0;
+        // If the ID is in the inventory and the current quantity is greater than the given quantity,
+        // the given quantity is subtracted from the current quantity and the new quantity is saved to PlayerPrefs.
+        if (currentQuantity > quantity) {
+            const newQuantity = currentQuantity - quantity;
+            this.inventoryCache.set(id, newQuantity);
+            this.SetValue(id, newQuantity);
+            return true;
+        } else {
+            console.log(`Not enough ${id} to use.`);
+            return false;
         }
     }
 
@@ -186,6 +269,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
         return this.characterSprites[character - Character.START];
     }
 
+    public GetCharacterIcon(character: Character): Sprite {
+        return this.characterIcons[character - Character.START];
+    }
     public GetCharacterSpriteByName(characterName: string): Sprite{
         const spriteIndex = this.characterSprites.findIndex((s) => s.name.split('_')[1].toLowerCase() === characterName);
         return this.characterSprites[spriteIndex];
@@ -198,5 +284,4 @@ export default class DataManager extends ZepetoScriptBehaviour {
     public GetSectionSprites(): Sprite[] {
         return this.sectionSprites;
     }
-
 }

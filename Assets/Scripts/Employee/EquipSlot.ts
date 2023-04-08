@@ -1,22 +1,22 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Image, Button, Toggle } from "UnityEngine.UI";
-import { GameObject, Sprite } from 'UnityEngine';
+import { GameObject, Sprite, Color } from 'UnityEngine';
 import DataManager from '../DataManager';
+import CardData from './CardData';
+
 export default class EquipSlot extends ZepetoScriptBehaviour {
 
     // Chacacter Slot
     @SerializeField() private characterSlotButton: Button;
     @SerializeField() private characterImage: Image;
-    @SerializeField() private defaultCharacterSlotSprite: Sprite;
 
     // SelectSection Slot
     @SerializeField() private selectedSectionImage: Image;
-    @SerializeField() private defaultSelectedSectionSprite: Sprite;
     @SerializeField() private selectSectionOpenToggle: Toggle;
-    @SerializeField() private selectSectionPanel: GameObject;
     @SerializeField() private sectionButtons: Button[];
 
-    private isEquip: boolean;
+    private isEquip: boolean = false;
+    private equippedCardData: CardData;
 
     Start(){
         this.characterSlotButton.onClick.AddListener(() => {
@@ -38,32 +38,36 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     }
 
     public InitSlot() {
-        this.selectedSectionImage.sprite = this.defaultSelectedSectionSprite;
+        this.selectedSectionImage.color = new Color(1, 1, 1, 0);
         this.DisableSelectSectionPanel();
         //this.selectSectionOpenToggle.interactable = false;
     }
 
     private SelectSection(sprite : Sprite){
         this.selectedSectionImage.sprite = sprite;
+        this.selectedSectionImage.color = new Color(1, 1, 1, 1);
     }
 
     public DisableSelectSectionPanel(){
         this.selectSectionOpenToggle.isOn = false;
     }
 
-    public EquipCard(characterSprite : Sprite){
-        this.selectedSectionImage.sprite = this.defaultSelectedSectionSprite;
+    public EquipCard(cardData : CardData){
+        this.equippedCardData = cardData;
+        this.selectedSectionImage.color = new Color(1, 1, 1, 0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = true;
-        this.characterImage.sprite = characterSprite;
+        this.characterImage.sprite = DataManager.GetInstance().getCharacterSprite(cardData.GetCharacterIndex());
+        this.characterImage.color = new Color(1, 1, 1, 1);
         this.isEquip = true;
     }
 
     public UnEquipCard(){
-        this.selectedSectionImage.sprite = this.defaultSelectedSectionSprite;
+        this.equippedCardData = null;
+        this.selectedSectionImage.color = new Color(1,1,1,0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = false;
-        this.characterImage.sprite = this.defaultCharacterSlotSprite;
+        this.characterImage.color = new Color(1, 1, 1, 0);
         this.isEquip = false;
     }
 
@@ -75,7 +79,12 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         return this.isEquip;
     }
 
+    public getEquippedCardData(): CardData {
+        return this.equippedCardData;
+    }
+
     private OnDisable(){
         this.DisableSelectSectionPanel();
     }
+    
 }

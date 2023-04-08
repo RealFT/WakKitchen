@@ -18,28 +18,31 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    UnityEngine_1 = require(\"UnityEngine\");\r\nconst EquipSlot_1 = require(\"./EquipSlot\");\r\nclass
-    EquipSlotController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
-    {\r\n        super(...arguments);\r\n        this.equipSlots = [];\r\n    }\r\n   
-    Start() {\r\n        for (let i = 0; i < this.equipSlotObjects.length; i++) {\r\n           
-    this.equipSlots[i] = this.equipSlotObjects[i].GetComponent($typeof(EquipSlot_1.default));\r\n           
-    let toggle = this.equipSlots[i].GetSelectSectionOpenToggle();\r\n           
-    toggle.onValueChanged.AddListener((isOn) => {\r\n                if (isOn) {\r\n                   
-    this.OnToggleValueChanged(toggle);\r\n                }\r\n            });\r\n       
-    }\r\n    }\r\n    OnToggleValueChanged(toggle) {\r\n        if (toggle != this.selectedToggle)
-    {\r\n            // If a different toggle is selected\r\n            if (this.selectedToggle)
-    {\r\n                this.selectedToggle.isOn = false; // Deselect the previously
-    selected toggle\r\n            }\r\n            this.selectedToggle = toggle;
-    // Save the new selected toggle\r\n        }\r\n        else {\r\n           
-    // If the same toggle is selected again\r\n            this.selectedToggle =
-    null; // Deselect the current toggle\r\n        }\r\n    }\r\n    EquipCharacter(characterSprite)
-    {\r\n        // Find an empty card equip slot\r\n        let emptyIndex = -1;\r\n       
-    for (let i = 0; i < this.equipSlots.length; i++) {\r\n            if (!this.equipSlots[i].IsEquip())
-    {\r\n                emptyIndex = i;\r\n                break;\r\n           
-    }\r\n        }\r\n        if (emptyIndex != -1) {\r\n            // Equip the
-    character to the first empty card equip slot\r\n            this.equipSlots[emptyIndex].EquipCard(characterSprite);\r\n       
-    }\r\n    }\r\n}\r\nexports.default = EquipSlotController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXF1aXBTbG90Q29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkVxdWlwU2xvdENvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQWlEO0FBRWpELDJDQUFvQztBQUNwQyxNQUFxQixtQkFBb0IsU0FBUSxxQ0FBcUI7SUFBdEU7O1FBR1ksZUFBVSxHQUFnQixFQUFFLENBQUM7SUEyQ3pDLENBQUM7SUF4Q0csS0FBSztRQUNELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQ25ELElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDLENBQUMsQ0FBQyxDQUFDLFlBQVksU0FBQyxtQkFBUyxFQUFHLENBQUM7WUFDeEUsSUFBSSxNQUFNLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQywwQkFBMEIsRUFBRSxDQUFDO1lBQzdELE1BQU0sQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQ3ZDLElBQUksSUFBSSxFQUFFO29CQUNOLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztpQkFDckM7WUFDTCxDQUFDLENBQUMsQ0FBQztTQUNOO0lBQ0wsQ0FBQztJQUVPLG9CQUFvQixDQUFDLE1BQWM7UUFDdkMsSUFBSSxNQUFNLElBQUksSUFBSSxDQUFDLGNBQWMsRUFBRTtZQUMvQixvQ0FBb0M7WUFDcEMsSUFBSSxJQUFJLENBQUMsY0FBYyxFQUFFO2dCQUNyQixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksR0FBRyxLQUFLLENBQUMsQ0FBQywwQ0FBMEM7YUFDL0U7WUFDRCxJQUFJLENBQUMsY0FBYyxHQUFHLE1BQU0sQ0FBQyxDQUFDLCtCQUErQjtTQUNoRTthQUFNO1lBQ0gsdUNBQXVDO1lBQ3ZDLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDLENBQUMsOEJBQThCO1NBQzdEO0lBQ0wsQ0FBQztJQUVNLGNBQWMsQ0FBQyxlQUF1QjtRQUN6QyxnQ0FBZ0M7UUFDaEMsSUFBSSxVQUFVLEdBQUcsQ0FBQyxDQUFDLENBQUM7UUFDcEIsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzdDLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO2dCQUMvQixVQUFVLEdBQUcsQ0FBQyxDQUFDO2dCQUNmLE1BQU07YUFDVDtTQUNKO1FBRUQsSUFBSSxVQUFVLElBQUksQ0FBQyxDQUFDLEVBQUU7WUFDbEIseURBQXlEO1lBQ3pELElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUMsU0FBUyxDQUFDLGVBQWUsQ0FBQyxDQUFDO1NBQzFEO0lBQ0wsQ0FBQztDQUNKO0FBOUNELHNDQThDQyJ9","assetPath":"Assets/Scripts/Employee/EquipSlotController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"equipSlotObjects","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"EquipSlotController","description":""},"isCompiled":true}'
-  typescriptHash: 9b21eeb8e3dd8b265ad3fd10c50d4f04
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst
+    EquipSlot_1 = require(\\\"./EquipSlot\\\");\\r\\nconst CardData_1 = require(\\\"./CardData\\\");\\r\\nclass
+    EquipSlotController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n   
+    constructor() {\\r\\n        super(...arguments);\\r\\n        this.equipSlots
+    = [];\\r\\n    }\\r\\n    Start() {\\r\\n        this.equipSlots = this.equipSlotParent.GetComponentsInChildren($typeof(EquipSlot_1.default));\\r\\n       
+    for (let i = 0; i < this.equipSlots.length; i++) {\\r\\n            let toggle
+    = this.equipSlots[i].GetSelectSectionOpenToggle();\\r\\n            toggle.onValueChanged.AddListener((isOn)
+    => {\\r\\n                if (isOn) {\\r\\n                    this.OnToggleValueChanged(toggle);\\r\\n               
+    }\\r\\n            });\\r\\n        }\\r\\n    }\\r\\n    // \uB2E4\uB978 \uC7A5\uCC29
+    \uCE90\uB9AD\uD130\uC758 \uC139\uC158 \uC120\uD0DD \uC2DC \uB2E4\uB978 \uC139\uC158\uC740
+    \uBE44\uD65C\uC131\uD654\uB418\uB294 \uAE30\uB2A5\\r\\n    OnToggleValueChanged(toggle)
+    {\\r\\n        if (toggle != this.selectedToggle) {\\r\\n            // If a
+    different toggle is selected\\r\\n            if (this.selectedToggle) {\\r\\n               
+    this.selectedToggle.isOn = false; // Deselect the previously selected toggle\\r\\n           
+    }\\r\\n            this.selectedToggle = toggle; // Save the new selected toggle\\r\\n       
+    }\\r\\n        else {\\r\\n            // If the same toggle is selected again\\r\\n           
+    this.selectedToggle = null; // Deselect the current toggle\\r\\n        }\\r\\n   
+    }\\r\\n    EquipCharacter(cardData) {\\r\\n        // Find an empty card equip
+    slot\\r\\n        let emptyIndex = -1;\\r\\n        for (let i = 0; i < this.equipSlots.length;
+    i++) {\\r\\n            if (!this.equipSlots[i].IsEquip()) {\\r\\n               
+    emptyIndex = i;\\r\\n                break;\\r\\n            }\\r\\n        }\\r\\n       
+    if (emptyIndex != -1) {\\r\\n            // Equip the character to the first
+    empty card equip slot\\r\\n            this.equipSlots[emptyIndex].EquipCard(cardData);\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\nexports.default = EquipSlotController;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXF1aXBTbG90Q29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkVxdWlwU2xvdENvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQWlEO0FBQ2pELG1EQUF3QztBQUN4QywyQ0FBb0M7QUFDcEMseUNBQWtDO0FBRWxDLE1BQXFCLG1CQUFvQixTQUFRLHFDQUFxQjtJQUF0RTs7UUFHWSxlQUFVLEdBQWdCLEVBQUUsQ0FBQztJQTRDekMsQ0FBQztJQXpDRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLHVCQUF1QixTQUFDLG1CQUFTLEVBQUcsQ0FBQztRQUM1RSxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDN0MsSUFBSSxNQUFNLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQywwQkFBMEIsRUFBRSxDQUFDO1lBQzdELE1BQU0sQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQ3ZDLElBQUksSUFBSSxFQUFFO29CQUNOLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztpQkFDckM7WUFDTCxDQUFDLENBQUMsQ0FBQztTQUNOO0lBQ0wsQ0FBQztJQUVELHNDQUFzQztJQUM5QixvQkFBb0IsQ0FBQyxNQUFjO1FBQ3ZDLElBQUksTUFBTSxJQUFJLElBQUksQ0FBQyxjQUFjLEVBQUU7WUFDL0Isb0NBQW9DO1lBQ3BDLElBQUksSUFBSSxDQUFDLGNBQWMsRUFBRTtnQkFDckIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsMENBQTBDO2FBQy9FO1lBQ0QsSUFBSSxDQUFDLGNBQWMsR0FBRyxNQUFNLENBQUMsQ0FBQywrQkFBK0I7U0FDaEU7YUFBTTtZQUNILHVDQUF1QztZQUN2QyxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxDQUFDLDhCQUE4QjtTQUM3RDtJQUNMLENBQUM7SUFFTSxjQUFjLENBQUMsUUFBa0I7UUFDcEMsZ0NBQWdDO1FBQ2hDLElBQUksVUFBVSxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBQ3BCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUM3QyxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtnQkFDL0IsVUFBVSxHQUFHLENBQUMsQ0FBQztnQkFDZixNQUFNO2FBQ1Q7U0FDSjtRQUVELElBQUksVUFBVSxJQUFJLENBQUMsQ0FBQyxFQUFFO1lBQ2xCLHlEQUF5RDtZQUN6RCxJQUFJLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQztTQUNuRDtJQUNMLENBQUM7Q0FDSjtBQS9DRCxzQ0ErQ0MifQ==\",\"assetPath\":\"Assets/Scripts/Employee/EquipSlotController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"equipSlotParent\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"EquipSlotController\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: cd7026cb2f36b1396d48ad3b25678892
   onlyWriteTrigger: 0

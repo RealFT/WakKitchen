@@ -16,6 +16,7 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
     @SerializeField() private card: Card;
     private _multiplay : ZepetoWorldMultiplay;
     private _room : Room;
+    
     Start() {
         this.card = this.cardObj.GetComponent<Card>();
         this.buyButton.onClick.AddListener(()=>{

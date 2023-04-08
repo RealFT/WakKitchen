@@ -18,101 +18,151 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nexports.Character = exports.Side = exports.Drink = exports.Ingredient
-    = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine_1
-    = require(\"UnityEngine\");\r\nconst Receipt_1 = require(\"./Receipt\");\r\nconst
-    UnityEngine_2 = require(\"UnityEngine\");\r\nconst CardData_1 = require(\"./Employee/CardData\");\r\nvar
-    Ingredient;\r\n(function (Ingredient) {\r\n    Ingredient[Ingredient[\"START\"]
-    = 0] = \"START\";\r\n    Ingredient[Ingredient[\"TOP_BURN\"] = 0] = \"TOP_BURN\";\r\n   
-    Ingredient[Ingredient[\"BOTTOM_BURN\"] = 1] = \"BOTTOM_BURN\";\r\n    Ingredient[Ingredient[\"PATTY\"]
-    = 2] = \"PATTY\";\r\n    Ingredient[Ingredient[\"CABBAGE\"] = 3] = \"CABBAGE\";\r\n   
-    Ingredient[Ingredient[\"TOMATO\"] = 4] = \"TOMATO\";\r\n    Ingredient[Ingredient[\"ONION\"]
-    = 5] = \"ONION\";\r\n    Ingredient[Ingredient[\"CHEESE\"] = 6] = \"CHEESE\";\r\n   
-    Ingredient[Ingredient[\"END\"] = 6] = \"END\";\r\n})(Ingredient = exports.Ingredient
-    || (exports.Ingredient = {}));\r\nvar Drink;\r\n(function (Drink) {\r\n    Drink[Drink[\"START\"]
-    = 8] = \"START\";\r\n    Drink[Drink[\"PAENCHI\"] = 8] = \"PAENCHI\";\r\n   
-    Drink[Drink[\"NECKSRITE\"] = 9] = \"NECKSRITE\";\r\n    Drink[Drink[\"HOTCHS\"]
-    = 10] = \"HOTCHS\";\r\n    Drink[Drink[\"ORANGE\"] = 11] = \"ORANGE\";\r\n   
-    Drink[Drink[\"PINEAPPLE\"] = 12] = \"PINEAPPLE\";\r\n    Drink[Drink[\"END\"]
-    = 12] = \"END\";\r\n})(Drink = exports.Drink || (exports.Drink = {}));\r\nvar
-    Side;\r\n(function (Side) {\r\n    Side[Side[\"START\"] = 13] = \"START\";\r\n   
-    Side[Side[\"FRY\"] = 13] = \"FRY\";\r\n    Side[Side[\"END\"] = 13] = \"END\";\r\n})(Side
-    = exports.Side || (exports.Side = {}));\r\nvar Character;\r\n(function (Character)
-    {\r\n    Character[Character[\"START\"] = 14] = \"START\";\r\n    Character[Character[\"HAKU\"]
-    = 14] = \"HAKU\";\r\n    Character[Character[\"CALLYCARLY\"] = 15] = \"CALLYCARLY\";\r\n   
-    Character[Character[\"CHUNSIK\"] = 16] = \"CHUNSIK\";\r\n    Character[Character[\"DANDAPBUG\"]
-    = 17] = \"DANDAPBUG\";\r\n    Character[Character[\"HYEJI\"] = 18] = \"HYEJI\";\r\n   
-    Character[Character[\"DOPAMINE\"] = 19] = \"DOPAMINE\";\r\n    Character[Character[\"HIKIKING\"]
-    = 20] = \"HIKIKING\";\r\n    Character[Character[\"KIMCHIMANDU\"] = 21] = \"KIMCHIMANDU\";\r\n   
-    Character[Character[\"KWONMIN\"] = 22] = \"KWONMIN\";\r\n    Character[Character[\"ROENTGENIUM\"]
-    = 23] = \"ROENTGENIUM\";\r\n    Character[Character[\"RUSUK\"] = 24] = \"RUSUK\";\r\n   
-    Character[Character[\"SECRETTO\"] = 25] = \"SECRETTO\";\r\n    Character[Character[\"BUSINESSKIM\"]
-    = 26] = \"BUSINESSKIM\";\r\n    Character[Character[\"WAKPHAGO\"] = 27] = \"WAKPHAGO\";\r\n   
-    Character[Character[\"WAKGOOD\"] = 28] = \"WAKGOOD\";\r\n    Character[Character[\"END\"]
-    = 28] = \"END\";\r\n})(Character = exports.Character || (exports.Character =
-    {}));\r\nclass DataManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
-    constructor() {\r\n        super(...arguments);\r\n        this.receipts = [];\r\n       
-    this.stageReceipts = [];\r\n        this.stages = [];\r\n        this.cardDatas
-    = [];\r\n    }\r\n    static GetInstance() {\r\n        if (!DataManager.Instance)
-    {\r\n            var _obj = UnityEngine_2.GameObject.Find(\"DataManager\");\r\n           
-    if (!_obj) {\r\n                UnityEngine_2.Debug.LogError(\"New DataManager\");\r\n               
-    _obj = new UnityEngine_2.GameObject(\"DataManager\");\r\n                _obj.AddComponent($typeof(DataManager));\r\n           
-    }\r\n            DataManager.Instance = _obj.GetComponent($typeof(DataManager));\r\n           
-    UnityEngine_2.GameObject.DontDestroyOnLoad(_obj);\r\n        }\r\n        return
-    DataManager.Instance;\r\n    }\r\n    Awake() {\r\n        if (this != DataManager.GetInstance())\r\n           
-    UnityEngine_2.GameObject.Destroy(this.gameObject);\r\n        this.LoadData();\r\n   
-    }\r\n    LoadData() {\r\n        this.LoadReceiptData();\r\n        this.LoadStageData();\r\n   
-    }\r\n    LoadReceiptData() {\r\n        const lines = this.receiptFile.text.split(''\\n'');
-    // split the CSV file by row\r\n        for (let i = 0; i < lines.length; i++)
-    {\r\n            const line = lines[i].trim().replace(''\\r'', ''''); // Remove
-    any leading/trailing whitespace and ''\\r'' characters\r\n            const values
-    = line.split('',''); // split the row by comma to get the values\r\n           
-    // do something with the values\r\n            const receipt = new Receipt_1.default();\r\n           
-    const ingredients = [];\r\n            for (let j = 6; j < values.length; j++)
-    {\r\n                ingredients.push(+values[j]);\r\n            }\r\n           
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.Character = exports.Side =
+    exports.Drink = exports.Ingredient = void 0;\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst Receipt_1 = require(\\\"./Receipt\\\");\\r\\nconst
+    UnityEngine_2 = require(\\\"UnityEngine\\\");\\r\\nconst CardData_1 = require(\\\"./Employee/CardData\\\");\\r\\nvar
+    Ingredient;\\r\\n(function (Ingredient) {\\r\\n    Ingredient[Ingredient[\\\"START\\\"]
+    = 0] = \\\"START\\\";\\r\\n    Ingredient[Ingredient[\\\"TOP_BURN\\\"] = 0] =
+    \\\"TOP_BURN\\\";\\r\\n    Ingredient[Ingredient[\\\"BOTTOM_BURN\\\"] = 1] =
+    \\\"BOTTOM_BURN\\\";\\r\\n    Ingredient[Ingredient[\\\"PATTY\\\"] = 2] = \\\"PATTY\\\";\\r\\n   
+    Ingredient[Ingredient[\\\"CABBAGE\\\"] = 3] = \\\"CABBAGE\\\";\\r\\n    Ingredient[Ingredient[\\\"TOMATO\\\"]
+    = 4] = \\\"TOMATO\\\";\\r\\n    Ingredient[Ingredient[\\\"ONION\\\"] = 5] = \\\"ONION\\\";\\r\\n   
+    Ingredient[Ingredient[\\\"CHEESE\\\"] = 6] = \\\"CHEESE\\\";\\r\\n    Ingredient[Ingredient[\\\"END\\\"]
+    = 6] = \\\"END\\\";\\r\\n})(Ingredient = exports.Ingredient || (exports.Ingredient
+    = {}));\\r\\nvar Drink;\\r\\n(function (Drink) {\\r\\n    Drink[Drink[\\\"START\\\"]
+    = 8] = \\\"START\\\";\\r\\n    Drink[Drink[\\\"PAENCHI\\\"] = 8] = \\\"PAENCHI\\\";\\r\\n   
+    Drink[Drink[\\\"NECKSRITE\\\"] = 9] = \\\"NECKSRITE\\\";\\r\\n    Drink[Drink[\\\"HOTCHS\\\"]
+    = 10] = \\\"HOTCHS\\\";\\r\\n    Drink[Drink[\\\"ORANGE\\\"] = 11] = \\\"ORANGE\\\";\\r\\n   
+    Drink[Drink[\\\"PINEAPPLE\\\"] = 12] = \\\"PINEAPPLE\\\";\\r\\n    Drink[Drink[\\\"END\\\"]
+    = 12] = \\\"END\\\";\\r\\n})(Drink = exports.Drink || (exports.Drink = {}));\\r\\nvar
+    Side;\\r\\n(function (Side) {\\r\\n    Side[Side[\\\"START\\\"] = 13] = \\\"START\\\";\\r\\n   
+    Side[Side[\\\"FRY\\\"] = 13] = \\\"FRY\\\";\\r\\n    Side[Side[\\\"END\\\"] =
+    13] = \\\"END\\\";\\r\\n})(Side = exports.Side || (exports.Side = {}));\\r\\nvar
+    Character;\\r\\n(function (Character) {\\r\\n    Character[Character[\\\"START\\\"]
+    = 14] = \\\"START\\\";\\r\\n    Character[Character[\\\"HAKU\\\"] = 14] = \\\"HAKU\\\";\\r\\n   
+    Character[Character[\\\"CALLYCARLY\\\"] = 15] = \\\"CALLYCARLY\\\";\\r\\n   
+    Character[Character[\\\"CHUNSIK\\\"] = 16] = \\\"CHUNSIK\\\";\\r\\n    Character[Character[\\\"DANDAPBUG\\\"]
+    = 17] = \\\"DANDAPBUG\\\";\\r\\n    Character[Character[\\\"HYEJI\\\"] = 18]
+    = \\\"HYEJI\\\";\\r\\n    Character[Character[\\\"DOPAMINE\\\"] = 19] = \\\"DOPAMINE\\\";\\r\\n   
+    Character[Character[\\\"HIKIKING\\\"] = 20] = \\\"HIKIKING\\\";\\r\\n    Character[Character[\\\"KIMCHIMANDU\\\"]
+    = 21] = \\\"KIMCHIMANDU\\\";\\r\\n    Character[Character[\\\"KWONMIN\\\"] =
+    22] = \\\"KWONMIN\\\";\\r\\n    Character[Character[\\\"ROENTGENIUM\\\"] = 23]
+    = \\\"ROENTGENIUM\\\";\\r\\n    Character[Character[\\\"RUSUK\\\"] = 24] = \\\"RUSUK\\\";\\r\\n   
+    Character[Character[\\\"SECRETTO\\\"] = 25] = \\\"SECRETTO\\\";\\r\\n    Character[Character[\\\"BUSINESSKIM\\\"]
+    = 26] = \\\"BUSINESSKIM\\\";\\r\\n    Character[Character[\\\"WAKPHAGO\\\"] =
+    27] = \\\"WAKPHAGO\\\";\\r\\n    Character[Character[\\\"WAKGOOD\\\"] = 28] =
+    \\\"WAKGOOD\\\";\\r\\n    Character[Character[\\\"PUNGSIN\\\"] = 29] = \\\"PUNGSIN\\\";\\r\\n   
+    Character[Character[\\\"SOPHIA\\\"] = 30] = \\\"SOPHIA\\\";\\r\\n    Character[Character[\\\"FREETER\\\"]
+    = 31] = \\\"FREETER\\\";\\r\\n    Character[Character[\\\"CARNARJUNGTUR\\\"]
+    = 32] = \\\"CARNARJUNGTUR\\\";\\r\\n    Character[Character[\\\"LEEDEOKSU\\\"]
+    = 33] = \\\"LEEDEOKSU\\\";\\r\\n    Character[Character[\\\"NOSFERATUHODD\\\"]
+    = 34] = \\\"NOSFERATUHODD\\\";\\r\\n    Character[Character[\\\"BUJUNGINGAN\\\"]
+    = 35] = \\\"BUJUNGINGAN\\\";\\r\\n    Character[Character[\\\"DOVE\\\"] = 36]
+    = \\\"DOVE\\\";\\r\\n    Character[Character[\\\"PARROT\\\"] = 37] = \\\"PARROT\\\";\\r\\n   
+    Character[Character[\\\"PAENCHI\\\"] = 38] = \\\"PAENCHI\\\";\\r\\n    Character[Character[\\\"LION\\\"]
+    = 39] = \\\"LION\\\";\\r\\n    Character[Character[\\\"END\\\"] = 39] = \\\"END\\\";\\r\\n})(Character
+    = exports.Character || (exports.Character = {}));\\r\\nclass DataManager extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.receipts = [];\\r\\n        this.stageReceipts
+    = [];\\r\\n        this.stages = [];\\r\\n        this.cardDatas = new Map();\\r\\n       
+    this.inventoryCache = new Map();\\r\\n        this.playStage = 'Stage';\\r\\n   
+    }\\r\\n    static GetInstance() {\\r\\n        if (!DataManager.Instance) {\\r\\n           
+    var _obj = UnityEngine_2.GameObject.Find(\\\"DataManager\\\");\\r\\n           
+    if (!_obj) {\\r\\n                UnityEngine_2.Debug.LogError(\\\"New DataManager\\\");\\r\\n               
+    _obj = new UnityEngine_2.GameObject(\\\"DataManager\\\");\\r\\n               
+    _obj.AddComponent($typeof(DataManager));\\r\\n            }\\r\\n           
+    DataManager.Instance = _obj.GetComponent($typeof(DataManager));\\r\\n           
+    UnityEngine_2.GameObject.DontDestroyOnLoad(_obj);\\r\\n        }\\r\\n       
+    return DataManager.Instance;\\r\\n    }\\r\\n    Awake() {\\r\\n        if (this
+    != DataManager.GetInstance())\\r\\n            UnityEngine_2.GameObject.Destroy(this.gameObject);\\r\\n       
+    this.LoadData();\\r\\n    }\\r\\n    Start() {\\r\\n        // \uC0AC\uC6A9 \uC608\uC2DC\\r\\n       
+    // const itemId = 'health_potion';\\r\\n        // console.log(`Current ${itemId}
+    count: ${this.getItemCount(itemId)}`);\\r\\n        // this.addItem(itemId, 1);\\r\\n       
+    // console.log(`Added 1 ${itemId}, now count: ${this.getItemCount(itemId)}`);\\r\\n       
+    // const success = this.useItem(itemId,10);\\r\\n        // console.log(`Tried
+    to use ${itemId}, success: ${success}, now count: ${this.getItemCount(itemId)}`);\\r\\n   
+    }\\r\\n    // Returns the value of a given key from PlayerPrefs as an integer.
+    \\r\\n    GetValue(key) {\\r\\n        if (UnityEngine_1.PlayerPrefs.HasKey(key))
+    {\\r\\n            return UnityEngine_1.PlayerPrefs.GetInt(key);\\r\\n       
+    }\\r\\n        else {\\r\\n            // Returns 0 if key does not exist.\\r\\n           
+    return 0;\\r\\n        }\\r\\n    }\\r\\n    // Sets the value of a given key
+    in PlayerPrefs to a given value.\\r\\n    SetValue(key, value) {\\r\\n       
+    UnityEngine_1.PlayerPrefs.SetInt(key, value);\\r\\n    }\\r\\n    LoadData()
+    {\\r\\n        this.LoadReceiptData();\\r\\n        this.LoadStageData();\\r\\n       
+    this.LoadCardData();\\r\\n    }\\r\\n    LoadReceiptData() {\\r\\n        const
+    lines = this.receiptFile.text.split('\\\\n'); // split the CSV file by row\\r\\n       
+    for (let i = 0; i < lines.length; i++) {\\r\\n            const line = lines[i].trim().replace('\\\\r',
+    ''); // Remove any leading/trailing whitespace and '\\\\r' characters\\r\\n           
+    const values = line.split(','); // split the row by comma to get the values\\r\\n           
+    // do something with the values\\r\\n            const receipt = new Receipt_1.default();\\r\\n           
+    const ingredients = [];\\r\\n            for (let j = 6; j < values.length; j++)
+    {\\r\\n                ingredients.push(+values[j]);\\r\\n            }\\r\\n           
     receipt.SetReceipt(+values[0], +values[1], +values[2], +values[3], +values[4],
-    values[5], ingredients);\r\n            this.receipts.push(receipt);\r\n       
-    }\r\n        ;\r\n    }\r\n    LoadStageData() {\r\n        const lines = this.stageFile.text.split(''\\n'');
-    // split the CSV file by row\r\n        for (let i = 0; i < lines.length; i++)
-    {\r\n            const line = lines[i].trim().replace(''\\r'', ''''); // Remove
-    any leading/trailing whitespace and ''\\r'' characters\r\n            const values
-    = line.split('',''); // split the row by comma to get the values\r\n           
-    // do something with the values\r\n            const stageIndexs = values.slice(1);\r\n           
-    this.stages[values[0]] = stageIndexs;\r\n        }\r\n    }\r\n    LoadCardData()
-    {\r\n        const lines = this.cardFile.text.split(''\\n''); // split the CSV
-    file by row\r\n        for (let i = 0; i < lines.length; i++) {\r\n           
-    const line = lines[i].trim().replace(''\\r'', ''''); // Remove any leading/trailing
-    whitespace and ''\\r'' characters\r\n            const values = line.split('','');
-    // split the row by comma to get the values\r\n            // do something with
-    the values\r\n            const cardData = new CardData_1.default();\r\n           
-    const ingredients = [];\r\n            for (let j = 6; j < values.length; j++)
-    {\r\n                ingredients.push(+values[j]);\r\n            }\r\n           
-    cardData.SetCardData(values[1], +values[2], values[3], values[4], +values[5],
-    +values[6], +values[7], +values[8]);\r\n            this.cardDatas.push(cardData);\r\n       
-    }\r\n    }\r\n    SetStageReceipts(stage) {\r\n        this.stageReceipts = [];\r\n       
-    for (let index = 0; index < this.stages[stage].length; index++) {\r\n           
-    this.stageReceipts.push(this.GetReceipt(this.stages[stage][index]));\r\n       
-    }\r\n    }\r\n    GetRandomStageReceipt() {\r\n        const index = Math.floor(UnityEngine_1.Random.Range(0,
-    this.stageReceipts.length));\r\n        return this.stageReceipts[index];\r\n   
-    }\r\n    GetReceipt(index) {\r\n        return this.receipts[index];\r\n    }\r\n   
-    getProductSprite(product) {\r\n        // split ingredients, drink, side\r\n       
-    if (product < Ingredient.END)\r\n            return this.getIngredientSprite(product);\r\n       
-    else if (product < Drink.END)\r\n            return this.getDrinkSprite(product);\r\n       
-    else\r\n            return this.getSideSprite(product);\r\n    }\r\n    // Return
-    sprite of the ingredient\r\n    getIngredientSprite(ingredient) {\r\n       
-    return this.ingredientSprites[ingredient - Ingredient.START];\r\n    }\r\n   
-    getDrinkSprite(drinkName) {\r\n        return this.drinkSprites[drinkName - Drink.START];\r\n   
-    }\r\n    // Return sprite of the side\r\n    getSideSprite(sideName) {\r\n       
-    return this.sideSprites[sideName - Side.START];\r\n    }\r\n    // Return sprite
-    of the character\r\n    getCharacterSprite(character) {\r\n        return this.characterSprites[character
-    - Character.START];\r\n    }\r\n    GetCharacterSpriteByName(characterName) {\r\n       
-    const spriteIndex = this.characterSprites.findIndex((s) => s.name.split(''_'')[1].toLowerCase()
-    === characterName);\r\n        return this.characterSprites[spriteIndex];\r\n   
-    }\r\n    GetSectionSpriteByName(sectionName) {\r\n        const spriteIndex =
-    this.sectionSprites.findIndex((s) => s.name.toLowerCase() === sectionName);\r\n       
-    return this.sectionSprites[spriteIndex];\r\n    }\r\n    GetSectionSprites()
-    {\r\n        return this.sectionSprites;\r\n    }\r\n}\r\nexports.default = DataManager;\r\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGF0YU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJEYXRhTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBc0Q7QUFDdEQsNkNBQW1FO0FBQ25FLHVDQUFnQztBQUNoQyw2Q0FBZ0Q7QUFDaEQsa0RBQTJDO0FBRTNDLElBQVksVUFVWDtBQVZELFdBQVksVUFBVTtJQUNsQiw2Q0FBUyxDQUFBO0lBQ1QsbURBQVksQ0FBQTtJQUNaLHlEQUFlLENBQUE7SUFDZiw2Q0FBUyxDQUFBO0lBQ1QsaURBQVcsQ0FBQTtJQUNYLCtDQUFVLENBQUE7SUFDViw2Q0FBUyxDQUFBO0lBQ1QsK0NBQVUsQ0FBQTtJQUNWLHlDQUFPLENBQUE7QUFDWCxDQUFDLEVBVlcsVUFBVSxHQUFWLGtCQUFVLEtBQVYsa0JBQVUsUUFVckI7QUFFRCxJQUFZLEtBUVg7QUFSRCxXQUFZLEtBQUs7SUFDYixtQ0FBUyxDQUFBO0lBQ1QsdUNBQVcsQ0FBQTtJQUNYLDJDQUFhLENBQUE7SUFDYixzQ0FBVyxDQUFBO0lBQ1gsc0NBQVcsQ0FBQTtJQUNYLDRDQUFjLENBQUE7SUFDZCxnQ0FBUSxDQUFBO0FBQ1osQ0FBQyxFQVJXLEtBQUssR0FBTCxhQUFLLEtBQUwsYUFBSyxRQVFoQjtBQUVELElBQVksSUFJWDtBQUpELFdBQVksSUFBSTtJQUNaLGtDQUFVLENBQUE7SUFDViw4QkFBUSxDQUFBO0lBQ1IsOEJBQVEsQ0FBQTtBQUNaLENBQUMsRUFKVyxJQUFJLEdBQUosWUFBSSxLQUFKLFlBQUksUUFJZjtBQUVELElBQVksU0FrQlg7QUFsQkQsV0FBWSxTQUFTO0lBQ2pCLDRDQUFVLENBQUE7SUFDViwwQ0FBUyxDQUFBO0lBQ1Qsc0RBQWUsQ0FBQTtJQUNmLGdEQUFZLENBQUE7SUFDWixvREFBYyxDQUFBO0lBQ2QsNENBQVUsQ0FBQTtJQUNWLGtEQUFhLENBQUE7SUFDYixrREFBYSxDQUFBO0lBQ2Isd0RBQWdCLENBQUE7SUFDaEIsZ0RBQVksQ0FBQTtJQUNaLHdEQUFnQixDQUFBO0lBQ2hCLDRDQUFVLENBQUE7SUFDVixrREFBYSxDQUFBO0lBQ2Isd0RBQWdCLENBQUE7SUFDaEIsa0RBQWEsQ0FBQTtJQUNiLGdEQUFZLENBQUE7SUFDWix3Q0FBUSxDQUFBO0FBQ1osQ0FBQyxFQWxCVyxTQUFTLEdBQVQsaUJBQVMsS0FBVCxpQkFBUyxRQWtCcEI7QUFFRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBQTlEOztRQTRCWSxhQUFRLEdBQWMsRUFBRSxDQUFDO1FBQ3pCLGtCQUFhLEdBQWMsRUFBRSxDQUFDO1FBQzlCLFdBQU0sR0FBZSxFQUFFLENBQUM7UUFDeEIsY0FBUyxHQUFlLEVBQUUsQ0FBQztJQW9IdkMsQ0FBQztJQWhKVSxNQUFNLENBQUMsV0FBVztRQUVyQixJQUFJLENBQUMsV0FBVyxDQUFDLFFBQVEsRUFBRTtZQUV2QixJQUFJLElBQUksR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsQ0FBQztZQUMxQyxJQUFJLENBQUMsSUFBSSxFQUFFO2dCQUNQLG1CQUFLLENBQUMsUUFBUSxDQUFDLGlCQUFpQixDQUFDLENBQUM7Z0JBQ2xDLElBQUksR0FBRyxJQUFJLHdCQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7Z0JBQ3JDLElBQUksQ0FBQyxZQUFZLFNBQUMsV0FBVyxHQUFJO2FBQ3BDO1lBQ0QsV0FBVyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLFdBQVcsRUFBRyxDQUFDO1lBQ3hELHdCQUFVLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDdEM7UUFDRCxPQUFPLFdBQVcsQ0FBQyxRQUFRLENBQUM7SUFDaEMsQ0FBQztJQWdCRCxLQUFLO1FBQ0QsSUFBSSxJQUFJLElBQUksV0FBVyxDQUFDLFdBQVcsRUFBRTtZQUFFLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUMzRSxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDcEIsQ0FBQztJQUVNLFFBQVE7UUFDWCxJQUFJLENBQUMsZUFBZSxFQUFFLENBQUM7UUFDdkIsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO0lBQ3pCLENBQUM7SUFFTSxlQUFlO1FBQ2xCLE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLDRCQUE0QjtRQUM3RSxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUNuQyxNQUFNLElBQUksR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLDZEQUE2RDtZQUM3RyxNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsMkNBQTJDO1lBRTNFLCtCQUErQjtZQUMvQixNQUFNLE9BQU8sR0FBRyxJQUFJLGlCQUFPLEVBQUUsQ0FBQztZQUM5QixNQUFNLFdBQVcsR0FBYSxFQUFFLENBQUM7WUFDakMsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLE1BQU0sQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQ3BDLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUNoQztZQUNELE9BQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLFdBQVcsQ0FBQyxDQUFDO1lBQ3ZHLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQy9CO1FBQUEsQ0FBQztJQUNOLENBQUM7SUFFTSxhQUFhO1FBQ2hCLE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLDRCQUE0QjtRQUMzRSxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUNuQyxNQUFNLElBQUksR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLDZEQUE2RDtZQUM3RyxNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsMkNBQTJDO1lBRTNFLCtCQUErQjtZQUMvQixNQUFNLFdBQVcsR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3BDLElBQUksQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsV0FBVyxDQUFDO1NBQ3hDO0lBQ0wsQ0FBQztJQUVNLFlBQVk7UUFDZixNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyw0QkFBNEI7UUFDMUUsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLEtBQUssQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDbkMsTUFBTSxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyw2REFBNkQ7WUFDN0csTUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLDJDQUEyQztZQUUzRSwrQkFBK0I7WUFDL0IsTUFBTSxRQUFRLEdBQUcsSUFBSSxrQkFBUSxFQUFFLENBQUM7WUFDaEMsTUFBTSxXQUFXLEdBQWEsRUFBRSxDQUFDO1lBQ2pDLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxNQUFNLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO2dCQUNwQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDaEM7WUFDRCxRQUFRLENBQUMsV0FBVyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsRUFBRSxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDbEgsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUM7U0FDakM7SUFDTCxDQUFDO0lBRU0sZ0JBQWdCLENBQUMsS0FBYTtRQUNqQyxJQUFJLENBQUMsYUFBYSxHQUFHLEVBQUUsQ0FBQztRQUN4QixLQUFLLElBQUksS0FBSyxHQUFHLENBQUMsRUFBRSxLQUFLLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLEVBQUU7WUFDNUQsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUN2RTtJQUNMLENBQUM7SUFFTSxxQkFBcUI7UUFDeEIsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxvQkFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1FBQ3JFLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNyQyxDQUFDO0lBRU0sVUFBVSxDQUFDLEtBQWE7UUFDM0IsT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ2hDLENBQUM7SUFFTSxnQkFBZ0IsQ0FBQyxPQUFlO1FBQ25DLGlDQUFpQztRQUNqQyxJQUFJLE9BQU8sR0FBRyxVQUFVLENBQUMsR0FBRztZQUN4QixPQUFPLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxPQUFPLENBQUMsQ0FBQzthQUN4QyxJQUFJLE9BQU8sR0FBRyxLQUFLLENBQUMsR0FBRztZQUN4QixPQUFPLElBQUksQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLENBQUM7O1lBRXBDLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUMzQyxDQUFDO0lBRUQsa0NBQWtDO0lBQzNCLG1CQUFtQixDQUFDLFVBQXNCO1FBQzdDLE9BQU8sSUFBSSxDQUFDLGlCQUFpQixDQUFDLFVBQVUsR0FBRyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDakUsQ0FBQztJQUVNLGNBQWMsQ0FBQyxTQUFnQjtRQUNsQyxPQUFPLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN0RCxDQUFDO0lBRUQsNEJBQTRCO0lBQ3JCLGFBQWEsQ0FBQyxRQUFjO1FBQy9CLE9BQU8sSUFBSSxDQUFDLFdBQVcsQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ25ELENBQUM7SUFFRCxpQ0FBaUM7SUFDMUIsa0JBQWtCLENBQUMsU0FBb0I7UUFDMUMsT0FBTyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsU0FBUyxHQUFHLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUM5RCxDQUFDO0lBRU0sd0JBQXdCLENBQUMsYUFBcUI7UUFDakQsTUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxFQUFFLEtBQUssYUFBYSxDQUFDLENBQUM7UUFDakgsT0FBTyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDLENBQUM7SUFDOUMsQ0FBQztJQUVNLHNCQUFzQixDQUFDLFdBQW1CO1FBQzdDLE1BQU0sV0FBVyxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLFdBQVcsQ0FBQyxDQUFDO1FBQy9GLE9BQU8sSUFBSSxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQztJQUM1QyxDQUFDO0lBQ00saUJBQWlCO1FBQ3BCLE9BQU8sSUFBSSxDQUFDLGNBQWMsQ0FBQztJQUMvQixDQUFDO0NBRUo7QUFuSkQsOEJBbUpDIn0=","assetPath":"Assets/Scripts/DataManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"receiptFile","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"stageFile","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"cardFile","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"ingredientSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"drinkSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"sideSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"characterSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"sectionSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"DataManager","description":""},"isCompiled":true}'
-  typescriptHash: 11b13ee8ddb04e603e3f9ee9fe436f12
+    values[5], ingredients);\\r\\n            this.receipts.push(receipt);\\r\\n       
+    }\\r\\n        ;\\r\\n    }\\r\\n    LoadStageData() {\\r\\n        const lines
+    = this.stageFile.text.split('\\\\n'); // split the CSV file by row\\r\\n       
+    for (let i = 0; i < lines.length; i++) {\\r\\n            const line = lines[i].trim().replace('\\\\r',
+    ''); // Remove any leading/trailing whitespace and '\\\\r' characters\\r\\n           
+    const values = line.split(','); // split the row by comma to get the values\\r\\n           
+    // do something with the values\\r\\n            const stageIndexs = values.slice(1);\\r\\n           
+    this.stages[values[0]] = stageIndexs;\\r\\n        }\\r\\n    }\\r\\n    LoadCardData()
+    {\\r\\n        const lines = this.cardFile.text.split('\\\\n'); // split the
+    CSV file by row\\r\\n        for (let i = 0; i < lines.length; i++) {\\r\\n           
+    const line = lines[i].trim().replace('\\\\r', ''); // Remove any leading/trailing
+    whitespace and '\\\\r' characters\\r\\n            const values = line.split(',');
+    // split the row by comma to get the values\\r\\n            // do something
+    with the values\\r\\n            const cardData = new CardData_1.default();\\r\\n           
+    const ingredients = [];\\r\\n            for (let j = 6; j < values.length; j++)
+    {\\r\\n                ingredients.push(+values[j]);\\r\\n            }\\r\\n           
+    const cardId = values[1];\\r\\n            cardData.SetCardData(cardId, +values[2],
+    values[3], values[4], +values[5], +values[6], +values[7], +values[8]);\\r\\n           
+    this.cardDatas.set(cardId, cardData);\\r\\n            const cardQuantity = this.GetValue(cardId);\\r\\n           
+    this.SetValue(cardId, cardQuantity);\\r\\n            this.inventoryCache.set(cardId,
+    cardQuantity);\\r\\n        }\\r\\n    }\\r\\n    GetCardData(id) {\\r\\n       
+    return this.cardDatas.get(id);\\r\\n    }\\r\\n    GetInventoryCache() {\\r\\n       
+    return this.inventoryCache;\\r\\n    }\\r\\n    GetCardQuantity(id) {\\r\\n       
+    return this.inventoryCache.get(id) || 0;\\r\\n    }\\r\\n    // Adds a given
+    quantity of cards with a given ID to the inventory.\\r\\n    AddCard(id, quantity)
+    {\\r\\n        const currentQuantity = this.inventoryCache.get(id) || 0;\\r\\n       
+    const newQuantity = currentQuantity + quantity;\\r\\n        this.inventoryCache.set(id,
+    newQuantity);\\r\\n        this.SetValue(id, newQuantity);\\r\\n    }\\r\\n   
+    // Uses a given quantity of cards with a given ID from the inventory.\\r\\n   
+    // Returns true if the operation is successful, false otherwise.\\r\\n    UseCard(id,
+    quantity) {\\r\\n        const currentQuantity = this.inventoryCache.get(id)
+    || 0;\\r\\n        // If the ID is in the inventory and the current quantity
+    is greater than the given quantity,\\r\\n        // the given quantity is subtracted
+    from the current quantity and the new quantity is saved to PlayerPrefs.\\r\\n       
+    if (currentQuantity > quantity) {\\r\\n            const newQuantity = currentQuantity
+    - quantity;\\r\\n            this.inventoryCache.set(id, newQuantity);\\r\\n           
+    this.SetValue(id, newQuantity);\\r\\n            return true;\\r\\n        }\\r\\n       
+    else {\\r\\n            console.log(`Not enough ${id} to use.`);\\r\\n           
+    return false;\\r\\n        }\\r\\n    }\\r\\n    SetStageReceipts(stage) {\\r\\n       
+    this.stageReceipts = [];\\r\\n        for (let index = 0; index < this.stages[stage].length;
+    index++) {\\r\\n            this.stageReceipts.push(this.GetReceipt(this.stages[stage][index]));\\r\\n       
+    }\\r\\n    }\\r\\n    GetRandomStageReceipt() {\\r\\n        const index = Math.floor(UnityEngine_1.Random.Range(0,
+    this.stageReceipts.length));\\r\\n        return this.stageReceipts[index];\\r\\n   
+    }\\r\\n    GetReceipt(index) {\\r\\n        return this.receipts[index];\\r\\n   
+    }\\r\\n    getProductSprite(product) {\\r\\n        // split ingredients, drink,
+    side\\r\\n        if (product < Ingredient.END)\\r\\n            return this.getIngredientSprite(product);\\r\\n       
+    else if (product < Drink.END)\\r\\n            return this.getDrinkSprite(product);\\r\\n       
+    else\\r\\n            return this.getSideSprite(product);\\r\\n    }\\r\\n   
+    // Return sprite of the ingredient\\r\\n    getIngredientSprite(ingredient) {\\r\\n       
+    return this.ingredientSprites[ingredient - Ingredient.START];\\r\\n    }\\r\\n   
+    getDrinkSprite(drinkName) {\\r\\n        return this.drinkSprites[drinkName -
+    Drink.START];\\r\\n    }\\r\\n    // Return sprite of the side\\r\\n    getSideSprite(sideName)
+    {\\r\\n        return this.sideSprites[sideName - Side.START];\\r\\n    }\\r\\n   
+    // Return sprite of the character\\r\\n    getCharacterSprite(character) {\\r\\n       
+    return this.characterSprites[character - Character.START];\\r\\n    }\\r\\n   
+    GetCharacterIcon(character) {\\r\\n        return this.characterIcons[character
+    - Character.START];\\r\\n    }\\r\\n    GetCharacterSpriteByName(characterName)
+    {\\r\\n        const spriteIndex = this.characterSprites.findIndex((s) => s.name.split('_')[1].toLowerCase()
+    === characterName);\\r\\n        return this.characterSprites[spriteIndex];\\r\\n   
+    }\\r\\n    GetSectionSpriteByName(sectionName) {\\r\\n        const spriteIndex
+    = this.sectionSprites.findIndex((s) => s.name.toLowerCase() === sectionName);\\r\\n       
+    return this.sectionSprites[spriteIndex];\\r\\n    }\\r\\n    GetSectionSprites()
+    {\\r\\n        return this.sectionSprites;\\r\\n    }\\r\\n}\\r\\nexports.default
+    = DataManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGF0YU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJEYXRhTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBc0Q7QUFDdEQsNkNBQWdGO0FBQ2hGLHVDQUFnQztBQUNoQyw2Q0FBZ0Q7QUFDaEQsa0RBQTJDO0FBRTNDLElBQVksVUFVWDtBQVZELFdBQVksVUFBVTtJQUNsQiw2Q0FBUyxDQUFBO0lBQ1QsbURBQVksQ0FBQTtJQUNaLHlEQUFlLENBQUE7SUFDZiw2Q0FBUyxDQUFBO0lBQ1QsaURBQVcsQ0FBQTtJQUNYLCtDQUFVLENBQUE7SUFDViw2Q0FBUyxDQUFBO0lBQ1QsK0NBQVUsQ0FBQTtJQUNWLHlDQUFPLENBQUE7QUFDWCxDQUFDLEVBVlcsVUFBVSxHQUFWLGtCQUFVLEtBQVYsa0JBQVUsUUFVckI7QUFFRCxJQUFZLEtBUVg7QUFSRCxXQUFZLEtBQUs7SUFDYixtQ0FBUyxDQUFBO0lBQ1QsdUNBQVcsQ0FBQTtJQUNYLDJDQUFhLENBQUE7SUFDYixzQ0FBVyxDQUFBO0lBQ1gsc0NBQVcsQ0FBQTtJQUNYLDRDQUFjLENBQUE7SUFDZCxnQ0FBUSxDQUFBO0FBQ1osQ0FBQyxFQVJXLEtBQUssR0FBTCxhQUFLLEtBQUwsYUFBSyxRQVFoQjtBQUVELElBQVksSUFJWDtBQUpELFdBQVksSUFBSTtJQUNaLGtDQUFVLENBQUE7SUFDViw4QkFBUSxDQUFBO0lBQ1IsOEJBQVEsQ0FBQTtBQUNaLENBQUMsRUFKVyxJQUFJLEdBQUosWUFBSSxLQUFKLFlBQUksUUFJZjtBQUVELElBQVksU0E2Qlg7QUE3QkQsV0FBWSxTQUFTO0lBQ2pCLDRDQUFVLENBQUE7SUFDViwwQ0FBUyxDQUFBO0lBQ1Qsc0RBQWUsQ0FBQTtJQUNmLGdEQUFZLENBQUE7SUFDWixvREFBYyxDQUFBO0lBQ2QsNENBQVUsQ0FBQTtJQUNWLGtEQUFhLENBQUE7SUFDYixrREFBYSxDQUFBO0lBQ2Isd0RBQWdCLENBQUE7SUFDaEIsZ0RBQVksQ0FB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\",\"assetPath\":\"Assets/Scripts/DataManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"receiptFile\",\"type\":\"UnityEngine.TextAsset\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"stageFile\",\"type\":\"UnityEngine.TextAsset\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"cardFile\",\"type\":\"UnityEngine.TextAsset\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"ingredientSprites\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"drinkSprites\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"sideSprites\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"characterSprites\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"characterIcons\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"gradeIcons\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"sectionSprites\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"DataManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 6d840ddc8bda21758c32ce731084bb36
   onlyWriteTrigger: 0

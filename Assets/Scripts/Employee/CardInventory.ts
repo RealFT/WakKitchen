@@ -1,145 +1,112 @@
 import {ZepetoScriptBehaviour} from 'ZEPETO.Script'
-import {Button, Text, ToggleGroup} from 'UnityEngine.UI'
-import {GameObject, Object, Sprite, Transform, WaitUntil} from 'UnityEngine'
-import {InventoryRecord, InventoryService} from "ZEPETO.Inventory";
+import { Button, GridLayoutGroup, ToggleGroup } from 'UnityEngine.UI'
+import { GameObject, Object, RectTransform, Transform, Vector2 } from 'UnityEngine'
 import {CurrencyService} from "ZEPETO.Currency";
 import {ProductRecord, ProductService, PurchaseType} from "ZEPETO.Product";
-import {ZepetoWorldMultiplay} from "ZEPETO.World";
-import {Room, RoomData} from "ZEPETO.Multiplay";
 import {BalanceSync, InventorySync, Currency} from "../Shop/BalanceManager";
 import CardSlot from './CardSlot';
+import DataManager from '../DataManager';
+import EquipSlotController from './EquipSlotController';
 
 export default class CardInventory extends ZepetoScriptBehaviour {
-    @SerializeField() private usedSlotNumTxt : Text;
-    @SerializeField() private possessionStarTxt : Text;
-    @SerializeField() private useBtn : Button;
     
-    @SerializeField() private contentParent : Transform;
-    @SerializeField() private prefItem : GameObject;
-    @SerializeField() private itemImage : Sprite[];
-    
-    private _inventoryCache: InventoryRecord[];
-    private _productCache: Map<string, ProductRecord> = new Map<string, ProductRecord>();
-    private _multiplay : ZepetoWorldMultiplay;
-    private _room : Room;
+    @SerializeField() private equipBtn: Button;
+    @SerializeField() private upgradeBtn: Button;
+    @SerializeField() private contentParent: Transform;
+    @SerializeField() private equipSlotControllerObj: GameObject;
+    @SerializeField() private cardSlotPrefab: GameObject;
+    private cardSlots: CardSlot[] = [];
+    private equipSlotController: EquipSlotController;
 
     private Start() {
-        this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
-        this._multiplay.RoomJoined += (room: Room) => {
-            this._room = room;
-            this.InitMessageHandler();
-        }
-        this.StartCoroutine(this.LoadAllItems());
+        this.Init();
+        const inventoryCache = DataManager.GetInstance().GetInventoryCache();
+        this.CreateInventory(inventoryCache);
+        this.equipSlotController = this.equipSlotControllerObj.GetComponent<EquipSlotController>();
     }
     
-    private InitMessageHandler(){
-        ProductService.OnPurchaseCompleted.AddListener((product, response) => {
-            this.StartCoroutine(this.RefreshInventoryUI());
-        });
-        this._room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
-            this.StartCoroutine(this.RefreshInventoryUI());
-        });
-        this.useBtn.onClick.AddListener(()=> this.OnClickEquipCard());
-    }
-
-    private* LoadAllItems() {
-        const request = ProductService.GetProductsAsync();
-        yield new WaitUntil(() => request.keepWaiting == false);
-        if (request.responseData.isSuccess) {
-            request.responseData.products.forEach((pr) => {
-                this._productCache.set(pr.productId,pr);
-            });
-        }
-        this.StartCoroutine(this.RefreshInventoryUI());
+    private Init(){
+        // ProductService.OnPurchaseCompleted.AddListener((product, response) => {
+        //     this.RefreshInventoryUI()
+        // });
+        // this._room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
+        //     this.RefreshInventoryUI()
+        // });
+        this.equipBtn.onClick.AddListener(()=> this.OnClickEquipCard());
     }
     
-    private * RefreshInventoryUI(){
-        const request = InventoryService.GetListAsync();
-        yield new WaitUntil(()=>request.keepWaiting == false);
-        if(request.responseData.isSuccess) {
-            const items: InventoryRecord[] = request.responseData.products;
-            
-            items.forEach((ir, index) => {
-                // If there are zero consumable items, delete them from the inventory.
-                if (ir.quantity <= 0 && this._productCache.get(ir.productId).PurchaseType == PurchaseType.Consumable) {
-                    // remove inventory
-                    const data = new RoomData();
-                    data.Add("productId", ir.productId);
-                    this._multiplay.Room?.Send("onRemoveInventory", data.GetObject());
-                    return;
-                }
-            });
+    private RefreshInventoryUI(): void {
+        const existingIds: string[] = [];
+        const inventoryCache = DataManager.GetInstance().GetInventoryCache();
+        // Update existing slots
+        this.cardSlots.forEach((cardSlot) => {
+            const cardId = cardSlot.GetCardData().GetCardId();
+            const quantity = inventoryCache.get(cardId) || 0;
 
-            // If the value matches the previously received value, do not update it.
-            if (this._inventoryCache === items) 
-                return;
-            else if (items != null && this._inventoryCache?.length == items.length) 
-                this.UpdateInventory(items);
-            else
-                this.CreateInventory(items);
+            if (quantity > 0) {
+                cardSlot.RefreshItem(quantity);
+                existingIds.push(cardId);
+            } else {
+                cardSlot.ClearSlot();
+                cardSlot.gameObject.SetActive(false);
+            }
+        });
 
-            this.usedSlotNumTxt.text = items.length.toString();
-            this._inventoryCache = items;
+        // Add new slots for cards that were not already displayed
+        for (const [id, quantity] of inventoryCache) {
+            if (!existingIds.includes(id)) {
+                this.CreateSlot(id, quantity);
+            }
         }
     }
     
-    private UpdateInventory(items:InventoryRecord[]){
-        const itemScripts = this.contentParent.GetComponentsInChildren<CardSlot>();
-        items.forEach((ir)=>{
-            itemScripts.forEach((itemScript)=>{
-                if(itemScript.itemRecord.productId == ir.productId) {            
-                    const isShowQuantity:boolean = this._productCache.get(ir.productId).PurchaseType == PurchaseType.Consumable;
-                    itemScript.RefreshItem(ir, isShowQuantity);
-                    return;
-                }
-            });
-        });
-    }
-    
-    private CreateInventory(items :InventoryRecord[]){
+    private CreateInventory(inventoryCache: Map<string, number>){
         this.contentParent.GetComponentsInChildren<CardSlot>().forEach((child)=>{
             GameObject.Destroy(child.gameObject);
         });
 
-        // Sort by Create Order (descending order)
-        items.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-        
-        items.forEach((ir, index) => {
-            const itemObj = Object.Instantiate(this.prefItem, this.contentParent) as GameObject;
+        /*Sort by Create Order (descending order)*/
 
-            const itemScript = itemObj.GetComponent<CardSlot>();
-            this.itemImage.forEach((s, index) => {
-                // Import by name comparison from image resources.
-                if (s.name == ir.productId) {
-                    itemScript.itemImage.sprite = this.itemImage[index];
-                    return;
-                }
-            });
-            // Non-consumable items do not display numbers.
-            const isShowQuantity:boolean = this._productCache.get(ir.productId).PurchaseType == PurchaseType.Consumable;
-            itemScript.RefreshItem(ir, isShowQuantity);
-            itemScript.isOn(index == 0);
-        });
+        for (const [id, quantity] of inventoryCache) {
+            //if (quantity > 0)
+                this.CreateSlot(id, quantity);
+        }
+        
+        // Update the size of the content to fit the number of slots
+        const layoutGroup = this.contentParent.GetComponent<GridLayoutGroup>();
+        const cellSize = layoutGroup.cellSize;
+        const spacing = layoutGroup.spacing;
+        const constraintCount = layoutGroup.constraintCount;
+        const rowCount = Math.ceil(this.cardSlots.length / constraintCount);
+
+        // Cast contentParent to RectTransform
+        const contentRectTransform = this.contentParent.transform as RectTransform;
+        const newContentSize = new Vector2(            
+            contentRectTransform.sizeDelta.x,
+            (rowCount + 1) * (cellSize.y + spacing.y)
+        );
+        contentRectTransform.sizeDelta = newContentSize;
     }
     
+    private CreateSlot(id: string, quantity: number) {
+        const cardObj = Object.Instantiate(this.cardSlotPrefab, this.contentParent) as GameObject;
+        const slot = cardObj.GetComponent<CardSlot>();
+        const cardData = DataManager.GetInstance().GetCardData(id);
+
+        slot.SetSlot(cardData, quantity);
+        //slot.IsOn(false);
+        this.cardSlots.push(slot);
+    }
 
     private OnClickEquipCard(){
         const toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
-        const item = toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().itemRecord;
+        const card = toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
         
-        if(item == null){
-            console.warn("no have item data");
+        if (card == null){
+            console.warn("no have card data");
             return;
         }
-        if(this._multiplay.Room == null){
-            console.warn("server disconnect");
-            return;
-        }
-
-        const data = new RoomData();
-        data.Add("productId", item.productId);
-        data.Add("quantity", 1);
-        this._multiplay.Room?.Send("onUseInventory", data.GetObject());
+        this.equipSlotController.EquipCharacter(card);
+        console.log("OnClickEquipCard: " + card.GetCardId());
     }
-
 }

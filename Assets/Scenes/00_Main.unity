@@ -647,7 +647,7 @@ MonoBehaviour:
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":13,\"length\":26,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":39,\"length\":5,\"type\":\"UnityEngine.Sprite,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":39,\"length\":5,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     unityArrayValues:
     - {fileID: 21300000, guid: b9359114493167b48973b9c2eef1444b, type: 3}
@@ -1331,6 +1331,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3565130946998342624, guid: b895e16fa0819324a9551200f9385607, type: 3}
       propertyPath: script.unityArrayValues.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193558346175392611, guid: b895e16fa0819324a9551200f9385607, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560270549827686021, guid: b895e16fa0819324a9551200f9385607, type: 3}

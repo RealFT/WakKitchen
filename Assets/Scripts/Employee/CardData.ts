@@ -9,7 +9,6 @@ export default class CardData extends ZepetoScriptBehaviour {
     private frierProficiency: number;
     private grillProficiency: number;
     private sliceProficiency: number;
-    private quantity: number;
 
     public SetCardData(productId: string, characterIndex: number, characterName: string, grade: string, 
         dispenserProficiency: number, frierProficiency: number, grillProficiency: number, sliceProficiency: number): void {
@@ -27,7 +26,31 @@ export default class CardData extends ZepetoScriptBehaviour {
         return this.productId;
     }
 
+    public GetCharacterIndex(): number {
+        return this.characterIndex;
+    }
+
+    public GetCharacterName(): string {
+        return this.characterName;
+    }
+
     public GetGrade(): string {
         return this.grade;
+    }
+
+    public GetDispenserProficiency(): number {
+        return this.dispenserProficiency;
+    }
+
+    public GetFrierProficiency(): number {
+        return this.frierProficiency;
+    }
+
+    public GetGrillProficiency(): number {
+        return this.grillProficiency;
+    }
+
+    public GetSliceProficiency(): number {
+        return this.sliceProficiency;
     }
 }
