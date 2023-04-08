@@ -1,7 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Image, Button, Toggle } from "UnityEngine.UI";
 import { GameObject, Sprite, Color } from 'UnityEngine';
-import DataManager from '../DataManager';
+import DataManager, { Character } from '../DataManager';
 import CardData from './CardData';
 
 export default class EquipSlot extends ZepetoScriptBehaviour {
@@ -57,7 +57,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectedSectionImage.color = new Color(1, 1, 1, 0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = true;
-        this.characterImage.sprite = DataManager.GetInstance().getCharacterSprite(cardData.GetCharacterIndex());
+        this.characterImage.sprite = DataManager.GetInstance().GetCharacterIcon(cardData.GetCharacterIndex());
         this.characterImage.color = new Color(1, 1, 1, 1);
         this.isEquip = true;
     }

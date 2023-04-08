@@ -265,7 +265,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     // Return sprite of the character
-    public getCharacterSprite(character: Character): Sprite {
+    public GetCharacterSprite(character: Character): Sprite {
         return this.characterSprites[character - Character.START];
     }
 

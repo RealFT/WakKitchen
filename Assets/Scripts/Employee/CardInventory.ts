@@ -101,8 +101,10 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     private OnClickEquipCard(){
         const toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
         const card = toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
-        
-        if (card == null){
+        console.log("OnClickEquipCard: " + toggleGroup.GetFirstActiveToggle());
+        console.log("OnClickEquipCard: " + toggleGroup.GetFirstActiveToggle());
+
+        if (card === null){
             console.warn("no have card data");
             return;
         }

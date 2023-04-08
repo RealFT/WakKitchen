@@ -30,7 +30,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
 
     private _foodCache: ProductRecord[] = [];
     private _upgradeCache: ProductRecord[] = [];
-    private _cardCache: ProductRecord[] = [];
+    //private _cardCache: ProductRecord[] = [];
     private _multiplay: ZepetoWorldMultiplay;
     private _room: Room;
 
@@ -93,9 +93,9 @@ export default class ItemManager extends ZepetoScriptBehaviour {
                         case ItemType.upgrade:
                             this._upgradeCache.push(pr);
                             break;
-                        case ItemType.card:
-                            this._cardCache.push(pr);
-                            break;
+                        // case ItemType.card:
+                        //     this._cardCache.push(pr);
+                        //     break;
                         default:
                             // Ignore products with unrecognized prefixes.
                             break;
@@ -108,32 +108,32 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     }
 
     public getFoodCache(): ProductRecord[] {
-        if (this._foodCache.Length == 0) {
+        if (this._foodCache.length == 0) {
             return null;
         }
         return this._foodCache;
     }
 
     public getUpgradeCache(): ProductRecord[] {
-        if (this._upgradeCache.Length == 0) {
+        if (this._upgradeCache.length == 0) {
             return null;
         }
         return this._upgradeCache;
     }
 
-    public getCardCache(): ProductRecord[] {
-        if (this._cardCache.Length == 0) {
-            return null;
-        }
-        return this._cardCache;
-    }
+    // public getCardCache(): ProductRecord[] {
+    //     if (this._cardCache.Length == 0) {
+    //         return null;
+    //     }
+    //     return this._cardCache;
+    // }
 
-    public GetRandomCardId(): string{
-        if (this._cardCache.Length == 0) {
-            return null;
-        }
-        return this._cardCache[Random.Range(0,this._cardCache.Length)].productId;
-    }
+    // public GetRandomCardId(): string{
+    //     if (this._cardCache.Length == 0) {
+    //         return null;
+    //     }
+    //     return this._cardCache[Random.Range(0,this._cardCache.Length)].productId;
+    // }
 
     // public GainBalance(currencyId: string, quantity: number) {
     //     const data = new RoomData();
@@ -181,8 +181,8 @@ export default class ItemManager extends ZepetoScriptBehaviour {
                 return this._foodCache.find((item) => item.productId === productId);
             case ItemType.upgrade:
                 return this._upgradeCache.find((item) => item.productId === productId);
-            case ItemType.card:
-                return this._cardCache.find((item) => item.productId === productId);;
+            // case ItemType.card:
+            //     return this._cardCache.find((item) => item.productId === productId);;
             default:
                 return undefined; // Return undefined for products with unrecognized prefixes.
         }

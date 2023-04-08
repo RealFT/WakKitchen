@@ -14,20 +14,20 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
     @SerializeField() private resultPanel: GameObject;
     @SerializeField() private cardObj: GameObject;
     @SerializeField() private card: Card;
-    private _multiplay : ZepetoWorldMultiplay;
-    private _room : Room;
+    // private _multiplay : ZepetoWorldMultiplay;
+    // private _room : Room;
     
-    Start() {
-        this.card = this.cardObj.GetComponent<Card>();
-        this.buyButton.onClick.AddListener(()=>{
-            this.PurchaceRandomCard();
-        });
-        this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
-        this._multiplay.RoomJoined += (room: Room) => {
-            this._room = room;
-            this.InitMessageHandler();
-        }
-    }
+    // Start() {
+    //     this.card = this.cardObj.GetComponent<Card>();
+    //     this.buyButton.onClick.AddListener(()=>{
+    //         this.PurchaceRandomCard();
+    //     });
+    //     this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+    //     this._multiplay.RoomJoined += (room: Room) => {
+    //         this._room = room;
+    //         this.InitMessageHandler();
+    //     }
+    // }
 
     private InitMessageHandler(){
         // ProductService.OnPurchaseCompleted.AddListener((product, response) => {
@@ -66,29 +66,29 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
         // this._multiplay.Room?.Send("onSetStorage", data.GetObject());
     }
 
-    private PurchaceRandomCard(){
-        var cardId = ItemManager.GetInstance().GetRandomCardId();
-        const cardIds = [];
-        if (!cardId) return; 
-        console.log(cardId);
-        var cardProduct = ItemManager.GetInstance().GetProduct(cardId);
-        //ItemManager.GetInstance().PurchaseItem(cardId);
-        cardIds.push(cardId);
-        // cardProductId: card_character_grade
-        this.ShowPurchaseResult(cardId);
-    }
+    // private PurchaceRandomCard(){
+    //     var cardId = ItemManager.GetInstance().GetRandomCardId();
+    //     const cardIds = [];
+    //     if (!cardId) return; 
+    //     console.log(cardId);
+    //     var cardProduct = ItemManager.GetInstance().GetProduct(cardId);
+    //     //ItemManager.GetInstance().PurchaseItem(cardId);
+    //     cardIds.push(cardId);
+    //     // cardProductId: card_character_grade
+    //     this.ShowPurchaseResult(cardId);
+    // }
 
-    private PurchaceCardPakage(){
-        var cardId = ItemManager.GetInstance().GetRandomCardId();
-        const cardIds = [];
-        if (!cardId) return; 
-        console.log(cardId);
-        var cardProduct = ItemManager.GetInstance().GetProduct(cardId);
-        //ItemManager.GetInstance().PurchaseItem(cardId);
-        cardIds.push(cardId);
-        // cardProductId: card_character_grade
-        this.ShowPurchaseResult(cardId);
-    }
+    // private PurchaceCardPakage(){
+    //     var cardId = ItemManager.GetInstance().GetRandomCardId();
+    //     const cardIds = [];
+    //     if (!cardId) return; 
+    //     console.log(cardId);
+    //     var cardProduct = ItemManager.GetInstance().GetProduct(cardId);
+    //     //ItemManager.GetInstance().PurchaseItem(cardId);
+    //     cardIds.push(cardId);
+    //     // cardProductId: card_character_grade
+    //     this.ShowPurchaseResult(cardId);
+    // }
 
     private ShowPurchaseResult(cardId: string) {
         const match = cardId.split('_');

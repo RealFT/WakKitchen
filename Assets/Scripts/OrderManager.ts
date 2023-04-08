@@ -185,7 +185,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         const drinkSprite = DataManager.GetInstance().getDrinkSprite(receipt.drink);
         const sideSprite = DataManager.GetInstance().getSideSprite(receipt.side);
         const additionalOrder = receipt.additionalOrder;
-        const characterSprite = DataManager.GetInstance().getCharacterSprite(receipt.character);
+        const characterSprite = DataManager.GetInstance().GetCharacterSprite(receipt.character);
 
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
