@@ -199,6 +199,19 @@ export default class DataManager extends ZepetoScriptBehaviour {
         return this.inventoryCache.get(id) || 0;
     }
 
+    public GetRandomCardByGrade(grade: string): CardData | undefined {
+        // 등급에 맞는 카드 목록 가져오기
+        const cardsByGrade = Array.from(this.cardDatas.values()).filter(cardData => cardData.GetGrade() === grade.toLowerCase());
+        
+        // 랜덤 카드 선택
+        if (cardsByGrade.length > 0) {
+            const randomIndex = Math.floor(Math.random() * cardsByGrade.length);
+            return cardsByGrade[randomIndex];
+        } else {
+            console.log("GetRandomCardByGrade: undefined");
+            return undefined;
+        }
+    }
     // Adds a given quantity of cards with a given ID to the inventory.
     public AddCard(id: string, quantity: number): void {
         const currentQuantity = this.inventoryCache.get(id) || 0;

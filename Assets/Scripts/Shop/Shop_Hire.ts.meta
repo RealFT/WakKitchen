@@ -18,50 +18,44 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
-    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ItemManager_1 = require(\"../ItemManager\");\r\nconst
-    Card_1 = require(\"../Employee/Card\");\r\nconst DataManager_1 = require(\"../DataManager\");\r\nconst
-    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nclass
-    Shop_Hire extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    // private _multiplay
-    : ZepetoWorldMultiplay;\r\n    // private _room : Room;\r\n    // Start() {\r\n   
-    //     this.card = this.cardObj.GetComponent<Card>();\r\n    //     this.buyButton.onClick.AddListener(()=>{\r\n   
-    //         this.PurchaceRandomCard();\r\n    //     });\r\n    //     this._multiplay
-    = Object.FindObjectOfType<ZepetoWorldMultiplay>();\r\n    //     this._multiplay.RoomJoined
-    += (room: Room) => {\r\n    //         this._room = room;\r\n    //         this.InitMessageHandler();\r\n   
-    //     }\r\n    // }\r\n    InitMessageHandler() {\r\n        // ProductService.OnPurchaseCompleted.AddListener((product,
-    response) => {\r\n        //     this.StartCoroutine(this.RefreshInventoryUI());\r\n       
-    //     this.StartCoroutine(this.RefreshBalanceUI());\r\n        // });\r\n       
-    // this._room.AddMessageHandler<InventorySync>(\"SyncInventories\", (message)
-    => {\r\n        //     this.StartCoroutine(this.RefreshInventoryUI());\r\n       
-    // });\r\n        // this._room.AddMessageHandler<BalanceSync>(\"SyncBalances\",
-    (message) => {\r\n        //     this.StartCoroutine(this.RefreshBalanceUI());\r\n       
-    // });\r\n        // this.useBtn.onClick.AddListener(()=> this.OnClickUseInventoryItem());\r\n   
-    }\r\n    InitHireShop() {\r\n    }\r\n    OnClickPurchaseCardPack() {\r\n       
-    // const toggleGroup = this.contentParent.GetComponent<ToggleGroup>();\r\n       
-    // const item = toggleGroup.GetFirstActiveToggle()?.GetComponent<ITM_Inventory>().itemRecord;\r\n       
-    // if(item == null){\r\n        //     console.warn(\"no have item data\");\r\n       
-    //     return;\r\n        // }\r\n        // if(this._multiplay.Room == null){\r\n       
-    //     console.warn(\"server disconnect\");\r\n        //     return;\r\n       
-    // }\r\n        // const data = new RoomData();\r\n        // data.Add(\"key\",
-    item.productId);\r\n        // data.Add(\"value\", 1);\r\n        // this._multiplay.Room?.Send(\"onSetStorage\",
-    data.GetObject());\r\n    }\r\n    // private PurchaceRandomCard(){\r\n    //    
-    var cardId = ItemManager.GetInstance().GetRandomCardId();\r\n    //     const
-    cardIds = [];\r\n    //     if (!cardId) return; \r\n    //     console.log(cardId);\r\n   
-    //     var cardProduct = ItemManager.GetInstance().GetProduct(cardId);\r\n   
-    //     //ItemManager.GetInstance().PurchaseItem(cardId);\r\n    //     cardIds.push(cardId);\r\n   
-    //     // cardProductId: card_character_grade\r\n    //     this.ShowPurchaseResult(cardId);\r\n   
-    // }\r\n    // private PurchaceCardPakage(){\r\n    //     var cardId = ItemManager.GetInstance().GetRandomCardId();\r\n   
-    //     const cardIds = [];\r\n    //     if (!cardId) return; \r\n    //    
-    console.log(cardId);\r\n    //     var cardProduct = ItemManager.GetInstance().GetProduct(cardId);\r\n   
-    //     //ItemManager.GetInstance().PurchaseItem(cardId);\r\n    //     cardIds.push(cardId);\r\n   
-    //     // cardProductId: card_character_grade\r\n    //     this.ShowPurchaseResult(cardId);\r\n   
-    // }\r\n    ShowPurchaseResult(cardId) {\r\n        const match = cardId.split(''_'');\r\n       
-    const characterName = match[1];\r\n        const grade = match[2];\r\n       
-    this.card.SetCard(cardId, grade, DataManager_1.default.GetInstance().GetCharacterSpriteByName(characterName));\r\n       
-    this.resultPanel.SetActive(true);\r\n    }\r\n    SetResultCard(cardId) {\r\n       
-    const match = cardId.split(''_'');\r\n        const characterName = match[1];\r\n       
-    const grade = match[2];\r\n        this.card.SetCard(cardId, grade, DataManager_1.default.GetInstance().GetCharacterSpriteByName(characterName));\r\n   
-    }\r\n}\r\nexports.default = Shop_Hire;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9IaXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9IaXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTJHO0FBRTNHLGlEQUFxRDtBQUVyRCxnREFBeUM7QUFDekMsMkNBQW9DO0FBQ3BDLGdEQUF5QztBQUN6QywrQ0FBa0Q7QUFDbEQsdURBQWdEO0FBRWhELE1BQXFCLFNBQVUsU0FBUSxxQ0FBcUI7SUFNeEQsNkNBQTZDO0lBQzdDLHdCQUF3QjtJQUV4QixZQUFZO0lBQ1oscURBQXFEO0lBQ3JELCtDQUErQztJQUMvQyxxQ0FBcUM7SUFDckMsVUFBVTtJQUNWLHlFQUF5RTtJQUN6RSxzREFBc0Q7SUFDdEQsNkJBQTZCO0lBQzdCLHFDQUFxQztJQUNyQyxRQUFRO0lBQ1IsSUFBSTtJQUVJLGtCQUFrQjtRQUN0QiwwRUFBMEU7UUFDMUUsc0RBQXNEO1FBQ3RELG9EQUFvRDtRQUNwRCxNQUFNO1FBQ04sZ0ZBQWdGO1FBQ2hGLHNEQUFzRDtRQUN0RCxNQUFNO1FBQ04sMkVBQTJFO1FBQzNFLG9EQUFvRDtRQUNwRCxNQUFNO1FBQ04sd0VBQXdFO0lBQzVFLENBQUM7SUFFTSxZQUFZO0lBRW5CLENBQUM7SUFFTyx1QkFBdUI7UUFDM0Isc0VBQXNFO1FBQ3RFLDZGQUE2RjtRQUU3RixvQkFBb0I7UUFDcEIseUNBQXlDO1FBQ3pDLGNBQWM7UUFDZCxJQUFJO1FBQ0osb0NBQW9DO1FBQ3BDLHlDQUF5QztRQUN6QyxjQUFjO1FBQ2QsSUFBSTtRQUVKLCtCQUErQjtRQUMvQixtQ0FBbUM7UUFDbkMsd0JBQXdCO1FBQ3hCLGdFQUFnRTtJQUNwRSxDQUFDO0lBRUQsZ0NBQWdDO0lBQ2hDLGdFQUFnRTtJQUNoRSwwQkFBMEI7SUFDMUIsNEJBQTRCO0lBQzVCLDJCQUEyQjtJQUMzQixzRUFBc0U7SUFDdEUsd0RBQXdEO0lBQ3hELDRCQUE0QjtJQUM1Qiw2Q0FBNkM7SUFDN0MsdUNBQXVDO0lBQ3ZDLElBQUk7SUFFSixnQ0FBZ0M7SUFDaEMsZ0VBQWdFO0lBQ2hFLDBCQUEwQjtJQUMxQiw0QkFBNEI7SUFDNUIsMkJBQTJCO0lBQzNCLHNFQUFzRTtJQUN0RSx3REFBd0Q7SUFDeEQsNEJBQTRCO0lBQzVCLDZDQUE2QztJQUM3Qyx1Q0FBdUM7SUFDdkMsSUFBSTtJQUVJLGtCQUFrQixDQUFDLE1BQWM7UUFDckMsTUFBTSxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNoQyxNQUFNLGFBQWEsR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDL0IsTUFBTSxLQUFLLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3ZCLElBQUksQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyx3QkFBd0IsQ0FBQyxhQUFhLENBQUMsQ0FBQyxDQUFDO1FBQ3BHLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3JDLENBQUM7SUFFTyxhQUFhLENBQUMsTUFBYztRQUNoQyxNQUFNLEtBQUssR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2hDLE1BQU0sYUFBYSxHQUFHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUMvQixNQUFNLEtBQUssR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDdkIsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLHdCQUF3QixDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUM7SUFDeEcsQ0FBQztDQUNKO0FBaEdELDRCQWdHQyJ9","assetPath":"Assets/Scripts/Shop/Shop_Hire.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"buyButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"resultPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"cardObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"","name":"card","type":"C:/Users/cba08/Documents/GitHub/WakKitchen/Assets/Scripts/Employee/Card.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Shop_Hire","description":""},"isCompiled":true}'
-  typescriptHash: 53e7106bd0cdf9f87b2e0a204cb4d677
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst ItemManager_1 =
+    require(\\\"../ItemManager\\\");\\r\\nconst Card_1 = require(\\\"../Employee/Card\\\");\\r\\nconst
+    DataManager_1 = require(\\\"../DataManager\\\");\\r\\nconst CardData_1 = require(\\\"../Employee/CardData\\\");\\r\\nclass
+    Shop_Hire extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.gradeRanges = [\\r\\n           
+    { grade: \\\"s\\\", min: 0, max: 1.9 },\\r\\n            { grade: \\\"a\\\",
+    min: 1.9, max: 6.7 },\\r\\n            { grade: \\\"b\\\", min: 6.7, max: 30.3
+    },\\r\\n            { grade: \\\"c\\\", min: 30.3, max: 60.8 },\\r\\n           
+    { grade: \\\"d\\\", min: 60.8, max: 100 }\\r\\n        ];\\r\\n    }\\r\\n   
+    InitHireShop() {\\r\\n    }\\r\\n    Start() {\\r\\n        this.cards = this.cardLayout.GetComponentsInChildren($typeof(Card_1.default));\\r\\n       
+    console.log(this.cards[0].name);\\r\\n        this.buyButton.onClick.AddListener(()
+    => {\\r\\n            this.OnBuyButtonClick();\\r\\n        });\\r\\n    }\\r\\n   
+    GetRandomCard() {\\r\\n        // get random value 0~100\\r\\n        const randomValue
+    = Math.random() * 100;\\r\\n        // \uB79C\uB364 \uAC12\uC774 \uC18D\uD55C
+    \uB4F1\uAE09\uC744 \uCC3E\uC74C\\r\\n        let cardGrade = \\\"d\\\"; // D
+    \uB4F1\uAE09\uC73C\uB85C \uCD08\uAE30\uD654\\r\\n        for (const range of
+    this.gradeRanges) {\\r\\n            if (randomValue >= range.min && randomValue
+    < range.max) {\\r\\n                cardGrade = range.grade;\\r\\n               
+    break;\\r\\n            }\\r\\n        }\\r\\n        // \uB4F1\uAE09\uC5D0 \uB9DE\uB294
+    \uB79C\uB364 \uCE74\uB4DC \uC120\uD0DD\\r\\n        const cardData = DataManager_1.default.GetInstance().GetRandomCardByGrade(cardGrade);\\r\\n       
+    if (cardData) {\\r\\n            return cardData;\\r\\n        }\\r\\n       
+    else {\\r\\n            console.log(\\\"GetRandomCard: undefined\\\");\\r\\n           
+    return undefined;\\r\\n        }\\r\\n    }\\r\\n    OnBuyButtonClick() {\\r\\n       
+    console.log(\\\"OnBuyButtonClick\\\");\\r\\n        // cards.length \uB9CC\uD07C\uC758
+    \uCE74\uB4DC\uB97C \uAD6C\uB9E4\\r\\n        const purchasedCards = [];\\r\\n       
+    for (let i = 0; i < this.cards.length; i++) {\\r\\n            const cardData
+    = this.GetRandomCard();\\r\\n            if (cardData) {\\r\\n               
+    purchasedCards.push(cardData);\\r\\n            }\\r\\n        }\\r\\n       
+    console.log(purchasedCards.length);\\r\\n        if (purchasedCards.length >
+    0) {\\r\\n            this.resultPanel.SetActive(true);\\r\\n            for
+    (let i = 0; i < purchasedCards.length; i++) {\\r\\n                const cardData
+    = purchasedCards[i];\\r\\n                const cardId = cardData.GetCardId();\\r\\n               
+    this.SetResultCard(this.cards[i], cardId);\\r\\n            }\\r\\n        }\\r\\n   
+    }\\r\\n    SetResultCard(card, cardId) {\\r\\n        const match = cardId.split('_');\\r\\n       
+    const characterName = match[1];\\r\\n        const grade = match[2];\\r\\n       
+    card.SetCard(cardId, grade, DataManager_1.default.GetInstance().GetCharacterSpriteByName(characterName));\\r\\n   
+    }\\r\\n}\\r\\nexports.default = Shop_Hire;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9IaXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9IaXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXdDO0FBRXhDLGlEQUFxRDtBQUVyRCxnREFBeUM7QUFDekMsMkNBQW9DO0FBQ3BDLGdEQUF5QztBQUd6QyxtREFBNEM7QUFRNUMsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQUE1RDs7UUFPWSxnQkFBVyxHQUFpQjtZQUNoQyxFQUFFLEtBQUssRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFO1lBQ2hDLEVBQUUsS0FBSyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUU7WUFDbEMsRUFBRSxLQUFLLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRTtZQUNuQyxFQUFFLEtBQUssRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFO1lBQ3BDLEVBQUUsS0FBSyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUU7U0FDdEMsQ0FBQztJQWlFTixDQUFDO0lBL0RVLFlBQVk7SUFFbkIsQ0FBQztJQUVELEtBQUs7UUFDRCxJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsdUJBQXVCLFNBQUMsY0FBSSxFQUFHLENBQUM7UUFDN0QsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2hDLElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDcEMsSUFBSSxDQUFDLGdCQUFnQixFQUFFLENBQUM7UUFDNUIsQ0FBQyxDQUFDLENBQUM7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\",\"assetPath\":\"Assets/Scripts/Shop/Shop_Hire.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"buyButton\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"resultPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"cardLayout\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"\",\"name\":\"cards\",\"type\":\"C:/Users/Jun/Documents/GitHub/WakKitchen/Assets/Scripts/Employee/Card.default\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"Shop_Hire\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 8476fd10b8b8953d514096eb1c9bb966
   onlyWriteTrigger: 0

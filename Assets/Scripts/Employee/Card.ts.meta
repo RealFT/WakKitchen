@@ -19,12 +19,13 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    UnityEngine_1 = require(\"UnityEngine\");\r\nclass Card extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    SetCard(productId, grade, characterSprite) {\r\n        this.productId
-    = productId;\r\n        this.grade = grade;\r\n        this.characterImage.sprite
-    = characterSprite;\r\n    }\r\n    GetCardId() {\r\n        return this.productId;\r\n   
-    }\r\n    GetGrade() {\r\n        return this.grade;\r\n    }\r\n}\r\nexports.default
-    = Card;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FyZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNhcmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXVEO0FBR3ZELE1BQXFCLElBQUssU0FBUSxxQ0FBcUI7SUFNNUMsT0FBTyxDQUFDLFNBQWlCLEVBQUUsS0FBYSxFQUFFLGVBQXVCO1FBQ3BFLElBQUksQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO1FBQzNCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDO1FBQ25CLElBQUksQ0FBQyxjQUFjLENBQUMsTUFBTSxHQUFHLGVBQWUsQ0FBQztJQUNqRCxDQUFDO0lBRU0sU0FBUztRQUNaLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQztJQUMxQixDQUFDO0lBRU0sUUFBUTtRQUNYLE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQztJQUN0QixDQUFDO0NBQ0o7QUFuQkQsdUJBbUJDIn0=","assetPath":"Assets/Scripts/Employee/Card.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"characterImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Card","description":""},"isCompiled":true}'
-  typescriptHash: e508ee63bddef525666e6d3b59c69fe6
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    Card extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n       
+    this.cardOpenButton.onClick.AddListener(() => {\r\n            //this.animator.Play(0);\r\n       
+    });\r\n    }\r\n    SetCard(cardId, grade, characterSprite) {\r\n        this.debug_id
+    = cardId;\r\n        this.cardId = cardId;\r\n        this.grade = grade;\r\n       
+    this.characterImage.sprite = characterSprite;\r\n    }\r\n    GetCardId() {\r\n       
+    return this.cardId;\r\n    }\r\n    GetGrade() {\r\n        return this.grade;\r\n   
+    }\r\n}\r\nexports.default = Card;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FyZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNhcmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFJckQsTUFBcUIsSUFBSyxTQUFRLHFDQUFxQjtJQVMzQyxLQUFLO1FBQ1QsSUFBSSxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUUsRUFBRTtZQUN4Qyx3QkFBd0I7UUFDNUIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRU0sT0FBTyxDQUFDLE1BQWMsRUFBRSxLQUFhLEVBQUUsZUFBdUI7UUFDakUsSUFBSSxDQUFDLFFBQVEsR0FBRyxNQUFNLENBQUM7UUFDdkIsSUFBSSxDQUFDLE1BQU0sR0FBRyxNQUFNLENBQUM7UUFDckIsSUFBSSxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7UUFDbkIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEdBQUcsZUFBZSxDQUFDO0lBQ2pELENBQUM7SUFFTSxTQUFTO1FBQ1osT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDO0lBQ3ZCLENBQUM7SUFFTSxRQUFRO1FBQ1gsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDO0lBQ3RCLENBQUM7Q0FDSjtBQTdCRCx1QkE2QkMifQ==","assetPath":"Assets/Scripts/Employee/Card.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"debug_id","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"characterImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"cardOpenButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.AnimationModule","name":"animator","type":"UnityEngine.Animator","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Card","description":""},"isCompiled":true}'
+  typescriptHash: 029868f0bb1eaeb2d2c99c8f9181734e
   onlyWriteTrigger: 0

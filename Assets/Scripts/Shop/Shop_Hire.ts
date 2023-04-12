@@ -1,5 +1,5 @@
-import { Object, GameObject, Quaternion, RectTransform, Vector2, Sprite, Debug, Random } from 'UnityEngine'
-import { HorizontalLayoutGroup,Button } from "UnityEngine.UI";
+import { GameObject } from 'UnityEngine'
+import { Button } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ProductRecord } from 'ZEPETO.Product';
 import ItemManager from '../ItemManager';
@@ -7,101 +7,90 @@ import Card from '../Employee/Card';
 import DataManager from '../DataManager';
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
+import CardData from '../Employee/CardData';
+
+interface GradeRange {
+    grade: string;
+    min: number;
+    max: number;
+}
 
 export default class Shop_Hire extends ZepetoScriptBehaviour{
 
     @SerializeField() private buyButton: Button;
     @SerializeField() private resultPanel: GameObject;
-    @SerializeField() private cardObj: GameObject;
-    @SerializeField() private card: Card;
-    // private _multiplay : ZepetoWorldMultiplay;
-    // private _room : Room;
-    
-    // Start() {
-    //     this.card = this.cardObj.GetComponent<Card>();
-    //     this.buyButton.onClick.AddListener(()=>{
-    //         this.PurchaceRandomCard();
-    //     });
-    //     this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
-    //     this._multiplay.RoomJoined += (room: Room) => {
-    //         this._room = room;
-    //         this.InitMessageHandler();
-    //     }
-    // }
+    @SerializeField() private cardLayout: GameObject;
+    @SerializeField() private cards: Card[];
 
-    private InitMessageHandler(){
-        // ProductService.OnPurchaseCompleted.AddListener((product, response) => {
-        //     this.StartCoroutine(this.RefreshInventoryUI());
-        //     this.StartCoroutine(this.RefreshBalanceUI());
-        // });
-        // this._room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
-        //     this.StartCoroutine(this.RefreshInventoryUI());
-        // });
-        // this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
-        //     this.StartCoroutine(this.RefreshBalanceUI());
-        // });
-        // this.useBtn.onClick.AddListener(()=> this.OnClickUseInventoryItem());
-    }
+    private gradeRanges: GradeRange[] = [
+        { grade: "s", min: 0, max: 1.9 },
+        { grade: "a", min: 1.9, max: 6.7 },
+        { grade: "b", min: 6.7, max: 30.3 },
+        { grade: "c", min: 30.3, max: 60.8 },
+        { grade: "d", min: 60.8, max: 100 }
+    ];
 
     public InitHireShop(){
 
     }
 
-    private OnClickPurchaseCardPack(){
-        // const toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
-        // const item = toggleGroup.GetFirstActiveToggle()?.GetComponent<ITM_Inventory>().itemRecord;
-        
-        // if(item == null){
-        //     console.warn("no have item data");
-        //     return;
-        // }
-        // if(this._multiplay.Room == null){
-        //     console.warn("server disconnect");
-        //     return;
-        // }
+    Start(){
+        this.cards = this.cardLayout.GetComponentsInChildren<Card>();
+        console.log(this.cards[0].name);
+        this.buyButton.onClick.AddListener(() => {
+            this.OnBuyButtonClick();
+        });
 
-        // const data = new RoomData();
-        // data.Add("key", item.productId);
-        // data.Add("value", 1);
-        // this._multiplay.Room?.Send("onSetStorage", data.GetObject());
     }
 
-    // private PurchaceRandomCard(){
-    //     var cardId = ItemManager.GetInstance().GetRandomCardId();
-    //     const cardIds = [];
-    //     if (!cardId) return; 
-    //     console.log(cardId);
-    //     var cardProduct = ItemManager.GetInstance().GetProduct(cardId);
-    //     //ItemManager.GetInstance().PurchaseItem(cardId);
-    //     cardIds.push(cardId);
-    //     // cardProductId: card_character_grade
-    //     this.ShowPurchaseResult(cardId);
-    // }
+    private GetRandomCard(): CardData | undefined {
+        // get random value 0~100
+        const randomValue = Math.random() * 100;
 
-    // private PurchaceCardPakage(){
-    //     var cardId = ItemManager.GetInstance().GetRandomCardId();
-    //     const cardIds = [];
-    //     if (!cardId) return; 
-    //     console.log(cardId);
-    //     var cardProduct = ItemManager.GetInstance().GetProduct(cardId);
-    //     //ItemManager.GetInstance().PurchaseItem(cardId);
-    //     cardIds.push(cardId);
-    //     // cardProductId: card_character_grade
-    //     this.ShowPurchaseResult(cardId);
-    // }
+        // 랜덤 값이 속한 등급을 찾음
+        let cardGrade = "d"; // D 등급으로 초기화
+        for (const range of this.gradeRanges) {
+            if (randomValue >= range.min && randomValue < range.max) {
+                cardGrade = range.grade;
+                break;
+            }
+        }
 
-    private ShowPurchaseResult(cardId: string) {
+        // 등급에 맞는 랜덤 카드 선택
+        const cardData = DataManager.GetInstance().GetRandomCardByGrade(cardGrade);
+        if (cardData) {
+            return cardData;
+        } else {
+            console.log("GetRandomCard: undefined");
+            return undefined;
+        }
+    }
+
+    private OnBuyButtonClick() {
+        console.log("OnBuyButtonClick");
+        // cards.length 만큼의 카드를 구매
+        const purchasedCards = [];
+        for (let i = 0; i < this.cards.length; i++) {
+          const cardData = this.GetRandomCard();
+          if (cardData) {
+            purchasedCards.push(cardData);
+          }
+        }
+        console.log(purchasedCards.length);
+        if (purchasedCards.length > 0) {
+            this.resultPanel.SetActive(true);
+            for (let i = 0; i < purchasedCards.length; i++) {
+                const cardData = purchasedCards[i];
+                const cardId = cardData.GetCardId();
+                this.SetResultCard(this.cards[i], cardId);
+            }
+        }
+    }
+
+    private SetResultCard(card: Card, cardId: string){
         const match = cardId.split('_');
         const characterName = match[1];
         const grade = match[2];
-        this.card.SetCard(cardId, grade, DataManager.GetInstance().GetCharacterSpriteByName(characterName));
-        this.resultPanel.SetActive(true);
-    }
-
-    private SetResultCard(cardId: string){
-        const match = cardId.split('_');
-        const characterName = match[1];
-        const grade = match[2];
-        this.card.SetCard(cardId, grade, DataManager.GetInstance().GetCharacterSpriteByName(characterName));
+        card.SetCard(cardId, grade, DataManager.GetInstance().GetCharacterSpriteByName(characterName));
     }
 }
