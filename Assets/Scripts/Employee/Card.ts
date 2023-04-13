@@ -1,13 +1,14 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Sprite, Debug, Animator } from 'UnityEngine'
 import { Image, Button, Slider } from "UnityEngine.UI";
-
+import DataManager from '../DataManager';
 export default class Card extends ZepetoScriptBehaviour {
     private cardId: string;
     private grade: string;
 
     @SerializeField() private debug_id: string;
     @SerializeField() private characterImage: Image;
+    @SerializeField() private cardBackgroundImage: Image;
     @SerializeField() private cardOpenButton: Button;
     @SerializeField() private animator: Animator;
 
@@ -22,6 +23,7 @@ export default class Card extends ZepetoScriptBehaviour {
         this.cardId = cardId;
         this.grade = grade;
         this.characterImage.sprite = characterSprite;
+        this.cardBackgroundImage.sprite = DataManager.GetInstance().GetCardBackgroundSpriteByGrade(grade);
     }
 
     public GetCardId(): string {

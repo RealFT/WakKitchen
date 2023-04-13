@@ -63,7 +63,6 @@ export default class Settlement extends ZepetoScriptBehaviour {
 
     //  Coroutine function that plays a sequence of animations stored in the animations array.
     private *AnimationSequence() {
-
         for (const animation of this.animations) {
             this.animationInProgress = true;
             yield* animation();

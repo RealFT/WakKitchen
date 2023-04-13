@@ -4,6 +4,14 @@ import Receipt from './Receipt';
 import { GameObject, Debug } from 'UnityEngine';
 import CardData from './Employee/CardData';
 
+export enum Grade {
+    D = 0,
+    C = 1,
+    B = 2,
+    A = 3,
+    S = 4,
+}
+
 export enum Ingredient {
     START = 0,
     TOP_BURN = 0,
@@ -92,6 +100,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private characterSprites: Sprite[];
     @SerializeField() private characterIcons: Sprite[];
     @SerializeField() private gradeIcons: Sprite[];
+    @SerializeField() private cardBackgroundSprites: Sprite[];
     @SerializeField() private sectionSprites: Sprite[];
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
@@ -99,6 +108,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     private cardDatas: Map<string, CardData> = new Map<string, CardData>();
     private inventoryCache: Map<string, number> = new Map<string, number>();
     private playStage: string = 'Stage';
+    private lastSavedStage: number;      // last saved Day(Stage).
 
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -131,9 +141,21 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public LoadData() {    
+        this.LoadSavedStage();
         this.LoadReceiptData();
         this.LoadStageData();
         this.LoadCardData();
+    }
+
+    public LoadSavedStage() {
+        this.lastSavedStage = this.GetValue("Stage");
+        this.SetValue("Stage", this.lastSavedStage);
+    }
+    public GetLastSavedStage(): number {
+        return this.lastSavedStage;
+    }
+    public SetStage(stage: number) {
+        this.SetValue("Stage", stage);
     }
 
     public LoadReceiptData() {
@@ -182,6 +204,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.cardDatas.set(cardId, cardData);
 
             const cardQuantity = this.GetValue(cardId);
+            console.log("ID: " + cardId, " Quantity: " + cardQuantity);
             this.SetValue(cardId, cardQuantity);
             this.inventoryCache.set(cardId, cardQuantity);
         }
@@ -213,7 +236,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
     // Adds a given quantity of cards with a given ID to the inventory.
-    public AddCard(id: string, quantity: number): void {
+    public AddCard(id: string, quantity: number = 1): void {
         const currentQuantity = this.inventoryCache.get(id) || 0;
         const newQuantity = currentQuantity + quantity;
         this.inventoryCache.set(id, newQuantity);
@@ -222,11 +245,11 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     // Uses a given quantity of cards with a given ID from the inventory.
     // Returns true if the operation is successful, false otherwise.
-    public UseCard(id: string, quantity: number): boolean {
+    public UseCard(id: string, quantity: number = 1): boolean {
         const currentQuantity = this.inventoryCache.get(id) || 0;
         // If the ID is in the inventory and the current quantity is greater than the given quantity,
         // the given quantity is subtracted from the current quantity and the new quantity is saved to PlayerPrefs.
-        if (currentQuantity > quantity) {
+        if (currentQuantity >= quantity) {
             const newQuantity = currentQuantity - quantity;
             this.inventoryCache.set(id, newQuantity);
             this.SetValue(id, newQuantity);
@@ -235,6 +258,34 @@ export default class DataManager extends ZepetoScriptBehaviour {
             console.log(`Not enough ${id} to use.`);
             return false;
         }
+    }
+
+    public GetGradeNumberByString(grade: string): Grade{
+        switch (grade.toLowerCase()) {
+            case "d":
+                return Grade.D;
+            case "c":
+                return Grade.C;
+            case "b":
+                return Grade.B;
+            case "a":
+                return Grade.A;
+            case "s":
+                return Grade.S;
+            default:
+                return Grade.D;
+        }
+    }
+
+    public GetGradeIconByGrade(grade: string): Sprite{
+        const index = this.GetGradeNumberByString(grade);
+        console.log(index);
+        return this.gradeIcons[index];
+    }
+
+    public GetCardBackgroundSpriteByGrade(grade: string): Sprite{
+        const index = this.GetGradeNumberByString(grade);
+        return this.cardBackgroundSprites[index];
     }
 
     public SetStageReceipts(stage: number) {

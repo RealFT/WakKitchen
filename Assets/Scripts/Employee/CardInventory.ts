@@ -1,5 +1,5 @@
 import {ZepetoScriptBehaviour} from 'ZEPETO.Script'
-import { Button, GridLayoutGroup, ToggleGroup } from 'UnityEngine.UI'
+import { Button, GridLayoutGroup, Toggle, ToggleGroup } from 'UnityEngine.UI'
 import { GameObject, Object, RectTransform, Transform, Vector2 } from 'UnityEngine'
 import {CurrencyService} from "ZEPETO.Currency";
 import {ProductRecord, ProductService, PurchaseType} from "ZEPETO.Product";
@@ -7,6 +7,7 @@ import {BalanceSync, InventorySync, Currency} from "../Shop/BalanceManager";
 import CardSlot from './CardSlot';
 import DataManager from '../DataManager';
 import EquipSlotController from './EquipSlotController';
+import CardInfoWindow from './CardInfoWindow';
 
 export default class CardInventory extends ZepetoScriptBehaviour {
     
@@ -14,61 +15,88 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     @SerializeField() private upgradeBtn: Button;
     @SerializeField() private contentParent: Transform;
     @SerializeField() private equipSlotControllerObj: GameObject;
+    @SerializeField() private cardInfoWindowObj: GameObject;
     @SerializeField() private cardSlotPrefab: GameObject;
-    private cardSlots: CardSlot[] = [];
     private equipSlotController: EquipSlotController;
+    private cardInfoWindow: CardInfoWindow;
+    private cardSlots: CardSlot[] = [];
+    private toggleGroup: ToggleGroup;
 
-    private Start() {
+    Start() {
         this.Init();
-        const inventoryCache = DataManager.GetInstance().GetInventoryCache();
-        this.CreateInventory(inventoryCache);
-        this.equipSlotController = this.equipSlotControllerObj.GetComponent<EquipSlotController>();
+        this.CreateInventory();
     }
     
+    private OnEnable(){
+        this.RefreshInventoryUI();
+        this.RefreshCardInfo();
+    }
+
     private Init(){
-        // ProductService.OnPurchaseCompleted.AddListener((product, response) => {
-        //     this.RefreshInventoryUI()
-        // });
-        // this._room.AddMessageHandler<InventorySync>("SyncInventories", (message) => {
-        //     this.RefreshInventoryUI()
-        // });
+        this.equipSlotController = this.equipSlotControllerObj.GetComponent<EquipSlotController>();
+        this.cardInfoWindow = this.cardInfoWindowObj.GetComponent<CardInfoWindow>();
+        this.toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
+
         this.equipBtn.onClick.AddListener(()=> this.OnClickEquipCard());
+        this.upgradeBtn.onClick.AddListener(()=> this.OnClickUpgradeCard());
+        const toggles = this.toggleGroup.GetComponentsInChildren<Toggle>(true);
+        toggles.forEach((toggle) => {
+            toggle.onValueChanged.AddListener(() => {
+                this.RefreshCardInfo();
+            });
+        });
+
+        this.cardInfoWindow.InitCardInfoWindow();
     }
     
     private RefreshInventoryUI(): void {
         const existingIds: string[] = [];
         const inventoryCache = DataManager.GetInstance().GetInventoryCache();
+        console.log(inventoryCache);
         // Update existing slots
         this.cardSlots.forEach((cardSlot) => {
-            const cardId = cardSlot.GetCardData().GetCardId();
-            const quantity = inventoryCache.get(cardId) || 0;
-
-            if (quantity > 0) {
-                cardSlot.RefreshItem(quantity);
-                existingIds.push(cardId);
-            } else {
-                cardSlot.ClearSlot();
+            const cardId = cardSlot.GetCardData()?.GetCardId();
+            if(cardId) {
+                const quantity = inventoryCache.get(cardId) || 0;
+                if (quantity > 0) {
+                    cardSlot.RefreshItem(quantity);
+                    existingIds.push(cardId);
+                } else {
+                    cardSlot.ClearSlot();
+                    cardSlot.gameObject.SetActive(false);
+                }
+            }
+            else {
                 cardSlot.gameObject.SetActive(false);
             }
         });
 
         // Add new slots for cards that were not already displayed
         for (const [id, quantity] of inventoryCache) {
-            if (!existingIds.includes(id)) {
+            if (!existingIds.includes(id) && quantity > 0) {
                 this.CreateSlot(id, quantity);
             }
         }
     }
     
-    private CreateInventory(inventoryCache: Map<string, number>){
-        this.contentParent.GetComponentsInChildren<CardSlot>().forEach((child)=>{
-            GameObject.Destroy(child.gameObject);
+    private RefreshCardInfo(): void {
+        console.warn("RefreshCardInfo");
+        const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
+        this.cardInfoWindow.SetCardInfoWindow(card);
+    }
+
+    private CreateInventory(){
+        this.cardSlots = [];
+        const remains = this.contentParent.gameObject.GetComponentsInChildren<CardSlot>();
+        remains.forEach((slot)=>{
+            console.log(slot.gameObject);
+            GameObject.Destroy(slot.gameObject);
         });
 
         /*Sort by Create Order (descending order)*/
-
+        const inventoryCache = DataManager.GetInstance().GetInventoryCache();
         for (const [id, quantity] of inventoryCache) {
-            //if (quantity > 0)
+            if (quantity > 0)
                 this.CreateSlot(id, quantity);
         }
         
@@ -89,20 +117,28 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     }
     
     private CreateSlot(id: string, quantity: number) {
-        const cardObj = Object.Instantiate(this.cardSlotPrefab, this.contentParent) as GameObject;
-        const slot = cardObj.GetComponent<CardSlot>();
+        let slot: CardSlot;
+        const inactiveSlotIndex = this.cardSlots.findIndex(s => !s.gameObject.activeSelf);
+        if (inactiveSlotIndex !== -1) { // reuse inactive slot
+            slot = this.cardSlots[inactiveSlotIndex];
+            slot.gameObject.SetActive(true);
+        } else { // instantiate new slot
+            const cardObj = Object.Instantiate(this.cardSlotPrefab, this.contentParent) as GameObject;
+            slot = cardObj.GetComponent<CardSlot>();
+            const toggle = cardObj.GetComponent<Toggle>();
+            toggle.group = this.toggleGroup;
+            this.cardSlots.push(slot);
+        }
+    
         const cardData = DataManager.GetInstance().GetCardData(id);
-
         slot.SetSlot(cardData, quantity);
         //slot.IsOn(false);
-        this.cardSlots.push(slot);
     }
 
     private OnClickEquipCard(){
-        const toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
-        const card = toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
-        console.log("OnClickEquipCard: " + toggleGroup.GetFirstActiveToggle());
-        console.log("OnClickEquipCard: " + toggleGroup.GetFirstActiveToggle());
+        const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
+        console.log("OnClickEquipCard: " + this.toggleGroup.GetFirstActiveToggle());
+        console.log("OnClickEquipCard: " + this.toggleGroup.GetFirstActiveToggle());
 
         if (card === null){
             console.warn("no have card data");
@@ -110,5 +146,43 @@ export default class CardInventory extends ZepetoScriptBehaviour {
         }
         this.equipSlotController.EquipCharacter(card);
         console.log("OnClickEquipCard: " + card.GetCardId());
+    }
+
+    private OnClickUpgradeCard(){
+        const cardSlot = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>();
+        if(!cardSlot || cardSlot.GetCardQuantity() < 10){
+            console.warn("not enough cards");
+            return;
+        }
+        const card = cardSlot.GetCardData();
+        if (card === null){
+            console.warn("no have card data");
+            return;
+        }
+        const grade = card.GetGrade();
+        console.log(grade);
+        if(grade == "s"){
+            console.warn("already fully upgraded");
+            return;
+        }
+        let upperGrade = "c";
+        switch (grade) {
+            case "d":
+                upperGrade = "c";
+                break;
+            case "c":
+                upperGrade = "b";
+                break;
+            case "b":
+                upperGrade = "a";
+                break;
+            case "a":
+                upperGrade = "s";
+                break;
+        }
+        const resultCard = DataManager.GetInstance().GetRandomCardByGrade(upperGrade);
+        DataManager.GetInstance().UseCard(card.GetCardId(), 10);
+        DataManager.GetInstance().AddCard(resultCard.GetCardId());
+        this.RefreshInventoryUI();
     }
 }

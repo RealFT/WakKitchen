@@ -130,13 +130,19 @@ MonoBehaviour:
     - characterImage
     - cardOpenButton
     - animator
+    - debug_id
+    - cardBackgroundImage
     unityValues:
     - {fileID: 3057122213787986294}
     - {fileID: 5782902049874693588}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 2748270022320739286}
     values:
     - 
     - 
+    - 
+    - '{"type":"System.String, mscorlib","value":""}'
     - 
     unityArrayValues: []
     arrayValues: []

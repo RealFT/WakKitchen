@@ -86,7 +86,7 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         data.Add("currencyId", currencyId);
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onDebit", data.GetObject());
-        console.warn("UseBalance");
+        console.warn("UseBalance: " + quantity);
         // if in Game, Add balance to history
         if(GameManager.GetInstance().isInGame) this.useBalanceHistory.push({ currencyId, quantity });
     }

@@ -1,28 +1,44 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Sprite, Debug } from 'UnityEngine'
 import { Image, Button, Slider } from "UnityEngine.UI";
+import DataManager from '../DataManager';
+import CardData from './CardData';
 
 export default class CardInfoWindow extends ZepetoScriptBehaviour {
-    private productId: string;
-    private grade: string;
+    private cardData: CardData;
     @SerializeField() private characterImage: Image;
+    @SerializeField() private gradeImage: Image;
+    @SerializeField() private cardBackgroundImage: Image;
     @SerializeField() private dispenserProficiencySlider: Slider;
     @SerializeField() private frierProficiencySlider: Slider;
     @SerializeField() private grillProficiencySlider: Slider;
     @SerializeField() private sliceProficiencySlider: Slider;
 
-    public SetCardInfoWindow(productId: string, grade: string, characterSprite: Sprite, 
-        dispenserProficiency: number, frierProficiency: number, grillProficiency: number, sliceProficiency: number): void {
-        this.productId = productId;
-        this.grade = grade;
-        this.characterImage.sprite = characterSprite;
-        this.dispenserProficiencySlider.value = dispenserProficiency;
-        this.frierProficiencySlider.value = frierProficiency;
-        this.grillProficiencySlider.value = grillProficiency;
-        this.sliceProficiencySlider.value = sliceProficiency;
+    public InitCardInfoWindow(){
+        this.characterImage.enabled = false;
+        this.gradeImage.enabled = false;
+        this.cardBackgroundImage.enabled = false;
+        this.dispenserProficiencySlider.value = 0;
+        this.frierProficiencySlider.value = 0;
+        this.grillProficiencySlider.value = 0;
+        this.sliceProficiencySlider.value = 0;
+    }
+
+    public SetCardInfoWindow(cardData: CardData): void {
+        this.cardData = cardData;
+        this.characterImage.enabled = true;
+        this.gradeImage.enabled = true;
+        this.cardBackgroundImage.enabled = true;
+        this.characterImage.sprite = DataManager.GetInstance().GetCharacterSprite(cardData.GetCharacterIndex());
+        this.gradeImage.sprite = DataManager.GetInstance().GetGradeIconByGrade(cardData.GetGrade());
+        this.cardBackgroundImage.sprite = DataManager.GetInstance().GetCardBackgroundSpriteByGrade(cardData.GetGrade());
+        this.dispenserProficiencySlider.value = cardData.GetDispenserProficiency();
+        this.frierProficiencySlider.value = cardData.GetFrierProficiency();
+        this.grillProficiencySlider.value = cardData.GetGrillProficiency();
+        this.sliceProficiencySlider.value = cardData.GetSliceProficiency();
     }
 
     public GetCardId(): string {
-        return this.productId;
+        return this.cardData.GetCardId();
     }
 }

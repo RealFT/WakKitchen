@@ -8,6 +8,7 @@ import DataManager from '../DataManager';
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
 import CardData from '../Employee/CardData';
+import BalanceManager from './BalanceManager';
 
 interface GradeRange {
     grade: string;
@@ -21,6 +22,7 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
     @SerializeField() private resultPanel: GameObject;
     @SerializeField() private cardLayout: GameObject;
     @SerializeField() private cards: Card[];
+    @SerializeField() private cost: number = 500;
 
     private gradeRanges: GradeRange[] = [
         { grade: "s", min: 0, max: 1.9 },
@@ -36,7 +38,6 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
 
     Start(){
         this.cards = this.cardLayout.GetComponentsInChildren<Card>();
-        console.log(this.cards[0].name);
         this.buyButton.onClick.AddListener(() => {
             this.OnBuyButtonClick();
         });
@@ -68,12 +69,15 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
 
     private OnBuyButtonClick() {
         console.log("OnBuyButtonClick");
+        BalanceManager.GetInstance().UseBalance("wak", this.cost);
+
         // cards.length 만큼의 카드를 구매
         const purchasedCards = [];
         for (let i = 0; i < this.cards.length; i++) {
           const cardData = this.GetRandomCard();
           if (cardData) {
             purchasedCards.push(cardData);
+            DataManager.GetInstance().AddCard(cardData.GetCardId());
           }
         }
         console.log(purchasedCards.length);

@@ -218,7 +218,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: upgrade_frier_1 Purchase Completed
+  m_Text: Currency Not Enough
 --- !u!114 &3895059397033708884
 MonoBehaviour:
   m_ObjectHideFlags: 0

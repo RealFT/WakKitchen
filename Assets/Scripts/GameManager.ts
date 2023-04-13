@@ -54,8 +54,8 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     Init() {
         /* need load */
-        this.lastSavedDay = 0;
-        this.curStage = this.lastSavedDay;
+        //this.lastSavedDay = 0;
+        this.curStage = DataManager.GetInstance().GetLastSavedStage();
     }
     
     // Initializes the stage
@@ -107,6 +107,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this._isInGame = false;
         
         Mediator.GetInstance().Notify(this, EventNames.StageEnded, null);
+        
+        this.curStage++;
+        DataManager.GetInstance().SetStage(this.curStage);
     }
 
     Update() {
@@ -143,7 +146,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     public NextStage(): void {
-        this.curStage++;
+
         this.StartStage();
         console.log(this.curStage);
     }
