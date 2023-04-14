@@ -36,7 +36,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
                 this.DisableSelectSectionPanel();
             });
         }
-        this.InitSlot();
+        this.UnEquipCard();
     }
 
     public InitSlot() {
@@ -47,6 +47,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
 
     private SelectSection(sprite : Sprite, sectionIndex: number){
         EmployeeManager.GetInstance().RegisterCardBySlotIndex(this.slotIndex, this.equippedCardData, sectionIndex);
+        console.log("SelectSection: "+this.slotIndex);
         this.selectedSectionImage.sprite = sprite;
         this.selectedSectionImage.color = new Color(1, 1, 1, 1);
     }
@@ -71,6 +72,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectedSectionImage.color = new Color(1,1,1,0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = false;
+        this.characterSlotButton.interactable = false;
         this.characterImage.color = new Color(1, 1, 1, 0);
         this.isEquip = false;
         EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);

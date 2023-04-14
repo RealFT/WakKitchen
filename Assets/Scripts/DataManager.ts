@@ -319,9 +319,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public getProductSprite(product: number): Sprite {
         // split ingredients, drink, side
-        if (product < Ingredient.END)
+        if (product <= Ingredient.END)
             return this.getIngredientSprite(product);
-        else if (product < Drink.END)
+        else if (product <= Drink.END)
             return this.getDrinkSprite(product);
         else
             return this.getSideSprite(product);

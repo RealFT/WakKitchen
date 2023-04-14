@@ -1,9 +1,14 @@
-import { GameObject } from 'UnityEngine';
+import { GameObject, Object } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import CardData from './CardData';
 import EmployeeSlot from './EmployeeSlot';
+import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+interface CardDataWithSection {
+    cardData: CardData;
+    section: number;
+}
 
-export default class EmployeeManager extends ZepetoScriptBehaviour {
+export default class EmployeeManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
     private static Instance: EmployeeManager;
     public static GetInstance(): EmployeeManager {
@@ -20,50 +25,71 @@ export default class EmployeeManager extends ZepetoScriptBehaviour {
         return EmployeeManager.Instance;
     }
 
-    @SerializeField() private employeeSlotObjs: GameObject[] = [];
+    @SerializeField() private employeeSlotContent: GameObject;
+    @SerializeField() private employeeSlotPrefab: GameObject;
     private employeeSlots: EmployeeSlot[] = [];
+    private cardDataWithSectionArray: CardDataWithSection[] = [];
 
     Awake() {
         if (this != EmployeeManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {    
-        for (let index = 0; index < this.employeeSlots.length; index++) {
-            this.employeeSlots.push(this.employeeSlotObjs[index].GetComponent<EmployeeSlot>());
+        // var employees = this.employeeSlotContent.GetComponentsInChildren<EmployeeSlot>(true); 
+        // for (let index = 0; index < this.employeeSlots.length; index++) {
+        //     this.employeeSlots[index] = employees[index];
+        //     console.log(employees[index]);
+        // }
+        Mediator.GetInstance().RegisterListener(this);
+    }
+
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if (!this.gameObject.activeSelf) return;
+        switch(eventName){
+            case EventNames.StageStarted:
+                console.log("StageStarted: employee");
+                console.log(this.cardDataWithSectionArray.length);
+                this.cardDataWithSectionArray.forEach((data)=>{
+                    this.CreateEmployeeSlot(data.cardData, data.section);
+                });
+                this.employeeSlots.forEach((slot)=>{
+                    if(slot.gameObject.activeSelf)
+                        slot.StartWorking();
+                });
+                break;
+            case EventNames.StageEnded:
+                this.employeeSlots.forEach((slot)=>{
+                    slot.Init();
+                    slot.gameObject.SetActive(false);
+                });
+                break;
         }
+    }
+    
+    private CreateEmployeeSlot(cardData: CardData, section: number) {
+        let slot: EmployeeSlot;
+        const inactiveSlotIndex = this.employeeSlots.findIndex(s => !s.gameObject.activeSelf);
+        if (inactiveSlotIndex !== -1) { // reuse inactive slot
+            slot = this.employeeSlots[inactiveSlotIndex];
+            slot.gameObject.SetActive(true);
+        } else { // instantiate new slot
+            const cardObj = Object.Instantiate(this.employeeSlotPrefab, this.employeeSlotContent.transform) as GameObject;
+            slot = cardObj.GetComponent<EmployeeSlot>();
+            this.employeeSlots.push(slot);
+        }
+        slot.SetEmployee(cardData, section);
+        slot.gameObject.SetActive(true);
     }
 
     public RegisterCardBySlotIndex(slotIndex: number, cardData: CardData, section: number) {
-        this.employeeSlots[slotIndex].gameObject.SetActive(true);
-        // Register the card to the first empty Employee slot
-        this.employeeSlots[slotIndex].SetEmployee(cardData, section);
+        this.cardDataWithSectionArray[slotIndex] = { cardData, section };
     }
 
-    public UnregisterCard(slotIndex: number) {    
-        // Unregister the card from the target Employee slot
-        this.employeeSlots[slotIndex].Init();
-        this.employeeSlots[slotIndex].gameObject.SetActive(false);
+    public UnregisterCard(slotIndex: number) {
+        this.cardDataWithSectionArray[slotIndex] = { cardData: null, section: null };
     }
-    
-    public RegisterCardToEmptySlot(cardData: CardData, section: number) {
-        // Find an empty Employee slot
-        let emptyIndex = -1;
-        for (let i = 0; i < this.employeeSlots.length; i++) {
-            if (!this.employeeSlots[i].IsRegistered()) {
-                emptyIndex = i;
-                break;
-            }
-        }
-    
-        // Check if an empty Employee slot is found
-        if (emptyIndex === -1) {
-            console.error('Cannot register the card because there are no empty Employee slots.');
-            return;
-        }
-
-        this.employeeSlots[emptyIndex].gameObject.SetActive(true);
-        // Register the card to the first empty Employee slot
-        this.employeeSlots[emptyIndex].SetEmployee(cardData, section);
-    }
-
 }

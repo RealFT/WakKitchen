@@ -3,10 +3,10 @@ import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEng
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
 import OrderManager from '../OrderManager';
 import DataManager, { Drink, Ingredient, Section, Side, Slice } from '../DataManager';
-import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 import CardData from './CardData';
+import Mediator, { EventNames } from '../Notification/Mediator';
 
-export default class EmployeeSlot extends ZepetoScriptBehaviour implements IListener {
+export default class EmployeeSlot extends ZepetoScriptBehaviour {
     @SerializeField() private pauseResumeToggle: Toggle;
     @SerializeField() private employeeImage: Image;    
     @SerializeField() private workSlider: Slider;
@@ -15,13 +15,6 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour implements IList
     private currentTime: number = 0;
     private isWorking: boolean;
     private isRegistered: boolean;
-
-    Start(){
-        Mediator.GetInstance().RegisterListener(this);
-    }
-    private OnDestroy() {
-        Mediator.GetInstance().UnregisterListener(this);
-    }
 
     Init(){
         this.StopAllCoroutines();
@@ -74,22 +67,9 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour implements IList
         this.isRegistered = true;
     }
 
-    public OnNotify(sender: any, eventName: string, eventData: any): void {
-        if (!this.gameObject.activeSelf) return;
-        switch(eventName){
-            case EventNames.StageStarted:
-                console.log("StageStarted: employee");
-                this.Init();
-                this.StartWorking();
-                break;
-            case EventNames.StageEnded:
-                this.Init();
-                break;
-        }
-    }
-    
+
     // Start Baking.
-    private StartWorking() {
+    public StartWorking() {
         this.isWorking = true;
         this.StartCoroutine(this.DoWorking());
     }
