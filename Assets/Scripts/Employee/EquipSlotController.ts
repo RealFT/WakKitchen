@@ -48,7 +48,7 @@ export default class EquipSlotController extends ZepetoScriptBehaviour {
 
         if (emptyIndex != -1) {
             // Equip the character to the first empty card equip slot
-            this.equipSlots[emptyIndex].EquipCard(cardData);
+            this.equipSlots[emptyIndex].EquipCard(cardData, emptyIndex);
         }
     }
 }

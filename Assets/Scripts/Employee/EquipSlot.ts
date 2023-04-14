@@ -2,6 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Image, Button, Toggle } from "UnityEngine.UI";
 import { GameObject, Sprite, Color } from 'UnityEngine';
 import DataManager, { Character } from '../DataManager';
+import EmployeeManager from './EmployeeManager';
 import CardData from './CardData';
 
 export default class EquipSlot extends ZepetoScriptBehaviour {
@@ -15,6 +16,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     @SerializeField() private selectSectionOpenToggle: Toggle;
     @SerializeField() private sectionButtons: Button[];
 
+    private slotIndex: number;
     private isEquip: boolean = false;
     private equippedCardData: CardData;
 
@@ -30,7 +32,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
             let image = button.transform.GetChild(0).GetComponent<Image>();
             image.sprite = sprite;
             button.onClick.AddListener(() => {
-                this.SelectSection(sprite);
+                this.SelectSection(sprite, i);
                 this.DisableSelectSectionPanel();
             });
         }
@@ -43,7 +45,8 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         //this.selectSectionOpenToggle.interactable = false;
     }
 
-    private SelectSection(sprite : Sprite){
+    private SelectSection(sprite : Sprite, sectionIndex: number){
+        EmployeeManager.GetInstance().RegisterCardBySlotIndex(this.slotIndex, this.equippedCardData, sectionIndex);
         this.selectedSectionImage.sprite = sprite;
         this.selectedSectionImage.color = new Color(1, 1, 1, 1);
     }
@@ -52,8 +55,9 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectSectionOpenToggle.isOn = false;
     }
 
-    public EquipCard(cardData : CardData){
+    public EquipCard(cardData : CardData, slotIndex: number){
         this.equippedCardData = cardData;
+        this.slotIndex = slotIndex;
         this.selectedSectionImage.color = new Color(1, 1, 1, 0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = true;
@@ -69,6 +73,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectSectionOpenToggle.interactable = false;
         this.characterImage.color = new Color(1, 1, 1, 0);
         this.isEquip = false;
+        EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);
     }
 
     public GetSelectSectionOpenToggle(): Toggle {

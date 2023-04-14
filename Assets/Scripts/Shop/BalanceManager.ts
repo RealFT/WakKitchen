@@ -8,6 +8,7 @@ import { ZepetoWorldMultiplay } from "ZEPETO.World";
 import { RoomData, Room } from "ZEPETO.Multiplay";
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 import GameManager from '../GameManager';
+import UIManager from '../UIManager';
 
 export default class BalanceManager extends ZepetoScriptBehaviour implements IListener {
     // 싱글톤 패턴
@@ -36,6 +37,7 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
 
     private _multiplay: ZepetoWorldMultiplay;
     private _room: Room
+    private possessionMoney: number;
 
     private Start() {
         Mediator.GetInstance().RegisterListener(this);
@@ -67,6 +69,7 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         if(request.responseData.isSuccess) {
             const possessionMoney = request.responseData.currencies?.ContainsKey(Currency.wak) ? request.responseData.currencies?.get_Item(Currency.wak).toString() :"0";
             // Mediator를 통해 UI 클래스에 possessionMoney값 전달
+            this.possessionMoney = parseInt(possessionMoney);
             Mediator.GetInstance().Notify(this, "PossessionMoneyUpdated", possessionMoney);
         }
     }
@@ -81,7 +84,19 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         if (GameManager.GetInstance().isInGame) this.gainBalanceHistory.push({ currencyId, quantity });
     }
 
-    public UseBalance(currencyId: string, quantity: number) {
+    public UseAvailableBalance(currencyId: string, quantity: number) {
+        if (this.possessionMoney < quantity) {
+            quantity = this.possessionMoney;
+        }
+        this.UseBalance(currencyId, quantity);
+    }
+
+    public UseBalance(currencyId: string, quantity: number): boolean {
+        if (this.possessionMoney < quantity) {
+            // Not enough currency.
+            UIManager.GetInstance().OpenInformation("Not Enough Currency.");
+            return false;
+        }
         const data = new RoomData();
         data.Add("currencyId", currencyId);
         data.Add("quantity", quantity);
@@ -89,6 +104,8 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         console.warn("UseBalance: " + quantity);
         // if in Game, Add balance to history
         if(GameManager.GetInstance().isInGame) this.useBalanceHistory.push({ currencyId, quantity });
+        this.RefreshAllBalanceUI();
+        return true;
     }
 
     public GetTotalGainBalanceHistory(): number {

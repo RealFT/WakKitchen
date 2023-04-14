@@ -92,7 +92,8 @@ export default class Settlement extends ZepetoScriptBehaviour {
     private GetPriceInformation() {
         this.totalSale = BalanceManager.GetInstance().GetTotalGainBalanceHistory();
         this.ingredientsCost = BalanceManager.GetInstance().GetTotalUseBalanceHistory();
-        this.employeeCost = 300;
+        this.employeeCost = 100;
+        BalanceManager.GetInstance().UseAvailableBalance(Currency.wak, this.employeeCost);
         this.netIncome = this.totalSale - this.ingredientsCost - this.employeeCost;
         this.netIncomeText.color = this.netIncome >= 0 ? this.totalSaleText.color : this.IngredientsText.color;
     }

@@ -69,7 +69,7 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
 
     private OnBuyButtonClick() {
         console.log("OnBuyButtonClick");
-        BalanceManager.GetInstance().UseBalance("wak", this.cost);
+        if(!BalanceManager.GetInstance().UseBalance("wak", this.cost)) return;
 
         // cards.length 만큼의 카드를 구매
         const purchasedCards = [];

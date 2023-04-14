@@ -29,7 +29,7 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     
     private OnEnable(){
         this.RefreshInventoryUI();
-        this.RefreshCardInfo();
+        //this.RefreshCardInfo();
     }
 
     private Init(){
@@ -39,12 +39,6 @@ export default class CardInventory extends ZepetoScriptBehaviour {
 
         this.equipBtn.onClick.AddListener(()=> this.OnClickEquipCard());
         this.upgradeBtn.onClick.AddListener(()=> this.OnClickUpgradeCard());
-        const toggles = this.toggleGroup.GetComponentsInChildren<Toggle>(true);
-        toggles.forEach((toggle) => {
-            toggle.onValueChanged.AddListener(() => {
-                this.RefreshCardInfo();
-            });
-        });
 
         this.cardInfoWindow.InitCardInfoWindow();
     }
@@ -81,8 +75,9 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     
     private RefreshCardInfo(): void {
         console.warn("RefreshCardInfo");
-        const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
-        this.cardInfoWindow.SetCardInfoWindow(card);
+        if(this.toggleGroup == null) this.toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
+        const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>()?.GetCardData();
+        if(card) this.cardInfoWindow.SetCardInfoWindow(card);
     }
 
     private CreateInventory(){
@@ -127,6 +122,11 @@ export default class CardInventory extends ZepetoScriptBehaviour {
             slot = cardObj.GetComponent<CardSlot>();
             const toggle = cardObj.GetComponent<Toggle>();
             toggle.group = this.toggleGroup;
+            toggle.onValueChanged.AddListener(() => {
+                if (toggle.isOn) {
+                  this.RefreshCardInfo();
+                }
+            });
             this.cardSlots.push(slot);
         }
     
@@ -146,6 +146,7 @@ export default class CardInventory extends ZepetoScriptBehaviour {
         }
         this.equipSlotController.EquipCharacter(card);
         console.log("OnClickEquipCard: " + card.GetCardId());
+        this.RefreshCardInfo();
     }
 
     private OnClickUpgradeCard(){

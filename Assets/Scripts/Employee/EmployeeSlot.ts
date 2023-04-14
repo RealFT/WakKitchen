@@ -2,17 +2,19 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
 import OrderManager from '../OrderManager';
-import { Side } from '../DataManager';
+import DataManager, { Drink, Ingredient, Section, Side, Slice } from '../DataManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import CardData from './CardData';
 
 export default class EmployeeSlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private pauseResumeToggle: Toggle;
     @SerializeField() private employeeImage: Image;    
     @SerializeField() private workSlider: Slider;
-    private foodId: number = 8;
+    private foodIds: number[] = [];
     private workTime: number = 10;
     private currentTime: number = 0;
     private isWorking: boolean;
+    private isRegistered: boolean;
 
     Start(){
         Mediator.GetInstance().RegisterListener(this);
@@ -21,22 +23,67 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour implements IList
         Mediator.GetInstance().UnregisterListener(this);
     }
 
-    init(){
+    Init(){
         this.StopAllCoroutines();
         this.workSlider.value = 0;
         this.currentTime = 0;
         this.isWorking = false;
+        this.isRegistered = false;
+    }
+
+    private GetRandomFoodId(): number{
+        const randomIndex = Math.floor(Math.random() * this.foodIds.length);
+        return this.foodIds[randomIndex];
+    }
+    public IsRegistered():boolean{
+        return this.isRegistered;
+    }
+    public SetEmployee(employeeData: CardData, section: number){
+        this.employeeImage.sprite = DataManager.GetInstance().GetCharacterIcon(employeeData.GetCharacterIndex());
+        this.foodIds = [];
+        let startId = 0;
+        let endId = 0;
+        let proficiency = 1;
+        switch(section){
+            case Section.Dispenser:
+                startId = Drink.START;
+                endId = Drink.END;
+                proficiency = employeeData.GetDispenserProficiency();
+                break;
+            case Section.Frier:
+                startId = Side.START;
+                endId = Side.END;
+                proficiency = employeeData.GetFrierProficiency();
+                break;
+            case Section.Grill:
+                startId = Ingredient.PATTY;
+                endId = Ingredient.PATTY;
+                proficiency = employeeData.GetGrillProficiency();
+                break;
+            case Section.Slice:
+                startId = Slice.START;
+                endId = Slice.END;
+                proficiency = employeeData.GetSliceProficiency();
+                break;
+        }
+        for (let id = startId; id <= endId; id++) {
+            this.foodIds.push(id);
+        }
+        if(proficiency <= 0) proficiency = 1;
+        this.workTime = 10 / (Math.floor(proficiency * 0.1) + 1);
+        this.isRegistered = true;
     }
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if (!this.gameObject.activeSelf) return;
         switch(eventName){
             case EventNames.StageStarted:
                 console.log("StageStarted: employee");
-                this.init();
+                this.Init();
                 this.StartWorking();
                 break;
             case EventNames.StageEnded:
-                this.init();
+                this.Init();
                 break;
         }
     }
@@ -61,7 +108,7 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour implements IList
 
             if (this.currentTime >= this.workTime) {
                 // Work done.
-                OrderManager.GetInstance().AddItemToInventory(this.foodId);
+                OrderManager.GetInstance().AddItemToInventory(this.GetRandomFoodId());
                 Mediator.GetInstance().Notify(this, EventNames.IngredientCountUpdated, null);
                 this.workSlider.value = 0;
                 this.currentTime = 0;

@@ -11,7 +11,12 @@ export enum Grade {
     A = 3,
     S = 4,
 }
-
+export enum Section {
+    Dispenser = 0,
+    Frier = 1,
+    Grill = 2,
+    Slice = 3,
+}
 export enum Ingredient {
     START = 0,
     TOP_BURN = 0,
@@ -22,6 +27,14 @@ export enum Ingredient {
     ONION = 5,
     CHEESE = 6,
     END = 6
+}
+
+export enum Slice {
+    START = 3,
+    CABBAGE = 3,
+    TOMATO = 4,
+    ONION = 5,
+    END = 5
 }
 
 export enum Drink {
@@ -342,7 +355,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public GetSectionSpriteByName(sectionName: string): Sprite{
-        const spriteIndex = this.sectionSprites.findIndex((s) => s.name.toLowerCase() === sectionName);
+        const spriteIndex = this.sectionSprites?.findIndex((s) => s.name.toLowerCase() === sectionName);
         return this.sectionSprites[spriteIndex];
     }
     public GetSectionSprites(): Sprite[] {
