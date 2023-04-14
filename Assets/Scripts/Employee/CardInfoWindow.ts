@@ -29,7 +29,7 @@ export default class CardInfoWindow extends ZepetoScriptBehaviour {
         this.characterImage.enabled = true;
         this.gradeImage.enabled = true;
         this.cardBackgroundImage.enabled = true;
-        this.characterImage.sprite = DataManager.GetInstance().GetCharacterSprite(cardData.GetCharacterIndex());
+        this.characterImage.sprite = DataManager.GetInstance().GetCharacterCardSprite(cardData.GetCharacterIndex());
         this.gradeImage.sprite = DataManager.GetInstance().GetGradeIconByGrade(cardData.GetGrade());
         this.cardBackgroundImage.sprite = DataManager.GetInstance().GetCardBackgroundSpriteByGrade(cardData.GetGrade());
         this.dispenserProficiencySlider.value = cardData.GetDispenserProficiency();

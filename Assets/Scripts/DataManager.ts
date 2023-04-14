@@ -111,6 +111,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private drinkSprites: Sprite[];
     @SerializeField() private sideSprites: Sprite[];
     @SerializeField() private characterSprites: Sprite[];
+    @SerializeField() private characterCardSprites: Sprite[];
     @SerializeField() private characterIcons: Sprite[];
     @SerializeField() private gradeIcons: Sprite[];
     @SerializeField() private cardBackgroundSprites: Sprite[];
@@ -161,8 +162,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public LoadSavedStage() {
-        this.lastSavedStage = this.GetValue("Stage");
+        this.lastSavedStage = 0;
         this.SetValue("Stage", this.lastSavedStage);
+        // this.lastSavedStage = this.GetValue("Stage");
+        // this.SetValue("Stage", this.lastSavedStage);
     }
     public GetLastSavedStage(): number {
         return this.lastSavedStage;
@@ -345,7 +348,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
     public GetCharacterSprite(character: Character): Sprite {
         return this.characterSprites[character - Character.START];
     }
-
+    
+    // Return sprite of the character
+    public GetCharacterCardSprite(character: Character): Sprite {
+        return this.characterCardSprites[character - Character.START];
+    }
+    
     public GetCharacterIcon(character: Character): Sprite {
         return this.characterIcons[character - Character.START];
     }

@@ -39,18 +39,20 @@ export default class CharacterController extends ZepetoScriptBehaviour {
     TryGetMoveControl() {
         this.moveControlUI = this.playerObject.transform.Find("UIZepetoPlayerControl").gameObject;
         this.safeArea = this.moveControlUI.transform.Find("SafeArea").gameObject;
+        const pad = this.safeArea.transform.Find("Pad").gameObject;
+        pad.SetActive(false);
         this.jumpButton = this.safeArea.transform.Find("Jump").gameObject;
-        this.touchPad = this.moveControlUI.GetComponentInChildren<ZepetoScreenTouchpad>();
-        this.handlePos = this.touchPad.touchHandle.position;
-        this.handleOriginPos = this.touchPad.touchHandleOrigin.position;
+        // this.touchPad = this.moveControlUI.GetComponentInChildren<ZepetoScreenTouchpad>();
+        // this.handlePos = this.touchPad.touchHandle.position;
+        // this.handleOriginPos = this.touchPad.touchHandleOrigin.position;
     }
 
     DisableMoveControl() {
         if (this.moveControlUI) {
-            this.touchPad.OnPointerUpEvent.Invoke();// = value;
-            this.touchPad.touchHandle.position = this.handlePos;
-            this.touchPad.touchHandleOrigin.position = this.handleOriginPos;
-            this.touchPad.canvasGroupTouchPadBackground.alpha = 0;
+            // this.touchPad.OnPointerUpEvent.Invoke();// = value;
+            // this.touchPad.touchHandle.position = this.handlePos;
+            // this.touchPad.touchHandleOrigin.position = this.handleOriginPos;
+            // this.touchPad.canvasGroupTouchPadBackground.alpha = 0;
             this.moveControlUI.SetActive(false);
         }
     }

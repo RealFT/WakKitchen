@@ -86,15 +86,14 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
             for (let i = 0; i < purchasedCards.length; i++) {
                 const cardData = purchasedCards[i];
                 const cardId = cardData.GetCardId();
-                this.SetResultCard(this.cards[i], cardId);
+                this.SetResultCard(this.cards[i], cardData);
             }
         }
     }
 
-    private SetResultCard(card: Card, cardId: string){
-        const match = cardId.split('_');
-        const characterName = match[1];
-        const grade = match[2];
-        card.SetCard(cardId, grade, DataManager.GetInstance().GetCharacterSpriteByName(characterName));
+    private SetResultCard(card: Card, cardData: CardData){
+        const cardId = cardData.GetCardId();
+        const grade =  cardData.GetGrade();
+        card.SetCard(cardId, grade, DataManager.GetInstance().GetCharacterCardSprite(cardData.GetCharacterIndex()));
     }
 }

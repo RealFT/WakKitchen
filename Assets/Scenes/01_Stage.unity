@@ -7302,8 +7302,10 @@ MonoBehaviour:
     - handleOriginPos
     - safeArea
     - jumpButton
+    - playerOriginPos
     unityValues:
     - {fileID: 945407467}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -7318,6 +7320,7 @@ MonoBehaviour:
     - '{"type":"UnityEngine.Vector3, UnityEngine.CoreModule","value":"{\"x\":0.0,\"y\":0.0,\"z\":0.0}"}'
     - 
     - 
+    - '{"type":"UnityEngine.Vector3, UnityEngine.CoreModule","value":"{\"x\":0.0,\"y\":0.0,\"z\":0.0}"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 2010355005c5d384b972a63b2ad7871a, type: 3}
