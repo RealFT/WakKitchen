@@ -36,13 +36,17 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
                 this.DisableSelectSectionPanel();
             });
         }
-        this.UnEquipCard();
+        this.InitSlot();
     }
 
     public InitSlot() {
+        this.equippedCardData = null;
         this.selectedSectionImage.color = new Color(1, 1, 1, 0);
         this.DisableSelectSectionPanel();
-        //this.selectSectionOpenToggle.interactable = false;
+        this.selectSectionOpenToggle.interactable = false;
+        this.characterImage.color = new Color(1, 1, 1, 0);
+        this.isEquip = false;
+        EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);
     }
 
     private SelectSection(sprite : Sprite, sectionIndex: number){
@@ -62,17 +66,18 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectedSectionImage.color = new Color(1, 1, 1, 0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = true;
+        this.characterSlotButton.interactable = true;
         this.characterImage.sprite = DataManager.GetInstance().GetCharacterIcon(cardData.GetCharacterIndex());
         this.characterImage.color = new Color(1, 1, 1, 1);
         this.isEquip = true;
     }
 
     public UnEquipCard(){
+        if(!this.equippedCardData) return;
         this.equippedCardData = null;
         this.selectedSectionImage.color = new Color(1,1,1,0);
         this.DisableSelectSectionPanel();
         this.selectSectionOpenToggle.interactable = false;
-        this.characterSlotButton.interactable = false;
         this.characterImage.color = new Color(1, 1, 1, 0);
         this.isEquip = false;
         EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);

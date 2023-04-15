@@ -306,8 +306,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public SetStageReceipts(stage: number) {
         this.stageReceipts = [];
-        for (let index = 0; index < this.stages[stage].length; index++) {
-            this.stageReceipts.push(this.GetReceipt(this.stages[stage][index]));
+        const maxStage = stage >= this.stages.length ? this.stages.length - 1 : stage;
+        for (let index = 0; index < this.stages[maxStage].length; index++) {
+            this.stageReceipts.push(this.GetReceipt(this.stages[maxStage][index]));
         }
     }
 

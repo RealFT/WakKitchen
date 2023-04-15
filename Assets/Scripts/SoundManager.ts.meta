@@ -1,0 +1,78 @@
+fileFormatVersion: 2
+guid: dbb56e05bf51f7242ae36f329ef7a6b2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nclass SoundManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        // Variables
+    to store scene names\r\n        this.keyMain = ''Main''; // Main scene key\r\n       
+    this.keyStage = ''Stage''; // Stage scene key\r\n        this.keyShop = ''Shop'';
+    // Shop scene key\r\n        this.keyCardSet = ''CardSet''; // CardSet scene
+    key\r\n        // Map to store loaded audio clips for BGM and SFX\r\n       
+    this.BGMMap = new Map();\r\n        this.SFXMap = new Map();\r\n        this.masterMute
+    = false; // Master mute flag\r\n        this.masterVolume = 1; // Master volume
+    level\r\n        this.SFXMute = false; // SFX mute flag\r\n        this.SFXVolume
+    = 1; // SFX volume level\r\n        this.BGMMute = false; // BGM mute flag\r\n       
+    this.BGMVolume = 1; // BGM volume level\r\n    }\r\n    static GetInstance()
+    {\r\n        if (!SoundManager.Instance) {\r\n            var _obj = UnityEngine_1.GameObject.Find(\"SoundManager\");\r\n           
+    if (!_obj) {\r\n                _obj = new UnityEngine_1.GameObject(\"SoundManager\");\r\n               
+    _obj.AddComponent($typeof(SoundManager));\r\n            }\r\n            SoundManager.Instance
+    = _obj.GetComponent($typeof(SoundManager));\r\n            UnityEngine_1.GameObject.DontDestroyOnLoad(_obj);\r\n       
+    }\r\n        return SoundManager.Instance;\r\n    }\r\n    Awake() {\r\n       
+    if (this != SoundManager.GetInstance())\r\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n   
+    }\r\n    // Getter functions to retrieve the current state of sound settings\r\n   
+    get SFXSoundMute() {\r\n        return this.masterMute || this.SFXMute;\r\n   
+    }\r\n    get SFXSoundVolume() {\r\n        return this.SFXVolume * this.masterVolume;\r\n   
+    }\r\n    get BGMSoundMute() {\r\n        return this.masterMute || this.BGMMute;\r\n   
+    }\r\n    get BGMSoundVolume() {\r\n        return this.BGMVolume * this.masterVolume;\r\n   
+    }\r\n    // Functions to change the sound settings\r\n    ChangeMasterVolume(slider)
+    {\r\n        this.masterVolume = slider.value;\r\n        this.ApplyBGMVolume();\r\n       
+    this.ApplySFXVolume();\r\n    }\r\n    MuteMasterVolume(toggle) {\r\n       
+    this.masterMute = toggle.isOn;\r\n        this.ApplyBGMVolume();\r\n        this.ApplySFXVolume();\r\n   
+    }\r\n    ChangeSFXVolume(slider) {\r\n        this.SFXVolume = slider.value;\r\n       
+    this.ApplySFXVolume();\r\n    }\r\n    MuteSFXVolume(toggle) {\r\n        this.SFXMute
+    = toggle.isOn;\r\n        this.ApplySFXVolume();\r\n    }\r\n    ChangeBGMVolume(slider)
+    {\r\n        this.BGMVolume = slider.value;\r\n        this.ApplyBGMVolume();\r\n   
+    }\r\n    MuteBGMVolume(toggle) {\r\n        this.BGMMute = toggle.isOn;\r\n       
+    this.ApplyBGMVolume();\r\n    }\r\n    LoadAudio() {\r\n        const bgmClips
+    = UnityEngine_1.Resources.LoadAll(\"Sounds/BGM\");\r\n        const sfxClips
+    = UnityEngine_1.Resources.LoadAll(\"Sounds/SFX\");\r\n        bgmClips.forEach((clip)
+    => {\r\n            if (clip instanceof UnityEngine_1.AudioClip) {\r\n               
+    this.BGMMap.set(clip.name, clip);\r\n            }\r\n        });\r\n       
+    sfxClips.forEach((clip) => {\r\n            if (clip instanceof UnityEngine_1.AudioClip)
+    {\r\n                this.SFXMap.set(clip.name, clip);\r\n            }\r\n           
+    this.SFXMap.set(clip.name, clip);\r\n        });\r\n        this.BGM.loop = true;\r\n       
+    this.SFX.loop = false;\r\n    }\r\n    ApplyBGMVolume() {\r\n        this.BGM.volume
+    = this.BGMVolume;\r\n        this.BGM.mute = this.BGMMute;\r\n    }\r\n    ApplySFXVolume()
+    {\r\n        this.SFX.volume = this.SFXVolume;\r\n        this.SFX.mute = this.SFXMute;\r\n   
+    }\r\n    OnPlayBGM(key) {\r\n        // Stop the currently playing music\r\n       
+    this.BGM.Stop();\r\n        // If already playing, return\r\n        if (this.BGM.isPlaying)\r\n           
+    return;\r\n        // Set the clip for the specified key\r\n        this.BGM.clip
+    = this.BGMMap.get(key);\r\n        // Only play if music clip exists\r\n       
+    if (!this.BGM.isPlaying)\r\n            this.BGM.Play();\r\n    }\r\n    OnPlaySFX(clipName)
+    {\r\n        if (this.SFX)\r\n            this.SFX.Stop();\r\n        if (this.SFX.isPlaying)\r\n           
+    return;\r\n        // Set the clip for the specified name\r\n        this.SFX.clip
+    = this.SFXMap.get(clipName);\r\n        // Only play if sound clip exists\r\n       
+    if (!this.SFX.isPlaying)\r\n            this.SFX.Play();\r\n    }\r\n    ToMain()
+    {\r\n        // Stop any currently playing sounds\r\n        this.BGM.Stop();\r\n       
+    this.SFX.Stop();\r\n        // Play the Main BGM\r\n        this.OnPlayBGM(this.keyMain);\r\n   
+    }\r\n}\r\nexports.default = SoundManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU291bmRNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU291bmRNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFvRjtBQUdwRixNQUFxQixZQUFhLFNBQVEscUNBQXFCO0lBQS9EOztRQXFCSSxpQ0FBaUM7UUFDMUIsWUFBTyxHQUFXLE1BQU0sQ0FBQyxDQUFDLGlCQUFpQjtRQUMzQyxhQUFRLEdBQVcsT0FBTyxDQUFDLENBQUMsa0JBQWtCO1FBQzlDLFlBQU8sR0FBVyxNQUFNLENBQUMsQ0FBQyxpQkFBaUI7UUFDM0MsZUFBVSxHQUFXLFNBQVMsQ0FBQyxDQUFDLG9CQUFvQjtRQUUzRCxrREFBa0Q7UUFDMUMsV0FBTSxHQUEyQixJQUFJLEdBQUcsRUFBcUIsQ0FBQztRQUM5RCxXQUFNLEdBQTJCLElBQUksR0FBRyxFQUFxQixDQUFDO1FBTTlELGVBQVUsR0FBWSxLQUFLLENBQUMsQ0FBQyxtQkFBbUI7UUFDaEQsaUJBQVksR0FBVyxDQUFDLENBQUMsQ0FBQyxzQkFBc0I7UUFFaEQsWUFBTyxHQUFZLEtBQUssQ0FBQyxDQUFDLGdCQUFnQjtRQUMxQyxjQUFTLEdBQVcsQ0FBQyxDQUFDLENBQUMsbUJBQW1CO1FBRTFDLFlBQU8sR0FBWSxLQUFLLENBQUMsQ0FBQyxnQkFBZ0I7UUFDMUMsY0FBUyxHQUFXLENBQUMsQ0FBQyxDQUFDLG1CQUFtQjtJQTRHdEQsQ0FBQztJQW5KVSxNQUFNLENBQUMsV0FBVztRQUVyQixJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsRUFBRTtZQUV4QixJQUFJLElBQUksR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQztZQUMzQyxJQUFJLENBQUMsSUFBSSxFQUFFO2dCQUNQLElBQUksR0FBRyxJQUFJLHdCQUFVLENBQUMsY0FBYyxDQUFDLENBQUM7Z0JBQ3RDLElBQUksQ0FBQyxZQUFZLFNBQUMsWUFBWSxHQUFJO2FBQ3JDO1lBQ0Qs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","assetPath":"Assets/Scripts/Legacy/SoundManager.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"keyMain","type":"System.String","isArray":false,"initValue":["Main"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"keyStage","type":"System.String","isArray":false,"initValue":["Stage"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"keyShop","type":"System.String","isArray":false,"initValue":["Shop"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"keyCardSet","type":"System.String","isArray":false,"initValue":["CardSet"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"BGM","type":"UnityEngine.AudioSource","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.AudioModule","name":"SFX","type":"UnityEngine.AudioSource","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"SoundManager","description":""},"isCompiled":true}'
+  typescriptHash: 4dff1c4f690e78dd4e11415140147acf
+  onlyWriteTrigger: 0
