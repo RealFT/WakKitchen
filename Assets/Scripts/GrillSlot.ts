@@ -19,6 +19,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private bakeTime: number;
     @SerializeField() private burnTime: number;
     @SerializeField() private visibleImages: Image[];
+    @SerializeField() private lockImage: Image;
     private startTime: number = 0;
     private currentTime: number = 0;
     private flipCount: number = 0;
@@ -26,6 +27,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     private isBaking: bool;
 
     Start() {
+        this.lockImage.enabled = true;
         this.bakingButton.interactable = false;
         this.grillButton.onClick.AddListener(() => { this.StartBaking(); });
         Mediator.GetInstance().RegisterListener(this);
@@ -34,6 +36,10 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         Mediator.GetInstance().UnregisterListener(this);
     }
  
+    public Unlock(){
+        this.lockImage.enabled = false;
+    }
+
     private Init(){
         this.StopAllCoroutines();
         this.ClearGrill();
