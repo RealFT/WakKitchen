@@ -4,6 +4,7 @@ import { Button, Image, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import DataManager, { Ingredient, Drink, Side } from './DataManager';
+import { TextMeshProUGUI } from 'TMPro';
 
 export default class CookSlot extends ZepetoScriptBehaviour implements IListener{
 
@@ -13,7 +14,8 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
     // Inventory related variables
     // must be same index productSlots and productCountTexts
     @SerializeField() private productSlots: Button[];  // Slots for stored items
-    @SerializeField() private productCountTexts: Text[] = [];
+    //@SerializeField() private productCountTexts: Text[] = [];
+    @SerializeField() private productCountTexts: TextMeshProUGUI[] = [];
     private productCounts: number[] = [];   // number of products stored in the inventory.
     private products: number[] = []; // list of products stored in the inventory.
 

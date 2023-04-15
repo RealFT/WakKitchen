@@ -1,7 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text, Image } from "UnityEngine.UI";
 import DataManager, { Ingredient } from './DataManager';
-import { Sprite } from 'UnityEngine';
+import { Sprite, WaitForSeconds } from 'UnityEngine';
 
 export default class Slicable extends ZepetoScriptBehaviour {
 
@@ -9,6 +9,16 @@ export default class Slicable extends ZepetoScriptBehaviour {
     public slicedSprite: Sprite;
     public ingredient: Ingredient;
     private isSliced: boolean;
+    private delay: number = 5;
+
+    private OnEnable() {
+        this.StartCoroutine(this.Exit());
+    }
+
+    private *Exit() {
+        yield new WaitForSeconds(this.delay);
+        this.gameObject.SetActive(false);
+    }
 
     public SetSlicable(origin: Sprite, ingredient: Ingredient) {
         this.originImage.sprite = origin;

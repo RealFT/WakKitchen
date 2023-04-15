@@ -5,7 +5,7 @@ import { Mathf, Time } from "UnityEngine";
 import { Button, Image, Slider } from "UnityEngine.UI";
 
 export default class Timer extends ZepetoScriptBehaviour {
-    private timeScale: number;    // 시간 배속
+    private timeScale: number;    // The time scale for the game
 
     public Day: number;
     public Hour: number;
@@ -23,7 +23,7 @@ export default class Timer extends ZepetoScriptBehaviour {
         this.InitTime();
     }
 
-    // 시간 갱신
+    // Update the time based on the elapsed time
     UpdateTime() {
         this.elapsedTime += Time.deltaTime * this.timeScale;
         let seconds = Math.floor(this.elapsedTime);
@@ -40,26 +40,29 @@ export default class Timer extends ZepetoScriptBehaviour {
         this.Second = seconds;
     }
 
-    // 게임 배속 설정
+    // Set the time scale based on the number of minutes per day
     SetTimeScale(minutesPerDay: number) {
-        this.timeScale = 24 * 60 / minutesPerDay; // 24 * 60(하루 1분) / n. 하루 n분
+        this.timeScale = 24 * 60 / minutesPerDay; // 24 * 60 (1 minute per day) / n minutes per day
         Debug.Log(this.timeScale);
         Debug.Log(this.Hour + ":" + this.Minute);
     }
 
+    // Set the time to the specified hour and minute
     SetTime(hour: number, minute: number) {
         this.elapsedTime = hour * this.secondsPerHour + minute * this.secondsPerMinute;
     }
 
-    // 시간 정보 초기화.
+    // Initialize the time information
     InitTime() {
         this.elapsedTime = 0;
     }
 
+    // Get the current hour
     GetHour(): number {
         return this.Hour;
     }
-
+    
+    // Get the current minute
     GetMinute(): number {
         return this.Minute;
     }

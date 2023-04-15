@@ -1,4 +1,4 @@
-import { Canvas, Object, GameObject, Quaternion, Rigidbody2D, Sprite, Vector3, WaitForSeconds, Input } from 'UnityEngine';
+import { Canvas, Object, GameObject, Quaternion, Rigidbody2D, Sprite, Vector3, WaitForSeconds, Input, Time } from 'UnityEngine';
 import { Vector2, RectTransform, Random, Rect, Debug } from 'UnityEngine';
 import { Image, Slider } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
@@ -12,8 +12,9 @@ export default class SliceController extends ZepetoScriptBehaviour {
     public mask: GameObject;  // The mask on which the ingredients will be spawned
 
     public originSprites: Sprite[]; // The original sprites for each type of ingredient
-    private ingredients: Map<number, Ingredient>;   // A map of ingredient indices to their corresponding enum values
-    private slicableItemsPool: GameObject[] = [];   // An object pool of GameObjects used to spawn new ingredients
+    // A map of ingredient indices to their corresponding enum values
+    private ingredients: Map<number, Ingredient> = new Map<number, Ingredient>();   
+    private slicableItemsPool: Slicable[] = [];   // An object pool of GameObjects used to spawn new ingredients
     private spawnCount = 0; // The number of ingredients to spawn initially
     private isCutting = false;  // Whether the player is currently in the process of cutting ingredients
 
@@ -31,11 +32,9 @@ export default class SliceController extends ZepetoScriptBehaviour {
     public rightSpawnPos: RectTransform;
 
     // The start and end positions of the cut.
-    public startSlicePoint: RectTransform;
-    public endSlicePoint: RectTransform;
+    public slicePoint: RectTransform;
 
     Start() {
-        this.ingredients = new Map<number, Ingredient>();
         this.ingredients.set(0, Ingredient.CABBAGE);
         this.ingredients.set(1, Ingredient.TOMATO);
         this.ingredients.set(2, Ingredient.ONION);
@@ -43,7 +42,7 @@ export default class SliceController extends ZepetoScriptBehaviour {
 
         // Initialize the object pool with 10 instances of the receipt item prefab
         for (let i = 0; i < this.spawnCount; i++) {
-            this.slicableItemsPool.push(this.CreateSlicable());
+            this.slicableItemsPool.push(this.CreateSlicable().GetComponent<Slicable>());
         }
 
         // Start the coroutine that shoots the projectiles
@@ -53,7 +52,7 @@ export default class SliceController extends ZepetoScriptBehaviour {
     DisableSlicables(){
         this.StopAllCoroutines();
         for (let i = 0; i < this.slicableItemsPool.length; i++) {
-            this.slicableItemsPool[i].SetActive(false);
+            this.slicableItemsPool[i].gameObject.SetActive(false);
         }
     }
 
@@ -67,16 +66,13 @@ export default class SliceController extends ZepetoScriptBehaviour {
     }
 
     Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("GetMouseButtonDown");
-            this.startSlicePoint.position = Input.mousePosition;
-            this.isCutting = true;
-        } else if (Input.GetMouseButtonUp(0) && this.isCutting) {
-            Debug.Log("GetMouseButtonUp");
-            this.endSlicePoint.position = Input.mousePosition;
-            this.isCutting = false;
-            this.SliceObjects();
-            //this.DrawLine();
+        if (Input.GetMouseButton(0)) {
+            if (!this.slicePoint.gameObject.activeSelf)
+                this.slicePoint.gameObject.SetActive(true);
+            this.slicePoint.position = Input.mousePosition;
+            this.SliceObjects(this.slicePoint.position);
+        } else {
+            this.slicePoint.gameObject.SetActive(false);
         }
     }
 
@@ -87,7 +83,7 @@ export default class SliceController extends ZepetoScriptBehaviour {
             yield new WaitForSeconds(delay);
 
             // Instantiate a new slicableObj
-            let slicableObj = this.GetSlicable();
+            let slicableObj = this.GetSlicable().gameObject;
             const spawnX = Random.Range(this.leftSpawnPos.position.x, this.rightSpawnPos.position.x);
             slicableObj.transform.position = this.leftSpawnPos.position + new Vector3(spawnX, 0, 0);
             slicableObj.SetActive(true);
@@ -95,31 +91,28 @@ export default class SliceController extends ZepetoScriptBehaviour {
             this.initialVelocity = new Vector2(Random.Range(-1 * this.tiltAngle, this.tiltAngle), 1);
             slicableObj.GetComponent<Rigidbody2D>().gravityScale = this.gravity;
             slicableObj.GetComponent<Rigidbody2D>().velocity = this.initialVelocity * this.speed;
-
-            // Destroy the slicableObj after a certain amount of time
-            //GameObject.Destroy(slicableObj, 10);
         }
     }
 
-    public GetSlicable(): GameObject {
+    public GetSlicable(): Slicable {
         let slicableObj: GameObject = null;
         // Check if there's a deactivated receipt item in the pool
         for (const item of this.slicableItemsPool) {
-            if (!item.activeSelf) {
-                slicableObj = item;
+            if (!item.gameObject.activeSelf) {
+                slicableObj = item.gameObject;
                 break;
             }
         }
         // If there's no deactivated item, create a new one and add it to the pool
         if (!slicableObj) {
             slicableObj = this.CreateSlicable();
-            this.slicableItemsPool.push(slicableObj);
+            this.slicableItemsPool.push(slicableObj.GetComponent<Slicable>());
         }
         // Set the position and sprite of the receipt item and activate it
         const slicable = slicableObj.GetComponent<Slicable>();
         const randomIndex = Math.floor(Random.Range(0, this.ingredients.size));
         slicable.SetSlicable(this.originSprites[randomIndex], this.ingredients.get(randomIndex));
-        return slicableObj;
+        return slicable;
     }
 
     private CreateSlicable(): GameObject {
@@ -129,50 +122,26 @@ export default class SliceController extends ZepetoScriptBehaviour {
         return slicableObj;
     }
 
-    private SliceObjects() {
-        //Debug.Log("cut");
-
+    private SliceObjects(point: Vector3) {
         for (let i = 0; i < this.slicableItemsPool.length; i++) {
-            const slicable = this.slicableItemsPool[i].GetComponent<Slicable>();
-            let food = slicable.GetSlicableImage();
-            let screenPos = food.transform.position;
-            let size = food.GetComponent<RectTransform>().sizeDelta;
-            // The target image's position and dimensions
-            // Debug.Log("size.x: " + size.x + ", size.y: " + size.y);
-            // Debug.Log("screenPos.x: " + screenPos.x + ", screenPos.y: " + screenPos.y);
-            //let imageRect: Rect = new Rect(screenPos.x - (size.x / 2), screenPos.y - (size.y / 2), screenPos.x + (size.x / 2), screenPos.y + (size.y / 2));
+            if(!this.slicableItemsPool[i].gameObject.activeSelf) continue;
+            const slicable = this.slicableItemsPool[i];
+            let screenPos = slicable.transform.position;
+            let size = slicable.GetComponent<RectTransform>().sizeDelta;
             let imageRect: Rect = new Rect(screenPos.x, screenPos.y, size.x, size.y);
-            if (this.IsWithinCuttingBounds(imageRect)) {
-                // Debug.Log("posx: " + screenPos.x + ", posy: " + screenPos.y);
-                // Debug.Log("sx: " + this.startPos.position.x + ", sy: " + this.startPos.position.y);
-                // Debug.Log("ex: " + this.endPos.position.x + ", ey: " + this.endPos.position.y);
-                Debug.Log("Slice :" + slicable.GetIngredient());
+            if (this.IsPointWithinRect(point, imageRect)) {
                 slicable.Sliced();
-                //this.foodImages.push(food);
                 OrderManager.GetInstance().AddItemToInventory(slicable.GetIngredient());
             }
         }
-
-        // for (let i = 0; i < this.slicedImages.length; i++) {
-        //     //Debug.Log("cut");
-        //     // Implement the logic to cut the objects here
-        // }
     }
 
-    // 이미지 Rect가 커팅 범위 내에 있는지 확인
-    private IsWithinCuttingBounds(r: Rect): boolean {
-        let minX = Math.min(this.startSlicePoint.position.x, this.endSlicePoint.position.x);
-        let maxX = Math.max(this.startSlicePoint.position.x, this.endSlicePoint.position.x);
-        let minY = Math.min(this.startSlicePoint.position.y, this.endSlicePoint.position.y);
-        let maxY = Math.max(this.startSlicePoint.position.y, this.endSlicePoint.position.y);
-        Debug.Log("xMin: " + r.xMin + ", xMax: " + r.xMax);
-        Debug.Log("yMin: " + r.xMax + ", yMax: " + r.yMax);
+    private IsPointWithinRect(point: Vector3, rect: Rect): boolean {
         return (
-            r.xMin <= maxX &&
-            r.xMax >= minX &&
-            r.yMin <= maxY &&
-            r.yMax >= minY
+            point.x >= rect.xMin &&
+            point.x <= rect.xMax &&
+            point.y >= rect.yMin &&
+            point.y <= rect.yMax
         );
     }
-
 }

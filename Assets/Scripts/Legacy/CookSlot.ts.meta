@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 0993398902798a249a597a6d0abf7b70
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    CookSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetSlot(sprite,
+    text) {\r\n        this.productSlotBtn.image.sprite = sprite;\r\n        this.productCountText.text
+    = text;\r\n        this.SEtSlotVisivility(true);\r\n    }\r\n    SEtSlotVisivility(value)
+    {\r\n        this.productSlotBtn.image.enabled = value;\r\n        this.productCountText.enabled
+    = value;\r\n    }\r\n    GetProductSprite() {\r\n        return this.productSlotBtn.image.sprite;\r\n   
+    }\r\n}\r\nexports.default = CookSlot;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29va1Nsb3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDb29rU2xvdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUlyRCxNQUFxQixRQUFTLFNBQVEscUNBQXFCO0lBSWhELE9BQU8sQ0FBQyxNQUFjLEVBQUUsSUFBWTtRQUN2QyxJQUFJLENBQUMsY0FBYyxDQUFDLEtBQUssQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO1FBQzFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2xDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNqQyxDQUFDO0lBRU0saUJBQWlCLENBQUMsS0FBYztRQUNuQyxJQUFJLENBQUMsY0FBYyxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO1FBQzFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO0lBQzFDLENBQUM7SUFFTSxnQkFBZ0I7UUFDbkIsT0FBTyxJQUFJLENBQUMsY0FBYyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUM7SUFDNUMsQ0FBQztDQUNKO0FBbEJELDJCQWtCQyJ9","assetPath":"Assets/Scripts/CookSlot.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"productSlotBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"Unity.TextMeshPro","name":"productCountText","type":"TMPro.TextMeshProUGUI","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"CookSlot","description":""},"isCompiled":true}'
+  typescriptHash: ef314d1e05b613a3814245a7013bfd01
+  onlyWriteTrigger: 0
