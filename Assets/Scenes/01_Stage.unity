@@ -8493,8 +8493,8 @@ MonoBehaviour:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":2,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":2,\"length\":6,\"type\":\"UnityEngine.Object,
-      UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":2,\"length\":8,\"type\":\"UnityEngine.UI.Image,
+      UnityEngine.UI\",\"isUnity\":true}"}'
     - 
     - 
     - 
@@ -8507,6 +8507,8 @@ MonoBehaviour:
     - {fileID: 1568217240}
     - {fileID: 1656496115}
     - {fileID: 1016376319}
+    - {fileID: 382328971}
+    - {fileID: 1240418972}
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: cc31d61d807bd324e9e691e54fe9685e, type: 3}
     isExpaned: 0
