@@ -27,7 +27,6 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     private isBaking: bool;
 
     Start() {
-        this.lockImage.enabled = true;
         this.bakingButton.interactable = false;
         this.grillButton.onClick.AddListener(() => { this.StartBaking(); });
         Mediator.GetInstance().RegisterListener(this);
@@ -37,7 +36,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     }
  
     public Unlock(){
-        this.lockImage.enabled = false;
+        this.lockImage.gameObject.SetActive(false);
     }
 
     private Init(){

@@ -6,15 +6,8 @@ import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private grillSlotObjects: GameObject[];
-    @SerializeField() private grillSlots: GrillSlot[];
     @SerializeField() private images: Image[];
     @SerializeField() private grillPanel: GameObject;
-
-    Awake(){
-        for (let i = 0; i < this.grillSlotObjects.length; i++) {
-            this.grillSlots.push(this.grillSlotObjects[i].GetComponent<GrillSlot>());
-        }
-    }
 
     Start() {
         super.Start();
@@ -61,13 +54,14 @@ export default class Interaction_Grill extends InteractionBase implements IListe
             this.images[i].enabled = value;
         }
         for (let i = 0; i < this.grillSlotObjects.length; i++) {
-            this.grillSlots[i].SetGrillVisibility(value);
+            this.grillSlotObjects[i].GetComponent<GrillSlot>()?.SetGrillVisibility(value);
         }
     }
 
     public UnlockSlot(level:number){
         for (let i = 0; i <= level; i++) {
-            this.grillSlots[i].Unlock();
+            console.log("grill unlock");
+            this.grillSlotObjects[i].GetComponent<GrillSlot>()?.Unlock();
         }
     }
 }
