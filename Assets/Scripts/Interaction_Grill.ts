@@ -6,8 +6,15 @@ import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private grillSlotObjects: GameObject[];
+    @SerializeField() private grillSlots: GrillSlot[];
     @SerializeField() private images: Image[];
     @SerializeField() private grillPanel: GameObject;
+
+    Awake(){
+        for (let i = 0; i < this.grillSlotObjects.length; i++) {
+            this.grillSlots.push(this.grillSlotObjects[i].GetComponent<GrillSlot>());
+        }
+    }
 
     Start() {
         super.Start();
@@ -15,11 +22,16 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         // Set panels and kitchen active
         this.grillPanel.SetActive(true);
         this.kitchen.SetActive(true);
+
+        //
+        this.UnlockSlot(0);
+
         Mediator.GetInstance().RegisterListener(this);
     }
     private OnDestroy() {
         Mediator.GetInstance().UnregisterListener(this);
     }
+
     private Init(){
         //Button Hide
         this.SetKitchenVisibility(false);
@@ -49,7 +61,13 @@ export default class Interaction_Grill extends InteractionBase implements IListe
             this.images[i].enabled = value;
         }
         for (let i = 0; i < this.grillSlotObjects.length; i++) {
-            this.grillSlotObjects[i].GetComponent<GrillSlot>().SetGrillVisibility(value);
+            this.grillSlots[i].SetGrillVisibility(value);
+        }
+    }
+
+    public UnlockSlot(level:number){
+        for (let i = 0; i <= level; i++) {
+            this.grillSlots[i].Unlock();
         }
     }
 }
