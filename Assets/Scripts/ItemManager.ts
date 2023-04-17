@@ -121,36 +121,6 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         return this._upgradeCache;
     }
 
-    // public getCardCache(): ProductRecord[] {
-    //     if (this._cardCache.Length == 0) {
-    //         return null;
-    //     }
-    //     return this._cardCache;
-    // }
-
-    // public GetRandomCardId(): string{
-    //     if (this._cardCache.Length == 0) {
-    //         return null;
-    //     }
-    //     return this._cardCache[Random.Range(0,this._cardCache.Length)].productId;
-    // }
-
-    // public GainBalance(currencyId: string, quantity: number) {
-    //     const data = new RoomData();
-    //     data.Add("currencyId", currencyId);
-    //     data.Add("quantity", quantity);
-    //     this._multiplay.Room?.Send("onCredit", data.GetObject());
-    //     console.warn("GainBalance");
-    // }
-
-    // public UseBalance(currencyId: string, quantity: number) {
-    //     const data = new RoomData();
-    //     data.Add("currencyId", currencyId);
-    //     data.Add("quantity", quantity);
-    //     this._multiplay.Room?.Send("onDebit", data.GetObject());
-    //     console.warn("UseBalance");
-    // }
-
     // an immediate purchase
     public * PurchaseItemImmediately(productId: string) {
         const request = ProductService.PurchaseProductAsync(productId);
@@ -168,6 +138,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         if (request.responseData.isSuccess) {
             // is purchase success
             // Mediator를 통해 UI 클래스에 possessionMoney값 전달
+            this.GetProduct(productId).isPurchased = true;
             Mediator.GetInstance().Notify(this, "UpgradeUpdated", productId);
         } else {
             // is purchase fail

@@ -1,0 +1,71 @@
+fileFormatVersion: 2
+guid: 7f19129ddec44064fb74c0f346343ffe
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst DataManager_1 = require(\"./DataManager\");\r\nconst
+    UIManager_1 = require(\"./UIManager\");\r\n// Class for daily rewards\r\nclass
+    DailyReward extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.rewardAmount = 1; // Amount
+    of daily reward\r\n        this.rewardDateKey = \"lastRewardDate\"; // Key to
+    save the date of the last reward\r\n        this.wakduKey = \"wakdu\"; // Key
+    to save the wakdu to be awarded as a reward\r\n    }\r\n    Start() {\r\n       
+    // Debug: Decrease saved date by one day for debugging purposes\r\n        let
+    debugDate = new Date();\r\n        debugDate.setDate(debugDate.getDate() - 1);\r\n       
+    UnityEngine_1.PlayerPrefs.SetString(this.rewardDateKey, debugDate.toISOString());\r\n       
+    // Debug: set wakdu 1 for debugging purposes\r\n        DataManager_1.default.GetInstance().SetValue(this.wakduKey,
+    1);\r\n        // Initialize claimButton\r\n        this.claimButton.onClick.AddListener(()
+    => this.ClaimReward());\r\n        // Initailize wakdu stamp\r\n        let currentWakdu
+    = DataManager_1.default.GetInstance().GetValue(this.wakduKey);\r\n        for
+    (let i = 0; i < currentWakdu; i++) {\r\n            this.CreateWakdu();\r\n       
+    }\r\n    }\r\n    CreateWakdu() {\r\n        const stamp = UnityEngine_1.Object.Instantiate(this.stampPrefab,
+    this.contentsParent);\r\n        this.stampPool.push(stamp);\r\n    }\r\n   
+    // Method to check if daily reward is claimable\r\n    CheckIfRewardClaimable()
+    {\r\n        // Initialize lastRewardDate to today''s date\r\n        let lastRewardDate
+    = new Date();\r\n        // Check if the last reward date is saved in PlayerPrefs\r\n       
+    if (UnityEngine_1.PlayerPrefs.HasKey(this.rewardDateKey)) {\r\n            //
+    Retrieve the saved date as a string and convert it to a Date object\r\n           
+    const dateString = UnityEngine_1.PlayerPrefs.GetString(this.rewardDateKey);\r\n           
+    lastRewardDate = new Date(dateString);\r\n        }\r\n        // Calculate the
+    difference between the current date and the date of the last reward\r\n       
+    const currentDate = new Date();\r\n        const difference = (currentDate.getTime()
+    - lastRewardDate.getTime()) / (1000 * 3600 * 24);\r\n        // Output the current
+    date, last reward date, and difference for debugging purposes\r\n        console.log(\"currentDate:
+    \" + currentDate.getTime());\r\n        console.log(\"lastRewardDate: \" + lastRewardDate.getTime());\r\n       
+    console.log(\"difference: \" + difference);\r\n        // Determine whether the
+    daily reward is claimable based on the difference\r\n        const isClaimable
+    = difference >= 1;\r\n        // Activate or deactivate the new image and claim
+    button based on claimability\r\n        this.newImage.gameObject.SetActive(isClaimable);\r\n       
+    this.claimButton.interactable = isClaimable;\r\n        // Return whether the
+    difference is greater than or equal to 1 day\r\n        return isClaimable;\r\n   
+    }\r\n    // Method to claim daily reward\r\n    ClaimReward() {\r\n        const
+    isClaimable = this.CheckIfRewardClaimable();\r\n        if (isClaimable) {\r\n           
+    // Grant the daily reward\r\n            let currentWakdu = DataManager_1.default.GetInstance().GetValue(this.wakduKey);\r\n           
+    currentWakdu += this.rewardAmount;\r\n            DataManager_1.default.GetInstance().SetValue(this.wakduKey,
+    currentWakdu);\r\n            // Update the date of the last reward\r\n           
+    const currentDate = new Date();\r\n            UnityEngine_1.PlayerPrefs.SetString(this.rewardDateKey,
+    currentDate.toISOString());\r\n            this.CreateWakdu();\r\n           
+    this.newImage.gameObject.SetActive(!isClaimable);\r\n            this.claimButton.interactable
+    = !isClaimable;\r\n            UIManager_1.default.GetInstance().OpenInformation(\"Daily
+    reward granted.\");\r\n        }\r\n        else {\r\n            UIManager_1.default.GetInstance().OpenInformation(\"Reward
+    already claimed today.\");\r\n        }\r\n    }\r\n}\r\nexports.default = DailyReward;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGFpbHlSZXdhcmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJEYWlseVJld2FyZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBeUU7QUFFekUsK0NBQXdDO0FBQ3hDLDJDQUFvQztBQUVwQywwQkFBMEI7QUFDMUIsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQUE5RDs7UUFDWSxpQkFBWSxHQUFXLENBQUMsQ0FBQyxDQUFDLHlCQUF5QjtRQUNuRCxrQkFBYSxHQUFXLGdCQUFnQixDQUFDLENBQUMsMENBQTBDO1FBQ3BGLGFBQVEsR0FBVyxPQUFPLENBQUMsQ0FBQyxrREFBa0Q7SUFxRjFGLENBQUM7SUE5RUcsS0FBSztRQUNELCtEQUErRDtRQUMvRCxJQUFJLFNBQVMsR0FBUyxJQUFJLElBQUksRUFBRSxDQUFDO1FBQ2pDLFNBQVMsQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLE9BQU8sRUFBRSxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBQzNDLHlCQUFXLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUUsU0FBUyxDQUFDLFdBQVcsRUFBRSxDQUFDLENBQUM7UUFDbkUsNENBQTRDO1FBQzVDLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFFckQseUJBQXlCO1FBQ3pCLElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQztRQUUvRCx5QkFBeUI7UUFDekIsSUFBSSxZQUFZLEdBQVcscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQzdFLEtBQUksSUFBSSxDQUFDLEdBQUMsQ0FBQyxFQUFDLENBQUMsR0FBQyxZQUFZLEVBQUMsQ0FBQyxFQUFFLEVB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","assetPath":"Assets/Scripts/DailyReward.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"claimButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"newImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"stampPrefab","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"stampPool","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"contentsParent","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"DailyReward","description":""},"isCompiled":true}'
+  typescriptHash: 34077fb5329607893a0432b079be209e
+  onlyWriteTrigger: 0

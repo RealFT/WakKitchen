@@ -1,5 +1,5 @@
 import { Object, GameObject, Quaternion, RectTransform, Vector2, Sprite, Debug, Rect } from 'UnityEngine'
-import { HorizontalLayoutGroup,Button } from "UnityEngine.UI";
+import { HorizontalLayoutGroup, Button } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import ItemSlot_Upgrade from './ItemSlot_Upgrade';
 import { ProductRecord } from 'ZEPETO.Product';
@@ -13,6 +13,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
     @SerializeField() private horizontalContent: RectTransform;
     @SerializeField() private layoutGroup: HorizontalLayoutGroup;
     @SerializeField() private contentHeight: number;
+    private upgradSlotPool: ItemSlot_Upgrade[] = [];
     Start() {
         Mediator.GetInstance().RegisterListener(this);
     }
@@ -23,12 +24,24 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
     }
 
+    private RefreshUpgradSlot(product: ProductRecord) {
+        this.upgradSlotPool.forEach((slot) => {
+            if(slot.GetItemRecord().productId === product.productId){
+                const match = product.productId.split('_');
+                const itemName = match ? match[1] : "";
+                const itemSprite = DataManager.GetInstance().GetSectionSpriteByName(itemName);
+                const upgradeLevel = match ? parseInt(match[2]) : 0;
+                slot.SetItem(product, itemSprite, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel);
+            }
+        });
+    }
+
     public OnNotify(sender: any, eventName: string, eventData: any): void {
         if (eventName == EventNames.UpgradeUpdated) {
             const product = ItemManager.GetInstance().GetProduct(eventData);
             if (product){
-                const match = product.productId.split('_');
-                //product.Name
+                this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
+                //this.RefreshUpgradSlot(product);
             }
         }
     }
@@ -74,9 +87,14 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             }
         }
 
+        this.SetSlotGroup(upgradeGroups);
+        this.SetSlotGroup(fullyUpgradedGroups);
+    }
+
+    private SetSlotGroup(groups: {}){
         // Extract items with the lowest match[3] value from each group.
-        for (let groupName in upgradeGroups ) {
-            const groupItems = upgradeGroups [groupName];
+        for (let groupName in groups ) {
+            const groupItems = groups[groupName];
             let minItem = groupItems[0];
             for (let i = 1; i < groupItems.length; i++) {
                 const currentItem = groupItems[i];
@@ -90,18 +108,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const match = minItem.productId.split('_');
             const itemName = match ? match[1] : "";
             const upgradeLevel = match ? parseInt(match[2]) : 0;
-            this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, false);
-        }
-
-        // Extract items with the lowest match[3] value from each group.
-        for (let groupName in fullyUpgradedGroups ) {
-            const groupItems = fullyUpgradedGroups [groupName];
-            let minItem = groupItems[0];
-            // Create an Upgrade Slot for each item in the list.
-            const match = minItem.productId.split('_');
-            const itemName = match ? match[1] : "";
-            const upgradeLevel = match ? parseInt(match[2]) : 0;
-            this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, true);
+            this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel);
         }
     }
 
@@ -122,5 +129,6 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         // Set up the item's properties using its ITM_Inventory component.
         const itemScript = slotObj.GetComponent<ItemSlot_Upgrade>();
         itemScript.SetItem(itemRecord, itemSprite, upgradeLevel, isFullyUpgraded);
+        this.upgradSlotPool.push(itemScript);
     }
 }
