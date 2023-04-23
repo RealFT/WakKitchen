@@ -19,11 +19,13 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
     @SerializeField() private fryTime: number;
     @SerializeField() private burnTime: number;
     @SerializeField() private visibleImages: Image[];
+    @SerializeField() private lockImage: Image;
+    @SerializeField() private clockImage: Image;
     private startTime: number = 0;
     private currentTime: number = 0;
     private isFrying: bool;
     private isFryied: bool;
-
+    private isClock: bool = false;
 
     Start() {
         this.fryButton.onClick.AddListener(() => { this.StartBaking(); });
@@ -32,6 +34,15 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
     }
     private OnDestroy() {
         Mediator.GetInstance().UnregisterListener(this);
+    }
+
+    public UnlockSlot(){
+        this.lockImage?.gameObject.SetActive(false);
+    }
+
+    public UnlockClock(){
+        this.clockImage?.gameObject.SetActive(true);
+        this.isClock = true;
     }
 
     private Init(){
@@ -72,7 +83,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.currentTime = Time.time - this.startTime;
         while (this.isFrying) {
             this.currentTime += Time.deltaTime;
-            this.frySlider.value = this.currentTime / this.burnTime;
+            this.frySlider.value = Math.min(1, this.currentTime / this.burnTime);
 
             if (this.currentTime >= this.fryTime) {
                 if (!this.isFryied) {
@@ -88,7 +99,8 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
                     this.isFryied = true;
                 }
             }
-            if (this.currentTime >= this.burnTime) {
+            // if Clock exist, fry doesn't burnt.
+            if (this.currentTime >= this.burnTime && !this.isClock) {
                 this.collectButton.image.sprite = this.burntFrySprite;
                 this.frySliderFill.color = this.failedColor;
                 this.StopBaking();

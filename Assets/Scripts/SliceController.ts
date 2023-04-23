@@ -6,8 +6,10 @@ import GameManager from './GameManager';
 import OrderManager from './OrderManager';
 import DataManager, { Ingredient } from './DataManager';
 import Slicable from './Slicable';
+import ItemManager from './ItemManager';
+import Mediator, { EventNames, IListener }  from './Notification/Mediator';
 
-export default class SliceController extends ZepetoScriptBehaviour {
+export default class SliceController extends ZepetoScriptBehaviour implements IListener  {
     public slicablePrefab: GameObject;  // The prefab for the ingredient that will be sliced
     public mask: GameObject;  // The mask on which the ingredients will be spawned
 
@@ -45,10 +47,25 @@ export default class SliceController extends ZepetoScriptBehaviour {
             this.slicableItemsPool.push(this.CreateSlicable().GetComponent<Slicable>());
         }
 
+        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("slice");
+        this.SlcieUnlock(upgradedlevel);
+
         // Start the coroutine that shoots the projectiles
         this.StartCoroutine(this.ShootSlicables());
+        Mediator.GetInstance().RegisterListener(this);
     }
 
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if(eventName === EventNames.UpgradeUpdated){
+            const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("slice");
+            this.SlcieUnlock(upgradedlevel);
+        }
+    }
+    
     DisableSlicables(){
         this.StopAllCoroutines();
         for (let i = 0; i < this.slicableItemsPool.length; i++) {
@@ -143,5 +160,17 @@ export default class SliceController extends ZepetoScriptBehaviour {
             point.y >= rect.yMin &&
             point.y <= rect.yMax
         );
+    }
+
+    public SlcieUnlock(level:number){
+        if(level >= 1){
+            this.maxDelay = 1.4;
+        }
+        if(level >= 2){
+            this.maxDelay = 1.0;
+        }
+        if(level >= 3){
+            this.maxDelay = 0.6;
+        }
     }
 }

@@ -4,6 +4,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
 import UIManager from './UIManager';
 import BalanceManager, { Currency } from './Shop/BalanceManager';
+import DataManager from './DataManager';
 
 // Settlement UI class that displays information about daily profits and costs.
 export default class Settlement extends ZepetoScriptBehaviour {
@@ -103,15 +104,27 @@ export default class Settlement extends ZepetoScriptBehaviour {
         if (this.animationInProgress) {
             return; // Ignore the click event if the animation is in progress.
         }
-        this.doubleIncomeButton.gameObject.SetActive(false);
-        
-        // Double the current net income and add the previous net income as profit.
-        BalanceManager.GetInstance().GainBalance(Currency.wak, this.netIncome);
-        this.netIncome *= 2;
+        // Initailize wakdu stamp
+        let currentWakdu: number = DataManager.GetInstance().GetValue("wakdu");
+        if(currentWakdu > 0){
+            // If wakdu stamps left, reduce one from the current count.            
+            DataManager.GetInstance().SetValue("wakdu", currentWakdu - 1);
 
-        // Run the ScoreAnimation coroutine.
-        this.animationInProgress = true;
-        this.StartCoroutine(this.NumberAnimation(this.netIncomeText, this.netIncome, this.animationDuration));
+            this.doubleIncomeButton.gameObject.SetActive(false);
+            
+            // Double the current net income and add the previous net income as profit.
+            BalanceManager.GetInstance().GainBalance(Currency.wak, this.netIncome);
+            this.netIncome *= 2;
+    
+            // Run the ScoreAnimation coroutine.
+            this.animationInProgress = true;
+            this.StartCoroutine(this.NumberAnimation(this.netIncomeText, this.netIncome, this.animationDuration));
+        }
+        // If there are no more Wakdu stamps left, inform the user with an information popup.
+        else{
+            UIManager.GetInstance().OpenInformation("Not enough daily stamp.");
+            return;
+        }
     }
 
 }

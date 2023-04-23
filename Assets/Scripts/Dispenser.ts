@@ -4,8 +4,10 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import Cup, { CupState } from './Cup';
 import OrderManager from './OrderManager';
 import { Drink } from './DataManager';
+import ItemManager from './ItemManager';
+import Mediator, { EventNames, IListener }  from './Notification/Mediator';
 
-export default class Dispenser extends ZepetoScriptBehaviour {
+export default class Dispenser extends ZepetoScriptBehaviour implements IListener  {
 
     @SerializeField() private leftMax: RectTransform; // Max value that can be moved to the left
     @SerializeField() private rightMax: RectTransform; // Max value that can be moved to the right
@@ -19,6 +21,7 @@ export default class Dispenser extends ZepetoScriptBehaviour {
     @SerializeField() private defaultCupSprite: Sprite;
     @SerializeField() private cupSprites: Sprite[];
     private curDrink: number;
+    private quantity: number = 1;
     private isCatch: boolean;
 
     Start() {
@@ -29,10 +32,26 @@ export default class Dispenser extends ZepetoScriptBehaviour {
             else this.CheckDrink();
         });
         this.cupBtn.onClick.AddListener(() => {
-            OrderManager.GetInstance().AddItemToInventory(this.curDrink);
+            OrderManager.GetInstance().AddItemToInventory(this.curDrink, this.quantity);
             this.cupBtn.gameObject.SetActive(false);
         });
+
+        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("dispenser");
+        this.DispenserUnlock(upgradedlevel);
+        Mediator.GetInstance().RegisterListener(this);
     }
+
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if(eventName === EventNames.UpgradeUpdated){
+            const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("dispenser");
+            this.DispenserUnlock(upgradedlevel);
+        }
+    }
+    
 
     private OnEnable(){
         this.StartMoving();
@@ -108,5 +127,18 @@ export default class Dispenser extends ZepetoScriptBehaviour {
 
     private SetCupImage(drink: Drink) {
         this.cupBtn.image.sprite = this.cupSprites[drink - Drink.START];
+    }
+
+    public DispenserUnlock(level:number){
+        if(level >= 1){
+            this.speed *=1.3;
+        }
+        if(level >= 2){
+            this.speed *=1.3;
+            this.speedRange *=0.5;
+        }
+        if(level >= 3){
+            this.quantity = 2;
+        }
     }
 }

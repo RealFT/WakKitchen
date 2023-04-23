@@ -78,7 +78,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.currentTime = Time.time - this.startTime;
         while (this.isBaking) {
             this.currentTime += Time.deltaTime;
-            this.bakeSlider.value = this.currentTime / this.burnTime;
+            this.bakeSlider.value = Math.min(1, this.currentTime / this.burnTime);
 
             if (this.currentTime >= this.bakeTime) {
                 if (this.flipCount > 0 && this.isFliped) {

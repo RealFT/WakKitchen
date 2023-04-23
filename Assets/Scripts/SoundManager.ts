@@ -1,6 +1,6 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { AudioClip, AudioSource, GameObject, Resources, Sprite } from "UnityEngine";
-import { Toggle, Slider } from "UnityEngine.UI";
+import { Toggle, Slider, Button } from "UnityEngine.UI";
 import { TextMeshProUGUI } from 'TMPro';
 export default class SoundManager extends ZepetoScriptBehaviour {
     // singleton
@@ -36,6 +36,8 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     // Audio sources for BGM and SFX
     @SerializeField() private BGM: AudioSource;
     @SerializeField() private SFX: AudioSource;
+    @SerializeField() private muteBGM: Toggle;
+    @SerializeField() private muteSFX: Toggle;
 
     private masterMute: boolean = false; // Master mute flag
     private masterVolume: number = 1; // Master volume level
@@ -58,6 +60,11 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     }
     get BGMSoundVolume() {
         return this.BGMVolume * this.masterVolume;
+    }
+
+    Start(){
+        this.muteBGM.onValueChanged.AddListener(() => this.MuteBGMVolume(this.muteBGM));
+        this.muteSFX.onValueChanged.AddListener(() => this.MuteSFXVolume(this.muteSFX));
     }
     
     // Functions to change the sound settings

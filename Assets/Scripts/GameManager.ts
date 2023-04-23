@@ -37,7 +37,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
     @SerializeField() private startHour: number;    // Stage Start Hour
     @SerializeField() private endHour: number;    // Stage End Hour
     private timer: Timer;
-    private lastSavedDay: number;      // last saved Day(Stage).
     private currTime: [number, number]; // current time
     private curStage: number;
     public _isInGame: boolean;
@@ -53,8 +52,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     Init() {
-        /* need load */
-        //this.lastSavedDay = 0;
         this.curStage = DataManager.GetInstance().GetLastSavedStage();
     }
     

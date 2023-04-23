@@ -8,6 +8,7 @@ import { Room, RoomData } from "ZEPETO.Multiplay";
 import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, InventorySync } from "./Shop/BalanceManager";
 import UIManager from './UIManager';
 import Mediator from './Notification/Mediator';
+import Shop_Upgrade from './Shop/Shop_Upgrade';
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -33,6 +34,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
     //private _cardCache: ProductRecord[] = [];
     private _multiplay: ZepetoWorldMultiplay;
     private _room: Room;
+    private upgradedGroup: Map<string, number> = new Map<string, number>();
 
     Awake() {
         if (this != ItemManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -92,6 +94,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
                             break;
                         case ItemType.upgrade:
                             this._upgradeCache.push(pr);
+                            this.AddToUpgradedGroup(pr);
                             break;
                         // case ItemType.card:
                         //     this._cardCache.push(pr);
@@ -121,6 +124,35 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         return this._upgradeCache;
     }
 
+    public GetUpgradedLevel(itemName: string): number{
+        return this.upgradedGroup.get(itemName);
+    }
+
+    private AddToUpgradedGroup(item: ProductRecord) {
+        // 1: Shop Category, 2: item Name, 3: upgrade level
+        // third matches single digit separated by underscore.
+        // Create groups based on match[1] value to extract items with the lowest match[2] value.
+        const match = item.productId.split('_');
+        const itemName = match ? match[1] : "";
+        const upgradeLevel = match ? parseInt(match[2]) : 0;
+        // Only retrieve purchased items.
+        if (item.isPurchased) {
+            // If it's already set in the group
+            if (this.upgradedGroup.has(itemName)) {
+                // find the maximum upgrade level and set
+                const currentValue = this.upgradedGroup.get(itemName);
+                const upgradedValue = Math.max(currentValue, upgradeLevel);
+                this.upgradedGroup.set(itemName, upgradedValue);
+            } else {
+                this.upgradedGroup.set(itemName, upgradeLevel);
+            }
+        }
+        // Set default value if not set in the group
+        else if (!this.upgradedGroup.has(itemName)) {
+            this.upgradedGroup.set(itemName, 0);
+        }
+    }
+
     // an immediate purchase
     public * PurchaseItemImmediately(productId: string) {
         const request = ProductService.PurchaseProductAsync(productId);
@@ -138,7 +170,9 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         if (request.responseData.isSuccess) {
             // is purchase success
             // Mediator를 통해 UI 클래스에 possessionMoney값 전달
-            this.GetProduct(productId).isPurchased = true;
+            const product = this.GetProduct(productId);
+            product.isPurchased = true;
+            this.AddToUpgradedGroup(product);
             Mediator.GetInstance().Notify(this, "UpgradeUpdated", productId);
         } else {
             // is purchase fail

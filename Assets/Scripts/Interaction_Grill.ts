@@ -3,6 +3,7 @@ import { Image } from 'UnityEngine.UI';
 import GrillSlot from './GrillSlot';
 import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
+import ItemManager from './ItemManager';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private grillSlotObjects: GameObject[];
@@ -16,8 +17,9 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         this.grillPanel.SetActive(true);
         this.kitchen.SetActive(true);
 
-        //
-        this.UnlockSlot(0);
+        // Unlock by Upgraded level
+        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("grill");
+        this.GrillUnlock(upgradedlevel);
 
         Mediator.GetInstance().RegisterListener(this);
     }
@@ -36,6 +38,10 @@ export default class Interaction_Grill extends InteractionBase implements IListe
             case EventNames.StageStarted:
             case EventNames.StageEnded:
                 this.Init();
+                break;
+            case EventNames.UpgradeUpdated:
+                const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("grill");
+                this.GrillUnlock(upgradedlevel);
                 break;
         }
     }
@@ -58,10 +64,13 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         }
     }
 
-    public UnlockSlot(level:number){
+    public GrillUnlock(level:number){
         for (let i = 0; i <= level; i++) {
             console.log("grill unlock");
             this.grillSlotObjects[i].GetComponent<GrillSlot>()?.Unlock();
+        }
+        if(level === 3){
+            // clock 기능 추가
         }
     }
 }

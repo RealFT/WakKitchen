@@ -14,6 +14,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
     @SerializeField() private layoutGroup: HorizontalLayoutGroup;
     @SerializeField() private contentHeight: number;
     private upgradSlotPool: ItemSlot_Upgrade[] = [];
+
     Start() {
         Mediator.GetInstance().RegisterListener(this);
     }
@@ -69,7 +70,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const itemName = match[1];
             if (match) {
                 console.log(match[1]+match[2]+item.isPurchased);
-                // Only retrieve unpurchased items.
+                // Only retrieve purchased items.
                 if (item.isPurchased) {
                     // if item is fully upgraded, add to fullyUpgradedGroups.
                     if (parseInt(match[2]) === Shop_Upgrade.MaxUpgradeLevel) {
@@ -108,6 +109,8 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const match = minItem.productId.split('_');
             const itemName = match ? match[1] : "";
             const upgradeLevel = match ? parseInt(match[2]) : 0;
+            DataManager.GetInstance().SetValue(itemName, upgradeLevel);
+            console.log("Section: " + itemName +"Level: "+ upgradeLevel);
             this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel);
         }
     }
