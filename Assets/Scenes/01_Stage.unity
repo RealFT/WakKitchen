@@ -3594,8 +3594,8 @@ MonoBehaviour:
     - 
     - '{"type":"System.Single, mscorlib","value":"6"}'
     - '{"type":"System.Single, mscorlib","value":"10"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":4,\"type\":\"UnityEngine.UI.Image,
-      UnityEngine.UI\",\"isUnity\":true}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":4,\"type\":\"UnityEngine.Object,
+      UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - 
     - 
     unityArrayValues:
@@ -6944,10 +6944,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 244366964}
     m_Modifications:
-    - target: {fileID: 394301539253099430, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 394301539800145297, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7035,38 +7031,6 @@ PrefabInstance:
     - target: {fileID: 394301539800145302, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: m_Name
       value: Grill Slot (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 670035881483202217, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403288949532307038, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3354581407763265508, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3354581407763265508, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4972291813007264412, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6145619042956548113, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659645871579777374, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8190963223911187216, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d871a78ae64b8459080947974006a3, type: 3}
@@ -8651,8 +8615,8 @@ MonoBehaviour:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":2,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":2,\"length\":10,\"type\":\"UnityEngine.UI.Image,
-      UnityEngine.UI\",\"isUnity\":true}"}'
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":2,\"length\":10,\"type\":\"UnityEngine.Object,
+      UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - 
     - 
     - 
@@ -9844,10 +9808,6 @@ PrefabInstance:
     - target: {fileID: 394301539800145302, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: m_Name
       value: Grill Slot
-      objectReference: {fileID: 0}
-    - target: {fileID: 8190963223911187216, guid: 83d871a78ae64b8459080947974006a3, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d871a78ae64b8459080947974006a3, type: 3}
