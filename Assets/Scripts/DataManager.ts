@@ -175,6 +175,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
     public SetStage(stage: number) {
         this.SetValue("Stage", stage);
+        this.lastSavedStage = stage;
     }
 
     public LoadReceiptData() {
@@ -384,7 +385,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
         const unlockStage = this.unlockStages?.get(name);
         return unlockStage;
     }
-
+    public GetIsUnlockByName(name: string): boolean{
+        const unlockStage = this.unlockStages?.get(name);
+        return this.lastSavedStage >= unlockStage;
+    }
     public GetSectionSprites(): Sprite[] {
         return this.sectionSprites;
     }

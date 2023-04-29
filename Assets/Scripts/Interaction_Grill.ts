@@ -4,11 +4,13 @@ import GrillSlot from './GrillSlot';
 import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import ItemManager from './ItemManager';
+import DataManager from './DataManager';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private grillSlotObjects: GameObject[];
     @SerializeField() private images: Image[];
     @SerializeField() private grillPanel: GameObject;
+    @SerializeField() private defaultTable: GameObject;
 
     Start() {
         super.Start();
@@ -31,6 +33,14 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         //Button Hide
         this.SetKitchenVisibility(false);
         this.openButton.gameObject.SetActive(false);
+
+        const isUnlock = DataManager.GetInstance().GetIsUnlockByName(this.sectionName);
+        // if name is empty, don't use this logic.
+        if (this.sectionName != "") {
+            this.defaultTable.SetActive(!isUnlock);
+            this.sectionObject.SetActive(isUnlock);
+            this.sectionCollider.enabled = isUnlock;
+        }
     }
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {

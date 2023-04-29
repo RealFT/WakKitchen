@@ -53,7 +53,7 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
     private CheckLock(){
         this.isLock = GameManager.GetInstance().GetCurrentStage() < this.unlockStage ? true : false;
         // need localize
-        this.lockText.text = `Unlock to\nStage ${this.unlockStage}`;
+        this.lockText.text = `Unlock to\nDay ${this.unlockStage}`;
         this.lockImage.gameObject.SetActive(this.isLock);
 
         // if unlocked, Move the current Transform object to the first sibling

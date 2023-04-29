@@ -103,6 +103,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.SetPlayerMovement(false);
         this._isInGame = false;
         
+        this.curStage++;
+        DataManager.GetInstance().SetStage(this.curStage);
+        
         Mediator.GetInstance().Notify(this, EventNames.StageEnded, null);
     }
 
@@ -140,8 +143,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     public NextStage(): void {
-        this.curStage++;
-        DataManager.GetInstance().SetStage(this.curStage);
+
         this.StartStage();
     }
 

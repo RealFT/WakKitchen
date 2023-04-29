@@ -1,4 +1,4 @@
-import { GameObject } from 'UnityEngine';
+import { Collider, GameObject } from 'UnityEngine';
 import { Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 // import custom script from path
@@ -8,6 +8,9 @@ export default class InteractionBase extends ZepetoScriptBehaviour {
     @SerializeField() protected openButton: Button;
     @SerializeField() protected escapeButton: Button;
     @SerializeField() protected kitchen: GameObject;
+    @SerializeField() protected sectionObject: GameObject;
+    @SerializeField() protected sectionCollider: Collider;
+    @SerializeField() protected sectionName: string;
 
     protected Start() {
         //Button Hide

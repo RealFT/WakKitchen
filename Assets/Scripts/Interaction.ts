@@ -1,3 +1,4 @@
+import DataManager from './DataManager';
 import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 
@@ -14,6 +15,13 @@ export default class Interaction extends InteractionBase implements IListener {
         //Button Hide
         this.SetKitchenVisibility(false);
         this.openButton.gameObject.SetActive(false);
+
+        const isUnlock = DataManager.GetInstance().GetIsUnlockByName(this.sectionName);
+        // if name is empty, don't use this logic.
+        if(this.sectionName != ""){
+            this.sectionObject.SetActive(isUnlock);
+            this.sectionCollider.enabled = isUnlock;
+        }
     }
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
