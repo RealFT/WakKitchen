@@ -21,29 +21,38 @@ ScriptedImporter:
   compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
     \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
     UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst EquipSlot_1 = require(\\\"./EquipSlot\\\");\\r\\nconst
-    CardData_1 = require(\\\"./CardData\\\");\\r\\nclass EquipSlotController extends
-    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
-    super(...arguments);\\r\\n        this.equipSlots = [];\\r\\n    }\\r\\n    Start()
-    {\\r\\n        this.equipSlots = this.equipSlotParent.GetComponentsInChildren($typeof(EquipSlot_1.default));\\r\\n       
+    CardData_1 = require(\\\"./CardData\\\");\\r\\nconst ItemManager_1 = require(\\\"../ItemManager\\\");\\r\\nconst
+    UIManager_1 = require(\\\"../UIManager\\\");\\r\\nconst Mediator_1 = require(\\\"../Notification/Mediator\\\");\\r\\nclass
+    EquipSlotController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n   
+    constructor() {\\r\\n        super(...arguments);\\r\\n        this.equipSlots
+    = [];\\r\\n    }\\r\\n    Start() {\\r\\n        this.equipSlots = this.equipSlotParent.GetComponentsInChildren($typeof(EquipSlot_1.default));\\r\\n       
     for (let i = 0; i < this.equipSlots.length; i++) {\\r\\n            let toggle
     = this.equipSlots[i].GetSelectSectionOpenToggle();\\r\\n            toggle.onValueChanged.AddListener((isOn)
     => {\\r\\n                if (isOn) {\\r\\n                    this.OnToggleValueChanged(toggle);\\r\\n               
-    }\\r\\n            });\\r\\n        }\\r\\n    }\\r\\n    // \uB2E4\uB978 \uC7A5\uCC29
-    \uCE90\uB9AD\uD130\uC758 \uC139\uC158 \uC120\uD0DD \uC2DC \uB2E4\uB978 \uC139\uC158\uC740
-    \uBE44\uD65C\uC131\uD654\uB418\uB294 \uAE30\uB2A5\\r\\n    OnToggleValueChanged(toggle)
-    {\\r\\n        if (toggle != this.selectedToggle) {\\r\\n            // If a
-    different toggle is selected\\r\\n            if (this.selectedToggle) {\\r\\n               
-    this.selectedToggle.isOn = false; // Deselect the previously selected toggle\\r\\n           
-    }\\r\\n            this.selectedToggle = toggle; // Save the new selected toggle\\r\\n       
-    }\\r\\n        else {\\r\\n            // If the same toggle is selected again\\r\\n           
-    this.selectedToggle = null; // Deselect the current toggle\\r\\n        }\\r\\n   
-    }\\r\\n    EquipCharacter(cardData) {\\r\\n        // Find an empty card equip
-    slot\\r\\n        let emptyIndex = -1;\\r\\n        for (let i = 0; i < this.equipSlots.length;
-    i++) {\\r\\n            if (!this.equipSlots[i].IsEquip()) {\\r\\n               
-    emptyIndex = i;\\r\\n                break;\\r\\n            }\\r\\n        }\\r\\n       
-    if (emptyIndex != -1) {\\r\\n            // Equip the character to the first
-    empty card equip slot\\r\\n            this.equipSlots[emptyIndex].EquipCard(cardData,
-    emptyIndex);\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default = EquipSlotController;\\r\\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXF1aXBTbG90Q29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkVxdWlwU2xvdENvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQWlEO0FBRWpELDJDQUFvQztBQUNwQyx5Q0FBa0M7QUFFbEMsTUFBcUIsbUJBQW9CLFNBQVEscUNBQXFCO0lBQXRFOztRQUdZLGVBQVUsR0FBZ0IsRUFBRSxDQUFDO0lBNEN6QyxDQUFDO0lBekNHLEtBQUs7UUFDRCxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxlQUFlLENBQUMsdUJBQXVCLFNBQUMsbUJBQVMsRUFBRyxDQUFDO1FBQzVFLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUM3QyxJQUFJLE1BQU0sR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLDBCQUEwQixFQUFFLENBQUM7WUFDN0QsTUFBTSxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtnQkFDdkMsSUFBSSxJQUFJLEVBQUU7b0JBQ04sSUFBSSxDQUFDLG9CQUFvQixDQUFDLE1BQU0sQ0FBQyxDQUFDO2lCQUNyQztZQUNMLENBQUMsQ0FBQyxDQUFDO1NBQ047SUFDTCxDQUFDO0lBRUQsc0NBQXNDO0lBQzlCLG9CQUFvQixDQUFDLE1BQWM7UUFDdkMsSUFBSSxNQUFNLElBQUksSUFBSSxDQUFDLGNBQWMsRUFBRTtZQUMvQixvQ0FBb0M7WUFDcEMsSUFBSSxJQUFJLENBQUMsY0FBYyxFQUFFO2dCQUNyQixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksR0FBRyxLQUFLLENBQUMsQ0FBQywwQ0FBMEM7YUFDL0U7WUFDRCxJQUFJLENBQUMsY0FBYyxHQUFHLE1BQU0sQ0FBQyxDQUFDLCtCQUErQjtTQUNoRTthQUFNO1lBQ0gsdUNBQXVDO1lBQ3ZDLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDLENBQUMsOEJBQThCO1NBQzdEO0lBQ0wsQ0FBQztJQUVNLGNBQWMsQ0FBQyxRQUFrQjtRQUNwQyxnQ0FBZ0M7UUFDaEMsSUFBSSxVQUFVLEdBQUcsQ0FBQyxDQUFDLENBQUM7UUFDcEIsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzdDLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO2dCQUMvQixVQUFVLEdBQUcsQ0FBQyxDQUFDO2dCQUNmLE1BQU07YUFDVDtTQUNKO1FBRUQsSUFBSSxVQUFVLElBQUksQ0FBQyxDQUFDLEVBQUU7WUFDbEIseURBQXlEO1lBQ3pELElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxVQUFVLENBQUMsQ0FBQztTQUMvRDtJQUNMLENBQUM7Q0FDSjtBQS9DRCxzQ0ErQ0MifQ==\",\"assetPath\":\"Assets/Scripts/Employee/EquipSlotController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"equipSlotParent\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"EquipSlotController\",\"description\":\"\"},\"isCompiled\":true}"
-  typescriptHash: d1dacc9d0131e9df2119b19bf048670c
+    }\\r\\n            });\\r\\n        }\\r\\n        const upgradedlevel = ItemManager_1.default.GetInstance().GetUpgradedLevel(\\\"employee\\\");\\r\\n       
+    this.EquipUnlock(upgradedlevel);\\r\\n        Mediator_1.default.GetInstance().RegisterListener(this);\\r\\n   
+    }\\r\\n    OnDestroy() {\\r\\n        Mediator_1.default.GetInstance().UnregisterListener(this);\\r\\n   
+    }\\r\\n    OnNotify(sender, eventName, eventData) {\\r\\n        if (eventName
+    === Mediator_1.EventNames.UpgradeUpdated) {\\r\\n            const upgradedlevel
+    = ItemManager_1.default.GetInstance().GetUpgradedLevel(\\\"employee\\\");\\r\\n           
+    this.EquipUnlock(upgradedlevel);\\r\\n        }\\r\\n    }\\r\\n    // \uB2E4\uB978
+    \uC7A5\uCC29 \uCE90\uB9AD\uD130\uC758 \uC139\uC158 \uC120\uD0DD \uC2DC \uB2E4\uB978
+    \uC139\uC158\uC740 \uBE44\uD65C\uC131\uD654\uB418\uB294 \uAE30\uB2A5\\r\\n   
+    OnToggleValueChanged(toggle) {\\r\\n        if (toggle != this.selectedToggle)
+    {\\r\\n            // If a different toggle is selected\\r\\n            if (this.selectedToggle)
+    {\\r\\n                this.selectedToggle.isOn = false; // Deselect the previously
+    selected toggle\\r\\n            }\\r\\n            this.selectedToggle = toggle;
+    // Save the new selected toggle\\r\\n        }\\r\\n        else {\\r\\n           
+    // If the same toggle is selected again\\r\\n            this.selectedToggle
+    = null; // Deselect the current toggle\\r\\n        }\\r\\n    }\\r\\n    EquipCharacter(cardData)
+    {\\r\\n        // Find an empty card equip slot\\r\\n        let emptyIndex =
+    -1;\\r\\n        for (let i = 0; i < this.equipSlots.length; i++) {\\r\\n           
+    if (!this.equipSlots[i].IsEquip()) {\\r\\n                emptyIndex = i;\\r\\n               
+    break;\\r\\n            }\\r\\n        }\\r\\n        if (emptyIndex != -1) {\\r\\n           
+    // Equip the character to the first empty card equip slot\\r\\n            this.equipSlots[emptyIndex].EquipCard(cardData,
+    emptyIndex);\\r\\n        }\\r\\n        else {\\r\\n            UIManager_1.default.GetInstance().OpenInformation(\\\"No
+    slots available.\\\");\\r\\n        }\\r\\n    }\\r\\n    EquipUnlock(level)
+    {\\r\\n        for (let i = 0; i < level; i++) {\\r\\n            this.equipSlots[i].Unlock();\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\nexports.default = EquipSlotController;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXF1aXBTbG90Q29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkVxdWlwU2xvdENvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQWlEO0FBRWpELDJDQUFvQztBQUNwQyx5Q0FBa0M7QUFDbEMsZ0RBQXlDO0FBQ3pDLDRDQUFxQztBQUNyQyx1REFBMkU7QUFFM0UsTUFBcUIsbUJBQW9CLFNBQVEscUNBQXFCO0lBQXRFOztRQUdZLGVBQVUsR0FBZ0IsRUFBRSxDQUFDO0lBbUV6QyxDQUFDO0lBaEVHLEtBQUs7UUFDRCxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxlQUFlLENBQUMsdUJBQXVCLFNBQUMsbUJBQVMsRUFBRyxDQUFDO1FBQzVFLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUM3QyxJQUFJLE1BQU0sR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLDBCQUEwQixFQUFFLENBQUM7WUFDN0QsTUFBTSxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtnQkFDdkMsSUFBSSxJQUFJLEVBQUU7b0JBQ04sSUFBSSxDQUFDLG9CQUFvQixDQUFDLE1BQU0sQ0FBQyxDQUFDO2lCQUNyQztZQUNMLENBQUMsQ0FBQyxDQUFDO1NBQ047UUFFRCxNQUFNLGFBQWEsR0FBRyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQzdFLElBQUksQ0FBQyxXQUFXLENBQUMsYUFBYSxDQUFDLENBQUM7UUFDaEMsa0JBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsRCxDQUFDO0lBRU8sU0FBUztRQUNiLGtCQUFRLENBQUMsV0FBVyxFQUFFLENBQUMsa0JBQWtCLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDcEQsQ0FBQztJQUNNLFFBQVEsQ0FBQyxNQUFXLEVBQUUsU0FBaUIsRUFBRSxTQUFjO1FBQzFELElBQUcsU0FBUyxLQUFLLHFCQUFVLENBQUMsY0FBYyxFQUFDO1lBQ3ZDLE1BQU0sYUFBYSxHQUFHLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsZ0JBQWdCLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDN0UsSUFBSSxDQUFDLFdBQVcsQ0FBQyxhQUFhLENBQUMsQ0FBQztTQUNuQztJQUNMLENBQUM7SUFFRCxzQ0FBc0M7SUFDOUIsb0JBQW9CLENBQUMsTUFBYztRQUN2QyxJQUFJLE1BQU0sSUFBSSxJQUFJLENBQUMsY0FBYyxFQUFFO1lBQy9CLG9DQUFvQztZQUNwQyxJQUFJLElBQUksQ0FBQyxjQUFjLEVBQUU7Z0JBQ3JCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxHQUFHLEtBQUssQ0FBQyxDQUFDLDBDQUEwQzthQUMvRTtZQUNELElBQUksQ0FBQyxjQUFjLEdBQUcsTUFBTSxDQUFDLENBQUMsK0JBQStCO1NBQ2hFO2FBQU07WUFDSCx1Q0FBdUM7WUFDdkMsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUMsQ0FBQyw4QkFBOEI7U0FDN0Q7SUFDTCxDQUFDO0lBRU0sY0FBYyxDQUFDLFFBQWtCO1FBQ3BDLGdDQUFnQztRQUNoQyxJQUFJLFVBQVUsR0FBRyxDQUFDLENBQUMsQ0FBQztRQUNwQixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDN0MsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7Z0JBQy9CLFVBQVUsR0FBRyxDQUFDLENBQUM7Z0JBQ2YsTUFBTTthQUNUO1NBQ0o7UUFFRCxJQUFJLFVBQVUsSUFBSSxDQUFDLENBQUMsRUFBRTtZQUNsQix5REFBeUQ7WUFDekQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUMsQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLFVBQVUsQ0FBQyxDQUFDO1NBQy9EO2FBQ0c7WUFDQSxtQkFBUyxDQUFDLFdBQVcsRUFBRSxDQUFDLGVBQWUsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1NBQ2xFO0lBQ0wsQ0FBQztJQUVNLFdBQVcsQ0FBQyxLQUFZO1FBQzNCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxLQUFLLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDNUIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxNQUFNLEVBQUUsQ0FBQztTQUMvQjtJQUNMLENBQUM7Q0FDSjtBQXRFRCxzQ0FzRUMifQ==\",\"assetPath\":\"Assets/Scripts/Employee/EquipSlotController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"equipSlotParent\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"EquipSlotController\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: a87aafcaa3e439df1ffb6ff3a93f4ba2
   onlyWriteTrigger: 0

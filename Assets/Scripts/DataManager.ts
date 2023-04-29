@@ -105,6 +105,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     @SerializeField() private receiptFile: TextAsset;
     @SerializeField() private stageFile: TextAsset;
+    @SerializeField() private unlockStageFile: TextAsset;
     @SerializeField() private cardFile: TextAsset;
     // Define the member variables for the Receipt's sprites
     @SerializeField() private ingredientSprites: Sprite[];
@@ -116,12 +117,13 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private gradeIcons: Sprite[];
     @SerializeField() private cardBackgroundSprites: Sprite[];
     @SerializeField() private sectionSprites: Sprite[];
+
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
     private stages: number[][] = [];
+    private unlockStages: Map<string, number> = new Map<string, number>();
     private cardDatas: Map<string, CardData> = new Map<string, CardData>();
     private inventoryCache: Map<string, number> = new Map<string, number>();
-    private playStage: string = 'Stage';
     private lastSavedStage: number;      // last saved Day(Stage).
 
     Awake() {
@@ -158,11 +160,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.LoadSavedStage();
         this.LoadReceiptData();
         this.LoadStageData();
+        this.LoadUnlockStageData();
         this.LoadCardData();
     }
 
     public LoadSavedStage() {
-        this.lastSavedStage = 0;
+        this.lastSavedStage = 1;
         this.SetValue("Stage", this.lastSavedStage);
         // this.lastSavedStage = this.GetValue("Stage");
         // this.SetValue("Stage", this.lastSavedStage);
@@ -203,6 +206,19 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
+    public LoadUnlockStageData() {
+        const lines = this.unlockStageFile.text.split('\n'); // split the CSV file by row
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
+            const values = line.split(','); // split the row by comma to get the values
+            
+            // do something with the values
+            const target = values[1];
+            const stage = +values[2];
+            this.unlockStages.set(target, stage);
+        }
+    }
+
     public LoadCardData() {
         const lines = this.cardFile.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
@@ -211,10 +227,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             
             // do something with the values
             const cardData = new CardData();
-            const ingredients: number[] = [];
-            for (let j = 6; j < values.length; j++) {
-                ingredients.push(+values[j]);
-            }
+
             const cardId = values[1];
             cardData.SetCardData(cardId, +values[2], values[3], values[4], +values[5], +values[6], +values[7], +values[8]);
             this.cardDatas.set(cardId, cardData);
@@ -367,6 +380,11 @@ export default class DataManager extends ZepetoScriptBehaviour {
         const spriteIndex = this.sectionSprites?.findIndex((s) => s.name.toLowerCase() === sectionName);
         return this.sectionSprites[spriteIndex];
     }
+    public GetUnlockStageByName(name: string): number{
+        const unlockStage = this.unlockStages?.get(name);
+        return unlockStage;
+    }
+
     public GetSectionSprites(): Sprite[] {
         return this.sectionSprites;
     }

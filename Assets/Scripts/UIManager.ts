@@ -26,6 +26,8 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private shopUI: GameObject;
     @SerializeField() private mainUI: GameObject[];
     @SerializeField() private gameUI: GameObject[];
+    @SerializeField() private sceneName: SceneName;
+    @SerializeField() private startBtn: Button;
     @SerializeField() private timeText: Text;
     @SerializeField() private possessionMoneyTxt: Text;
     @SerializeField() private informationObj: GameObject;
@@ -37,6 +39,11 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     }
 
     Start() {
+        this.startBtn.onClick.AddListener(() => {
+            //this.MoveScene(this.sceneName);
+            SceneLoadManager.GetInstance().LoadScene(this.sceneName);
+        });
+
         // Register UIManager as a listener for events
         Mediator.GetInstance().RegisterListener(this);
         // Initialize the UI

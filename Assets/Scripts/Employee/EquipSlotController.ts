@@ -3,8 +3,11 @@ import { GameObject, Sprite } from 'UnityEngine';
 import { Toggle } from 'UnityEngine.UI';
 import EquipSlot from './EquipSlot';
 import CardData from './CardData';
+import ItemManager from '../ItemManager';
+import UIManager from '../UIManager';
+import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 
-export default class EquipSlotController extends ZepetoScriptBehaviour {
+export default class EquipSlotController extends ZepetoScriptBehaviour implements IListener {
     
     @SerializeField() private equipSlotParent: GameObject;
     private equipSlots: EquipSlot[] = [];
@@ -20,8 +23,22 @@ export default class EquipSlotController extends ZepetoScriptBehaviour {
                 }
             });
         }
+
+        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("employee");
+        this.EquipUnlock(upgradedlevel);
+        Mediator.GetInstance().RegisterListener(this);
     }
 
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
+    }
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if(eventName === EventNames.UpgradeUpdated){
+            const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("employee");
+            this.EquipUnlock(upgradedlevel);
+        }
+    }
+    
     // 다른 장착 캐릭터의 섹션 선택 시 다른 섹션은 비활성화되는 기능
     private OnToggleValueChanged(toggle: Toggle) {
         if (toggle != this.selectedToggle) {
@@ -49,6 +66,15 @@ export default class EquipSlotController extends ZepetoScriptBehaviour {
         if (emptyIndex != -1) {
             // Equip the character to the first empty card equip slot
             this.equipSlots[emptyIndex].EquipCard(cardData, emptyIndex);
+        }
+        else{
+            UIManager.GetInstance().OpenInformation("No slots available.");
+        }
+    }
+
+    public EquipUnlock(level:number){
+        for (let i = 0; i < level; i++) {
+            this.equipSlots[i].Unlock();
         }
     }
 }

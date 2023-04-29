@@ -51,7 +51,6 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
             this.DispenserUnlock(upgradedlevel);
         }
     }
-    
 
     private OnEnable(){
         this.StartMoving();

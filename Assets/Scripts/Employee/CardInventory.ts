@@ -8,6 +8,7 @@ import CardSlot from './CardSlot';
 import DataManager from '../DataManager';
 import EquipSlotController from './EquipSlotController';
 import CardInfoWindow from './CardInfoWindow';
+import UIManager from '../UIManager';
 
 export default class CardInventory extends ZepetoScriptBehaviour {
     
@@ -137,27 +138,22 @@ export default class CardInventory extends ZepetoScriptBehaviour {
 
     private OnClickEquipCard(){
         const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
-        console.log("OnClickEquipCard: " + this.toggleGroup.GetFirstActiveToggle());
-        console.log("OnClickEquipCard: " + this.toggleGroup.GetFirstActiveToggle());
-
-        if (card === null){
-            console.warn("no have card data");
+        if (card == undefined){
+            UIManager.GetInstance().OpenInformation("No card selected.");
             return;
         }
         this.equipSlotController.EquipCharacter(card);
-        console.log("OnClickEquipCard: " + card.GetCardId());
         this.RefreshCardInfo();
     }
 
     private OnClickUpgradeCard(){
         const cardSlot = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>();
         if(!cardSlot || cardSlot.GetCardQuantity() < 10){
-            console.warn("not enough cards");
+            UIManager.GetInstance().OpenInformation("Not enough cards to Upgrade");
             return;
         }
         const card = cardSlot.GetCardData();
-        if (card === null){
-            console.warn("no have card data");
+        if (card == null){
             return;
         }
         const grade = card.GetGrade();

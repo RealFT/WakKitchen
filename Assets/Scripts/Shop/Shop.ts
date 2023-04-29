@@ -36,7 +36,7 @@ export default class Shop extends ZepetoScriptBehaviour {
         if(hireShop) hireShop.InitHireShop();
         var upgradeShop = this.panels[1].GetComponent<Shop_Upgrade>();
         if(upgradeShop) upgradeShop.InitUpgradeShop();
-        var foodShop = this.panels[2].GetComponent<Shop_Food>();
-        if(foodShop) foodShop.InitFoodShop();
+        // var foodShop = this.panels[2].GetComponent<Shop_Food>();
+        // if(foodShop) foodShop.InitFoodShop();
     }
 }

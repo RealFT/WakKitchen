@@ -18,6 +18,9 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
     Start() {
         Mediator.GetInstance().RegisterListener(this);
     }
+    private OnEnable() {
+        this.RefreshUpgradeSlots();
+    }
     private OnDestroy() {
         Mediator.GetInstance().UnregisterListener(this);
     }
@@ -25,15 +28,21 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
     }
 
-    private RefreshUpgradSlot(product: ProductRecord) {
+    private RefreshUpgradeSlot(product: ProductRecord) {
         this.upgradSlotPool.forEach((slot) => {
             if(slot.GetItemRecord().productId === product.productId){
                 const match = product.productId.split('_');
                 const itemName = match ? match[1] : "";
                 const itemSprite = DataManager.GetInstance().GetSectionSpriteByName(itemName);
+                const unlockStage = DataManager.GetInstance().GetUnlockStageByName(itemName);
                 const upgradeLevel = match ? parseInt(match[2]) : 0;
-                slot.SetItem(product, itemSprite, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel);
+                slot.SetItem(product, itemSprite, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel, unlockStage);
             }
+        });
+    }
+    private RefreshUpgradeSlots() {
+        this.upgradSlotPool.forEach((slot) => {
+            slot.RefreshSlot();
         });
     }
 
@@ -42,7 +51,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const product = ItemManager.GetInstance().GetProduct(eventData);
             if (product){
                 this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
-                //this.RefreshUpgradSlot(product);
+                //this.RefreshUpgradeSlot(product);
             }
         }
     }
@@ -128,10 +137,11 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
         this.horizontalContent.sizeDelta = new Vector2(newWidth, this.contentHeight);
     
         const itemSprite = DataManager.GetInstance().GetSectionSpriteByName(itemName);
-    
+        const unlockStage = DataManager.GetInstance().GetUnlockStageByName(itemName);
+
         // Set up the item's properties using its ITM_Inventory component.
         const itemScript = slotObj.GetComponent<ItemSlot_Upgrade>();
-        itemScript.SetItem(itemRecord, itemSprite, upgradeLevel, isFullyUpgraded);
+        itemScript.SetItem(itemRecord, itemSprite, upgradeLevel, isFullyUpgraded, unlockStage);
         this.upgradSlotPool.push(itemScript);
     }
 }
