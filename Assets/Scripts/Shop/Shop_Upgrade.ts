@@ -78,7 +78,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const match = item.productId.split('_');
             const itemName = match[1];
             if (match) {
-                console.log(match[1]+match[2]+item.isPurchased);
+                // console.log(match[1]+match[2]+item.isPurchased);
                 // Only retrieve purchased items.
                 if (item.isPurchased) {
                     // if item is fully upgraded, add to fullyUpgradedGroups.

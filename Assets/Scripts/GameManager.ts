@@ -76,7 +76,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.timer.SetTime(this.startHour, 0);
         this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
 
-        DataManager.GetInstance().SetStageReceipts(this.curStage);
+        DataManager.GetInstance().SetStageReceipts(this.curStage - 1);
 
         OrderManager.GetInstance().Init();
         OrderManager.GetInstance().StartOrder();
@@ -156,7 +156,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.timer.SetTime(this.startHour, 0);
         this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
 
-        DataManager.GetInstance().SetStageReceipts(this.curStage);
+        DataManager.GetInstance().SetStageReceipts(this.curStage - 1);
         OrderManager.GetInstance().Init();
         OrderManager.GetInstance().StartOrder();
 

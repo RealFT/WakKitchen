@@ -64,8 +64,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.RemoveAllItemsFromInventory();
         this.AddItemToInventory(Ingredient.BOTTOM_BURN, 100);
         this.AddItemToInventory(Ingredient.TOP_BURN, 100);
+        this.AddItemToInventory(Ingredient.CHEESE, 100);
         this.AddItemToInventory(Ingredient.PATTY, 10);
-        this.AddItemToInventory(Ingredient.CABBAGE, 10);
     }
 
     // Add item to inventory
@@ -146,9 +146,9 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
         // split ingredients, drink, side
         for (let i = 0; i < products.length; i++) {
-            if (products[i] < Ingredient.END)
+            if (products[i] <= Ingredient.END)
                 ingredients.push(products[i]);
-            else if (products[i] < Drink.END)
+            else if (products[i] <= Drink.END)
                 drink = products[i];
             else
                 side = products[i];
@@ -185,10 +185,11 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         const drinkSprite = DataManager.GetInstance().getDrinkSprite(receipt.drink);
         const sideSprite = DataManager.GetInstance().getSideSprite(receipt.side);
         const additionalOrder = receipt.additionalOrder;
+        const cost = receipt.pay.toString();
         const characterSprite = DataManager.GetInstance().GetCharacterSprite(receipt.character);
 
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
-        this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, characterSprite);
+        this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, cost, characterSprite);
         this.expandOrderReceipt.setPanel(true);
     }
 

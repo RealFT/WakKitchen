@@ -17,6 +17,21 @@ export enum Section {
     Grill = 2,
     Slice = 3,
 }
+export enum Cost {
+    TOP_BURN = 15,
+    BOTTOM_BURN = 15,
+    PATTY = 100,
+    CABBAGE = 20,
+    TOMATO = 20,
+    ONION = 10,
+    CHEESE = 20,
+    PAENCHI = 30,
+    NECKSRITE = 30,
+    HOTCHS = 30,
+    ORANGE = 30,
+    PINEAPPLE = 30,
+    FRY = 60
+}
 export enum Ingredient {
     START = 0,
     TOP_BURN = 0,
@@ -104,6 +119,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     @SerializeField() private receiptFile: TextAsset;
+    @SerializeField() private costFile: TextAsset;
     @SerializeField() private stageFile: TextAsset;
     @SerializeField() private unlockStageFile: TextAsset;
     @SerializeField() private cardFile: TextAsset;
@@ -120,10 +136,14 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
+    private costs: Map<number, number> = new Map<number, number>();
+
     private stages: number[][] = [];
     private unlockStages: Map<string, number> = new Map<string, number>();
+
     private cardDatas: Map<string, CardData> = new Map<string, CardData>();
     private inventoryCache: Map<string, number> = new Map<string, number>();
+
     private lastSavedStage: number;      // last saved Day(Stage).
 
     Awake() {
@@ -158,6 +178,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public LoadData() {    
         this.LoadSavedStage();
+        this.LoadCostData();
         this.LoadReceiptData();
         this.LoadStageData();
         this.LoadUnlockStageData();
@@ -177,7 +198,18 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.SetValue("Stage", stage);
         this.lastSavedStage = stage;
     }
-
+    public LoadCostData() {
+        const lines = this.costFile.text.split('\n'); // split the CSV file by row
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
+            const values = line.split(','); // split the row by comma to get the values
+            
+            // do something with the values
+            const index = +values[0];
+            const cost = +values[1];
+            this.costs.set(index, cost);
+        }
+    }
     public LoadReceiptData() {
         const lines = this.receiptFile.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
@@ -186,11 +218,26 @@ export default class DataManager extends ZepetoScriptBehaviour {
             
             // do something with the values
             const receipt = new Receipt();
+            let price = 0;
             const ingredients: number[] = [];
-            for (let j = 6; j < values.length; j++) {
+            for (let j = 5; j < values.length; j++) {
                 ingredients.push(+values[j]);
+                price += this.costs.get(+values[j]);
             }
-            receipt.SetReceipt(+values[0], +values[1], +values[2], +values[3], +values[4], values[5], ingredients);
+            // 값이 -1이 아닐 경우 무작위 drink 하나 선정
+            const drink = +values[1] == -1 ? -1 : Math.floor(Math.random() * (Drink.END - Drink.START)) + Drink.START;
+            if(drink != -1) price += this.costs.get(drink);
+            // 값이 -1이 아닐 경우 무작위 side 하나 선정
+            const side = +values[2] == -1 ? -1 : Math.floor(Math.random() * (Side.END - Side.START)) + Side.START;
+            if(side != -1) price += this.costs.get(side);
+
+            // values[3]이 캐릭터이나, 현재 사용하지 않는 데이터.
+            let customer = Math.floor(Math.random() * (Character.END - Character.START)) + Character.START;
+            // 캐릭터 블락(임시)
+            if (customer == Character.FREETER || customer == Character.WAKGOOD) customer = Character.SOPHIA;
+            // 도둑 캐릭터의 경우 price가 0
+            if(customer == Character.SOPHIA) price = 0;
+            receipt.SetReceipt(+values[0], price, drink, side, customer, values[4], ingredients);
             this.receipts.push(receipt);
         };
     }
@@ -320,9 +367,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public SetStageReceipts(stage: number) {
         this.stageReceipts = [];
-        const maxStage = stage >= this.stages.length ? this.stages.length - 1 : stage;
-        for (let index = 0; index < this.stages[maxStage].length; index++) {
-            this.stageReceipts.push(this.GetReceipt(this.stages[maxStage][index]));
+        // const maxStage = stage >= this.stages.length ? this.stages.length - 1 : stage;
+        for (let index = 0; index < this.stages[stage].length; index++) {
+            this.stageReceipts.push(this.GetReceipt(this.stages[stage][index]));
         }
     }
 

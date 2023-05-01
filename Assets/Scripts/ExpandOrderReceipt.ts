@@ -12,6 +12,7 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
     @SerializeField() private drinkImage: Image;
     @SerializeField() private sideImage: Image;
     @SerializeField() private additionalOrderText: Text;
+    @SerializeField() private priceText: Text;
     @SerializeField() private customerImage: Image;
 
     Start(){
@@ -21,7 +22,7 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
     }
 
     public SetOrderReceipt(burgerSprites: Sprite[], drinkSprite: Sprite, 
-        sideSprite: Sprite, additionalOrder: string, customerSprite: Sprite): void {
+        sideSprite: Sprite, additionalOrder: string, pay: string, customerSprite: Sprite): void {
             
         this.ClearOrderReceipt();
         for (let i = 0; i < burgerSprites.length; i++) {
@@ -33,7 +34,8 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
         if(sideSprite) this.EnableImage(this.sideImage, sideSprite);
         if(customerSprite) this.EnableImage(this.customerImage, customerSprite);
         this.customerImage.SetNativeSize();
-        if(additionalOrder) this.additionalOrderText.text = additionalOrder;
+        if(this.additionalOrderText) this.additionalOrderText.text = additionalOrder;
+        if(this.priceText) this.priceText.text = pay;
     }
 
     private ClearOrderReceipt(){
@@ -43,6 +45,7 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
         this.drinkImage.enabled = false;
         this.sideImage.enabled = false;
         this.additionalOrderText.text = "";
+        this.priceText.text = "";
         this.customerImage.enabled = false;
     }
 
