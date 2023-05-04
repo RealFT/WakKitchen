@@ -34,21 +34,21 @@ export enum Cost {
 }
 export enum Ingredient {
     START = 0,
-    TOP_BURN = 0,
-    BOTTOM_BURN = 1,
-    PATTY = 2,
-    CABBAGE = 3,
-    TOMATO = 4,
-    ONION = 5,
-    CHEESE = 6,
+    BOTTOM_BURN = 0,
+    CABBAGE = 1,
+    TOMATO = 2,
+    ONION = 3,
+    PATTY = 4,
+    CHEESE = 5,
+    TOP_BURN = 6,
     END = 6
 }
 
 export enum Slice {
-    START = 3,
-    CABBAGE = 3,
-    TOMATO = 4,
-    ONION = 5,
+    START = 1,
+    CABBAGE = 1,
+    TOMATO = 2,
+    ONION = 3,
     END = 5
 }
 
