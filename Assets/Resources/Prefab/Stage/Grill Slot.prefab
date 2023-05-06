@@ -209,7 +209,7 @@ MonoBehaviour:
     - 
     - 
     - '{"type":"System.Single, mscorlib","value":"4"}'
-    - '{"type":"System.Single, mscorlib","value":"8"}'
+    - '{"type":"System.Single, mscorlib","value":"10"}'
     - 
     - 
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.686274528503418,\"g\":0.9333333373069763,\"b\":0.3294117748737335,\"a\":1.0}"}'
