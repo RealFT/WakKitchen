@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 11799330}
   - component: {fileID: 11799329}
   m_Layer: 5
-  m_Name: Canvas_Frier
+  m_Name: Canvas_Fryer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18747,7 +18747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 854597915}
   m_Layer: 0
-  m_Name: Frier Table
+  m_Name: Fryer Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23396,7 +23396,7 @@ GameObject:
   - component: {fileID: 1230015779}
   - component: {fileID: 1230015778}
   m_Layer: 0
-  m_Name: Prop_Frier_p01 (1)
+  m_Name: Prop_Fryer_p01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31962,7 +31962,7 @@ GameObject:
   - component: {fileID: 1597224209}
   - component: {fileID: 1597224208}
   m_Layer: 5
-  m_Name: Frier
+  m_Name: Fryer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33193,7 +33193,7 @@ GameObject:
   - component: {fileID: 1715160195}
   - component: {fileID: 1715160194}
   m_Layer: 0
-  m_Name: Section_Frier
+  m_Name: Section_Fryer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41718,7 +41718,7 @@ GameObject:
   - component: {fileID: 355364834951417536}
   - component: {fileID: 4296093441107401042}
   m_Layer: 0
-  m_Name: Prop_Frier_p01
+  m_Name: Prop_Fryer_p01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41964,7 +41964,7 @@ GameObject:
   - component: {fileID: 7048480842951027509}
   - component: {fileID: 5642942433806704463}
   m_Layer: 0
-  m_Name: Prop_Frier_p03
+  m_Name: Prop_Fryer_p03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42018,7 +42018,7 @@ GameObject:
   - component: {fileID: 60173911647410173}
   - component: {fileID: 5003279125733168428}
   m_Layer: 0
-  m_Name: Prop_Frier_p02
+  m_Name: Prop_Fryer_p02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43388,7 +43388,7 @@ GameObject:
   - component: {fileID: 8239300501672801143}
   - component: {fileID: 8239300501672801142}
   m_Layer: 0
-  m_Name: Frier_prev
+  m_Name: Fryer_prev
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
