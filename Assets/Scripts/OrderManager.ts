@@ -194,7 +194,9 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     public addOrder(): void {
-        this.receipts.push(DataManager.GetInstance().GetRandomStageReceipt());
+        const receipt = DataManager.GetInstance().GetRandomStageReceipt();
+        this.receipts.push(receipt);
+        this.orderReceipts[this.curOrderNumber].GetComponent<OrderReceipt>()?.SetOrderReceipt(receipt);
         this.orderReceipts[this.curOrderNumber].gameObject.SetActive(true);
         this.waitCoroutines[this.curOrderNumber] = this.StartCoroutine(this.WaitOrder(this.curOrderNumber, 0))
         this.curOrderNumber++;
