@@ -5,6 +5,7 @@ import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import ItemManager from './ItemManager';
 import DataManager from './DataManager';
+import SoundManager from './SoundManager';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private grillSlotObjects: GameObject[];
@@ -66,11 +67,22 @@ export default class Interaction_Grill extends InteractionBase implements IListe
 
     SetKitchenVisibility(value: boolean) {
         super.SetKitchenVisibility(value);
+        let sfx = false;
         for (let i = 0; i < this.images.length; i++) {
             this.images[i].enabled = value;
         }
         for (let i = 0; i < this.grillSlotObjects.length; i++) {
-            this.grillSlotObjects[i].GetComponent<GrillSlot>()?.SetGrillVisibility(value);
+            let slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
+            slot.SetGrillVisibility(value);
+            if(slot.IsBaking()) sfx = true;
+        }
+        // is kitchen visivility is true;
+        if (value && sfx) {
+            SoundManager.GetInstance().OnPlayLoopSFX("Grill_Sizzling");
+        }
+        // is kitchen visivility is false;
+        else {
+            SoundManager.GetInstance().StopSFX();
         }
     }
 

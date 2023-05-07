@@ -9,6 +9,7 @@ import UIBallances, { BalanceSync, Currency, ItemType, InventoryAction, Inventor
 import UIManager from './UIManager';
 import Mediator from './Notification/Mediator';
 import Shop_Upgrade from './Shop/Shop_Upgrade';
+import SoundManager from './SoundManager';
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -173,6 +174,7 @@ export default class ItemManager extends ZepetoScriptBehaviour {
             const product = this.GetProduct(productId);
             product.isPurchased = true;
             this.AddToUpgradedGroup(product);
+            SoundManager.GetInstance().OnPlaySFX("Purchase");
             Mediator.GetInstance().Notify(this, "UpgradeUpdated", productId);
         } else {
             // is purchase fail

@@ -9,6 +9,7 @@ import DataManager from '../DataManager';
 import EquipSlotController from './EquipSlotController';
 import CardInfoWindow from './CardInfoWindow';
 import UIManager from '../UIManager';
+import SoundManager from '../SoundManager';
 
 export default class CardInventory extends ZepetoScriptBehaviour {
     
@@ -180,6 +181,7 @@ export default class CardInventory extends ZepetoScriptBehaviour {
         const resultCard = DataManager.GetInstance().GetRandomCardByGrade(upperGrade);
         DataManager.GetInstance().UseCard(card.GetCardId(), 10);
         DataManager.GetInstance().AddCard(resultCard.GetCardId());
+        SoundManager.GetInstance().OnPlaySFX("Card_Upgrade");
         this.RefreshInventoryUI();
     }
 }

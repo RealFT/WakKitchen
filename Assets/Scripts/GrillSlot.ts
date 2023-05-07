@@ -134,6 +134,10 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.bakeSlider.gameObject.SetActive(false);
     }
 
+    public IsBaking(): boolean {
+        return this.isBaking;
+    }
+
     SetGrillVisibility(value: bool) {
         for (let i = 0; i < this.visibleImages.length; i++) {
             this.visibleImages[i].enabled = value;

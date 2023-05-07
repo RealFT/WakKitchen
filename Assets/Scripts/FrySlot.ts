@@ -126,6 +126,10 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.frySlider.gameObject.SetActive(false);
     }
 
+    public IsFrying(): boolean {
+        return this.isFrying;
+    }
+
     SetFryVisibility(value: bool) {
         for (let i = 0; i < this.visibleImages.length; i++) {
             this.visibleImages[i].enabled = value;

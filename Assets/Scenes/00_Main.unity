@@ -383,6 +383,7 @@ MonoBehaviour:
     - SFX
     - muteBGM
     - muteSFX
+    - keyStageEnd
     unityValues:
     - {fileID: 0}
     - {fileID: 0}
@@ -392,15 +393,17 @@ MonoBehaviour:
     - {fileID: 803924726}
     - {fileID: 1735561125}
     - {fileID: 110787826}
+    - {fileID: 0}
     values:
     - '{"type":"System.String, mscorlib","value":"Main"}'
-    - '{"type":"System.String, mscorlib","value":"Stage"}'
-    - '{"type":"System.String, mscorlib","value":"Shop"}'
-    - '{"type":"System.String, mscorlib","value":"CardSet"}'
+    - '{"type":"System.String, mscorlib","value":"The Original Orchestra - Cojito"}'
+    - '{"type":"System.String, mscorlib","value":"Main"}'
+    - '{"type":"System.String, mscorlib","value":"Shop_Hire"}'
     - 
     - 
     - 
     - 
+    - '{"type":"System.String, mscorlib","value":"Settlement"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: dbb56e05bf51f7242ae36f329ef7a6b2, type: 3}

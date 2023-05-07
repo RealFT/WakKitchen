@@ -4,6 +4,7 @@ import { GameObject, WaitForSeconds } from 'UnityEngine';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import Shop from './Shop/Shop';
+import SoundManager from './SoundManager';
 
 export default class UIManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
@@ -77,6 +78,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         console.log("ToShop");
         this.SetSettlementUI(false);
         this.SetShopUI(true);
+        SoundManager.GetInstance().OnPlayBGM(SoundManager.GetInstance().keyShop);
     }
 
     public InitShopUI(){

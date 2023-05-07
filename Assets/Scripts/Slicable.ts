@@ -2,6 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text, Image } from "UnityEngine.UI";
 import DataManager, { Ingredient } from './DataManager';
 import { Sprite, WaitForSeconds } from 'UnityEngine';
+import SoundManager from './SoundManager';
 
 export default class Slicable extends ZepetoScriptBehaviour {
 
@@ -30,6 +31,7 @@ export default class Slicable extends ZepetoScriptBehaviour {
     public Sliced() {
         this.isSliced = true;
         this.originImage.sprite = this.slicedSprite;
+        SoundManager.GetInstance().OnPlaySFX("Slice");
     }
     public GetSlicableImage(): Image {
         return this.originImage;

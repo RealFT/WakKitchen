@@ -6,6 +6,7 @@ import OrderManager from './OrderManager';
 import { Drink } from './DataManager';
 import ItemManager from './ItemManager';
 import Mediator, { EventNames, IListener }  from './Notification/Mediator';
+import SoundManager from './SoundManager';
 
 export default class Dispenser extends ZepetoScriptBehaviour implements IListener  {
 
@@ -100,6 +101,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
                 this.curDrink = this.GetDrinkByState(state);
                 this.SetCupImage(this.curDrink);
                 this.cupBtn.interactable = true;
+                SoundManager.GetInstance().OnPlaySFX("Dispenser_liquid");
             }
             else this.InitCupImage();
         }

@@ -5,6 +5,8 @@ import OrderManager from './OrderManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import DataManager, { Ingredient, Drink, Side } from './DataManager';
 import { TextMeshProUGUI } from 'TMPro';
+import SoundManager from './SoundManager';
+import UIManager from './UIManager';
 
 export default class CookSlot extends ZepetoScriptBehaviour implements IListener{
 
@@ -49,6 +51,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
             this.GetProductsData();
             this.UpdateProductDisplay();
             this.InitPlate();
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
         });
         // Initialize product slots
         for (var index: int = 0; index < this.productSlots.length; index++) {
@@ -89,6 +92,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
             this.platedProducts.push(this.products[index]);
             this.ReduceProductCount(index);
             //this.UpdateProductDisplay();
+            SoundManager.GetInstance().OnPlaySFX("Button2");
         });
     }
 
@@ -125,6 +129,11 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
         // If the served food matches the order
         if(OrderManager.GetInstance().checkOrder(this.platedProducts)){
             this.RemovePlatedProducts();
+            SoundManager.GetInstance().OnPlaySFX("Selling_Items");
+        }
+        else {
+            UIManager.GetInstance().OpenInformation("Invalid recipe.");
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
         }
         this.GetProductsData();
         this.UpdateProductDisplay();

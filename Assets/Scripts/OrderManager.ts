@@ -6,6 +6,8 @@ import Receipt from './Receipt';
 import DataManager, { Ingredient, Drink, Side } from './DataManager';
 import OrderReceipt from './OrderReceipt';
 import BalanceManager, { Currency } from './Shop/BalanceManager';
+import SoundManager from './SoundManager';
+import UIManager from './UIManager';
 
 export default class OrderManager extends ZepetoScriptBehaviour {
     // singleton
@@ -35,7 +37,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
     @SerializeField() private waitTime: number; // time to wait order
     @SerializeField() private waitSliders: Slider[] = []; // 
-    private waitCoroutines:Coroutine[] = [];
+    private waitCoroutines: Coroutine[] = [];
 
     // array of produced Ingredient, Drink, Side.
     // number of items in inventory indexed by product id
@@ -65,7 +67,6 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.AddItemToInventory(Ingredient.BOTTOM_BURN, 100);
         this.AddItemToInventory(Ingredient.TOP_BURN, 100);
         this.AddItemToInventory(Ingredient.CHEESE, 100);
-        this.AddItemToInventory(Ingredient.PATTY, 10);
     }
 
     // Add item to inventory
@@ -76,6 +77,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         } else {
             this.productInventory.set(product, quantity);
         }
+        SoundManager.GetInstance().OnPlaySFX("Button1");
     }
 
     // Remove item from inventory
@@ -163,6 +165,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                 BalanceManager.GetInstance().GainBalance(Currency.wak, this.receipts[index].pay);
                 // if waitSlider isn't 0, remove this receipt
                 this.removeOrder(index);
+
                 return true;
             }
         }
@@ -191,6 +194,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, cost, characterSprite);
         this.expandOrderReceipt.setPanel(true);
+        SoundManager.GetInstance().OnPlaySFX("Button2");
     }
 
     public addOrder(): void {

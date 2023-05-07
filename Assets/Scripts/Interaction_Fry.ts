@@ -5,6 +5,7 @@ import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import ItemManager from './ItemManager';
 import DataManager from './DataManager';
+import SoundManager from './SoundManager';
 
 export default class Interaction_Fry extends InteractionBase implements IListener {
     @SerializeField() private frySlotObjects: GameObject[];
@@ -62,11 +63,22 @@ export default class Interaction_Fry extends InteractionBase implements IListene
 
     SetKitchenVisibility(value: boolean) {
         super.SetKitchenVisibility(value);
+        let sfx = false;
         for (let i = 0; i < this.images.length; i++) {
             this.images[i].enabled = value;
         }
         for (let i = 0; i < this.frySlotObjects.length; i++) {
-            this.frySlotObjects[i].GetComponent<FrySlot>().SetFryVisibility(value);
+            let slot = this.frySlotObjects[i].GetComponent<FrySlot>();
+            slot.SetFryVisibility(value);
+            if(slot.IsFrying()) sfx = true;
+        }
+        // is kitchen visivility is true;
+        if(value && sfx){
+            SoundManager.GetInstance().OnPlayLoopSFX("Fryer_Frying");
+        }
+        // is kitchen visivility is false;
+        else{
+            SoundManager.GetInstance().StopSFX();
         }
     }
 

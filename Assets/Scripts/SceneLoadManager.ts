@@ -5,6 +5,7 @@ import { AsyncOperation, Mathf, Debug, GameObject, SerializeField, WaitForEndOfF
 import GameManager from './GameManager';
 import OrderManager from './OrderManager';
 import UIManager from './UIManager';
+import SoundManager from './SoundManager';
 
 export enum SceneName {
     Main = "00_Main",
@@ -71,6 +72,8 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
         this.currentScene = sceneName;
         switch(sceneName){
             case SceneName.Main:
+                SoundManager.GetInstance().OnPlayBGM(SoundManager.GetInstance().keyMain);
+                break;
             case SceneName.Shop:
                 OrderManager.GetInstance().DisableOrder();
                 UIManager.GetInstance().DisableStageUI();
@@ -79,8 +82,8 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
                 while (!this.isCharacterLoaded){
                     yield;
                 }
-                // GameManager.GetInstance().InitStage();
-                // GameManager.GetInstance().NextStage();
+                GameManager.GetInstance().InitStage();
+                GameManager.GetInstance().NextStage();
                 break;
             default:
                 break;

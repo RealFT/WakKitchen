@@ -21,11 +21,13 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     }
     Awake() {
         if (this != SoundManager.GetInstance()) GameObject.Destroy(this.gameObject);
+        this.LoadAudio();
     }
 
     // Variables to store scene names
     public keyMain: string = 'Main'; // Main scene key
     public keyStage: string = 'Stage'; // Stage scene key
+    public keyStageEnd: string = 'StageEnd'; // StageEnd scene key
     public keyShop: string = 'Shop'; // Shop scene key
     public keyCardSet: string = 'CardSet'; // CardSet scene key
 
@@ -147,8 +149,26 @@ export default class SoundManager extends ZepetoScriptBehaviour {
         // Set the clip for the specified name
         this.SFX.clip = this.SFXMap.get(clipName);
 
+        this.SFX.loop = false;
         // Only play if sound clip exists
         if (!this.SFX.isPlaying) this.SFX.Play();
+    }
+
+    public OnPlayLoopSFX(clipName: string): void {
+        if (this.SFX) this.SFX.Stop();
+
+        if (this.SFX.isPlaying) return;
+
+        // Set the clip for the specified name
+        this.SFX.clip = this.SFXMap.get(clipName);
+
+        this.SFX.loop = true;
+        // Only play if sound clip exists
+        if (!this.SFX.isPlaying) this.SFX.Play();
+    }
+
+    public StopSFX(){
+        this.SFX.Stop();
     }
 
     public ToMain(): void {

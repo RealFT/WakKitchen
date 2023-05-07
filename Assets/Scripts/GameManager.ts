@@ -10,6 +10,7 @@ import OrderManager from './OrderManager';
 import UIManager from './UIManager';
 import BalanceManager from './Shop/BalanceManager';
 import Mediator, { EventNames } from './Notification/Mediator';
+import SoundManager from './SoundManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -49,6 +50,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     Start() {
         this.Init();
+        SoundManager.GetInstance().OnPlayBGM(SoundManager.GetInstance().keyMain);
     }
 
     Init() {
@@ -92,7 +94,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.SetPlayerMovement(true);
 
         this._isInGame = true;
-
+        SoundManager.GetInstance().OnPlayBGM(SoundManager.GetInstance().keyStage);
         Mediator.GetInstance().Notify(this, EventNames.StageStarted, null);
     }
 
@@ -105,7 +107,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         
         this.curStage++;
         DataManager.GetInstance().SetStage(this.curStage);
-        
+        SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyStageEnd);
         Mediator.GetInstance().Notify(this, EventNames.StageEnded, null);
     }
 

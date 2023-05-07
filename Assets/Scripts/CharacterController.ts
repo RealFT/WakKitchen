@@ -27,8 +27,8 @@ export default class CharacterController extends ZepetoScriptBehaviour {
             this.playerOriginPos = _player.transform.position;
             this.TryGetMoveControl();
             SceneLoadManager.GetInstance().SetCharacterLoaded();
-            GameManager.GetInstance().InitStage();
-            GameManager.GetInstance().StartStage();
+            // GameManager.GetInstance().InitStage();
+            // GameManager.GetInstance().StartStage();
         });
     }
 
