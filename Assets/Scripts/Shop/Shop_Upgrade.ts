@@ -119,7 +119,6 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const itemName = match ? match[1] : "";
             const upgradeLevel = match ? parseInt(match[2]) : 0;
             DataManager.GetInstance().SetValue(itemName, upgradeLevel);
-            console.log("Section: " + itemName +"Level: "+ upgradeLevel);
             this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel);
         }
     }

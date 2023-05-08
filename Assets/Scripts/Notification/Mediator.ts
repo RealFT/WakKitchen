@@ -12,6 +12,7 @@ export class EventNames {
     public static UpgradeUpdated: string = "UpgradeUpdated";
     public static StageEnded: string = "StageEnded";
     public static StageStarted: string = "StageStarted";
+    public static InventoryUpdated: string = "InventoryUpdated";
 }
 
 export default class Mediator extends ZepetoScriptBehaviour {

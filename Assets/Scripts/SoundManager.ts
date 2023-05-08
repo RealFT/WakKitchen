@@ -167,6 +167,10 @@ export default class SoundManager extends ZepetoScriptBehaviour {
         if (!this.SFX.isPlaying) this.SFX.Play();
     }
 
+    public OnPlayButtonClick(){
+        this.OnPlaySFX("Button1");
+    }
+
     public StopSFX(){
         this.SFX.Stop();
     }

@@ -10,8 +10,9 @@ import EquipSlotController from './EquipSlotController';
 import CardInfoWindow from './CardInfoWindow';
 import UIManager from '../UIManager';
 import SoundManager from '../SoundManager';
+import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 
-export default class CardInventory extends ZepetoScriptBehaviour {
+export default class CardInventory extends ZepetoScriptBehaviour implements IListener {
     
     @SerializeField() private equipBtn: Button;
     @SerializeField() private upgradeBtn: Button;
@@ -27,11 +28,23 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     Start() {
         this.Init();
         this.CreateInventory();
+        Mediator.GetInstance().RegisterListener(this);
+    }
+
+    private OnDestroy() {
+        Mediator.GetInstance().UnregisterListener(this);
     }
     
     private OnEnable(){
         this.RefreshInventoryUI();
         //this.RefreshCardInfo();
+    }
+
+    public OnNotify(sender: any, eventName: string, eventData: any): void {
+        if (!this.gameObject.activeSelf) return;
+        if (eventName == EventNames.InventoryUpdated) {
+            this.RefreshInventoryUI();
+        }
     }
 
     private Init(){
@@ -48,7 +61,7 @@ export default class CardInventory extends ZepetoScriptBehaviour {
     private RefreshInventoryUI(): void {
         const existingIds: string[] = [];
         const inventoryCache = DataManager.GetInstance().GetInventoryCache();
-        console.log(inventoryCache);
+
         // Update existing slots
         this.cardSlots.forEach((cardSlot) => {
             const cardId = cardSlot.GetCardData()?.GetCardId();
@@ -144,7 +157,7 @@ export default class CardInventory extends ZepetoScriptBehaviour {
             return;
         }
         this.equipSlotController.EquipCharacter(card);
-        this.RefreshCardInfo();
+        this.RefreshInventoryUI();
     }
 
     private OnClickUpgradeCard(){

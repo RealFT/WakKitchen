@@ -1,7 +1,7 @@
 import { SceneManager } from 'UnityEngine.SceneManagement';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider } from "UnityEngine.UI";
-import { GameObject, Random, WaitForSeconds, Debug } from 'UnityEngine';
+import { GameObject, Random, WaitForSeconds, Debug, Time } from 'UnityEngine';
 import Timer from './Timer';
 import CharacterController from './CharacterController';
 import QuarterViewController from './QuarterViewController';
@@ -109,6 +109,14 @@ export default class GameManager extends ZepetoScriptBehaviour {
         DataManager.GetInstance().SetStage(this.curStage);
         SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyStageEnd);
         Mediator.GetInstance().Notify(this, EventNames.StageEnded, null);
+    }
+
+    public PauseStage(){
+        Time.timeScale = 0;
+    }
+
+    public ResumeStage(){
+        Time.timeScale = 1;
     }
 
     Update() {

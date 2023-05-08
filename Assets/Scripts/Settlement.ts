@@ -5,6 +5,7 @@ import GameManager from './GameManager';
 import UIManager from './UIManager';
 import BalanceManager, { Currency } from './Shop/BalanceManager';
 import DataManager from './DataManager';
+import EmployeeManager from './Employee/EmployeeManager';
 
 // Settlement UI class that displays information about daily profits and costs.
 export default class Settlement extends ZepetoScriptBehaviour {
@@ -93,7 +94,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     private GetPriceInformation() {
         this.totalSale = BalanceManager.GetInstance().GetTotalGainBalanceHistory();
         this.ingredientsCost = BalanceManager.GetInstance().GetTotalUseBalanceHistory();
-        this.employeeCost = 100;
+        this.employeeCost = EmployeeManager.GetInstance().GetTotalEmployeePay();
         BalanceManager.GetInstance().UseAvailableBalance(Currency.wak, this.employeeCost);
         this.netIncome = this.totalSale - this.ingredientsCost - this.employeeCost;
         this.netIncomeText.color = this.netIncome >= 0 ? this.totalSaleText.color : this.IngredientsText.color;

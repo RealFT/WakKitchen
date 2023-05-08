@@ -5,6 +5,7 @@ import DataManager, { Character } from '../DataManager';
 import EmployeeManager from './EmployeeManager';
 import CardData from './CardData';
 import { TextMeshProUGUI } from 'TMPro';
+import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 
 export default class EquipSlot extends ZepetoScriptBehaviour {
 
@@ -28,6 +29,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
 
     private slotIndex: number;
     private isEquip: boolean = false;
+    private isSelectSection: boolean = false;
     private isLocked: boolean = true;
     private equippedCardData: CardData;
 
@@ -81,6 +83,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectedSectionImage.color = new Color(1, 1, 1, 1);
         this.infoText.text = "Complete";
         this.infoText.color = this.completeColor;
+        this.isSelectSection = true;
     }
 
     public DisableSelectSectionPanel(){
@@ -99,10 +102,13 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.isEquip = true;
         this.infoText.text = "Select Task";
         this.infoText.color = this.selectColor;
+        this.isSelectSection = false;
+        DataManager.GetInstance().UseCard(this.equippedCardData.GetCardId(), 1);
     }
 
     public UnEquipCard(){
         if(!this.equippedCardData) return;
+        DataManager.GetInstance().AddCard(this.equippedCardData.GetCardId());
         this.equippedCardData = null;
         this.selectedSectionImage.color = new Color(1,1,1,0);
         this.DisableSelectSectionPanel();
@@ -112,6 +118,8 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);
         this.infoText.text = "Empty";
         this.infoText.color = this.emptyColor;
+        this.isSelectSection = false;
+        Mediator.GetInstance().Notify(this, EventNames.InventoryUpdated, null);
     }
 
     public GetSelectSectionOpenToggle(): Toggle {
@@ -121,7 +129,12 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     public IsEquip(): boolean{
         return this.isEquip || this.isLocked;
     }
-
+    public IsSelected(): boolean{
+        return this.isEquip && this.isSelectSection;
+    }
+    public IsLocked(): boolean{
+        return this.isLocked;
+    }
     public getEquippedCardData(): CardData {
         return this.equippedCardData;
     }

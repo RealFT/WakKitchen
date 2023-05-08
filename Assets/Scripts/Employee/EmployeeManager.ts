@@ -29,6 +29,7 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
     @SerializeField() private employeeSlotPrefab: GameObject;
     private employeeSlots: EmployeeSlot[] = [];
     private cardDataWithSectionArray: CardDataWithSection[] = [];
+    private employeeHeadCount: number = 0;
 
     Awake() {
         if (this != EmployeeManager.GetInstance()) GameObject.Destroy(this.gameObject);
@@ -51,14 +52,17 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
         if (!this.gameObject.activeSelf) return;
         switch(eventName){
             case EventNames.StageStarted:
+                this.employeeHeadCount = 0;
                 console.log("StageStarted: employee");
                 console.log(this.cardDataWithSectionArray.length);
                 this.cardDataWithSectionArray.forEach((data)=>{
                     this.CreateEmployeeSlot(data.cardData, data.section);
                 });
                 this.employeeSlots.forEach((slot)=>{
-                    if(slot.gameObject.activeSelf)
+                    if(slot.gameObject.activeSelf){
                         slot.StartWorking();
+                        this.employeeHeadCount++;
+                    }
                 });
                 break;
             case EventNames.StageEnded:
@@ -91,5 +95,9 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
 
     public UnregisterCard(slotIndex: number) {
         this.cardDataWithSectionArray[slotIndex] = { cardData: null, section: null };
+    }
+
+    public GetTotalEmployeePay(): number{
+        return this.employeeHeadCount * 100;
     }
 }

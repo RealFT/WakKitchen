@@ -77,4 +77,19 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
             this.equipSlots[i].Unlock();
         }
     }
+
+    // Checks if all equipment slots are selected.
+    public CheckSlots(): boolean {
+        for (let i = 0; i < this.equipSlots.Length; i++) {
+            // Check only unlocked slots,
+            // If any unlocked slot is not selected, return false.
+            if (!this.equipSlots[i].IsLocked() &&
+                !this.equipSlots[i].IsSelected()){
+                    UIManager.GetInstance().OpenInformation("You must select a section.");
+                    return false;
+                }
+        }
+        // If all unlocked slots are selected, return true.
+        return true;
+    }
 }

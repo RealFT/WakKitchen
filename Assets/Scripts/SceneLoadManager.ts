@@ -83,7 +83,7 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
                     yield;
                 }
                 GameManager.GetInstance().InitStage();
-                GameManager.GetInstance().NextStage();
+                //GameManager.GetInstance().NextStage();
                 break;
             default:
                 break;

@@ -3,6 +3,7 @@ import { Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 // import custom script from path
 import GameManager from './GameManager';
+import SoundManager from './SoundManager';
 
 export default class InteractionBase extends ZepetoScriptBehaviour {
     @SerializeField() protected openButton: Button;
@@ -22,6 +23,7 @@ export default class InteractionBase extends ZepetoScriptBehaviour {
             this.SetKitchenVisibility(true);
             GameManager.GetInstance().SetPlayerMovement(false);
             this.openButton.gameObject.SetActive(false);
+            SoundManager.GetInstance().OnPlayButtonClick();
         });
 
         //When Button Click
@@ -29,6 +31,7 @@ export default class InteractionBase extends ZepetoScriptBehaviour {
             this.SetKitchenVisibility(false);
             GameManager.GetInstance().SetPlayerMovement(true);
             this.openButton.gameObject.SetActive(true);
+            SoundManager.GetInstance().OnPlayButtonClick();
         });
     }
 

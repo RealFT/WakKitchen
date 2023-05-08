@@ -5,6 +5,7 @@ import { ProductRecord } from 'ZEPETO.Product';
 import ItemManager from '../ItemManager';
 import GameManager from '../GameManager';
 import { TextMeshProUGUI } from 'TMPro';
+import UIManager from '../UIManager';
 
 export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
 
@@ -51,7 +52,12 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
     }
 
     private CheckLock(){
-        this.isLock = GameManager.GetInstance().GetCurrentStage() < this.unlockStage ? true : false;
+        const curStage = GameManager.GetInstance().GetCurrentStage();
+        this.isLock = curStage < this.unlockStage ? true : false;
+        // if(curStage == this.unlockStage){
+        //     const info = `${this.nameText.text} unlocked!`;
+        //     UIManager.GetInstance().OpenInformation(info);
+        // }
         // need localize
         this.lockText.text = `Unlock to\nDay ${this.unlockStage}`;
         this.lockImage.gameObject.SetActive(this.isLock);

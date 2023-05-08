@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 34
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: ProductSettings
   m_EditorClassIdentifier: 
   productTextureInfo:
-  - targetId: food_test
-    targetAssetPath: 
   - targetId: upgrade_dispenser_0
     targetAssetPath: 
   - targetId: upgrade_dispenser_1
@@ -39,10 +37,6 @@ MonoBehaviour:
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/frier.png
   - targetId: upgrade_frier_3
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/frier.png
-  - targetId: upgrade_gril_0
-    targetAssetPath: 
-  - targetId: upgrade_gril_1
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Grill.png
   - targetId: upgrade_grill_0
     targetAssetPath: 
   - targetId: upgrade_grill_1
