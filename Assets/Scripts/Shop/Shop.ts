@@ -5,6 +5,7 @@ import Shop_Hire from './Shop_Hire';
 import Shop_Upgrade from './Shop_Upgrade';
 import Shop_Food from './Shop_Food';
 import GameManager from '../GameManager';
+import SoundManager from '../SoundManager';
 
 export default class Shop extends ZepetoScriptBehaviour {
     @SerializeField() private categoryBtns: Button[];
@@ -24,6 +25,7 @@ export default class Shop extends ZepetoScriptBehaviour {
                     panel.SetActive(categoryPanel === panel);
                     btn.interactable = (categoryBtn != btn);
                 }
+                SoundManager.GetInstance().OnPlayButtonClick();
             });
         }
         this.toStageBtn.onClick.AddListener(() => {

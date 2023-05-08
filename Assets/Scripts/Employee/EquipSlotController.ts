@@ -5,6 +5,7 @@ import EquipSlot from './EquipSlot';
 import CardData from './CardData';
 import ItemManager from '../ItemManager';
 import UIManager from '../UIManager';
+import SoundManager from '../SoundManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 
 export default class EquipSlotController extends ZepetoScriptBehaviour implements IListener {
@@ -66,9 +67,11 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
         if (emptyIndex != -1) {
             // Equip the character to the first empty card equip slot
             this.equipSlots[emptyIndex].EquipCard(cardData, emptyIndex);
+            SoundManager.GetInstance().OnPlaySFX("Button3");
         }
         else{
             UIManager.GetInstance().OpenInformation("No slots available.");
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
         }
     }
 

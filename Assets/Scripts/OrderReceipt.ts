@@ -31,7 +31,7 @@ export default class OrderReceipt extends ZepetoScriptBehaviour {
         if (sideSprite) this.EnableImage(this.sideImage, sideSprite);
     }
 
-    private ClearOrderReceipt() {
+    public ClearOrderReceipt() {
         for (let i = 0; i < this.burgerImages.length; i++) {
             this.burgerImages[i].enabled = false;
         }

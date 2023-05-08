@@ -154,16 +154,21 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
         const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
         if (card == undefined){
             UIManager.GetInstance().OpenInformation("No card selected.");
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
             return;
         }
-        this.equipSlotController.EquipCharacter(card);
-        this.RefreshInventoryUI();
+        else {
+            SoundManager.GetInstance().OnPlaySFX("Button3");
+            this.equipSlotController.EquipCharacter(card);
+            this.RefreshInventoryUI();
+        }
     }
 
     private OnClickUpgradeCard(){
         const cardSlot = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>();
         if(!cardSlot || cardSlot.GetCardQuantity() < 10){
             UIManager.GetInstance().OpenInformation("Not enough cards to Upgrade");
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
             return;
         }
         const card = cardSlot.GetCardData();

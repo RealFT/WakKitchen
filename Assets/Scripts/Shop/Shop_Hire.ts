@@ -9,6 +9,7 @@ import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {Room, RoomData} from "ZEPETO.Multiplay";
 import CardData from '../Employee/CardData';
 import BalanceManager from './BalanceManager';
+import SoundManager from '../SoundManager';
 
 interface GradeRange {
     grade: string;
@@ -40,6 +41,7 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
         this.cards = this.cardLayout.GetComponentsInChildren<Card>();
         this.buyButton.onClick.AddListener(() => {
             this.OnBuyButtonClick();
+            SoundManager.GetInstance().OnPlaySFX("Purchase");
         });
 
     }

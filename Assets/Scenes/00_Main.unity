@@ -253,8 +253,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -104, y: -22}
-  m_SizeDelta: {x: 180, y: 56}
+  m_AnchoredPosition: {x: -112, y: -24}
+  m_SizeDelta: {x: 192, y: 60}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &13797205
 MonoBehaviour:
@@ -278,12 +278,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3feb8170fa4b2964d9c1ce5f86ba0276, type: 3}
-    m_FontSize: 16
+    m_FontSize: 26
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 16
+    m_BestFit: 0
+    m_MinSize: 2
     m_MaxSize: 84
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2299,8 +2299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 0}
-  m_SizeDelta: {x: 96, y: 32}
+  m_AnchoredPosition: {x: -16, y: 0}
+  m_SizeDelta: {x: 108, y: 36}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &342562525
 CanvasRenderer:
@@ -3228,18 +3228,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9198357628493173916}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 42542364}
         m_TargetAssemblyTypeName: ZEPETO.Script.ZepetoScriptBehaviourComponent, ZEPETO.Script
         m_MethodName: Invoke
@@ -6827,8 +6815,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -20}
-  m_SizeDelta: {x: 56, y: 56}
+  m_AnchoredPosition: {x: -112, y: -20}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1390100690
 MonoBehaviour:
@@ -9221,8 +9209,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 0}
-  m_SizeDelta: {x: 100, y: 32}
+  m_AnchoredPosition: {x: -8, y: 0}
+  m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1870922763
 CanvasRenderer:
@@ -9616,8 +9604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -324, y: -22}
-  m_SizeDelta: {x: 180, y: 56}
+  m_AnchoredPosition: {x: -340, y: -24}
+  m_SizeDelta: {x: 192, y: 60}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &1960976123
 GameObject:
@@ -9663,7 +9651,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 14
-    m_MaxSize: 28
+    m_MaxSize: 32
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -9756,7 +9744,7 @@ MonoBehaviour:
     values:
     - 
     - 
-    - '{"type":"System.Single, mscorlib","value":"0.5"}'
+    - '{"type":"System.Single, mscorlib","value":"2.5"}'
     - '{"type":"System.Single, mscorlib","value":"8"}'
     - '{"type":"System.Single, mscorlib","value":"22"}'
     - '{"type":"System.Boolean, mscorlib","value":"False"}'
@@ -13278,6 +13266,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 42542364}
+        m_TargetAssemblyTypeName: ZEPETO.Script.ZepetoScriptBehaviourComponent, ZEPETO.Script
+        m_MethodName: Invoke
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnPlayButtonClick
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2748006618487256019
 GameObject:
   m_ObjectHideFlags: 0
@@ -15027,6 +15027,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 42542364}
+        m_TargetAssemblyTypeName: ZEPETO.Script.ZepetoScriptBehaviourComponent, ZEPETO.Script
+        m_MethodName: Invoke
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnPlayButtonClick
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &4337067993250591171
@@ -17026,75 +17038,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: script.values.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: script.keys.Array.data[7]
-      value: priceText
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: script.unityValues.Array.data[7]
+    - target: {fileID: 6459788422854708070, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6459788421356596999}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 0faf77386d606c14198ce38a2d339e24, type: 3}
     - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 42542364}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SendMessage
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Component, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: OnPlayButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6459788423159908662, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f998a15c200783c409447dace822dfce, type: 3}
---- !u!114 &6459788421356596999 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7225229892066049892, guid: f998a15c200783c409447dace822dfce, type: 3}
-  m_PrefabInstance: {fileID: 6459788421356596998}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &6467712459519003025
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19232,7 +19189,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -22, y: -22}
-  m_SizeDelta: {x: 56, y: 56}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &8614037106960930069
 GameObject:

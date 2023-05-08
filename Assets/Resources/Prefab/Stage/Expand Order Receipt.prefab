@@ -332,6 +332,7 @@ MonoBehaviour:
     - sideImage
     - additionalOrderText
     - customerImage
+    - priceText
     unityValues:
     - {fileID: 6459788423159908662}
     - {fileID: 6459788423159908660}
@@ -340,11 +341,13 @@ MonoBehaviour:
     - {fileID: 6459788421465990508}
     - {fileID: 6459788421823973344}
     - {fileID: 6459788422854708070}
+    - {fileID: 7225229892066049892}
     values:
     - 
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":6,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - 
     - 
     - 
     - 
@@ -1164,7 +1167,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6459788423159908661}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ZEPETO.Script.ZepetoScriptBehaviourComponent, ZEPETO.Script
+        m_MethodName: Invoke
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnPlayButtonClick
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6459788423322173094
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,8 +55,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         for (let i = 0; i < this.maxOrderSize; i++) {
             this.InitOrderBtn(i);
         }
-        this.clearOrder();
-        this.clearOrderReceipts();
+        this.ClearOrder();
+        this.ClearOrderReceipts();
         this.InitProduct();
         /**/ 
         if(this.waitTime == 0) this.setWaitTime(20);
@@ -173,7 +173,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     // Enable corresponding index order
-    public displayExpandOrder(index: number): void {
+    public DisplayExpandOrder(index: number): void {
         if (!this.receipts) return;
         const receipt = this.receipts[index];
         const ingredients = receipt.ingredients;
@@ -235,13 +235,14 @@ export default class OrderManager extends ZepetoScriptBehaviour {
             this.receipts[i] = this.receipts[i + 1];
             const curTime = (1 - this.waitSliders[i + 1].value) * this.waitTime;
             this.waitCoroutines[i] = this.StartCoroutine(this.WaitOrder(i, curTime));
+            this.orderReceipts[i].GetComponent<OrderReceipt>()?.SetOrderReceipt(this.receipts[i]);
         }
         // remove the last order
         this.receipts.pop();
         this.orderReceipts[this.curOrderNumber].gameObject.SetActive(false);
     }
 
-    public clearOrder() {
+    public ClearOrder() {
         this.curOrderNumber = 0;
         this.receipts = [];
     }
@@ -249,20 +250,21 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     public InitOrderBtn(index: number) {
         var openReceiptBtn = this.orderReceipts[index].GetComponent<OrderReceipt>().GetReceiptButton();
         openReceiptBtn.onClick.AddListener(() => {
-            this.displayExpandOrder(index);
+            this.DisplayExpandOrder(index);
         });
     }
 
-    public clearOrderReceipts() {
+    public ClearOrderReceipts() {
         for(let i=0;i<this.orderReceipts.length;i++){
             this.orderReceipts[i].gameObject.SetActive(false);
+            this.orderReceipts[i].GetComponent<OrderReceipt>()?.ClearOrderReceipt();
         }
     }
 
     public DisableOrder(){
         this.StopOrder();
-        this.clearOrder();
-        this.clearOrderReceipts();
+        this.ClearOrder();
+        this.ClearOrderReceipts();
         if (this.expandOrderReceipt) this.expandOrderReceipt.setPanel(false);
     }
 

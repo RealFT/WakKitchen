@@ -20,18 +20,18 @@ export default class InteractionBase extends ZepetoScriptBehaviour {
 
         //When Button Click
         this.openButton.onClick.AddListener(() => {
+            SoundManager.GetInstance().OnPlayButtonClick();
             this.SetKitchenVisibility(true);
             GameManager.GetInstance().SetPlayerMovement(false);
             this.openButton.gameObject.SetActive(false);
-            SoundManager.GetInstance().OnPlayButtonClick();
         });
 
         //When Button Click
         this.escapeButton.onClick.AddListener(() => {
+            SoundManager.GetInstance().OnPlayButtonClick();
             this.SetKitchenVisibility(false);
             GameManager.GetInstance().SetPlayerMovement(true);
             this.openButton.gameObject.SetActive(true);
-            SoundManager.GetInstance().OnPlayButtonClick();
         });
     }
 

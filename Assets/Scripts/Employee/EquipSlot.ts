@@ -6,6 +6,7 @@ import EmployeeManager from './EmployeeManager';
 import CardData from './CardData';
 import { TextMeshProUGUI } from 'TMPro';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import SoundManager from '../SoundManager';
 
 export default class EquipSlot extends ZepetoScriptBehaviour {
 
@@ -36,6 +37,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     Start(){
         this.characterSlotButton.onClick.AddListener(() => {
             this.UnEquipCard();
+            SoundManager.GetInstance().OnPlaySFX("Button3");
         });
 
         var sprites = DataManager.GetInstance().GetSectionSprites();
@@ -47,6 +49,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
             button.onClick.AddListener(() => {
                 this.SelectSection(sprite, i);
                 this.DisableSelectSectionPanel();
+                SoundManager.GetInstance().OnPlaySFX("Button3");
             });
         }
         this.InitSlot();
