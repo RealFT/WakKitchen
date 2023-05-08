@@ -25,7 +25,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     private animations: (() => Generator)[] = [
         () => this.NumberAnimation(this.totalSaleText, this.totalSale, this.animationDuration),
         () => this.NumberAnimation(this.employeeText, -this.employeeCost, this.animationDuration),
-        () => this.NumberAnimation(this.IngredientsText, -this.ingredientsCost, this.animationDuration),
+        // () => this.NumberAnimation(this.IngredientsText, -this.ingredientsCost, this.animationDuration),
         () => this.NumberAnimation(this.netIncomeText, this.netIncome, this.animationDuration)
     ];
 
@@ -86,7 +86,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.dateText.text = `Day ${GameManager.GetInstance().GetCurrentStage()}`;
         this.totalSaleText.text = "";
         this.employeeText.text = "";
-        this.IngredientsText.text = "";
+        // this.IngredientsText.text = "";
         this.netIncomeText.text = "";
     }
 
@@ -97,7 +97,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.employeeCost = EmployeeManager.GetInstance().GetTotalEmployeePay();
         BalanceManager.GetInstance().UseAvailableBalance(Currency.wak, this.employeeCost);
         this.netIncome = this.totalSale - this.ingredientsCost - this.employeeCost;
-        this.netIncomeText.color = this.netIncome >= 0 ? this.totalSaleText.color : this.IngredientsText.color;
+        this.netIncomeText.color = this.netIncome >= 0 ? this.totalSaleText.color : this.employeeText.color;
     }
 
     // Doubles the current net income and displays the result using animation.

@@ -4,6 +4,7 @@ import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Ingredient } from './DataManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
+import SoundManager from './SoundManager';
 
 export default class GrillSlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private grillButton: Button;    // Putting ingredients in the kitchen
@@ -71,6 +72,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.startTime = Time.time;
         this.bakeSliderFill.color = this.defaultColor;
         this.StartCoroutine(this.DoBaking());
+        SoundManager.GetInstance().OnPlayLoopSFX("Grill_Sizzling");
     }
 
     // Baking Coroutine

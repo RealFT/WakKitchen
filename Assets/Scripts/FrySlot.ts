@@ -4,6 +4,7 @@ import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Side } from './DataManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
+import SoundManager from './SoundManager';
 
 export default class FrySlot extends ZepetoScriptBehaviour implements IListener {
     @SerializeField() private fryButton: Button;    // Putting ingredients in the kitchen
@@ -76,6 +77,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.startTime = Time.time;
         this.frySliderFill.color = this.defaultColor;
         this.StartCoroutine(this.DoBaking());
+        SoundManager.GetInstance().OnPlayLoopSFX("Fryer_Frying");
     }
 
     // Baking Coroutine

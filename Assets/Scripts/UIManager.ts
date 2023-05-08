@@ -43,6 +43,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.startBtn.onClick.AddListener(() => {
             //this.MoveScene(this.sceneName);
             SceneLoadManager.GetInstance().LoadScene(this.sceneName);
+            SoundManager.GetInstance().OnPlaySFX("Button1");
         });
 
         // Register UIManager as a listener for events

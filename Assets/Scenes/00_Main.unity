@@ -3878,7 +3878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &780397160
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5587,7 +5587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -60}
+  m_AnchoredPosition: {x: 0, y: -44}
   m_SizeDelta: {x: 268, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1120131310
@@ -17046,6 +17046,38 @@ PrefabInstance:
       propertyPath: script.unityValues.Array.data[7]
       value: 
       objectReference: {fileID: 6459788421356596999}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 42542364}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendMessage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Component, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: OnPlayButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6459788423159908662, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -18581,6 +18613,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7808169059227636126, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e8fae2901cf430e469e1f426167b78c1, type: 3}
+    - target: {fileID: 7808169059227636126, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808169059227636126, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808169059227636126, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808169059367813278, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808169059695076312, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7808169060001471541, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
       propertyPath: m_Name
       value: SceneLoadManager

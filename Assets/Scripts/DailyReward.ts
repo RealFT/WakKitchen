@@ -3,6 +3,7 @@ import { GameObject, Object, Transform, PlayerPrefs } from 'UnityEngine';
 import { Button, Image } from "UnityEngine.UI";
 import DataManager from './DataManager';
 import UIManager from './UIManager';
+import SoundManager from './SoundManager';
 
 // Class for daily rewards
 export default class DailyReward extends ZepetoScriptBehaviour {
@@ -88,9 +89,11 @@ export default class DailyReward extends ZepetoScriptBehaviour {
             this.claimButton.interactable = !isClaimable;
 
             UIManager.GetInstance().OpenInformation("Daily reward granted.");
+            SoundManager.GetInstance().OnPlaySFX("Purchase");
         }
         else {
             UIManager.GetInstance().OpenInformation("Reward already claimed today.");
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
         }
     }
 }
