@@ -34,9 +34,17 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
         Mediator.GetInstance().UnregisterListener(this);
     }
     public OnNotify(sender: any, eventName: string, eventData: any): void {
-        if(eventName === EventNames.UpgradeUpdated){
-            const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("employee");
-            this.EquipUnlock(upgradedlevel);
+        switch(eventName){
+            case EventNames.UpgradeUpdated:
+                const upgradedLevel = ItemManager.GetInstance().GetUpgradedLevel("employee");
+                this.EquipUnlock(upgradedLevel);
+                break;
+            case EventNames.StageEnded:
+                this.ClearSlots();
+                break;
+            default:
+                // In case an unhandled event occurs
+                break;
         }
     }
     
@@ -94,5 +102,11 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
         }
         // If all unlocked slots are selected, return true.
         return true;
+    }
+
+    public ClearSlots(){
+        for (let i = 0; i < this.equipSlots.Length; i++) {
+            this.equipSlots[i].InitSlot();
+        }
     }
 }

@@ -51,7 +51,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
             this.GetProductsData();
             this.UpdateProductDisplay();
             this.InitPlate();
-            SoundManager.GetInstance().OnPlaySFX("Tresh");
+            SoundManager.GetInstance().OnPlayButtonSFX("Tresh");
         });
         // Initialize product slots
         for (var index: int = 0; index < this.productSlots.length; index++) {
@@ -92,7 +92,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
             this.platedProducts.push(this.products[index]);
             this.ReduceProductCount(index);
             //this.UpdateProductDisplay();
-            SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnSelect);
+            SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
         });
     }
 
@@ -133,7 +133,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
         }
         else {
             UIManager.GetInstance().OpenInformation("Invalid recipe.");
-            SoundManager.GetInstance().OnPlaySFX("Tresh");
+            SoundManager.GetInstance().OnPlayButtonSFX("Tresh");
         }
         this.GetProductsData();
         this.UpdateProductDisplay();

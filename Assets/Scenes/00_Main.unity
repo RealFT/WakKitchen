@@ -386,6 +386,10 @@ MonoBehaviour:
     - muteSFX
     - keyStageEnd
     - buttonSFX
+    - keyBtnClick
+    - keyBtnSelect
+    - keyBtnEquip
+    - keySettlement
     unityValues:
     - {fileID: 0}
     - {fileID: 0}
@@ -397,6 +401,10 @@ MonoBehaviour:
     - {fileID: 110787826}
     - {fileID: 0}
     - {fileID: 435245664}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     values:
     - '{"type":"System.String, mscorlib","value":"Main"}'
     - '{"type":"System.String, mscorlib","value":"The Original Orchestra - Cojito"}'
@@ -408,6 +416,10 @@ MonoBehaviour:
     - 
     - '{"type":"System.String, mscorlib","value":"Settlement"}'
     - 
+    - '{"type":"System.String, mscorlib","value":"Button_Click"}'
+    - '{"type":"System.String, mscorlib","value":"Button_Select"}'
+    - '{"type":"System.String, mscorlib","value":"Button_Equip"}'
+    - '{"type":"System.String, mscorlib","value":"Settlement"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: dbb56e05bf51f7242ae36f329ef7a6b2, type: 3}
@@ -2206,7 +2218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16, y: 64}
+  m_AnchoredPosition: {x: -24, y: 0}
   m_SizeDelta: {x: 80, y: 320}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &326950642
@@ -2226,8 +2238,8 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
-  m_Spacing: 36
+  m_ChildAlignment: 1
+  m_Spacing: 32
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -9859,12 +9871,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1334, y: 750}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -10480,7 +10492,7 @@ MonoBehaviour:
     values:
     - 
     - 
-    - '{"type":"System.Single, mscorlib","value":"0.5"}'
+    - '{"type":"System.Single, mscorlib","value":"2"}'
     - '{"type":"System.Single, mscorlib","value":"8"}'
     - '{"type":"System.Single, mscorlib","value":"22"}'
     - '{"type":"System.Boolean, mscorlib","value":"False"}'
@@ -17920,6 +17932,10 @@ PrefabInstance:
     - target: {fileID: 6459788421411680294, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788422854708057, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 6459788422854708070, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_Sprite

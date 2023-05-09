@@ -77,7 +77,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         } else {
             this.productInventory.set(product, quantity);
         }
-        SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnSelect);
+        SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
     }
 
     // Remove item from inventory
@@ -197,7 +197,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         if (!this.expandOrderReceipt) this.expandOrderReceipt = this.expandOrderReceiptObj.GetComponent<ExpandOrderReceipt>();
         this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, cost, characterSprite);
         this.expandOrderReceipt.setPanel(true);
-        SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnSelect);
+        SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
     }
 
     public addOrder(): void {

@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
+import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color, Animation } from 'UnityEngine';
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
 import OrderManager from '../OrderManager';
 import DataManager, { Drink, Ingredient, Section, Side } from '../DataManager';
@@ -9,6 +9,8 @@ import Mediator, { EventNames } from '../Notification/Mediator';
 export default class EmployeeSlot extends ZepetoScriptBehaviour {
     @SerializeField() private pauseResumeToggle: Toggle;
     @SerializeField() private employeeImage: Image;    
+    @SerializeField() private foodImage: Image;    
+    @SerializeField() private foodAnim: Animation;    
     @SerializeField() private workSlider: Slider;
     private foodIds: number[] = [];
     private workTime: number = 10;
@@ -86,7 +88,11 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
 
             if (this.currentTime >= this.workTime) {
                 // Work done.
-                OrderManager.GetInstance().AddItemToInventory(this.GetRandomFoodId());
+                const foodId = this.GetRandomFoodId();
+                OrderManager.GetInstance().AddItemToInventory(foodId);
+                this.foodImage.gameObject.SetActive(true);
+                this.foodImage.sprite = DataManager.GetInstance().getProductSprite(foodId);
+                this.foodAnim.Play();
                 Mediator.GetInstance().Notify(this, EventNames.IngredientCountUpdated, null);
                 this.workSlider.value = 0;
                 this.currentTime = 0;

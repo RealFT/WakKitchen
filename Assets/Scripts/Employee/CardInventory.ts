@@ -172,13 +172,10 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
             return;
         }
         const card = cardSlot.GetCardData();
-        if (card == null){
-            return;
-        }
         const grade = card.GetGrade();
-        console.log(grade);
         if(grade == "s"){
-            console.warn("already fully upgraded");
+            UIManager.GetInstance().OpenInformation("Fully upgraded");
+            SoundManager.GetInstance().OnPlaySFX("Tresh");
             return;
         }
         let upperGrade = "c";
