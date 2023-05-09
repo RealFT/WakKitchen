@@ -12,6 +12,8 @@ export default class Interaction_Grill extends InteractionBase implements IListe
     @SerializeField() private images: Image[];
     @SerializeField() private grillPanel: GameObject;
     @SerializeField() private defaultTable: GameObject;
+    @SerializeField() private burntEffect: GameObject;
+    private workingStates: boolean[] = [];
 
     Start() {
         super.Start();
@@ -19,10 +21,29 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         // Set panels and kitchen active
         this.grillPanel.SetActive(true);
         this.kitchen.SetActive(true);
+        this.burntEffect.SetActive(false);
 
         // Unlock by Upgraded level
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("grill");
         this.GrillUnlock(upgradedlevel);
+
+        for (let i = 0; i < this.grillSlotObjects.length; i++) {
+            let slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
+            slot.onWorkStateChanged = (working: boolean) => {
+                for (let i = 0; i < this.grillSlotObjects.length; i++) {
+                    let slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
+                    this.workingStates[i] = slot.IsWorking();
+                }
+                const allBaking = this.workingStates.every(state => state);
+                if (allBaking) {
+                    // 모든 Slot 객체가 burnt 상태가 아닌 경우
+                    this.burntEffect.SetActive(false);
+                } else {
+                    // 하나 이상의 Slot 객체가 burnt 상태인 경우
+                    this.burntEffect.SetActive(true);
+                }
+            };
+        }
 
         Mediator.GetInstance().RegisterListener(this);
     }

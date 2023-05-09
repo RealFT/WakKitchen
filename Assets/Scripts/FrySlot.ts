@@ -22,6 +22,8 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
     @SerializeField() private visibleImages: Image[];
     @SerializeField() private lockImage: Image;
     @SerializeField() private clockImage: Image;
+    @SerializeField() private burntEffect: GameObject;
+    public onWorkStateChanged: (baking: boolean) => void;
     private startTime: number = 0;
     private currentTime: number = 0;
     private isFrying: bool;
@@ -30,6 +32,15 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
 
     Start() {
         this.fryButton.onClick.AddListener(() => { this.StartBaking(); });
+        this.onWorkStateChanged = (baking: boolean) => {
+            if (baking) {
+                // 모든 Slot 객체가 burnt 상태가 아닌 경우
+                this.burntEffect.SetActive(false);
+            } else {
+                // 하나 이상의 Slot 객체가 burnt 상태인 경우
+                this.burntEffect.SetActive(true);
+            }
+        };
         this.Init();
         Mediator.GetInstance().RegisterListener(this);
     }
@@ -106,6 +117,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
                 this.collectButton.image.sprite = this.burntFrySprite;
                 this.frySliderFill.color = this.failedColor;
                 this.StopBaking();
+                this.onWorkStateChanged?.(false);
             }
             yield new WaitForSeconds(Time.deltaTime);
         }
@@ -126,6 +138,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.collectButton.onClick.RemoveAllListeners();
         this.collectButton.gameObject.SetActive(false);
         this.frySlider.gameObject.SetActive(false);
+        this.onWorkStateChanged?.(true);
     }
 
     public IsFrying(): boolean {
