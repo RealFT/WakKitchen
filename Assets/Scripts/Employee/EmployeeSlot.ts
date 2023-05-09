@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
 import { Image, Button, Slider, Text, Toggle } from "UnityEngine.UI";
 import OrderManager from '../OrderManager';
-import DataManager, { Drink, Ingredient, Section, Side, Slice } from '../DataManager';
+import DataManager, { Drink, Ingredient, Section, Side } from '../DataManager';
 import CardData from './CardData';
 import Mediator, { EventNames } from '../Notification/Mediator';
 
@@ -34,34 +34,32 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
     public SetEmployee(employeeData: CardData, section: number){
         this.employeeImage.sprite = DataManager.GetInstance().GetCharacterIcon(employeeData.GetCharacterIndex());
         this.foodIds = [];
-        let startId = 0;
-        let endId = 0;
         let proficiency = 1;
         switch(section){
             case Section.Dispenser:
-                startId = Drink.START;
-                endId = Drink.END;
+                let startId = Drink.START;
+                let endId = Drink.END;
+                for (let id = startId; id <= endId; id++) {
+                    this.foodIds.push(id);
+                }
                 proficiency = employeeData.GetDispenserProficiency();
                 break;
-            case Section.Frier:
-                startId = Side.START;
-                endId = Side.END;
+            case Section.Fryer:
+                this.foodIds.push(Side.FRY);
                 proficiency = employeeData.GetFrierProficiency();
                 break;
             case Section.Grill:
-                startId = Ingredient.PATTY;
-                endId = Ingredient.PATTY;
+                this.foodIds.push(Ingredient.PATTY);
                 proficiency = employeeData.GetGrillProficiency();
                 break;
             case Section.Slice:
-                startId = Slice.START;
-                endId = Slice.END;
+                this.foodIds.push(Ingredient.CABBAGE);
+                this.foodIds.push(Ingredient.TOMATO);
+                this.foodIds.push(Ingredient.ONION);
                 proficiency = employeeData.GetSliceProficiency();
                 break;
         }
-        for (let id = startId; id <= endId; id++) {
-            this.foodIds.push(id);
-        }
+
         if(proficiency <= 0) proficiency = 1;
         this.workTime = 10 / (Math.floor(proficiency * 0.1) + 1);
         this.isRegistered = true;

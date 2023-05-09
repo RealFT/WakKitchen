@@ -128,7 +128,22 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         // Set the position and sprite of the receipt item and activate it
         const slicable = slicableObj.GetComponent<Slicable>();
         const randomIndex = Math.floor(Random.Range(0, this.ingredients.size));
-        slicable.SetSlicable(this.originSprites[randomIndex], this.ingredients.get(randomIndex));
+        const randomInt = Math.floor(Math.random() * 3); // 0, 1, 2 중 랜덤으로 선택됩니다.
+        let selectedIndex: Ingredient.CABBAGE | Ingredient.TOMATO | Ingredient.ONION;
+        switch (randomInt) {
+            case 0:
+                selectedIndex = Ingredient.CABBAGE;
+                break;
+            case 1:
+                selectedIndex = Ingredient.TOMATO;
+                break;
+            case 2:
+                selectedIndex = Ingredient.ONION;
+                break;
+            default:
+                throw new Error("Unexpected random integer value.");
+        }
+        slicable.SetSlicable(this.originSprites[selectedIndex], this.ingredients.get(selectedIndex));
         return slicable;
     }
 

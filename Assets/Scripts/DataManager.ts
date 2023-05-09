@@ -13,7 +13,7 @@ export enum Grade {
 }
 export enum Section {
     Dispenser = 0,
-    Frier = 1,
+    Fryer = 1,
     Grill = 2,
     Slice = 3,
 }
@@ -37,19 +37,11 @@ export enum Ingredient {
     BOTTOM_BURN = 0,
     CABBAGE = 1,
     TOMATO = 2,
-    ONION = 3,
-    PATTY = 4,
-    CHEESE = 5,
+    PATTY = 3,
+    CHEESE = 4,
+    ONION = 5,
     TOP_BURN = 6,
     END = 6
-}
-
-export enum Slice {
-    START = 1,
-    CABBAGE = 1,
-    TOMATO = 2,
-    ONION = 3,
-    END = 5
 }
 
 export enum Drink {

@@ -29,7 +29,15 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
         this.cup = this.cupBtn.gameObject.GetComponent<Cup>();
         this.stopBtn.onClick.AddListener(() => {
             this.isCatch = (this.isCatch) ? false : true;
-            if (!this.isCatch) this.StartMoving();
+            if (!this.isCatch) {
+                if (this.cup.GetState() != CupState.DEFAULT){
+                    OrderManager.GetInstance().AddItemToInventory(this.curDrink, this.quantity);
+                    this.cupBtn.gameObject.SetActive(false);
+                    this.isCatch = true;
+                }
+                else
+                    this.StartMoving();
+            }
             else this.CheckDrink();
         });
         this.cupBtn.onClick.AddListener(() => {
