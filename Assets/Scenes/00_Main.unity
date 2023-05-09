@@ -734,30 +734,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1956925192}
     m_Modifications:
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.data[3]
-      value: debug_id
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.data[3]
-      value: '{"type":"System.String, mscorlib","value":""}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.data[4]
-      value: 
-      objectReference: {fileID: 1135985344}
     - target: {fileID: 5190417614692204312, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
       propertyPath: m_Name
       value: Card (1)
@@ -1598,17 +1574,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197891064}
   m_CullTransparentMesh: 1
---- !u!114 &200607798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2748270022320739286, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-  m_PrefabInstance: {fileID: 841144009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &204984571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,30 +3202,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1956925192}
     m_Modifications:
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.data[3]
-      value: debug_id
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.data[3]
-      value: '{"type":"System.String, mscorlib","value":""}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.data[4]
-      value: 
-      objectReference: {fileID: 2091122082}
     - target: {fileID: 5190417614692204312, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
       propertyPath: m_Name
       value: Card (2)
@@ -5070,30 +5011,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1956925192}
     m_Modifications:
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.data[3]
-      value: debug_id
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.data[3]
-      value: '{"type":"System.String, mscorlib","value":""}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.data[4]
-      value: 
-      objectReference: {fileID: 200607798}
     - target: {fileID: 5190417614692204312, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
       propertyPath: m_Name
       value: Card (3)
@@ -6243,17 +6160,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120131310}
   m_CullTransparentMesh: 1
---- !u!114 &1135985344 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2748270022320739286, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-  m_PrefabInstance: {fileID: 69452695}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1136737475
 GameObject:
   m_ObjectHideFlags: 0
@@ -6673,6 +6579,7 @@ MonoBehaviour:
     - characterCardSprites
     - unlockStageFile
     - costFile
+    - cardFrameSprites
     unityValues:
     - {fileID: 4900000, guid: 502a277dece810d48999fc1e0e07c03c, type: 3}
     - {fileID: 4900000, guid: e5f99d487b4296342ae548fd1ee30c2e, type: 3}
@@ -6688,6 +6595,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 4900000, guid: 3edadbf19d88d2f42b7e45e495ee55b3, type: 3}
     - {fileID: 4900000, guid: 17fca27ee75b5c346b8646a39d8cce15, type: 3}
+    - {fileID: 0}
     values:
     - 
     - 
@@ -6712,6 +6620,8 @@ MonoBehaviour:
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - 
     - 
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":107,\"length\":5,\"type\":\"UnityEngine.Object,
+      UnityEngine.CoreModule\",\"isUnity\":true}"}'
     unityArrayValues:
     - {fileID: 21300000, guid: 220d95c1bb6440a4d946f656211b09a7, type: 3}
     - {fileID: 21300000, guid: e346d11c193db5d4e9c1044874a9093a, type: 3}
@@ -6820,6 +6730,11 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b9eccfd3c7d8fb941a6cba5755120d16, type: 3}
     - {fileID: 21300000, guid: d6cbee7216a33f3449aa7a6e5da8b7b5, type: 3}
     - {fileID: 21300000, guid: 4752e682afae44942a8e34dfb62dba38, type: 3}
+    - {fileID: 21300000, guid: 2a8e4a22cb4d5864ea0dad81a498cc29, type: 3}
+    - {fileID: 21300000, guid: d499e2c32c1a45f4e9fae9ba5549a96c, type: 3}
+    - {fileID: 21300000, guid: f376e03b62795ce41bc2e8c21be04b6e, type: 3}
+    - {fileID: 21300000, guid: acf9c33fe8f897546840b93dd2f31a9c, type: 3}
+    - {fileID: 21300000, guid: 8deb79484675520498d97c75e0a93613, type: 3}
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: c8aa2219ba0ed2641863883b651a275b, type: 3}
     isExpaned: 0
@@ -7223,17 +7138,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331407278}
   m_CullTransparentMesh: 1
---- !u!114 &1342026188 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2748270022320739286, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-  m_PrefabInstance: {fileID: 1525559660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1352458417
 GameObject:
   m_ObjectHideFlags: 0
@@ -7741,30 +7645,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1956925192}
     m_Modifications:
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.keys.Array.data[3]
-      value: debug_id
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.values.Array.data[3]
-      value: '{"type":"System.String, mscorlib","value":""}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 190278354584855362, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-      propertyPath: script.unityValues.Array.data[4]
-      value: 
-      objectReference: {fileID: 1342026188}
     - target: {fileID: 5190417614692204312, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
       propertyPath: m_Name
       value: Card (4)
@@ -11454,17 +11334,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2091122082 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2748270022320739286, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
-  m_PrefabInstance: {fileID: 476793271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2119285422
 GameObject:
   m_ObjectHideFlags: 0

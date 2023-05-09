@@ -9,6 +9,7 @@ export default class Card extends ZepetoScriptBehaviour {
     @SerializeField() private debug_id: string;
     @SerializeField() private characterImage: Image;
     @SerializeField() private cardBackgroundImage: Image;
+    @SerializeField() private cardFrameImage: Image;
     @SerializeField() private cardOpenButton: Button;
     @SerializeField() private animator: Animator;
 
@@ -24,6 +25,7 @@ export default class Card extends ZepetoScriptBehaviour {
         this.grade = grade;
         this.characterImage.sprite = characterSprite;
         this.cardBackgroundImage.sprite = DataManager.GetInstance().GetCardBackgroundSpriteByGrade(grade);
+        this.cardFrameImage.sprite = DataManager.GetInstance().GetCardFrameByGrade(grade);
     }
 
     public GetCardId(): string {

@@ -124,6 +124,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private characterIcons: Sprite[];
     @SerializeField() private gradeIcons: Sprite[];
     @SerializeField() private cardBackgroundSprites: Sprite[];
+    @SerializeField() private cardFrameSprites: Sprite[];
     @SerializeField() private sectionSprites: Sprite[];
 
     private receipts: Receipt[] = [];
@@ -355,6 +356,11 @@ export default class DataManager extends ZepetoScriptBehaviour {
     public GetCardBackgroundSpriteByGrade(grade: string): Sprite{
         const index = this.GetGradeNumberByString(grade);
         return this.cardBackgroundSprites[index];
+    }
+
+    public GetCardFrameByGrade(grade: string): Sprite{
+        const index = this.GetGradeNumberByString(grade);
+        return this.cardFrameSprites[index];
     }
 
     public SetStageReceipts(stage: number) {
