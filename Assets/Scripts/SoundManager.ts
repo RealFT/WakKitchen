@@ -1,4 +1,4 @@
-import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
+ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { AudioClip, AudioSource, GameObject, Resources, Sprite } from "UnityEngine";
 import { Toggle, Slider, Button } from "UnityEngine.UI";
 import { TextMeshProUGUI } from 'TMPro';
@@ -38,6 +38,7 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     // Audio sources for BGM and SFX
     @SerializeField() private BGM: AudioSource;
     @SerializeField() private SFX: AudioSource;
+    @SerializeField() private buttonSFX: AudioSource;
     @SerializeField() private muteBGM: Toggle;
     @SerializeField() private muteSFX: Toggle;
 
@@ -125,6 +126,8 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     public ApplySFXVolume(): void {
         this.SFX.volume = this.SFXVolume;
         this.SFX.mute = this.SFXMute;
+        this.buttonSFX.volume = this.SFXVolume;
+        this.buttonSFX.mute = this.SFXMute;
     }
 
     public OnPlayBGM(key: string): void {
@@ -168,7 +171,16 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     }
 
     public OnPlayButtonClick(){
-        this.OnPlaySFX("Button1");
+        if (this.buttonSFX) this.buttonSFX.Stop();
+
+        if (this.buttonSFX.isPlaying) return;
+
+        // Set the clip for the specified name
+        this.buttonSFX.clip = this.SFXMap.get("Button1");
+
+        this.buttonSFX.loop = false;
+        // Only play if sound clip exists
+        if (!this.buttonSFX.isPlaying) this.buttonSFX.Play();
     }
 
     public StopSFX(){
