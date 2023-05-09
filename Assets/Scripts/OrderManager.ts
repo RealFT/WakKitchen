@@ -136,7 +136,10 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         while (true) {
             if (this.maxOrderSize > this.curOrderNumber)
                 this.addOrder();
-            const waitTime = 10;//Math.max(60 - (this.difficultyLevel - 1) * 3, 30) + 30 * Math.random();
+            let waitTime = Math.max(2 + 8 * Math.random());
+            if(this.curOrderNumber <= 1)
+                waitTime *= 0.5;
+            console.log("waitTime: " + waitTime);
             yield new WaitForSeconds(waitTime);
         }
     }

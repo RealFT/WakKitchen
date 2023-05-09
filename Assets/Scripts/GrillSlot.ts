@@ -21,13 +21,16 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private burnTime: number;
     @SerializeField() private visibleImages: Image[];
     @SerializeField() private lockImage: Image;
+    public onWorkStateChanged: (working: boolean) => void;
     private startTime: number = 0;
     private currentTime: number = 0;
     private flipCount: number = 0;
     private isFliped: bool;
     private isBaking: bool;
+    private isWorking: bool;
 
     Start() {
+        this.isWorking = true;
         this.bakingButton.interactable = false;
         this.grillButton.onClick.AddListener(() => { this.StartBaking(); });
         Mediator.GetInstance().RegisterListener(this);
@@ -71,6 +74,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.flipCount = 0;
         this.startTime = Time.time;
         this.bakeSliderFill.color = this.defaultColor;
+
         this.StartCoroutine(this.DoBaking());
         SoundManager.GetInstance().OnPlayLoopSFX("Grill_Sizzling");
     }
@@ -106,6 +110,8 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
                 this.bakingButton.image.sprite = this.burntPattySprite;
                 this.bakeSliderFill.color = this.failedColor;
                 this.StopBaking();
+                this.isWorking = false;
+                this.onWorkStateChanged?.(false);
             }
             yield new WaitForSeconds(Time.deltaTime);
         }
@@ -134,10 +140,16 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.bakingButton.onClick.RemoveAllListeners();
         this.bakingButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
+        this.isWorking = true;
+        this.onWorkStateChanged?.(true);
     }
 
     public IsBaking(): boolean {
         return this.isBaking;
+    }
+
+    public IsWorking(): boolean {
+        return this.isWorking;
     }
 
     SetGrillVisibility(value: bool) {

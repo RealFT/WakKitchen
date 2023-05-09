@@ -15005,6 +15005,7 @@ MonoBehaviour:
     - sectionName
     - sectionObject
     - sectionCollider
+    - burntEffect
     unityValues:
     - {fileID: 865958547593278898}
     - {fileID: 0}
@@ -15016,6 +15017,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 1139545425}
     - {fileID: 543212705}
+    - {fileID: 215642426}
     values:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Object,
@@ -15027,6 +15029,7 @@ MonoBehaviour:
     - 
     - 
     - '{"type":"System.String, mscorlib","value":"grill"}'
+    - 
     - 
     - 
     unityArrayValues:
@@ -17122,6 +17125,8 @@ MonoBehaviour:
     - visibleImages
     - lockImage
     - clockImage
+    - burntEffect
+    - onWorkStateChanged
     unityValues:
     - {fileID: 1561138943}
     - {fileID: 272309470}
@@ -17138,6 +17143,8 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 478694555}
+    - {fileID: 523494275}
+    - {fileID: 0}
     values:
     - 
     - 
@@ -17153,6 +17160,8 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"10"}'
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":4,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - 
+    - 
     - 
     - 
     unityArrayValues:
@@ -44101,6 +44110,8 @@ MonoBehaviour:
     - visibleImages
     - lockImage
     - clockImage
+    - burntEffect
+    - onWorkStateChanged
     unityValues:
     - {fileID: 8432500519280023284}
     - {fileID: 8432500520535301333}
@@ -44117,6 +44128,8 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 382328971}
     - {fileID: 1154697287}
+    - {fileID: 1425370255}
+    - {fileID: 0}
     values:
     - 
     - 
@@ -44132,6 +44145,8 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"10"}'
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":4,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - 
+    - 
     - 
     - 
     unityArrayValues:
