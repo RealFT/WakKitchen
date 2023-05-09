@@ -158,7 +158,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
             return;
         }
         else {
-            SoundManager.GetInstance().OnPlaySFX("Button3");
+            SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnEquip);
             this.equipSlotController.EquipCharacter(card);
             this.RefreshInventoryUI();
         }

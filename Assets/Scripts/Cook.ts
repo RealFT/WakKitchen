@@ -92,7 +92,7 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
             this.platedProducts.push(this.products[index]);
             this.ReduceProductCount(index);
             //this.UpdateProductDisplay();
-            SoundManager.GetInstance().OnPlaySFX("Button2");
+            SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnSelect);
         });
     }
 

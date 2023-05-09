@@ -1,7 +1,8 @@
  import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { AudioClip, AudioSource, GameObject, Resources, Sprite } from "UnityEngine";
+import { AudioClip, AudioSource, GameObject, Resources, Sprite, WaitForSeconds } from "UnityEngine";
 import { Toggle, Slider, Button } from "UnityEngine.UI";
 import { TextMeshProUGUI } from 'TMPro';
+
 export default class SoundManager extends ZepetoScriptBehaviour {
     // singleton
     private static Instance: SoundManager;
@@ -30,6 +31,10 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     public keyStageEnd: string = 'StageEnd'; // StageEnd scene key
     public keyShop: string = 'Shop'; // Shop scene key
     public keyCardSet: string = 'CardSet'; // CardSet scene key
+    public keyBtnClick: string = 'Button_Click'; // CardSet scene key
+    public keyBtnSelect: string = 'Button_Select'; // CardSet scene key
+    public keyBtnEquip: string = 'Button_Equip'; // CardSet scene key
+    public keySettlement: string = 'Settlement'; // CardSet scene key
 
     // Map to store loaded audio clips for BGM and SFX
     private BGMMap: Map<string, AudioClip> = new Map<string, AudioClip>();
@@ -143,6 +148,32 @@ export default class SoundManager extends ZepetoScriptBehaviour {
         // Only play if music clip exists
         if (!this.BGM.isPlaying) this.BGM.Play();
     }
+
+    public OnPlayOnceBGM(key: string): void {
+        // Stop the currently playing music
+        this.BGM.Stop();
+
+        // If already playing, return
+        if (this.BGM.isPlaying) return;
+
+        // Set the clip for the specified key
+        const clip = this.BGMMap.get(key);
+        this.StartCoroutine(this.PlayOnce(clip));
+    }
+
+    *PlayOnce(clip: AudioClip){
+        const preClip = this.BGM.clip;
+        this.BGM.clip = clip;
+        this.BGM.loop = false;
+        // Only play if music clip exists
+        if (!this.BGM.isPlaying) this.BGM.Play();
+        // wait until play done.
+        while (this.BGM.isPlaying) {
+            yield null;
+        }
+        this.BGM.clip = preClip;
+        this.BGM.Play();
+    }
     
     public OnPlaySFX(clipName: string): void {
         if (this.SFX) this.SFX.Stop();
@@ -170,17 +201,23 @@ export default class SoundManager extends ZepetoScriptBehaviour {
         if (!this.SFX.isPlaying) this.SFX.Play();
     }
 
-    public OnPlayButtonClick(){
+    public OnPlayButtonSFX(clipName: string){
         if (this.buttonSFX) this.buttonSFX.Stop();
 
         if (this.buttonSFX.isPlaying) return;
 
         // Set the clip for the specified name
-        this.buttonSFX.clip = this.SFXMap.get("Button1");
+        this.buttonSFX.clip = this.SFXMap.get(clipName);
 
         this.buttonSFX.loop = false;
         // Only play if sound clip exists
         if (!this.buttonSFX.isPlaying) this.buttonSFX.Play();
+    }
+    public OnPlayButtonClick(){
+        this.OnPlayButtonSFX(this.keyBtnClick);
+    }
+    public OnPlayButtonSelect(){
+        this.OnPlayButtonSFX(this.keyBtnSelect);
     }
 
     public StopSFX(){

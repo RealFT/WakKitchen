@@ -37,7 +37,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     Start(){
         this.characterSlotButton.onClick.AddListener(() => {
             this.UnEquipCard();
-            SoundManager.GetInstance().OnPlaySFX("Button3");
+            SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnEquip);
         });
 
         var sprites = DataManager.GetInstance().GetSectionSprites();
@@ -49,7 +49,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
             button.onClick.AddListener(() => {
                 this.SelectSection(sprite, i);
                 this.DisableSelectSectionPanel();
-                SoundManager.GetInstance().OnPlaySFX("Button3");
+                SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnEquip);
             });
         }
         this.InitSlot();

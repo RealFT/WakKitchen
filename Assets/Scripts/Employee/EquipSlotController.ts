@@ -67,7 +67,7 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
         if (emptyIndex != -1) {
             // Equip the character to the first empty card equip slot
             this.equipSlots[emptyIndex].EquipCard(cardData, emptyIndex);
-            SoundManager.GetInstance().OnPlaySFX("Button3");
+            SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnEquip);
         }
         else{
             UIManager.GetInstance().OpenInformation("No slots available.");

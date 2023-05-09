@@ -38,6 +38,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     Start() {
         this.doubleIncomeButton.onClick.AddListener(() => {
             this.OnDoubleIncome();
+            SoundManager.GetInstance().OnPlayButtonSFX("Purchase");
         });
         this.toShopButton.onClick.AddListener(() => {
             UIManager.GetInstance().ToShop();
@@ -80,7 +81,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.ResetPriceTexts();
         this.GetPriceInformation();
         this.StartCoroutine(this.AnimationSequence());
-        SoundManager.GetInstance().OnPlaySFX("Settlement");
+        SoundManager.GetInstance().OnPlayOnceBGM(SoundManager.GetInstance().keySettlement);
     }
 
     // Resets all Text UI elements to empty strings.
