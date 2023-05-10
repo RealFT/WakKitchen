@@ -1,10 +1,12 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, InputField, Slider, Text } from "UnityEngine.UI";
 import { GameObject, WaitForSeconds } from 'UnityEngine';
+import { TextMeshProUGUI } from 'TMPro';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import Shop from './Shop/Shop';
 import SoundManager from './SoundManager';
+import GameManager from './GameManager';
 
 export default class UIManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
@@ -27,23 +29,26 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private shopUI: GameObject;
     @SerializeField() private mainUI: GameObject[];
     @SerializeField() private gameUI: GameObject[];
-    @SerializeField() private sceneName: SceneName;
     @SerializeField() private startBtn: Button;
     @SerializeField() private timeText: Text;
     @SerializeField() private possessionMoneyTxt: Text;
     @SerializeField() private informationObj: GameObject;
     @SerializeField() private displayDelay: number = 0.7;
-
-     Awake() {
+    @SerializeField() private writerText: string = "";    // 
+    @SerializeField() private helpText: TextMeshProUGUI;    // 
+    private helpTexts: string[] = [];
+    private isNextText: boolean;   // 텍스트 출력을 한번에 할지 결정
+    private isTextCut: boolean;   // 텍스트 출력을 한번에 할지 결정
+    private isTextEnd: boolean;   // 텍스트 출력이 끝났는지 확인
+    
+    Awake() {
         // If the current object is not the instance of UIManager, destroy it.
         if (this != UIManager.GetInstance()) GameObject.Destroy(this.gameObject);
     }
 
     Start() {
         this.startBtn.onClick.AddListener(() => {
-            //this.MoveScene(this.sceneName);
-            SceneLoadManager.GetInstance().LoadScene(this.sceneName);
-            SoundManager.GetInstance().OnPlaySFX("Purchase");
+            GameManager.GetInstance().StartGame();
         });
 
         // Register UIManager as a listener for events
@@ -61,6 +66,90 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.SetShopUI(false);
         this.SetSettlementUI(false);
         this.informationObj.SetActive(false);
+    }
+
+    *PlayHelp()
+    {
+        // introBackAnim.Play();
+        // while (introBackAnim.isPlaying) yield return null;
+        // MoveScene(SCENE.Main, SCENE.CharSelect);
+        // introSkipButton.SetActive(true);
+        // introNextButton.SetActive(true);
+        // introObjectList[introObjCount].SetActive(true);
+        for (let i = 0; i < this.helpTexts.length; i++)
+        {
+            // 한 줄의 타이핑이 완료될 때 까지 대기
+            yield this.TypeChat(this.helpText, this.helpTexts[i]);
+            // 코루틴을 탈출하면 현재 문장 전부 불러옴
+            this.helpText.text = this.helpTexts[i];
+
+            //yield return new WaitForSeconds(0.2f);
+
+            while (!this.isNextText) yield null;
+            this.isNextText = false;
+        }
+        // 인트로가 끝났을 경우 인트로 비활성화 호출
+        // OffIntro();
+        this.ResetHelpText();
+    }
+
+    public nextHelp()
+    {
+        // 텍스트가 끝나지 않았을 경우
+        if (!this.isTextEnd)
+        {
+            // 텍스트 출력을 한번에 하고 리턴.
+            this.isTextCut = true;
+        }
+        // 텍스트 출력이 끝났을 경우
+        else
+        {
+            // 텍스트 초기화
+            this.helpText.text = "";
+            // // 인트로 오브젝트가 남아있는 경우에만 활성화
+            // if (introObjCount + 1 < introObjectList.Count)
+            // {
+            //     introObjectList[introObjCount].SetActive(false);
+            //     introObjCount++;
+            //     introObjectList[introObjCount].SetActive(true);
+            // }
+            this.isNextText = true;
+        }
+    }
+
+    *TypeChat(targetText: TextMeshProUGUI, narration: string)
+    {
+        this.isTextEnd = false;
+        this.writerText = "";
+        //텍스트 타이핑 효과
+        for (let i = 0; i < narration.length; i++)
+        {
+            // textCut 호출 시 출력을 한번에 한다.
+            if (this.isTextCut) break;
+
+            this.writerText += narration[i];
+            targetText.text = this.writerText;
+            SoundManager.GetInstance().OnPlaySFX("Button_Select");
+            yield new WaitForSeconds(0.07);
+        }
+        this.isTextEnd = true;
+        this.isTextCut = false;
+    }
+
+    // Reset Help Text
+    private ResetHelpText()
+    {
+        // for (let i = 0; i < introObjectList.Count; i++)
+        // {
+        //     introObjectList[introObjCount].SetActive(false);
+        // }
+        // introSkipButton.SetActive(false);
+        // introNextButton.SetActive(false);
+        // intro.SetActive(false);
+        // introObjCount = 0;
+        //isIntro = false;  // 인트로를 단 한 번만 실행하게 하기
+        this.helpText.text = "";
+        this.isTextCut = false;
     }
 
     public InitStageUI(){
@@ -139,6 +228,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.timeText.text = time;
     }
 
+    // Info Window
     public OpenInformation(message: string) {
         // Set the text of the information element to the given message
         this.informationObj.GetComponentInChildren<Text>().text = message;

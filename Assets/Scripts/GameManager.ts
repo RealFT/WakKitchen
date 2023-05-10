@@ -11,6 +11,7 @@ import UIManager from './UIManager';
 import BalanceManager from './Shop/BalanceManager';
 import Mediator, { EventNames } from './Notification/Mediator';
 import SoundManager from './SoundManager';
+import SceneLoadManager, { SceneName } from './SceneLoadManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -159,6 +160,11 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     public GetCurrentStage(): number {
         return this.curStage;
+    }
+
+    public StartGame(){
+        SceneLoadManager.GetInstance().LoadScene(SceneName.Stage);
+        SoundManager.GetInstance().OnPlaySFX("Purchase");
     }
 
     public RestartGame() {
