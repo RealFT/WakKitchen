@@ -15,7 +15,7 @@ export enum Section {
     Dispenser = 0,
     Fryer = 1,
     Grill = 2,
-    Slice = 3,
+    Prep = 3,
 }
 export enum Cost {
     TOP_BURN = 15,
@@ -115,6 +115,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private stageFile: TextAsset;
     @SerializeField() private unlockStageFile: TextAsset;
     @SerializeField() private cardFile: TextAsset;
+    @SerializeField() private lang_ko: TextAsset;
+    @SerializeField() private lang_eng: TextAsset;
     // Define the member variables for the Receipt's sprites
     @SerializeField() private ingredientSprites: Sprite[];
     @SerializeField() private drinkSprites: Sprite[];
@@ -278,6 +280,34 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.SetValue(cardId, cardQuantity);
             this.inventoryCache.set(cardId, cardQuantity);
         }
+    }
+
+    private textContents_ko: Map<string, string[]> = new Map<string, string[]>();
+    private textContents_eng: Map<string, string[]> = new Map<string, string[]>();
+
+    public LoadAllLanguageData() {
+        this.textContents_ko = this.LoadLanguageData(this.lang_ko);
+        this.textContents_eng = this.LoadLanguageData(this.lang_eng);
+    }
+
+    public LoadLanguageData(textAsset: TextAsset): Map<string, string[]> {
+        const textContents = new Map<string, string[]>();
+        const lines = textAsset.text.split('\n'); // split the CSV file by row
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
+            const values = line.split(','); // split the row by comma to get the values
+            
+            // do something with the values
+            const key = values[0];
+            const contents = values[1];
+            let group = textContents.get(key); 
+            if(!group){
+                group = [];
+                textContents.set(values[0], group);
+            }
+            group.push(values[1]);
+        }
+        return textContents;
     }
 
     public GetCardData(id: string): CardData {

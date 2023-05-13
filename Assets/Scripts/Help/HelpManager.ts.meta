@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: 508729b000a1bf8498bdcd489b9ff092
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst UIManager_1 = require(\"../UIManager\");\r\nconst
+    SoundManager_1 = require(\"../SoundManager\");\r\nclass HelpManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    static GetInstance() {\r\n        if (!HelpManager.Instance) {\r\n           
+    //Debug.LogError(\"GameManager\");\r\n            var _obj = UnityEngine_1.GameObject.Find(\"HelpManager\");\r\n           
+    if (!_obj) {\r\n                _obj = new UnityEngine_1.GameObject(\"HelpManager\");\r\n               
+    _obj.AddComponent($typeof(HelpManager));\r\n            }\r\n            HelpManager.Instance
+    = _obj.GetComponent($typeof(HelpManager));\r\n            UnityEngine_1.GameObject.DontDestroyOnLoad(_obj);\r\n       
+    }\r\n        return HelpManager.Instance;\r\n    }\r\n    Awake() {\r\n       
+    if (this != HelpManager.GetInstance())\r\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n   
+    }\r\n    GuideStartGame() {\r\n        this.helpWindow_full.gameObject.SetActive(true);\r\n   
+    }\r\n}\r\nexports.default = HelpManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSGVscE1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJIZWxwTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUVyRCw2Q0FBOEU7QUFDOUUsNENBQXFDO0FBQ3JDLGtEQUEyQztBQUUzQyxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBR25ELE1BQU0sQ0FBQyxXQUFXO1FBRXJCLElBQUksQ0FBQyxXQUFXLENBQUMsUUFBUSxFQUFFO1lBQ3ZCLGdDQUFnQztZQUVoQyxJQUFJLElBQUksR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsQ0FBQztZQUMxQyxJQUFJLENBQUMsSUFBSSxFQUFFO2dCQUNQLElBQUksR0FBRyxJQUFJLHdCQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7Z0JBQ3JDLElBQUksQ0FBQyxZQUFZLFNBQUMsV0FBVyxHQUFJO2FBQ3BDO1lBQ0QsV0FBVyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLFdBQVcsRUFBRyxDQUFDO1lBQ3hELHdCQUFVLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDdEM7UUFDRCxPQUFPLFdBQVcsQ0FBQyxRQUFRLENBQUM7SUFDaEMsQ0FBQztJQUNELEtBQUs7UUFDRCxJQUFJLElBQUksSUFBSSxXQUFXLENBQUMsV0FBVyxFQUFFO1lBQUUsd0JBQVUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQy9FLENBQUM7SUFNTSxjQUFjO1FBQ2pCLElBQUksQ0FBQyxlQUFlLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNwRCxDQUFDO0NBRUo7QUE5QkQsOEJBOEJDIn0=","assetPath":"Assets/Scripts/Help/HelpManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"helpWindow_full","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"helpWindow_upper","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"helpWindow_lower","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"HelpManager","description":""},"isCompiled":true}'
+  typescriptHash: 602bc0042f68a98dbf2067af2687b41e
+  onlyWriteTrigger: 0

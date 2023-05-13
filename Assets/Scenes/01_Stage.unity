@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 3473532}
   - component: {fileID: 3473531}
   m_Layer: 0
-  m_Name: Section_Slice
+  m_Name: Section_Prep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7918,7 +7918,7 @@ GameObject:
   - component: {fileID: 303107680}
   - component: {fileID: 303107679}
   m_Layer: 5
-  m_Name: Canvas_Slice
+  m_Name: Canvas_Prep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9019,7 +9019,7 @@ GameObject:
   - component: {fileID: 432603281}
   - component: {fileID: 432603283}
   m_Layer: 5
-  m_Name: Panel_Slice
+  m_Name: Panel_Prep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23480,7 +23480,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9866fda0e61a7904087eb0ec5ab17e03, type: 2}
+  - {fileID: 2100000, guid: 68e5be533d69dd64caea0478144cfd9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39208,8 +39208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148305526687}
   m_LocalRotation: {x: -0.65415305, y: 0.26848426, z: 0.26848426, w: 0.65415305}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 26.104967, y: 26.104967, z: 26.104969}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalScale: {x: 28, y: 28, z: 28}
   m_Children:
   - {fileID: 1398618389572063062}
   - {fileID: 7773157511411480141}
@@ -41915,7 +41915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9866fda0e61a7904087eb0ec5ab17e03, type: 2}
+  - {fileID: 2100000, guid: 68e5be533d69dd64caea0478144cfd9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -42433,7 +42433,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9866fda0e61a7904087eb0ec5ab17e03, type: 2}
+  - {fileID: 2100000, guid: 68e5be533d69dd64caea0478144cfd9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

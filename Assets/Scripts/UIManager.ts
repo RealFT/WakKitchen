@@ -231,7 +231,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     // Info Window
     public OpenInformation(message: string) {
         // Set the text of the information element to the given message
-        this.informationObj.GetComponentInChildren<Text>().text = message;
+        this.informationObj.GetComponentInChildren<TextMeshProUGUI>().text = message;
         // Start a coroutine to display the information element for a set amount of time
         this.StartCoroutine(this.DisaplayInformation());
     }

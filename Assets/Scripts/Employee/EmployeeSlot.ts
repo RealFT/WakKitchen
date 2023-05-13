@@ -54,7 +54,7 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
                 this.foodIds.push(Ingredient.PATTY);
                 proficiency = employeeData.GetGrillProficiency();
                 break;
-            case Section.Slice:
+            case Section.Prep:
                 this.foodIds.push(Ingredient.CABBAGE);
                 this.foodIds.push(Ingredient.TOMATO);
                 this.foodIds.push(Ingredient.ONION);
