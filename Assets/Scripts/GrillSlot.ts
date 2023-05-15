@@ -94,6 +94,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
                     this.bakingButton.onClick.AddListener(() => {
                         this.ClearGrill();
                         OrderManager.GetInstance().AddItemToInventory(Ingredient.PATTY);
+                        SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
                     });
                     this.bakeSliderFill.color = this.bakedColor;
                     this.isFliped = false;

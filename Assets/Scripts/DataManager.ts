@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { Random, Sprite, Resources, TextAsset, PlayerPrefs } from 'UnityEngine';
+import { Random, Sprite, Resources, TextAsset, PlayerPrefs, Application, SystemLanguage } from 'UnityEngine';
 import Receipt from './Receipt';
 import { GameObject, Debug } from 'UnityEngine';
 import CardData from './Employee/CardData';
@@ -116,7 +116,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private unlockStageFile: TextAsset;
     @SerializeField() private cardFile: TextAsset;
     @SerializeField() private lang_ko: TextAsset;
-    @SerializeField() private lang_eng: TextAsset;
+    @SerializeField() private lang_en: TextAsset;
     // Define the member variables for the Receipt's sprites
     @SerializeField() private ingredientSprites: Sprite[];
     @SerializeField() private drinkSprites: Sprite[];
@@ -128,6 +128,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private cardBackgroundSprites: Sprite[];
     @SerializeField() private cardFrameSprites: Sprite[];
     @SerializeField() private sectionSprites: Sprite[];
+
+    private textContents_ko: Map<string, string[]> = new Map<string, string[]>();
+    private textContents_en: Map<string, string[]> = new Map<string, string[]>();
+    private langCode: string;    // Language Setting
 
     private receipts: Receipt[] = [];
     private stageReceipts: Receipt[] = [];
@@ -143,6 +147,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
+        this.SetLangCode();
         this.LoadData();
     }
 
@@ -178,12 +183,15 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.LoadStageData();
         this.LoadUnlockStageData();
         this.LoadCardData();
+        this.LoadAllLanguageData();
     }
 
     public LoadSavedStage() {
         // this.lastSavedStage = 1;
         // this.SetValue("Stage", this.lastSavedStage);
         this.lastSavedStage = this.GetValue("Stage");
+        // 값이 없을 경우 0 리턴. 처음 시작은 1스테이지부터.
+        if(this.lastSavedStage == 0) this.lastSavedStage = 1;
         this.SetValue("Stage", this.lastSavedStage);
     }
     public GetLastSavedStage(): number {
@@ -262,6 +270,57 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
+    // ----------- Language -------------
+    public LoadAllLanguageData() {
+        if(this.textContents_ko) this.textContents_ko = this.LoadLanguageData(this.lang_ko);
+        if(this.textContents_en) this.textContents_en = this.LoadLanguageData(this.lang_en);
+    }
+
+    public LoadLanguageData(textAsset: TextAsset): Map<string, string[]> {
+        const textContents = new Map<string, string[]>();
+        const lines = textAsset.text.split('\n'); // split the CSV file by row
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
+            const values = line.split(','); // split the row by comma to get the values
+            
+            // do something with the values
+            const key = values[0];
+            const contents = values[1];
+            let group = textContents.get(key); 
+            if(!group){
+                group = [];
+                textContents.set(key, group);
+            }
+            group.push(contents);
+        }
+        return textContents;
+    }
+
+    private SetLangCode(){
+        // 사용자의 지역 정보 가져오기
+        if (Application.systemLanguage == SystemLanguage.Korean) {
+            this.langCode = "ko"; // 사용자가 한국어를 사용하는 경우
+        }
+        else {
+            this.langCode = "en"; // 기본 언어 설정 (영어)
+        }
+    }
+
+    public GetCurrentLanguageData(key:string): string[] {
+        switch(this.langCode){
+            case "ko":
+                return this.textContents_ko?.get(key);
+            case "en":
+                return this.textContents_en?.get(key);
+            default:
+                console.log("langCode error");
+                return null;
+        }
+    }
+    // ----------- Language -------------
+
+
+    // ----------- Card -------------
     public LoadCardData() {
         const lines = this.cardFile.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
@@ -282,42 +341,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
-    private textContents_ko: Map<string, string[]> = new Map<string, string[]>();
-    private textContents_eng: Map<string, string[]> = new Map<string, string[]>();
-
-    public LoadAllLanguageData() {
-        this.textContents_ko = this.LoadLanguageData(this.lang_ko);
-        this.textContents_eng = this.LoadLanguageData(this.lang_eng);
-    }
-
-    public LoadLanguageData(textAsset: TextAsset): Map<string, string[]> {
-        const textContents = new Map<string, string[]>();
-        const lines = textAsset.text.split('\n'); // split the CSV file by row
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
-            const values = line.split(','); // split the row by comma to get the values
-            
-            // do something with the values
-            const key = values[0];
-            const contents = values[1];
-            let group = textContents.get(key); 
-            if(!group){
-                group = [];
-                textContents.set(values[0], group);
-            }
-            group.push(values[1]);
-        }
-        return textContents;
-    }
-
     public GetCardData(id: string): CardData {
         return this.cardDatas.get(id);
     }
-
-    public GetInventoryCache(): Map<string, number> {
-        return this.inventoryCache;
-    }
-
     public GetCardQuantity(id: string): number {
         return this.inventoryCache.get(id) || 0;
     }
@@ -391,6 +417,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
     public GetCardFrameByGrade(grade: string): Sprite{
         const index = this.GetGradeNumberByString(grade);
         return this.cardFrameSprites[index];
+    }
+    // ----------- Card -------------
+    
+
+    public GetInventoryCache(): Map<string, number> {
+        return this.inventoryCache;
     }
 
     public SetStageReceipts(stage: number) {

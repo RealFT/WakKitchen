@@ -30,6 +30,7 @@ export default class Shop extends ZepetoScriptBehaviour {
         }
         this.toStageBtn.onClick.AddListener(() => {
             GameManager.GetInstance().NextStage();
+            SoundManager.GetInstance().OnPlayButtonClick();
         });
     }
 

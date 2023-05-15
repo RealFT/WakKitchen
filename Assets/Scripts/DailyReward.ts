@@ -18,11 +18,11 @@ export default class DailyReward extends ZepetoScriptBehaviour {
     
     Start(){
         // Debug: Decrease saved date by one day for debugging purposes
-        let debugDate: Date = new Date();
-        debugDate.setDate(debugDate.getDate() - 1);
-        PlayerPrefs.SetString(this.rewardDateKey, debugDate.toISOString());
-        // Debug: set wakdu 1 for debugging purposes
-        DataManager.GetInstance().SetValue(this.wakduKey, 1);
+        // let debugDate: Date = new Date();
+        // debugDate.setDate(debugDate.getDate() - 1);
+        // PlayerPrefs.SetString(this.rewardDateKey, debugDate.toISOString());
+        // // Debug: set wakdu 1 for debugging purposes
+        // DataManager.GetInstance().SetValue(this.wakduKey, 1);
 
         // Initialize claimButton
         this.claimButton.onClick.AddListener(() => this.ClaimReward());
@@ -81,7 +81,9 @@ export default class DailyReward extends ZepetoScriptBehaviour {
             DataManager.GetInstance().SetValue(this.wakduKey, currentWakdu);
 
             // Update the date of the last reward
-            const currentDate: Date = new Date();
+            let currentDate: Date = new Date();
+            currentDate.setHours(0);
+            currentDate.setMinutes(0);
             PlayerPrefs.SetString(this.rewardDateKey, currentDate.toISOString());
 
             this.CreateWakdu();

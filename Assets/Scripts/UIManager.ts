@@ -69,8 +69,13 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.informationObj.SetActive(false);
     }
 
-    *PlayHelp(text: TextMeshProUGUI)
+    public PlayText(text: TextMeshProUGUI, textContents: string[]){
+        this.StartCoroutine(this.TypeRoutine(text, textContents));
+    }
+
+    *TypeRoutine(text: TextMeshProUGUI, textContents: string[])
     {
+        this.ResetText(text);
         // introBackAnim.Play();
         // while (introBackAnim.isPlaying) yield return null;
         // MoveScene(SCENE.Main, SCENE.CharSelect);
@@ -79,12 +84,15 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         // introObjectList[introObjCount].SetActive(true);
 
         // helpTexts는 DataManager에서 가져오기
-        for (let i = 0; i < this.helpTexts.length; i++)
+        for (let i = 0; i < textContents.length; i++)
         {
+            this.isTextEnd = false;
             // 한 줄의 타이핑이 완료될 때 까지 대기
-            yield this.TypeChat(text, this.helpTexts[i]);
+            this.StartCoroutine(this.TypeChat(text, textContents[i]));
+            while(!this.isTextEnd) yield null;
+
             // 코루틴을 탈출하면 현재 문장 전부 불러옴
-            text.text = this.helpTexts[i];
+            text.text = textContents[i];
 
             //yield return new WaitForSeconds(0.2f);
 
@@ -93,22 +101,23 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         }
         // 인트로가 끝났을 경우 인트로 비활성화 호출
         // OffIntro();
-        this.ResetText(text);
+
     }
 
-    public nextText(text: TextMeshProUGUI)
+    public nextText(): boolean
     {
         // 텍스트가 끝나지 않았을 경우
         if (!this.isTextEnd)
         {
             // 텍스트 출력을 한번에 하고 리턴.
             this.isTextCut = true;
+            return false;
         }
         // 텍스트 출력이 끝났을 경우
         else
         {
             // 텍스트 초기화
-            text.text = "";
+            //text.text = "";
             // // 인트로 오브젝트가 남아있는 경우에만 활성화
             // if (introObjCount + 1 < introObjectList.Count)
             // {
@@ -117,12 +126,13 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
             //     introObjectList[introObjCount].SetActive(true);
             // }
             this.isNextText = true;
+            return true;
         }
     }
 
     *TypeChat(targetText: TextMeshProUGUI, narration: string)
     {
-        this.isTextEnd = false;
+        this.isTextCut = false;
         this.writerText = "";
         //텍스트 타이핑 효과
         for (let i = 0; i < narration.length; i++)
@@ -133,7 +143,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
             this.writerText += narration[i];
             targetText.text = this.writerText;
             SoundManager.GetInstance().OnPlaySFX("Button_Select");
-            yield new WaitForSeconds(0.07);
+            yield new WaitForSeconds(0.032);
         }
         this.isTextEnd = true;
         this.isTextCut = false;

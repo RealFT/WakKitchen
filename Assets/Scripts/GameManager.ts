@@ -12,6 +12,7 @@ import BalanceManager from './Shop/BalanceManager';
 import Mediator, { EventNames } from './Notification/Mediator';
 import SoundManager from './SoundManager';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
+import HelpManager from './Help/HelpManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -73,6 +74,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
         UIManager.GetInstance().InitStageUI();
         UIManager.GetInstance().InitShopUI();
         //this.SetPlayerJump(false);
+
+        if(this.curStage == 1){
+            HelpManager.GetInstance().GuideStartGame();
+        }
     }
 
     public StartStage(){
