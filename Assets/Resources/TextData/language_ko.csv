@@ -10,36 +10,27 @@ shop_hire_category,고용
 shop_hire_buy,고용하기
 shop_upgrade_category,조리도구
 shop_upgrade_buy,구입
-tutorial_start_ment1,안녕! 나는 팬치라고 해! 너의 가게 운영을 도와주러 왔어!
-tutorial_start_ment2,먼저 우리 가게로 이동해 볼까? Play 버튼을 눌러서 가게로 이동하자.
-tutorial_start_ment3,"여기가 우리의 가게야! 아직은 조금 부족하지만, 점점 더 좋아질거야!"
-tutorial_start_ment4,"먼저, 조합대로 가 볼까? 이곳으로 이동해 보자."
-tutorial_start_ment5,Open 버튼을 누르면 조리를 시작할 수 있어.
-tutorial_start_ment6,물음표 버튼을 클릭하면 제조 방법을 알 수 있어!
-tutorial_start_ment7,햄버거 번과 치즈는 매일 공급을 해 줄게! 나머지는 직접 구해야 할 거야.
-tutorial_start_ment8,주문이 들어왔어! 자세히 확인해 볼까? 주문 영수증을 눌러보자.
-tutorial_start_ment9,"주의할 점은, 영수증의 하트 게이지가 모두 소진되기 전에 음식을 서빙해야 해. 안 그러면 손님이 화가 나서 나가버릴 거야.."
-tutorial_start_ment10,이제 주문에 맞게 조리를 해 볼까? 틀려도 괜찮아! 재료들은 다시 원상태로 복구된다구!
-tutorial_start_ment11,좋아! 이제 열심히 돈을 모아 보자구!
-tutorial_dispenser_ment1,디스펜서가 해금되었어! 이제부터 음료수를 제조할 수 있어!
-tutorial_dispenser_ment2,디스펜서는 여기에 있어. 이쪽으로 가 보자!
-tutorial_grill_ment1,그릴이 해금되었어! 이제 패티를 구울 수 있겠다!
-tutorial_grill_ment2,그릴은 이곳에 배치해 두었어. 역시 버거에는 패티가 빠질 수 없지!
-tutorial_employee_ment1,드디어! 아르바이트 기능이 해금되었어! 왁타버스 친구들을 일일 알바로 고용할 수 있어.
-tutorial_employee_ment2,먼저 고용 탭으로 가 보자!
-tutorial_employee_ment3,이제 고용을 해 볼까? 이번에는 무료로 고용하게 해 줄게!
-tutorial_employee_ment4,어때? 좋은 캐릭터 카드가 나왔어?
-tutorial_employee_ment5,이제 고용한 알바들을 관리해 보자. 이곳을 클릭해서 내 카드들을 관리할 수 있어.
-tutorial_employee_ment6,이런! 일일 알바를 장착할 슬롯이 부족해! 먼저 슬롯을 늘려야겠어.
-tutorial_employee_ment7,업그레이드 탭으로 이동하자. 그곳에서 기능을 강화시킬 수 있어.
-tutorial_employee_ment8,Employee를 업그레이드 해 보자! 슬롯이 늘어날 거야!
-tutorial_employee_ment9,성공했어! 이제 다시 카드 관리 창으로 돌아가자.
-tutorial_employee_ment10,"슬롯이 늘어났어! 이제 원하는 알바를 선택하고, 장착 버튼을 눌러 알바를 사용하자!"
-tutorial_employee_ment11,장착한 알바에게 업무를 지정해 주어야 해. 음료를 뽑게 해 볼까?
-tutorial_employee_ment12,이제 장사 할 준비가 끝났어! 다음 날이 기대되는걸?
-tutorial_employee_ment13,아르바이트는 이곳에 표시 돼! 아르바이트를 누르면 작업을 멈추게 할 수도 있어!
-tutorial_employee_ment14,"아르바이트를 사용하게 되면 해당 카드 1장을 소모하게 되고, 일일 수당을 지급해 주어야 한다는 점 명심해!"
-tutorial_employee_ment15,이제 장사를 시작 해 보자구!
+tutorial_start_ment1,안녕하세요! 저는 가게 운영을 도와주러 온 팬치라고 합니다. 
+tutorial_start_ment2,"먼저, Play 버튼을 눌러 가게로 이동하세요!"
+tutorial_start_ment3,조합대의 위치는 이곳입니다.
+tutorial_start_ment4,Open 버튼을 눌러 조리를 시작할 수 있습니다.
+tutorial_start_ment5,도움말 버튼을 누르면 조리 방법을 알 수 있습니다.
+tutorial_start_ment6,주문 영수증을 눌러 자세한 정보를 확인할 수 있습니다.
+tutorial_dispenser_ment1,디스펜서가 해금되었습니다. 이제부터 음료수를 제조할 수 있습니다!
+tutorial_dispenser_ment2,디스펜서의 위치는 이곳입니다.
+tutorial_grill_ment1,그릴이 해금되었습니다. 이제부터 패티를 구울 수 있습니다.
+tutorial_grill_ment2,그릴의 위치는 이곳입니다.
+tutorial_employee_ment1,아르바이트 기능이 해금되었습니다. 조리를 대신 맡길 수 있습니다.
+tutorial_employee_ment2,고용 탭으로 이동해 주세요.
+tutorial_employee_ment3,이곳에서 아르바이트를 고용할 수 있습니다.
+tutorial_employee_ment4,카드 관리창을 열어 획득한 카드들을 관리할 수 있습니다.
+tutorial_employee_ment5,아르바이트를 사용하기 위해서는 기능 강화를 통해 슬롯을 늘려야 합니다.
+tutorial_employee_ment6,업그레이드 탭으로 이동하세요. 그곳에서 기능을 강화시킬 수 있습니다.
+tutorial_employee_ment7,Employee를 업그레이드 해 슬롯이 확장시키세요.
+tutorial_employee_ment8,업그레이드가 완료되었습니다! 이제 카드 관리창을 다시 열어주세요.
+tutorial_employee_ment9,"이제 원하는 카드를 선택하고, 장착해주세요."
+tutorial_employee_ment10,장착한 아르바이트에게 업무를 지정해 주어야 합니다. 업무를 선택 해 주세요.
+tutorial_employee_ment11,모든 준비가 끝났습니다. 이제 이 가게를 최고의 가게로 만들어 주세요!
 help_receipt_ment1,"일정 주기마다 손님이 주문을 합니다. 주문이 빨리 해소될수록, 손님의 방문이 빨라집니다."
 help_receipt_ment2,하트 게이지가 다 사라지게 되면 손님이 떠나게 됩니다.
 help_receipt_ment3,손님의 영수증을 누르면 자세한 정보를 확인할 수 있습니다. 
@@ -47,3 +38,4 @@ help_receipt_ment4,하단에 가격이 표시됩니다. 강도는 돈을 주지 않습니다.
 help_plating_ment1,레시피와 동일한 순서대로 쌓아 재료를 조합해주세요.
 help_plating_ment2,제조한 재료들은 이곳에 추가됩니다.
 help_plating_ment3,"조합이 완료되면 벨을 눌러 서빙을 완료할 수 있습니다. 레시피가 틀리면, 재료들이 원위치됩니다."
+help_employee_ment1,아르바이트는 이곳에 표시 됩니다. 아르바이트를 눌러 작업을 중단시킬 수 있습니다.

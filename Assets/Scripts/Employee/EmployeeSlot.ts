@@ -5,6 +5,7 @@ import OrderManager from '../OrderManager';
 import DataManager, { Drink, Ingredient, Section, Side } from '../DataManager';
 import CardData from './CardData';
 import Mediator, { EventNames } from '../Notification/Mediator';
+import SoundManager from '../SoundManager';
 
 export default class EmployeeSlot extends ZepetoScriptBehaviour {
     @SerializeField() private pauseResumeToggle: Toggle;
@@ -90,6 +91,7 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
                 // Work done.
                 const foodId = this.GetRandomFoodId();
                 OrderManager.GetInstance().AddItemToInventory(foodId);
+                SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
                 this.foodImage.gameObject.SetActive(true);
                 this.foodImage.sprite = DataManager.GetInstance().getProductSprite(foodId);
                 this.foodAnim.Play();

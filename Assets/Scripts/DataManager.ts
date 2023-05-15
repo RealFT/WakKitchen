@@ -181,10 +181,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public LoadSavedStage() {
-        this.lastSavedStage = 1;
-        this.SetValue("Stage", this.lastSavedStage);
-        // this.lastSavedStage = this.GetValue("Stage");
+        // this.lastSavedStage = 1;
         // this.SetValue("Stage", this.lastSavedStage);
+        this.lastSavedStage = this.GetValue("Stage");
+        this.SetValue("Stage", this.lastSavedStage);
     }
     public GetLastSavedStage(): number {
         return this.lastSavedStage;

@@ -32,6 +32,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
             if (!this.isCatch) {
                 if (this.cup.GetState() != CupState.DEFAULT){
                     OrderManager.GetInstance().AddItemToInventory(this.curDrink, this.quantity);
+                    SoundManager.GetInstance().OnPlaySFX("Dispenser_liquid");
                     this.cupBtn.gameObject.SetActive(false);
                     this.isCatch = true;
                 }
@@ -42,6 +43,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
         });
         this.cupBtn.onClick.AddListener(() => {
             OrderManager.GetInstance().AddItemToInventory(this.curDrink, this.quantity);
+            SoundManager.GetInstance().OnPlaySFX("Dispenser_liquid");
             this.cupBtn.gameObject.SetActive(false);
         });
 

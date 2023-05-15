@@ -77,7 +77,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         } else {
             this.productInventory.set(product, quantity);
         }
-        SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
+        // SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
     }
 
     // Remove item from inventory

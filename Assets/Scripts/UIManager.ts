@@ -35,7 +35,8 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private informationObj: GameObject;
     @SerializeField() private displayDelay: number = 0.7;
     @SerializeField() private writerText: string = "";    // 
-    @SerializeField() private helpText: TextMeshProUGUI;    // 
+    @SerializeField() private lockHireTap: GameObject;
+    @SerializeField() private lockMyCard: GameObject;
     private helpTexts: string[] = [];
     private isNextText: boolean;   // 텍스트 출력을 한번에 할지 결정
     private isTextCut: boolean;   // 텍스트 출력을 한번에 할지 결정
@@ -68,7 +69,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.informationObj.SetActive(false);
     }
 
-    *PlayHelp()
+    *PlayHelp(text: TextMeshProUGUI)
     {
         // introBackAnim.Play();
         // while (introBackAnim.isPlaying) yield return null;
@@ -76,12 +77,14 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         // introSkipButton.SetActive(true);
         // introNextButton.SetActive(true);
         // introObjectList[introObjCount].SetActive(true);
+
+        // helpTexts는 DataManager에서 가져오기
         for (let i = 0; i < this.helpTexts.length; i++)
         {
             // 한 줄의 타이핑이 완료될 때 까지 대기
-            yield this.TypeChat(this.helpText, this.helpTexts[i]);
+            yield this.TypeChat(text, this.helpTexts[i]);
             // 코루틴을 탈출하면 현재 문장 전부 불러옴
-            this.helpText.text = this.helpTexts[i];
+            text.text = this.helpTexts[i];
 
             //yield return new WaitForSeconds(0.2f);
 
@@ -90,10 +93,10 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         }
         // 인트로가 끝났을 경우 인트로 비활성화 호출
         // OffIntro();
-        this.ResetHelpText();
+        this.ResetText(text);
     }
 
-    public nextHelp()
+    public nextText(text: TextMeshProUGUI)
     {
         // 텍스트가 끝나지 않았을 경우
         if (!this.isTextEnd)
@@ -105,7 +108,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         else
         {
             // 텍스트 초기화
-            this.helpText.text = "";
+            text.text = "";
             // // 인트로 오브젝트가 남아있는 경우에만 활성화
             // if (introObjCount + 1 < introObjectList.Count)
             // {
@@ -137,7 +140,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     }
 
     // Reset Help Text
-    private ResetHelpText()
+    private ResetText(text: TextMeshProUGUI)
     {
         // for (let i = 0; i < introObjectList.Count; i++)
         // {
@@ -148,7 +151,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         // intro.SetActive(false);
         // introObjCount = 0;
         //isIntro = false;  // 인트로를 단 한 번만 실행하게 하기
-        this.helpText.text = "";
+        text.text = "";
         this.isTextCut = false;
     }
 
@@ -250,6 +253,11 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.possessionMoneyTxt.text = money;
     }
     
+    public UnlockShop(){
+        this.lockHireTap.SetActive(false);
+        this.lockMyCard.SetActive(false);
+    }
+
     public OnNotify(sender: any, eventName: string, eventData: any): void {
         // If the event is PossessionMoneyUpdated, set the possession money text to the eventData value
         if (eventName == EventNames.PossessionMoneyUpdated) {

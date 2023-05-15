@@ -56,6 +56,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     Init() {
         this.curStage = DataManager.GetInstance().GetLastSavedStage();
+        this.CheckShopUnlock();
     }
     
     // Initializes the stage
@@ -108,8 +109,15 @@ export default class GameManager extends ZepetoScriptBehaviour {
         
         this.curStage++;
         DataManager.GetInstance().SetStage(this.curStage);
+        this.CheckShopUnlock();
         SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyStageEnd);
         Mediator.GetInstance().Notify(this, EventNames.StageEnded, null);
+    }
+
+    private CheckShopUnlock(){
+        if(this.curStage >= DataManager.GetInstance().GetUnlockStageByName("employee")){
+            UIManager.GetInstance().UnlockShop();
+        }
     }
 
     public PauseStage(){
