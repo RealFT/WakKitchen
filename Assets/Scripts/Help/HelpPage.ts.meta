@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: daf074360024a5741a660dbbb3b155c1
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    HelpPage extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    GetPrevBtn()
+    {\r\n        return this.prevBtn;\r\n    }\r\n    GetNextBtn() {\r\n        return
+    this.nextBtn;\r\n    }\r\n    SetDiscription(text) {\r\n        this.discription.text
+    = text;\r\n    }\r\n}\r\nexports.default = HelpPage;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSGVscFBhZ2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJIZWxwUGFnZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLGlEQUFxRDtBQUdyRCxNQUFxQixRQUFTLFNBQVEscUNBQXFCO0lBS2hELFVBQVU7UUFDYixPQUFPLElBQUksQ0FBQyxPQUFPLENBQUM7SUFDeEIsQ0FBQztJQUNNLFVBQVU7UUFDYixPQUFPLElBQUksQ0FBQyxPQUFPLENBQUM7SUFDeEIsQ0FBQztJQUVNLGNBQWMsQ0FBQyxJQUFZO1FBQzlCLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztJQUNqQyxDQUFDO0NBRUo7QUFoQkQsMkJBZ0JDIn0=","assetPath":"Assets/Scripts/Help/HelpPage.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"prevBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"nextBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"Unity.TextMeshPro","name":"discription","type":"TMPro.TextMeshProUGUI","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"HelpPage","description":""},"isCompiled":true}'
+  typescriptHash: 080ab65af13bb3a74dabe38e09e04491
+  onlyWriteTrigger: 0

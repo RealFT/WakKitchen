@@ -19,9 +19,10 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
-    HelpWindow extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetBackgroundAlpha(alpha)
-    {\r\n        this.background.color.a = alpha;\r\n    }\r\n    GetHelpText() {\r\n       
-    return this.helpText;\r\n    }\r\n}\r\nexports.default = HelpWindow;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSGVscFdpbmRvdy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkhlbHBXaW5kb3cudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFJckQsTUFBcUIsVUFBVyxTQUFRLHFDQUFxQjtJQUtsRCxrQkFBa0IsQ0FBQyxLQUFhO1FBQ25DLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsR0FBRyxLQUFLLENBQUM7SUFDcEMsQ0FBQztJQUVNLFdBQVc7UUFDZCxPQUFPLElBQUksQ0FBQyxRQUFRLENBQUM7SUFDekIsQ0FBQztDQUNKO0FBWkQsNkJBWUMifQ==","assetPath":"Assets/Scripts/Help/HelpWindow.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"background","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"Unity.TextMeshPro","name":"helpText","type":"TMPro.TextMeshProUGUI","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"HelpWindow","description":""},"isCompiled":true}'
-  typescriptHash: 0f5ba5c9f08822efb1fee1029ada1371
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    TMPro_1 = require(\"TMPro\");\r\nclass HelpWindow extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    GetHelpText() {\r\n        return this.helpText;\r\n    }\r\n}\r\nexports.default
+    = HelpWindow;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSGVscFdpbmRvdy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkhlbHBXaW5kb3cudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsbURBQXVEO0FBQ3ZELDZDQUE4RTtBQUM5RSxpQ0FBd0M7QUFDeEMsTUFBcUIsVUFBVyxTQUFRLHFDQUFxQjtJQUdsRCxXQUFXO1FBQ2QsT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDO0lBQ3pCLENBQUM7Q0FDSjtBQU5ELDZCQU1DIn0=","assetPath":"Assets/Scripts/Help/HelpWindow.ts","manifest":{"properties":[{"assembly":"Unity.TextMeshPro","name":"helpText","type":"TMPro.TextMeshProUGUI","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"HelpWindow","description":""},"isCompiled":true}'
+  typescriptHash: 8fcba3d865afc632d1cc6d142667b0f8
   onlyWriteTrigger: 0

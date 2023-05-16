@@ -49,4 +49,8 @@ export default class InteractionBase extends ZepetoScriptBehaviour {
     protected SetKitchenVisibility(value: boolean) {
         this.escapeButton.gameObject.SetActive(value);
     }
+
+    public GetOpenButton(): Button{
+        return this.openButton;
+    }
 }

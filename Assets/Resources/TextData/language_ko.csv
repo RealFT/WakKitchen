@@ -10,12 +10,14 @@ shop_hire_category,고용
 shop_hire_buy,고용하기
 shop_upgrade_category,조리도구
 shop_upgrade_buy,구입
-tutorial_start_ment1,안녕하세요! 저는 가게 운영을 도와주러 온 팬치라고 합니다. 
+tutorial_start_ment1,안녕하세요! 저는 가게 운영을 도와주러 온 팬치입니다! 
 tutorial_start_ment2,Play 버튼을 눌러 가게로 이동하세요!
-tutorial_start_ment3,먼저 조합대로 가 볼까요? 이곳으로 이동해 주세요.
-tutorial_start_ment4,가까이 다가가서 Open 버튼을 누르면 조리를 시작할 수 있습니다.
-tutorial_start_ment5,도움말 버튼을 누르면 조리 방법을 알 수 있습니다.
-tutorial_start_ment6,주문 영수증을 눌러 자세한 정보를 확인할 수 있습니다.
+tutorial_start_ment3,아직은 조합대만 해금되어 있어요. 조합대는 여기에 있습니다.
+tutorial_start_ment4,가까이 다가가서 Open 버튼을 누르면 조리를 시작할 수 있습니다. 조합대로 이동해 주세요!
+tutorial_start_ment5,"먼저, 도움말 버튼을 눌러 자세한 조리 방법을 확인해 보세요."
+tutorial_start_ment6,이제 주문을 받아 보죠! 주문이 들어오면 이곳에 영수증이 표시됩니다.
+tutorial_start_ment7,주문 영수증을 눌러 자세한 정보를 확인할 수 있습니다.
+tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
 tutorial_dispenser_ment1,디스펜서가 해금되었습니다. 이제부터 음료수를 제조할 수 있습니다!
 tutorial_dispenser_ment2,디스펜서의 위치는 이곳입니다.
 tutorial_grill_ment1,그릴이 해금되었습니다. 이제부터 패티를 구울 수 있습니다.
@@ -35,7 +37,8 @@ help_receipt_ment1,"일정 주기마다 손님이 주문을 합니다. 주문이
 help_receipt_ment2,하트 게이지가 다 사라지게 되면 손님이 떠나게 됩니다.
 help_receipt_ment3,손님의 영수증을 누르면 자세한 정보를 확인할 수 있습니다. 
 help_receipt_ment4,하단에 가격이 표시됩니다. 강도는 돈을 주지 않습니다.
-help_plating_ment1,레시피와 동일한 순서대로 쌓아 재료를 조합해주세요.
-help_plating_ment2,제조한 재료들은 이곳에 추가됩니다.
-help_plating_ment3,"조합이 완료되면 벨을 눌러 서빙을 완료할 수 있습니다. 레시피가 틀리면, 재료들이 원위치됩니다."
+help_plating_ment1,제조를 시작하기 전에 레시피를 확인합니다. 주문이 들어오면 좌측 상단에 주문 영수증이 표기됩니다.
+help_plating_ment2,"주문 영수증을 누르면 주문자, 주문내역, 금액 등을 확인할 수 있습니다. 가끔 나타나는 도둑은 금액을 지불하지 않습니다!"
+help_plating_ment3,레시피 순서대로 재료를 쌓아 요리를 완성하세요. 우측 하단의 쓰레기통 버튼을 눌러 잘못 만든 요리를 버리고 다시 만들 수 있습니다.
+help_plating_ment4,요리가 완성되면 벨을 눌러 손님에게 전달하세요. 레시피와 다른 요리를 만들어 서빙에 실패하게 되면 재료들은 원상복구됩니다.
 help_employee_ment1,아르바이트는 이곳에 표시 됩니다. 아르바이트를 눌러 작업을 중단시킬 수 있습니다.

@@ -1,0 +1,44 @@
+button_confirm,Confirm
+button_cancel,Cancel
+button_next,Next
+main_start,Start
+setting_language,Language
+setting_bgm,BGM
+setting_sfx,SFX
+setting_help,Help
+shop_hire_category,Hire
+shop_hire_buy,Hire
+shop_upgrade_category,Upgrade
+shop_upgrade_buy,Buy
+tutorial_start_ment1,"Hello! I'm Panchi, here to help you with your shop operation!"
+tutorial_start_ment2,Press the Play button to move to the shop!
+tutorial_start_ment3,Only the Workstation is unlocked for now. The Workstation is right here.
+tutorial_start_ment4,Approach it closely and press the Open button to start cooking.
+tutorial_start_ment5,"Press the Help button to check the detailed cooking instructions."
+tutorial_start_ment6,"When an order comes in, the receipt will be displayed here."
+tutorial_start_ment7,Press the order receipt to view detailed information.
+tutorial_start_ment8,Now it's time for real action! Serve delicious burgers to your customers!
+tutorial_dispenser_ment1,The dispenser is unlocked. Now you can make beverages!
+tutorial_dispenser_ment2,The dispenser is located here.
+tutorial_grill_ment1,The grill is unlocked. Now you can cook patties!
+tutorial_grill_ment2,The grill is located here.
+tutorial_employee_ment1,The part-time employee feature is unlocked. You can delegate cooking tasks to them.
+tutorial_employee_ment2,"Go to the Hire tab, please."
+tutorial_employee_ment3,You can hire part-time employees here.
+tutorial_employee_ment4,Open the Card Management window to manage the cards you've obtained.
+tutorial_employee_ment5,"To use part-time employees, you need to expand slots through function upgrades."
+tutorial_employee_ment6,Go to the Upgrade tab. You can enhance the functions there.
+tutorial_employee_ment7,Upgrade Employee to expand the slots.
+tutorial_employee_ment8,Upgrade complete! Now reopen the Card Management window.
+tutorial_employee_ment9,Now select and equip the desired card.
+tutorial_employee_ment10,You need to assign tasks to the equipped employees. Please select the tasks.
+tutorial_employee_ment11,All preparations are complete. Now make this shop the best one!
+help_receipt_ment1,"Customers place orders at regular intervals. The faster you fulfill the orders, the faster the customers' visits."
+help_receipt_ment2,"When the heart gauge is depleted, the customer leaves."
+help_receipt_ment3,Press the customer's receipt to view detailed information.
+help_receipt_ment4,The price is displayed at the bottom. Intensity does not give money.
+help_plating_ment1,"Before starting the manufacturing process, check the recipe. When an order comes in, the order receipt will be displayed in the top left corner."
+help_plating_ment2,"By pressing the order receipt, you can check the customer's name, order details, and amount. Occasionally, a thief may appear who does not pay the amount!"
+help_plating_ment3,Stack the ingredients in the order of the recipe to complete the dish. Press the trash can button in the bottom right corner to discard any incorrectly made dishes and start again.
+help_plating_ment4,"Once the dish is completed, press the bell to deliver it to the customer. If you make a different dish from the recipe and fail to serve it, the ingredients will be restored to their original state."
+help_employee_ment1,Part-time employees are displayed here. You can click on the employee to pause their work.

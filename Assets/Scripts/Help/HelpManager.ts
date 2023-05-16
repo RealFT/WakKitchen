@@ -1,11 +1,13 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { Button, InputField, Slider } from "UnityEngine.UI";
+import { Button, Image, Slider } from "UnityEngine.UI";
 import { GameObject, Random, WaitForSeconds, Debug, Time } from 'UnityEngine';
 import UIManager from '../UIManager';
 import SoundManager from '../SoundManager';
 import HelpWindow from './HelpWindow';
-import DataManager from '../DataManager';
+import DataManager, { Section } from '../DataManager';
 import GameManager from '../GameManager';
+import Interaction from '../Interaction';
+import HelpContents from './HelpContents';
 
 export default class HelpManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -32,6 +34,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.window_lower = this.helpWindow_lower.GetComponent<HelpWindow>();
     }
 
+    @SerializeField() private background: Image;
     @SerializeField() private nextBtn: Button;
     @SerializeField() private helpUI: GameObject;
     @SerializeField() private helpWindow_full: GameObject;
@@ -43,6 +46,11 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     private window_upper: HelpWindow;
     private window_lower: HelpWindow;
     private curPage: number;
+    private enableBackground: number = 0.625;
+    private disableBackground: number = 0;
+
+    @SerializeField() private helpContents_Plating: GameObject;
+
 
     Start(){
         for (const gameObject of this.guideObjects) {
@@ -60,8 +68,13 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.helpWindow_full.SetActive(false);
         this.helpWindow_upper.SetActive(false);
         this.helpWindow_lower.SetActive(false);
+        this.background.gameObject.SetActive(true);
     }
-    
+
+    public setBackgroundVisibility(visible: boolean) {
+        this.background.enabled = visible;
+    }
+
     public GuideStartGame(){
         this.helpUI.SetActive(true);
         this.StartCoroutine(this.GuideStartRoutine());
@@ -72,6 +85,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
         // page 1
         this.helpWindow_full.gameObject.SetActive(true);
+        this.setBackgroundVisibility(true);
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment1"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
@@ -85,6 +99,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.helpWindow_lower.gameObject.SetActive(true);
         const playButton = this.gameObjectMap.get("Help_ToStageBtn")?.[0];
         playButton.SetActive(true);
+        this.setBackgroundVisibility(true);
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment2"));
         this.nextBtn.onClick.AddListener(()=>{
@@ -97,10 +112,12 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         while (this.curPage < 2) yield null;
 
-        // page 3
+        // page 3, 4
         this.helpWindow_lower.gameObject.SetActive(false);
         this.helpWindow_full.gameObject.SetActive(true);
-        this.gameObjectMap.get("Focus_Section_Cook")?.[0].SetActive(true);
+        const focus_plating = this.gameObjectMap.get("Focus_Section_Plating")?.[0];
+        focus_plating.SetActive(true);
+        this.setBackgroundVisibility(false);
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment3"));
         this.nextBtn.onClick.AddListener(()=>{
@@ -109,16 +126,116 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             }
         })
         while (this.curPage < 3) yield null;
+        const open_plating = GameObject.FindGameObjectWithTag("PlatingOpen")?.GetComponent<Interaction>()?.GetOpenButton();
+        const guide_plating = this.gameObjectMap.get("Guide_Section_Plating")?.[0];
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment4"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
-                this.curPage = 3;
+                this.helpWindow_full.gameObject.SetActive(false);
+                focus_plating.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
+                guide_plating.SetActive(true);
             }
         })
+        open_plating.onClick.AddListener(() => {
+            if(this.curPage == 3) this.curPage = 4;
+        })
+        while (this.curPage < 4) yield null;
+        guide_plating.SetActive(false);
+        this.nextBtn.gameObject.SetActive(true);
+
+        // page 5
+        this.helpWindow_full.gameObject.SetActive(false);
+        this.helpWindow_upper.gameObject.SetActive(true);
+        const help_openBtn = this.gameObjectMap.get("Help_OpenHelpBtn")?.[0];
+        help_openBtn.SetActive(true);
+        const help_closeBtn = this.gameObjectMap.get("Help_CloseHelpBtn")?.[0];
+        help_closeBtn.SetActive(false);
+        this.setBackgroundVisibility(true);
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_upper.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment5"));
+        this.nextBtn.onClick.AddListener(() => {
+            if(UIManager.GetInstance().nextText()){
+                this.helpWindow_upper.gameObject.SetActive(false);
+            }
+        })
+        help_openBtn.GetComponent<Button>().onClick.AddListener(()=>{
+            this.OpenHelpWindow(Section.Plating);
+            help_closeBtn.SetActive(true);
+            this.setBackgroundVisibility(false);
+            this.helpWindow_upper.gameObject.SetActive(false);
+            help_openBtn.SetActive(false);
+            this.nextBtn.gameObject.SetActive(false);
+        });
+        help_closeBtn.GetComponent<Button>().onClick.AddListener(()=>{
+            this.curPage = 5;
+            help_closeBtn.SetActive(false);
+        });
+        while (this.curPage < 5) yield null;
+        this.nextBtn.gameObject.SetActive(true);
+
+        // page 6, 7
+        this.helpWindow_upper.gameObject.SetActive(false);
+        this.helpWindow_full.gameObject.SetActive(true);
+        const focus_receipt = this.gameObjectMap.get("Focus_Receipt")?.[0];
+        focus_receipt.SetActive(true);
+        this.setBackgroundVisibility(false);
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment6"));
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                this.curPage = 6;
+            }
+        })
+        while (this.curPage < 6) yield null;
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment7"));
+        this.nextBtn.onClick.AddListener(()=>{
+            if(UIManager.GetInstance().nextText()){
+                this.curPage = 7;
+            }
+        })
+        while (this.curPage < 7) yield null;
+        focus_receipt.SetActive(false);
+
+        // page 8
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment8"));
+        this.nextBtn.onClick.AddListener(()=>{
+            if(UIManager.GetInstance().nextText()){
+                this.curPage = 8;
+            }
+        })
+        while (this.curPage < 8) yield null;
 
         this.helpWindow_full.gameObject.SetActive(false);
         this.helpWindow_lower.gameObject.SetActive(false);
+        this.helpWindow_upper.gameObject.SetActive(false);
         this.helpUI.SetActive(false);
+    }
+
+    public OpenHelpWindow(section: Section) {
+        UIManager.GetInstance().OpenHelpPanel();
+        //GameManager.GetInstance().PauseStage();
+        switch(section){
+            case Section.Dispenser:
+                break;
+            case Section.Fryer:
+                break;
+            case Section.Grill:
+                break;
+            case Section.Prep:
+                break;
+            case Section.Plating:
+                const contents = this.helpContents_Plating.GetComponent<HelpContents>();
+                const pages = contents.GetPages();
+                pages[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1")[0]);
+                pages[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2")[0]);
+                pages[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3")[0]);
+                pages[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4")[0]);
+                pages[0].gameObject.SetActive(true);
+                break;
+        }
     }
 }

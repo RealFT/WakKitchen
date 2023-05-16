@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 3473531}
   m_Layer: 0
   m_Name: Section_Prep
-  m_TagString: Untagged
+  m_TagString: PrepOpen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 73036523}
   m_Layer: 0
   m_Name: Section_Dispenser
-  m_TagString: Untagged
+  m_TagString: DispenserOpen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15012,7 +15012,7 @@ GameObject:
   - component: {fileID: 543212704}
   m_Layer: 0
   m_Name: Section_Grill
-  m_TagString: Untagged
+  m_TagString: GrillOpen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18521,6 +18521,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52775ae047189b244b76f43e09797772, type: 3}
 --- !u!224 &836692529 stripped
@@ -19362,6 +19366,10 @@ PrefabInstance:
     - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52775ae047189b244b76f43e09797772, type: 3}
@@ -20375,7 +20383,7 @@ GameObject:
   - component: {fileID: 956733589}
   m_Layer: 0
   m_Name: Section_Plating
-  m_TagString: Untagged
+  m_TagString: PlatingOpen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33275,7 +33283,7 @@ GameObject:
   - component: {fileID: 1715160194}
   m_Layer: 0
   m_Name: Section_Fryer
-  m_TagString: Untagged
+  m_TagString: FryerOpen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33635,6 +33643,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52775ae047189b244b76f43e09797772, type: 3}
 --- !u!224 &1757577999 stripped
@@ -33857,6 +33869,7 @@ MonoBehaviour:
     - plateSideImage
     - plateDrinkImage
     - plateImages
+    - helpButton
     unityValues:
     - {fileID: 180107201}
     - {fileID: 1020785116}
@@ -33865,6 +33878,7 @@ MonoBehaviour:
     - {fileID: 417973117}
     - {fileID: 653049283}
     - {fileID: 0}
+    - {fileID: 868568188}
     values:
     - 
     - 
@@ -33876,6 +33890,7 @@ MonoBehaviour:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":24,\"length\":7,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - 
     unityArrayValues:
     - {fileID: 857536903}
     - {fileID: 451446384}
@@ -35461,6 +35476,10 @@ PrefabInstance:
     - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
       propertyPath: m_Name
       value: Open_Section
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52775ae047189b244b76f43e09797772, type: 3}
@@ -42631,6 +42650,10 @@ PrefabInstance:
     - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52775ae047189b244b76f43e09797772, type: 3}

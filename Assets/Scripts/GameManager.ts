@@ -67,7 +67,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.quarterViewController = GameObject.FindGameObjectWithTag("Quarter").GetComponent<QuarterViewController>();
         
         this.timer = new Timer();
-        this.timer.SetTimeScale(this.minutesPerDay);
 
         Mediator.GetInstance().Notify(this, EventNames.CurrencyUpdatedEvent, null);
         
@@ -77,6 +76,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
         if(this.curStage == 1){
             HelpManager.GetInstance().GuideStartGame();
+            this.timer.SetTimeScale(99999);
+        }
+        else{
+            this.timer.SetTimeScale(this.minutesPerDay);
         }
     }
 
@@ -84,7 +87,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // reset all variables to their Initial values
         this.timer.SetTime(this.startHour, 0);
         this.currTime = [this.timer.GetHour(), this.timer.GetMinute()];
-
         DataManager.GetInstance().SetStageReceipts(this.curStage - 1);
 
         OrderManager.GetInstance().Init();
@@ -151,7 +153,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // update UI
         UIManager.GetInstance().SetTimeUI(this.currTime[0], this.currTime[1]);
     }
-
 
     SetPlayerMovement(value: boolean) {
         if (this.characterController && this.quarterViewController) {

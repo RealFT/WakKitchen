@@ -16,6 +16,7 @@ export enum Section {
     Fryer = 1,
     Grill = 2,
     Prep = 3,
+    Plating = 4
 }
 export enum Cost {
     TOP_BURN = 15,
@@ -147,7 +148,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
-        this.SetLangCode();
+        this.SetAreaLangCode();
         this.LoadData();
     }
 
@@ -187,12 +188,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public LoadSavedStage() {
-        // this.lastSavedStage = 1;
-        // this.SetValue("Stage", this.lastSavedStage);
-        this.lastSavedStage = this.GetValue("Stage");
-        // 값이 없을 경우 0 리턴. 처음 시작은 1스테이지부터.
-        if(this.lastSavedStage == 0) this.lastSavedStage = 1;
+        this.lastSavedStage = 1;
         this.SetValue("Stage", this.lastSavedStage);
+        //this.lastSavedStage = this.GetValue("Stage");
+        // 값이 없을 경우 0 리턴. 처음 시작은 1스테이지부터.
+        // if(this.lastSavedStage == 0) this.lastSavedStage = 1;
+        // this.SetValue("Stage", this.lastSavedStage);
     }
     public GetLastSavedStage(): number {
         return this.lastSavedStage;
@@ -281,13 +282,30 @@ export default class DataManager extends ZepetoScriptBehaviour {
         const lines = textAsset.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
-            const values = line.split(','); // split the row by comma to get the values
-            
+            // Custom CSV parsing logic
+            const values = [];
+            let currentValue = '';
+            let withinQuotes = false;
+
+            for (let j = 0; j < line.length; j++) {
+                const char = line[j];
+                if (char === '"') {
+                    withinQuotes = !withinQuotes;
+                } else if (char === ',' && !withinQuotes) {
+                    values.push(currentValue.trim());
+                    currentValue = '';
+                } else {
+                    currentValue += char;
+                }
+            }
+
+            values.push(currentValue.trim());
+
             // do something with the values
             const key = values[0];
             const contents = values[1];
-            let group = textContents.get(key); 
-            if(!group){
+            let group = textContents.get(key);
+            if (!group) {
                 group = [];
                 textContents.set(key, group);
             }
@@ -296,7 +314,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
         return textContents;
     }
 
-    private SetLangCode(){
+    private SetAreaLangCode(){
         // 사용자의 지역 정보 가져오기
         if (Application.systemLanguage == SystemLanguage.Korean) {
             this.langCode = "ko"; // 사용자가 한국어를 사용하는 경우
@@ -304,6 +322,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
         else {
             this.langCode = "en"; // 기본 언어 설정 (영어)
         }
+    }
+
+    public SetLangCode(langCode: string){
+        this.langCode = langCode; // 사용자가 한국어를 사용하는 경우
     }
 
     public GetCurrentLanguageData(key:string): string[] {

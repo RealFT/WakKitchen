@@ -11401,7 +11401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &382546541
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42601,7 +42601,10 @@ MonoBehaviour:
     - informationObj
     - writerText
     - startBtn
-    - helpText
+    - lockHireTap
+    - lockMyCard
+    - applyLanguageBtn
+    - languageBtns
     unityValues:
     - {fileID: 1960976124}
     - {fileID: 13797205}
@@ -42613,6 +42616,9 @@ MonoBehaviour:
     - {fileID: 204984571}
     - {fileID: 0}
     - {fileID: 783344913}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     values:
     - 
@@ -42628,6 +42634,10 @@ MonoBehaviour:
     - '{"type":"System.String, mscorlib","value":""}'
     - 
     - 
+    - 
+    - 
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":9,\"length\":0,\"type\":\"UnityEngine.UI.Button,
+      UnityEngine.UI\",\"isUnity\":true}"}'
     unityArrayValues:
     - {fileID: 1780147620}
     - {fileID: 783344911}

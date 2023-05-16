@@ -3,13 +3,15 @@ import { GameObject, Debug } from "UnityEngine";
 import { Button, Image, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
-import DataManager, { Ingredient, Drink, Side } from './DataManager';
+import DataManager, { Ingredient, Drink, Side, Section } from './DataManager';
 import { TextMeshProUGUI } from 'TMPro';
 import SoundManager from './SoundManager';
 import UIManager from './UIManager';
+import HelpManager from './Help/HelpManager';
 
-export default class CookSlot extends ZepetoScriptBehaviour implements IListener{
+export default class Cook extends ZepetoScriptBehaviour implements IListener{
 
+    @SerializeField() private helpButton: Button; // Button to help
     @SerializeField() private serveButton: Button; // Button to try serving after plating is finished
     @SerializeField() private treshButton: Button; // Button to throwing away food in the trash
 
@@ -43,6 +45,9 @@ export default class CookSlot extends ZepetoScriptBehaviour implements IListener
         this.InitPlate();
 
         // Initialize button listeners
+        this.helpButton.onClick.AddListener(() => {
+            HelpManager.GetInstance().OpenHelpWindow(Section.Plating);
+        });
         this.serveButton.onClick.AddListener(() => {
             this.Serve();
         });

@@ -10,12 +10,14 @@ shop_hire_category,고용
 shop_hire_buy,고용하기
 shop_upgrade_category,조리도구
 shop_upgrade_buy,구입
-tutorial_start_ment1,안녕하세요! 저는 가게 운영을 도와주러 온 팬치라고 합니다. 
-tutorial_start_ment2,"먼저, Play 버튼을 눌러 가게로 이동하세요!"
-tutorial_start_ment3,조합대의 위치는 이곳입니다.
-tutorial_start_ment4,Open 버튼을 눌러 조리를 시작할 수 있습니다.
-tutorial_start_ment5,도움말 버튼을 누르면 조리 방법을 알 수 있습니다.
-tutorial_start_ment6,주문 영수증을 눌러 자세한 정보를 확인할 수 있습니다.
+tutorial_start_ment1,안녕하세요! 저는 가게 운영을 도와주러 온 팬치입니다! 
+tutorial_start_ment2,Play 버튼을 눌러 가게로 이동하세요!
+tutorial_start_ment3,아직은 조합대만 해금되어 있어요. 조합대는 여기에 있습니다.
+tutorial_start_ment4,가까이 다가가서 Open 버튼을 누르면 조리를 시작할 수 있습니다.
+tutorial_start_ment5,조리 방법이 궁금하시다면 도움말 버튼을 눌러 자세한 조리 방법을 확인할 수 있어요.
+tutorial_start_ment6,주문이 들어오면 이곳에 영수증이 표시됩니다.
+tutorial_start_ment7,주문 영수증을 눌러 자세한 정보를 확인할 수 있습니다.
+tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
 tutorial_dispenser_ment1,디스펜서가 해금되었습니다. 이제부터 음료수를 제조할 수 있습니다!
 tutorial_dispenser_ment2,디스펜서의 위치는 이곳입니다.
 tutorial_grill_ment1,그릴이 해금되었습니다. 이제부터 패티를 구울 수 있습니다.

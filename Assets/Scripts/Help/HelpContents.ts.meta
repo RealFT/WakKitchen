@@ -1,0 +1,46 @@
+fileFormatVersion: 2
+guid: 850a8eef2b7367448823d123943d405c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst HelpPage_1 = require(\\\"./HelpPage\\\");\\r\\nclass
+    HelpContents extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.pages = [];\\r\\n    }\\r\\n   
+    Awake() {\\r\\n        for (const page of this.pageObjs) {\\r\\n            this.pages.push(page.GetComponent($typeof(HelpPage_1.default)));\\r\\n       
+    }\\r\\n    }\\r\\n    Start() {\\r\\n        const maxPage = this.pages.length;\\r\\n       
+    // \uCCAB \uD398\uC774\uC9C0\uC758 \uC774\uC804\uC73C\uB85C, \uB9C8\uC9C0\uB9C9
+    \uD398\uC774\uC9C0\uC758 \uB2E4\uC74C \uBC84\uD2BC \uBE44\uD65C\uC131\uD654\\r\\n       
+    this.pages[0].gameObject.SetActive(true);\\r\\n        this.pages[0].GetPrevBtn().gameObject.SetActive(false);\\r\\n       
+    this.pages[maxPage - 1].GetNextBtn().gameObject.SetActive(false);\\r\\n       
+    for (let i = 0; i < maxPage; i++) {\\r\\n            const curPage = this.pages[i];\\r\\n           
+    if (i != 0) {\\r\\n                const prevPage = this.pages[i - 1];\\r\\n               
+    curPage.GetPrevBtn().onClick.AddListener(() => {\\r\\n                    curPage.gameObject.SetActive(false);\\r\\n                   
+    prevPage.gameObject.SetActive(true);\\r\\n                });\\r\\n               
+    curPage.gameObject.SetActive(false);\\r\\n            }\\r\\n            if (i
+    != maxPage - 1) {\\r\\n                const nextPage = this.pages[i + 1];\\r\\n               
+    curPage.GetNextBtn().onClick.AddListener(() => {\\r\\n                    curPage.gameObject.SetActive(false);\\r\\n                   
+    nextPage.gameObject.SetActive(true);\\r\\n                });\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    GetPages() {\\r\\n        if (this.pages.length
+    == 0) {\\r\\n            for (const page of this.pageObjs) {\\r\\n               
+    this.pages.push(page.GetComponent($typeof(HelpPage_1.default)));\\r\\n           
+    }\\r\\n        }\\r\\n        return this.pages;\\r\\n    }\\r\\n}\\r\\nexports.default
+    = HelpContents;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSGVscENvbnRlbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiSGVscENvbnRlbnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXlDO0FBQ3pDLGlEQUFxRDtBQUNyRCx5Q0FBa0M7QUFFbEMsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQUEvRDs7UUFFWSxVQUFLLEdBQWUsRUFBRSxDQUFDO0lBMENuQyxDQUFDO0lBekNHLEtBQUs7UUFDRCxLQUFLLE1BQU0sSUFBSSxJQUFJLElBQUksQ0FBQyxRQUFRLEVBQUU7WUFDOUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFlBQVksU0FBQyxrQkFBUSxHQUFJLENBQUM7U0FDbEQ7SUFDTCxDQUFDO0lBRUQsS0FBSztRQUNELE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDO1FBQ2xDLG1DQUFtQztRQUNuQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDekMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLEVBQUUsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ3ZELElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLENBQUMsQ0FBQyxDQUFDLFVBQVUsRUFBRSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDakUsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLE9BQU8sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUM5QixNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQzlCLElBQUksQ0FBQyxJQUFJLENBQUMsRUFBQztnQkFDUCxNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztnQkFDbkMsT0FBTyxDQUFDLFVBQVUsRUFBRSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRSxFQUFFO29CQUN6QyxPQUFPLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztvQkFDcEMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBQ3hDLENBQUMsQ0FBQyxDQUFDO2dCQUNILE9BQU8sQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO2FBQ3ZDO1lBQ0QsSUFBSSxDQUFDLElBQUksT0FBTyxHQUFHLENBQUMsRUFBQztnQkFDakIsTUFBTSxRQUFRLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7Z0JBQ25DLE9BQU8sQ0FBQyxVQUFVLEVBQUUsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUUsRUFBRTtvQkFDekMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7b0JBQ3BDLFFBQVEsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUN4QyxDQUFDLENBQUMsQ0FBQzthQUNOO1NBQ0o7SUFDTCxDQUFDO0lBRU0sUUFBUTtRQUNYLElBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUFDO1lBQ3RCLEtBQUssTUFBTSxJQUFJLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtnQkFDOUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFlBQVksU0FBQyxrQkFBUSxHQUFJLENBQUM7YUFDbEQ7U0FDSjtRQUNELE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQztJQUN0QixDQUFDO0NBRUo7QUE1Q0QsK0JBNENDIn0=\",\"assetPath\":\"Assets/Scripts/Help/HelpContents.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"pageObjs\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"HelpContents\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 8159dda50cb6e01636d851a5afb2dc0a
+  onlyWriteTrigger: 0
