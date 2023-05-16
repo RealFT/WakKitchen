@@ -235,6 +235,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 pages[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3")[0]);
                 pages[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4")[0]);
                 pages[0].gameObject.SetActive(true);
+                pages[1].gameObject.SetActive(false);
+                pages[2].gameObject.SetActive(false);
+                pages[3].gameObject.SetActive(false);
                 break;
         }
     }

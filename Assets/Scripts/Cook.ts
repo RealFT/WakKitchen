@@ -48,6 +48,7 @@ export default class Cook extends ZepetoScriptBehaviour implements IListener{
         this.helpButton.onClick.AddListener(() => {
             HelpManager.GetInstance().OpenHelpWindow(Section.Plating);
         });
+        
         this.serveButton.onClick.AddListener(() => {
             this.Serve();
         });
