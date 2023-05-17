@@ -76,11 +76,19 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
         if(this.curStage == 1){
             HelpManager.GetInstance().GuideStartGame();
-            this.timer.SetTimeScale(99999);
         }
         else{
             this.timer.SetTimeScale(this.minutesPerDay);
         }
+    }
+
+    public SetTutorialTimeScale(){
+        this.timer.SetTimeScale(99999);
+    }
+
+    public SetTutorialPlayTime(){
+        this.timer.SetTime(18, 0);
+        this.timer.SetTimeScale(this.minutesPerDay);
     }
 
     public StartStage(){
@@ -90,6 +98,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
         DataManager.GetInstance().SetStageReceipts(this.curStage - 1);
 
         OrderManager.GetInstance().Init();
+        if(this.curStage == 1){
+            OrderManager.GetInstance().SetOrderSize(1);
+        }
         OrderManager.GetInstance().StartOrder();
 
         BalanceManager.GetInstance().ClearAllBalanceHistory();
@@ -178,7 +189,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     public StartGame(){
         SceneLoadManager.GetInstance().LoadScene(SceneName.Stage);
-        SoundManager.GetInstance().OnPlaySFX("Purchase");
+        SoundManager.GetInstance().OnPlayButtonSFX("Purchase");
     }
 
     public RestartGame() {

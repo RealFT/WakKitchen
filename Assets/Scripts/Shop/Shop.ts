@@ -6,13 +6,22 @@ import Shop_Upgrade from './Shop_Upgrade';
 import Shop_Food from './Shop_Food';
 import GameManager from '../GameManager';
 import SoundManager from '../SoundManager';
-
+import DataManager from '../DataManager';
+import { TextMeshProUGUI } from 'TMPro';
 export default class Shop extends ZepetoScriptBehaviour {
     @SerializeField() private categoryBtns: Button[];
+    @SerializeField() private categoryTextHire: TextMeshProUGUI;
+    @SerializeField() private categoryTextUpgrade: TextMeshProUGUI;
     @SerializeField() private toStageBtn: Button;
     @SerializeField() private panels: GameObject[];
 
+    OnEnable(){
+        this.categoryTextHire.text = DataManager.GetInstance().GetCurrentLanguageData("shop_hire_category");
+        this.categoryTextUpgrade.text = DataManager.GetInstance().GetCurrentLanguageData("shop_upgrade_category");
+    }
+
     Start() {
+
         for (let i = 0; i < this.categoryBtns.length; i++) {
             const categoryBtn = this.categoryBtns[i];
             const categoryPanel = this.panels[i];

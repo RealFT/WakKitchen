@@ -43,8 +43,6 @@ export default class Timer extends ZepetoScriptBehaviour {
     // Set the time scale based on the number of minutes per day
     SetTimeScale(minutesPerDay: number) {
         this.timeScale = 24 * 60 / minutesPerDay; // 24 * 60 (1 minute per day) / n minutes per day
-        Debug.Log(this.timeScale);
-        Debug.Log(this.Hour + ":" + this.Minute);
     }
 
     // Set the time to the specified hour and minute

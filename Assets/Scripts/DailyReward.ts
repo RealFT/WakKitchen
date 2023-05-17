@@ -4,6 +4,7 @@ import { Button, Image } from "UnityEngine.UI";
 import DataManager from './DataManager';
 import UIManager from './UIManager';
 import SoundManager from './SoundManager';
+import { TextMeshProUGUI } from 'TMPro';
 
 // Class for daily rewards
 export default class DailyReward extends ZepetoScriptBehaviour {
@@ -11,11 +12,18 @@ export default class DailyReward extends ZepetoScriptBehaviour {
     private rewardDateKey: string = "lastRewardDate"; // Key to save the date of the last reward
     private wakduKey: string = "wakdu"; // Key to save the wakdu to be awarded as a reward
     @SerializeField() private claimButton: Button;    // button to claim reward
+    @SerializeField() private claimButtonText: TextMeshProUGUI;    // button to claim reward
+    @SerializeField() private contentsText: TextMeshProUGUI;    // button to claim reward
     @SerializeField() private newImage: Image;    // Image to inform new
     @SerializeField() private stampPrefab: GameObject;    
     @SerializeField() private stampPool: GameObject[];    
     @SerializeField() private contentsParent: Transform;    
     
+    OnEnable(){
+        this.contentsText.text = DataManager.GetInstance().GetCurrentLanguageData("panel_daily");
+        this.claimButtonText.text = DataManager.GetInstance().GetCurrentLanguageData("button_claim");
+    }
+
     Start(){
         // Debug: Decrease saved date by one day for debugging purposes
         // let debugDate: Date = new Date();
@@ -25,7 +33,9 @@ export default class DailyReward extends ZepetoScriptBehaviour {
         // DataManager.GetInstance().SetValue(this.wakduKey, 1);
 
         // Initialize claimButton
-        this.claimButton.onClick.AddListener(() => this.ClaimReward());
+        this.claimButton.onClick.AddListener(() => {
+            this.ClaimReward();
+        });
 
         // Initailize wakdu stamp
         let currentWakdu: number = DataManager.GetInstance().GetValue(this.wakduKey);
@@ -56,9 +66,9 @@ export default class DailyReward extends ZepetoScriptBehaviour {
         const difference: number = (currentDate.getTime() - lastRewardDate.getTime()) / (1000 * 3600 * 24);
 
         // Output the current date, last reward date, and difference for debugging purposes
-        console.log("currentDate: " + currentDate.getTime());
-        console.log("lastRewardDate: " + lastRewardDate.getTime());
-        console.log("difference: " + difference);
+        // console.log("currentDate: " + currentDate.getTime());
+        // console.log("lastRewardDate: " + lastRewardDate.getTime());
+        // console.log("difference: " + difference);
 
         // Determine whether the daily reward is claimable based on the difference
         const isClaimable = difference >= 1;
@@ -90,11 +100,11 @@ export default class DailyReward extends ZepetoScriptBehaviour {
             this.newImage.gameObject.SetActive(!isClaimable);
             this.claimButton.interactable = !isClaimable;
 
-            UIManager.GetInstance().OpenInformation("Daily reward granted.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_dailygranted"));
             SoundManager.GetInstance().OnPlaySFX("Purchase");
         }
         else {
-            UIManager.GetInstance().OpenInformation("Reward already claimed today.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_already_dailygranted"));
             SoundManager.GetInstance().OnPlaySFX("Tresh");
         }
     }

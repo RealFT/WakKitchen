@@ -61,7 +61,7 @@ export default class QuarterViewController extends ZepetoScriptBehaviour {
         });
 
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
-            console.log("quarter view log");
+            // console.log("quarter view log");
             ZepetoPlayers.instance.LocalPlayer.zepetoCamera.gameObject.SetActive(false);
             this.myCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
 

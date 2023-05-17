@@ -126,7 +126,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
         }
         // If there are no more Wakdu stamps left, inform the user with an information popup.
         else{
-            UIManager.GetInstance().OpenInformation("Not enough daily stamp.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_nostamp"));
             return;
         }
     }

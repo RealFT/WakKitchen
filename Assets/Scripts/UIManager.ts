@@ -30,17 +30,25 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private shopUI: GameObject;
     @SerializeField() private mainUI: GameObject[];
     @SerializeField() private gameUI: GameObject[];
-    @SerializeField() private startBtn: Button;
+
     @SerializeField() private timeText: Text;
     @SerializeField() private possessionMoneyTxt: Text;
+
     @SerializeField() private informationObj: GameObject;
     @SerializeField() private displayDelay: number = 0.7;
     @SerializeField() private writerText: string = "";    // 
+
     @SerializeField() private lockHireTap: GameObject;
     @SerializeField() private lockMyCard: GameObject;
+
+    @SerializeField() private startBtn: Button;
+    @SerializeField() private bgmBtnText: TextMeshProUGUI;
+    @SerializeField() private sfxBtnText: TextMeshProUGUI;
+    @SerializeField() private helpBtnText: TextMeshProUGUI;
+    @SerializeField() private creditBtnText: TextMeshProUGUI;
+    @SerializeField() private languageBtnText: TextMeshProUGUI;
     @SerializeField() private applyLanguageBtn: Button;
     @SerializeField() private languageBtns: Button[];
-    private helpTexts: string[] = [];
     private languageTag: string;
     private isNextText: boolean;   // 텍스트 출력을 한번에 할지 결정
     private isTextCut: boolean;   // 텍스트 출력을 한번에 할지 결정
@@ -55,7 +63,6 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.bookPanel.SetActive(true);
         this.stampPanel.SetActive(false);
         this.eventPanel.SetActive(false);
-        this.helpPanel.SetActive(false);
     }
     public OpenStampPanel(){
         this.InitBookPanel();
@@ -66,7 +73,6 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.eventPanel.SetActive(true);
     }
     public OpenHelpPanel(){
-        this.InitBookPanel();
         this.helpPanel.SetActive(true);
     }
 
@@ -82,15 +88,16 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.applyLanguageBtn.onClick.AddListener(() => {
             this.OnClickApplyLanguage();
             SoundManager.GetInstance().OnPlayButtonClick();
-        });
 
+        });
         for (const button of this.languageBtns) {
             button.onClick.AddListener(() => {
-              this.languageTag = button.gameObject.tag;
-              SoundManager.GetInstance().OnPlayButtonClick();
+                this.languageTag = button.gameObject.tag;
+                SoundManager.GetInstance().OnPlayButtonClick();
             });
-          }
+        }
 
+        this.ApplyLanguageText();
         // Register UIManager as a listener for events
         Mediator.GetInstance().RegisterListener(this);
         // Initialize the UI
@@ -108,15 +115,24 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.informationObj.SetActive(false);
     }
 
-    private OnClickApplyLanguage(){
-        DataManager.GetInstance().SetLangCode(this.languageTag);
+    private ApplyLanguageText(){
+        this.bgmBtnText.text = DataManager.GetInstance().GetCurrentLanguageData("button_bgm");
+        this.sfxBtnText.text = DataManager.GetInstance().GetCurrentLanguageData("button_sfx");
+        this.helpBtnText.text = DataManager.GetInstance().GetCurrentLanguageData("button_help");
+        this.creditBtnText.text = DataManager.GetInstance().GetCurrentLanguageData("button_credit");
+        this.languageBtnText.text = DataManager.GetInstance().GetCurrentLanguageData("button_language");
     }
 
-    public PlayText(text: TextMeshProUGUI, textContents: string[]){
+    private OnClickApplyLanguage(){
+        DataManager.GetInstance().SetLangCode(this.languageTag);
+        this.ApplyLanguageText();
+    }
+
+    public PlayText(text: TextMeshProUGUI, textContents: string){
         this.StartCoroutine(this.TypeRoutine(text, textContents));
     }
 
-    *TypeRoutine(text: TextMeshProUGUI, textContents: string[])
+    *TypeRoutine(text: TextMeshProUGUI, textContents: string)
     {
         this.ResetText(text);
         // introBackAnim.Play();
@@ -126,22 +142,18 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         // introNextButton.SetActive(true);
         // introObjectList[introObjCount].SetActive(true);
 
-        // helpTexts는 DataManager에서 가져오기
-        for (let i = 0; i < textContents.length; i++)
-        {
-            this.isTextEnd = false;
-            // 한 줄의 타이핑이 완료될 때 까지 대기
-            this.StartCoroutine(this.TypeChat(text, textContents[i]));
-            while(!this.isTextEnd) yield null;
+        this.isTextEnd = false;
+        // 한 줄의 타이핑이 완료될 때 까지 대기
+        this.StartCoroutine(this.TypeChat(text, textContents));
+        while(!this.isTextEnd) yield null;
 
-            // 코루틴을 탈출하면 현재 문장 전부 불러옴
-            text.text = textContents[i];
+        // 코루틴을 탈출하면 현재 문장 전부 불러옴
+        text.text = textContents;
 
-            //yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
 
-            while (!this.isNextText) yield null;
-            this.isNextText = false;
-        }
+        while (!this.isNextText) yield null;
+        this.isNextText = false;
         // 인트로가 끝났을 경우 인트로 비활성화 호출
         // OffIntro();
 

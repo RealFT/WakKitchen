@@ -8,6 +8,8 @@ import DataManager, { Section } from '../DataManager';
 import GameManager from '../GameManager';
 import Interaction from '../Interaction';
 import HelpContents from './HelpContents';
+import OrderManager from '../OrderManager';
+import OrderReceipt from '../OrderReceipt';
 
 export default class HelpManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -36,12 +38,13 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
     @SerializeField() private background: Image;
     @SerializeField() private nextBtn: Button;
+    @SerializeField() private receiptCloseBtn: Button;
     @SerializeField() private helpUI: GameObject;
     @SerializeField() private helpWindow_full: GameObject;
     @SerializeField() private helpWindow_upper: GameObject;
     @SerializeField() private helpWindow_lower: GameObject;
     @SerializeField() private guideObjects: GameObject[];
-    private gameObjectMap = new Map<string, GameObject[]>();
+    private gameObjectMap = new Map<string, GameObject>();
     private window_full: HelpWindow;
     private window_upper: HelpWindow;
     private window_lower: HelpWindow;
@@ -55,14 +58,8 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     Start(){
         for (const gameObject of this.guideObjects) {
             const name = gameObject.name; // Get the name of the current GameObject.
-            // const words = name.split("_"); // Split the name by '_' to get an array of words.
-            // const firstWord = words[0]; // Get the first word of the name.
             let group = this.gameObjectMap.get(name); // Get the array of GameObjects with the same first word.
-            if (!group) { // If there is no array for the first word yet, create a new one.
-              group = [];
-              this.gameObjectMap.set(name, group);
-            }
-            group.push(gameObject); // Add the current GameObject to the array of GameObjects with the same first word.
+            this.gameObjectMap.set(name, gameObject);
         }
         this.helpUI.SetActive(false);
         this.helpWindow_full.SetActive(false);
@@ -82,6 +79,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
     *GuideStartRoutine(){
         this.curPage = 0;
+        GameManager.GetInstance().SetTutorialTimeScale();
 
         // page 1
         this.helpWindow_full.gameObject.SetActive(true);
@@ -97,7 +95,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 2
         this.helpWindow_full.gameObject.SetActive(false);
         this.helpWindow_lower.gameObject.SetActive(true);
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn")?.[0];
+        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
         playButton.SetActive(true);
         this.setBackgroundVisibility(true);
         this.nextBtn.onClick.RemoveAllListeners();
@@ -115,7 +113,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 3, 4
         this.helpWindow_lower.gameObject.SetActive(false);
         this.helpWindow_full.gameObject.SetActive(true);
-        const focus_plating = this.gameObjectMap.get("Focus_Section_Plating")?.[0];
+        const focus_plating = this.gameObjectMap.get("Focus_Section_Plating");
         focus_plating.SetActive(true);
         this.setBackgroundVisibility(false);
         this.nextBtn.onClick.RemoveAllListeners();
@@ -127,7 +125,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         })
         while (this.curPage < 3) yield null;
         const open_plating = GameObject.FindGameObjectWithTag("PlatingOpen")?.GetComponent<Interaction>()?.GetOpenButton();
-        const guide_plating = this.gameObjectMap.get("Guide_Section_Plating")?.[0];
+        const guide_plating = this.gameObjectMap.get("Guide_Section_Plating");
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment4"));
         this.nextBtn.onClick.AddListener(()=>{
@@ -148,9 +146,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 5
         this.helpWindow_full.gameObject.SetActive(false);
         this.helpWindow_upper.gameObject.SetActive(true);
-        const help_openBtn = this.gameObjectMap.get("Help_OpenHelpBtn")?.[0];
+        const help_openBtn = this.gameObjectMap.get("Help_OpenHelpBtn");
         help_openBtn.SetActive(true);
-        const help_closeBtn = this.gameObjectMap.get("Help_CloseHelpBtn")?.[0];
+        const help_closeBtn = this.gameObjectMap.get("Help_CloseHelpBtn");
         help_closeBtn.SetActive(false);
         this.setBackgroundVisibility(true);
         this.nextBtn.onClick.RemoveAllListeners();
@@ -178,7 +176,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 6, 7
         this.helpWindow_upper.gameObject.SetActive(false);
         this.helpWindow_full.gameObject.SetActive(true);
-        const focus_receipt = this.gameObjectMap.get("Focus_Receipt")?.[0];
+        const focus_receipt = this.gameObjectMap.get("Focus_Receipt");
         focus_receipt.SetActive(true);
         this.setBackgroundVisibility(false);
         this.nextBtn.onClick.RemoveAllListeners();
@@ -189,17 +187,41 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             }
         })
         while (this.curPage < 6) yield null;
+        const open_receipt = GameObject.FindGameObjectWithTag("ReceiptOpen").GetComponent<OrderReceipt>().GetReceiptButton();
+        const help_openReceiptBtn = this.gameObjectMap.get("Help_OpenReceiptBtn");
+        const help_closeReceiptBtn = this.gameObjectMap.get("Help_CloseReceiptBtn");
+        help_openReceiptBtn.SetActive(false);
+        help_closeReceiptBtn.SetActive(false);
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment7"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
-                this.curPage = 7;
+                this.nextBtn.gameObject.SetActive(false);
+                this.helpWindow_full.gameObject.SetActive(false);
+                help_openReceiptBtn.SetActive(true);
             }
         })
+        this.curPage = 5;
+        help_openReceiptBtn.GetComponent<Button>().onClick.AddListener(()=>{
+            open_receipt.onClick.Invoke();
+            this.curPage = 6;
+            help_openReceiptBtn.SetActive(false);
+            focus_receipt.SetActive(false);
+            help_closeReceiptBtn.SetActive(true);
+        });
+        while (this.curPage < 6) yield null;
+        yield new WaitForSeconds(1);
+        help_closeReceiptBtn.GetComponent<Button>().onClick.AddListener(()=>{
+            this.curPage = 7;
+            this.receiptCloseBtn.onClick.Invoke();
+            help_closeReceiptBtn.SetActive(false);
+        });
         while (this.curPage < 7) yield null;
-        focus_receipt.SetActive(false);
+        help_openReceiptBtn.SetActive(false);
+        this.nextBtn.gameObject.SetActive(true);
 
         // page 8
+        this.helpWindow_full.gameObject.SetActive(true);
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment8"));
         this.nextBtn.onClick.AddListener(()=>{
@@ -213,6 +235,8 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.helpWindow_lower.gameObject.SetActive(false);
         this.helpWindow_upper.gameObject.SetActive(false);
         this.helpUI.SetActive(false);
+        GameManager.GetInstance().SetTutorialPlayTime();
+        OrderManager.GetInstance().SetOrderSize(3);
     }
 
     public OpenHelpWindow(section: Section) {
@@ -230,10 +254,10 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             case Section.Plating:
                 const contents = this.helpContents_Plating.GetComponent<HelpContents>();
                 const pages = contents.GetPages();
-                pages[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1")[0]);
-                pages[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2")[0]);
-                pages[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3")[0]);
-                pages[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4")[0]);
+                pages[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
+                pages[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
+                pages[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
+                pages[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4"));
                 pages[0].gameObject.SetActive(true);
                 pages[1].gameObject.SetActive(false);
                 pages[2].gameObject.SetActive(false);

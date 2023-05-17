@@ -1,15 +1,18 @@
 button_confirm,Confirm
 button_cancel,Cancel
 button_next,Next
+button_claim,Claim
+button_bgm,BGM
+button_sfx,SFX
+button_help,Help
+button_credit,Credits
+button_language,Language
 main_start,Start
-setting_language,Language
-setting_bgm,BGM
-setting_sfx,SFX
-setting_help,Help
 shop_hire_category,Hire
 shop_hire_buy,Hire
 shop_upgrade_category,Upgrade
 shop_upgrade_buy,Buy
+panel_daily,We give you a stamp every day! You can double your incomes with stamps!
 tutorial_start_ment1,"Hello! I'm Panchi, here to help you with your shop operation!"
 tutorial_start_ment2,Press the Play button to move to the shop!
 tutorial_start_ment3,Only the Workstation is unlocked for now. The Workstation is right here.
@@ -37,8 +40,13 @@ help_receipt_ment1,"Customers place orders at regular intervals. The faster you 
 help_receipt_ment2,"When the heart gauge is depleted, the customer leaves."
 help_receipt_ment3,Press the customer's receipt to view detailed information.
 help_receipt_ment4,The price is displayed at the bottom. Intensity does not give money.
-help_plating_ment1,"Before starting the manufacturing process, check the recipe. When an order comes in, the order receipt will be displayed in the top left corner."
-help_plating_ment2,"By pressing the order receipt, you can check the customer's name, order details, and amount. Occasionally, a thief may appear who does not pay the amount!"
-help_plating_ment3,Stack the ingredients in the order of the recipe to complete the dish. Press the trash can button in the bottom right corner to discard any incorrectly made dishes and start again.
-help_plating_ment4,"Once the dish is completed, press the bell to deliver it to the customer. If you make a different dish from the recipe and fail to serve it, the ingredients will be restored to their original state."
+help_plating_ment1,Check the recipe before starting the preparation. When an order comes in, the order receipt will be displayed in the upper left corner.
+help_plating_ment2,Press the order receipt to view detailed information. Pay attention to the order! Thieves don't pay!
+help_plating_ment3,Stack the ingredients in the order of the recipe to complete the dish. You can discard incorrectly made dishes by pressing the trash bin button in the lower right corner.
+help_plating_ment4,"Once the dish is ready, press the bell to serve it to the customer. If the completed dish is different from the recipe, the ingredients will be restored to their original state."
 help_employee_ment1,Part-time employees are displayed here. You can click on the employee to pause their work.
+info_nocurruncey,Not enough currency.
+info_nostamp,No remaining stamps.
+info_dailygranted,Daily reward has been obtained.
+info_already_dailygranted,You have already claimed the reward today.
+info_Invalid_recipe,No matching order for the recipe.

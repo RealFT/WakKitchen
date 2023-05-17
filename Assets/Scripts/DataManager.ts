@@ -130,8 +130,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private cardFrameSprites: Sprite[];
     @SerializeField() private sectionSprites: Sprite[];
 
-    private textContents_ko: Map<string, string[]> = new Map<string, string[]>();
-    private textContents_en: Map<string, string[]> = new Map<string, string[]>();
+    private textContents_ko: Map<string, string> = new Map<string, string>();
+    private textContents_en: Map<string, string> = new Map<string, string>();
     private langCode: string;    // Language Setting
 
     private receipts: Receipt[] = [];
@@ -273,12 +273,18 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     // ----------- Language -------------
     public LoadAllLanguageData() {
+        if(PlayerPrefs.HasKey("Language")){
+            this.SetLangCode(PlayerPrefs.GetString("Language"));
+        }
+        else{
+            this.SetAreaLangCode();
+        }
         if(this.textContents_ko) this.textContents_ko = this.LoadLanguageData(this.lang_ko);
         if(this.textContents_en) this.textContents_en = this.LoadLanguageData(this.lang_en);
     }
 
-    public LoadLanguageData(textAsset: TextAsset): Map<string, string[]> {
-        const textContents = new Map<string, string[]>();
+    public LoadLanguageData(textAsset: TextAsset): Map<string, string> {
+        const textContents = new Map<string, string>();
         const lines = textAsset.text.split('\n'); // split the CSV file by row
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
@@ -304,12 +310,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             // do something with the values
             const key = values[0];
             const contents = values[1];
-            let group = textContents.get(key);
-            if (!group) {
-                group = [];
-                textContents.set(key, group);
-            }
-            group.push(contents);
+            textContents.set(key, contents);
         }
         return textContents;
     }
@@ -322,20 +323,24 @@ export default class DataManager extends ZepetoScriptBehaviour {
         else {
             this.langCode = "en"; // 기본 언어 설정 (영어)
         }
+        PlayerPrefs.SetString("Language", this.langCode);
     }
 
     public SetLangCode(langCode: string){
-        this.langCode = langCode; // 사용자가 한국어를 사용하는 경우
+        this.langCode = langCode;
+        PlayerPrefs.SetString("Language", this.langCode);
     }
-
-    public GetCurrentLanguageData(key:string): string[] {
+    public GetLangCode(): string{
+        return this.langCode;
+    }
+    public GetCurrentLanguageData(key:string): string {
         switch(this.langCode){
             case "ko":
                 return this.textContents_ko?.get(key);
             case "en":
                 return this.textContents_en?.get(key);
             default:
-                console.log("langCode error");
+                // console.log("langCode error");
                 return null;
         }
     }
@@ -357,7 +362,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.cardDatas.set(cardId, cardData);
 
             const cardQuantity = this.GetValue(cardId);
-            console.log("ID: " + cardId, " Quantity: " + cardQuantity);
+            // console.log("ID: " + cardId, " Quantity: " + cardQuantity);
             this.SetValue(cardId, cardQuantity);
             this.inventoryCache.set(cardId, cardQuantity);
         }
@@ -379,7 +384,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             const randomIndex = Math.floor(Math.random() * cardsByGrade.length);
             return cardsByGrade[randomIndex];
         } else {
-            console.log("GetRandomCardByGrade: undefined");
+            // console.log("GetRandomCardByGrade: undefined");
             return undefined;
         }
     }
@@ -403,7 +408,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.SetValue(id, newQuantity);
             return true;
         } else {
-            console.log(`Not enough ${id} to use.`);
+            // console.log(`Not enough ${id} to use.`);
             return false;
         }
     }

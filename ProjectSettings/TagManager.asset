@@ -21,6 +21,7 @@ TagManager:
   - GrillOpen
   - PrepOpen
   - FryerOpen
+  - ReceiptOpen
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ import UIManager from './UIManager';
 import Mediator from './Notification/Mediator';
 import Shop_Upgrade from './Shop/Shop_Upgrade';
 import SoundManager from './SoundManager';
+import DataManager from './DataManager';
 
 export default class ItemManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -74,7 +75,12 @@ export default class ItemManager extends ZepetoScriptBehaviour {
             UIManager.GetInstance().OpenInformation(message);
         });
         ProductService.OnPurchaseCompleted.AddListener((product, response) => {
-            UIManager.GetInstance().OpenInformation(`${response.productId} Purchase Completed`);
+            if(DataManager.GetInstance().GetLangCode() == "en"){
+                UIManager.GetInstance().OpenInformation(`${response.productId} Purchase Completed`);
+            }
+            else{
+                UIManager.GetInstance().OpenInformation(`${response.productId} 구매 완료`);
+            }
         });
         ProductService.OnPurchaseFailed.AddListener((product, response) => {
             UIManager.GetInstance().OpenInformation(response.message);

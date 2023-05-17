@@ -138,7 +138,7 @@ export default class Cook extends ZepetoScriptBehaviour implements IListener{
             SoundManager.GetInstance().OnPlaySFX("Selling_Items");
         }
         else {
-            UIManager.GetInstance().OpenInformation("Invalid recipe.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_Invalid_recipe"));
             SoundManager.GetInstance().OnPlayButtonSFX("Tresh");
         }
         this.GetProductsData();

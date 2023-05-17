@@ -9,6 +9,7 @@ import { RoomData, Room } from "ZEPETO.Multiplay";
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 import GameManager from '../GameManager';
 import UIManager from '../UIManager';
+import DataManager from '../DataManager';
 
 export default class BalanceManager extends ZepetoScriptBehaviour implements IListener {
     // 싱글톤 패턴
@@ -94,7 +95,7 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
     public UseBalance(currencyId: string, quantity: number): boolean {
         if (this.possessionMoney < quantity) {
             // Not enough currency.
-            UIManager.GetInstance().OpenInformation("Not Enough Currency.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_nocurruncey"));
             return false;
         }
         const data = new RoomData();

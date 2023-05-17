@@ -97,11 +97,11 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             }
         }
 
-        this.SetSlotGroup(upgradeGroups);
-        this.SetSlotGroup(fullyUpgradedGroups);
+        this.SetSlotGroup(upgradeGroups, false);
+        this.SetSlotGroup(fullyUpgradedGroups, true);
     }
 
-    private SetSlotGroup(groups: {}){
+    private SetSlotGroup(groups: {}, isFullyUpgraded: boolean){
         // Extract items with the lowest match[3] value from each group.
         for (let groupName in groups ) {
             const groupItems = groups[groupName];
@@ -119,7 +119,7 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             const itemName = match ? match[1] : "";
             const upgradeLevel = match ? parseInt(match[2]) : 0;
             DataManager.GetInstance().SetValue(itemName, upgradeLevel);
-            this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, upgradeLevel === Shop_Upgrade.MaxUpgradeLevel);
+            this.SetupUpgradeSlot(minItem, itemName, upgradeLevel, isFullyUpgraded);
         }
     }
 

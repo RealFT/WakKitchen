@@ -92,10 +92,10 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                     this.productInventory.delete(product);
                 }
             } else {
-                Debug.Log(`Not enough ${product} in productInventory`);
+                // Debug.Log(`Not enough ${product} in productInventory`);
             }
         } else {
-            Debug.Log(`${product} not found in productInventory`);
+            // Debug.Log(`${product} not found in productInventory`);
         }
     }
 
@@ -132,16 +132,21 @@ export default class OrderManager extends ZepetoScriptBehaviour {
     }
 
     private *DoOrder() {
-        yield new WaitForSeconds(2);
+        yield new WaitForSeconds(Math.max(1 + 2 * Math.random()));
         while (true) {
             if (this.maxOrderSize > this.curOrderNumber)
                 this.addOrder();
             let waitTime = Math.max(2 + 8 * Math.random());
             if(this.curOrderNumber <= 1)
                 waitTime *= 0.5;
-            console.log("waitTime: " + waitTime);
+            // console.log("waitTime: " + waitTime);
             yield new WaitForSeconds(waitTime);
         }
+    }
+
+    public SetOrderSize(size: number){
+        if (size > 3) size = 3;
+        this.maxOrderSize = size;
     }
 
     public checkOrder(products: number[]): boolean {

@@ -6,13 +6,14 @@ import ItemManager from '../ItemManager';
 import GameManager from '../GameManager';
 import { TextMeshProUGUI } from 'TMPro';
 import UIManager from '../UIManager';
+import DataManager from '../DataManager';
 
 export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
 
     // Upgrade slot
     @SerializeField() private itemImage: Image;
-    @SerializeField() private nameText :Text;
-    @SerializeField() private priceText :Text;
+    @SerializeField() private nameText :TextMeshProUGUI;
+    @SerializeField() private priceText :TextMeshProUGUI;
     @SerializeField() private buyBtn: Button;
     @SerializeField() private starObjs : GameObject[] = [];
 
@@ -59,7 +60,12 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
         //     UIManager.GetInstance().OpenInformation(info);
         // }
         // need localize
-        this.lockText.text = `Unlock to\nDay ${this.unlockStage}`;
+        if (DataManager.GetInstance().GetLangCode() == "en") {
+            this.lockText.text = `Unlock to\nDay ${this.unlockStage}`;
+        }
+        else {
+            this.lockText.text = `Day ${this.unlockStage}에\n잠금 해제`;
+        }
         this.lockImage?.gameObject?.SetActive(this.isLock);
 
         // if unlocked, Move the current Transform object to the first sibling

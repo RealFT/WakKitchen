@@ -1,14 +1,21 @@
 import { GameObject } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import HelpPage from './HelpPage';
+import { TextMeshProUGUI } from 'TMPro';
+import DataManager from '../DataManager';
 
 export default class HelpContents extends ZepetoScriptBehaviour {
     @SerializeField() private pageObjs: GameObject[];
+    @SerializeField() private confirmText: TextMeshProUGUI;
     private pages: HelpPage[] = [];
     Awake(){
         for (const page of this.pageObjs) {
             this.pages.push(page.GetComponent<HelpPage>());
         }
+    }
+
+    OnEnable(){
+        this.confirmText.text = DataManager.GetInstance().GetCurrentLanguageData("button_confirm");
     }
 
     Start() {

@@ -64,7 +64,7 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
         if (cardData) {
             return cardData;
         } else {
-            console.log("GetRandomCard: undefined");
+            // console.log("GetRandomCard: undefined");
             return undefined;
         }
     }
