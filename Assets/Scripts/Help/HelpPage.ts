@@ -17,5 +17,4 @@ export default class HelpPage extends ZepetoScriptBehaviour {
     public SetDiscription(text: string){
         this.discription.text = text;
     }
-
 }

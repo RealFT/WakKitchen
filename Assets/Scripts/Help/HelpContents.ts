@@ -1,4 +1,5 @@
 import { GameObject } from 'UnityEngine';
+import { Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import HelpPage from './HelpPage';
 import { TextMeshProUGUI } from 'TMPro';
@@ -6,6 +7,7 @@ import DataManager from '../DataManager';
 
 export default class HelpContents extends ZepetoScriptBehaviour {
     @SerializeField() private pageObjs: GameObject[];
+    @SerializeField() private closeButton: Button;
     @SerializeField() private confirmText: TextMeshProUGUI;
     private pages: HelpPage[] = [];
     Awake(){
@@ -51,6 +53,10 @@ export default class HelpContents extends ZepetoScriptBehaviour {
             }
         }
         return this.pages;
+    }
+
+    public SetCloseBtnVisivility(visible: boolean){
+        this.closeButton.gameObject.SetActive(visible);
     }
 
 }

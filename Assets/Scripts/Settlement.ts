@@ -7,15 +7,22 @@ import BalanceManager, { Currency } from './Shop/BalanceManager';
 import DataManager from './DataManager';
 import EmployeeManager from './Employee/EmployeeManager';
 import SoundManager from './SoundManager';
+import HelpManager from './Help/HelpManager';
+import { TextMeshProUGUI } from 'TMPro';
 
 // Settlement UI class that displays information about daily profits and costs.
 export default class Settlement extends ZepetoScriptBehaviour {
 
-    @SerializeField() private dateText: Text;
-    @SerializeField() private totalSaleText: Text;
-    @SerializeField() private employeeText: Text;
-    @SerializeField() private IngredientsText: Text;
-    @SerializeField() private netIncomeText: Text;
+    @SerializeField() private dateText: TextMeshProUGUI;
+    @SerializeField() private totalSaleText: TextMeshProUGUI;
+    @SerializeField() private totalSaleMoneyText: TextMeshProUGUI;
+    @SerializeField() private employeeText: TextMeshProUGUI;
+    @SerializeField() private employeeMoneyText: TextMeshProUGUI;
+    // @SerializeField() private IngredientsText: TextMeshProUGUI;
+    // @SerializeField() private IngredientsMoneyText: TextMeshProUGUI;
+    @SerializeField() private netIncomeText: TextMeshProUGUI;
+    @SerializeField() private netIncomeMoneyText: TextMeshProUGUI;
+
     @SerializeField() private doubleIncomeButton: Button;
     @SerializeField() private toShopButton: Button;
     @SerializeField() private animationDuration: number;
@@ -24,16 +31,31 @@ export default class Settlement extends ZepetoScriptBehaviour {
     // Array of Generator functions that will be stored in the animations array.
     // Each function animates a single UI element with a corresponding value.
     private animations: (() => Generator)[] = [
-        () => this.NumberAnimation(this.totalSaleText, this.totalSale, this.animationDuration),
-        () => this.NumberAnimation(this.employeeText, -this.employeeCost, this.animationDuration),
-        // () => this.NumberAnimation(this.IngredientsText, -this.ingredientsCost, this.animationDuration),
-        () => this.NumberAnimation(this.netIncomeText, this.netIncome, this.animationDuration)
+        () => this.NumberAnimation(this.totalSaleMoneyText, this.totalSale, this.animationDuration),
+        () => this.NumberAnimation(this.employeeMoneyText, -this.employeeCost, this.animationDuration),
+        // () => this.NumberAnimation(this.IngredientsMoneyText, -this.ingredientsCost, this.animationDuration),
+        () => this.NumberAnimation(this.netIncomeMoneyText, this.netIncome, this.animationDuration)
     ];
 
     private totalSale: number;
     private ingredientsCost: number;
     private employeeCost: number;
     private netIncome: number;
+
+    // Called when the Settlement UI is enabled.
+    // Resets all Text UI elements to empty strings and starts the AnimationSequence coroutine.
+    OnEnable(){
+        this.totalSaleText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_total");
+        this.employeeText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_employee");
+        // this.IngredientsText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_ingredient");
+        this.netIncomeText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_netIncome");
+
+        this.doubleIncomeButton.gameObject.SetActive(true);
+        this.ResetPriceTexts();
+        this.GetPriceInformation();
+        this.StartCoroutine(this.AnimationSequence());
+        SoundManager.GetInstance().OnPlayOnceBGM(SoundManager.GetInstance().keySettlement);
+    }
 
     Start() {
         this.doubleIncomeButton.onClick.AddListener(() => {
@@ -51,7 +73,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
      * @param endNumber The number that the animation will end on.
      * @param duration The duration of the animation in seconds.
      */
-    private *NumberAnimation(targetText: Text, endNumber: number, duration: number) {
+    private *NumberAnimation(targetText: TextMeshProUGUI, endNumber: number, duration: number) {
         let timer: number = 0;
 
         while (timer < duration) {
@@ -72,25 +94,18 @@ export default class Settlement extends ZepetoScriptBehaviour {
             yield* animation();
             this.animationInProgress = false;
         }
-    }
-
-    // Called when the Settlement UI is enabled.
-    // Resets all Text UI elements to empty strings and starts the AnimationSequence coroutine.
-    private OnEnable() {
-        this.doubleIncomeButton.gameObject.SetActive(true);
-        this.ResetPriceTexts();
-        this.GetPriceInformation();
-        this.StartCoroutine(this.AnimationSequence());
-        SoundManager.GetInstance().OnPlayOnceBGM(SoundManager.GetInstance().keySettlement);
+        if(GameManager.GetInstance().GetCurrentStage() == 2){
+            HelpManager.GetInstance().GuideSettlement();
+        }
     }
 
     // Resets all Text UI elements to empty strings.
     private ResetPriceTexts() {
         this.dateText.text = `Day ${GameManager.GetInstance().GetCurrentStage()}`;
-        this.totalSaleText.text = "";
-        this.employeeText.text = "";
-        // this.IngredientsText.text = "";
-        this.netIncomeText.text = "";
+        this.totalSaleMoneyText.text = "";
+        this.employeeMoneyText.text = "";
+        // this.IngredientsMoneyText.text = "";
+        this.netIncomeMoneyText.text = "";
     }
 
     // Gets daily profit and cost information from the BalanceManager class and calculates net income.
@@ -100,7 +115,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.employeeCost = EmployeeManager.GetInstance().GetTotalEmployeePay();
         if(this.employeeCost > 0) BalanceManager.GetInstance().UseAvailableBalance(Currency.wak, this.employeeCost);
         this.netIncome = this.totalSale - this.ingredientsCost - this.employeeCost;
-        this.netIncomeText.color = this.netIncome >= 0 ? this.totalSaleText.color : this.employeeText.color;
+        this.netIncomeMoneyText.color = this.netIncome >= 0 ? this.totalSaleMoneyText.color : this.employeeMoneyText.color;
     }
 
     // Doubles the current net income and displays the result using animation.
@@ -110,6 +125,10 @@ export default class Settlement extends ZepetoScriptBehaviour {
         }
         // Initailize wakdu stamp
         let currentWakdu: number = DataManager.GetInstance().GetValue("wakdu");
+        // if current stage is tutorial stage,
+        if (GameManager.GetInstance().GetCurrentStage() == 2) {
+            currentWakdu++;
+        }
         if(currentWakdu > 0){
             // If wakdu stamps left, reduce one from the current count.            
             DataManager.GetInstance().SetValue("wakdu", currentWakdu - 1);
@@ -122,7 +141,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     
             // Run the ScoreAnimation coroutine.
             this.animationInProgress = true;
-            this.StartCoroutine(this.NumberAnimation(this.netIncomeText, this.netIncome, this.animationDuration));
+            this.StartCoroutine(this.NumberAnimation(this.netIncomeMoneyText, this.netIncome, this.animationDuration));
         }
         // If there are no more Wakdu stamps left, inform the user with an information popup.
         else{

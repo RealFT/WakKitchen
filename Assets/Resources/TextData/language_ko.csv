@@ -8,6 +8,9 @@ button_help,도움말
 button_credit,크레딧
 button_language,언어
 main_start,시작
+settlement_total,총 매출
+settlement_employee,직원 급여
+settlement_netIncome,순이익
 shop_hire_category,아르바이트
 shop_hire_buy,고용하기
 shop_upgrade_category,업그레이드
@@ -21,6 +24,9 @@ tutorial_start_ment5,"먼저, 도움말 버튼을 눌러 자세한 조리 방법
 tutorial_start_ment6,이제 주문을 받아 보죠! 주문이 들어오면 이곳에 영수증이 표시됩니다.
 tutorial_start_ment7,주문 영수증을 눌러 자세한 정보를 확인해 봅시다.
 tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
+tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
+tutorial_settlement_ment1,어느새 하루가 벌써 지났군요!
+tutorial_settlement_ment2,
 tutorial_dispenser_ment1,디스펜서가 해금되었습니다. 이제부터 음료수를 제조할 수 있습니다!
 tutorial_dispenser_ment2,디스펜서의 위치는 이곳입니다.
 tutorial_grill_ment1,그릴이 해금되었습니다. 이제부터 패티를 구울 수 있습니다.

@@ -47,12 +47,21 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
     }
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
-        if (eventName == EventNames.UpgradeUpdated) {
-            const product = ItemManager.GetInstance().GetProduct(eventData);
-            if (product){
-                this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
-                //this.RefreshUpgradeSlot(product);
+        switch (eventName) {
+            case EventNames.UpgradeUpdated: {
+                const product = ItemManager.GetInstance().GetProduct(eventData);
+                if (product) {
+                    this.CreateUpgradeSlots(ItemManager.GetInstance().getUpgradeCache());
+                    // this.RefreshUpgradeSlot(product);
+                }
+                break;
             }
+            case EventNames.LanguageChanged: {
+                this.RefreshUpgradeSlots();
+                break;
+            }
+            default:
+                break;
         }
     }
 

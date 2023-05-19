@@ -239,6 +239,50 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         OrderManager.GetInstance().SetOrderSize(3);
     }
 
+    public GuideSettlement(){
+        this.helpUI.SetActive(true);
+        this.StartCoroutine(this.GuideSettlementRoutine());
+    }
+
+    *GuideSettlementRoutine(){
+        this.curPage = 0;
+        GameManager.GetInstance().SetTutorialTimeScale();
+
+        // page 1
+        this.helpWindow_full.gameObject.SetActive(true);
+        this.setBackgroundVisibility(false);
+        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment1"));
+        this.nextBtn.onClick.AddListener(()=>{
+            if(UIManager.GetInstance().nextText()){
+                this.curPage = 1;
+            }
+        })
+        while (this.curPage < 1) yield null;
+
+        // page 2
+        this.helpWindow_full.gameObject.SetActive(false);
+        this.helpWindow_lower.gameObject.SetActive(true);
+        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
+        playButton.SetActive(true);
+        this.setBackgroundVisibility(true);
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment2"));
+        this.nextBtn.onClick.AddListener(()=>{
+            UIManager.GetInstance().nextText()
+        });
+        playButton.GetComponent<Button>().onClick.AddListener(()=>{
+            GameManager.GetInstance().NextStage();
+            this.curPage = 2;
+            playButton.SetActive(false);
+        });
+        while (this.curPage < 2) yield null;
+
+        this.helpWindow_full.gameObject.SetActive(false);
+        this.helpWindow_lower.gameObject.SetActive(false);
+        this.helpWindow_upper.gameObject.SetActive(false);
+        this.helpUI.SetActive(false);
+    }
+
     public OpenHelpWindow(section: Section) {
         UIManager.GetInstance().OpenHelpPanel();
         //GameManager.GetInstance().PauseStage();
@@ -254,6 +298,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             case Section.Plating:
                 const contents = this.helpContents_Plating.GetComponent<HelpContents>();
                 const pages = contents.GetPages();
+                contents.SetCloseBtnVisivility(false);
                 pages[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
                 pages[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
                 pages[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
@@ -261,6 +306,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 pages[0].gameObject.SetActive(true);
                 pages[1].gameObject.SetActive(false);
                 pages[2].gameObject.SetActive(false);
+                pages[2].GetNextBtn().onClick.AddListener(()=>{
+                    contents.SetCloseBtnVisivility(true);
+                });
                 pages[3].gameObject.SetActive(false);
                 break;
         }

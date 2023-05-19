@@ -86,8 +86,30 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
                 this.CreateSlot(id, quantity);
             }
         }
+
+        // Sort existing slots by grade
+        this.cardSlots.sort((a, b) => {
+            const cardGradeA = a.GetCardData()?.GetGrade();
+            const cardGradeB = b.GetCardData()?.GetGrade();
+            return this.CompareGrades(cardGradeA, cardGradeB);
+        });
+
+        // Update the size of the content to fit the number of slots
+        this.UpdateContentSize();
     }
     
+    private CompareGrades(gradeA: string | undefined, gradeB: string | undefined): number {
+        // Define grade order (from high to low)
+        const gradeOrder = { s: 4, a: 3, b: 2, c: 1, d: 0 };
+
+        // Compare grades using the grade order
+        if (gradeA && gradeB) {
+            const orderA = gradeOrder[gradeA.toLowerCase()] || 0;
+            const orderB = gradeOrder[gradeB.toLowerCase()] || 0;
+            return orderB - orderA; // Sort in descending order
+        }
+        return 0;
+    }
     private RefreshCardInfo(): void {
         console.warn("RefreshCardInfo");
         if(this.toggleGroup == null) this.toggleGroup = this.contentParent.GetComponent<ToggleGroup>();
@@ -111,21 +133,26 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
         }
         
         // Update the size of the content to fit the number of slots
+        this.UpdateContentSize();
+    }
+
+    // Update the size of the content to fit the number of slots
+    private UpdateContentSize(): void {
         const layoutGroup = this.contentParent.GetComponent<GridLayoutGroup>();
         const cellSize = layoutGroup.cellSize;
         const spacing = layoutGroup.spacing;
         const constraintCount = layoutGroup.constraintCount;
         const rowCount = Math.ceil(this.cardSlots.length / constraintCount);
-
+    
         // Cast contentParent to RectTransform
         const contentRectTransform = this.contentParent.transform as RectTransform;
-        const newContentSize = new Vector2(            
+        const newContentSize = new Vector2(
             contentRectTransform.sizeDelta.x,
             (rowCount + 1) * (cellSize.y + spacing.y)
         );
         contentRectTransform.sizeDelta = newContentSize;
     }
-    
+
     private CreateSlot(id: string, quantity: number) {
         let slot: CardSlot;
         const inactiveSlotIndex = this.cardSlots.findIndex(s => !s.gameObject.activeSelf);
