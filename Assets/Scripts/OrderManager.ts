@@ -8,6 +8,7 @@ import OrderReceipt from './OrderReceipt';
 import BalanceManager, { Currency } from './Shop/BalanceManager';
 import SoundManager from './SoundManager';
 import UIManager from './UIManager';
+import GameManager from './GameManager';
 
 export default class OrderManager extends ZepetoScriptBehaviour {
     // singleton
@@ -203,6 +204,8 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.expandOrderReceipt.SetOrderReceipt(burgerSprites, drinkSprite, sideSprite, additionalOrder, cost, characterSprite);
         this.expandOrderReceipt.setPanel(true);
         SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
+
+        GameManager.GetInstance().SlowStage();
     }
 
     public addOrder(): void {

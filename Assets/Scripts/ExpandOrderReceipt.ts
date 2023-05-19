@@ -1,6 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Image, Text, Button } from 'UnityEngine.UI';
 import { GameObject, Sprite } from 'UnityEngine';
+import GameManager from './GameManager';
 
 export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
 
@@ -20,6 +21,10 @@ export default class ExpandOrderReceipt extends ZepetoScriptBehaviour {
             this.setPanel(false);
         });
     }
+
+    // OnDisable(){
+    //     GameManager.GetInstance().ResumeStage();
+    // }
 
     public SetOrderReceipt(burgerSprites: Sprite[], drinkSprite: Sprite, 
         sideSprite: Sprite, additionalOrder: string, pay: string, customerSprite: Sprite): void {

@@ -142,6 +142,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
         Time.timeScale = 0;
     }
 
+    public SlowStage(){
+        Time.timeScale = 0.2;
+    }
+
     public ResumeStage(){
         Time.timeScale = 1;
     }

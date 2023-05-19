@@ -53,6 +53,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     private disableBackground: number = 0;
 
     @SerializeField() private helpContents_Plating: GameObject;
+    @SerializeField() private helpContents_Double: Button;
+    @SerializeField() private helpContents_DoubleConfirm: Button;
+    @SerializeField() private helpContents_Next: Button;
 
 
     Start(){
@@ -80,6 +83,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     *GuideStartRoutine(){
         this.curPage = 0;
         GameManager.GetInstance().SetTutorialTimeScale();
+        this.nextBtn.gameObject.SetActive(true);
 
         // page 1
         this.helpWindow_full.gameObject.SetActive(true);
@@ -210,7 +214,6 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             help_closeReceiptBtn.SetActive(true);
         });
         while (this.curPage < 6) yield null;
-        yield new WaitForSeconds(1);
         help_closeReceiptBtn.GetComponent<Button>().onClick.AddListener(()=>{
             this.curPage = 7;
             this.receiptCloseBtn.onClick.Invoke();
@@ -246,11 +249,14 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
     *GuideSettlementRoutine(){
         this.curPage = 0;
-        GameManager.GetInstance().SetTutorialTimeScale();
+        this.nextBtn.gameObject.SetActive(true);
+        this.helpContents_Next.enabled = false;
+        this.helpContents_Double.enabled = false;
 
         // page 1
         this.helpWindow_full.gameObject.SetActive(true);
         this.setBackgroundVisibility(false);
+        this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment1"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
@@ -262,20 +268,51 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 2
         this.helpWindow_full.gameObject.SetActive(false);
         this.helpWindow_lower.gameObject.SetActive(true);
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
-        this.setBackgroundVisibility(true);
+        const focus_double = this.gameObjectMap.get("Focus_Double");
+        focus_double.SetActive(true);
         this.nextBtn.onClick.RemoveAllListeners();
         UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment2"));
         this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText()
-        });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
-            GameManager.GetInstance().NextStage();
-            this.curPage = 2;
-            playButton.SetActive(false);
+            if(UIManager.GetInstance().nextText()){
+                this.curPage = 2;
+            }
+
         });
         while (this.curPage < 2) yield null;
+
+        // page 3
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment3"));
+        this.nextBtn.onClick.AddListener(()=>{
+            if(UIManager.GetInstance().nextText()){
+                this.nextBtn.gameObject.SetActive(false);
+                this.helpContents_Double.enabled = true;
+            }
+        })
+        this.helpContents_DoubleConfirm.onClick.AddListener(() => {
+            focus_double.SetActive(false);
+            this.curPage = 3;
+        });
+        while (this.curPage < 3) yield null;
+        this.nextBtn.gameObject.SetActive(true);
+
+        // page 4
+        const focus_next = this.gameObjectMap.get("Focus_Next");
+        focus_double.SetActive(true);
+        this.nextBtn.onClick.RemoveAllListeners();
+        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment4"));
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                this.nextBtn.gameObject.SetActive(false);
+                this.helpContents_Next.enabled = true;
+            }
+        })
+        this.helpContents_Next.onClick.AddListener(() => {
+            focus_next.SetActive(false);
+            this.curPage = 4;
+        });
+        while (this.curPage < 4) yield null;
+        this.nextBtn.gameObject.SetActive(true);
 
         this.helpWindow_full.gameObject.SetActive(false);
         this.helpWindow_lower.gameObject.SetActive(false);
