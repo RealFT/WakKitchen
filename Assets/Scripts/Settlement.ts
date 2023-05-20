@@ -23,6 +23,10 @@ export default class Settlement extends ZepetoScriptBehaviour {
     @SerializeField() private netIncomeText: TextMeshProUGUI;
     @SerializeField() private netIncomeMoneyText: TextMeshProUGUI;
 
+    @SerializeField() private doubleInfoText: TextMeshProUGUI;
+    @SerializeField() private doubleConfirmText: TextMeshProUGUI;
+    @SerializeField() private doubleCancelText: TextMeshProUGUI;
+
     @SerializeField() private doubleIncomeButton: Button;
     @SerializeField() private toShopButton: Button;
     @SerializeField() private animationDuration: number;
@@ -49,6 +53,9 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.employeeText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_employee");
         // this.IngredientsText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_ingredient");
         this.netIncomeText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_netIncome");
+        this.doubleInfoText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_double_info");
+        this.doubleConfirmText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_double_confirm");
+        this.doubleCancelText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_double_cancel");
 
         this.doubleIncomeButton.gameObject.SetActive(true);
         this.ResetPriceTexts();
@@ -132,8 +139,6 @@ export default class Settlement extends ZepetoScriptBehaviour {
         if(currentWakdu > 0){
             // If wakdu stamps left, reduce one from the current count.            
             DataManager.GetInstance().SetValue("wakdu", currentWakdu - 1);
-
-            this.doubleIncomeButton.gameObject.SetActive(false);
             
             // Double the current net income and add the previous net income as profit.
             BalanceManager.GetInstance().GainBalance(Currency.wak, this.netIncome);

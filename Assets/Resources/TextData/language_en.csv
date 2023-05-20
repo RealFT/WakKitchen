@@ -11,6 +11,9 @@ main_start,Start
 settlement_total,Total Sales
 settlement_employee,Employee
 settlement_netIncome,Net Income
+settlement_double_info,Use Stamp and get double income.
+settlement_double_confirm,Confirm
+settlement_double_cancel,Cancel
 shop_hire_category,Hire
 shop_hire_buy,Hire
 shop_upgrade_category,Upgrade

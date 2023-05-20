@@ -8,6 +8,7 @@ import Shop from './Shop/Shop';
 import SoundManager from './SoundManager';
 import GameManager from './GameManager';
 import DataManager from './DataManager';
+import HelpManager from './Help/HelpManager';
 
 export default class UIManager extends ZepetoScriptBehaviour implements IListener {
     // singleton
@@ -236,6 +237,13 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         console.log("ToShop");
         this.SetSettlementUI(false);
         this.SetShopUI(true);
+
+        // 현재 스테이지에 해금된 섹션이 있는지 체크 후 해당하는 가이드 튜토리얼 활성화
+        const curStage = GameManager.GetInstance().GetCurrentStage();
+        const unlockSection = DataManager.GetInstance().CheckUnlockByStage(curStage);
+        if (unlockSection != undefined) {
+            HelpManager.GetInstance().GuideSection(unlockSection);
+        }
         SoundManager.GetInstance().OnPlayBGM(SoundManager.GetInstance().keyShop);
     }
 

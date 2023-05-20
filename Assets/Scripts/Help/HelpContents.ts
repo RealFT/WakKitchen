@@ -4,6 +4,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import HelpPage from './HelpPage';
 import { TextMeshProUGUI } from 'TMPro';
 import DataManager from '../DataManager';
+import GameManager from '../GameManager';
 
 export default class HelpContents extends ZepetoScriptBehaviour {
     @SerializeField() private pageObjs: GameObject[];
@@ -58,5 +59,4 @@ export default class HelpContents extends ZepetoScriptBehaviour {
     public SetCloseBtnVisivility(visible: boolean){
         this.closeButton.gameObject.SetActive(visible);
     }
-
 }

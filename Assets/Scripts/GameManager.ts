@@ -86,8 +86,8 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.timer.SetTimeScale(99999);
     }
 
-    public SetTutorialPlayTime(){
-        this.timer.SetTime(18, 0);
+    public SetTutorialPlayTime(hour: number){
+        this.timer.SetTime(hour, 0);
         this.timer.SetTimeScale(this.minutesPerDay);
     }
 

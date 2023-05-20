@@ -10,7 +10,10 @@ button_language,언어
 main_start,시작
 settlement_total,총 매출
 settlement_employee,직원 급여
-settlement_netIncome,순이익
+settlement_netIncome,순수익
+settlement_double_info,도장을 사용해서 수익을 두 배로 얻으세요!
+settlement_double_confirm,확인
+settlement_double_cancel,취소
 shop_hire_category,아르바이트
 shop_hire_buy,고용하기
 shop_upgrade_category,업그레이드
@@ -27,10 +30,12 @@ tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를
 tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
 tutorial_settlement_ment1,어느새 하루가 벌써 지났군요!
 tutorial_settlement_ment2,두 배 보상을 받자.
-tutorial_settlement_ment3,이번에만 공짜야. ㄱㄱ
+tutorial_settlement_ment3,이번에만 공짜야.
 tutorial_settlement_ment4,상점으로 가자.
 tutorial_dispenser_ment1,디스펜서가 해금되었습니다. 이제부터 음료수를 제조할 수 있습니다!
 tutorial_dispenser_ment2,디스펜서의 위치는 이곳입니다.
+tutorial_dispenser_ment3,디스펜서의 위치는 이곳입니다.
+tutorial_dispenser_ment4,디스펜서의 위치는 이곳입니다.
 tutorial_grill_ment1,그릴이 해금되었습니다. 이제부터 패티를 구울 수 있습니다.
 tutorial_grill_ment2,그릴의 위치는 이곳입니다.
 tutorial_employee_ment1,아르바이트 기능이 해금되었습니다. 조리를 대신 맡길 수 있습니다.

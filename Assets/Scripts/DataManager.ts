@@ -16,7 +16,8 @@ export enum Section {
     Fryer = 1,
     Grill = 2,
     Prep = 3,
-    Plating = 4
+    Plating = 4,
+    Employee = 5
 }
 export enum Cost {
     TOP_BURN = 15,
@@ -522,6 +523,14 @@ export default class DataManager extends ZepetoScriptBehaviour {
     public GetIsUnlockByName(name: string): boolean{
         const unlockStage = this.unlockStages?.get(name);
         return this.lastSavedStage >= unlockStage;
+    }
+    public CheckUnlockByStage(stage: number): string | undefined {
+        for (const [key, value] of this.unlockStages) {
+            if (value === stage) {
+                return key;
+            }
+        }
+        return undefined;
     }
     public GetSectionSprites(): Sprite[] {
         return this.sectionSprites;
