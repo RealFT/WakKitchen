@@ -6977,7 +6977,7 @@ MonoBehaviour:
     - {fileID: 854341365}
     - {fileID: 903130800}
     - {fileID: 519787132}
-    - {fileID: 155771492}
+    - {fileID: 2140698151}
     - {fileID: 445964308}
     - {fileID: 1345176840}
     values:
@@ -6990,7 +6990,7 @@ MonoBehaviour:
     - 
     - 
     - 
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":17,\"type\":\"UnityEngine.GameObject,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":17,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - 
     - 
@@ -9112,7 +9112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &667774070
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25296,6 +25296,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137793261}
   m_CullTransparentMesh: 1
+--- !u!114 &2140698151 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6459788423159908660, guid: f998a15c200783c409447dace822dfce, type: 3}
+  m_PrefabInstance: {fileID: 6459788421356596998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &13500149623834559
 RectTransform:
   m_ObjectHideFlags: 0

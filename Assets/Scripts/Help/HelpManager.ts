@@ -36,30 +36,28 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.window_lower = this.helpWindow_lower.GetComponent<HelpWindow>();
     }
 
-    @SerializeField() private background: Image;
-    @SerializeField() private nextBtn: Button;
-    @SerializeField() private receiptCloseBtn: Button;
-    @SerializeField() private helpUI: GameObject;
-    @SerializeField() private helpWindow_full: GameObject;
-    @SerializeField() private helpWindow_upper: GameObject;
-    @SerializeField() private helpWindow_lower: GameObject;
-    @SerializeField() private guideObjects: GameObject[];
-    private gameObjectMap = new Map<string, GameObject>();
+    @SerializeField() private background: Image;    // 도움말 background 이미지
+    @SerializeField() private nextBtn: Button;  // 도움말 넘기기 버튼
+    @SerializeField() private receiptCloseBtn: Button;  //  확장 레시피 닫는 버튼(background)
+    @SerializeField() private helpUI: GameObject;   //  UI_Help
+    @SerializeField() private helpWindow_full: GameObject;  // 캐릭터가 다 나오는 도움말
+    @SerializeField() private helpWindow_upper: GameObject; // 위쪽 공간 설명용 도움말
+    @SerializeField() private helpWindow_lower: GameObject; // 아래쪽 공간 설명용 도움말
+    @SerializeField() private guideObjects: GameObject[];   // 가이드 시 필요한 오브젝트들
+    private gameObjectMap = new Map<string, GameObject>();  // 게임오브젝트 검색을 편하게 하기 위하
     private window_full: HelpWindow;
     private window_upper: HelpWindow;
     private window_lower: HelpWindow;
-    private enableBackground: number = 0.625;
-    private disableBackground: number = 0;
 
-    @SerializeField() private helpContents_Dispenser: GameObject;
-    @SerializeField() private helpContents_Grill: GameObject;
-    @SerializeField() private helpContents_Employee: GameObject;
-    @SerializeField() private helpContents_Prep: GameObject;
-    @SerializeField() private helpContents_Fryer: GameObject;
-    @SerializeField() private helpContents_Plating: GameObject;
-    @SerializeField() private helpContents_Double: Button;
-    @SerializeField() private helpContents_DoubleConfirm: Button;
-    @SerializeField() private helpContents_Next: Button;
+    @SerializeField() private helpContents_Dispenser: GameObject;   // 디스펜서 도움말 창
+    @SerializeField() private helpContents_Grill: GameObject;       // 그릴 도움말 창
+    @SerializeField() private helpContents_Employee: GameObject;    // 고용 도움말 창
+    @SerializeField() private helpContents_Prep: GameObject;        // 프랩 도움말 창
+    @SerializeField() private helpContents_Fryer: GameObject;       // 튀김기 도움말 창
+    @SerializeField() private helpContents_Plating: GameObject;     // 플레이팅 도움말 창
+    @SerializeField() private helpContents_Double: Button;          // 두 배 버튼
+    @SerializeField() private helpContents_DoubleConfirm: Button;   // 두 배 확인 버튼
+    @SerializeField() private helpContents_Next: Button;            // Next(ToShop)버튼
 
     Start(){
         for (const gameObject of this.guideObjects) {
