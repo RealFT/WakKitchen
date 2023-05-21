@@ -7,6 +7,7 @@ import GameManager from '../GameManager';
 import { TextMeshProUGUI } from 'TMPro';
 import UIManager from '../UIManager';
 import DataManager from '../DataManager';
+import BalanceManager from './BalanceManager';
 
 export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
 
@@ -31,7 +32,14 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
         this.priceText.text = ir.price.toString();
         if (!isFullyUpgraded) {
             this.buyBtn.onClick.AddListener(() => {
-                this.StartCoroutine(ItemManager.GetInstance().PurchaseItem(ir.productId));
+                const price = this.itemRecord.price;
+                // if don't have enough money
+                if (price < BalanceManager.GetInstance().GetPossessionMoney()) {
+                    UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_nocurruncey"));
+                }
+                else {
+                    this.StartCoroutine(ItemManager.GetInstance().PurchaseItem(ir.productId));
+                }
             });
             this.SetStar(upgradeLevel);
         }
@@ -78,5 +86,9 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
 
     public GetItemRecord(): ProductRecord {
         return this.itemRecord;
+    }
+
+    public GetBuyBtn(): Button {
+        return this.buyBtn;
     }
 }

@@ -1,42 +1,48 @@
 import { Canvas, Object, GameObject, Quaternion, Rigidbody2D, Sprite, Vector3, WaitForSeconds, Input, Time } from 'UnityEngine';
 import { Vector2, RectTransform, Random, Rect, Debug } from 'UnityEngine';
-import { Image, Slider } from "UnityEngine.UI";
+import { Image, Button } from "UnityEngine.UI";
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
 import OrderManager from './OrderManager';
-import DataManager, { Ingredient } from './DataManager';
+import DataManager, { Ingredient, Section } from './DataManager';
 import Slicable from './Slicable';
 import ItemManager from './ItemManager';
 import Mediator, { EventNames, IListener }  from './Notification/Mediator';
+import HelpManager from './Help/HelpManager';
 
 export default class SliceController extends ZepetoScriptBehaviour implements IListener  {
-    public slicablePrefab: GameObject;  // The prefab for the ingredient that will be sliced
-    public mask: GameObject;  // The mask on which the ingredients will be spawned
+    @SerializeField() private helpButton: Button; // Button to help
+    @SerializeField() private  slicablePrefab: GameObject;  // The prefab for the ingredient that will be sliced
+    @SerializeField() private  mask: GameObject;  // The mask on which the ingredients will be spawned
 
-    public originSprites: Sprite[]; // The original sprites for each type of ingredient
+    @SerializeField() private  originSprites: Sprite[]; // The original sprites for each type of ingredient
     // A map of ingredient indices to their corresponding enum values
     private ingredients: Map<number, Ingredient> = new Map<number, Ingredient>();   
     private slicableItemsPool: Slicable[] = [];   // An object pool of GameObjects used to spawn new ingredients
     private spawnCount = 0; // The number of ingredients to spawn initially
     private isCutting = false;  // Whether the player is currently in the process of cutting ingredients
 
-    public initialVelocity: Vector2;    // The initial velocity of the ingredient
-    public tiltAngle: number;     // the degree to which the ingredients are tilted
-    public gravity: number;    // The acceleration due to gravity
-    public speed: number;    // speed of the ingredient
+    @SerializeField() private  initialVelocity: Vector2;    // The initial velocity of the ingredient
+    @SerializeField() private  tiltAngle: number;     // the degree to which the ingredients are tilted
+    @SerializeField() private  gravity: number;    // The acceleration due to gravity
+    @SerializeField() private  speed: number;    // speed of the ingredient
 
     // The minimum and maximum delay between shots
-    public minDelay: number;
-    public maxDelay: number;
+    @SerializeField() private  minDelay: number;
+    @SerializeField() private  maxDelay: number;
 
     // The maximum left and right position at which the ingredient can spawn.
-    public leftSpawnPos: RectTransform;
-    public rightSpawnPos: RectTransform;
+    @SerializeField() private  leftSpawnPos: RectTransform;
+    @SerializeField() private  rightSpawnPos: RectTransform;
 
     // The start and end positions of the cut.
-    public slicePoint: RectTransform;
+    @SerializeField() private  slicePoint: RectTransform;
 
     Start() {
+        this.helpButton.onClick.AddListener(() => {
+            HelpManager.GetInstance().OpenHelpSection(Section.Prep);
+        });
+
         this.ingredients.set(0, Ingredient.CABBAGE);
         this.ingredients.set(1, Ingredient.TOMATO);
         this.ingredients.set(2, Ingredient.ONION);

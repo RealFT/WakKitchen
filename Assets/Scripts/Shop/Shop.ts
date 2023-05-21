@@ -1,7 +1,7 @@
 import { GameObject } from 'UnityEngine';
 import { Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import Shop_Hire from './Shop_Hire';
+import Shop_Employee from './Shop_Employee';
 import Shop_Upgrade from './Shop_Upgrade';
 import Shop_Food from './Shop_Food';
 import GameManager from '../GameManager';
@@ -10,13 +10,13 @@ import DataManager from '../DataManager';
 import { TextMeshProUGUI } from 'TMPro';
 export default class Shop extends ZepetoScriptBehaviour {
     @SerializeField() private categoryBtns: Button[];
-    @SerializeField() private categoryTextHire: TextMeshProUGUI;
+    @SerializeField() private categoryTextEmployee: TextMeshProUGUI;
     @SerializeField() private categoryTextUpgrade: TextMeshProUGUI;
     @SerializeField() private toStageBtn: Button;
     @SerializeField() private panels: GameObject[];
 
     OnEnable(){
-        this.categoryTextHire.text = DataManager.GetInstance().GetCurrentLanguageData("shop_hire_category");
+        this.categoryTextEmployee.text = DataManager.GetInstance().GetCurrentLanguageData("shop_employee_category");
         this.categoryTextUpgrade.text = DataManager.GetInstance().GetCurrentLanguageData("shop_upgrade_category");
     }
 
@@ -44,8 +44,8 @@ export default class Shop extends ZepetoScriptBehaviour {
     }
 
     public InitShop(){
-        var hireShop = this.panels[0].GetComponent<Shop_Hire>();
-        if(hireShop) hireShop.InitHireShop();
+        var employeeShop = this.panels[0].GetComponent<Shop_Employee>();
+        if(employeeShop) employeeShop.InitEmployeeShop();
         var upgradeShop = this.panels[1].GetComponent<Shop_Upgrade>();
         if(upgradeShop) upgradeShop.InitUpgradeShop();
         // var foodShop = this.panels[2].GetComponent<Shop_Food>();

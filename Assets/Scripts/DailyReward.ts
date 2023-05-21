@@ -22,6 +22,7 @@ export default class DailyReward extends ZepetoScriptBehaviour {
     OnEnable(){
         this.contentsText.text = DataManager.GetInstance().GetCurrentLanguageData("panel_daily");
         this.claimButtonText.text = DataManager.GetInstance().GetCurrentLanguageData("button_claim");
+        this.RefreshStamp();
     }
 
     Start(){
@@ -44,9 +45,36 @@ export default class DailyReward extends ZepetoScriptBehaviour {
         }
     }
 
-    private CreateWakdu(){
-        const stamp = Object.Instantiate(this.stampPrefab, this.contentsParent) as GameObject;
-        this.stampPool.push(stamp);
+    private RefreshStamp(){
+        for (const stamp of this.stampPool) {
+            stamp.SetActive(false);
+        }
+        let currentWakdu: number = DataManager.GetInstance().GetValue(this.wakduKey);
+        for(let i=0;i<currentWakdu;i++){
+            this.CreateWakdu();
+        }
+    }
+
+    private CreateWakdu(): void {
+        let stamp: GameObject | null = this.FindInactiveStamp();
+
+        if (stamp !== null) {
+            // 비활성화된 오브젝트가 있는 경우
+            stamp.SetActive(true);
+        } else {
+            // 비활성화된 오브젝트가 없는 경우
+            stamp = Object.Instantiate(this.stampPrefab, this.contentsParent) as GameObject;
+            this.stampPool.push(stamp);
+        }
+    }
+
+    private FindInactiveStamp(): GameObject | null {
+        for (const stamp of this.stampPool) {
+            if (!stamp.activeSelf) {
+                return stamp;
+            }
+        }
+        return null;
     }
 
     // Method to check if daily reward is claimable

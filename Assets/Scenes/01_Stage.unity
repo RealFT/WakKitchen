@@ -727,11 +727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[4]
-      value: '{"type":"System.Single, mscorlib","value":"2.5"}'
+      value: '{"type":"System.Single, mscorlib","value":"2"}'
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[5]
-      value: '{"type":"System.Single, mscorlib","value":"7.5"}'
+      value: '{"type":"System.Single, mscorlib","value":"8"}'
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[8]
@@ -9114,6 +9114,7 @@ MonoBehaviour:
     - rightSpawnPos
     - slicePoint
     - mask
+    - helpButton
     unityValues:
     - {fileID: 1163768469588619952, guid: de8895deeb6b12746a5e2f75967ffbd4, type: 3}
     - {fileID: 0}
@@ -9127,6 +9128,7 @@ MonoBehaviour:
     - {fileID: 949339394}
     - {fileID: 684050593}
     - {fileID: 1179887285}
+    - {fileID: 657018762}
     values:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Object,
@@ -9137,6 +9139,7 @@ MonoBehaviour:
     - '{"type":"System.Single, mscorlib","value":"800"}'
     - '{"type":"System.Single, mscorlib","value":"0.1"}'
     - '{"type":"System.Single, mscorlib","value":"2"}'
+    - 
     - 
     - 
     - 
@@ -15042,6 +15045,7 @@ MonoBehaviour:
     - sectionObject
     - sectionCollider
     - burntEffect
+    - helpButton
     unityValues:
     - {fileID: 865958547593278898}
     - {fileID: 0}
@@ -15054,6 +15058,7 @@ MonoBehaviour:
     - {fileID: 1139545425}
     - {fileID: 543212705}
     - {fileID: 215642426}
+    - {fileID: 1798356178}
     values:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":3,\"type\":\"UnityEngine.Object,
@@ -15065,6 +15070,7 @@ MonoBehaviour:
     - 
     - 
     - '{"type":"System.String, mscorlib","value":"grill"}'
+    - 
     - 
     - 
     - 
@@ -16520,6 +16526,7 @@ MonoBehaviour:
     - defaultCupSprite
     - cupSprites
     - speedRange
+    - helpButton
     unityValues:
     - {fileID: 655457275}
     - {fileID: 928102449}
@@ -16532,6 +16539,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 30a7a640d9529fc41b97c6413d868ee1, type: 3}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 395637217}
     values:
     - 
     - 
@@ -16545,6 +16553,7 @@ MonoBehaviour:
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":5,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - '{"type":"System.Single, mscorlib","value":"0.32"}'
+    - 
     unityArrayValues:
     - {fileID: 21300000, guid: e5b3a034ed7674c4c844f881633d9314, type: 3}
     - {fileID: 21300000, guid: d3ec931220f709944bf44d232ae6781c, type: 3}
@@ -24413,11 +24422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[4]
-      value: '{"type":"System.Single, mscorlib","value":"2.5"}'
+      value: '{"type":"System.Single, mscorlib","value":"2"}'
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[5]
-      value: '{"type":"System.Single, mscorlib","value":"7.5"}'
+      value: '{"type":"System.Single, mscorlib","value":"8"}'
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[8]
@@ -33312,6 +33321,7 @@ MonoBehaviour:
     - sectionName
     - sectionObject
     - sectionCollider
+    - helpButton
     unityValues:
     - {fileID: 180274481}
     - {fileID: 0}
@@ -33323,6 +33333,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 854597914}
     - {fileID: 1715160195}
+    - {fileID: 822423079}
     values:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":2,\"type\":\"UnityEngine.Object,
@@ -33334,6 +33345,7 @@ MonoBehaviour:
     - 
     - 
     - '{"type":"System.String, mscorlib","value":"frier"}'
+    - 
     - 
     - 
     unityArrayValues:
@@ -39031,11 +39043,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[4]
-      value: '{"type":"System.Single, mscorlib","value":"2.5"}'
+      value: '{"type":"System.Single, mscorlib","value":"2"}'
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145296, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: script.values.Array.data[5]
-      value: '{"type":"System.Single, mscorlib","value":"7.5"}'
+      value: '{"type":"System.Single, mscorlib","value":"8"}'
       objectReference: {fileID: 0}
     - target: {fileID: 394301539800145297, guid: 83d871a78ae64b8459080947974006a3, type: 3}
       propertyPath: m_Pivot.x

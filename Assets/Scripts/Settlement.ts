@@ -28,6 +28,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     @SerializeField() private doubleCancelText: TextMeshProUGUI;
 
     @SerializeField() private doubleIncomeButton: Button;
+    @SerializeField() private doubleConfirmButton: Button;
     @SerializeField() private toShopButton: Button;
     @SerializeField() private animationDuration: number;
     private animationInProgress: boolean = false;
@@ -57,15 +58,16 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.doubleConfirmText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_double_confirm");
         this.doubleCancelText.text = DataManager.GetInstance().GetCurrentLanguageData("settlement_double_cancel");
 
-        this.doubleIncomeButton.gameObject.SetActive(true);
         this.ResetPriceTexts();
         this.GetPriceInformation();
+        this.doubleIncomeButton.gameObject.SetActive(false);
+        this.toShopButton.gameObject.SetActive(false);
         this.StartCoroutine(this.AnimationSequence());
         SoundManager.GetInstance().OnPlayOnceBGM(SoundManager.GetInstance().keySettlement);
     }
 
     Start() {
-        this.doubleIncomeButton.onClick.AddListener(() => {
+        this.doubleConfirmButton.onClick.AddListener(() => {
             this.OnDoubleIncome();
             SoundManager.GetInstance().OnPlayButtonSFX("Purchase");
         });
@@ -101,6 +103,8 @@ export default class Settlement extends ZepetoScriptBehaviour {
             yield* animation();
             this.animationInProgress = false;
         }
+        this.doubleIncomeButton.gameObject.SetActive(true);
+        this.toShopButton.gameObject.SetActive(true);
         if(GameManager.GetInstance().GetCurrentStage() == 2){
             HelpManager.GetInstance().GuideSettlement();
         }

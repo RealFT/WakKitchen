@@ -22,6 +22,12 @@ TagManager:
   - PrepOpen
   - FryerOpen
   - ReceiptOpen
+  - ShopUpgrade
+  - CategoryEmployee
+  - CategoryUpgrade
+  - CloseMyCard
+  - OpenMyCard
+  - BuyCard
   layers:
   - Default
   - TransparentFX

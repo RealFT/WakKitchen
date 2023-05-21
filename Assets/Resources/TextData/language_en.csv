@@ -14,8 +14,8 @@ settlement_netIncome,Net Income
 settlement_double_info,Use Stamp and get double income.
 settlement_double_confirm,Confirm
 settlement_double_cancel,Cancel
-shop_hire_category,Hire
-shop_hire_buy,Hire
+shop_employee_category,Employee
+shop_employee_buy,Buy
 shop_upgrade_category,Upgrade
 shop_upgrade_buy,Buy
 panel_daily,We give you a stamp every day! You can double your incomes with stamps!
@@ -23,25 +23,45 @@ tutorial_start_ment1,"Hello! I'm Panchi, here to help you with your shop operati
 tutorial_start_ment2,Press the Play button to move to the shop!
 tutorial_start_ment3,Only the Workstation is unlocked for now. The Workstation is right here.
 tutorial_start_ment4,Approach it closely and press the Open button to start cooking.
-tutorial_start_ment5,"Press the Help button to check the detailed cooking instructions."
+tutorial_start_ment5,Press the Help button to check the detailed cooking instructions.
 tutorial_start_ment6,"When an order comes in, the receipt will be displayed here."
 tutorial_start_ment7,Press the order receipt to view detailed information.
 tutorial_start_ment8,Now it's time for real action! Serve delicious burgers to your customers!
-tutorial_dispenser_ment1,The dispenser is unlocked. Now you can make beverages!
-tutorial_dispenser_ment2,The dispenser is located here.
-tutorial_grill_ment1,The grill is unlocked. Now you can cook patties!
-tutorial_grill_ment2,The grill is located here.
-tutorial_employee_ment1,The part-time employee feature is unlocked. You can delegate cooking tasks to them.
-tutorial_employee_ment2,"Go to the Hire tab, please."
-tutorial_employee_ment3,You can hire part-time employees here.
-tutorial_employee_ment4,Open the Card Management window to manage the cards you've obtained.
-tutorial_employee_ment5,"To use part-time employees, you need to expand slots through function upgrades."
-tutorial_employee_ment6,Go to the Upgrade tab. You can enhance the functions there.
-tutorial_employee_ment7,Upgrade Employee to expand the slots.
-tutorial_employee_ment8,Upgrade complete! Now reopen the Card Management window.
-tutorial_employee_ment9,Now select and equip the desired card.
-tutorial_employee_ment10,You need to assign tasks to the equipped employees. Please select the tasks.
-tutorial_employee_ment11,All preparations are complete. Now make this shop the best one!
+tutorial_settlement_ment1, "Oh, it's already time! The clock has struck 10 o'clock."
+tutorial_settlement_ment2, You can receive double rewards with stamps obtained through daily attendance.
+tutorial_settlement_ment3, Shall we give it a try? It's free this time!
+tutorial_settlement_ment4, Great! Now let's go to the shop!
+tutorial_dispenser_ment1, The dispenser has been unlocked. Now you can make beverages!
+tutorial_dispenser_ment2, "Let's go to the shop and check it out. When you're ready, press the Play button!"
+tutorial_dispenser_ment3, Installation is complete! The dispenser is located here.
+tutorial_dispenser_ment4, "Get closer and press the Open button, please."
+tutorial_grill_ment1, The grill has been unlocked. Now you can cook patties!
+tutorial_grill_ment2, "When you're ready, press the Play button."
+tutorial_grill_ment3, Installation is complete! The grill is located here.
+tutorial_grill_ment4, "Go to the grill and press the Open button, please."
+tutorial_prep_ment1, "The prep station has been unlocked. Finally, we can have some vegetables!"
+tutorial_prep_ment2, "When you're ready, press the Play button."
+tutorial_prep_ment3, Installation is complete! The prep station is located here.
+tutorial_prep_ment4, "Get closer and press the Open button, please."
+tutorial_fryer_ment1, The fryer has been unlocked. French fries are a must-have!
+tutorial_fryer_ment2, "When you're ready, press the Play button."
+tutorial_fryer_ment3, Now you have all the equipment! The fryer is located here.
+tutorial_fryer_ment4, Get closer and press the Open button, please.
+tutorial_employee_ment1, The employee has been unlocked. They can handle the cooking for you.
+tutorial_employee_ment2, "Go to the Employee tab, please."
+tutorial_employee_ment3, You can purchase employee cards here. The first purchase cost is on me!
+tutorial_employee_ment4, Great! Now let's check the cards you've obtained. Please press My Card.
+tutorial_employee_ment5, "Oh no! All the slots are locked! To register employees, you need to expand the slots through function upgrades."
+tutorial_employee_ment6, Go to the Upgrade tab. You can enhance the functions there.
+tutorial_employee_ment7, "Enhance Employee to unlock slots. Since it's your first time, I'll do it for free!"
+tutorial_employee_ment8, Upgrade is complete! Now please open the Card Management window again.
+tutorial_employee_ment9, "One slot has been unlocked. Now you need to select the desired card and equip it."
+tutorial_employee_ment10, "Once equipped, you need to assign tasks to the employees."
+tutorial_employee_ment11, "Once everything is ready, please press the Play button and go to the shop."
+tutorial_employee_ment12, Employees will be displayed here. The ingredients completed by employees will be automatically added to the prep station.
+tutorial_employee_ment13, You can click on the employee icon to make them stop working.
+tutorial_employee_ment14, "Please note that you need to pay daily wages to your employees!"
+tutorial_employee_ment15, Now it's time for the real challenge! Good luck!
 help_receipt_ment1,"Customers place orders at regular intervals. The faster you fulfill the orders, the faster the customers' visits."
 help_receipt_ment2,"When the heart gauge is depleted, the customer leaves."
 help_receipt_ment3,Press the customer's receipt to view detailed information.
@@ -54,5 +74,6 @@ help_employee_ment1,Part-time employees are displayed here. You can click on the
 info_nocurruncey,Not enough currency.
 info_nostamp,No remaining stamps.
 info_dailygranted,Daily reward has been obtained.
-info_already_dailygranted,You have already claimed the reward today.
+info_already_dailygranted,Already claimed the reward today.
 info_Invalid_recipe,No matching order for the recipe.
+info_require_section,You must select a section for your employee.

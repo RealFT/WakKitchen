@@ -7,9 +7,11 @@ import { Drink } from './DataManager';
 import ItemManager from './ItemManager';
 import Mediator, { EventNames, IListener }  from './Notification/Mediator';
 import SoundManager from './SoundManager';
-
+import DataManager, { Section } from './DataManager';
+import HelpManager from './Help/HelpManager';
 export default class Dispenser extends ZepetoScriptBehaviour implements IListener  {
 
+    @SerializeField() private helpButton: Button; // Button to help
     @SerializeField() private leftMax: RectTransform; // Max value that can be moved to the left
     @SerializeField() private rightMax: RectTransform; // Max value that can be moved to the right
     @SerializeField() private cupTransform: RectTransform; // Cup's Transform
@@ -45,6 +47,9 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
             OrderManager.GetInstance().AddItemToInventory(this.curDrink, this.quantity);
             SoundManager.GetInstance().OnPlaySFX("Dispenser_liquid");
             this.cupBtn.gameObject.SetActive(false);
+        });
+        this.helpButton.onClick.AddListener(() => {
+            HelpManager.GetInstance().OpenHelpSection(Section.Dispenser);
         });
 
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("dispenser");

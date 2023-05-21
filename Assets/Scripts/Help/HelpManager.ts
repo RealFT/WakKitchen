@@ -6,10 +6,17 @@ import SoundManager from '../SoundManager';
 import HelpWindow from './HelpWindow';
 import DataManager, { Section } from '../DataManager';
 import GameManager from '../GameManager';
+import InteractionBase from '../InteractionBase';
 import Interaction from '../Interaction';
+import Interaction_Grill from '../Interaction_Grill';
+import Interaction_Fry from '../Interaction_Fry';
 import HelpContents from './HelpContents';
 import OrderManager from '../OrderManager';
 import OrderReceipt from '../OrderReceipt';
+import { TextMeshProUGUI } from 'TMPro';
+import BalanceManager, { Currency } from '../Shop/BalanceManager';
+import CardInventory from '../Employee/CardInventory';
+import Shop_Upgrade from '../Shop/Shop_Upgrade';
 
 export default class HelpManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -58,6 +65,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     @SerializeField() private helpContents_Double: Button;          // 두 배 버튼
     @SerializeField() private helpContents_DoubleConfirm: Button;   // 두 배 확인 버튼
     @SerializeField() private helpContents_Next: Button;            // Next(ToShop)버튼
+    @SerializeField() private helpContents_GetCard: Button;         // GetCard버튼
 
     Start(){
         for (const gameObject of this.guideObjects) {
@@ -66,9 +74,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             this.gameObjectMap.set(name, gameObject);
         }
         this.helpUI.SetActive(false);
-        this.helpWindow_full.SetActive(false);
-        this.helpWindow_upper.SetActive(false);
-        this.helpWindow_lower.SetActive(false);
+        this.ClearHelpWindow();
         this.background.gameObject.SetActive(true);
     }
 
@@ -76,20 +82,31 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.background.enabled = visible;
     }
 
+    private ClearHelpWindow(){
+        this.helpWindow_full.SetActive(false);
+        this.helpWindow_upper.SetActive(false);
+        this.helpWindow_lower.SetActive(false);
+    }
+
+    private DisplayTextWithId(helpWindowObj: GameObject, displayText: TextMeshProUGUI, contentsId: string) {
+        this.ClearHelpWindow();
+        helpWindowObj.SetActive(true);
+        this.nextBtn.gameObject.SetActive(true);
+        UIManager.GetInstance().PlayText(displayText, DataManager.GetInstance().GetCurrentLanguageData(contentsId));
+    }
+
     public GuideStartGame(){
         this.helpUI.SetActive(true);
+        GameManager.GetInstance().SetTutorialTimeScale();
         this.StartCoroutine(this.GuideStartRoutine());
     }
 
     *GuideStartRoutine(){
         let curPage = 0;
-        GameManager.GetInstance().SetTutorialTimeScale();
-        this.nextBtn.gameObject.SetActive(true);
 
         // page 1
-        this.helpWindow_full.gameObject.SetActive(true);
         this.setBackgroundVisibility(true);
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment1"));
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_start_ment1");
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 1;
@@ -98,13 +115,11 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 1) yield null;
 
         // page 2
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(true);
         const playButton = this.gameObjectMap.get("Help_ToStageBtn");
         playButton.SetActive(true);
         this.setBackgroundVisibility(true);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_start_ment2");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment2"));
         this.nextBtn.onClick.AddListener(()=>{
             UIManager.GetInstance().nextText()
         });
@@ -116,13 +131,11 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 2) yield null;
 
         // page 3, 4
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
         const focus_plating = this.gameObjectMap.get("Focus_Section_Plating");
         focus_plating.SetActive(true);
         this.setBackgroundVisibility(false);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_start_ment3");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment3"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 3;
@@ -131,11 +144,11 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 3) yield null;
         const open_plating = GameObject.FindGameObjectWithTag("PlatingOpen")?.GetComponent<Interaction>()?.GetOpenButton();
         const guide_plating = this.gameObjectMap.get("Guide_Section_Plating");
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_start_ment4");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment4"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
-                this.helpWindow_full.gameObject.SetActive(false);
+                this.helpWindow_full.SetActive(false);
                 focus_plating.SetActive(false);
                 this.nextBtn.gameObject.SetActive(false);
                 guide_plating.SetActive(true);
@@ -146,28 +159,25 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         while (curPage < 4) yield null;
         guide_plating.SetActive(false);
-        this.nextBtn.gameObject.SetActive(true);
 
         // page 5
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(true);
         const help_openBtn = this.gameObjectMap.get("Help_OpenHelpBtn");
         help_openBtn.SetActive(true);
         const help_closeBtn = this.gameObjectMap.get("Help_CloseHelpBtn");
         help_closeBtn.SetActive(false);
         this.setBackgroundVisibility(true);
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_start_ment5");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_upper.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment5"));
         this.nextBtn.onClick.AddListener(() => {
             if(UIManager.GetInstance().nextText()){
-                this.helpWindow_upper.gameObject.SetActive(false);
+                this.helpWindow_upper.SetActive(false);
             }
         });
         help_openBtn.GetComponent<Button>().onClick.AddListener(()=>{
-            this.OpenHelpWindow(Section.Plating);
+            this.OpenHelpSection(Section.Plating);
             help_closeBtn.SetActive(true);
             this.setBackgroundVisibility(false);
-            this.helpWindow_upper.gameObject.SetActive(false);
+            this.helpWindow_upper.SetActive(false);
             help_openBtn.SetActive(false);
             this.nextBtn.gameObject.SetActive(false);
         });
@@ -176,33 +186,31 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             help_closeBtn.SetActive(false);
         });
         while (curPage < 5) yield null;
-        this.nextBtn.gameObject.SetActive(true);
 
         // page 6, 7
-        this.helpWindow_upper.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
         const focus_receipt = this.gameObjectMap.get("Focus_Receipt");
         focus_receipt.SetActive(true);
         this.setBackgroundVisibility(false);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_start_ment6");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment6"));
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
                 curPage = 6;
             }
         });
         while (curPage < 6) yield null;
+
         const open_receipt = GameObject.FindGameObjectWithTag("ReceiptOpen").GetComponent<OrderReceipt>().GetReceiptButton();
         const help_openReceiptBtn = this.gameObjectMap.get("Help_OpenReceiptBtn");
         const help_closeReceiptBtn = this.gameObjectMap.get("Help_CloseReceiptBtn");
         help_openReceiptBtn.SetActive(false);
         help_closeReceiptBtn.SetActive(false);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_start_ment7");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment7"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 this.nextBtn.gameObject.SetActive(false);
-                this.helpWindow_full.gameObject.SetActive(false);
+                this.helpWindow_full.SetActive(false);
                 help_openReceiptBtn.SetActive(true);
             }
         });
@@ -222,12 +230,10 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         while (curPage < 7) yield null;
         help_openReceiptBtn.SetActive(false);
-        this.nextBtn.gameObject.SetActive(true);
 
         // page 8
-        this.helpWindow_full.gameObject.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_start_ment8");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_start_ment8"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 8;
@@ -235,9 +241,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         while (curPage < 8) yield null;
 
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(false);
+        this.ClearHelpWindow();
         this.helpUI.SetActive(false);
         GameManager.GetInstance().SetTutorialPlayTime(18);
         OrderManager.GetInstance().SetOrderSize(3);
@@ -250,15 +254,13 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
     *GuideSettlementRoutine(){
         let curPage = 0;
-        this.nextBtn.gameObject.SetActive(true);
         this.helpContents_Next.enabled = false;
         this.helpContents_Double.enabled = false;
 
         // page 1
-        this.helpWindow_full.gameObject.SetActive(true);
         this.setBackgroundVisibility(false);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_settlement_ment1");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment1"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 1;
@@ -267,94 +269,73 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 1) yield null;
 
         // page 2
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(true);
         const focus_double = this.gameObjectMap.get("Focus_Double");
         focus_double.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_settlement_ment2");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment2"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 2;
             }
-
         });
         while (curPage < 2) yield null;
 
         // page 3
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_settlement_ment3");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment3"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 this.nextBtn.gameObject.SetActive(false);
-                this.helpWindow_lower.gameObject.SetActive(false);
+                this.helpWindow_lower.SetActive(false);
                 this.helpContents_Double.enabled = true;
             }
         });
         this.helpContents_Double.onClick.AddListener(() => {
-            focus_double.SetActive(false);
+            if(focus_double) focus_double.SetActive(false);
         });
         this.helpContents_DoubleConfirm.onClick.AddListener(() => {
-            curPage = 3;
+            if(curPage = 2) curPage = 3;
         });
         while (curPage < 3) yield null;
         yield new WaitForSeconds(1.5);
-        this.nextBtn.gameObject.SetActive(true);
 
         // page 4
-        this.helpWindow_lower.gameObject.SetActive(true);
         const focus_next = this.gameObjectMap.get("Focus_Next");
         focus_next.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_settlement_ment4");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_settlement_ment4"));
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
-                this.helpWindow_lower.gameObject.SetActive(false);
+                this.helpWindow_lower.SetActive(false);
                 this.nextBtn.gameObject.SetActive(false);
                 this.helpContents_Next.enabled = true;
             }
         });
         this.helpContents_Next.onClick.AddListener(() => {
-            focus_next.SetActive(false);
-            // this.helpWindow_full.gameObject.SetActive(false);
-            // this.helpWindow_upper.gameObject.SetActive(false);
-            // this.helpWindow_lower.gameObject.SetActive(false);
-            // this.helpUI.SetActive(false);
-            curPage = 4;
+            if(focus_next) focus_next.SetActive(false);
         });
-        // while (curPage < 4) yield null;
     }
 
     public GuideSection(section: string){
-
+        GameManager.GetInstance().SetTutorialTimeScale();
         this.helpUI.SetActive(true);
-        switch(section){
-            case "dispenser":
-                this.StartCoroutine(this.GuideDispenserRoutine());
-                break;
-            case "grill":
-                break;
-            case "employee":
-                break;
-            case "slice":
-                break;
-            case "frier":
-                break;
+        if(section == "employee"){
+            this.StartCoroutine(this.GuideEmployeeRoutine());
+        }
+        else{
+            this.StartCoroutine(this.GuideUnlockSectionRoutine(section));
         }
     }
 
-    *GuideDispenserRoutine(){
+    *GuideUnlockSectionRoutine(section: string){
+        // 첫 글자를 대문자로 변경
+        const capitalizedSection = section.charAt(0).toUpperCase() + section.slice(1).toLowerCase();
         let curPage = 0;
-        this.nextBtn.gameObject.SetActive(true);
-        this.helpContents_Next.enabled = false;
-        this.helpContents_Double.enabled = false;
-        GameManager.GetInstance().SetTutorialTimeScale();
 
         // page 1
-        this.helpWindow_lower.gameObject.SetActive(true);
         this.setBackgroundVisibility(false);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), `tutorial_${section.toLowerCase()}_ment1`);
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_dispenser_ment1"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 1;
@@ -365,11 +346,13 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 2
         const playButton = this.gameObjectMap.get("Help_ToStageBtn");
         playButton.SetActive(true);
-        this.setBackgroundVisibility(true);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), `tutorial_${section.toLowerCase()}_ment2`);
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_dispenser_ment2"));
         this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText();
+            if(UIManager.GetInstance().nextText()){
+                this.helpWindow_lower.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
+            }
         });
         playButton.GetComponent<Button>().onClick.AddListener(()=>{
             GameManager.GetInstance().NextStage();
@@ -378,135 +361,75 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         while (curPage < 2) yield null;
         
-        // page 3, 4
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
-        const focus_dispenser = this.gameObjectMap.get("Focus_Section_Dispenser");
-        focus_dispenser.SetActive(true);
-        this.setBackgroundVisibility(false);
+        // page 3
+        const focus = this.gameObjectMap.get(`Focus_Section_${capitalizedSection}`);
+        focus.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), `tutorial_${section.toLowerCase()}_ment3`);
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_dispenser_ment3"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 3;
             }
         });
         while (curPage < 3) yield null;
-        const open_dispenser = GameObject.FindGameObjectWithTag("DispenserOpen")?.GetComponent<Interaction>()?.GetOpenButton();
-        const guide_dispenser = this.gameObjectMap.get("Guide_Section_Dispenser");
+
+        // page 4
+        let open: Button;
+        if(section == "grill"){
+            open = GameObject.FindGameObjectWithTag(`${capitalizedSection}Open`)?.GetComponent<Interaction_Grill>()?.GetOpenButton();
+        }
+        else if(section == "fryer"){
+            open = GameObject.FindGameObjectWithTag(`${capitalizedSection}Open`)?.GetComponent<Interaction_Fry>()?.GetOpenButton();
+        }
+        else {
+            open = GameObject.FindGameObjectWithTag(`${capitalizedSection}Open`)?.GetComponent<Interaction>()?.GetOpenButton();
+        }
+        const guide = this.gameObjectMap.get(`Guide_Section_${capitalizedSection}`);
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_dispenser_ment4"));
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), `tutorial_${section.toLowerCase()}_ment4`);
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
-                this.helpWindow_full.gameObject.SetActive(false);
-                focus_dispenser.SetActive(false);
+                this.helpWindow_full.SetActive(false);
+                focus.SetActive(false);
                 this.nextBtn.gameObject.SetActive(false);
-                guide_dispenser.SetActive(true);
+                guide.SetActive(true);
             }
         });
-        open_dispenser.onClick.AddListener(() => {
+        open.onClick.AddListener(() => {
             if(curPage == 3) curPage = 4;
         });
         while (curPage < 4) yield null;
-        guide_dispenser.SetActive(false);
+        guide.SetActive(false);
 
-        this.OpenHelpWindow(Section.Dispenser);
+        switch(section.toLowerCase()){
+            case "dispenser":
+                this.OpenHelpSection(Section.Dispenser);
+                break;
+            case "grill":
+                this.OpenHelpSection(Section.Grill);
+                break;
+            case "slice":
+                this.OpenHelpSection(Section.Prep);
+                break;
+            case "frier":
+                this.OpenHelpSection(Section.Fryer);
+                break;
+        }
 
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(false);
-        this.helpUI.SetActive(false);
-        GameManager.GetInstance().SetTutorialPlayTime(14);
-    }
-
-    *GuideGrillRoutine(){
-        let curPage = 0;
-        this.nextBtn.gameObject.SetActive(true);
-        this.helpContents_Next.enabled = false;
-        this.helpContents_Double.enabled = false;
-        GameManager.GetInstance().SetTutorialTimeScale();
-
-        // page 1
-        this.helpWindow_lower.gameObject.SetActive(true);
-        this.setBackgroundVisibility(false);
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_grill_ment1"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                curPage = 1;
-            }
-        });
-        while (curPage < 1) yield null;
-
-        // page 2
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
-        this.setBackgroundVisibility(true);
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_grill_ment2"));
-        this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText();
-        });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
-            GameManager.GetInstance().NextStage();
-            curPage = 2;
-            playButton.SetActive(false);
-        });
-        while (curPage < 2) yield null;
-        
-        // page 3, 4
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
-        const focus_dispenser = this.gameObjectMap.get("Focus_Section_Grill");
-        focus_dispenser.SetActive(true);
-        this.setBackgroundVisibility(false);
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_dispenser_ment3"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                curPage = 3;
-            }
-        });
-        while (curPage < 3) yield null;
-        const open_dispenser = GameObject.FindGameObjectWithTag("GrillOpen")?.GetComponent<Interaction>()?.GetOpenButton();
-        const guide_dispenser = this.gameObjectMap.get("Guide_Section_Grill");
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_dispenser_ment4"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                this.helpWindow_full.gameObject.SetActive(false);
-                focus_dispenser.SetActive(false);
-                this.nextBtn.gameObject.SetActive(false);
-                guide_dispenser.SetActive(true);
-            }
-        });
-        open_dispenser.onClick.AddListener(() => {
-            if(curPage == 3) curPage = 4;
-        });
-        while (curPage < 4) yield null;
-        guide_dispenser.SetActive(false);
-
-        this.OpenHelpWindow(Section.Dispenser);
-
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(false);
+        this.ClearHelpWindow();
         this.helpUI.SetActive(false);
         GameManager.GetInstance().SetTutorialPlayTime(14);
     }
 
     *GuideEmployeeRoutine(){
         let curPage = 0;
-        this.nextBtn.gameObject.SetActive(true);
-        this.helpContents_Next.enabled = false;
-        this.helpContents_Double.enabled = false;
-        GameManager.GetInstance().SetTutorialTimeScale();
+        const playMask = this.gameObjectMap.get("Help_PlayMask");
+        playMask.SetActive(true);
 
         // page 1
-        this.helpWindow_lower.gameObject.SetActive(true);
         this.setBackgroundVisibility(false);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment1");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_employee_ment1"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 curPage = 1;
@@ -515,192 +438,242 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 1) yield null;
 
         // page 2
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
-        this.setBackgroundVisibility(true);
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_employee_ment2"));
-        this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText();
-        });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
-            GameManager.GetInstance().NextStage();
-            curPage = 2;
-            playButton.SetActive(false);
-        });
-        while (curPage < 2) yield null;
-        
-        // page 3, 4
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
-        const focus_Employee = this.gameObjectMap.get("Focus_Section_Employee");
+        const focus_Employee = this.gameObjectMap.get("Focus_Employee");
         focus_Employee.SetActive(true);
-        this.setBackgroundVisibility(false);
+        this.DisplayTextWithId(this.helpWindow_full, this.window_full.GetHelpText(), "tutorial_employee_ment2");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_employee_ment3"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
-                curPage = 3;
+                this.helpWindow_full.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
             }
+        });
+        const category_employee = GameObject.FindGameObjectWithTag("CategoryEmployee")?.GetComponent<Button>();
+        category_employee.onClick.AddListener(()=>{
+            focus_Employee.SetActive(false);
+            curPage = 2;
+        });
+        while (curPage < 2) yield null;
+
+        // page 3
+        const categoryMask = this.gameObjectMap.get("Help_CategoryMask");
+        categoryMask.SetActive(true);
+        const buyCardBtn = GameObject.FindGameObjectWithTag("BuyCard")?.GetComponent<Button>();
+        const helpBuyBtn = this.gameObjectMap.get("Help_BuyCardBtn");
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment3");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(()=>{
+            if(UIManager.GetInstance().nextText()){
+                BalanceManager.GetInstance().GainBalance(Currency.wak, 500);
+                helpBuyBtn.SetActive(true);
+                this.setBackgroundVisibility(true);
+                this.helpWindow_lower.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
+            }
+        });
+        helpBuyBtn.GetComponent<Button>().onClick.AddListener(()=>{
+            buyCardBtn.onClick.Invoke();
+            helpBuyBtn.SetActive(false);
+            this.setBackgroundVisibility(false);
+        });
+        this.helpContents_GetCard.onClick.AddListener(()=>{
+            if(curPage == 2) curPage = 3;
         });
         while (curPage < 3) yield null;
 
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(false);
-        this.helpUI.SetActive(false);
-        GameManager.GetInstance().SetTutorialPlayTime(14);
-    }
-
-    *GuideSliceRoutine(){
-        let curPage = 0;
-        this.nextBtn.gameObject.SetActive(true);
-        this.helpContents_Next.enabled = false;
-        this.helpContents_Double.enabled = false;
-        GameManager.GetInstance().SetTutorialTimeScale();
-
-        // page 1
-        this.helpWindow_lower.gameObject.SetActive(true);
-        this.setBackgroundVisibility(false);
+        // page 4
+        const openMyCardBtn = GameObject.FindGameObjectWithTag("OpenMyCard")?.GetComponent<Button>();
+        const focus_MyCard = this.gameObjectMap.get("Focus_MyCard");
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment4");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_prep_ment1"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                curPage = 1;
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                this.helpWindow_lower.SetActive(false);
+                focus_MyCard.SetActive(true);
+                this.nextBtn.gameObject.SetActive(false);
             }
         });
-        while (curPage < 1) yield null;
+        openMyCardBtn.onClick.AddListener(() => {
+            if (curPage == 3) curPage = 4;
+            focus_MyCard.SetActive(false);
+            categoryMask.SetActive(false);
+        });
+        while (curPage < 4) yield null;
 
-        // page 2
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
-        this.setBackgroundVisibility(true);
+        // page 5
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment5");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_prep_ment2"));
         this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText();
+            if(UIManager.GetInstance().nextText()){
+                curPage = 5;
+            }
+        });
+        while (curPage < 5) yield null;
+
+        // page 6
+        const closeMyCardBtn = GameObject.FindGameObjectWithTag("CloseMyCard")?.GetComponent<Button>();
+        const categoryUpgradeBtn = GameObject.FindGameObjectWithTag("CategoryUpgrade")?.GetComponent<Button>();
+        const focus_CloseInventory = this.gameObjectMap.get("Focus_CloseInventory");
+        const focus_Upgrade = this.gameObjectMap.get("Focus_Upgrade");
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment6");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                this.helpWindow_upper.SetActive(false);
+                focus_CloseInventory.SetActive(true);
+                playMask.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
+            }
+        });
+        const closeBtn = playMask.GetComponent<Button>();
+        closeBtn.onClick.AddListener(() => {
+            closeMyCardBtn.onClick.Invoke();
+            focus_CloseInventory.SetActive(false);
+            focus_Upgrade.SetActive(true);
+            closeBtn.onClick.RemoveAllListeners();
+        });
+        categoryUpgradeBtn.onClick.AddListener(() => {
+            if (curPage == 5) curPage = 6;
+            focus_Upgrade.SetActive(false);
+            categoryMask.SetActive(true);
+        });
+        while (curPage < 6) yield null;
+
+        // page 7
+        const ShopUpgrade = GameObject.FindGameObjectWithTag("ShopUpgrade")?.GetComponent<Shop_Upgrade>();
+        const upgradeBtn = ShopUpgrade.FindUpgradeSlotWithId("upgrade_employee_1")?.GetBuyBtn();
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment7");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                this.helpWindow_upper.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
+            }
+        });
+        if(upgradeBtn) upgradeBtn.onClick.AddListener(() => {
+            if(curPage == 6) curPage = 7;
+        });
+        else{
+            this.nextBtn.onClick.AddListener(() => {
+                curPage = 7;
+            });
+        }
+        while (curPage < 7) yield null;
+
+        // page 8
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment8");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                this.helpWindow_upper.SetActive(false);
+                focus_MyCard.SetActive(true);
+                this.nextBtn.gameObject.SetActive(false);
+            }
+        });
+        openMyCardBtn.onClick.AddListener(() => {
+            if (curPage == 7) curPage = 8;
+        });
+        while (curPage < 8) yield null;
+        categoryMask.SetActive(false);
+
+        // page 9
+        const focus_Equip = this.gameObjectMap.get("Focus_Equip");
+        focus_Equip.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment9");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                curPage = 9;
+                focus_Equip.SetActive(false);
+            }
+        });
+        while (curPage < 9) yield null;
+
+        // page 10
+        const focus_SelectSection = this.gameObjectMap.get("Focus_SelectSection");
+        focus_SelectSection.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment10");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                curPage = 10;
+                focus_SelectSection.SetActive(false);
+            }
+        });
+        while (curPage < 10) yield null;
+
+        // page 11
+        playMask.SetActive(false);
+        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
+        playButton.SetActive(false);
+        this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment11");
+        this.nextBtn.onClick.RemoveAllListeners();
+        this.nextBtn.onClick.AddListener(()=>{
+            if(UIManager.GetInstance().nextText()){
+                this.helpWindow_lower.SetActive(false);
+                this.nextBtn.gameObject.SetActive(false);
+                closeMyCardBtn.gameObject.SetActive(true);
+            }
+        });
+        closeBtn.onClick.AddListener(() => {
+            closeMyCardBtn.onClick.Invoke();
+            this.nextBtn.onClick.RemoveAllListeners();
+            this.setBackgroundVisibility(true);
+            this.nextBtn.gameObject.SetActive(true);
+            playButton.SetActive(true);
+            closeBtn.onClick.RemoveAllListeners();
         });
         playButton.GetComponent<Button>().onClick.AddListener(()=>{
             GameManager.GetInstance().NextStage();
-            curPage = 2;
-            playButton.SetActive(false);
+            curPage = 11;
         });
-        while (curPage < 2) yield null;
-        
-        // page 3, 4
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
-        const focus_prep = this.gameObjectMap.get("Focus_Section_Prep");
-        focus_prep.SetActive(true);
+        while (curPage < 11) yield null;
+        playButton.SetActive(false);
         this.setBackgroundVisibility(false);
+
+        // page 12
+        const focus = this.gameObjectMap.get("Focus_EmployeeSlot");
+        focus.SetActive(true);
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment12");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_prep_ment3"));
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
-                curPage = 3;
+                curPage = 12;
             }
         });
-        while (curPage < 3) yield null;
-        const open_prep = GameObject.FindGameObjectWithTag("PrepOpen")?.GetComponent<Interaction>()?.GetOpenButton();
-        const guide_prep = this.gameObjectMap.get("Guide_Section_Prep");
+        while (curPage < 12) yield null;
+
+        // page 13
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment13");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_prep_ment4"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                this.helpWindow_full.gameObject.SetActive(false);
-                focus_prep.SetActive(false);
-                this.nextBtn.gameObject.SetActive(false);
-                guide_prep.SetActive(true);
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                curPage = 13;
             }
         });
-        open_prep.onClick.AddListener(() => {
-            if(curPage == 3) curPage = 4;
-        });
-        while (curPage < 4) yield null;
-        guide_prep.SetActive(false);
+        while (curPage < 13) yield null;
 
-        this.OpenHelpWindow(Section.Prep);
-
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(false);
-        this.helpUI.SetActive(false);
-        GameManager.GetInstance().SetTutorialPlayTime(14);
-    }
-
-    *GuideFryerRoutine(){
-        let curPage = 0;
-        this.nextBtn.gameObject.SetActive(true);
-
-        this.helpContents_Next.enabled = false;
-        this.helpContents_Double.enabled = false;
-        GameManager.GetInstance().SetTutorialTimeScale();
-
-        // page 1
-        this.helpWindow_lower.gameObject.SetActive(true);
-        this.setBackgroundVisibility(false);
+        // page 14
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment14");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_fryer_ment1"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                curPage = 1;
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                curPage = 14;
             }
         });
-        while (curPage < 1) yield null;
+        while (curPage < 14) yield null;
 
-        // page 2
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
-        this.setBackgroundVisibility(true);
+        // page 15
+        this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment15");
         this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_lower.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_fryer_ment2"));
-        this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText();
-        });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
-            GameManager.GetInstance().NextStage();
-            curPage = 2;
-            playButton.SetActive(false);
-        });
-        while (curPage < 2) yield null;
-        
-        // page 3, 4
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_full.gameObject.SetActive(true);
-        const focus_fryer = this.gameObjectMap.get("Focus_Section_Fryer");
-        focus_fryer.SetActive(true);
-        this.setBackgroundVisibility(false);
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_fryer_ment3"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                curPage = 3;
+        this.nextBtn.onClick.AddListener(() => {
+            if (UIManager.GetInstance().nextText()) {
+                curPage = 15;
             }
         });
-        while (curPage < 3) yield null;
-        const open_fryer = GameObject.FindGameObjectWithTag("FryerOpen")?.GetComponent<Interaction>()?.GetOpenButton();
-        const guide_fryer = this.gameObjectMap.get("Guide_Section_Fryer");
-        this.nextBtn.onClick.RemoveAllListeners();
-        UIManager.GetInstance().PlayText(this.window_full.GetHelpText(), DataManager.GetInstance().GetCurrentLanguageData("tutorial_fryer_ment4"));
-        this.nextBtn.onClick.AddListener(()=>{
-            if(UIManager.GetInstance().nextText()){
-                this.helpWindow_full.gameObject.SetActive(false);
-                focus_fryer.SetActive(false);
-                this.nextBtn.gameObject.SetActive(false);
-                guide_fryer.SetActive(true);
-            }
-        });
-        open_fryer.onClick.AddListener(() => {
-            if(curPage == 3) curPage = 4;
-        });
-        while (curPage < 4) yield null;
-        guide_fryer.SetActive(false);
+        while (curPage < 15) yield null;
 
-        this.OpenHelpWindow(Section.Fryer);
-
-        this.helpWindow_full.gameObject.SetActive(false);
-        this.helpWindow_lower.gameObject.SetActive(false);
-        this.helpWindow_upper.gameObject.SetActive(false);
+        this.ClearHelpWindow();
         this.helpUI.SetActive(false);
         GameManager.GetInstance().SetTutorialPlayTime(14);
     }
@@ -714,8 +687,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.helpContents_Employee.SetActive(false);
     }
 
-    public OpenHelpWindow(section: Section) {
+    public OpenHelpSection(section: Section) {
         UIManager.GetInstance().OpenHelpPanel();
+        this.ClearHelpContents();
         //GameManager.GetInstance().PauseStage();
         switch(section){
             case Section.Dispenser:

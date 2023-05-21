@@ -13,6 +13,7 @@ import Mediator, { EventNames } from './Notification/Mediator';
 import SoundManager from './SoundManager';
 import SceneLoadManager, { SceneName } from './SceneLoadManager';
 import HelpManager from './Help/HelpManager';
+import EmployeeManager from './Employee/EmployeeManager';
 
 export default class GameManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -112,6 +113,8 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
         if(this.characterController) this.characterController.InitPlayer();
         this.SetPlayerMovement(true);
+
+        EmployeeManager.GetInstance().StartEmployee();
 
         this._isInGame = true;
         SoundManager.GetInstance().OnPlayBGM(SoundManager.GetInstance().keyStage);

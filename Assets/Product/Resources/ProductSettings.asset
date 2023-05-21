@@ -13,31 +13,23 @@ MonoBehaviour:
   m_Name: ProductSettings
   m_EditorClassIdentifier: 
   productTextureInfo:
-  - targetId: upgrade_dispenser_0
-    targetAssetPath: 
   - targetId: upgrade_dispenser_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Dispenser.png
   - targetId: upgrade_dispenser_2
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/dispenser.png
   - targetId: upgrade_dispenser_3
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/dispenser.png
-  - targetId: upgrade_employee_0
-    targetAssetPath: 
   - targetId: upgrade_employee_1
     targetAssetPath: 
   - targetId: upgrade_employee_2
     targetAssetPath: 
   - targetId: upgrade_employee_3
     targetAssetPath: 
-  - targetId: upgrade_frier_0
+  - targetId: upgrade_fryer_1
     targetAssetPath: 
-  - targetId: upgrade_frier_1
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Frier.png
-  - targetId: upgrade_frier_2
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/frier.png
-  - targetId: upgrade_frier_3
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/frier.png
-  - targetId: upgrade_grill_0
+  - targetId: upgrade_fryer_2
+    targetAssetPath: 
+  - targetId: upgrade_fryer_3
     targetAssetPath: 
   - targetId: upgrade_grill_1
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/grill.png
@@ -51,14 +43,12 @@ MonoBehaviour:
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/ingredient.png
   - targetId: upgrade_ingredient_3
     targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/ingredient.png
-  - targetId: upgrade_slice_0
+  - targetId: upgrade_prep_1
     targetAssetPath: 
-  - targetId: upgrade_slice_1
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/Slice.png
-  - targetId: upgrade_slice_2
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/slice.png
-  - targetId: upgrade_slice_3
-    targetAssetPath: Assets/Resources/Sprites/Shop/Upgrade/slice.png
+  - targetId: upgrade_prep_2
+    targetAssetPath: 
+  - targetId: upgrade_prep_3
+    targetAssetPath: 
   currencyTextureInfo:
   - targetId: wak
     targetAssetPath: Assets/Resources/Sprites/UI/MONEY icon.png

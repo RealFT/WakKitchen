@@ -48,22 +48,24 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
         Mediator.GetInstance().UnregisterListener(this);
     }
 
+    public StartEmployee(){
+        this.employeeHeadCount = 0;
+        this.cardDataWithSectionArray.forEach((data)=>{
+            this.CreateEmployeeSlot(data.cardData, data.section);
+        });
+        this.employeeSlots.forEach((slot)=>{
+            if(slot.gameObject.activeSelf){
+                slot.StartWorking();
+                this.employeeHeadCount++;
+            }
+        });
+    }
+
     public OnNotify(sender: any, eventName: string, eventData: any): void {
         if (!this.gameObject.activeSelf) return;
         switch(eventName){
             case EventNames.StageStarted:
-                this.employeeHeadCount = 0;
-                console.log("StageStarted: employee");
-                console.log(this.cardDataWithSectionArray.length);
-                this.cardDataWithSectionArray.forEach((data)=>{
-                    this.CreateEmployeeSlot(data.cardData, data.section);
-                });
-                this.employeeSlots.forEach((slot)=>{
-                    if(slot.gameObject.activeSelf){
-                        slot.StartWorking();
-                        this.employeeHeadCount++;
-                    }
-                });
+                //this.StartEmployee();
                 break;
             case EventNames.StageEnded:
                 this.employeeSlots.forEach((slot)=>{

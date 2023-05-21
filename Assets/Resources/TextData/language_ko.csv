@@ -14,8 +14,8 @@ settlement_netIncome,순수익
 settlement_double_info,도장을 사용해서 수익을 두 배로 얻으세요!
 settlement_double_confirm,확인
 settlement_double_cancel,취소
-shop_hire_category,아르바이트
-shop_hire_buy,고용하기
+shop_employee_category,아르바이트
+shop_employee_buy,고용하기
 shop_upgrade_category,업그레이드
 shop_upgrade_buy,구입
 panel_daily,하루에 한 번 출석으로 왁두 도장을 획득하세요! 도장을 통해 수입을 두 배로 늘릴 수 있습니다!
@@ -27,28 +27,41 @@ tutorial_start_ment5,"먼저, 도움말 버튼을 눌러 자세한 조리 방법
 tutorial_start_ment6,이제 주문을 받아 보죠! 주문이 들어오면 이곳에 영수증이 표시됩니다.
 tutorial_start_ment7,주문 영수증을 눌러 자세한 정보를 확인해 봅시다.
 tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
-tutorial_start_ment8,이제 실전입니다! 손님들에게 맛있는 버거를 제공하세요!
-tutorial_settlement_ment1,어느새 하루가 벌써 지났군요!
-tutorial_settlement_ment2,두 배 보상을 받자.
-tutorial_settlement_ment3,이번에만 공짜야.
-tutorial_settlement_ment4,상점으로 가자.
+tutorial_settlement_ment1,이제 10시가 되어 하루의 영업이 마무리되었습니다.
+tutorial_settlement_ment2,일일 출석으로 얻을 수 있는 도장으로 두 배 보상을 받을 수 있습니다.
+tutorial_settlement_ment3,한번 해 볼까요? 이번에는 공짜입니다!
+tutorial_settlement_ment4,좋아요! 이제 상점으로 가시죠!
 tutorial_dispenser_ment1,디스펜서가 해금되었습니다. 이제부터 음료수를 제조할 수 있습니다!
-tutorial_dispenser_ment2,디스펜서의 위치는 이곳입니다.
-tutorial_dispenser_ment3,디스펜서의 위치는 이곳입니다.
-tutorial_dispenser_ment4,디스펜서의 위치는 이곳입니다.
+tutorial_dispenser_ment2,그럼 가게로 가서 확인해볼까요? 준비가 끝나면 Play 버튼을 눌러주세요!
+tutorial_dispenser_ment3,설치가 완료되었군요! 디스펜서는 여기에 있습니다.
+tutorial_dispenser_ment4,가까이 가서 Open 버튼을 눌러 주세요.
 tutorial_grill_ment1,그릴이 해금되었습니다. 이제부터 패티를 구울 수 있습니다.
-tutorial_grill_ment2,그릴의 위치는 이곳입니다.
+tutorial_grill_ment2,준비가 끝나면 Play 버튼을 눌러주세요.
+tutorial_grill_ment3,설치가 완료되었네요! 그릴은 여기에 있습니다.
+tutorial_grill_ment4,그릴으로 가서 Open 버튼을 눌러 주세요.
+tutorial_prep_ment1,프랩이 해금되었습니다. 드디어 야채를 먹을 수 있겠군요!
+tutorial_prep_ment2,준비가 끝나면 Play 버튼을 눌러주세요.
+tutorial_prep_ment3,설치가 완료되었네요! 프랩은 여기에 있습니다.
+tutorial_prep_ment4,가까이 가서 Open 버튼을 눌러 주세요.
+tutorial_fryer_ment1,튀김기가 해금되었습니다. 감자튀김은 필수죠!
+tutorial_fryer_ment2,준비가 끝나면 Play 버튼을 눌러주세요.
+tutorial_fryer_ment3,이제 모든 설비를 갖추었네요! 튀김기는 여기에 있습니다.
+tutorial_fryer_ment4,가까이 가서 Open 버튼을 눌러 주세요.
 tutorial_employee_ment1,아르바이트 기능이 해금되었습니다. 조리를 대신 맡길 수 있습니다.
-tutorial_employee_ment2,고용 탭으로 이동해 주세요.
-tutorial_employee_ment3,이곳에서 아르바이트를 고용할 수 있습니다.
-tutorial_employee_ment4,카드 관리창을 열어 획득한 카드들을 관리할 수 있습니다.
-tutorial_employee_ment5,아르바이트를 사용하기 위해서는 기능 강화를 통해 슬롯을 늘려야 합니다.
+tutorial_employee_ment2,아르바이트 탭으로 이동해 주세요.
+tutorial_employee_ment3,이곳에서 직원 고용 카드를 구매해 보세요. 첫 구매 비용은 제가 드릴게요!
+tutorial_employee_ment4,좋아요. 이제 획득한 카드들을 확인해 봅시다. My Card를 눌러주세요.
+tutorial_employee_ment5,이런! 슬롯이 다 잠겨 있군요! 직원을 등록하기 위해서는 기능 강화를 통해 슬롯을 늘려야 합니다.
 tutorial_employee_ment6,업그레이드 탭으로 이동하세요. 그곳에서 기능을 강화시킬 수 있습니다.
-tutorial_employee_ment7,Employee를 업그레이드 해 슬롯이 확장시키세요.
+tutorial_employee_ment7,"Employee를 강화하여 슬롯을 개방하세요. 이번에도 처음이니까, 무료로 해 드릴게요!"
 tutorial_employee_ment8,업그레이드가 완료되었습니다! 이제 카드 관리창을 다시 열어주세요.
-tutorial_employee_ment9,"이제 원하는 카드를 선택하고, 장착해주세요."
-tutorial_employee_ment10,장착한 아르바이트에게 업무를 지정해 주어야 합니다. 업무를 선택 해 주세요.
-tutorial_employee_ment11,모든 준비가 끝났습니다. 이제 이 가게를 최고의 가게로 만들어 주세요!
+tutorial_employee_ment9,"슬롯이 하나 개방되었습니다. 이제 원하는 카드를 선택하고, 장착해야 합니다."
+tutorial_employee_ment10,"장착을 하면, 직원에게 업무를 지정해 주어야 합니다."
+tutorial_employee_ment11,"준비가 완료되면, Play 버튼을 눌러 가게로 이동해 주세요."
+tutorial_employee_ment12,직원은 이곳에 표시됩니다. 직원이 완성한 재료는 자동으로 조합대에 추가됩니다.
+tutorial_employee_ment13,직원 아이콘을 클릭하면 작업을 멈추게 할 수 있습니다.
+tutorial_employee_ment14,"직원들에게 일일 수당을 지불해야 한다는 점, 주의하세요!"
+tutorial_employee_ment15,"자, 이제 실전입니다! 행운을 빌어요!"
 help_receipt_ment1,"일정 주기마다 손님이 주문을 합니다. 주문이 빨리 해소될수록, 손님의 방문이 빨라집니다."
 help_receipt_ment2,하트 게이지가 다 사라지게 되면 손님이 떠나게 됩니다.
 help_receipt_ment3,손님의 영수증을 누르면 자세한 정보를 확인할 수 있습니다. 
@@ -63,3 +76,4 @@ info_nostamp,남아있는 왁두 도장이 없습니다.
 info_dailygranted,일일 보상을 획득하였습니다.
 info_already_dailygranted,오늘은 이미 보상을 획득하셨습니다.
 info_Invalid_recipe,레시피와 일치하는 주문이 없습니다.
+info_require_section,직원이 작업할 섹션을 선택해야 합니다.

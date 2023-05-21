@@ -13,9 +13,11 @@ import SoundManager from '../SoundManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 
 export default class CardInventory extends ZepetoScriptBehaviour implements IListener {
-    
+
+    @SerializeField() private inventoryPanel: GameObject;
     @SerializeField() private equipBtn: Button;
     @SerializeField() private upgradeBtn: Button;
+    @SerializeField() private closeBtn: Button;
     @SerializeField() private contentParent: Transform;
     @SerializeField() private equipSlotControllerObj: GameObject;
     @SerializeField() private cardInfoWindowObj: GameObject;
@@ -54,6 +56,16 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
 
         this.equipBtn.onClick.AddListener(()=> this.OnClickEquipCard());
         this.upgradeBtn.onClick.AddListener(()=> this.OnClickUpgradeCard());
+        this.closeBtn.onClick.AddListener(()=>{
+            if(!this.equipSlotController.CheckSlots()){
+                SoundManager.GetInstance().OnPlayButtonSFX("Tresh");
+                UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_require_section"));
+            }
+            else{
+                SoundManager.GetInstance().OnPlayButtonClick();
+                this.inventoryPanel.SetActive(false);
+            }
+        });
 
         this.cardInfoWindow.InitCardInfoWindow();
     }

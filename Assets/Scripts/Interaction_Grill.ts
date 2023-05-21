@@ -1,13 +1,15 @@
 import { GameObject } from 'UnityEngine';
-import { Image } from 'UnityEngine.UI';
+import { Image, Button } from 'UnityEngine.UI';
 import GrillSlot from './GrillSlot';
 import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import ItemManager from './ItemManager';
-import DataManager from './DataManager';
+import DataManager, { Section } from './DataManager';
 import SoundManager from './SoundManager';
+import HelpManager from './Help/HelpManager';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
+    @SerializeField() private helpButton: Button; // Button to help
     @SerializeField() private grillSlotObjects: GameObject[];
     @SerializeField() private images: Image[];
     @SerializeField() private grillPanel: GameObject;
@@ -17,6 +19,10 @@ export default class Interaction_Grill extends InteractionBase implements IListe
 
     Start() {
         super.Start();
+
+        this.helpButton.onClick.AddListener(() => {
+            HelpManager.GetInstance().OpenHelpSection(Section.Grill);
+        });
 
         // Set panels and kitchen active
         this.grillPanel.SetActive(true);

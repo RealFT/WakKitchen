@@ -40,6 +40,19 @@ export default class Shop_Upgrade extends ZepetoScriptBehaviour implements IList
             }
         });
     }
+
+    public FindUpgradeSlotWithId(productId: string): ItemSlot_Upgrade | undefined {
+        this.upgradSlotPool.forEach((slot) => {
+            // Check if the productId of the current slot's item record matches the given productId.
+            if (slot.GetItemRecord().productId === productId) {
+                // If a match is found, return the slot.
+                return slot;
+            }
+        });
+        // if no matching slot is found, undefined.
+        return undefined;
+    }
+
     private RefreshUpgradeSlots() {
         this.upgradSlotPool.forEach((slot) => {
             slot.RefreshSlot();

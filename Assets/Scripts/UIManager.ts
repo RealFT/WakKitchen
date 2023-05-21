@@ -106,6 +106,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         // Set the game UI to be disabled and the main UI to be enabled
         this.SetGameUI(false);
         this.SetMainUI(true);
+        this.languageTag = DataManager.GetInstance().GetLangCode();
     }
 
     public Init() {
@@ -130,6 +131,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     }
 
     public PlayText(text: TextMeshProUGUI, textContents: string){
+        this.StopAllCoroutines();
         this.StartCoroutine(this.TypeRoutine(text, textContents));
     }
 

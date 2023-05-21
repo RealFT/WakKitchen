@@ -17,7 +17,7 @@ interface GradeRange {
     max: number;
 }
 
-export default class Shop_Hire extends ZepetoScriptBehaviour{
+export default class Shop_Employee extends ZepetoScriptBehaviour{
 
     @SerializeField() private buyButton: Button;
     @SerializeField() private resultPanel: GameObject;
@@ -33,7 +33,7 @@ export default class Shop_Hire extends ZepetoScriptBehaviour{
         { grade: "d", min: 60.8, max: 100 }
     ];
 
-    public InitHireShop(){
+    public InitEmployeeShop(){
 
     }
 

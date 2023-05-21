@@ -7,6 +7,7 @@ import ItemManager from '../ItemManager';
 import UIManager from '../UIManager';
 import SoundManager from '../SoundManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import DataManager from '../DataManager';
 
 export default class EquipSlotController extends ZepetoScriptBehaviour implements IListener {
     
@@ -93,12 +94,12 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
     public CheckSlots(): boolean {
         for (let i = 0; i < this.equipSlots.Length; i++) {
             // Check only unlocked slots,
-            // If any unlocked slot is not selected, return false.
+            // If any equipped slot is not selected, return false.
             if (!this.equipSlots[i].IsLocked() &&
-                !this.equipSlots[i].IsSelected()){
-                    UIManager.GetInstance().OpenInformation("You must select a section.");
-                    return false;
-                }
+                this.equipSlots[i].IsEquip() &&
+                !this.equipSlots[i].IsSelected()) {
+                return false;
+            }
         }
         // If all unlocked slots are selected, return true.
         return true;

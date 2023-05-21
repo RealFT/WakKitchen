@@ -1,13 +1,15 @@
 import { GameObject } from 'UnityEngine';
-import { Image } from 'UnityEngine.UI';
+import { Image, Button } from 'UnityEngine.UI';
 import FrySlot from './FrySlot';
 import InteractionBase from './InteractionBase';
 import Mediator, { EventNames, IListener } from './Notification/Mediator';
 import ItemManager from './ItemManager';
-import DataManager from './DataManager';
+import DataManager, { Section } from './DataManager';
 import SoundManager from './SoundManager';
+import HelpManager from './Help/HelpManager';
 
 export default class Interaction_Fry extends InteractionBase implements IListener {
+    @SerializeField() private helpButton: Button; // Button to help
     @SerializeField() private frySlotObjects: GameObject[];
     @SerializeField() private images: Image[];
     @SerializeField() private fryPanel: GameObject;
@@ -15,6 +17,11 @@ export default class Interaction_Fry extends InteractionBase implements IListene
 
     Start() {
         super.Start();
+
+        this.helpButton.onClick.AddListener(() => {
+            HelpManager.GetInstance().OpenHelpSection(Section.Fryer);
+        });
+
         this.fryPanel.SetActive(true);
         this.kitchen.SetActive(true);
 
