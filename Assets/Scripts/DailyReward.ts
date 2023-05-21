@@ -39,10 +39,7 @@ export default class DailyReward extends ZepetoScriptBehaviour {
         });
 
         // Initailize wakdu stamp
-        let currentWakdu: number = DataManager.GetInstance().GetValue(this.wakduKey);
-        for(let i=0;i<currentWakdu;i++){
-            this.CreateWakdu();
-        }
+        this.RefreshStamp();
     }
 
     private RefreshStamp(){

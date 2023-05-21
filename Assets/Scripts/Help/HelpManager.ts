@@ -425,6 +425,8 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         let curPage = 0;
         const playMask = this.gameObjectMap.get("Help_PlayMask");
         playMask.SetActive(true);
+        const myCardMask = this.gameObjectMap.get("Help_MyCardMask");
+        myCardMask.SetActive(true);
 
         // page 1
         this.setBackgroundVisibility(false);
@@ -489,6 +491,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_lower.SetActive(false);
+                myCardMask.SetActive(false);
                 focus_MyCard.SetActive(true);
                 this.nextBtn.gameObject.SetActive(false);
             }
@@ -521,7 +524,6 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_upper.SetActive(false);
                 focus_CloseInventory.SetActive(true);
-                playMask.SetActive(false);
                 this.nextBtn.gameObject.SetActive(false);
             }
         });
@@ -530,6 +532,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             closeMyCardBtn.onClick.Invoke();
             focus_CloseInventory.SetActive(false);
             focus_Upgrade.SetActive(true);
+            myCardMask.SetActive(true);
             closeBtn.onClick.RemoveAllListeners();
         });
         categoryUpgradeBtn.onClick.AddListener(() => {
@@ -566,6 +569,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_upper.SetActive(false);
+                myCardMask.SetActive(false);
                 focus_MyCard.SetActive(true);
                 this.nextBtn.gameObject.SetActive(false);
             }
@@ -617,10 +621,10 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         closeBtn.onClick.AddListener(() => {
             closeMyCardBtn.onClick.Invoke();
-            this.nextBtn.onClick.RemoveAllListeners();
             this.setBackgroundVisibility(true);
-            this.nextBtn.gameObject.SetActive(true);
+            categoryMask.SetActive(true);
             playButton.SetActive(true);
+            myCardMask.SetActive(true);
             closeBtn.onClick.RemoveAllListeners();
         });
         playButton.GetComponent<Button>().onClick.AddListener(()=>{
@@ -628,7 +632,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             curPage = 11;
         });
         while (curPage < 11) yield null;
+        categoryMask.SetActive(false);
         playButton.SetActive(false);
+        myCardMask.SetActive(false);
         this.setBackgroundVisibility(false);
 
         // page 12

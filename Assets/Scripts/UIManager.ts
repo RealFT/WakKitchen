@@ -132,6 +132,8 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
 
     public PlayText(text: TextMeshProUGUI, textContents: string){
         this.StopAllCoroutines();
+        // 코루틴이 멈추면 info 코루틴이 중단되기 때문에 추가.
+        this.informationObj.SetActive(false);
         this.StartCoroutine(this.TypeRoutine(text, textContents));
     }
 
