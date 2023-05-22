@@ -186,7 +186,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     public NextStage(): void {
-
         this.StartStage();
     }
 

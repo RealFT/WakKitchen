@@ -49,7 +49,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
             this.cupBtn.gameObject.SetActive(false);
         });
         this.helpButton.onClick.AddListener(() => {
-            HelpManager.GetInstance().OpenHelpSection(Section.Dispenser);
+            HelpManager.GetInstance().OpenHelpSection("dispenser");
         });
 
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("dispenser");

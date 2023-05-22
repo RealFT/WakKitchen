@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
+import { WaitForSeconds, Time, GameObject, Sprite, AudioSource, Color } from 'UnityEngine';
 import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Side } from './DataManager';
@@ -23,11 +23,14 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
     @SerializeField() private lockImage: Image;
     @SerializeField() private clockImage: Image;
     @SerializeField() private burntEffect: GameObject;
+    @SerializeField() private bakeTimerSFX: AudioSource;
     public onWorkStateChanged: (baking: boolean) => void;
+    public onBakeLevelChanged: (level: number) => void;
     private startTime: number = 0;
     private currentTime: number = 0;
+    private bakeLevel: number = 0;
     private isFrying: bool;
-    private isFryied: bool;
+    private isFryed: bool;
     private isClock: bool = false;
 
     Start() {
@@ -38,6 +41,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
                 this.burntEffect.SetActive(false);
             } else {
                 // 하나 이상의 Slot 객체가 burnt 상태인 경우
+                SoundManager.GetInstance().OnPlayLoopSFX("Grill_level3");
                 this.burntEffect.SetActive(true);
             }
         };
@@ -84,11 +88,12 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
 
         this.collectButton.onClick.RemoveAllListeners();
         this.isFrying = true;
-        this.isFryied = false;
+        this.isFryed = false;
         this.startTime = Time.time;
         this.frySliderFill.color = this.defaultColor;
+        this.bakeLevel = 1;
+        this.onBakeLevelChanged?.(this.bakeLevel);
         this.StartCoroutine(this.DoBaking());
-        SoundManager.GetInstance().OnPlayLoopSFX("Fryer_Frying");
     }
 
     // Baking Coroutine
@@ -99,8 +104,10 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
             this.frySlider.value = Math.min(1, this.currentTime / this.burnTime);
 
             if (this.currentTime >= this.fryTime) {
-                if (!this.isFryied) {
+                if (!this.isFryed) {
                     // baking done.
+                    this.bakeLevel = 2;
+                    this.onBakeLevelChanged?.(this.bakeLevel);
                     this.collectButton.image.sprite = this.bakedFrySprite;
                     this.collectButton.interactable = true;
                     this.collectButton.onClick.RemoveAllListeners();
@@ -110,13 +117,16 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
                         SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
                     });
                     this.frySliderFill.color = this.friedColor;
-                    this.isFryied = true;
+                    this.isFryed = true;
+                    this.OnPlayBakeTimerSFX();
                 }
             }
             // if Clock exist, fry doesn't burnt.
             if (this.currentTime >= this.burnTime && !this.isClock) {
                 this.collectButton.image.sprite = this.burntFrySprite;
                 this.frySliderFill.color = this.failedColor;
+                this.bakeLevel = 3;
+                this.onBakeLevelChanged?.(this.bakeLevel);
                 this.StopBaking();
                 this.onWorkStateChanged?.(false);
             }
@@ -134,12 +144,18 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
     private ClearFry() {
         this.fryButton.gameObject.SetActive(true);
         this.isFrying = false;
-        this.isFryied = false;
+        this.isFryed = false;
+        this.bakeLevel = 0;
+        this.onBakeLevelChanged?.(this.bakeLevel);
         this.collectButton.interactable = false;
         this.collectButton.onClick.RemoveAllListeners();
         this.collectButton.gameObject.SetActive(false);
         this.frySlider.gameObject.SetActive(false);
         this.onWorkStateChanged?.(true);
+    }
+
+    public GetBakeLevel(): number {
+        return this.bakeLevel;
     }
 
     public IsFrying(): boolean {
@@ -150,5 +166,11 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         for (let i = 0; i < this.visibleImages.length; i++) {
             this.visibleImages[i].enabled = value;
         }
+    }
+    
+    private OnPlayBakeTimerSFX(){
+        this.bakeTimerSFX.volume = SoundManager.GetInstance().SFXSoundVolume;
+        this.bakeTimerSFX.mute = SoundManager.GetInstance().SFXSoundMute;
+        this.bakeTimerSFX.Play();
     }
 }

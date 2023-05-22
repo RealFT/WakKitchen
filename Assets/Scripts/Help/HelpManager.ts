@@ -1,12 +1,11 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { Button, Image, Slider } from "UnityEngine.UI";
-import { GameObject, Random, WaitForSeconds, Debug, Time } from 'UnityEngine';
+import { GameObject, WaitForSeconds } from 'UnityEngine';
 import UIManager from '../UIManager';
 import SoundManager from '../SoundManager';
 import HelpWindow from './HelpWindow';
 import DataManager, { Section } from '../DataManager';
 import GameManager from '../GameManager';
-import InteractionBase from '../InteractionBase';
 import Interaction from '../Interaction';
 import Interaction_Grill from '../Interaction_Grill';
 import Interaction_Fry from '../Interaction_Fry';
@@ -15,8 +14,8 @@ import OrderManager from '../OrderManager';
 import OrderReceipt from '../OrderReceipt';
 import { TextMeshProUGUI } from 'TMPro';
 import BalanceManager, { Currency } from '../Shop/BalanceManager';
-import CardInventory from '../Employee/CardInventory';
 import Shop_Upgrade from '../Shop/Shop_Upgrade';
+import EquipSlotController from '../Employee/EquipSlotController';
 
 export default class HelpManager extends ZepetoScriptBehaviour {
     // 싱글톤 패턴
@@ -56,16 +55,18 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     private window_upper: HelpWindow;
     private window_lower: HelpWindow;
 
+    @SerializeField() private helpContents_Plating: GameObject;     // 플레이팅 도움말 창
     @SerializeField() private helpContents_Dispenser: GameObject;   // 디스펜서 도움말 창
     @SerializeField() private helpContents_Grill: GameObject;       // 그릴 도움말 창
     @SerializeField() private helpContents_Employee: GameObject;    // 고용 도움말 창
     @SerializeField() private helpContents_Prep: GameObject;        // 프랩 도움말 창
     @SerializeField() private helpContents_Fryer: GameObject;       // 튀김기 도움말 창
-    @SerializeField() private helpContents_Plating: GameObject;     // 플레이팅 도움말 창
-    @SerializeField() private helpContents_Double: Button;          // 두 배 버튼
-    @SerializeField() private helpContents_DoubleConfirm: Button;   // 두 배 확인 버튼
-    @SerializeField() private helpContents_Next: Button;            // Next(ToShop)버튼
-    @SerializeField() private helpContents_GetCard: Button;         // GetCard버튼
+
+    @SerializeField() private help_Double: Button;                  // 두 배 버튼
+    @SerializeField() private help_DoubleConfirm: Button;           // 두 배 확인 버튼
+    @SerializeField() private help_Next: Button;                    // Next(ToShop)버튼
+    @SerializeField() private help_GetCard: Button;                 // GetCard버튼
+    @SerializeField() private help_EquipSlotController: GameObject; // EquipSlotController 오브젝트
 
     Start(){
         for (const gameObject of this.guideObjects) {
@@ -115,20 +116,21 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 1) yield null;
 
         // page 2
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
+        const playButton = this.gameObjectMap.get("Help_ToStageBtn").GetComponent<Button>();
+        playButton.gameObject.SetActive(true);
         this.setBackgroundVisibility(true);
         this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_start_ment2");
         this.nextBtn.onClick.RemoveAllListeners();
         this.nextBtn.onClick.AddListener(()=>{
-            UIManager.GetInstance().nextText()
+            UIManager.GetInstance().nextText();
         });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
+        playButton.onClick.RemoveAllListeners();
+        playButton.onClick.AddListener(()=>{
             GameManager.GetInstance().NextStage();
             curPage = 2;
-            playButton.SetActive(false);
         });
         while (curPage < 2) yield null;
+        playButton.gameObject.SetActive(false);
 
         // page 3, 4
         const focus_plating = this.gameObjectMap.get("Focus_Section_Plating");
@@ -174,7 +176,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             }
         });
         help_openBtn.GetComponent<Button>().onClick.AddListener(()=>{
-            this.OpenHelpSection(Section.Plating);
+            this.OpenHelpSection("plating");
             help_closeBtn.SetActive(true);
             this.setBackgroundVisibility(false);
             this.helpWindow_upper.SetActive(false);
@@ -216,7 +218,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         curPage = 5;
         help_openReceiptBtn.GetComponent<Button>().onClick.AddListener(()=>{
-            open_receipt.onClick.Invoke();
+            if(open_receipt) open_receipt.onClick.Invoke();
             curPage = 6;
             help_openReceiptBtn.SetActive(false);
             focus_receipt.SetActive(false);
@@ -254,8 +256,8 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
     *GuideSettlementRoutine(){
         let curPage = 0;
-        this.helpContents_Next.enabled = false;
-        this.helpContents_Double.enabled = false;
+        this.help_Next.enabled = false;
+        this.help_Double.enabled = false;
 
         // page 1
         this.setBackgroundVisibility(false);
@@ -287,13 +289,13 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             if(UIManager.GetInstance().nextText()){
                 this.nextBtn.gameObject.SetActive(false);
                 this.helpWindow_lower.SetActive(false);
-                this.helpContents_Double.enabled = true;
+                this.help_Double.enabled = true;
             }
         });
-        this.helpContents_Double.onClick.AddListener(() => {
+        this.help_Double.onClick.AddListener(() => {
             if(focus_double) focus_double.SetActive(false);
         });
-        this.helpContents_DoubleConfirm.onClick.AddListener(() => {
+        this.help_DoubleConfirm.onClick.AddListener(() => {
             if(curPage = 2) curPage = 3;
         });
         while (curPage < 3) yield null;
@@ -308,10 +310,10 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_lower.SetActive(false);
                 this.nextBtn.gameObject.SetActive(false);
-                this.helpContents_Next.enabled = true;
+                this.help_Next.enabled = true;
             }
         });
-        this.helpContents_Next.onClick.AddListener(() => {
+        this.help_Next.onClick.AddListener(() => {
             if(focus_next) focus_next.SetActive(false);
         });
     }
@@ -344,8 +346,6 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 1) yield null;
 
         // page 2
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(true);
         this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), `tutorial_${section.toLowerCase()}_ment2`);
         this.nextBtn.onClick.RemoveAllListeners();
         this.nextBtn.onClick.AddListener(()=>{
@@ -354,13 +354,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 this.nextBtn.gameObject.SetActive(false);
             }
         });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
-            GameManager.GetInstance().NextStage();
-            curPage = 2;
-            playButton.SetActive(false);
-        });
-        while (curPage < 2) yield null;
-        
+        while (!GameManager.GetInstance().isInGame) yield null;
+        OrderManager.GetInstance().StopOrder();
+
         // page 3
         const focus = this.gameObjectMap.get(`Focus_Section_${capitalizedSection}`);
         focus.SetActive(true);
@@ -400,25 +396,12 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         });
         while (curPage < 4) yield null;
         guide.SetActive(false);
-
-        switch(section.toLowerCase()){
-            case "dispenser":
-                this.OpenHelpSection(Section.Dispenser);
-                break;
-            case "grill":
-                this.OpenHelpSection(Section.Grill);
-                break;
-            case "slice":
-                this.OpenHelpSection(Section.Prep);
-                break;
-            case "frier":
-                this.OpenHelpSection(Section.Fryer);
-                break;
-        }
+        this.OpenHelpSection(section.toLowerCase());
 
         this.ClearHelpWindow();
         this.helpUI.SetActive(false);
-        GameManager.GetInstance().SetTutorialPlayTime(14);
+        GameManager.GetInstance().SetTutorialPlayTime(8);
+        OrderManager.GetInstance().StartOrder();
     }
 
     *GuideEmployeeRoutine(){
@@ -478,7 +461,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             helpBuyBtn.SetActive(false);
             this.setBackgroundVisibility(false);
         });
-        this.helpContents_GetCard.onClick.AddListener(()=>{
+        this.help_GetCard.onClick.AddListener(()=>{
             if(curPage == 2) curPage = 3;
         });
         while (curPage < 3) yield null;
@@ -486,20 +469,22 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         // page 4
         const openMyCardBtn = GameObject.FindGameObjectWithTag("OpenMyCard")?.GetComponent<Button>();
         const focus_MyCard = this.gameObjectMap.get("Focus_MyCard");
+        focus_MyCard.SetActive(true);
+        const myCardMaskBtn = myCardMask.GetComponent<Button>();
         this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment4");
         this.nextBtn.onClick.RemoveAllListeners();
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_lower.SetActive(false);
-                myCardMask.SetActive(false);
-                focus_MyCard.SetActive(true);
                 this.nextBtn.gameObject.SetActive(false);
             }
         });
-        openMyCardBtn.onClick.AddListener(() => {
-            if (curPage == 3) curPage = 4;
+        myCardMaskBtn.onClick.AddListener(() => {
+            curPage = 4;
             focus_MyCard.SetActive(false);
             categoryMask.SetActive(false);
+            openMyCardBtn.onClick.Invoke();
+            myCardMaskBtn.onClick.RemoveAllListeners();
         });
         while (curPage < 4) yield null;
 
@@ -518,27 +503,29 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         const categoryUpgradeBtn = GameObject.FindGameObjectWithTag("CategoryUpgrade")?.GetComponent<Button>();
         const focus_CloseInventory = this.gameObjectMap.get("Focus_CloseInventory");
         const focus_Upgrade = this.gameObjectMap.get("Focus_Upgrade");
+        focus_CloseInventory.SetActive(true);
         this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment6");
         this.nextBtn.onClick.RemoveAllListeners();
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_upper.SetActive(false);
-                focus_CloseInventory.SetActive(true);
                 this.nextBtn.gameObject.SetActive(false);
             }
         });
-        const closeBtn = playMask.GetComponent<Button>();
-        closeBtn.onClick.AddListener(() => {
-            closeMyCardBtn.onClick.Invoke();
+        const playMaskBtn = playMask.GetComponent<Button>();
+        playMaskBtn.onClick.AddListener(() => {
             focus_CloseInventory.SetActive(false);
             focus_Upgrade.SetActive(true);
             myCardMask.SetActive(true);
-            closeBtn.onClick.RemoveAllListeners();
+            closeMyCardBtn.onClick.Invoke();
+            playMaskBtn.onClick.RemoveAllListeners();
         });
         categoryUpgradeBtn.onClick.AddListener(() => {
-            if (curPage == 5) curPage = 6;
-            focus_Upgrade.SetActive(false);
-            categoryMask.SetActive(true);
+            if (curPage == 5) {
+                curPage = 6;
+                focus_Upgrade.SetActive(false);
+                categoryMask.SetActive(true);
+            }
         });
         while (curPage < 6) yield null;
 
@@ -569,15 +556,17 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.nextBtn.onClick.AddListener(() => {
             if (UIManager.GetInstance().nextText()) {
                 this.helpWindow_upper.SetActive(false);
-                myCardMask.SetActive(false);
                 focus_MyCard.SetActive(true);
                 this.nextBtn.gameObject.SetActive(false);
             }
         });
-        openMyCardBtn.onClick.AddListener(() => {
-            if (curPage == 7) curPage = 8;
+        myCardMaskBtn.onClick.AddListener(() => {
+            openMyCardBtn.onClick.Invoke();
+            curPage = 8;
+            myCardMaskBtn.onClick.RemoveAllListeners();
         });
         while (curPage < 8) yield null;
+        focus_MyCard.SetActive(false);
         categoryMask.SetActive(false);
 
         // page 9
@@ -607,35 +596,56 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 10) yield null;
 
         // page 11
-        playMask.SetActive(false);
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn");
-        playButton.SetActive(false);
+        const playButton = this.gameObjectMap.get("Help_ToStageBtn").GetComponent<Button>();
+        playButton.gameObject.SetActive(false);
         this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment11");
         this.nextBtn.onClick.RemoveAllListeners();
         this.nextBtn.onClick.AddListener(()=>{
             if(UIManager.GetInstance().nextText()){
                 this.helpWindow_lower.SetActive(false);
                 this.nextBtn.gameObject.SetActive(false);
-                closeMyCardBtn.gameObject.SetActive(true);
             }
         });
-        closeBtn.onClick.AddListener(() => {
-            closeMyCardBtn.onClick.Invoke();
-            this.setBackgroundVisibility(true);
-            categoryMask.SetActive(true);
-            playButton.SetActive(true);
-            myCardMask.SetActive(true);
-            closeBtn.onClick.RemoveAllListeners();
+        const equipSlotController = this.help_EquipSlotController.GetComponent<EquipSlotController>();
+        // playMaskBtn == playMask's Button
+        playMaskBtn.onClick.AddListener(() => {
+            // 첫 번째 슬롯에 카드가 비어있는지 확인
+            if(equipSlotController.IsEmpty()){
+                this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_error");
+                this.nextBtn.onClick.RemoveAllListeners();
+                this.nextBtn.onClick.AddListener(()=>{
+                    if(UIManager.GetInstance().nextText()){
+                        this.helpWindow_lower.SetActive(false);
+                        this.nextBtn.gameObject.SetActive(false);
+                    }
+                });
+            }
+            // 섹션 선택을 했는지 확인
+            else if(equipSlotController.CheckSlots()){
+                SoundManager.GetInstance().OnPlayButtonClick();
+                closeMyCardBtn.onClick.Invoke();
+                playButton.gameObject.SetActive(true);
+                categoryMask.SetActive(true);
+                myCardMask.SetActive(true);
+                playMask.SetActive(false);
+            }
+            // 섹션 선택을 하지 않았을 경우,
+            else if(!equipSlotController.CheckSlots()){
+                SoundManager.GetInstance().OnPlayButtonSFX("Tresh");
+                UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_require_section"));
+            }
         });
-        playButton.GetComponent<Button>().onClick.AddListener(()=>{
+        playButton.onClick.RemoveAllListeners();
+        playButton.onClick.AddListener(()=>{
             GameManager.GetInstance().NextStage();
             curPage = 11;
         });
         while (curPage < 11) yield null;
+        playMaskBtn.onClick.RemoveAllListeners();
+        myCardMaskBtn.onClick.RemoveAllListeners();
+        playButton.gameObject.SetActive(false);
         categoryMask.SetActive(false);
-        playButton.SetActive(false);
         myCardMask.SetActive(false);
-        this.setBackgroundVisibility(false);
 
         // page 12
         const focus = this.gameObjectMap.get("Focus_EmployeeSlot");
@@ -648,6 +658,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             }
         });
         while (curPage < 12) yield null;
+        focus.SetActive(false);
 
         // page 13
         this.DisplayTextWithId(this.helpWindow_upper, this.window_upper.GetHelpText(), "tutorial_employee_ment13");
@@ -693,12 +704,12 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         this.helpContents_Employee.SetActive(false);
     }
 
-    public OpenHelpSection(section: Section) {
+    public OpenHelpSection(section: string) {
         UIManager.GetInstance().OpenHelpPanel();
         this.ClearHelpContents();
         //GameManager.GetInstance().PauseStage();
         switch(section){
-            case Section.Dispenser:
+            case "dispenser":
                 this.helpContents_Dispenser.SetActive(true);
                 const contents_Dispenser = this.helpContents_Dispenser.GetComponent<HelpContents>();
                 const pages_Dispenser = contents_Dispenser.GetPages();
@@ -715,7 +726,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 });
                 pages_Dispenser[3].gameObject.SetActive(false);
                 break;
-            case Section.Fryer:
+            case "fryer":
                 this.helpContents_Fryer.SetActive(true);
                 const contents_Fryer = this.helpContents_Fryer.GetComponent<HelpContents>();
                 const pages_Fryer = contents_Fryer.GetPages();
@@ -732,7 +743,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 });
                 pages_Fryer[3].gameObject.SetActive(false);
                 break;
-            case Section.Grill:
+            case "grill":
                 this.helpContents_Grill.SetActive(true);
                 const contents_Grill = this.helpContents_Grill.GetComponent<HelpContents>();
                 const pages_Grill = contents_Grill.GetPages();
@@ -749,7 +760,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 });
                 pages_Grill[3].gameObject.SetActive(false);
                 break;
-            case Section.Prep:
+            case "prep":
                 this.helpContents_Prep.SetActive(true);
                 const contents_Prep = this.helpContents_Prep.GetComponent<HelpContents>();
                 const pages_Prep = contents_Prep.GetPages();
@@ -766,7 +777,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 });
                 pages_Prep[3].gameObject.SetActive(false);
                 break;
-            case Section.Plating:
+            case "plating":
                 this.helpContents_Plating.SetActive(true);
                 const contents_Plating = this.helpContents_Plating.GetComponent<HelpContents>();
                 const pages_Plating = contents_Plating.GetPages();
@@ -783,7 +794,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 });
                 pages_Plating[3].gameObject.SetActive(false);
                 break;
-            case Section.Employee:
+            case "employee":
                 this.helpContents_Employee.SetActive(true);
                 const contents_Employee = this.helpContents_Employee.GetComponent<HelpContents>();
                 const pages_Employee = contents_Employee.GetPages();
@@ -799,7 +810,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                     contents_Employee.SetCloseBtnVisivility(true);
                 });
                 pages_Employee[3].gameObject.SetActive(false);
-                break;
+            break;
         }
     }
 }

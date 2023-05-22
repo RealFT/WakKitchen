@@ -62,14 +62,15 @@ tutorial_employee_ment12, Employees will be displayed here. The ingredients comp
 tutorial_employee_ment13, You can click on the employee icon to make them stop working.
 tutorial_employee_ment14, "Please note that you need to pay daily wages to your employees!"
 tutorial_employee_ment15, Now it's time for the real challenge! Good luck!
+tutorial_employee_error,"It's usually not necessary to put anything in the slot, but this time, it would be helpful if you could equip something for guidance!"
 help_receipt_ment1,"Customers place orders at regular intervals. The faster you fulfill the orders, the faster the customers' visits."
 help_receipt_ment2,"When the heart gauge is depleted, the customer leaves."
 help_receipt_ment3,Press the customer's receipt to view detailed information.
 help_receipt_ment4,The price is displayed at the bottom. Intensity does not give money.
-help_plating_ment1,Check the recipe before starting the preparation. When an order comes in, the order receipt will be displayed in the upper left corner.
+help_plating_ment1,"Check the recipe before starting the preparation. When an order comes in, the order receipt will be displayed in the upper left corner."
 help_plating_ment2,Press the order receipt to view detailed information. Pay attention to the order! Thieves don't pay!
-help_plating_ment3,Stack the ingredients in the order of the recipe to complete the dish. You can discard incorrectly made dishes by pressing the trash bin button in the lower right corner.
-help_plating_ment4,"Once the dish is ready, press the bell to serve it to the customer. If the completed dish is different from the recipe, the ingredients will be restored to their original state."
+help_plating_ment3,Complete the cooking by stacking the ingredients in order of recipe. Press the Trash button on the bottom right to discard the miscooked food.
+help_plating_ment4,"When the dish is ready, ring the bell and serve it to the guest. If the finished dish is different from the recipe, the ingredients will be restored to their original state."
 help_employee_ment1,Part-time employees are displayed here. You can click on the employee to pause their work.
 info_nocurruncey,Not enough currency.
 info_nostamp,No remaining stamps.

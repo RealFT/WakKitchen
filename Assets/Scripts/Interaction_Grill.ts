@@ -21,7 +21,7 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         super.Start();
 
         this.helpButton.onClick.AddListener(() => {
-            HelpManager.GetInstance().OpenHelpSection(Section.Grill);
+            HelpManager.GetInstance().OpenHelpSection("grill");
         });
 
         // Set panels and kitchen active
@@ -47,8 +47,12 @@ export default class Interaction_Grill extends InteractionBase implements IListe
                 } else {
                     // 하나 이상의 Slot 객체가 burnt 상태인 경우
                     this.burntEffect.SetActive(true);
+                    SoundManager.GetInstance().OnPlayLoopSFX("Grill_level3");
                 }
             };
+            slot.onBakeLevelChanged = (level: number) => {
+                this.PlayBakeLevelSFX();
+            }
         }
 
         Mediator.GetInstance().RegisterListener(this);
@@ -86,10 +90,34 @@ export default class Interaction_Grill extends InteractionBase implements IListe
 
     OnTriggerEnter(collider) {
         super.OnTriggerEnter(collider);
+        this.PlayBakeLevelSFX();
+    }
+
+    private PlayBakeLevelSFX(){
+        let maxBakeLevel = 0;
+        this.grillSlotObjects.forEach((slotObj) => {
+            let slot = slotObj.GetComponent<GrillSlot>();
+            const bakeLevel = slot.GetBakeLevel();
+            maxBakeLevel = (bakeLevel > maxBakeLevel) ? bakeLevel : maxBakeLevel;
+        });
+        switch(maxBakeLevel){
+            case 0: // nothing
+                break;
+            case 1: // baking
+                SoundManager.GetInstance().OnPlayLoopSFX("Grill_level1");
+                break;
+            case 2: // done
+                SoundManager.GetInstance().OnPlayLoopSFX("Grill_level2");
+                break;
+            case 3: // burnt
+                SoundManager.GetInstance().OnPlayLoopSFX("Grill_level3");
+                break;
+        }
     }
 
     OnTriggerExit(collider) {
         super.OnTriggerExit(collider);
+        SoundManager.GetInstance().StopSFX();
     }
 
     SetKitchenVisibility(value: boolean) {
@@ -101,15 +129,7 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         for (let i = 0; i < this.grillSlotObjects.length; i++) {
             let slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
             slot.SetGrillVisibility(value);
-            if(slot.IsBaking()) sfx = true;
-        }
-        // is kitchen visivility is true;
-        if (value && sfx) {
-            SoundManager.GetInstance().OnPlayLoopSFX("Grill_Sizzling");
-        }
-        // is kitchen visivility is false;
-        else {
-            SoundManager.GetInstance().StopSFX();
+
         }
     }
 

@@ -50,11 +50,14 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
 
     public StartEmployee(){
         this.employeeHeadCount = 0;
+        this.employeeSlots.forEach((slot)=>{
+            slot.gameObject.SetActive(false);
+        });
         this.cardDataWithSectionArray.forEach((data)=>{
-            this.CreateEmployeeSlot(data.cardData, data.section);
+            if(data.cardData) this.CreateEmployeeSlot(data.cardData, data.section);
         });
         this.employeeSlots.forEach((slot)=>{
-            if(slot.gameObject.activeSelf){
+            if(slot.IsRegistered()){
                 slot.StartWorking();
                 this.employeeHeadCount++;
             }
@@ -72,6 +75,7 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
                     slot.Init();
                     slot.gameObject.SetActive(false);
                 });
+                this.cardDataWithSectionArray = [];
                 break;
         }
     }

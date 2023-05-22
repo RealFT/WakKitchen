@@ -1,11 +1,13 @@
 import { SceneManager } from 'UnityEngine.SceneManagement';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { Button, InputField, Slider, Text } from "UnityEngine.UI";
-import { AsyncOperation, Mathf, Debug, GameObject, SerializeField, WaitForEndOfFrame, WaitForSeconds } from "UnityEngine";
+import { Button, Slider } from "UnityEngine.UI";
+import { AsyncOperation, Mathf, Debug, GameObject } from "UnityEngine";
 import GameManager from './GameManager';
 import OrderManager from './OrderManager';
 import UIManager from './UIManager';
 import SoundManager from './SoundManager';
+import HelpManager from './Help/HelpManager';
+import DataManager from './DataManager';
 
 export enum SceneName {
     Main = "00_Main",
@@ -84,6 +86,12 @@ export default class SceneLoadManager extends ZepetoScriptBehaviour {
                 }
                 GameManager.GetInstance().InitStage();
                 //GameManager.GetInstance().NextStage();
+                // 현재 스테이지에 해금된 섹션이 있는지 체크 후 해당하는 가이드 튜토리얼 활성화
+                const curStage = GameManager.GetInstance().GetCurrentStage();
+                const unlockSection = DataManager.GetInstance().CheckUnlockByStage(curStage);
+                if (unlockSection != undefined) {
+                    HelpManager.GetInstance().GuideSection(unlockSection);
+                }
                 break;
             default:
                 break;

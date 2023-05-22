@@ -1,0 +1,67 @@
+fileFormatVersion: 2
+guid: 4b2a22358c407284aac95bea49d288e2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst EventSlot_1 = require(\\\"./EventSlot\\\");\\r\\nclass
+    Event extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.eventSlots = []; // \uC774\uBCA4\uD2B8
+    \uBCF4\uC0C1 \uC2AC\uB86F \uBC30\uC5F4\\r\\n        this.totalEventTime = 60
+    * 60; // \uC774\uBCA4\uD2B8 \uCD1D \uC2DC\uAC04 (60\uBD84)\\r\\n        this.rewardInterval
+    = 15 * 60; // \uBCF4\uC0C1 \uC218\uB839 \uAC04\uACA9 (15\uBD84)\\r\\n       
+    this.firstRewardDelay = 5 * 60; // \uCC98\uC74C \uBCF4\uC0C1 \uC9C0\uC5F0 \uC2DC\uAC04
+    (5\uBD84)\\r\\n        this.elapsedTime = 0; // \uACBD\uACFC \uC2DC\uAC04\\r\\n       
+    this.interval = 1; // \uCD08 \uB2E8\uC704\uB85C \uC138\uACE0 \uC2F6\uC740 \uAC04\uACA9\\r\\n   
+    }\\r\\n    Start() {\\r\\n        // eventSlotObjs\uC5D0 \uB4F1\uB85D\uB41C EventSlot
+    \uCEF4\uD3EC\uB10C\uD2B8\uB97C \uAC00\uC838\uC640\uC11C eventSlots\uC5D0 \uB4F1\uB85D\\r\\n       
+    this.eventSlotObjs.forEach((slotObj) => {\\r\\n            const eventSlot =
+    slotObj.GetComponent($typeof(EventSlot_1.default));\\r\\n            if (eventSlot)
+    {\\r\\n                this.eventSlots.push(eventSlot);\\r\\n            }\\r\\n       
+    });\\r\\n        this.StartTimer();\\r\\n    }\\r\\n    StartTimer() {\\r\\n       
+    setInterval(() => {\\r\\n            this.elapsedTime++;\\r\\n            //
+    \uC774\uBCA4\uD2B8 \uC9C4\uD589\uB3C4 \uC5C5\uB370\uC774\uD2B8\\r\\n           
+    this.UpdateEventProgress();\\r\\n            // \uB0A8\uC740 \uC2DC\uAC04 \uC5C5\uB370\uC774\uD2B8\\r\\n           
+    this.UpdateRemainingTime();\\r\\n            // \uBCF4\uC0C1 \uC218\uB839 \uAC00\uB2A5
+    \uCCB4\uD06C\\r\\n            this.CheckRewardAvailability();\\r\\n        },
+    this.interval * 1000);\\r\\n    }\\r\\n    UpdateEventProgress() {\\r\\n       
+    const progressRatio = this.elapsedTime / this.totalEventTime;\\r\\n        this.eventProgressSlider.value
+    = progressRatio;\\r\\n    }\\r\\n    UpdateRemainingTime() {\\r\\n        let
+    remainingTime;\\r\\n        if (this.elapsedTime <= this.firstRewardDelay) {\\r\\n           
+    remainingTime = this.firstRewardDelay - this.elapsedTime;\\r\\n        }\\r\\n       
+    else {\\r\\n            const timeSinceLastReward = (this.elapsedTime - this.firstRewardDelay)
+    % this.rewardInterval;\\r\\n            remainingTime = this.rewardInterval -
+    timeSinceLastReward;\\r\\n        }\\r\\n        this.remainingTimeText.text
+    = this.FormatTime(remainingTime);\\r\\n    }\\r\\n    CheckRewardAvailability()
+    {\\r\\n        // const currentTime: number = this.elapsedTime - this.firstRewardDelay;\\r\\n       
+    // this.eventSlots.forEach((eventSlot) => {\\r\\n        //     if (eventSlot.slotStatus
+    === \\\"locked\\\") {\\r\\n        //         if (currentTime >= eventSlot.unlockTime)
+    {\\r\\n        //             eventSlot.slotStatus = \\\"unlocked\\\";\\r\\n       
+    //             // \uC7A0\uAE08 \uD574\uC81C \uC2DC \uCC98\uB9AC \uB85C\uC9C1
+    \uCD94\uAC00\\r\\n        //         }\\r\\n        //     } else if (eventSlot.slotStatus
+    === \\\"unlocked\\\") {\\r\\n        //         if (currentTime >= eventSlot.unlockTime
+    + this.rewardInterval) {\\r\\n        //             eventSlot.slotStatus = \\\"redeemable\\\";\\r\\n       
+    //             // \uC218\uB839 \uAC00\uB2A5 \uC0C1\uD0DC\uB85C \uBCC0\uACBD \uC2DC
+    \uCC98\uB9AC \uB85C\uC9C1 \uCD94\uAC00\\r\\n        //         }\\r\\n       
+    //     }\\r\\n        // });\\r\\n    }\\r\\n    FormatTime(time) {\\r\\n       
+    const minutes = Math.floor(time / 60);\\r\\n        const seconds = time % 60;\\r\\n       
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2,
+    '0')}`;\\r\\n    }\\r\\n}\\r\\nexports.default = Event;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXZlbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJFdmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBZ0Q7QUFHaEQsMkNBQW9DO0FBQ3BDLE1BQXFCLEtBQU0sU0FBUSxxQ0FBcUI7SUFBeEQ7O1FBTVksZUFBVSxHQUFnQixFQUFFLENBQUMsQ0FBRyxlQUFlO1FBQy9DLG1CQUFjLEdBQVcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLGlCQUFpQjtRQUNuRCxtQkFBYyxHQUFXLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQyxpQkFBaUI7UUFDbkQscUJBQWdCLEdBQVcsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLG1CQUFtQjtRQUN0RCxnQkFBVyxHQUFXLENBQUMsQ0FBQyxDQUFDLFFBQVE7UUFDakMsYUFBUSxHQUFXLENBQUMsQ0FBQyxDQUFDLGlCQUFpQjtJQW9FbkQsQ0FBQztJQWxFRyxLQUFLO1FBQ0QseURBQXlEO1FBQ3pELElBQUksQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDbkMsTUFBTSxTQUFTLEdBQUcsT0FBTyxDQUFDLFlBQVksU0FBQyxtQkFBUyxFQUFHLENBQUM7WUFDcEQsSUFBSSxTQUFTLEVBQUU7Z0JBQ1gsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7YUFDbkM7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxVQUFVLEVBQUUsQ0FBQztJQUN0QixDQUFDO0lBRU8sVUFBVTtRQUNkLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDYixJQUFJLENBQUMsV0FBVyxFQUFFLENBQUM7WUFFbkIsZUFBZTtZQUNmLElBQUksQ0FBQyxtQkFBbUIsRUFBRSxDQUFDO1lBRTNCLGFBQWE7WUFDYixJQUFJLENBQUMsbUJBQW1CLEVBQUUsQ0FBQztZQUUzQixjQUFjO1lBQ2QsSUFBSSxDQUFDLHVCQUF1QixFQUFFLENBQUM7UUFDbkMsQ0FBQyxFQUFFLElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLENBQUM7SUFDN0IsQ0FBQztJQUNPLG1CQUFtQjtRQUN2QixNQUFNLGFBQWEsR0FBVyxJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUM7UUFDckUsSUFBSSxDQUFDLG1CQUFtQixDQUFDLEtBQUssR0FBRyxhQUFhLENBQUM7SUFDbkQsQ0FBQztJQUVPLG1CQUFtQjtRQUN2QixJQUFJLGFBQXFCLENBQUM7UUFFMUIsSUFBSSxJQUFJLENBQUMsV0FBVyxJQUFJLElBQUksQ0FBQyxnQkFBZ0IsRUFBRTtZQUMzQyxhQUFhLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixHQUFHLElBQUksQ0FBQyxXQUFXLENBQUM7U0FDNUQ7YUFBTTtZQUNILE1BQU0sbUJBQW1CLEdBQVcsQ0FBQyxJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUM7WUFDckcsYUFBYSxHQUFHLElBQUksQ0FBQyxjQUFjLEdBQUcsbUJBQW1CLENBQUM7U0FDN0Q7UUFFRCxJQUFJLENBQUMsaUJBQWlCLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7SUFDakUsQ0FBQztJQUVPLHVCQUF1QjtRQUMzQix3RUFBd0U7UUFFeEUsMkNBQTJDO1FBQzNDLCtDQUErQztRQUMvQyxxREFBcUQ7UUFDckQsaURBQWlEO1FBQ2pELGtDQUFrQztRQUNsQyxZQUFZO1FBQ1osd0RBQXdEO1FBQ3hELDJFQUEyRTtRQUMzRSxtREFBbUQ7UUFDbkQseUNBQXlDO1FBQ3pDLFlBQVk7UUFDWixRQUFRO1FBQ1IsTUFBTTtJQUNWLENBQUM7SUFFTyxVQUFVLENBQUMsSUFBWTtRQUMzQixNQUFNLE9BQU8sR0FBVyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksR0FBRyxFQUFFLENBQUMsQ0FBQztRQUM5QyxNQUFNLE9BQU8sR0FBVyxJQUFJLEdBQUcsRUFBRSxDQUFDO1FBQ2xDLE9BQU8sR0FBRyxPQUFPLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUMsSUFBSSxPQUFPLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUMsRUFBRSxDQUFDO0lBQzNGLENBQUM7Q0FDSjtBQS9FRCx3QkErRUMifQ==\",\"assetPath\":\"Assets/Scripts/Event/Event.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"eventTitleText\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"eventDescriptionText\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"remainingTimeText\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"eventProgressSlider\",\"type\":\"UnityEngine.UI.Slider\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"eventSlotObjs\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"Event\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 56f91a2121e11ddf2fa1962056013f2e
+  onlyWriteTrigger: 0

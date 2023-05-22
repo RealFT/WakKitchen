@@ -105,6 +105,17 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
         return true;
     }
 
+    public IsEmpty(): boolean {
+        for (let i = 0; i < this.equipSlots.Length; i++) {
+            if (!this.equipSlots[i].IsLocked() &&
+                !this.equipSlots[i].IsEquip() &&
+                !this.equipSlots[i].IsSelected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ClearSlots(){
         for (let i = 0; i < this.equipSlots.Length; i++) {
             this.equipSlots[i].InitSlot();

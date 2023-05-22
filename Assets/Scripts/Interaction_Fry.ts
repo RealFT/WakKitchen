@@ -19,14 +19,23 @@ export default class Interaction_Fry extends InteractionBase implements IListene
         super.Start();
 
         this.helpButton.onClick.AddListener(() => {
-            HelpManager.GetInstance().OpenHelpSection(Section.Fryer);
+            HelpManager.GetInstance().OpenHelpSection("fryer");
         });
 
         this.fryPanel.SetActive(true);
         this.kitchen.SetActive(true);
 
-        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("frier");
+        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("fryer");
         this.FryUnlock(upgradedlevel);
+
+        for (let i = 0; i < this.frySlotObjects.length; i++) {
+            let slot = this.frySlotObjects[i].GetComponent<FrySlot>();
+            slot.onBakeLevelChanged = (level: number) => {
+                this.PlayBakeLevelSFX();
+                if (level == 3)
+                    SoundManager.GetInstance().OnPlayLoopSFX("Fryer_level3");
+            }
+        }
 
         Mediator.GetInstance().RegisterListener(this);
     }
@@ -54,7 +63,7 @@ export default class Interaction_Fry extends InteractionBase implements IListene
                 this.Init();
                 break;
             case EventNames.UpgradeUpdated:
-                const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("frier");
+                const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("fryer");
                 this.FryUnlock(upgradedlevel);
                 break;
         }
@@ -62,10 +71,34 @@ export default class Interaction_Fry extends InteractionBase implements IListene
 
     OnTriggerEnter(collider) {
         super.OnTriggerEnter(collider);
+        this.PlayBakeLevelSFX();
+    }
+
+    private PlayBakeLevelSFX(){
+        let maxBakeLevel = 0;
+        this.frySlotObjects.forEach((slotObj) => {
+            let slot = slotObj.GetComponent<FrySlot>();
+            const bakeLevel = slot.GetBakeLevel();
+            maxBakeLevel = (bakeLevel > maxBakeLevel) ? bakeLevel : maxBakeLevel;
+        });
+        switch(maxBakeLevel){
+            case 0: // nothing
+                break;
+            case 1: // baking
+                SoundManager.GetInstance().OnPlayLoopSFX("Fryer_level1");
+                break;
+            case 2: // done
+                SoundManager.GetInstance().OnPlayLoopSFX("Fryer_level2");
+                break;
+            case 3: // burnt
+                SoundManager.GetInstance().OnPlayLoopSFX("Fryer_level3");
+                break;
+        }
     }
 
     OnTriggerExit(collider) {
         super.OnTriggerExit(collider);
+        SoundManager.GetInstance().StopSFX();
     }
 
     SetKitchenVisibility(value: boolean) {
@@ -77,15 +110,6 @@ export default class Interaction_Fry extends InteractionBase implements IListene
         for (let i = 0; i < this.frySlotObjects.length; i++) {
             let slot = this.frySlotObjects[i].GetComponent<FrySlot>();
             slot.SetFryVisibility(value);
-            if(slot.IsFrying()) sfx = true;
-        }
-        // is kitchen visivility is true;
-        if(value && sfx){
-            SoundManager.GetInstance().OnPlayLoopSFX("Fryer_Frying");
-        }
-        // is kitchen visivility is false;
-        else{
-            SoundManager.GetInstance().StopSFX();
         }
     }
 

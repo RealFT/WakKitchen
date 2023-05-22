@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: eb607ff485c19b148a02e944264ac4f0
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst DataManager_1 = require(\\\"../DataManager\\\");\\r\\nclass
+    EventSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    OnEnable()
+    {\\r\\n        this.redeemButtonText.text = DataManager_1.default.GetInstance().GetCurrentLanguageData(\\\"event_\\\");\\r\\n   
+    }\\r\\n    SetSlot(unlockTime) {\\r\\n        this.slotStatus = \\\"locked\\\";\\r\\n       
+    this.unlockTime = unlockTime;\\r\\n    }\\r\\n    // private Refresh\\r\\n   
+    CheckRewardAvailability(elapsedTime) {\\r\\n        // if (this.isRedeemed) {\\r\\n       
+    //     // \uBCF4\uC0C1 \uC774\uBBF8 \uC218\uB839\uD55C \uC0C1\uD0DC\\r\\n       
+    //     this.redeemButton.interactable = false;\\r\\n        //     this.redeemButtonText.text
+    = \\\"REDEEMED\\\";\\r\\n        // } else if (this.isLocked) {\\r\\n       
+    //     // \uC7A0\uAE34 \uC0C1\uD0DC\\r\\n        //     this.redeemButton.interactable
+    = false;\\r\\n        //     this.redeemButtonText.text = \\\"Locked\\\";\\r\\n       
+    // } else {\\r\\n        //     // \uBCF4\uC0C1 \uC218\uB839 \uAC00\uB2A5\uD55C
+    \uC0C1\uD0DC\\r\\n        //     this.redeemButton.interactable = true;\\r\\n       
+    //     this.redeemButtonText.text = \\\"REDEEM!\\\";\\r\\n        // }\\r\\n   
+    }\\r\\n}\\r\\nexports.default = EventSlot;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXZlbnRTbG90LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRXZlbnRTbG90LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFnRDtBQUdoRCxnREFBeUM7QUFDekMsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQVV4RCxRQUFRO1FBQ0osSUFBSSxDQUFDLGdCQUFnQixDQUFDLElBQUksR0FBRyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLHNCQUFzQixDQUFDLFFBQVEsQ0FBQyxDQUFBO0lBQzNGLENBQUM7SUFFTSxPQUFPLENBQUMsVUFBa0I7UUFDN0IsSUFBSSxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDM0IsSUFBSSxDQUFDLFVBQVUsR0FBRyxVQUFVLENBQUM7SUFDakMsQ0FBQztJQUVELGtCQUFrQjtJQUVYLHVCQUF1QixDQUFDLFdBQW1CO1FBQzlDLHlCQUF5QjtRQUN6QixzQkFBc0I7UUFDdEIsOENBQThDO1FBQzlDLCtDQUErQztRQUMvQyw4QkFBOEI7UUFDOUIsZUFBZTtRQUNmLDhDQUE4QztRQUM5Qyw2Q0FBNkM7UUFDN0MsV0FBVztRQUNYLHNCQUFzQjtRQUN0Qiw2Q0FBNkM7UUFDN0MsOENBQThDO1FBQzlDLElBQUk7SUFDUixDQUFDO0NBQ0o7QUFwQ0QsNEJBb0NDIn0=\",\"assetPath\":\"Assets/Scripts/Event/EventSlot.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"rewardImage\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"background\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"redeemButton\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"lockButton\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"redeemTimeText\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"redeemButtonText\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"mscorlib\",\"name\":\"slotStatus\",\"type\":\"System.String\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"EventSlot\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 7aff28b24213340333c9e65a2dcd31b0
+  onlyWriteTrigger: 0

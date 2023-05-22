@@ -40,7 +40,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
 
     Start() {
         this.helpButton.onClick.AddListener(() => {
-            HelpManager.GetInstance().OpenHelpSection(Section.Prep);
+            HelpManager.GetInstance().OpenHelpSection("prep");
         });
 
         this.ingredients.set(0, Ingredient.CABBAGE);
@@ -53,7 +53,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
             this.slicableItemsPool.push(this.CreateSlicable().GetComponent<Slicable>());
         }
 
-        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("slice");
+        const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("prep");
         this.SlcieUnlock(upgradedlevel);
 
         // Start the coroutine that shoots the projectiles
@@ -67,7 +67,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
 
     public OnNotify(sender: any, eventName: string, eventData: any): void {
         if(eventName === EventNames.UpgradeUpdated){
-            const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("slice");
+            const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("prep");
             this.SlcieUnlock(upgradedlevel);
         }
     }

@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { WaitForSeconds, Time, GameObject, Sprite, Debug, Color } from 'UnityEngine';
+import { WaitForSeconds, Time, GameObject, Sprite, Color, AudioSource } from 'UnityEngine';
 import { Image, Button, Slider, Text } from "UnityEngine.UI";
 import OrderManager from './OrderManager';
 import { Ingredient } from './DataManager';
@@ -21,10 +21,13 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private burnTime: number;
     @SerializeField() private visibleImages: Image[];
     @SerializeField() private lockImage: Image;
+    @SerializeField() private bakeTimerSFX: AudioSource;
     public onWorkStateChanged: (working: boolean) => void;
+    public onBakeLevelChanged: (level: number) => void;
     private startTime: number = 0;
     private currentTime: number = 0;
     private flipCount: number = 0;
+    private bakeLevel: number = 0;
     private isFliped: bool;
     private isBaking: bool;
     private isWorking: bool;
@@ -74,9 +77,9 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.flipCount = 0;
         this.startTime = Time.time;
         this.bakeSliderFill.color = this.defaultColor;
-
+        this.bakeLevel = 1;
+        this.onBakeLevelChanged?.(this.bakeLevel);
         this.StartCoroutine(this.DoBaking());
-        SoundManager.GetInstance().OnPlayLoopSFX("Grill_Sizzling");
     }
 
     // Baking Coroutine
@@ -89,6 +92,8 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
             if (this.currentTime >= this.bakeTime) {
                 if (this.flipCount > 0 && this.isFliped) {
                     // baking done.
+                    this.bakeLevel = 2;
+                    this.onBakeLevelChanged?.(this.bakeLevel);
                     this.bakingButton.interactable = true;
                     this.bakingButton.onClick.RemoveAllListeners();
                     this.bakingButton.onClick.AddListener(() => {
@@ -98,6 +103,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
                     });
                     this.bakeSliderFill.color = this.bakedColor;
                     this.isFliped = false;
+                    this.OnPlayBakeTimerSFX();
                 }
                 else if (this.flipCount == 0 && !this.isFliped) {
                     this.bakingButton.interactable = true;
@@ -105,9 +111,12 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
                     this.bakingButton.onClick.AddListener(() => { this.FlipPatty(); });
                     this.bakeSliderFill.color = this.bakedColor;
                     this.flipCount++;
+                    this.OnPlayBakeTimerSFX();
                 }
             }
             if (this.currentTime >= this.burnTime) {
+                this.bakeLevel = 3;
+                this.onBakeLevelChanged?.(this.bakeLevel);
                 this.bakingButton.image.sprite = this.burntPattySprite;
                 this.bakeSliderFill.color = this.failedColor;
                 this.StopBaking();
@@ -142,7 +151,13 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.bakingButton.gameObject.SetActive(false);
         this.bakeSlider.gameObject.SetActive(false);
         this.isWorking = true;
+        this.bakeLevel = 0;
+        this.onBakeLevelChanged?.(this.bakeLevel);
         this.onWorkStateChanged?.(true);
+    }
+
+    public GetBakeLevel(): number {
+        return this.bakeLevel;
     }
 
     public IsBaking(): boolean {
@@ -157,5 +172,11 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         for (let i = 0; i < this.visibleImages.length; i++) {
             this.visibleImages[i].enabled = value;
         }
+    }
+    
+    private OnPlayBakeTimerSFX(){
+        this.bakeTimerSFX.volume = SoundManager.GetInstance().SFXSoundVolume;
+        this.bakeTimerSFX.mute = SoundManager.GetInstance().SFXSoundMute;
+        this.bakeTimerSFX.Play();
     }
 }
