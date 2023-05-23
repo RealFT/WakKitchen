@@ -61,7 +61,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.isClock = true;
     }
 
-    private Init(){
+    public Init(){
         this.StopAllCoroutines();
         this.ClearFry();
     }

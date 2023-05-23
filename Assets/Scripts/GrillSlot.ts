@@ -46,7 +46,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.lockImage.gameObject.SetActive(false);
     }
 
-    private Init(){
+    public Init(){
         this.StopAllCoroutines();
         this.ClearGrill();
     }
