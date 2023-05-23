@@ -300,6 +300,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
                 } else if (char === ',' && !withinQuotes) {
                     values.push(currentValue.trim());
                     currentValue = '';
+                } else if(char === '\\') {
+                    currentValue += "\n";
                 } else {
                     currentValue += char;
                 }
