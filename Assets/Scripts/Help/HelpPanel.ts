@@ -6,6 +6,7 @@ import DataManager, { Section } from '../DataManager';
 import { GameObject } from 'UnityEngine';
 export default class HelpPanel extends ZepetoScriptBehaviour {
     @SerializeField() private mainPanel: GameObject;
+    @SerializeField() private mainText: TextMeshProUGUI;
     // @SerializeField() private help_receipt: Button;
     // @SerializeField() private help_receiptText: TextMeshProUGUI;
     @SerializeField() private help_employee: Button;
@@ -21,10 +22,12 @@ export default class HelpPanel extends ZepetoScriptBehaviour {
     @SerializeField() private help_fryer: Button;
     @SerializeField() private help_fryerText: TextMeshProUGUI;
     @SerializeField() private toMainButton: Button;
-    @SerializeField() private mainText: TextMeshProUGUI;
+    @SerializeField() private toMainButtonText: TextMeshProUGUI;
+    @SerializeField() private closeButton: Button;
 
     OnEnable(){
         this.ToMain();
+        this.toMainButton.gameObject.SetActive(false);
     }
 
     Start() {
@@ -53,11 +56,14 @@ export default class HelpPanel extends ZepetoScriptBehaviour {
 
     private ToHelpSection(section: string){
         this.mainPanel.SetActive(false);
+        this.toMainButton.gameObject.SetActive(true);
         HelpManager.GetInstance().OpenHelpSection(section);
     }
 
     private ToMain(){
         HelpManager.GetInstance().ClearHelpContents();
         this.mainPanel.SetActive(true);
+        this.toMainButton.gameObject.SetActive(false);
+        this.closeButton.gameObject.SetActive(true);
     }
 }

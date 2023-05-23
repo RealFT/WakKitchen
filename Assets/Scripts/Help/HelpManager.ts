@@ -795,17 +795,15 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 const contents_Employee = this.helpContents_Employee.GetComponent<HelpContents>();
                 const pages_Employee = contents_Employee.GetPages();
                 contents_Employee.SetCloseBtnVisivility(false);
-                pages_Employee[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
-                pages_Employee[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
-                pages_Employee[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
-                pages_Employee[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4"));
+                pages_Employee[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_employee_ment1"));
+                pages_Employee[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_employee_ment2"));
+                pages_Employee[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_employee_ment3"));
                 pages_Employee[0].gameObject.SetActive(true);
                 pages_Employee[1].gameObject.SetActive(false);
-                pages_Employee[2].gameObject.SetActive(false);
-                pages_Employee[2].GetNextBtn().onClick.AddListener(()=>{
+                pages_Employee[1].GetNextBtn().onClick.AddListener(()=>{
                     contents_Employee.SetCloseBtnVisivility(true);
                 });
-                pages_Employee[3].gameObject.SetActive(false);
+                pages_Employee[2].gameObject.SetActive(false);
             break;
         }
     }
