@@ -34,7 +34,7 @@ export default class ItemSlot_Upgrade extends ZepetoScriptBehaviour {
             this.buyBtn.onClick.AddListener(() => {
                 const price = this.itemRecord.price;
                 // if don't have enough money
-                if (price < BalanceManager.GetInstance().GetPossessionMoney()) {
+                if (price > BalanceManager.GetInstance().GetPossessionMoney()) {
                     UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_nocurruncey"));
                 }
                 else {

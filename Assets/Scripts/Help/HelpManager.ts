@@ -716,15 +716,11 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 contents_Dispenser.SetCloseBtnVisivility(false);
                 pages_Dispenser[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
                 pages_Dispenser[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
-                pages_Dispenser[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
-                pages_Dispenser[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4"));
                 pages_Dispenser[0].gameObject.SetActive(true);
-                pages_Dispenser[1].gameObject.SetActive(false);
-                pages_Dispenser[2].gameObject.SetActive(false);
-                pages_Dispenser[2].GetNextBtn().onClick.AddListener(()=>{
+                pages_Dispenser[0].GetNextBtn().onClick.AddListener(()=>{
                     contents_Dispenser.SetCloseBtnVisivility(true);
                 });
-                pages_Dispenser[3].gameObject.SetActive(false);
+                pages_Dispenser[1].gameObject.SetActive(false);
                 break;
             case "fryer":
                 this.helpContents_Fryer.SetActive(true);

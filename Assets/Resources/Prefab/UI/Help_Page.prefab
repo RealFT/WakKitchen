@@ -529,8 +529,8 @@ MonoBehaviour:
     \uD655\uC778\uD569\uB2C8\uB2E4. \uC8FC\uBB38\uC774 \uB4E4\uC5B4\uC624\uBA74 \uC88C\uCE21
     \uC0C1\uB2E8\uC5D0 \uC8FC\uBB38 \uC601\uC218\uC99D\uC774 \uD45C\uAE30\uB429\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 52ed58c0bfffc2e478794ccdbe688fad, type: 2}
-  m_sharedMaterial: {fileID: 5161020387398471451, guid: 52ed58c0bfffc2e478794ccdbe688fad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+  m_sharedMaterial: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

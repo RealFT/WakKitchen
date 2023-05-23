@@ -71,6 +71,8 @@ help_plating_ment1,"Check the recipe before starting the preparation. When an or
 help_plating_ment2,Press the order receipt to view detailed information. Pay attention to the order! Thieves don't pay!
 help_plating_ment3,Complete the cooking by stacking the ingredients in order of recipe. Press the Trash button on the bottom right to discard the miscooked food.
 help_plating_ment4,"When the dish is ready, ring the bell and serve it to the guest. If the finished dish is different from the recipe, the ingredients will be restored to their original state."
+help_dispenser_ment1, "When the moving cup is at the desired beverage position,\press the PUSH button to successfully stop it,\and the beverage will come out.\Press the PUSH button again to retrieve the beverage!"
+help_dispenser_ment2, "After obtaining the beverage, press the PUSH button again to generate a new cup."
 help_employee_ment1,Part-time employees are displayed here. You can click on the employee to pause their work.
 info_nocurruncey,Not enough currency.
 info_nostamp,No remaining stamps.
