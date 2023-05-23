@@ -101,10 +101,6 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
 
     private *ShootSlicables() {
         while (true) {
-            // Wait for a random amount of time between shots
-            let delay = Random.Range(this.minDelay, this.maxDelay);
-            yield new WaitForSeconds(delay);
-
             // Instantiate a new slicableObj
             let slicableObj = this.GetSlicable().gameObject;
             const spawnX = Random.Range(this.leftSpawnPos.position.x, this.rightSpawnPos.position.x);
@@ -114,6 +110,10 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
             this.initialVelocity = new Vector2(Random.Range(-1 * this.tiltAngle, this.tiltAngle), 1);
             slicableObj.GetComponent<Rigidbody2D>().gravityScale = this.gravity;
             slicableObj.GetComponent<Rigidbody2D>().velocity = this.initialVelocity * this.speed;
+
+            // Wait for a random amount of time between shots
+            let delay = Random.Range(this.minDelay, this.maxDelay);
+            yield new WaitForSeconds(delay);
         }
     }
 

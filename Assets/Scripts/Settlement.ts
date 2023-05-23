@@ -63,6 +63,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
         this.doubleIncomeButton.gameObject.SetActive(false);
         this.toShopButton.gameObject.SetActive(false);
         this.StartCoroutine(this.AnimationSequence());
+        SoundManager.GetInstance().StopSFX();
         SoundManager.GetInstance().OnPlayOnceBGM(SoundManager.GetInstance().keySettlement);
     }
 

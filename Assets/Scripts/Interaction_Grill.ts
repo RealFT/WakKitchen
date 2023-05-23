@@ -80,6 +80,10 @@ export default class Interaction_Grill extends InteractionBase implements IListe
             case EventNames.StageStarted:
             case EventNames.StageEnded:
                 this.Init();
+                this.grillSlotObjects.forEach((slotObj) => {
+                    let slot = slotObj.GetComponent<GrillSlot>();
+                    slot.Init();
+                });
                 break;
             case EventNames.UpgradeUpdated:
                 const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("grill");

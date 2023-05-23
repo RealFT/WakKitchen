@@ -61,6 +61,10 @@ export default class Interaction_Fry extends InteractionBase implements IListene
             case EventNames.StageStarted:
             case EventNames.StageEnded:
                 this.Init();
+                this.frySlotObjects.forEach((slotObj) => {
+                    let slot = slotObj.GetComponent<FrySlot>();
+                    slot.Init();
+                });
                 break;
             case EventNames.UpgradeUpdated:
                 const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("fryer");

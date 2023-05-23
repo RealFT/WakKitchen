@@ -714,8 +714,8 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 const contents_Dispenser = this.helpContents_Dispenser.GetComponent<HelpContents>();
                 const pages_Dispenser = contents_Dispenser.GetPages();
                 contents_Dispenser.SetCloseBtnVisivility(false);
-                pages_Dispenser[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
-                pages_Dispenser[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
+                pages_Dispenser[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_dispenser_ment1"));
+                pages_Dispenser[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_dispenser_ment2"));
                 pages_Dispenser[0].gameObject.SetActive(true);
                 pages_Dispenser[0].GetNextBtn().onClick.AddListener(()=>{
                     contents_Dispenser.SetCloseBtnVisivility(true);
