@@ -11,6 +11,7 @@ import CardInfoWindow from './CardInfoWindow';
 import UIManager from '../UIManager';
 import SoundManager from '../SoundManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import HelpManager from '../Help/HelpManager';
 
 export default class CardInventory extends ZepetoScriptBehaviour implements IListener {
 
@@ -18,6 +19,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
     @SerializeField() private equipBtn: Button;
     @SerializeField() private upgradeBtn: Button;
     @SerializeField() private closeBtn: Button;
+    @SerializeField() private helpBtn: Button;
     @SerializeField() private contentParent: Transform;
     @SerializeField() private equipSlotControllerObj: GameObject;
     @SerializeField() private cardInfoWindowObj: GameObject;
@@ -66,6 +68,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
                 this.inventoryPanel.SetActive(false);
             }
         });
+        this.helpBtn.onClick.AddListener(()=> HelpManager.GetInstance().OpenHelpSection("employee"));
 
         this.cardInfoWindow.InitCardInfoWindow();
     }

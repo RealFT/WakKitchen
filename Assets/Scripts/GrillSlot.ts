@@ -28,11 +28,13 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     private currentTime: number = 0;
     private flipCount: number = 0;
     private bakeLevel: number = 0;
+    private amount: number = 1;
     private isFliped: bool;
     private isBaking: bool;
     private isWorking: bool;
 
     Start() {
+
         this.isWorking = true;
         this.bakingButton.interactable = false;
         this.grillButton.onClick.AddListener(() => { this.StartBaking(); });
@@ -45,7 +47,9 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
     public Unlock(){
         this.lockImage.gameObject.SetActive(false);
     }
-
+    public Double(){
+        this.amount = 2;
+    }
     public Init(){
         this.StopAllCoroutines();
         this.ClearGrill();
@@ -98,7 +102,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
                     this.bakingButton.onClick.RemoveAllListeners();
                     this.bakingButton.onClick.AddListener(() => {
                         this.ClearGrill();
-                        OrderManager.GetInstance().AddItemToInventory(Ingredient.PATTY);
+                        OrderManager.GetInstance().AddItemToInventory(Ingredient.PATTY,this.amount);
                         SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
                     });
                     this.bakeSliderFill.color = this.bakedColor;

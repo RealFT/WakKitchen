@@ -20,6 +20,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
     private ingredients: Map<number, Ingredient> = new Map<number, Ingredient>();   
     private slicableItemsPool: Slicable[] = [];   // An object pool of GameObjects used to spawn new ingredients
     private spawnCount = 0; // The number of ingredients to spawn initially
+    private amount = 1; // The number of ingredients to get
     private isCutting = false;  // Whether the player is currently in the process of cutting ingredients
 
     @SerializeField() private  initialVelocity: Vector2;    // The initial velocity of the ingredient
@@ -155,7 +156,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
             let imageRect: Rect = new Rect(screenPos.x, screenPos.y, size.x, size.y);
             if (this.IsPointWithinRect(point, imageRect)) {
                 slicable.Sliced();
-                OrderManager.GetInstance().AddItemToInventory(slicable.GetIngredient());
+                OrderManager.GetInstance().AddItemToInventory(slicable.GetIngredient(), this.amount);
             }
         }
     }
@@ -174,10 +175,10 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
             this.maxDelay = 1.4;
         }
         if(level >= 2){
-            this.maxDelay = 1.0;
+            this.maxDelay = 0.8;
         }
         if(level >= 3){
-            this.maxDelay = 0.6;
+            this.amount = 2;
         }
     }
 }

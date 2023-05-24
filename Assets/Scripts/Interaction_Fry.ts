@@ -131,9 +131,11 @@ export default class Interaction_Fry extends InteractionBase implements IListene
         }
         if(level >= 2){
             slots[0].UnlockClock();
+            slots[1].UnlockClock();
         }
         if(level >= 3){
-            slots[1].UnlockClock();
+            slots[0].Double();
+            slots[1].Double();
         }
     }
 }

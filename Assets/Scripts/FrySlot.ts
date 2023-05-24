@@ -29,6 +29,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
     private startTime: number = 0;
     private currentTime: number = 0;
     private bakeLevel: number = 0;
+    private amount: number = 1;
     private isFrying: bool;
     private isFryed: bool;
     private isClock: bool = false;
@@ -60,7 +61,9 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.clockImage?.gameObject.SetActive(true);
         this.isClock = true;
     }
-
+    public Double(){
+        this.amount = 2;
+    }
     public Init(){
         this.StopAllCoroutines();
         this.ClearFry();
@@ -113,7 +116,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
                     this.collectButton.onClick.RemoveAllListeners();
                     this.collectButton.onClick.AddListener(() => {
                         this.ClearFry();
-                        OrderManager.GetInstance().AddItemToInventory(Side.FRY);
+                        OrderManager.GetInstance().AddItemToInventory(Side.FRY, this.amount);
                         SoundManager.GetInstance().OnPlayButtonSFX(SoundManager.GetInstance().keyBtnSelect);
                     });
                     this.frySliderFill.color = this.friedColor;

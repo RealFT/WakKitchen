@@ -139,10 +139,9 @@ export default class Interaction_Grill extends InteractionBase implements IListe
 
     public GrillUnlock(level:number){
         for (let i = 0; i <= level; i++) {
-            this.grillSlotObjects[i].GetComponent<GrillSlot>()?.Unlock();
-        }
-        if(level === 3){
-            // clock 기능 추가
+            const slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
+            slot.Unlock();
+            if(level === 3) slot.Double();
         }
     }
 }

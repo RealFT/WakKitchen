@@ -596,8 +596,6 @@ export default class HelpManager extends ZepetoScriptBehaviour {
         while (curPage < 10) yield null;
 
         // page 11
-        const playButton = this.gameObjectMap.get("Help_ToStageBtn").GetComponent<Button>();
-        playButton.gameObject.SetActive(false);
         this.DisplayTextWithId(this.helpWindow_lower, this.window_lower.GetHelpText(), "tutorial_employee_ment11");
         this.nextBtn.onClick.RemoveAllListeners();
         this.nextBtn.onClick.AddListener(()=>{
@@ -624,7 +622,6 @@ export default class HelpManager extends ZepetoScriptBehaviour {
             else if(equipSlotController.CheckSlots()){
                 SoundManager.GetInstance().OnPlayButtonClick();
                 closeMyCardBtn.onClick.Invoke();
-                playButton.gameObject.SetActive(true);
                 categoryMask.SetActive(true);
                 myCardMask.SetActive(true);
                 playMask.SetActive(false);
@@ -635,15 +632,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_require_section"));
             }
         });
-        playButton.onClick.RemoveAllListeners();
-        playButton.onClick.AddListener(()=>{
-            GameManager.GetInstance().NextStage();
-            curPage = 11;
-        });
-        while (curPage < 11) yield null;
+        while (!GameManager.GetInstance().isInGame) yield null;
         playMaskBtn.onClick.RemoveAllListeners();
         myCardMaskBtn.onClick.RemoveAllListeners();
-        playButton.gameObject.SetActive(false);
         categoryMask.SetActive(false);
         myCardMask.SetActive(false);
 
@@ -727,27 +718,25 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 const contents_Fryer = this.helpContents_Fryer.GetComponent<HelpContents>();
                 const pages_Fryer = contents_Fryer.GetPages();
                 contents_Fryer.SetCloseBtnVisivility(false);
-                pages_Fryer[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
-                pages_Fryer[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
-                pages_Fryer[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
-                pages_Fryer[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4"));
+                pages_Fryer[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_fryer_ment1"));
+                pages_Fryer[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_fryer_ment2"));
+                pages_Fryer[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_fryer_ment3"));
                 pages_Fryer[0].gameObject.SetActive(true);
                 pages_Fryer[1].gameObject.SetActive(false);
-                pages_Fryer[2].gameObject.SetActive(false);
-                pages_Fryer[2].GetNextBtn().onClick.AddListener(()=>{
+                pages_Fryer[1].GetNextBtn().onClick.AddListener(()=>{
                     contents_Fryer.SetCloseBtnVisivility(true);
                 });
-                pages_Fryer[3].gameObject.SetActive(false);
+                pages_Fryer[2].gameObject.SetActive(false);
                 break;
             case "grill":
                 this.helpContents_Grill.SetActive(true);
                 const contents_Grill = this.helpContents_Grill.GetComponent<HelpContents>();
                 const pages_Grill = contents_Grill.GetPages();
                 contents_Grill.SetCloseBtnVisivility(false);
-                pages_Grill[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
-                pages_Grill[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
-                pages_Grill[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
-                pages_Grill[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4"));
+                pages_Grill[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment1"));
+                pages_Grill[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment2"));
+                pages_Grill[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment3"));
+                pages_Grill[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment4"));
                 pages_Grill[0].gameObject.SetActive(true);
                 pages_Grill[1].gameObject.SetActive(false);
                 pages_Grill[2].gameObject.SetActive(false);
@@ -760,18 +749,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 this.helpContents_Prep.SetActive(true);
                 const contents_Prep = this.helpContents_Prep.GetComponent<HelpContents>();
                 const pages_Prep = contents_Prep.GetPages();
-                contents_Prep.SetCloseBtnVisivility(false);
+                contents_Prep.SetCloseBtnVisivility(true);
                 pages_Prep[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
-                pages_Prep[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
-                pages_Prep[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
-                pages_Prep[3].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment4"));
                 pages_Prep[0].gameObject.SetActive(true);
-                pages_Prep[1].gameObject.SetActive(false);
-                pages_Prep[2].gameObject.SetActive(false);
-                pages_Prep[2].GetNextBtn().onClick.AddListener(()=>{
-                    contents_Prep.SetCloseBtnVisivility(true);
-                });
-                pages_Prep[3].gameObject.SetActive(false);
                 break;
             case "plating":
                 this.helpContents_Plating.SetActive(true);

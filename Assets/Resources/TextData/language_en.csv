@@ -73,7 +73,17 @@ help_plating_ment3,Complete the cooking by stacking the ingredients in order of 
 help_plating_ment4,"When the dish is ready, ring the bell and serve it to the guest. If the finished dish is different from the recipe, the ingredients will be restored to their original state."
 help_dispenser_ment1, "When the moving cup is at the desired beverage position,\press the PUSH button to successfully stop it,\and the beverage will come out.\Press the PUSH button again to retrieve the beverage!"
 help_dispenser_ment2, "After obtaining the beverage, press the PUSH button again to generate a new cup."
-help_employee_ment1,Part-time employees are displayed here. You can click on the employee to pause their work.
+help_employee_ment1, "Press the desired employee and click the Equip button to equip them. Equipping a card consumes one card."
+help_employee_ment2, "You need to assign tasks to the equipped employees. Press the section selection slot next to the equip slot to choose the desired task."
+help_employee_ment3, "By consuming 10 cards of lower grade, you can obtain a random employee card of higher grade. The maximum grade is S."
+help_grill_ment1, "You can place patties on the slots on the grill."
+help_grill_ment2, "The color of the slider changes depending on the level of doneness. Flip or collect the fully cooked patties. If left unattended for too long, they will burn!"
+help_grill_ment3, "Once one side is fully cooked, flip it to cook the other side. When both sides are fully cooked, you can collect the patty."
+help_grill_ment4, "When the patty burns, you'll see smoke rising from the grill and hear a sound."
+help_prep_ment1,"Slice the rising vegetables to obtain them!"
+help_fryer_ment1, "Press the fryer to fry the potatoes."
+help_fryer_ment2, "The color of the fries and slider changes depending on the degree of cooking. Press the fully cooked fries to obtain them. If left unattended for too long, they will burn!"
+help_fryer_ment3, "When the fries are burnt, you will see smoke rising from the fryer and hear a sound."
 info_nocurruncey,Not enough currency.
 info_nostamp,No remaining stamps.
 info_dailygranted,Daily reward has been obtained.

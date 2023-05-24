@@ -63,6 +63,8 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectSectionOpenToggle.interactable = false;
         this.characterImage.color = new Color(1, 1, 1, 0);
         this.isEquip = false;
+        this.infoText.text = "Empty";
+        this.infoText.color = this.emptyColor;
         EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);
     }
 

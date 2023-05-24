@@ -38,6 +38,7 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
         this.employeeImage.sprite = DataManager.GetInstance().GetCharacterIcon(employeeData.GetCharacterIndex());
         this.foodIds = [];
         let proficiency = 1;
+        let time = 10;
         switch(section){
             case Section.Dispenser:
                 let startId = Drink.START;
@@ -46,25 +47,29 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
                     this.foodIds.push(id);
                 }
                 proficiency = employeeData.GetDispenserProficiency();
+                time = 8;
                 break;
             case Section.Fryer:
                 this.foodIds.push(Side.FRY);
                 proficiency = employeeData.GetFrierProficiency();
+                time = 10;
                 break;
             case Section.Grill:
                 this.foodIds.push(Ingredient.PATTY);
                 proficiency = employeeData.GetGrillProficiency();
+                time = 16;
                 break;
             case Section.Prep:
                 this.foodIds.push(Ingredient.CABBAGE);
                 this.foodIds.push(Ingredient.TOMATO);
                 this.foodIds.push(Ingredient.ONION);
                 proficiency = employeeData.GetSliceProficiency();
+                time = 4;
                 break;
         }
 
         if(proficiency <= 0) proficiency = 1;
-        this.workTime = 10 / (Math.floor(proficiency * 0.1) + 1);
+        this.workTime = time / (Math.floor(proficiency * 0.1) + 1);
         this.isRegistered = true;
     }
 

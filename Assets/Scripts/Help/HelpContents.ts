@@ -11,17 +11,16 @@ export default class HelpContents extends ZepetoScriptBehaviour {
     @SerializeField() private closeButton: Button;
     @SerializeField() private confirmText: TextMeshProUGUI;
     private pages: HelpPage[] = [];
-    Awake(){
-        for (const page of this.pageObjs) {
-            this.pages.push(page.GetComponent<HelpPage>());
-        }
-    }
 
     OnEnable(){
         this.confirmText.text = DataManager.GetInstance().GetCurrentLanguageData("button_confirm");
+        this.pageObjs[0].SetActive(true);
     }
 
     Start() {
+        for (const page of this.pageObjs) {
+            this.pages.push(page.GetComponent<HelpPage>());
+        }
         const maxPage = this.pages.length;
         // 첫 페이지의 이전으로, 마지막 페이지의 다음 버튼 비활성화
         this.pages[0].gameObject.SetActive(true);    
@@ -45,6 +44,7 @@ export default class HelpContents extends ZepetoScriptBehaviour {
                 });
             }
         }
+        this.pageObjs[0].SetActive(true);
     }
 
     public GetPages(): HelpPage[]{
