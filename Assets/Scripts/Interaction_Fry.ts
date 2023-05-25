@@ -7,6 +7,7 @@ import ItemManager from './ItemManager';
 import DataManager, { Section } from './DataManager';
 import SoundManager from './SoundManager';
 import HelpManager from './Help/HelpManager';
+import GameManager from './GameManager';
 
 export default class Interaction_Fry extends InteractionBase implements IListener {
     @SerializeField() private helpButton: Button; // Button to help
@@ -65,6 +66,7 @@ export default class Interaction_Fry extends InteractionBase implements IListene
                     let slot = slotObj.GetComponent<FrySlot>();
                     slot.Init();
                 });
+                SoundManager.GetInstance().StopSFX();
                 break;
             case EventNames.UpgradeUpdated:
                 const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("fryer");
@@ -79,6 +81,7 @@ export default class Interaction_Fry extends InteractionBase implements IListene
     }
 
     private PlayBakeLevelSFX(){
+        if(GameManager.GetInstance().isInGame) return;
         let maxBakeLevel = 0;
         this.frySlotObjects.forEach((slotObj) => {
             let slot = slotObj.GetComponent<FrySlot>();

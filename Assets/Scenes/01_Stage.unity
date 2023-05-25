@@ -20385,7 +20385,7 @@ MonoBehaviour:
     useEnhancedOption: 1
     enhancedOptionData:
       zoomSpeed: 2
-      zoomDampSpeed: 5
+      zoomDampSpeed: 3
       rotationSpeed: 4
       rotationDampSpeed: 15
       viewportMargin: 3
@@ -20401,8 +20401,8 @@ MonoBehaviour:
     radius: 0.23
     height: 1.2
     walkSpeed: 2
-    runSpeed: 4
-    jumpPower: 7
+    runSpeed: 3.5
+    jumpPower: 13
     layer:
       serializedVersion: 2
       m_Bits: 0

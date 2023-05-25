@@ -108,7 +108,9 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
             const cardGradeB = b.GetCardData()?.GetGrade();
             return this.CompareGrades(cardGradeA, cardGradeB);
         });
-
+        this.cardSlots.forEach((slot)=>{
+            slot.gameObject.transform.SetAsLastSibling();
+        });
         // Update the size of the content to fit the number of slots
         this.UpdateContentSize();
     }
@@ -137,7 +139,8 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
         const remains = this.contentParent.gameObject.GetComponentsInChildren<CardSlot>();
         remains.forEach((slot)=>{
             console.log(slot.gameObject);
-            GameObject.Destroy(slot.gameObject);
+            slot.gameObject.SetActive(false);
+            // GameObject.Destroy(slot.gameObject);
         });
 
         /*Sort by Create Order (descending order)*/

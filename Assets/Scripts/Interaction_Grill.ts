@@ -7,6 +7,7 @@ import ItemManager from './ItemManager';
 import DataManager, { Section } from './DataManager';
 import SoundManager from './SoundManager';
 import HelpManager from './Help/HelpManager';
+import GameManager from './GameManager';
 
 export default class Interaction_Grill extends InteractionBase implements IListener {
     @SerializeField() private helpButton: Button; // Button to help
@@ -84,6 +85,7 @@ export default class Interaction_Grill extends InteractionBase implements IListe
                     let slot = slotObj.GetComponent<GrillSlot>();
                     slot.Init();
                 });
+                SoundManager.GetInstance().StopSFX();
                 break;
             case EventNames.UpgradeUpdated:
                 const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("grill");
@@ -98,6 +100,7 @@ export default class Interaction_Grill extends InteractionBase implements IListe
     }
 
     private PlayBakeLevelSFX(){
+        if(GameManager.GetInstance().isInGame) return;
         let maxBakeLevel = 0;
         this.grillSlotObjects.forEach((slotObj) => {
             let slot = slotObj.GetComponent<GrillSlot>();
