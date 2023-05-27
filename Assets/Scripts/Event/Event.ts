@@ -3,6 +3,8 @@ import { GameObject, Color } from 'UnityEngine';
 import { Image, Button, Text, Slider } from 'UnityEngine.UI'
 import { TextMeshProUGUI } from 'TMPro';
 import EventSlot from './EventSlot';
+import DataManager from '../DataManager';
+
 export default class Event extends ZepetoScriptBehaviour {
     @SerializeField() private eventTitleText: TextMeshProUGUI;   // 이벤트 제목
     @SerializeField() private eventDescriptionText: TextMeshProUGUI;   // 이벤트 내용
@@ -16,6 +18,11 @@ export default class Event extends ZepetoScriptBehaviour {
     private elapsedTime: number = 0; // 경과 시간
     private interval: number = 1; // 초 단위로 세고 싶은 간격
 
+    OnEnable(){
+        this.eventTitleText.text = DataManager.GetInstance().GetCurrentLanguageData("event_title");
+        this.eventDescriptionText.text = DataManager.GetInstance().GetCurrentLanguageData("event_description");
+    }
+
     Start() {
         // eventSlotObjs에 등록된 EventSlot 컴포넌트를 가져와서 eventSlots에 등록
         this.eventSlotObjs.forEach((slotObj) => {
@@ -25,6 +32,11 @@ export default class Event extends ZepetoScriptBehaviour {
             }
         });
         this.StartTimer();
+        this.eventSlots[0].SetSlot(5);
+        this.eventSlots[1].SetSlot(15);
+        this.eventSlots[2].SetSlot(30);
+        this.eventSlots[3].SetSlot(45);
+        this.eventSlots[4].SetSlot(60);
     }
 
     private StartTimer(): void {
@@ -37,8 +49,6 @@ export default class Event extends ZepetoScriptBehaviour {
             // 남은 시간 업데이트
             this.UpdateRemainingTime();
 
-            // 보상 수령 가능 체크
-            this.CheckRewardAvailability();
         }, this.interval * 1000);
     }
     private UpdateEventProgress(): void {
@@ -57,29 +67,16 @@ export default class Event extends ZepetoScriptBehaviour {
         }
     
         this.remainingTimeText.text = this.FormatTime(remainingTime);
-    }
 
-    private CheckRewardAvailability(): void {
-        // const currentTime: number = this.elapsedTime - this.firstRewardDelay;
-
-        // this.eventSlots.forEach((eventSlot) => {
-        //     if (eventSlot.slotStatus === "locked") {
-        //         if (currentTime >= eventSlot.unlockTime) {
-        //             eventSlot.slotStatus = "unlocked";
-        //             // 잠금 해제 시 처리 로직 추가
-        //         }
-        //     } else if (eventSlot.slotStatus === "unlocked") {
-        //         if (currentTime >= eventSlot.unlockTime + this.rewardInterval) {
-        //             eventSlot.slotStatus = "redeemable";
-        //             // 수령 가능 상태로 변경 시 처리 로직 추가
-        //         }
-        //     }
-        // });
+        this.eventSlots.forEach((slot) => {
+            slot.CheckUnlock(this.elapsedTime);
+        });
     }
 
     private FormatTime(time: number): string {
+        const next: string = DataManager.GetInstance().GetCurrentLanguageData("event_time_next");
         const minutes: number = Math.floor(time / 60);
         const seconds: number = time % 60;
-        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        return `${next}: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 }

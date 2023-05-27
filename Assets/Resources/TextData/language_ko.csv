@@ -90,3 +90,9 @@ info_dailygranted,일일 보상을 획득하였습니다.
 info_already_dailygranted,오늘은 이미 보상을 획득하셨습니다.
 info_Invalid_recipe,레시피와 일치하는 주문이 없습니다.
 info_require_section,직원이 작업할 섹션을 선택해야 합니다.
+event_time_next,다음 보상까지
+event_redeem_locked,잠김
+event_redeem_unlock,보상 수령!
+event_redeem_redeemed,수령 완료
+event_title,접속 보상 이벤트
+event_description,WAK BURGER에서의 총 플레이 시간에 따라 특별한 보상이 제공됩니다!
