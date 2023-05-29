@@ -186,7 +186,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
 
             this.writerText += narration[i];
             targetText.text = this.writerText;
-            SoundManager.GetInstance().OnPlaySFX("Button_Select");
+            SoundManager.GetInstance().OnPlaySFX("Type");
             yield new WaitForSeconds(0.032);
         }
         this.isTextEnd = true;

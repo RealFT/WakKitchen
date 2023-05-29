@@ -18,6 +18,7 @@ export default class EventTimer extends ZepetoScriptBehaviour {
     private firstRewardDelay: number = 5 * 60; // 처음 보상 지연 시간 (5분)
     private elapsedTime: number = 0; // 경과 시간
     private interval: number = 1; // 초 단위로 세고 싶은 간격
+    private redeemedIndex: number = 0; // 초 단위로 세고 싶은 간격
 
     OnEnable(){
         this.eventTitleText.text = DataManager.GetInstance().GetCurrentLanguageData("event_title");
@@ -29,7 +30,19 @@ export default class EventTimer extends ZepetoScriptBehaviour {
         this.UpdateNewReward();
     }
 
+    OnDestroy(){
+        // 종료될 때 시점의 시간 저장
+        DataManager.GetInstance().SetValue("time", this.elapsedTime);
+        //DataManager.GetInstance().SetValue("redeemedIndex", this.elapsedTime);
+    }
+
     Start() {
+        // 이전에 저장된 시간 불러오기
+        const savedTime = DataManager.GetInstance().GetValue("time");
+        if (savedTime !== null) {
+            this.elapsedTime = savedTime;
+        }
+
         // eventSlotObjs에 등록된 EventSlot 컴포넌트를 가져와서 eventSlots에 등록
         this.eventSlotObjs.forEach((slotObj) => {
             const eventSlot = slotObj.GetComponent<EventSlot>();
@@ -45,6 +58,8 @@ export default class EventTimer extends ZepetoScriptBehaviour {
         this.eventSlots[2].SetSlot(30);
         this.eventSlots[3].SetSlot(45);
         this.eventSlots[4].SetSlot(60);
+
+        //this.redeemedIndex = DataManager.GetInstance().GetValue("redeemedIndex");
     }
 
     private StartTimer(): void {
