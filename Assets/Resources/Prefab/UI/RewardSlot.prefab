@@ -483,6 +483,8 @@ MonoBehaviour:
     - redeemColor
     - lockButtonColor
     - lockColor
+    - backDefault
+    - backRedeem
     unityValues:
     - {fileID: 2316752431535739155}
     - {fileID: 2316752431507084368}
@@ -490,6 +492,8 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 4109192575052122043}
     - {fileID: 2316752430479431713}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -505,6 +509,8 @@ MonoBehaviour:
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.3294117748737335,\"g\":0.8274509906768799,\"b\":0.5529412031173706,\"a\":1.0}"}'
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.7843137979507446,\"g\":0.7843137979507446,\"b\":0.7843137979507446,\"a\":1.0}"}'
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.5372549295425415,\"g\":0.5372549295425415,\"b\":0.5372549295425415,\"a\":1.0}"}'
+    - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.21568627655506135,\"g\":0.21568627655506135,\"b\":0.21568627655506135,\"a\":1.0}"}'
+    - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.3294117748737335,\"g\":0.8274509906768799,\"b\":0.5529412031173706,\"a\":1.0}"}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: eb607ff485c19b148a02e944264ac4f0, type: 3}

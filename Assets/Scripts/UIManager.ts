@@ -55,24 +55,8 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     private isTextCut: boolean;   // 텍스트 출력을 한번에 할지 결정
     private isTextEnd: boolean;   // 텍스트 출력이 끝났는지 확인
     
-    @SerializeField() private bookPanel: GameObject;
-    @SerializeField() private stampPanel: GameObject;
-    @SerializeField() private eventPanel: GameObject;
     @SerializeField() private helpPanel: GameObject;
 
-    private InitBookPanel(){
-        this.bookPanel.SetActive(true);
-        this.stampPanel.SetActive(false);
-        this.eventPanel.SetActive(false);
-    }
-    public OpenStampPanel(){
-        this.InitBookPanel();
-        this.stampPanel.SetActive(true);
-    }
-    public OpenEventPanel(){
-        this.InitBookPanel();
-        this.eventPanel.SetActive(true);
-    }
     public OpenHelpPanel(){
         this.helpPanel.SetActive(true);
     }

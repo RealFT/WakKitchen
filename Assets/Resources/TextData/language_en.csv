@@ -96,3 +96,4 @@ event_redeem_unlock,REDEEM!
 event_redeem_redeemed,REDEEMED
 event_title,Playtime Reward Event
 event_description,You will receive special rewards based on your total playtime in WAK BURGER!
+event_time_end,The event has ended.

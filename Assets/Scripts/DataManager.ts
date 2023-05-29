@@ -153,6 +153,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     Start() {
+        //const client: SandboxPlayer;
+        //const storage: DataStorage = client.loadDataStorage();
+
         // 사용 예시
         // const itemId = 'health_potion';
         // console.log(`Current ${itemId} count: ${this.getItemCount(itemId)}`);
@@ -178,13 +181,13 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public LoadData() {    
+        this.LoadAllLanguageData();
         this.LoadSavedStage();
         this.LoadCostData();
         this.LoadReceiptData();
         this.LoadStageData();
         this.LoadUnlockStageData();
         this.LoadCardData();
-        this.LoadAllLanguageData();
     }
 
     public LoadSavedStage() {
@@ -238,9 +241,26 @@ export default class DataManager extends ZepetoScriptBehaviour {
             // values[3]이 캐릭터이나, 현재 사용하지 않는 데이터.
             let customer = Math.floor(Math.random() * (Character.END - Character.START)) + Character.START;
             // 캐릭터 블락(임시)
-            if (customer == Character.FREETER || customer == Character.WAKGOOD) customer = Character.SOPHIA;
+            switch (customer) {
+                case Character.CHUNSIK:
+                case Character.NOSFERATUHODD:
+                    customer = Character.SOPHIA;
+                    break;
+                case Character.FREETER:
+                case Character.WAKGOOD:
+                    customer = Character.DANDAPBUG;
+                    break;
+                // 다른 Character 값들에 대한 처리...
+                default:
+                    // 기본 처리 로직
+                    break;
+            }
             // 도둑 캐릭터의 경우 price가 0
             if(customer == Character.SOPHIA) price = 0;
+            // 캐릭터에 맞는 언어 데이터 랜덤하게 가져오기
+            const randomIndex = Math.floor(Math.random() * 3 + 1);  // 1~3
+            const langCode = `receipts_${customer}_${randomIndex}`;
+            const langScript: string = DataManager.GetInstance().GetCurrentLanguageData(langCode);
             receipt.SetReceipt(+values[0], price, drink, side, customer, values[4], ingredients);
             this.receipts.push(receipt);
         };

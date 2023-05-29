@@ -1,9 +1,9 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, Object, Transform, PlayerPrefs } from 'UnityEngine';
 import { Button, Image } from "UnityEngine.UI";
-import DataManager from './DataManager';
-import UIManager from './UIManager';
-import SoundManager from './SoundManager';
+import DataManager from '../DataManager';
+import UIManager from '../UIManager';
+import SoundManager from '../SoundManager';
 import { TextMeshProUGUI } from 'TMPro';
 
 // Class for daily rewards
@@ -40,6 +40,7 @@ export default class DailyReward extends ZepetoScriptBehaviour {
 
         // Initailize wakdu stamp
         this.RefreshStamp();
+        this.CheckIfRewardClaimable();
     }
 
     private RefreshStamp(){
