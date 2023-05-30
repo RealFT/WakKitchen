@@ -49,6 +49,7 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
             this._room = room;
             this.InitMessageHandler();
         }
+
     }
 
     private InitMessageHandler() {

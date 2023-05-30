@@ -4,6 +4,8 @@ import { Image, Button, Text, Slider } from 'UnityEngine.UI'
 import { TextMeshProUGUI } from 'TMPro';
 import DataManager from '../DataManager';
 import SoundManager from '../SoundManager';
+import RedeemCodePanel from './RedeemCodePanel';
+import UIManager from '../UIManager';
 
 export default class EventSlot extends ZepetoScriptBehaviour {
     @SerializeField() private rewardImage: Image;   // 보상 이미지
@@ -18,8 +20,12 @@ export default class EventSlot extends ZepetoScriptBehaviour {
     @SerializeField() private redeemTimeText: TextMeshProUGUI;   // 보상 수령 시간 텍스트
     @SerializeField() private redeemButtonText: TextMeshProUGUI;   // 보상 수령 버튼 텍스트
     @SerializeField() private rewardIcon: Image;   // 슬라이더 보상 아이콘
+    @SerializeField() private redeemObj: GameObject;   // 슬라이더 보상 아이콘
+    private redeemPanel: RedeemCodePanel;   // redeem panel
     private unlockTime: number;  // 잠금 해제 시간
     public slotStatus: number; // 슬롯 상태 (0: "locked",1: "unlocked",2: "redeemed")
+    public isCode: boolean; // 코드 사용 여부
+    public redeemValue: string; // 보상 관련 값
 
     OnEnable(){
         this.SetSlotStatus(this.slotStatus);
@@ -29,13 +35,37 @@ export default class EventSlot extends ZepetoScriptBehaviour {
         this.redeemButton.onClick.AddListener(()=>{
             this.SetSlotStatus(2);
             SoundManager.GetInstance().OnPlaySFX("Purchase");
+            if(this.isCode){
+                //  Activate redeem panel
+                this.redeemPanel = this.redeemObj.GetComponent<RedeemCodePanel>();
+                this.redeemObj.SetActive(true);
+                this.redeemPanel.SetRedeemCode(this.redeemValue);
+            } else {
+                // Give normal item
+                this.GetNormalItem(+this.redeemValue);
+            }
         });
     }
 
-    public SetSlot(unlockTime: number) {
+    private GetNormalItem(rewardAmount: number){
+        if(rewardAmount == undefined) return;
+        // Grant the daily reward
+        let currentWakdu: number = DataManager.GetInstance().GetValue("wakdu");
+        currentWakdu += rewardAmount;
+        if(currentWakdu >= 12) {
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_stampfull"));
+            this.SetSlotStatus(1);
+            return;
+        }
+        DataManager.GetInstance().SetValue("wakdu", currentWakdu);
+    }
+
+    public SetSlot(unlockTime: number, hasCode: boolean, value: string) {
         this.SetSlotStatus(0);
         this.unlockTime = unlockTime;
         this.redeemTimeText.text = `${unlockTime}min`;
+        this.isCode = hasCode;
+        this.redeemValue = value;
     }
 
     // private Refresh
@@ -53,7 +83,9 @@ export default class EventSlot extends ZepetoScriptBehaviour {
 
     public SetSlotStatus(status: number){
         this.slotStatus = status;
-        switch(status){
+        // Status does not go to 2 if there is a redem code.
+        if(this.isCode && status == 2) this.slotStatus = 1;
+        switch(this.slotStatus){
             case 0:
                 // 잠긴 상태
                 this.redeemButton.image.color = this.redeemButtonColor;

@@ -1,9 +1,10 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Random, Sprite, Resources, TextAsset, PlayerPrefs, Application, SystemLanguage } from 'UnityEngine';
 import Receipt from './Receipt';
-import { GameObject, Debug } from 'UnityEngine';
+import { GameObject, Object, Debug } from 'UnityEngine';
 import CardData from './Employee/CardData';
-
+import { RoomData, Room } from "ZEPETO.Multiplay";
+import { ZepetoWorldMultiplay } from 'ZEPETO.World';
 export enum Grade {
     D = 0,
     C = 1,
@@ -145,7 +146,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
     private inventoryCache: Map<string, number> = new Map<string, number>();
 
     private lastSavedStage: number;      // last saved Day(Stage).
-
+    private _multiplay: ZepetoWorldMultiplay;
+    private _room: Room
+    
     Awake() {
         if (this != DataManager.GetInstance()) GameObject.Destroy(this.gameObject);
         this.SetAreaLangCode();
@@ -153,16 +156,41 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     Start() {
-        //const client: SandboxPlayer;
-        //const storage: DataStorage = client.loadDataStorage();
-
-        // 사용 예시
-        // const itemId = 'health_potion';
-        // console.log(`Current ${itemId} count: ${this.getItemCount(itemId)}`);
-        // this.addItem(itemId, 1);
-        // console.log(`Added 1 ${itemId}, now count: ${this.getItemCount(itemId)}`);
-        // const success = this.useItem(itemId,10);
-        // console.log(`Tried to use ${itemId}, success: ${success}, now count: ${this.getItemCount(itemId)}`);
+        this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+        this._multiplay.RoomJoined += (room: Room) => {
+            this._room = room;
+            this.InitMessageHandler();
+        }
+    }
+    private InitMessageHandler() {
+        this._room.AddMessageHandler("onGetStorageResult", (message) => {
+            // message가 data 처리
+            if(message == "") {
+                console.warn("no have data");
+                return;
+            }
+            console.log(message);
+        });
+        this.GetData("d");
+    }
+    public SetData(key: string, value: string) {
+        if(this._multiplay.Room == null){
+            console.warn("server disconnect");
+            return;
+        }
+        const data = new RoomData();
+        data.Add("key", key);
+        data.Add("value", value);
+        this._multiplay.Room?.Send("onSetStorage", data.GetObject());
+    }
+    public GetData(key: string) {
+        if(this._multiplay.Room == null){
+            console.warn("server disconnect");
+            return;
+        }
+        const data = new RoomData();
+        data.Add("key", key);
+        this._multiplay.Room?.Send("onGetStorage", data.GetObject());
     }
 
     // Returns the value of a given key from PlayerPrefs as an integer. 

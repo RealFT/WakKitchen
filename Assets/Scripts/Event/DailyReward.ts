@@ -113,6 +113,10 @@ export default class DailyReward extends ZepetoScriptBehaviour {
         if (isClaimable) {
             // Grant the daily reward
             let currentWakdu: number = DataManager.GetInstance().GetValue(this.wakduKey);
+            if(currentWakdu >= 12) {
+                UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_stampfull"));
+                return;
+            }
             currentWakdu += this.rewardAmount;
             DataManager.GetInstance().SetValue(this.wakduKey, currentWakdu);
 

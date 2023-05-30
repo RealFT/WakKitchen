@@ -93,8 +93,6 @@ export default class extends Sandbox {
         }
     }
 
-
-
     async GetStorage(client: SandboxPlayer, key: string) {
 
         try {
@@ -118,7 +116,6 @@ export default class extends Sandbox {
 
 
     async AddInventory(client: SandboxPlayer, productId: string, quantity: number) {
-
         try {
             const inventory = await loadInventory(client.userId);
             await inventory.add(productId, quantity);

@@ -28,7 +28,7 @@ export default class BookPanel extends ZepetoScriptBehaviour {
         });
         this.closeButton.onClick.AddListener(() => {
             this.bookPanel.SetActive(false);
-            SoundManager.GetInstance().OnPlayButtonClick();
+            SoundManager.GetInstance().OnPlayButtonSFX("Button_Close");
         });
         const event = this.eventPanel.GetComponent<EventTimer>();
         if (event.IsDateWithinRange()) {

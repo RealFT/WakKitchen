@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: d97e100c115e23449948333c3bae5574
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    DataManager_1 = require(\"../DataManager\");\r\nconst SoundManager_1 = require(\"../SoundManager\");\r\nclass
+    RedeemCodePanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
+    {\r\n        this.closeButton.onClick.AddListener(() => {\r\n            this.gameObject.SetActive(false);\r\n           
+    SoundManager_1.default.GetInstance().OnPlayButtonSFX(\"Button_Close\");\r\n       
+    });\r\n    }\r\n    OnEnable() {\r\n        this.RefreshText();\r\n    }\r\n   
+    RefreshText() {\r\n        this.mainText.text = DataManager_1.default.GetInstance().GetCurrentLanguageData(\"redeem_main\");\r\n       
+    this.infoText.text = DataManager_1.default.GetInstance().GetCurrentLanguageData(\"redeem_info\");\r\n   
+    }\r\n    SetRedeemCode(code) {\r\n        this.redeemCode.text = code;\r\n   
+    }\r\n}\r\nexports.default = RedeemCodePanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVkZWVtQ29kZVBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiUmVkZWVtQ29kZVBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBR3JELGdEQUF5QztBQUN6QyxrREFBMkM7QUFFM0MsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFNOUQsS0FBSztRQUNELElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFFLEVBQUU7WUFDckMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDakMsc0JBQVksQ0FBQyxXQUFXLEVBQUUsQ0FBQyxlQUFlLENBQUMsY0FBYyxDQUFDLENBQUM7UUFDL0QsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQsUUFBUTtRQUNKLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQztJQUN2QixDQUFDO0lBRU8sV0FBVztRQUNmLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxHQUFHLHFCQUFXLENBQUMsV0FBVyxFQUFFLENBQUMsc0JBQXNCLENBQUMsYUFBYSxDQUFDLENBQUM7UUFDckYsSUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEdBQUcscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxzQkFBc0IsQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUN6RixDQUFDO0lBRU0sYUFBYSxDQUFDLElBQVk7UUFDN0IsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO0lBQ2hDLENBQUM7Q0FDSjtBQXpCRCxrQ0F5QkMifQ==","assetPath":"Assets/Scripts/Event/RedeemCodePanel.ts","manifest":{"properties":[{"assembly":"Unity.TextMeshPro","name":"mainText","type":"TMPro.TextMeshProUGUI","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"Unity.TextMeshPro","name":"infoText","type":"TMPro.TextMeshProUGUI","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"Unity.TextMeshPro","name":"redeemCode","type":"TMPro.TMP_InputField","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"closeButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"RedeemCodePanel","description":""},"isCompiled":true}'
+  typescriptHash: 470f4fac62e0efa4e4c0012e89c85901
+  onlyWriteTrigger: 0

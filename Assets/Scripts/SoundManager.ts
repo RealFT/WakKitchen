@@ -219,7 +219,9 @@ export default class SoundManager extends ZepetoScriptBehaviour {
     public OnPlayButtonSelect(){
         this.OnPlayButtonSFX(this.keyBtnSelect);
     }
-
+    public OnPlayButtonClose(){
+        this.OnPlayButtonSFX("Button_Close");
+    }
     public StopSFX(){
         this.SFX.Stop();
     }

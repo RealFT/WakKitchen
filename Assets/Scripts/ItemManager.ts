@@ -85,6 +85,13 @@ export default class ItemManager extends ZepetoScriptBehaviour {
         ProductService.OnPurchaseFailed.AddListener((product, response) => {
             UIManager.GetInstance().OpenInformation(response.message);
         });
+
+        this._multiplay.RoomJoined += (room: Room) => {
+            room.AddMessageHandler("key", (message: string) => {
+                // Print server message
+                console.log(message);
+            });
+        }
     }
 
     private * LoadAllItems() {

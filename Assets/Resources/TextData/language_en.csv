@@ -90,6 +90,7 @@ info_dailygranted,Daily reward has been obtained.
 info_already_dailygranted,Already claimed the reward today.
 info_Invalid_recipe,No matching order for the recipe.
 info_require_section,You must select a section for your employee.
+info_stampfull,The stamp is full.
 event_time_next,Next reward
 event_redeem_locked,Lockes
 event_redeem_unlock,REDEEM!
@@ -97,3 +98,5 @@ event_redeem_redeemed,REDEEMED
 event_title,Playtime Reward Event
 event_description,You will receive special rewards based on your total playtime in WAK BURGER!
 event_time_end,The event has ended.
+redeem_main,Register Coupon Code
+redeem_info,"* ZEPETO Settings > Redeem Coupon to register.\* iOS users can register via the Feed URL of their ZDE account. (@zde_shop)"
