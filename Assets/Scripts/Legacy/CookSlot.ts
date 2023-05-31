@@ -9,10 +9,10 @@ export default class CookSlot extends ZepetoScriptBehaviour {
     public SetSlot(sprite: Sprite, text: string) {    
         this.productSlotBtn.image.sprite = sprite;
         this.productCountText.text = text;
-        this.SEtSlotVisivility(true);
+        this.SetSlotVisivility(true);
     }
 
-    public SEtSlotVisivility(value: boolean){
+    public SetSlotVisivility(value: boolean){
         this.productSlotBtn.image.enabled = value;
         this.productCountText.enabled = value;
     }
