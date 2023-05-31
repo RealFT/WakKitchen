@@ -118,4 +118,8 @@ export default class EventSlot extends ZepetoScriptBehaviour {
                 break;
         }
     }
+
+    public GetSlotStatus():number{
+        return this.slotStatus;
+    }
 }

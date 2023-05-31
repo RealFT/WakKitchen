@@ -28,6 +28,7 @@ TagManager:
   - CloseMyCard
   - OpenMyCard
   - BuyCard
+  - GetCard
   layers:
   - Default
   - TransparentFX
@@ -50,7 +51,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 

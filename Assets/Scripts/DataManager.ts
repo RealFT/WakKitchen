@@ -162,17 +162,27 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.InitMessageHandler();
         }
     }
-    private InitMessageHandler() {
+
+    private async InitMessageHandler() {
         this._room.AddMessageHandler("onGetStorageResult", (message) => {
             // message가 data 처리
             if(message == "") {
                 console.warn("no have data");
                 return;
             }
-            console.log(message);
+            // const result: string = message as string;
+            // const values = result.split('_');
+            // switch (values[0]) {
+            //     case "time":
+            //         break;
+            //     case "Stage":
+            //         break;
+            //     case "wakdu":
+            //         break;
+            // }
         });
-        this.GetData("d");
     }
+
     public SetData(key: string, value: string) {
         if(this._multiplay.Room == null){
             console.warn("server disconnect");
@@ -183,6 +193,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
         data.Add("value", value);
         this._multiplay.Room?.Send("onSetStorage", data.GetObject());
     }
+
     public GetData(key: string) {
         if(this._multiplay.Room == null){
             console.warn("server disconnect");

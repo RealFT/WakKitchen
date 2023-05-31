@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { GameObject, Color } from 'UnityEngine';
+import { GameObject, PlayerPrefs, Color } from 'UnityEngine';
 import { Image, Button, Text, Slider } from 'UnityEngine.UI'
 import { TextMeshProUGUI } from 'TMPro';
 import EventSlot from './EventSlot';
@@ -33,7 +33,8 @@ export default class EventTimer extends ZepetoScriptBehaviour {
     OnDestroy(){
         // 종료될 때 시점의 시간 저장
         DataManager.GetInstance().SetValue("time", this.elapsedTime);
-        //DataManager.GetInstance().SetValue("redeemedIndex", this.elapsedTime);
+        const redeemedIndex = `${this.eventSlots[0].GetSlotStatus()}_${this.eventSlots[1].GetSlotStatus()}_${this.eventSlots[2].GetSlotStatus()}_${this.eventSlots[3].GetSlotStatus()}_${this.eventSlots[4].GetSlotStatus()}`;
+        PlayerPrefs.SetString("redeemedIndex", redeemedIndex);
     }
 
     Start() {
@@ -59,7 +60,13 @@ export default class EventTimer extends ZepetoScriptBehaviour {
         this.eventSlots[3].SetSlot(45,false,"5");
         this.eventSlots[4].SetSlot(60,true,"CODE3");
 
-        //this.redeemedIndex = DataManager.GetInstance().GetValue("redeemedIndex");
+        const redeemed = PlayerPrefs.GetString("redeemedIndex");
+        const values = redeemed.split('_');
+        this.eventSlots[0].SetSlotStatus(+values[0]);
+        this.eventSlots[1].SetSlotStatus(+values[1]);
+        this.eventSlots[2].SetSlotStatus(+values[2]);
+        this.eventSlots[3].SetSlotStatus(+values[3]);
+        this.eventSlots[4].SetSlotStatus(+values[4]);
     }
 
     private StartTimer(): void {
@@ -92,10 +99,13 @@ export default class EventTimer extends ZepetoScriptBehaviour {
     private UpdateRemainingTime(): void {
         let remainingTime: number;
     
+        // 첫 5분
         if (this.elapsedTime <= this.firstRewardDelay) {
             remainingTime = this.firstRewardDelay - this.elapsedTime;
-        } else {
-            const timeSinceLastReward: number = (this.elapsedTime - this.firstRewardDelay) % this.rewardInterval;
+        } 
+        // 15분
+        else {
+            const timeSinceLastReward: number = this.elapsedTime % this.rewardInterval;
             remainingTime = this.rewardInterval - timeSinceLastReward;
         }
     
