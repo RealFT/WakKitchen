@@ -117,7 +117,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
     
     private CompareGrades(gradeA: string | undefined, gradeB: string | undefined): number {
         // Define grade order (from high to low)
-        const gradeOrder = { s: 4, a: 3, b: 2, c: 1, d: 0 };
+        const gradeOrder = { s: 0, a: 1, b: 2, c: 3, d: 4 };
 
         // Compare grades using the grade order
         if (gradeA && gradeB) {

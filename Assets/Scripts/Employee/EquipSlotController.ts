@@ -92,7 +92,7 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
 
     // Checks if all equipment slots are selected.
     public CheckSlots(): boolean {
-        for (let i = 0; i < this.equipSlots.Length; i++) {
+        for (let i = 0; i < this.equipSlots.length; i++) {
             // Check only unlocked slots,
             // If any equipped slot is not selected, return false.
             if (!this.equipSlots[i].IsLocked() &&
@@ -106,7 +106,7 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
     }
 
     public IsEmpty(): boolean {
-        for (let i = 0; i < this.equipSlots.Length; i++) {
+        for (let i = 0; i < this.equipSlots.length; i++) {
             if (!this.equipSlots[i].IsLocked() &&
                 !this.equipSlots[i].IsEquip() &&
                 !this.equipSlots[i].IsSelected()) {
@@ -117,7 +117,7 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
     }
 
     public ClearSlots(){
-        for (let i = 0; i < this.equipSlots.Length; i++) {
+        for (let i = 0; i < this.equipSlots.length; i++) {
             this.equipSlots[i].InitSlot();
         }
     }

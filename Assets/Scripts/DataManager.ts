@@ -262,6 +262,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
             const values = line.split(','); // split the row by comma to get the values
             
+
+
             // do something with the values
             const receipt = new Receipt();
             let price = 0;
@@ -287,11 +289,18 @@ export default class DataManager extends ZepetoScriptBehaviour {
                     break;
                 case Character.FREETER:
                 case Character.WAKGOOD:
-                    customer = Character.DANDAPBUG;
+                case Character.DANDAPBUG:
+                    customer = Character.HYEJI;
                     break;
                 // 다른 Character 값들에 대한 처리...
                 default:
                     // 기본 처리 로직
+                    break;
+            }
+            switch(+values[0]){
+                // 치즈만 있는 레시피들은 전부 단답벌레로 변경
+                case 0:
+                    customer = Character.DANDAPBUG;
                     break;
             }
             // 도둑 캐릭터의 경우 price가 0
@@ -299,8 +308,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             // 캐릭터에 맞는 언어 데이터 랜덤하게 가져오기
             const randomIndex = Math.floor(Math.random() * 3 + 1);  // 1~3
             const langCode = `receipts_${customer}_${randomIndex}`;
-            const langScript: string = DataManager.GetInstance().GetCurrentLanguageData(langCode);
-            receipt.SetReceipt(+values[0], price, drink, side, customer, values[4], ingredients);
+            receipt.SetReceipt(+values[0], price, drink, side, customer, langCode, ingredients);
             this.receipts.push(receipt);
         };
     }

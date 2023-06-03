@@ -144,7 +144,7 @@ export default class SoundManager extends ZepetoScriptBehaviour {
 
         // Set the clip for the specified key
         this.BGM.clip = this.BGMMap.get(key);
-
+        this.BGM.loop = true;
         // Only play if music clip exists
         if (!this.BGM.isPlaying) this.BGM.Play();
     }

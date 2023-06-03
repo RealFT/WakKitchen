@@ -196,7 +196,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
 
         const drinkSprite = DataManager.GetInstance().getDrinkSprite(receipt.drink);
         const sideSprite = DataManager.GetInstance().getSideSprite(receipt.side);
-        const additionalOrder = receipt.additionalOrder;
+        const additionalOrder = DataManager.GetInstance().GetCurrentLanguageData(receipt.langCode);
         const cost = receipt.pay.toString();
         const characterSprite = DataManager.GetInstance().GetCharacterSprite(receipt.character);
 

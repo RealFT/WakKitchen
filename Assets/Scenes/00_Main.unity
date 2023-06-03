@@ -17218,6 +17218,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081952148}
   m_CullTransparentMesh: 1
+--- !u!114 &1090194142 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7225229892066049892, guid: f998a15c200783c409447dace822dfce, type: 3}
+  m_PrefabInstance: {fileID: 6459788421356596998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1095398942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20677,6 +20688,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318952824}
   m_CullTransparentMesh: 1
+--- !u!114 &1328962613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6459788422854708070, guid: f998a15c200783c409447dace822dfce, type: 3}
+  m_PrefabInstance: {fileID: 6459788421356596998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1340778852
 GameObject:
   m_ObjectHideFlags: 0
@@ -27449,6 +27471,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801555669}
   m_CullTransparentMesh: 1
+--- !u!114 &1810367065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6459788421823973344, guid: f998a15c200783c409447dace822dfce, type: 3}
+  m_PrefabInstance: {fileID: 6459788421356596998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1811574178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31240,7 +31273,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -38528,9 +38561,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.keys.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.values.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.keys.Array.data[5]
+      value: customerImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.keys.Array.data[6]
+      value: priceText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.keys.Array.data[7]
+      value: langDialogueText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.keys.Array.data[8]
+      value: langDialogueText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.unityValues.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.unityValues.Array.data[5]
+      value: 
+      objectReference: {fileID: 1328962613}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.unityValues.Array.data[6]
+      value: 
+      objectReference: {fileID: 1090194142}
+    - target: {fileID: 6459788421411680295, guid: f998a15c200783c409447dace822dfce, type: 3}
+      propertyPath: script.unityValues.Array.data[7]
+      value: 
+      objectReference: {fileID: 1810367065}
     - target: {fileID: 6459788421823973346, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_Name
-      value: Discription
+      value: Dialogue
       objectReference: {fileID: 0}
     - target: {fileID: 6459788421823973346, guid: f998a15c200783c409447dace822dfce, type: 3}
       propertyPath: m_IsActive

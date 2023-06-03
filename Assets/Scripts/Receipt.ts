@@ -8,7 +8,7 @@ export default class Receipt extends ZepetoScriptBehaviour {
     private _drink: number;
     private _side: number;
     private _character: number;
-    private _additionalOrder: string;
+    private _langCode: string;
     private _ingredients: number[];
 
     public get id(): number {
@@ -31,22 +31,22 @@ export default class Receipt extends ZepetoScriptBehaviour {
         return this._character;
     }
 
-    public get additionalOrder(): string {
-        return this._additionalOrder;
+    public get langCode(): string {
+        return this._langCode;
     }
 
     public get ingredients(): number[] {
         return this._ingredients;
     }
 
-    SetReceipt(id: number, pay: number, drink: number, side: number, character: number, additionalOrder: string, ingredients: number[]){
+    SetReceipt(id: number, pay: number, drink: number, side: number, character: number, langCode: string, ingredients: number[]){
         this._id = id;
         this._pay = pay;
         this._ingredients = ingredients;
         this._drink = drink;
         this._side = side;
         this._character = character;
-        this._additionalOrder = additionalOrder;
+        this._langCode = langCode;
     }
 
     compareReceipt(drink: number, side: number, ingredients: number[]) {
