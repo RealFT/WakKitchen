@@ -28209,7 +28209,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 320}
+  m_SizeDelta: {x: 660, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683657054
 MonoBehaviour:
@@ -28233,7 +28233,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Planning/Development: \uD478\uC9D0\uD55C\uC9D1\r\n2D Resource/Character
     Art: \uB9AC\uC5BC\uD050\r\n3D Modeling: TAEO\r\nUI/UX Design: TAEO\r\nSound:
-    TAEO"
+    TAEO\nGrill Alarm Sound Author: Lordomi"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d0aa727adc5a0c45b8fb2a6851c96a6, type: 2}
   m_sharedMaterial: {fileID: -423539565272073665, guid: 4d0aa727adc5a0c45b8fb2a6851c96a6, type: 2}

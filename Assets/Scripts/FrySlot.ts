@@ -142,6 +142,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.collectButton.interactable = true;
         this.collectButton.onClick.RemoveAllListeners();
         this.collectButton.onClick.AddListener(() => { this.ClearFry(); });
+        this.StopBakeTimerSFX();
     }
 
     private ClearFry() {
@@ -155,6 +156,7 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.collectButton.gameObject.SetActive(false);
         this.frySlider.gameObject.SetActive(false);
         this.onWorkStateChanged?.(true);
+        this.StopBakeTimerSFX();
     }
 
     public GetBakeLevel(): number {
@@ -175,5 +177,9 @@ export default class FrySlot extends ZepetoScriptBehaviour implements IListener 
         this.bakeTimerSFX.volume = SoundManager.GetInstance().SFXSoundVolume;
         this.bakeTimerSFX.mute = SoundManager.GetInstance().SFXSoundMute;
         this.bakeTimerSFX.Play();
+    }
+
+    private StopBakeTimerSFX(){
+        this.bakeTimerSFX.Stop();
     }
 }

@@ -81,7 +81,7 @@ export default class Interaction_Fry extends InteractionBase implements IListene
     }
 
     private PlayBakeLevelSFX(){
-        if(GameManager.GetInstance().isInGame) return;
+        if(!GameManager.GetInstance().isInGame) return;
         let maxBakeLevel = 0;
         this.frySlotObjects.forEach((slotObj) => {
             let slot = slotObj.GetComponent<FrySlot>();

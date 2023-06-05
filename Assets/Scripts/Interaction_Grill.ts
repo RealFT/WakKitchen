@@ -100,7 +100,7 @@ export default class Interaction_Grill extends InteractionBase implements IListe
     }
 
     private PlayBakeLevelSFX(){
-        if(GameManager.GetInstance().isInGame) return;
+        if(!GameManager.GetInstance().isInGame) return;
         let maxBakeLevel = 0;
         this.grillSlotObjects.forEach((slotObj) => {
             let slot = slotObj.GetComponent<GrillSlot>();

@@ -137,6 +137,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.currentTime = 0;
         this.bakingButton.interactable = false;
         this.bakingButton.image.sprite = this.bakedPattySprite;
+        this.StopBakeTimerSFX();
     }
 
     private StopBaking() {
@@ -144,6 +145,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.bakingButton.interactable = true;
         this.bakingButton.onClick.RemoveAllListeners();
         this.bakingButton.onClick.AddListener(() => { this.ClearGrill(); });
+        this.StopBakeTimerSFX();
     }
 
     private ClearGrill() {
@@ -158,6 +160,7 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.bakeLevel = 0;
         this.onBakeLevelChanged?.(this.bakeLevel);
         this.onWorkStateChanged?.(true);
+        this.StopBakeTimerSFX();
     }
 
     public GetBakeLevel(): number {
@@ -182,5 +185,9 @@ export default class GrillSlot extends ZepetoScriptBehaviour implements IListene
         this.bakeTimerSFX.volume = SoundManager.GetInstance().SFXSoundVolume;
         this.bakeTimerSFX.mute = SoundManager.GetInstance().SFXSoundMute;
         this.bakeTimerSFX.Play();
+    }
+
+    private StopBakeTimerSFX(){
+        this.bakeTimerSFX.Stop();
     }
 }
