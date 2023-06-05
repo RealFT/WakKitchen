@@ -261,14 +261,12 @@ export default class DataManager extends ZepetoScriptBehaviour {
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim().replace('\r', ''); // Remove any leading/trailing whitespace and '\r' characters
             const values = line.split(','); // split the row by comma to get the values
-            
-
 
             // do something with the values
             const receipt = new Receipt();
             let price = 0;
             const ingredients: number[] = [];
-            for (let j = 5; j < values.length; j++) {
+            for (let j = 3; j < values.length; j++) {
                 ingredients.push(+values[j]);
                 price += this.costs.get(+values[j]);
             }
@@ -338,6 +336,25 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
     }
 
+    public SetStageReceipts(stageIndex: number) {
+        // 길이가 충분하다면, 더이상 반복작업을 하지 않는다.
+        if(this.stageReceipts.length >= 316) return;
+        this.stageReceipts = [];
+        // 최대 인덱스에 도달했을 경우, 데이터 길이가 1이다.
+        // 이 값은 최대 레시피 개수가 기록된다.
+        if (this.stages.length <= stageIndex) {
+            // 이제부터 모든 레시피를 등록
+            const maxStage = this.stages.length - 1;
+            for (let index = 0; index <= this.stages[maxStage][0]; index++) {
+                this.stageReceipts.push(this.GetReceipt(index));
+            }
+        }
+        else {
+            for (let index = 0; index < this.stages[stageIndex].length; index++) {
+                this.stageReceipts.push(this.GetReceipt(this.stages[stageIndex][index]));
+            }
+        }
+    }
     // ----------- Language -------------
     public LoadAllLanguageData() {
         if(PlayerPrefs.HasKey("Language")){
@@ -519,14 +536,6 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     public GetInventoryCache(): Map<string, number> {
         return this.inventoryCache;
-    }
-
-    public SetStageReceipts(stage: number) {
-        this.stageReceipts = [];
-        // const maxStage = stage >= this.stages.length ? this.stages.length - 1 : stage;
-        for (let index = 0; index < this.stages[stage].length; index++) {
-            this.stageReceipts.push(this.GetReceipt(this.stages[stage][index]));
-        }
     }
 
     public GetRandomStageReceipt(): Receipt {
