@@ -60,13 +60,13 @@ MonoBehaviour:
     - slicedEffect
     unityValues:
     - {fileID: 7371048410785847753}
-    - {fileID: 0}
+    - {fileID: 21300000, guid: e346d11c193db5d4e9c1044874a9093a, type: 3}
     - {fileID: 0}
     - {fileID: 5270486981314202842}
     values:
     - 
     - 
-    - 
+    - '{"type":"System.String, mscorlib","value":"1"}'
     - 
     unityArrayValues: []
     arrayValues: []

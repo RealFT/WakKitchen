@@ -76,6 +76,13 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
         }
     }
 
+    public GainDebugBalance() {
+        const data = new RoomData();
+        data.Add("currencyId", "wak");
+        data.Add("quantity", 10000);
+        this._multiplay.Room?.Send("onCredit", data.GetObject());
+    }
+
     public GainBalance(currencyId: string, quantity: number) {
         const data = new RoomData();
         data.Add("currencyId", currencyId);
