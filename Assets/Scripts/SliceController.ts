@@ -58,7 +58,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         this.SlcieUnlock(upgradedlevel);
 
         // Start the coroutine that shoots the projectiles
-        this.StartCoroutine(this.ShootSlicables());
+        //this.StartCoroutine(this.ShootSlicables());
         Mediator.GetInstance().RegisterListener(this);
     }
 
@@ -104,6 +104,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         while (true) {
             // Instantiate a new slicableObj
             let slicableObj = this.GetSlicable().gameObject;
+            yield null;
             const spawnX = Random.Range(this.leftSpawnPos.position.x, this.rightSpawnPos.position.x);
             slicableObj.transform.position = this.leftSpawnPos.position + new Vector3(spawnX, 0, 0);
             slicableObj.SetActive(true);
@@ -151,6 +152,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         for (let i = 0; i < this.slicableItemsPool.length; i++) {
             if(!this.slicableItemsPool[i].gameObject.activeSelf) continue;
             const slicable = this.slicableItemsPool[i];
+            if(slicable.GetSlicedSprite() == undefined) continue;
             let screenPos = slicable.transform.position;
             let size = slicable.GetComponent<RectTransform>().sizeDelta;
             let imageRect: Rect = new Rect(screenPos.x, screenPos.y, size.x, size.y);

@@ -18,51 +18,52 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
-    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst CardData_1 = require(\"./CardData\");\r\nconst
-    EmployeeSlot_1 = require(\"./EmployeeSlot\");\r\nconst Mediator_1 = require(\"../Notification/Mediator\");\r\nclass
-    EmployeeManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
-    {\r\n        super(...arguments);\r\n        this.employeeSlots = [];\r\n       
-    this.cardDataWithSectionArray = [];\r\n        this.employeeHeadCount = 0;\r\n   
-    }\r\n    static GetInstance() {\r\n        if (!EmployeeManager.Instance) {\r\n           
-    var _obj = UnityEngine_1.GameObject.Find(\"EmployeeManager\");\r\n           
-    if (!_obj) {\r\n                _obj = new UnityEngine_1.GameObject(\"EmployeeManager\");\r\n               
-    _obj.AddComponent($typeof(EmployeeManager));\r\n            }\r\n           
-    EmployeeManager.Instance = _obj.GetComponent($typeof(EmployeeManager));\r\n           
-    UnityEngine_1.GameObject.DontDestroyOnLoad(_obj);\r\n        }\r\n        return
-    EmployeeManager.Instance;\r\n    }\r\n    Awake() {\r\n        if (this != EmployeeManager.GetInstance())\r\n           
-    UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n    }\r\n    Start() {\r\n       
-    // var employees = this.employeeSlotContent.GetComponentsInChildren<EmployeeSlot>(true);
-    \r\n        // for (let index = 0; index < this.employeeSlots.length; index++)
-    {\r\n        //     this.employeeSlots[index] = employees[index];\r\n       
-    //     console.log(employees[index]);\r\n        // }\r\n        Mediator_1.default.GetInstance().RegisterListener(this);\r\n   
-    }\r\n    OnDestroy() {\r\n        Mediator_1.default.GetInstance().UnregisterListener(this);\r\n   
-    }\r\n    StartEmployee() {\r\n        this.employeeHeadCount = 0;\r\n       
-    this.employeeSlots.forEach((slot) => {\r\n            slot.gameObject.SetActive(false);\r\n       
-    });\r\n        this.cardDataWithSectionArray.forEach((data) => {\r\n           
-    if (data.cardData)\r\n                this.CreateEmployeeSlot(data.cardData,
-    data.section);\r\n        });\r\n        this.employeeSlots.forEach((slot) =>
-    {\r\n            if (slot.IsRegistered()) {\r\n                slot.StartWorking();\r\n               
-    this.employeeHeadCount++;\r\n            }\r\n        });\r\n    }\r\n    OnNotify(sender,
-    eventName, eventData) {\r\n        if (!this.gameObject.activeSelf)\r\n           
-    return;\r\n        switch (eventName) {\r\n            case Mediator_1.EventNames.StageStarted:\r\n               
-    //this.StartEmployee();\r\n                break;\r\n            case Mediator_1.EventNames.StageEnded:\r\n               
-    this.employeeSlots.forEach((slot) => {\r\n                    slot.Init();\r\n                   
-    slot.gameObject.SetActive(false);\r\n                });\r\n                this.cardDataWithSectionArray
-    = [];\r\n                break;\r\n        }\r\n    }\r\n    CreateEmployeeSlot(cardData,
-    section) {\r\n        let slot;\r\n        const inactiveSlotIndex = this.employeeSlots.findIndex(s
-    => !s.gameObject.activeSelf);\r\n        if (inactiveSlotIndex !== -1) { // reuse
-    inactive slot\r\n            slot = this.employeeSlots[inactiveSlotIndex];\r\n           
-    slot.gameObject.SetActive(true);\r\n        }\r\n        else { // instantiate
-    new slot\r\n            const cardObj = UnityEngine_1.Object.Instantiate(this.employeeSlotPrefab,
-    this.employeeSlotContent.transform);\r\n            slot = cardObj.GetComponent($typeof(EmployeeSlot_1.default));\r\n           
-    this.employeeSlots.push(slot);\r\n        }\r\n        slot.SetEmployee(cardData,
-    section);\r\n        slot.gameObject.SetActive(true);\r\n    }\r\n    RegisterCardBySlotIndex(slotIndex,
-    cardData, section) {\r\n        this.cardDataWithSectionArray[slotIndex] = {
-    cardData, section };\r\n    }\r\n    UnregisterCard(slotIndex) {\r\n        this.cardDataWithSectionArray[slotIndex]
-    = { cardData: null, section: null };\r\n    }\r\n    GetTotalEmployeePay() {\r\n       
-    return this.employeeHeadCount * 100;\r\n    }\r\n}\r\nexports.default = EmployeeManager;\r\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRW1wbG95ZWVNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRW1wbG95ZWVNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWlEO0FBQ2pELGlEQUFxRDtBQUNyRCx5Q0FBa0M7QUFDbEMsaURBQTBDO0FBQzFDLHVEQUEyRTtBQU0zRSxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQUFsRTs7UUFtQlksa0JBQWEsR0FBbUIsRUFBRSxDQUFDO1FBQ25DLDZCQUF3QixHQUEwQixFQUFFLENBQUM7UUFDckQsc0JBQWlCLEdBQVcsQ0FBQyxDQUFDO0lBNkUxQyxDQUFDO0lBL0ZVLE1BQU0sQ0FBQyxXQUFXO1FBQ3JCLElBQUksQ0FBQyxlQUFlLENBQUMsUUFBUSxFQUFFO1lBRTNCLElBQUksSUFBSSxHQUFHLHdCQUFVLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLENBQUM7WUFDOUMsSUFBSSxDQUFDLElBQUksRUFBRTtnQkFDUCxJQUFJLEdBQUcsSUFBSSx3QkFBVSxDQUFDLGlCQUFpQixDQUFDLENBQUM7Z0JBQ3pDLElBQUksQ0FBQyxZQUFZLFNBQUMsZUFBZSxHQUFJO2FBQ3hDO1lBQ0QsZUFBZSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLGVBQWUsRUFBRyxDQUFDO1lBQ2hFLHdCQUFVLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDdEM7UUFDRCxPQUFPLGVBQWUsQ0FBQyxRQUFRLENBQUM7SUFDcEMsQ0FBQztJQVFELEtBQUs7UUFDRCxJQUFJLElBQUksSUFBSSxlQUFlLENBQUMsV0FBVyxFQUFFO1lBQUUsd0JBQVUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQ25GLENBQUM7SUFFRCxLQUFLO1FBQ0QseUZBQXlGO1FBQ3pGLG9FQUFvRTtRQUNwRSxvREFBb0Q7UUFDcEQscUNBQXFDO1FBQ3JDLElBQUk7UUFDSixrQkFBUSxDQUFDLFdB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","assetPath":"Assets/Scripts/Employee/EmployeeManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"employeeSlotContent","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"employeeSlotPrefab","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"EmployeeManager","description":""},"isCompiled":true}'
-  typescriptHash: 934fa01d5fe015e505d2fe6ecfd1f2d1
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst CardData_1 = require(\\\"./CardData\\\");\\r\\nconst
+    EmployeeSlot_1 = require(\\\"./EmployeeSlot\\\");\\r\\nconst Mediator_1 = require(\\\"../Notification/Mediator\\\");\\r\\nconst
+    DataManager_1 = require(\\\"../DataManager\\\");\\r\\nclass EmployeeManager extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.employeeSlots = [];\\r\\n        this.cardDataWithSectionArray
+    = [];\\r\\n        this.employeeHeadCount = 0;\\r\\n    }\\r\\n    static GetInstance()
+    {\\r\\n        if (!EmployeeManager.Instance) {\\r\\n            var _obj = UnityEngine_1.GameObject.Find(\\\"EmployeeManager\\\");\\r\\n           
+    if (!_obj) {\\r\\n                _obj = new UnityEngine_1.GameObject(\\\"EmployeeManager\\\");\\r\\n               
+    _obj.AddComponent($typeof(EmployeeManager));\\r\\n            }\\r\\n           
+    EmployeeManager.Instance = _obj.GetComponent($typeof(EmployeeManager));\\r\\n           
+    UnityEngine_1.GameObject.DontDestroyOnLoad(_obj);\\r\\n        }\\r\\n       
+    return EmployeeManager.Instance;\\r\\n    }\\r\\n    Awake() {\\r\\n        if
+    (this != EmployeeManager.GetInstance())\\r\\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\\r\\n   
+    }\\r\\n    Start() {\\r\\n        Mediator_1.default.GetInstance().RegisterListener(this);\\r\\n   
+    }\\r\\n    OnDestroy() {\\r\\n        Mediator_1.default.GetInstance().UnregisterListener(this);\\r\\n   
+    }\\r\\n    StartEmployee() {\\r\\n        this.employeeHeadCount = 0;\\r\\n       
+    this.employeeSlots.forEach((slot) => {\\r\\n            slot.gameObject.SetActive(false);\\r\\n       
+    });\\r\\n        this.cardDataWithSectionArray.forEach((data) => {\\r\\n           
+    if (data.cardData)\\r\\n                this.CreateEmployeeSlot(data.cardData,
+    data.section);\\r\\n        });\\r\\n        this.employeeSlots.forEach((slot)
+    => {\\r\\n            if (slot.IsRegistered()) {\\r\\n                slot.StartWorking();\\r\\n               
+    this.employeeHeadCount++;\\r\\n            }\\r\\n        });\\r\\n    }\\r\\n   
+    OnNotify(sender, eventName, eventData) {\\r\\n        if (!this.gameObject.activeSelf)\\r\\n           
+    return;\\r\\n        switch (eventName) {\\r\\n            case Mediator_1.EventNames.StageStarted:\\r\\n               
+    //this.StartEmployee();\\r\\n                break;\\r\\n            case Mediator_1.EventNames.StageEnded:\\r\\n               
+    this.employeeSlots.forEach((slot) => {\\r\\n                    slot.Init();\\r\\n                   
+    slot.gameObject.SetActive(false);\\r\\n                });\\r\\n               
+    break;\\r\\n        }\\r\\n    }\\r\\n    CreateEmployeeSlot(cardData, section)
+    {\\r\\n        let slot;\\r\\n        const inactiveSlotIndex = this.employeeSlots.findIndex(s
+    => !s.gameObject.activeSelf);\\r\\n        if (inactiveSlotIndex !== -1) { //
+    reuse inactive slot\\r\\n            slot = this.employeeSlots[inactiveSlotIndex];\\r\\n           
+    slot.gameObject.SetActive(true);\\r\\n        }\\r\\n        else { // instantiate
+    new slot\\r\\n            const cardObj = UnityEngine_1.Object.Instantiate(this.employeeSlotPrefab,
+    this.employeeSlotContent.transform);\\r\\n            slot = cardObj.GetComponent($typeof(EmployeeSlot_1.default));\\r\\n           
+    this.employeeSlots.push(slot);\\r\\n        }\\r\\n        slot.SetEmployee(cardData,
+    section);\\r\\n        slot.gameObject.SetActive(true);\\r\\n    }\\r\\n    RegisterCardBySlotIndex(slotIndex,
+    cardData, section) {\\r\\n        this.cardDataWithSectionArray[slotIndex] =
+    { cardData, section };\\r\\n        // \uAE30\uBCF8\uAC12\uC774 0 \uC774\uBBC0\uB85C
+    \uC778\uB371\uC2A4\uAC00 0\uC77C \uACBD\uC6B0\uB97C \uB300\uBE44\uD574 +1 \uB85C
+    \uC800\uC7A5.\\r\\n        // \uAC12\uC744 \uAC00\uC838\uC62C \uB54C -1 \uC5F0\uC0B0
+    \uD544\uC694\\r\\n        DataManager_1.default.GetInstance().SetValue(`EquipSlot_Section_${slotIndex}`,
+    section + 1);\\r\\n    }\\r\\n    UnregisterCard(slotIndex) {\\r\\n        this.cardDataWithSectionArray[slotIndex]
+    = { cardData: null, section: null };\\r\\n        DataManager_1.default.GetInstance().SetValue(`EquipSlot_Section_${slotIndex}`,
+    0);\\r\\n    }\\r\\n    GetTotalEmployeePay() {\\r\\n        return this.employeeHeadCount
+    * 100;\\r\\n    }\\r\\n}\\r\\nexports.default = EmployeeManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRW1wbG95ZWVNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRW1wbG95ZWVNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWlEO0FBQ2pELGlEQUFxRDtBQUNyRCx5Q0FBa0M7QUFDbEMsaURBQTBDO0FBQzFDLHVEQUEyRTtBQUMzRSxnREFBeUM7QUFNekMsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFBbEU7O1FBbUJZLGtCQUFhLEdBQW1CLEVBQUUsQ0FBQztRQUNuQyw2QkFBd0IsR0FBMEIsRUFBRSxDQUFDO1FBQ3JELHNCQUFpQixHQUFXLENBQUMsQ0FBQztJQTJFMUMsQ0FBQztJQTdGVSxNQUFNLENBQUMsV0FBVztRQUNyQixJQUFJLENBQUMsZUFBZSxDQUFDLFFBQVEsRUFBRTtZQUUzQixJQUFJLElBQUksR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1lBQzlDLElBQUksQ0FBQyxJQUFJLEVBQUU7Z0JBQ1AsSUFBSSxHQUFHLElBQUksd0JBQVUsQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO2dCQUN6QyxJQUFJLENBQUMsWUFBWSxTQUFDLGVBQWUsR0FBSTthQUN4QztZQUNELGVBQWUsQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyxlQUFlLEVBQUcsQ0FBQztZQUNoRSx3QkFBVSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ3RDO1FBQ0QsT0FBTyxlQUFlLENBQUMsUUFBUSxDQUFDO0lBQ3BDLENBQUM7SUFRRCxLQUFLO1FBQ0QsSUFBSSxJQUFJLElBQUksZUFBZSxDQUFDLFdBQVcsRUFBRTtZQUFFLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUNuRixDQUFDO0lBRUQsS0FBSztRQUNELGtCQUFRLENBQUMsV0FBVyxFQUFFLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEQsQ0FB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\",\"assetPath\":\"Assets/Scripts/Employee/EmployeeManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"employeeSlotContent\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"employeeSlotPrefab\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"EmployeeManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 50600e8950acdf81d4c6b600ac6205d6
   onlyWriteTrigger: 0

@@ -43,6 +43,9 @@ export default class Slicable extends ZepetoScriptBehaviour {
     public GetSlicableImage(): Image {
         return this.originImage;
     }
+    public GetSlicedSprite(): Sprite {
+        return this.slicedSprite;
+    }
     public GetIngredient(): Ingredient {
         return this.ingredient;
     }

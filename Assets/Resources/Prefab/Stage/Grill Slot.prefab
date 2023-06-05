@@ -215,8 +215,8 @@ MonoBehaviour:
     - 
     - 
     - 
-    - '{"type":"System.Single, mscorlib","value":"2.82"}'
-    - '{"type":"System.Single, mscorlib","value":"6"}'
+    - '{"type":"System.Single, mscorlib","value":"2"}'
+    - '{"type":"System.Single, mscorlib","value":"4.2"}'
     - 
     - 
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.9254902005195618,\"g\":0.7450980544090271,\"b\":0.2666666805744171,\"a\":1.0}"}'

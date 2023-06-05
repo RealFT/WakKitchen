@@ -18,6 +18,7 @@ shop_employee_category,Employee
 shop_employee_buy,Buy
 shop_upgrade_category,Upgrade
 shop_upgrade_buy,Buy
+panel_empty,There is an empty slot.\Continue?
 panel_daily,We give you a stamp every day! You can double your incomes with stamps!
 tutorial_start_ment1,"Hello! I'm Panchi, here to help you with your shop operation!"
 tutorial_start_ment2,Press the Play button to move to the shop!
@@ -97,6 +98,7 @@ event_redeem_unlock,REDEEM!
 event_redeem_redeemed,REDEEMED
 event_title,Playtime Reward Event
 event_description,You will receive special rewards based on your total playtime in WAK BURGER!
+event_clear,Event clear!
 event_time_end,The event has ended.
 redeem_main,Register Coupon Code
 redeem_info,"* ZEPETO Settings > Redeem Coupon to register.\* iOS users can register via the Feed URL of their ZDE account. (@zde_shop)"

@@ -29,8 +29,8 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     @SerializeField() private completeColor: Color;
 
     private slotIndex: number;
-    private isEquip: boolean = false;
-    private isSelectSection: boolean = false;
+    private isEquip: boolean;
+    private isSelectSection: boolean;
     private isLocked: boolean = true;
     private equippedCardData: CardData;
 
@@ -52,7 +52,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
                 SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnEquip);
             });
         }
-        this.InitSlot();
+        //this.InitSlot();
         //this.Lock();
     }
 
@@ -63,6 +63,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.selectSectionOpenToggle.interactable = false;
         this.characterImage.color = new Color(1, 1, 1, 0);
         this.isEquip = false;
+        this.isSelectSection = false;
         this.infoText.text = "Empty";
         this.infoText.color = this.emptyColor;
         EmployeeManager.GetInstance().UnregisterCard(this.slotIndex);
@@ -81,7 +82,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.isLocked = false;
     }
 
-    private SelectSection(sprite : Sprite, sectionIndex: number){
+    public SelectSection(sprite : Sprite, sectionIndex: number){
         EmployeeManager.GetInstance().RegisterCardBySlotIndex(this.slotIndex, this.equippedCardData, sectionIndex);
         console.log("SelectSection: " +   this.slotIndex);
         this.selectedSectionImage.sprite = sprite;
@@ -109,6 +110,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.infoText.color = this.selectColor;
         this.isSelectSection = false;
         DataManager.GetInstance().UseCard(this.equippedCardData.GetCardId(), 1);
+        DataManager.GetInstance().SetStrValue(`EquipSlot_${slotIndex}`, cardData.GetCardId());
     }
 
     public UnEquipCard(){
@@ -124,6 +126,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
         this.infoText.text = "Empty";
         this.infoText.color = this.emptyColor;
         this.isSelectSection = false;
+        DataManager.GetInstance().SetStrValue(`EquipSlot_${this.slotIndex}`, "");
         Mediator.GetInstance().Notify(this, EventNames.InventoryUpdated, null);
     }
 
@@ -132,7 +135,7 @@ export default class EquipSlot extends ZepetoScriptBehaviour {
     }
 
     public IsEquip(): boolean{
-        return this.isEquip || this.isLocked;
+        return this.isEquip;
     }
     public IsSelected(): boolean{
         return this.isEquip && this.isSelectSection;

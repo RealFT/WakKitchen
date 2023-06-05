@@ -213,11 +213,23 @@ export default class DataManager extends ZepetoScriptBehaviour {
             return 0;
         }
     }
+    public GetStrValue(key: string): string {
+        if (PlayerPrefs.HasKey(key)) {
+            return PlayerPrefs.GetString(key);
+        } else {
+            // Returns "" if key does not exist.
+            return "";
+        }
+    }
 
     // Sets the value of a given key in PlayerPrefs to a given value.
     public SetValue(key: string, value: number): void {
         PlayerPrefs.SetInt(key, value);
     }
+    // Sets the value of a given key in PlayerPrefs to a given value.
+    public SetStrValue(key: string, value: string): void {
+        PlayerPrefs.SetString(key, value);
+    }    // Sets the value of a given key in PlayerPrefs to a given value.
 
     public LoadData() {    
         this.LoadAllLanguageData();
@@ -277,6 +289,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
                 ingredients.push(+values[j]);
                 price += this.costs.get(+values[j]);
             }
+            // 오류 발생 시 해당 레시피 드랍
+            if (ingredients[0] != 0) continue;
             // 값이 -1이 아닐 경우 무작위 drink 하나 선정
             const drink = +values[1] == -1 ? -1 : Math.floor(Math.random() * (Drink.END - Drink.START)) + Drink.START;
             if(drink != -1) price += this.costs.get(drink);
@@ -304,7 +318,20 @@ export default class DataManager extends ZepetoScriptBehaviour {
             }
             switch(+values[0]){
                 // 치즈만 있는 레시피들은 전부 단답벌레로 변경
-                case 0:
+                case 10:
+                case 11:
+                case 30:
+                case 44:
+                case 45:
+                case 69:
+                case 83:
+                case 84:
+                case 108:
+                case 122:
+                case 123:
+                case 147:
+                case 176:
+                case 224:
                     customer = Character.DANDAPBUG;
                     break;
             }

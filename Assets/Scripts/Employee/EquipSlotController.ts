@@ -8,14 +8,14 @@ import UIManager from '../UIManager';
 import SoundManager from '../SoundManager';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
 import DataManager from '../DataManager';
+import EmployeeManager from './EmployeeManager';
 
 export default class EquipSlotController extends ZepetoScriptBehaviour implements IListener {
-    
     @SerializeField() private equipSlotParent: GameObject;
     private equipSlots: EquipSlot[] = [];
     private selectedToggle: Toggle; // Variable to store the selected toggle
 
-    Start() {    
+    Start() {
         this.equipSlots = this.equipSlotParent.GetComponentsInChildren<EquipSlot>();
         for (let i = 0; i < this.equipSlots.length; i++) {
             let toggle = this.equipSlots[i].GetSelectSectionOpenToggle();
@@ -28,6 +28,25 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
 
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("employee");
         this.EquipUnlock(upgradedlevel);
+
+        this.ClearSlots();
+
+        // 기록된 데이터 불러오기
+        // 기본값이 0 이므로 인덱스가 0일 경우를 대비해 +1 로 저장.
+        // 값을 가져올 때 -1 연산 필요
+        const sprites = DataManager.GetInstance().GetSectionSprites();
+        for (let index = 0; index < this.equipSlots.length; index++) {
+            const cardId = DataManager.GetInstance().GetStrValue(`EquipSlot_${index}`);
+            if (cardId == "") continue;
+            else {
+                const cardData = DataManager.GetInstance().GetCardData(cardId);
+                this.equipSlots[index].EquipCard(cardData, index);
+                const sectionIndex = DataManager.GetInstance().GetValue(`EquipSlot_Section_${index}`);
+                if(sectionIndex != 0){
+                    this.equipSlots[index].SelectSection(sprites[sectionIndex - 1], sectionIndex - 1);
+                }
+            }
+        }
         Mediator.GetInstance().RegisterListener(this);
     }
 
@@ -41,7 +60,13 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
                 this.EquipUnlock(upgradedLevel);
                 break;
             case EventNames.StageEnded:
-                this.ClearSlots();
+                for (let i = 0; i < this.equipSlots.length; i++) {
+                    if(this.equipSlots[i].IsEquip() == false) continue;
+                    else if(DataManager.GetInstance().UseCard(this.equipSlots[i].getEquippedCardData().GetCardId(), 1) == false){
+                        EmployeeManager.GetInstance().UnregisterCard(i);
+                        this.equipSlots[i].InitSlot();
+                    }
+                }
                 break;
             default:
                 // In case an unhandled event occurs
@@ -67,7 +92,8 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
         // Find an empty card equip slot
         let emptyIndex = -1;
         for (let i = 0; i < this.equipSlots.length; i++) {
-            if (!this.equipSlots[i].IsEquip()) {
+            if (!this.equipSlots[i].IsEquip() &&
+                !this.equipSlots[i].IsLocked()) {
                 emptyIndex = i;
                 break;
             }
@@ -118,7 +144,8 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
 
     public ClearSlots(){
         for (let i = 0; i < this.equipSlots.length; i++) {
-            this.equipSlots[i].InitSlot();
+            let slot = this.equipSlots[i];
+            slot.InitSlot();
         }
     }
 }

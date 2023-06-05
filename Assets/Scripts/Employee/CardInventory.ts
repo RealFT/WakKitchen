@@ -32,7 +32,9 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
     Start() {
         this.Init();
         this.CreateInventory();
-        Mediator.GetInstance().RegisterListener(this);
+        if(!DataManager.GetInstance().GetIsUnlockByName("employee")){
+            this.inventoryPanel.gameObject.SetActive(false);
+        }
     }
 
     private OnDestroy() {
@@ -71,6 +73,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
         this.helpBtn.onClick.AddListener(()=> HelpManager.GetInstance().OpenHelpSection("employee"));
 
         this.cardInfoWindow.InitCardInfoWindow();
+        Mediator.GetInstance().RegisterListener(this);
     }
     
     private RefreshInventoryUI(): void {

@@ -74,11 +74,18 @@ export default class EventTimer extends ZepetoScriptBehaviour {
             if (this.IsDateWithinRange()) {
                 this.elapsedTime++;
 
-                // 이벤트 진행도 업데이트
-                this.UpdateEventProgress();
+                // 시간 경과가 모든 이벤트 시간 조건을 충족시켰다면, 더이상 하지 않는다.
+                if (this.elapsedTime <= this.totalEventTime) {
+                    // 이벤트 진행도 업데이트
+                    this.UpdateEventProgress();
 
-                // 남은 시간 업데이트
-                this.UpdateRemainingTime();
+                    // 남은 시간 업데이트
+                    this.UpdateRemainingTime();
+                }
+                else {
+                    this.eventProgressSlider.value = 1;
+                    this.remainingTimeText.text = DataManager.GetInstance().GetCurrentLanguageData("event_clear");
+                }
 
                 // 보상 획득 가능 여부 업데이트
                 this.UpdateNewReward();

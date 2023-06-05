@@ -8,6 +8,8 @@ import GameManager from '../GameManager';
 import SoundManager from '../SoundManager';
 import DataManager from '../DataManager';
 import { TextMeshProUGUI } from 'TMPro';
+import CardInventory from '../Employee/CardInventory';
+import EquipSlotController from '../Employee/EquipSlotController';
 export default class Shop extends ZepetoScriptBehaviour {
     @SerializeField() private categoryBtns: Button[];
     @SerializeField() private categoryTextEmployee: TextMeshProUGUI;
@@ -15,9 +17,20 @@ export default class Shop extends ZepetoScriptBehaviour {
     @SerializeField() private toStageBtn: Button;
     @SerializeField() private panels: GameObject[];
 
+    @SerializeField() private equipSlotControllerObj: GameObject;
+    @SerializeField() private emptyPlayPanel: GameObject;
+    @SerializeField() private emptyPlayText: TextMeshProUGUI;
+    @SerializeField() private confirmPlayText: TextMeshProUGUI;
+    @SerializeField() private cancelPlayText: TextMeshProUGUI;
+    @SerializeField() private confirmPlayBtn: Button;
+    @SerializeField() private cancelPlayBtn: Button;
+
     OnEnable(){
         this.categoryTextEmployee.text = DataManager.GetInstance().GetCurrentLanguageData("shop_employee_category");
         this.categoryTextUpgrade.text = DataManager.GetInstance().GetCurrentLanguageData("shop_upgrade_category");
+        this.emptyPlayText.text = DataManager.GetInstance().GetCurrentLanguageData("panel_empty");
+        this.confirmPlayText.text = DataManager.GetInstance().GetCurrentLanguageData("button_confirm");
+        this.cancelPlayText.text = DataManager.GetInstance().GetCurrentLanguageData("button_cancel");
     }
 
     Start() {
@@ -38,7 +51,21 @@ export default class Shop extends ZepetoScriptBehaviour {
             });
         }
         this.toStageBtn.onClick.AddListener(() => {
+            const equipSlotController = this.equipSlotControllerObj.GetComponent<EquipSlotController>();
+            if(equipSlotController.IsEmpty()){
+                this.emptyPlayPanel.SetActive(true);
+            }
+            else{
+                GameManager.GetInstance().NextStage();
+                SoundManager.GetInstance().OnPlayButtonClick();
+            }
+        });
+        this.confirmPlayBtn.onClick.AddListener(() => {
             GameManager.GetInstance().NextStage();
+            SoundManager.GetInstance().OnPlayButtonClick();
+        });
+        this.cancelPlayBtn.onClick.AddListener(() => {
+            this.emptyPlayPanel.SetActive(false);
             SoundManager.GetInstance().OnPlayButtonClick();
         });
     }
@@ -48,7 +75,7 @@ export default class Shop extends ZepetoScriptBehaviour {
         if(employeeShop) employeeShop.InitEmployeeShop();
         var upgradeShop = this.panels[1].GetComponent<Shop_Upgrade>();
         if(upgradeShop) upgradeShop.InitUpgradeShop();
-        // var foodShop = this.panels[2].GetComponent<Shop_Food>();
-        // if(foodShop) foodShop.InitFoodShop();
+        // var cardInventory = this.panels[2].GetComponent<CardInventory>();
+        // if(cardInventory) cardInventory.Init();
     }
 }

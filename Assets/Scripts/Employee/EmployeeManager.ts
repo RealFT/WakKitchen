@@ -3,6 +3,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import CardData from './CardData';
 import EmployeeSlot from './EmployeeSlot';
 import Mediator, { EventNames, IListener } from '../Notification/Mediator';
+import DataManager from '../DataManager';
 interface CardDataWithSection {
     cardData: CardData;
     section: number;
@@ -36,11 +37,6 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
     }
 
     Start() {    
-        // var employees = this.employeeSlotContent.GetComponentsInChildren<EmployeeSlot>(true); 
-        // for (let index = 0; index < this.employeeSlots.length; index++) {
-        //     this.employeeSlots[index] = employees[index];
-        //     console.log(employees[index]);
-        // }
         Mediator.GetInstance().RegisterListener(this);
     }
 
@@ -75,7 +71,6 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
                     slot.Init();
                     slot.gameObject.SetActive(false);
                 });
-                this.cardDataWithSectionArray = [];
                 break;
         }
     }
@@ -97,10 +92,14 @@ export default class EmployeeManager extends ZepetoScriptBehaviour implements IL
 
     public RegisterCardBySlotIndex(slotIndex: number, cardData: CardData, section: number) {
         this.cardDataWithSectionArray[slotIndex] = { cardData, section };
+        // 기본값이 0 이므로 인덱스가 0일 경우를 대비해 +1 로 저장.
+        // 값을 가져올 때 -1 연산 필요
+        DataManager.GetInstance().SetValue(`EquipSlot_Section_${slotIndex}`, section + 1);
     }
 
     public UnregisterCard(slotIndex: number) {
         this.cardDataWithSectionArray[slotIndex] = { cardData: null, section: null };
+        DataManager.GetInstance().SetValue(`EquipSlot_Section_${slotIndex}`, 0);
     }
 
     public GetTotalEmployeePay(): number{
