@@ -138,7 +138,7 @@ export default class EventTimer extends ZepetoScriptBehaviour {
 
     public IsDateWithinRange(): boolean {
         const currentDate: Date = new Date();
-        const maxDate: Date = new Date('2023-07-10');
+        const maxDate: Date = new Date('2023-07-15');
 
         // 클라이언트에 저장된 날짜가 2023년 7월 10일까지인지 확인
         if (currentDate <= maxDate) {

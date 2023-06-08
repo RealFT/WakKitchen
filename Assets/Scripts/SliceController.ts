@@ -136,6 +136,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         // Set the position and sprite of the receipt item and activate it
         const slicable = slicableObj.GetComponent<Slicable>();
         const randomIndex = Math.floor(Random.Range(0, this.ingredients.size));
+        console.log("originSprites: "+randomIndex);
         const selectedIngredient: number = this.ingredients.get(randomIndex);
         slicable.SetSlicable(this.originSprites[randomIndex], selectedIngredient);
         return slicable;

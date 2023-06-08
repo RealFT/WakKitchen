@@ -119,6 +119,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private cardFile: TextAsset;
     @SerializeField() private lang_ko: TextAsset;
     @SerializeField() private lang_en: TextAsset;
+    @SerializeField() private lang_jp: TextAsset;
     // Define the member variables for the Receipt's sprites
     @SerializeField() private ingredientSprites: Sprite[];
     @SerializeField() private drinkSprites: Sprite[];
@@ -133,6 +134,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     private textContents_ko: Map<string, string> = new Map<string, string>();
     private textContents_en: Map<string, string> = new Map<string, string>();
+    private textContents_jp: Map<string, string> = new Map<string, string>();
     private langCode: string;    // Language Setting
 
     private receipts: Receipt[] = [];
@@ -245,13 +247,13 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.SetValue("Stage", this.lastSavedStage);
     }
     public DebugStageNoHelp() {
-        this.lastSavedStage = 20;
+        this.lastSavedStage = 29;
         this.SetValue("Stage", this.lastSavedStage);
     }
     public LoadSavedStage() {
-        //this.lastSavedStage = 36;
+        this.lastSavedStage = 29;
         //this.SetValue("Stage", this.lastSavedStage);
-        this.lastSavedStage = this.GetValue("Stage");
+        //this.lastSavedStage = this.GetValue("Stage");
         //값이 없을 경우 0 리턴. 처음 시작은 1스테이지부터.
         if(this.lastSavedStage == 0) this.lastSavedStage = 1;
         this.SetValue("Stage", this.lastSavedStage);
@@ -289,6 +291,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
                 ingredients.push(+values[j]);
                 price += this.costs.get(+values[j]);
             }
+            console.log("receipe:" + ingredients);
             // 오류 발생 시 해당 레시피 드랍
             if (ingredients[0] != 0) continue;
             // 값이 -1이 아닐 경우 무작위 drink 하나 선정
@@ -376,10 +379,11 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.stageReceipts = [];
         // 최대 인덱스에 도달했을 경우, 데이터 길이가 1이다.
         // 이 값은 최대 레시피 개수가 기록된다.
-        if (this.stages.length <= stageIndex) {
+        if (this.stages.length <= stageIndex + 1) {
             // 이제부터 모든 레시피를 등록
             const maxStage = this.stages.length - 1;
-            for (let index = 0; index <= this.stages[maxStage][0]; index++) {
+            const maxIndex = this.stages[maxStage][0];
+            for (let index = 0; index <= maxIndex; index++) {
                 this.stageReceipts.push(this.GetReceipt(index));
             }
         }
@@ -397,8 +401,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
         else{
             this.SetAreaLangCode();
         }
-        if(this.textContents_ko) this.textContents_ko = this.LoadLanguageData(this.lang_ko);
-        if(this.textContents_en) this.textContents_en = this.LoadLanguageData(this.lang_en);
+        if(this.lang_ko) this.textContents_ko = this.LoadLanguageData(this.lang_ko);
+        if(this.lang_en) this.textContents_en = this.LoadLanguageData(this.lang_en);
+        if(this.lang_jp) this.textContents_jp = this.LoadLanguageData(this.lang_jp);
     }
 
     public LoadLanguageData(textAsset: TextAsset): Map<string, string> {
@@ -437,11 +442,16 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     private SetAreaLangCode(){
         // 사용자의 지역 정보 가져오기
-        if (Application.systemLanguage == SystemLanguage.Korean) {
-            this.langCode = "ko"; // 사용자가 한국어를 사용하는 경우
-        }
-        else {
-            this.langCode = "en"; // 기본 언어 설정 (영어)
+        switch(Application.systemLanguage){
+            case SystemLanguage.Korean:
+                this.langCode = "ko"; // 사용자가 한국어를 사용하는 경우
+                break;
+            case SystemLanguage.English:
+                this.langCode = "en"; // 기본 언어 설정 (영어)
+                break;
+            case SystemLanguage.Japanese:
+                this.langCode = "jp"; // 기본 언어 설정 (영어)
+                break;
         }
         PlayerPrefs.SetString("Language", this.langCode);
     }
@@ -459,6 +469,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
                 return this.textContents_ko?.get(key);
             case "en":
                 return this.textContents_en?.get(key);
+            case "jp":
+                return this.textContents_jp?.get(key);
             default:
                 // console.log("langCode error");
                 return null;

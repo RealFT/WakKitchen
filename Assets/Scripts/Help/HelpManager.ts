@@ -704,35 +704,35 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 this.helpContents_Dispenser.SetActive(true);
                 const contents_Dispenser = this.helpContents_Dispenser.GetComponent<HelpContents>();
                 const pages_Dispenser = contents_Dispenser.GetPages();
-                contents_Dispenser.SetCloseBtnVisivility(false);
+                contents_Dispenser.SetCloseBtnVisivility(true);
                 pages_Dispenser[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_dispenser_ment1"));
                 pages_Dispenser[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_dispenser_ment2"));
                 pages_Dispenser[0].gameObject.SetActive(true);
-                pages_Dispenser[0].GetNextBtn().onClick.AddListener(()=>{
-                    contents_Dispenser.SetCloseBtnVisivility(true);
-                });
+                // pages_Dispenser[0].GetNextBtn().onClick.AddListener(()=>{
+                //     contents_Dispenser.SetCloseBtnVisivility(true);
+                // });
                 pages_Dispenser[1].gameObject.SetActive(false);
                 break;
             case "fryer":
                 this.helpContents_Fryer.SetActive(true);
                 const contents_Fryer = this.helpContents_Fryer.GetComponent<HelpContents>();
                 const pages_Fryer = contents_Fryer.GetPages();
-                contents_Fryer.SetCloseBtnVisivility(false);
+                contents_Fryer.SetCloseBtnVisivility(true);
                 pages_Fryer[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_fryer_ment1"));
                 pages_Fryer[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_fryer_ment2"));
                 pages_Fryer[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_fryer_ment3"));
                 pages_Fryer[0].gameObject.SetActive(true);
                 pages_Fryer[1].gameObject.SetActive(false);
-                pages_Fryer[1].GetNextBtn().onClick.AddListener(()=>{
-                    contents_Fryer.SetCloseBtnVisivility(true);
-                });
+                // pages_Fryer[1].GetNextBtn().onClick.AddListener(()=>{
+                //     contents_Fryer.SetCloseBtnVisivility(true);
+                // });
                 pages_Fryer[2].gameObject.SetActive(false);
                 break;
             case "grill":
                 this.helpContents_Grill.SetActive(true);
                 const contents_Grill = this.helpContents_Grill.GetComponent<HelpContents>();
                 const pages_Grill = contents_Grill.GetPages();
-                contents_Grill.SetCloseBtnVisivility(false);
+                contents_Grill.SetCloseBtnVisivility(true);
                 pages_Grill[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment1"));
                 pages_Grill[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment2"));
                 pages_Grill[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_grill_ment3"));
@@ -740,9 +740,9 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 pages_Grill[0].gameObject.SetActive(true);
                 pages_Grill[1].gameObject.SetActive(false);
                 pages_Grill[2].gameObject.SetActive(false);
-                pages_Grill[2].GetNextBtn().onClick.AddListener(()=>{
-                    contents_Grill.SetCloseBtnVisivility(true);
-                });
+                // pages_Grill[2].GetNextBtn().onClick.AddListener(()=>{
+                //     contents_Grill.SetCloseBtnVisivility(true);
+                // });
                 pages_Grill[3].gameObject.SetActive(false);
                 break;
             case "prep":
@@ -757,7 +757,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 this.helpContents_Plating.SetActive(true);
                 const contents_Plating = this.helpContents_Plating.GetComponent<HelpContents>();
                 const pages_Plating = contents_Plating.GetPages();
-                contents_Plating.SetCloseBtnVisivility(false);
+                contents_Plating.SetCloseBtnVisivility(true);
                 pages_Plating[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment1"));
                 pages_Plating[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment2"));
                 pages_Plating[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_plating_ment3"));
@@ -765,24 +765,24 @@ export default class HelpManager extends ZepetoScriptBehaviour {
                 pages_Plating[0].gameObject.SetActive(true);
                 pages_Plating[1].gameObject.SetActive(false);
                 pages_Plating[2].gameObject.SetActive(false);
-                pages_Plating[2].GetNextBtn().onClick.AddListener(()=>{
-                    contents_Plating.SetCloseBtnVisivility(true);
-                });
+                // pages_Plating[2].GetNextBtn().onClick.AddListener(()=>{
+                //     contents_Plating.SetCloseBtnVisivility(true);
+                // });
                 pages_Plating[3].gameObject.SetActive(false);
                 break;
             case "employee":
                 this.helpContents_Employee.SetActive(true);
                 const contents_Employee = this.helpContents_Employee.GetComponent<HelpContents>();
                 const pages_Employee = contents_Employee.GetPages();
-                contents_Employee.SetCloseBtnVisivility(false);
+                contents_Employee.SetCloseBtnVisivility(true);
                 pages_Employee[0].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_employee_ment1"));
                 pages_Employee[1].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_employee_ment2"));
                 pages_Employee[2].SetDiscription(DataManager.GetInstance().GetCurrentLanguageData("help_employee_ment3"));
                 pages_Employee[0].gameObject.SetActive(true);
                 pages_Employee[1].gameObject.SetActive(false);
-                pages_Employee[1].GetNextBtn().onClick.AddListener(()=>{
-                    contents_Employee.SetCloseBtnVisivility(true);
-                });
+                // pages_Employee[1].GetNextBtn().onClick.AddListener(()=>{
+                //     contents_Employee.SetCloseBtnVisivility(true);
+                // });
                 pages_Employee[2].gameObject.SetActive(false);
             break;
         }

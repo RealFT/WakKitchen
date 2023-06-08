@@ -29,6 +29,7 @@ TagManager:
   - OpenMyCard
   - BuyCard
   - GetCard
+  - jp
   layers:
   - Default
   - TransparentFX

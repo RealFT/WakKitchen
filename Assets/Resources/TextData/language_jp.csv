@@ -1,0 +1,170 @@
+button_confirm,確認してください
+button_cancel,キャンセル
+button_next,次です
+button_claim,獲得しました
+button_bgm,背景音です
+button_sfx,?果音です
+button_help,ヘルプです
+button_credit,クレジットです
+button_language,言語です
+main_start,スタ?トです
+settlement_total,??上高です
+settlement_employee,職員の給?です
+settlement_netIncome,純利益です
+settlement_double_info,はんこを使って?益を2倍にしてください！
+settlement_double_confirm,確認してください
+settlement_double_cancel,キャンセル
+shop_employee_category,アルバイトです
+shop_employee_buy,雇います
+shop_upgrade_category,アップグレ?ドしてください
+shop_upgrade_buy,買います
+panel_empty,空いているスロットがあります。?行しますか？
+panel_daily,一日に一度出席で\ワクドゥハンコを獲得してください！ 塗?により?入を\2倍に?やすことができます！
+tutorial_start_ment1,こんにちは！私は店の??を手?いに?たパンチです！
+tutorial_start_ment2,Playボタンを押してお店に移動してください！
+tutorial_start_ment3,まだ組合だけが解禁されています。 組み合わせ台はここにあります。
+tutorial_start_ment4,近づいてOpenボタンを押すと調理を始めることができます。 組み合わせ通りに移動してください！
+tutorial_start_ment5,まず、ヘルプ ボタンを押して、詳細な調理方法を確認してください。
+tutorial_start_ment6,では、注文を受け付けましょう！ 注文が入ると、ここに領?書が表示されます。
+tutorial_start_ment7,注文の領?書を押して、詳細を確認してみましょう。
+tutorial_start_ment8,これから本番です！ お客?においしいバ?ガ?を提供してください！
+tutorial_settlement_ment1,もう10時になって一日の?業が終わりました。
+tutorial_settlement_ment2,1日の出席で得られる印鑑で、2倍の補償を受けることができます。
+tutorial_settlement_ment3,一度やってみましょうか？ 今回は無料です！
+tutorial_settlement_ment4,いいですね！これからお店に行きましょう！
+tutorial_dispenser_ment1,ディスペンサ?が解禁されました。 これから?み物を製造できます！
+tutorial_dispenser_ment2,では、お店に行って確認してみましょうか？ 準備が終わったらPlayボタンを押してください！
+tutorial_dispenser_ment3,インスト?ルが完了しましたね！ ディスペンサ?はここにあります。
+tutorial_dispenser_ment4,近くに行ってOpenボタンを押してください。
+tutorial_grill_ment1,グリルが解禁されました。 これからパティを?くことができます。
+tutorial_grill_ment2,準備が終わったらPlayボタンを押してください。
+tutorial_grill_ment3,インスト?ルが完了しましたね！ グリルは右側にあります。
+tutorial_grill_ment4,グリルに行ってOpenボタンを押してください。
+tutorial_prep_ment1,フラップが解禁されました。 いよいよ野菜が食べられますね！
+tutorial_prep_ment2,準備が終わったらPlayボタンを押してください。
+tutorial_prep_ment3,インスト?ルが完了しましたね！ フラップはここにあります。
+tutorial_prep_ment4,近くに行ってOpenボタンを押してください。
+tutorial_fryer_ment1,フライヤ?が解禁されました。 フライドポテトは必須です！
+tutorial_fryer_ment2,準備が終わったらPlayボタンを押してください。
+tutorial_fryer_ment3,もうすべての設備を整えましたね！ フライヤ?は\ここにあります。
+tutorial_fryer_ment4,近くに行ってOpenボタンを押してください。
+tutorial_employee_ment1,アルバイト機能が解禁されました。 調理を代わりに任せることができます。
+tutorial_employee_ment2,アルバイトタブに移動してください。
+tutorial_employee_ment3,ここで?業員雇用カ?ドを購入してみてください。 初めての購入費用は私が差し上げます！
+tutorial_employee_ment4,いいですね。では獲得したカ?ドを確認してみましょう。 My Cardを押してください。
+tutorial_employee_ment5,おっと！スロットがすべてロックされていますね！ ?業員を登?するには、機能?化によりスロットを?やす必要があります。
+tutorial_employee_ment6,アップグレ?ドタブに移動してください。 そこで機能を?化することができます。
+tutorial_employee_ment7,Employeeを?化してスロットを開放してください。 今回も初めてなので、無料でさせていただきます！
+tutorial_employee_ment8,アップグレ?ドが完了しました！ これからカ?ド管理ウィンドウをもう一度開いてください。
+tutorial_employee_ment9,スロットが 1 つオ?プンしました。 これから好きなカ?ドを選?し、?着する必要があります。
+tutorial_employee_ment10,?着すると、?業員に業務を指定してもらう必要があります。
+tutorial_employee_ment11,準備ができたら、Playボタンを押してお店に移動してください。
+tutorial_employee_ment12,スタッフはこちらに表示されます。 スタッフが完成した材料は自動的に組合台に追加されます。
+tutorial_employee_ment13,?業員 アイコンをクリックすると、タスクを停止できます。
+tutorial_employee_ment14,?業員に1日の手?を支?う必要があることに注意してください！
+tutorial_employee_ment15,さあ、本番です！ 幸運を祈ります！
+tutorial_employee_error,通常はスロットに何も入れなくてもいいのですが、今回は案?のために?着していただいた方がいいですね！
+help_receipt_ment1,一定周期ごとにお客?が注文をします。 注文が早く解消されるほど、お客?の訪問が早くなります。
+help_receipt_ment2,ハ?トゲ?ジがすべて消えると、お客?が去ってしまいます。
+help_receipt_ment3,お客?のレシ?トを押すと、詳細情報が確認できます。
+help_receipt_ment4,下段に?格が表示されます。 ??はお金をくれません。
+help_plating_ment1,製造を開始する前にレシピを確認します。 注文が入ると\左上に注文領?書が表記されます。
+help_plating_ment2,注文の領?書を押すと、詳細情報が確認できます。 注文をよく確認してください！ 泥棒はお金をくれません！
+help_plating_ment3,レシピ順に材料を積んで料理を完成させなさい。 右下の\ゴミ箱ボタンを押して、作り間違えた料理を捨てることができます。
+help_plating_ment4,料理が出?上がりましたら、ベルを押してお客?にお?えください。 完成した料理がレシピと異なる場合、材料は元の?態に?ります。
+help_dispenser_ment1,動くカップが好きな?み物の位置にある時、\PUSHボタンを押して止まると?み物が出て、\PUSHボタンを押して?み物を手に入れることができます！
+help_dispenser_ment2,?み物を手に入れた後、もう一度PUSHボタンを押すとカップが生成されます。
+help_employee_ment1,希望するスタッフを押して取り付けボタンを押して取り付けます。 ?着時にカ?ド1枚を消耗します。
+help_employee_ment2,?着した職員に業務を指定する必要があります。 ?業員取り付けスロットの?にあるセクション選?スロットをクリックして、目的のタスクを選?してください。
+help_employee_ment3,低ランクのカ?ド10枚を消耗することで、高ランクのランダム社員カ?ド1枚を獲得できます。 最大等級はS等級です。
+help_grill_ment1,グリル上のパティスロットを押して、パティを上げることができます。
+help_grill_ment2,?き加減によってスライダ?の色が?わります。 ?けたパティをひっくり返すか、獲得してください。 あまりにも長い間放置すると燃えてしまいます！
+help_grill_ment3,片面に火が通ったら裏返して反?側の面も?いてください。 反?側の?も煮えたら、パティを得ることができます。
+help_grill_ment4,パティが焦げるとグリルから燃えた煙が上がってきて、音が聞こえてきます。
+help_prep_ment1,上がってくる野菜を切って獲得してください！
+help_fryer_ment1,フライヤ?を押してポテトを揚げることができます。
+help_fryer_ment2,?き加減によって天ぷら、スライダ?の色が?わります。 ?けた天ぷらを押して獲得してください。 あまりにも長い間放置すると燃えてしまいます！
+help_fryer_ment3,フライドポテトが焦げると、フライヤ?から焦げた煙が上がってきて、音が聞こえてきます。
+info_nocurruncey,?高が不足しています。
+info_nostamp,?っているワクドゥはんこがありません。
+info_dailygranted,一日補償を獲得しました。
+info_already_dailygranted,本日はすでにご褒美を獲得しております。
+info_Invalid_recipe,レシピと一致する注文がありません。
+info_require_section,?業員が作業するセクションを選?する必要があります。
+info_stampfull,はんこがいっぱいです。
+event_time_next,次の補償までです
+event_redeem_locked,閉まります
+event_redeem_unlock,補償を受けます！
+event_redeem_redeemed,受領完了です
+event_title,アクセス補償イベントです
+event_description,WakBurgerの??を記念して一定時間以上アクセスしたすべての方?に特別なプレゼントを差し上げます！
+event_clear,イベント完了です！
+event_time_end,イベントは終了しました。
+redeem_main,ク?ポンコ?ドを登?します
+redeem_info,* 受け取ったコ?ドはコピ?したあとZEPETO設定 > ク?ポン登?で登?できます。\* iosユ?ザ?はZDEアカウントのフィ?ドURLから登?できます。(@zde_shop)
+receipts_14_1,博士が包?してくれるように?みました！
+receipts_14_2,?み物でキャノ?ラ油はありませんか？
+receipts_14_3,き@&Oです！#^！~
+receipts_15_1,おい、バ?ガ?を一つください！
+receipts_15_2,バ?ガ?を注文するのが君にとってとても[バ?ガ?]ですか？ くはははです
+receipts_15_3,この家をよく訪れるようになりますね。とても?に入っています
+receipts_17_1,チ?ズです。
+receipts_17_2,チ?ズですか？
+receipts_17_3,チ?ズです！！
+receipts_18_1,あ、お腹すきました。早くください~
+receipts_18_2,これはシムティは使えますか？
+receipts_18_3,あ、何を食べましょうか？ すごく?みますね？ おすすめしてください~！
+receipts_19_1,え？何かもっと?もうと思ったのに 忘れてしまいました
+receipts_19_2,このド?パミンはとてもお腹が空いています。
+receipts_19_3,うわぁ…今日は太っ腹に食べます
+receipts_20_1,おはようございます？ ハンバ?ガ?を一つお願いします。
+receipts_20_2,オレのチャクラが足りません。 早く食べ物をください。
+receipts_20_3,ホリモリ?ロリポリハリガリワカモリ?カリワクですか？
+receipts_21_1,私は13男なので、これくらいは食べないといけないんです。
+receipts_21_2,オニ！ここのバ?ガ?の味が柔らかく溶けます。
+receipts_21_3,あ、お腹すきました。バ?ガ?でも食べないと。
+receipts_22_1,ここにハンバ?が一つあります
+receipts_22_2,このバ?ガ?の味が私を押しのけるふりをして ずっと引っ張ります
+receipts_22_3,注文するからぶつぶつ言わないでください
+receipts_23_1,ハンバ?ガ?を一つください。
+receipts_23_2,セットを6つ別?に包?してください。 私が食べるのではなく、アイドルの方?が食べるんです！
+receipts_23_3,ハハハ、その通りです。 私がまさに?象現レントゲニウムです。
+receipts_24_1,ハンバ?ガ?を一つ注文します。
+receipts_24_2,このハンバ?ガ?によく合うカクテルがありますが、一度召し上がってみますか？
+receipts_24_3,あ、いらっしゃったんですね。 注文しようと待っていました。
+receipts_25_1,ハンバ?ガ?を一つください。
+receipts_25_2,今日は正義の泥棒になろうかと?みましたが、我慢します。
+receipts_25_3,神?、今日もおいしいハンバ?ガ?を注文することを許可してください。
+receipts_26_1,下品なもの、バ?ガ?を一つください。
+receipts_26_2,私が直接ここの常連になってくれますね。
+receipts_26_3,今日は?がる?空の下、このハンバ?ガ?でピクニックを?しみたいですね。
+receipts_27_1,バ?ガ?を一つください。
+receipts_27_2,ハンバ?ガ?の色は何色か知っていますか？ 正解はバ?ガンディ?色です。 ハハハ.
+receipts_27_3,ハンバ?ガ?の理想のタイプは何ですか？ それは「チ?ズ」できる人です。 ハハハ.
+receipts_29_1,私ハンバ?ガ?好きなんだけど、一つだけください。
+receipts_29_2,注文してから待つ時間がときめきの始まりです！
+receipts_29_3,私の魔法でもこの味は生かせません！
+receipts_30_1,こんにちは。生計型泥棒です。 バ?ガ?を一つ持って行ってもいいですか？
+receipts_30_2,バ?ガ?を早くくださらなければ、一方的な泥棒に切り替えるしかないと思います。
+receipts_30_3,トッピングにパクチ?を入れていただくことはできないんですか？
+receipts_32_1,セットで買うのがいいのか?品で買うのがいいのか心理的に考える?値があるテ?マだと思います。
+receipts_32_2,ハンバ?ガ?の最も理想的な割合で材料を積み重ねると、その味の違いが明らかになります。
+receipts_32_3,ハンバ?ガ?は??な?養素が入った完全製品だそうですが、多量を?取すると健康を害する恐れがあります。
+receipts_33_1,私のは野菜をたっぷり入れてください
+receipts_33_2,私が缶500ウォンずつ?って貯めたお金なので、少し安くしてください~
+receipts_33_3,ここが本?においしいお店です。 これが僕のシェシャンです
+receipts_35_1,私がハンバ?ガ?を?んでもいいですか。
+receipts_35_2,私があげられるのは同じじゃない?物が作ったばかりの安い歌詞と各自の褒めすぎに感謝します
+receipts_35_3,部隊で食べる味とは次元が違いますね···
+receipts_36_1,ここで?っているハンバ?ガ?は本?に高級感があります！
+receipts_36_2,この値段でこんなにおいしいハンバ?ガ?が食べられるなんて、すごいです！
+receipts_36_3,このハンバ?ガ?の値段です.. とんでもないです！
+receipts_37_1,ハンバ?ガ?を一つください。
+receipts_37_2,このハンバ?ガ?は他の場所で食べるよりもおいしいです。
+receipts_37_3,ここはサイドの方がおいしいと思います。
+receipts_38_1,ハンバ?ガ?の注文、今できますか？
+receipts_38_2,ここで?っているハンバ?ガ?は食べれば食べるほど魅力的です。
+receipts_38_3,ここで?っているハンバ?ガ?は本?に最高です。 味も豊富で新鮮です！
+receipts_39_1,ハンバ?ガ?一つ、テイクアウトです。
+receipts_39_2,このハンバ?ガ?を見ると食欲が爆?します。 一口に幸せいっぱいというか？
+receipts_39_3,ここのハンバ?ガ?は本?に絶品です。 他では味わえません。

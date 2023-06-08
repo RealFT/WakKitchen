@@ -17,6 +17,7 @@ export default class OrderReceipt extends ZepetoScriptBehaviour {
 
     public SetOrderReceipt(receipt: Receipt){
         this.ClearOrderReceipt();
+        console.log("ingredients: "+receipt.ingredients);
         if (this.drinkImage) {
             for (let i = 0; i < receipt.ingredients.length; i++) {
                 let sprite = DataManager.GetInstance().getIngredientSprite(receipt.ingredients[i]);
