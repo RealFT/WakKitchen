@@ -60,7 +60,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         this.curStage = DataManager.GetInstance().GetLastSavedStage();
         this.CheckShopUnlock();
     }
-    
+
     // Initializes the stage
     InitStage() {
         Debug.Log("InitStage");
@@ -82,7 +82,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
             this.timer.SetTimeScale(this.minutesPerDay);
         }
     }
-
+    public DebugSetTimeScale(scale:number){
+        this.timer.SetTimeScale(scale);
+        this.minutesPerDay = scale;
+    }
     public SetTutorialTimeScale(){
         this.timer.SetTimeScale(99999);
     }

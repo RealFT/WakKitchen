@@ -251,9 +251,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.SetValue("Stage", this.lastSavedStage);
     }
     public LoadSavedStage() {
-        this.lastSavedStage = 29;
+        //this.lastSavedStage = 29;
         //this.SetValue("Stage", this.lastSavedStage);
-        //this.lastSavedStage = this.GetValue("Stage");
+        this.lastSavedStage = this.GetValue("Stage");
         //값이 없을 경우 0 리턴. 처음 시작은 1스테이지부터.
         if(this.lastSavedStage == 0) this.lastSavedStage = 1;
         this.SetValue("Stage", this.lastSavedStage);

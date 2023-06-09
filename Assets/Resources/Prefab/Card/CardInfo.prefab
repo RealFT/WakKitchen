@@ -216,17 +216,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: WakGood
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ae8af907cd2c17f40a3824798db53c3e, type: 2}
-  m_sharedMaterial: {fileID: -423539565272073665, guid: ae8af907cd2c17f40a3824798db53c3e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a6883e64cf7604a4ca65f509a7b86d62, type: 2}
+  m_sharedMaterial: {fileID: -6237714624176690617, guid: a6883e64cf7604a4ca65f509a7b86d62, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4279568130
+  m_fontColor: {r: 0.007843138, g: 0.02745098, b: 0.08235294, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
