@@ -16,7 +16,9 @@ export default class Interaction_Grill extends InteractionBase implements IListe
     @SerializeField() private grillPanel: GameObject;
     @SerializeField() private defaultTable: GameObject;
     @SerializeField() private burntEffect: GameObject;
+    @SerializeField() private unlockDouble: GameObject;
     private workingStates: boolean[] = [];
+    private isDouble: boolean;
 
     Start() {
         super.Start();
@@ -29,7 +31,9 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         this.grillPanel.SetActive(true);
         this.kitchen.SetActive(true);
         this.burntEffect.SetActive(false);
-
+        
+        this.unlockDouble.SetActive(false);
+        this.isDouble = false;
         // Unlock by Upgraded level
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("grill");
         this.GrillUnlock(upgradedlevel);
@@ -136,15 +140,19 @@ export default class Interaction_Grill extends InteractionBase implements IListe
         for (let i = 0; i < this.grillSlotObjects.length; i++) {
             let slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
             slot.SetGrillVisibility(value);
-
         }
+        if (this.isDouble) this.unlockDouble.SetActive(value);
     }
 
     public GrillUnlock(level:number){
         for (let i = 0; i <= level; i++) {
             const slot = this.grillSlotObjects[i].GetComponent<GrillSlot>();
             slot.Unlock();
-            if(level === 3) slot.Double();
+            if(level === 3) {
+                slot.Double();
+                this.unlockDouble.SetActive(true);
+                this.isDouble = true;
+            }
         }
     }
 }

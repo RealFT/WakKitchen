@@ -15,6 +15,8 @@ export default class Interaction_Fry extends InteractionBase implements IListene
     @SerializeField() private images: Image[];
     @SerializeField() private fryPanel: GameObject;
     @SerializeField() private defaultTable: GameObject;
+    @SerializeField() private unlockDouble: GameObject;
+    private isDouble: boolean;
 
     Start() {
         super.Start();
@@ -25,7 +27,8 @@ export default class Interaction_Fry extends InteractionBase implements IListene
 
         this.fryPanel.SetActive(true);
         this.kitchen.SetActive(true);
-
+        this.isDouble = false;
+        this.unlockDouble.SetActive(false);
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("fryer");
         this.FryUnlock(upgradedlevel);
 
@@ -118,6 +121,7 @@ export default class Interaction_Fry extends InteractionBase implements IListene
             let slot = this.frySlotObjects[i].GetComponent<FrySlot>();
             slot.SetFryVisibility(value);
         }
+        if (this.isDouble) this.unlockDouble.SetActive(value);
     }
 
     public FryUnlock(level:number){
@@ -139,6 +143,8 @@ export default class Interaction_Fry extends InteractionBase implements IListene
         if(level >= 3){
             slots[0].Double();
             slots[1].Double();
+            this.unlockDouble.SetActive(true);
+            this.isDouble = true;
         }
     }
 }

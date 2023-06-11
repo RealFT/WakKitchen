@@ -291,7 +291,6 @@ export default class DataManager extends ZepetoScriptBehaviour {
                 ingredients.push(+values[j]);
                 price += this.costs.get(+values[j]);
             }
-            console.log("receipe:" + ingredients);
             // 오류 발생 시 해당 레시피 드랍
             if (ingredients[0] != 0) continue;
             // 값이 -1이 아닐 경우 무작위 drink 하나 선정

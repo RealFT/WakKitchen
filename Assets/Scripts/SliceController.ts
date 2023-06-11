@@ -38,6 +38,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
 
     // The start and end positions of the cut.
     @SerializeField() private  slicePoint: RectTransform;
+    @SerializeField() private unlockDouble: GameObject;
 
     Start() {
         this.helpButton.onClick.AddListener(() => {
@@ -53,7 +54,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         for (let i = 0; i < this.spawnCount; i++) {
             this.slicableItemsPool.push(this.CreateSlicable().GetComponent<Slicable>());
         }
-
+        this.unlockDouble.SetActive(false);
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("prep");
         this.SlcieUnlock(upgradedlevel);
 
@@ -182,6 +183,7 @@ export default class SliceController extends ZepetoScriptBehaviour implements IL
         }
         if(level >= 3){
             this.amount = 2;
+            this.unlockDouble.SetActive(true);
         }
     }
 }

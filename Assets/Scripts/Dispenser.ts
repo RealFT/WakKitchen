@@ -23,6 +23,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private cup: Cup;
     @SerializeField() private defaultCupSprite: Sprite;
     @SerializeField() private cupSprites: Sprite[];
+    @SerializeField() private unlockDouble: GameObject;
     private curDrink: number;
     private quantity: number = 1;
     private isCatch: boolean;
@@ -53,6 +54,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
         });
 
         const upgradedlevel = ItemManager.GetInstance().GetUpgradedLevel("dispenser");
+        this.unlockDouble.SetActive(false);
         this.DispenserUnlock(upgradedlevel);
         Mediator.GetInstance().RegisterListener(this);
     }
@@ -156,6 +158,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
         }
         if(level >= 3){
             this.quantity = 2;
+            this.unlockDouble.SetActive(true);
         }
     }
 }

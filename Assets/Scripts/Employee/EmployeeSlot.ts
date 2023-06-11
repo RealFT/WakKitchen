@@ -25,6 +25,8 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
         this.currentTime = 0;
         this.isWorking = false;
         this.isRegistered = false;
+        let proficiency = 1;
+        let time = 10;
     }
 
     private GetRandomFoodId(): number{
@@ -38,7 +40,7 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
         this.employeeImage.sprite = DataManager.GetInstance().GetCharacterIcon(employeeData.GetCharacterIndex());
         this.foodIds = [];
         let proficiency = 1;
-        let time = 10;
+        let time = 8;
         switch(section){
             case Section.Dispenser:
                 let startId = Drink.START;
@@ -47,17 +49,17 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
                     this.foodIds.push(id);
                 }
                 proficiency = employeeData.GetDispenserProficiency();
-                time = 8;
+                time = 6;
                 break;
             case Section.Fryer:
                 this.foodIds.push(Side.FRY);
                 proficiency = employeeData.GetFrierProficiency();
-                time = 10;
+                time = 8;
                 break;
             case Section.Grill:
                 this.foodIds.push(Ingredient.PATTY);
                 proficiency = employeeData.GetGrillProficiency();
-                time = 16;
+                time = 12;
                 break;
             case Section.Prep:
                 this.foodIds.push(Ingredient.CABBAGE);
@@ -69,11 +71,14 @@ export default class EmployeeSlot extends ZepetoScriptBehaviour {
         }
 
         if(proficiency <= 0) proficiency = 1;
-        this.workTime = time / (Math.floor(proficiency * 0.1) + 1);
+        this.workTime = this.calculate(time, proficiency);
         this.isRegistered = true;
     }
 
-
+    private calculate(time: number, x: number): number {
+        const result = (time * 1.8) / (1 + 0.6 * Math.exp(0.032 * x));
+        return result;
+      }
     // Start Baking.
     public StartWorking() {
         this.isWorking = true;
