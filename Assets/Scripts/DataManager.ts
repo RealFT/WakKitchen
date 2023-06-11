@@ -295,10 +295,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
             // 오류 발생 시 해당 레시피 드랍
             if (ingredients[0] != 0) continue;
             // 값이 -1이 아닐 경우 무작위 drink 하나 선정
-            const drink = +values[1] == -1 ? -1 : Math.floor(Math.random() * (Drink.END - Drink.START)) + Drink.START;
+            const drink = +values[1] == -1 ? -1 : Math.floor(Math.random() * (Drink.END - Drink.START + 1)) + Drink.START;
             if(drink != -1) price += this.costs.get(drink);
             // 값이 -1이 아닐 경우 무작위 side 하나 선정
-            const side = +values[2] == -1 ? -1 : Math.floor(Math.random() * (Side.END - Side.START)) + Side.START;
+            const side = +values[2] == -1 ? -1 : Math.floor(Math.random() * (Side.END - Side.START + 1)) + Side.START;
             if(side != -1) price += this.costs.get(side);
 
             // values[3]이 캐릭터이나, 현재 사용하지 않는 데이터.

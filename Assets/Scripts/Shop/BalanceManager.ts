@@ -74,6 +74,9 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
             this.possessionMoney = parseInt(possessionMoney);
             Mediator.GetInstance().Notify(this, "PossessionMoneyUpdated", possessionMoney);
         }
+        else {
+            UIManager.GetInstance().OpenInformation("ERROR: BALANCE REQUEST FAIL");
+        }
     }
 
     public GainDebugBalance() {
