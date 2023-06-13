@@ -125,6 +125,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     public EndStage(){
+        this.ResumeStage();
         UIManager.GetInstance().SetSettlementUI(true);
         OrderManager.GetInstance().DisableOrder();
 

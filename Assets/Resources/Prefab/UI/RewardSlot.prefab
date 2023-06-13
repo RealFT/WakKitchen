@@ -485,6 +485,10 @@ MonoBehaviour:
     - lockColor
     - backDefault
     - backRedeem
+    - rewardIcon
+    - redeemObj
+    - isCode
+    - redeemValue
     unityValues:
     - {fileID: 2316752431535739155}
     - {fileID: 2316752431507084368}
@@ -492,6 +496,10 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 4109192575052122043}
     - {fileID: 2316752430479431713}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -511,6 +519,10 @@ MonoBehaviour:
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.5372549295425415,\"g\":0.5372549295425415,\"b\":0.5372549295425415,\"a\":1.0}"}'
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.21568627655506135,\"g\":0.21568627655506135,\"b\":0.21568627655506135,\"a\":1.0}"}'
     - '{"type":"UnityEngine.Color, UnityEngine.CoreModule","value":"{\"r\":0.3294117748737335,\"g\":0.8274509906768799,\"b\":0.5529412031173706,\"a\":1.0}"}'
+    - 
+    - 
+    - '{"type":"System.Boolean, mscorlib","value":"True"}'
+    - '{"type":"System.String, mscorlib","value":""}'
     unityArrayValues: []
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: eb607ff485c19b148a02e944264ac4f0, type: 3}
@@ -582,15 +594,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5min
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ae8af907cd2c17f40a3824798db53c3e, type: 2}
-  m_sharedMaterial: {fileID: -423539565272073665, guid: ae8af907cd2c17f40a3824798db53c3e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+  m_sharedMaterial: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279568130
-  m_fontColor: {r: 0.007843138, g: 0.02745098, b: 0.08235294, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

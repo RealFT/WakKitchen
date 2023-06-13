@@ -216,17 +216,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WakGood
+  m_text: Paenchi
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a6883e64cf7604a4ca65f509a7b86d62, type: 2}
-  m_sharedMaterial: {fileID: -6237714624176690617, guid: a6883e64cf7604a4ca65f509a7b86d62, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4d0aa727adc5a0c45b8fb2a6851c96a6, type: 2}
+  m_sharedMaterial: {fileID: -423539565272073665, guid: 4d0aa727adc5a0c45b8fb2a6851c96a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279568130
-  m_fontColor: {r: 0.007843138, g: 0.02745098, b: 0.08235294, a: 1}
+    rgba: 4290314234
+  m_fontColor: {r: 0.9813333, g: 1, b: 0.72, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2841dae6b2d0d534d8619e009bf18a72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6cbee7216a33f3449aa7a6e5da8b7b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

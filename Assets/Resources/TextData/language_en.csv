@@ -92,6 +92,9 @@ info_already_dailygranted,Already claimed the reward today.
 info_Invalid_recipe,No matching order for the recipe.
 info_require_section,You must select a section for your employee.
 info_stampfull,The stamp is full.
+info_noselect_card,No card selected.
+info_notenough_card,Not enough cards to Upgrade.
+info_upgrade_full,Fully upgraded.
 event_time_next,Next reward
 event_redeem_locked,Lockes
 event_redeem_unlock,REDEEM!

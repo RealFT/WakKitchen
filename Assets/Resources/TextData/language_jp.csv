@@ -92,6 +92,9 @@ info_already_dailygranted,本日はすでにご褒美を獲得しております
 info_Invalid_recipe,レシピと一致する注文がありません。
 info_require_section,職員が作業するセクションを選択しなければなりません。
 info_stampfull,スタンプがいっぱいです
+info_noselect_card,カードを選択する必要があります。
+info_notenough_card,アップグレードに必要なカードが足りません。
+info_upgrade_full,すでに最高等級です。
 event_time_next,次の報酬まで 
 event_redeem_locked,ロック
 event_redeem_unlock,取得！

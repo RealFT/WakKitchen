@@ -961,7 +961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &26309653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6251,42 +6251,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 811680886}
     m_Modifications:
     - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.values.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[12]
-      value: rewardIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[13]
-      value: redeemObj
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[14]
-      value: isCode
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[15]
-      value: redeemValue
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.values.Array.data[14]
-      value: '{"type":"System.Boolean, mscorlib","value":"True"}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.values.Array.data[15]
-      value: '{"type":"System.String, mscorlib","value":""}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: script.unityValues.Array.data[12]
       value: 
       objectReference: {fileID: 13228776}
@@ -6294,6 +6258,10 @@ PrefabInstance:
       propertyPath: script.unityValues.Array.data[13]
       value: 
       objectReference: {fileID: 1242538410}
+    - target: {fileID: 2316752431535739155, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d7c246b27967f264f8198232f03420fb, type: 3}
     - target: {fileID: 2316752432214958604, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -9342,6 +9310,26 @@ PrefabInstance:
       propertyPath: script.unityValues.Array.data[13]
       value: 
       objectReference: {fileID: 1242538410}
+    - target: {fileID: 2316752431535739152, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316752431535739152, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316752431535739152, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316752431535739152, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316752431535739155, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5f4b32b369b9d64091d37c57fcddf38, type: 3}
     - target: {fileID: 2316752432214958604, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -9430,6 +9418,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
 --- !u!224 &538207401 stripped
@@ -10166,50 +10162,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 811680886}
     m_Modifications:
     - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.values.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[10]
-      value: backDefault
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[11]
-      value: backRedeem
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[12]
-      value: rewardIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[13]
-      value: redeemObj
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[14]
-      value: isCode
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.keys.Array.data[15]
-      value: redeemValue
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.values.Array.data[14]
-      value: '{"type":"System.Boolean, mscorlib","value":"True"}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.values.Array.data[15]
-      value: '{"type":"System.String, mscorlib","value":""}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
-      propertyPath: script.unityValues.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: script.unityValues.Array.data[12]
       value: 
       objectReference: {fileID: 1642625909}
@@ -10217,6 +10169,10 @@ PrefabInstance:
       propertyPath: script.unityValues.Array.data[13]
       value: 
       objectReference: {fileID: 1242538410}
+    - target: {fileID: 2316752431535739155, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c75e3415a75c87241b9fb78c398a3db1, type: 3}
     - target: {fileID: 2316752432214958604, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -10304,6 +10260,38 @@ PrefabInstance:
     - target: {fileID: 2316752432214958605, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: m_Name
       value: RewardSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
@@ -11376,6 +11364,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: OnPlayButtonClose
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2000123238}
+        m_TargetAssemblyTypeName: ZEPETO.Script.ZepetoScriptBehaviourComponent, ZEPETO.Script
+        m_MethodName: Invoke
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ResumeStage
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &666330347
@@ -13795,7 +13795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &796533564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17672,7 +17672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &969106015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20489,7 +20489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1208493055
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22445,6 +22445,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardSlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
 --- !u!224 &1304961070 stripped
@@ -24532,6 +24540,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardSlot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+    - target: {fileID: 4109192575052122043, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
 --- !u!224 &1441845193 stripped
@@ -39238,14 +39254,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4009494733724342522, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d6cbee7216a33f3449aa7a6e5da8b7b5, type: 3}
-    - target: {fileID: 5900603385127181674, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7490990156184725879, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -43991,6 +43999,18 @@ MonoBehaviour:
           m_StringArgument: OnPlayButtonClick
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2000123238}
+        m_TargetAssemblyTypeName: ZEPETO.Script.ZepetoScriptBehaviourComponent, ZEPETO.Script
+        m_MethodName: Invoke
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PauseStage
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!114 &8614037106960930071
 MonoBehaviour:
@@ -44325,7 +44345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &9198357628493173917
 MonoBehaviour:
   m_ObjectHideFlags: 0
