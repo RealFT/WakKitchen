@@ -20,16 +20,16 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
-    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    ItemSlot_Food_1 = require(\"./ItemSlot_Food\");\r\nconst ItemManager_1 = require(\"../ItemManager\");\r\nconst
-    Mediator_1 = require(\"../Notification/Mediator\");\r\nclass Shop_Food extends
-    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        Mediator_1.default.GetInstance().RegisterListener(this);\r\n   
-    }\r\n    OnDestroy() {\r\n        Mediator_1.default.GetInstance().UnregisterListener(this);\r\n   
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ItemSlot_Food_1 = require(\"./ItemSlot_Food\");\r\nconst
+    ItemManager_1 = require(\"../ItemManager\");\r\nconst Mediator_1 = require(\"../Notification/Mediator\");\r\nclass
+    Shop_Food extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n       
+    Mediator_1.default.GetInstance().RegisterListener(this);\r\n    }\r\n    OnDestroy()
+    {\r\n        Mediator_1.default.GetInstance().UnregisterListener(this);\r\n   
     }\r\n    InitFoodShop() {\r\n    }\r\n    OnNotify(sender, eventName, eventData)
     {\r\n        if (eventName == Mediator_1.EventNames.CurrencyUpdatedEvent) {\r\n           
     const product = ItemManager_1.default.GetInstance().GetProduct(eventData);\r\n           
     if (product) {\r\n                const match = product.productId.split(''_'');\r\n               
     //product.Name\r\n            }\r\n        }\r\n    }\r\n}\r\nexports.default
-    = Shop_Food;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9Gb29kLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9Gb29kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW1HO0FBQ25HLG1EQUE4RDtBQUM5RCxpREFBcUQ7QUFDckQsbURBQTRDO0FBRTVDLGdEQUF5QztBQUN6Qyx1REFBMkU7QUFFM0UsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQUV4RCxLQUFLO1FBRUQsa0JBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsRCxDQUFDO0lBQ08sU0FBUztRQUNiLGtCQUFRLENBQUMsV0FBVyxFQUFFLENBQUMsa0JBQWtCLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDcEQsQ0FBQztJQUNNLFlBQVk7SUFFbkIsQ0FBQztJQUVNLFFBQVEsQ0FBQyxNQUFXLEVBQUUsU0FBaUIsRUFBRSxTQUFjO1FBQzFELElBQUksU0FBUyxJQUFJLHFCQUFVLENBQUMsb0JBQW9CLEVBQUU7WUFDOUMsTUFBTSxPQUFPLEdBQUcscUJBQVcsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLENBQUM7WUFDaEUsSUFBSSxPQUFPLEVBQUM7Z0JBQ1IsTUFBTSxLQUFLLEdBQUcsT0FBTyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7Z0JBQzNDLGNBQWM7YUFDakI7U0FDSjtJQUNMLENBQUM7Q0FDSjtBQXRCRCw0QkFzQkMifQ==","assetPath":"Assets/Scripts/Shop/Shop_Food.ts","manifest":{"properties":[],"name":"Shop_Food","description":""},"isCompiled":true}'
+    = Shop_Food;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9Gb29kLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9Gb29kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW1HO0FBRW5HLGlEQUFxRDtBQUNyRCxtREFBNEM7QUFFNUMsZ0RBQXlDO0FBQ3pDLHVEQUEyRTtBQUUzRSxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBRXhELEtBQUs7UUFFRCxrQkFBUSxDQUFDLFdBQVcsRUFBRSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xELENBQUM7SUFDTyxTQUFTO1FBQ2Isa0JBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNwRCxDQUFDO0lBQ00sWUFBWTtJQUVuQixDQUFDO0lBRU0sUUFBUSxDQUFDLE1BQVcsRUFBRSxTQUFpQixFQUFFLFNBQWM7UUFDMUQsSUFBSSxTQUFTLElBQUkscUJBQVUsQ0FBQyxvQkFBb0IsRUFBRTtZQUM5QyxNQUFNLE9BQU8sR0FBRyxxQkFBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQztZQUNoRSxJQUFJLE9BQU8sRUFBQztnQkFDUixNQUFNLEtBQUssR0FBRyxPQUFPLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDM0MsY0FBYzthQUNqQjtTQUNKO0lBQ0wsQ0FBQztDQUNKO0FBdEJELDRCQXNCQyJ9","assetPath":"Assets/Scripts/Shop/Shop_Food.ts","manifest":{"properties":[],"name":"Shop_Food","description":""},"isCompiled":true}'
   typescriptHash: c685f3b57005c3c1caf064e5580cdc2a
   onlyWriteTrigger: 0

@@ -16813,13 +16813,13 @@ MonoBehaviour:
     - 
     - '{"type":"System.Single, mscorlib","value":"1"}'
     - 
-    - '{"type":"System.Single, mscorlib","value":"360"}'
+    - '{"type":"System.Single, mscorlib","value":"300"}'
     - 
     - 
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":5,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
-    - '{"type":"System.Single, mscorlib","value":"0.32"}'
+    - '{"type":"System.Single, mscorlib","value":"0.36"}'
     - 
     - 
     unityArrayValues:
@@ -18590,11 +18590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519870864255291275, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
       propertyPath: m_Pivot.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 519870864255291275, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
       propertyPath: m_Pivot.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 519870864255291275, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
       propertyPath: m_AnchorMax.x
@@ -18626,11 +18626,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519870864255291275, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -16
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 519870864255291275, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -172
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: 519870864259884466, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
       propertyPath: m_SortingOrder
@@ -37175,11 +37175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727616324896, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_Pivot.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727616324896, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_Pivot.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727616324896, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_AnchorMax.x
@@ -37211,11 +37211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727616324896, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -16
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727616324896, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -68
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727757043984, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_SizeDelta.x
@@ -37244,6 +37244,10 @@ PrefabInstance:
     - target: {fileID: 6099409727888809997, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000055342683
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099409727894498848, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6099409727894498849, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_SortingOrder

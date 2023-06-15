@@ -56,7 +56,14 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
     private isTextEnd: boolean;   // 텍스트 출력이 끝났는지 확인
     
     @SerializeField() private helpPanel: GameObject;
-
+    @SerializeField() private inventoryPanel: GameObject;
+    
+    public OpenInventoryPanel(){
+        this.inventoryPanel.SetActive(true);
+    }
+    public CloseInventoryPanel(){
+        this.inventoryPanel.SetActive(false);
+    }
     public OpenHelpPanel(){
         this.helpPanel.SetActive(true);
     }
@@ -225,9 +232,13 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         console.log("ToShop");
         this.SetSettlementUI(false);
         this.SetShopUI(true);
+        if(DataManager.GetInstance().GetIsUnlockByName("employee")){
+            this.OpenInventoryPanel();
+        }
 
         // 현재 스테이지에 해금된 섹션이 있는지 체크 후 해당하는 가이드 튜토리얼 활성화
         const curStage = GameManager.GetInstance().GetCurrentStage();
+
         const unlockSection = DataManager.GetInstance().CheckUnlockByStage(curStage);
         if (unlockSection != undefined) {
             HelpManager.GetInstance().GuideSection(unlockSection);

@@ -149,11 +149,11 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
 
     public DispenserUnlock(level:number){
         if(level >= 1){
-            this.speed = 320;
+            this.speed = 340;
             this.speedRange = 0.2;
         }
         if(level >= 2){
-            this.speed = 280;
+            this.speed = 380;
             this.speedRange = 0;
         }
         if(level >= 3){

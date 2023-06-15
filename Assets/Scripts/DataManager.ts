@@ -177,7 +177,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             // switch (values[0]) {
             //     case "time":
             //         break;
-            //     case "Stage":
+            //     case "curStage":
             //         break;
             //     case "wakdu":
             //         break;
@@ -242,27 +242,27 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.LoadUnlockStageData();
         this.LoadCardData();
     }
-    public DebugStage() {
-        this.lastSavedStage = 1;
-        this.SetValue("Stage", this.lastSavedStage);
-    }
-    public DebugStageNoHelp() {
-        this.lastSavedStage = 29;
-        this.SetValue("Stage", this.lastSavedStage);
-    }
+    // public DebugStage() {
+    //     this.lastSavedStage = 1;
+    //     this.SetValue("curStage", this.lastSavedStage);
+    // }
+    // public DebugStageNoHelp() {
+    //     this.lastSavedStage = 29;
+    //     this.SetValue("curStage", this.lastSavedStage);
+    // }
     public LoadSavedStage() {
         //this.lastSavedStage = 29;
-        //this.SetValue("Stage", this.lastSavedStage);
-        this.lastSavedStage = this.GetValue("Stage");
+        //this.SetValue("curStage", this.lastSavedStage);
+        this.lastSavedStage = this.GetValue("curStage");
         //값이 없을 경우 0 리턴. 처음 시작은 1스테이지부터.
         if(this.lastSavedStage == 0) this.lastSavedStage = 1;
-        this.SetValue("Stage", this.lastSavedStage);
+        this.SetValue("curStage", this.lastSavedStage);
     }
     public GetLastSavedStage(): number {
         return this.lastSavedStage;
     }
     public SetStage(stage: number) {
-        this.SetValue("Stage", stage);
+        this.SetValue("curStage", stage);
         this.lastSavedStage = stage;
     }
     public LoadCostData() {

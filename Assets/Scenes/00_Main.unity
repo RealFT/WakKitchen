@@ -6251,6 +6251,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 811680886}
     m_Modifications:
     - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: script.values.Array.data[15]
+      value: '{"type":"System.String, mscorlib","value":""}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: script.unityValues.Array.data[12]
       value: 
       objectReference: {fileID: 13228776}
@@ -10162,6 +10166,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 811680886}
     m_Modifications:
     - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+      propertyPath: script.values.Array.data[15]
+      value: '{"type":"System.String, mscorlib","value":""}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192858424290849863, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
       propertyPath: script.unityValues.Array.data[12]
       value: 
       objectReference: {fileID: 1642625909}
@@ -11156,10 +11164,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '* ZEPETO Settings > Redeem Coupon to register.
-
-    * iOS users can register
-    via the Feed URL of their ZDE account. (@zde_shop)'
+  m_text: "* ZEPETO Settings > Redeem Coupon to register.\n* iOS users can register
+    via the Feed URL of their \uD478\uC9D0\uD55C\uC9D1 account. (@cba0898)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
   m_sharedMaterial: {fileID: -423539565272073665, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
@@ -26540,6 +26546,7 @@ MonoBehaviour:
     - bgmBtnText
     - sfxBtnText
     - helpBtnText
+    - inventoryPanel
     unityValues:
     - {fileID: 1960976124}
     - {fileID: 13797205}
@@ -26561,6 +26568,7 @@ MonoBehaviour:
     - {fileID: 873870884}
     - {fileID: 29995012}
     - {fileID: 1293296591}
+    - {fileID: 9198357628493173916}
     values:
     - 
     - 
@@ -26579,6 +26587,7 @@ MonoBehaviour:
     - 
     - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":9,\"length\":3,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
+    - 
     - 
     - 
     - 
@@ -34223,11 +34232,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7918666397879232375, guid: 978dc4f0d96e9fc44a423751f1b90e17, type: 3}
   m_PrefabInstance: {fileID: 2085412478}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2087193987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2436527152538627868, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
-  m_PrefabInstance: {fileID: 3978212807835753953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2087221728
 GameObject:
   m_ObjectHideFlags: 0
@@ -39296,6 +39300,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
+--- !u!1 &3978212807835753954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2436527152538627868, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
+  m_PrefabInstance: {fileID: 3978212807835753953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3993697464040506985
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44360,27 +44369,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script:
     keys:
-    - cardSlotPrefab
-    - equipSlotControllerObj
-    - contentParent
-    - upgradeBtn
     - equipBtn
-    - cardInfoWindowObj
-    - inventoryPanel
+    - upgradeBtn
     - closeBtn
     - helpBtn
+    - contentParent
+    - equipSlotControllerObj
+    - cardInfoWindowObj
+    - cardSlotPrefab
     unityValues:
-    - {fileID: 7396701654745154610, guid: 664c45b914543704e9e499adfaf93856, type: 3}
-    - {fileID: 2073798340}
-    - {fileID: 6234492784654174621}
-    - {fileID: 282529008609232102}
     - {fileID: 4529860919628652997}
-    - {fileID: 2087193987}
-    - {fileID: 9198357628493173916}
+    - {fileID: 282529008609232102}
     - {fileID: 2738814855225660847}
     - {fileID: 545384477}
+    - {fileID: 6234492784654174621}
+    - {fileID: 2073798340}
+    - {fileID: 3978212807835753954}
+    - {fileID: 7396701654745154610, guid: 664c45b914543704e9e499adfaf93856, type: 3}
     values:
-    - 
     - 
     - 
     - 

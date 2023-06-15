@@ -43,6 +43,7 @@ export default class InteractionBase extends ZepetoScriptBehaviour {
     protected OnTriggerExit(collider) {
         this.SetKitchenVisibility(false);
         GameManager.GetInstance().SetPlayerJump(true);
+        GameManager.GetInstance().SetPlayerMovement(true);
         this.openButton.gameObject.SetActive(false);
     }
 

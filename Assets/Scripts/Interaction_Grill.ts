@@ -150,7 +150,7 @@ export default class Interaction_Grill extends InteractionBase implements IListe
             slot.Unlock();
             if(level === 3) {
                 slot.Double();
-                this.unlockDouble.SetActive(true);
+                //this.unlockDouble.SetActive(true);
                 this.isDouble = true;
             }
         }

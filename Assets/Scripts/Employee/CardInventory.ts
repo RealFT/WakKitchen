@@ -15,7 +15,6 @@ import HelpManager from '../Help/HelpManager';
 
 export default class CardInventory extends ZepetoScriptBehaviour implements IListener {
 
-    @SerializeField() private inventoryPanel: GameObject;
     @SerializeField() private equipBtn: Button;
     @SerializeField() private upgradeBtn: Button;
     @SerializeField() private closeBtn: Button;
@@ -32,9 +31,9 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
     Start() {
         this.Init();
         this.CreateInventory();
-        if(!DataManager.GetInstance().GetIsUnlockByName("employee")){
-            this.inventoryPanel.gameObject.SetActive(false);
-        }
+        // if(!DataManager.GetInstance().GetIsUnlockByName("employee")){
+        //     this.inventoryPanel.gameObject.SetActive(false);
+        // }
     }
 
     private OnDestroy() {
@@ -67,7 +66,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
             }
             else{
                 SoundManager.GetInstance().OnPlayButtonClick();
-                this.inventoryPanel.SetActive(false);
+                UIManager.GetInstance().CloseInventoryPanel();
             }
         });
         this.helpBtn.onClick.AddListener(()=> HelpManager.GetInstance().OpenHelpSection("employee"));
@@ -201,7 +200,7 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
     private OnClickEquipCard(){
         const card = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>().GetCardData();
         if (card == undefined){
-            UIManager.GetInstance().OpenInformation("No card selected.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_noselect_card"));
             SoundManager.GetInstance().OnPlaySFX("Tresh");
             return;
         }
@@ -215,14 +214,14 @@ export default class CardInventory extends ZepetoScriptBehaviour implements ILis
     private OnClickUpgradeCard(){
         const cardSlot = this.toggleGroup.GetFirstActiveToggle()?.GetComponent<CardSlot>();
         if(!cardSlot || cardSlot.GetCardQuantity() < 10){
-            UIManager.GetInstance().OpenInformation("Not enough cards to Upgrade");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_notenough_card"));
             SoundManager.GetInstance().OnPlaySFX("Tresh");
             return;
         }
         const card = cardSlot.GetCardData();
         const grade = card.GetGrade();
         if(grade == "s"){
-            UIManager.GetInstance().OpenInformation("Fully upgraded");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_upgrade_full"));
             SoundManager.GetInstance().OnPlaySFX("Tresh");
             return;
         }

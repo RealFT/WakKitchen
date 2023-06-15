@@ -54,11 +54,11 @@ export default class EventTimer extends ZepetoScriptBehaviour {
         this.eventTitleText.text = DataManager.GetInstance().GetCurrentLanguageData("event_title");
         this.eventDescriptionText.text = DataManager.GetInstance().GetCurrentLanguageData("event_description");
         this.StartTimer();
-        this.eventSlots[0].SetSlot(5,true,"CODE1");
+        this.eventSlots[0].SetSlot(5,true,"WAKKINGA");
         this.eventSlots[1].SetSlot(15,false,"3");
-        this.eventSlots[2].SetSlot(30,true,"CODE2");
+        this.eventSlots[2].SetSlot(30,true,"WAKBURGERHAT");
         this.eventSlots[3].SetSlot(45,false,"5");
-        this.eventSlots[4].SetSlot(60,true,"CODE3");
+        this.eventSlots[4].SetSlot(60,true,"WAKOVERALL");
 
         const redeemed = PlayerPrefs.GetString("redeemedIndex");
         const values = redeemed.split('_');

@@ -143,7 +143,7 @@ export default class Interaction_Fry extends InteractionBase implements IListene
         if(level >= 3){
             slots[0].Double();
             slots[1].Double();
-            this.unlockDouble.SetActive(true);
+            //this.unlockDouble.SetActive(true);
             this.isDouble = true;
         }
     }

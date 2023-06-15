@@ -103,6 +103,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     }
 
     *GuideStartRoutine(){
+        UIManager.GetInstance().CloseInventoryPanel();
         let curPage = 0;
 
         // page 1
@@ -255,6 +256,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
     }
 
     *GuideSettlementRoutine(){
+        UIManager.GetInstance().CloseInventoryPanel();
         let curPage = 0;
         this.help_Next.enabled = false;
         this.help_Double.enabled = false;
@@ -320,6 +322,7 @@ export default class HelpManager extends ZepetoScriptBehaviour {
 
     public GuideSection(section: string){
         GameManager.GetInstance().SetTutorialTimeScale();
+        UIManager.GetInstance().CloseInventoryPanel();
         this.helpUI.SetActive(true);
         if(section == "employee"){
             this.StartCoroutine(this.GuideEmployeeRoutine());
