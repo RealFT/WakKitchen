@@ -11,7 +11,7 @@ main_start,시작
 settlement_total,총 매출
 settlement_employee,직원 급여
 settlement_netIncome,순수익
-settlement_double_info,도장을 사용해서 수익을 두 배로 얻으세요!
+settlement_double_info,도장을 사용해서 수익을 \두 배로 얻으세요!
 settlement_double_confirm,확인
 settlement_double_cancel,취소
 shop_employee_category,아르바이트

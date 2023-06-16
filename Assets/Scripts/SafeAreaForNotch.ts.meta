@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: a37ea45d18cea2b4bba0a2ab8be540d4
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.SafeArea = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nclass SafeArea extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Awake() {\r\n        const rectTransform = this.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
+    const safeArea = UnityEngine_1.Screen.safeArea;\r\n        const minAnchor =
+    safeArea.position;\r\n        const maxAnchor = new UnityEngine_1.Vector2(minAnchor.x
+    + safeArea.size.x, minAnchor.y + safeArea.size.y);\r\n        minAnchor.x /=
+    UnityEngine_1.Screen.width;\r\n        minAnchor.y /= UnityEngine_1.Screen.height;\r\n       
+    maxAnchor.x /= UnityEngine_1.Screen.width;\r\n        maxAnchor.y /= UnityEngine_1.Screen.height;\r\n       
+    rectTransform.anchorMin = minAnchor;\r\n        rectTransform.anchorMax = maxAnchor;\r\n   
+    }\r\n}\r\nexports.SafeArea = SafeArea;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2FmZUFyZWFGb3JOb3RjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNhZmVBcmVhRm9yTm90Y2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFtRTtBQUVuRSxNQUFhLFFBQVMsU0FBUSxxQ0FBcUI7SUFDakQsS0FBSztRQUNILE1BQU0sYUFBYSxHQUFrQixJQUFJLENBQUMsWUFBWSxTQUFDLDJCQUFhLEVBQUcsQ0FBQztRQUN4RSxNQUFNLFFBQVEsR0FBUyxvQkFBTSxDQUFDLFFBQVEsQ0FBQztRQUN2QyxNQUFNLFNBQVMsR0FBWSxRQUFRLENBQUMsUUFBUSxDQUFDO1FBQzdDLE1BQU0sU0FBUyxHQUFZLElBQUkscUJBQU8sQ0FBQyxTQUFTLENBQUMsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxFQUFFLFNBQVMsQ0FBQyxDQUFDLEdBQUcsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUVyRyxTQUFTLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsS0FBSyxDQUFDO1FBQzVCLFNBQVMsQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxNQUFNLENBQUM7UUFDN0IsU0FBUyxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLEtBQUssQ0FBQztRQUM1QixTQUFTLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsTUFBTSxDQUFDO1FBRTdCLGFBQWEsQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO1FBQ3BDLGFBQWEsQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO0lBQ3RDLENBQUM7Q0FDRjtBQWZELDRCQWVDIn0=","assetPath":"Assets/Scripts/SafeAreaForNotch.ts","manifest":{"properties":[],"name":"SafeArea","description":""},"isCompiled":true}'
+  typescriptHash: 45dc569e56cca968075cd3f90c1e0b70
+  onlyWriteTrigger: 0
