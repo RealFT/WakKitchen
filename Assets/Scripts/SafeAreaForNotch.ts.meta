@@ -19,15 +19,16 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nexports.SafeArea = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    UnityEngine_1 = require(\"UnityEngine\");\r\nclass SafeArea extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    Awake() {\r\n        const rectTransform = this.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
-    const safeArea = UnityEngine_1.Screen.safeArea;\r\n        const minAnchor =
-    safeArea.position;\r\n        const maxAnchor = new UnityEngine_1.Vector2(minAnchor.x
-    + safeArea.size.x, minAnchor.y + safeArea.size.y);\r\n        minAnchor.x /=
-    UnityEngine_1.Screen.width;\r\n        minAnchor.y /= UnityEngine_1.Screen.height;\r\n       
-    maxAnchor.x /= UnityEngine_1.Screen.width;\r\n        maxAnchor.y /= UnityEngine_1.Screen.height;\r\n       
-    rectTransform.anchorMin = minAnchor;\r\n        rectTransform.anchorMax = maxAnchor;\r\n   
-    }\r\n}\r\nexports.SafeArea = SafeArea;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2FmZUFyZWFGb3JOb3RjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNhZmVBcmVhRm9yTm90Y2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFtRTtBQUVuRSxNQUFhLFFBQVMsU0FBUSxxQ0FBcUI7SUFDakQsS0FBSztRQUNILE1BQU0sYUFBYSxHQUFrQixJQUFJLENBQUMsWUFBWSxTQUFDLDJCQUFhLEVBQUcsQ0FBQztRQUN4RSxNQUFNLFFBQVEsR0FBUyxvQkFBTSxDQUFDLFFBQVEsQ0FBQztRQUN2QyxNQUFNLFNBQVMsR0FBWSxRQUFRLENBQUMsUUFBUSxDQUFDO1FBQzdDLE1BQU0sU0FBUyxHQUFZLElBQUkscUJBQU8sQ0FBQyxTQUFTLENBQUMsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxFQUFFLFNBQVMsQ0FBQyxDQUFDLEdBQUcsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUVyRyxTQUFTLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsS0FBSyxDQUFDO1FBQzVCLFNBQVMsQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxNQUFNLENBQUM7UUFDN0IsU0FBUyxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLEtBQUssQ0FBQztRQUM1QixTQUFTLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsTUFBTSxDQUFDO1FBRTdCLGFBQWEsQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO1FBQ3BDLGFBQWEsQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO0lBQ3RDLENBQUM7Q0FDRjtBQWZELDRCQWVDIn0=","assetPath":"Assets/Scripts/SafeAreaForNotch.ts","manifest":{"properties":[],"name":"SafeArea","description":""},"isCompiled":true}'
-  typescriptHash: 45dc569e56cca968075cd3f90c1e0b70
+    { value: true });\r\nexports.SafeArea = void 0;\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nclass
+    SafeArea extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake() {\r\n       
+    const rectTransform = this.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
+    const safeArea = UnityEngine_1.Screen.safeArea;\r\n        let newAnchorMin =
+    safeArea.position;\r\n        let newAnchorMax = __UnityEngine__.Vector2.op_Addition(safeArea.position,
+    safeArea.size);\r\n        newAnchorMin.x /= UnityEngine_1.Screen.width;\r\n       
+    newAnchorMax.x /= UnityEngine_1.Screen.width;\r\n        newAnchorMin.y /= UnityEngine_1.Screen.height;\r\n       
+    newAnchorMax.y /= UnityEngine_1.Screen.height;\r\n        rectTransform.anchorMin
+    = newAnchorMin;\r\n        rectTransform.anchorMax = newAnchorMax;\r\n    }\r\n}\r\nexports.SafeArea
+    = SafeArea;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2FmZUFyZWFGb3JOb3RjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNhZmVBcmVhRm9yTm90Y2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBMEQ7QUFFMUQsTUFBYSxRQUFTLFNBQVEscUNBQXFCO0lBQ2pELEtBQUs7UUFDSCxNQUFNLGFBQWEsR0FBa0IsSUFBSSxDQUFDLFlBQVksU0FBQywyQkFBYSxFQUFHLENBQUM7UUFDeEUsTUFBTSxRQUFRLEdBQVMsb0JBQU0sQ0FBQyxRQUFRLENBQUM7UUFDdkMsSUFBSSxZQUFZLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQztRQUNyQyxJQUFJLFlBQVksMkJBVW8vNUYsV0FBWSxDQVY3LzVGLFFBQVEsQ0FBQyxRQUFRLEVBQUcsUUFBUSxDQUFDLElBQUksQ0FBQSxDQUFDO1FBRXJELFlBQVksQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxLQUFLLENBQUM7UUFDL0IsWUFBWSxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLEtBQUssQ0FBQztRQUMvQixZQUFZLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsTUFBTSxDQUFDO1FBQ2hDLFlBQVksQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxNQUFNLENBQUM7UUFFaEMsYUFBYSxDQUFDLFNBQVMsR0FBRyxZQUFZLENBQUM7UUFDdkMsYUFBYSxDQUFDLFNBQVMsR0FBRyxZQUFZLENBQUM7SUFDekMsQ0FBQztDQUNGO0FBZkQsNEJBZUMifQ==","assetPath":"Assets/Scripts/SafeAreaForNotch.ts","manifest":{"properties":[],"name":"SafeArea","description":""},"isCompiled":true}'
+  typescriptHash: 160ecb139f96069136f5b3930893fe78
   onlyWriteTrigger: 0

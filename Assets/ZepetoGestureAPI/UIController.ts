@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Button, RawImage, Text, Toggle } from 'UnityEngine.UI';
 import { LocalPlayer, ZepetoCharacter, ZepetoPlayers, ZepetoScreenTouchpad } from 'ZEPETO.Character.Controller';
 import { OfficialContentType, Content } from 'ZEPETO.World';
-import { Object, GameObject, Transform } from 'UnityEngine';
+import { Object, GameObject, Screen, Rect, RectTransform, Transform } from 'UnityEngine';
 import GestureLoader from './GestureLodaer';
 import Thumbnail from './Thumbnail';
 
@@ -13,9 +13,22 @@ export default class UIController extends ZepetoScriptBehaviour {
 
     private _gestureLodaer: GestureLoader;
     private _myCharacter: ZepetoCharacter;
-        
+    public safeAreaObject: GameObject;
+
     Start() {
-        
+        // SafeArea Settings
+        let safeArea: Rect = Screen.safeArea;
+        let newAnchorMin = safeArea.position;
+        let newAnchorMax = safeArea.position + safeArea.size;
+        newAnchorMin.x /= Screen.width;
+        newAnchorMax.x /= Screen.width;
+        newAnchorMin.y /= Screen.height;
+        newAnchorMax.y /= Screen.height;
+
+        let rect = this.safeAreaObject.GetComponent<RectTransform>();
+        rect.anchorMin = newAnchorMin;
+        rect.anchorMax = newAnchorMax;
+
         this._gestureLodaer = Object.FindObjectOfType<GestureLoader>();
         ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
             this._myCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;

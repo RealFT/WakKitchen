@@ -37305,6 +37305,26 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6099409727910760229, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: script.keys.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099409727910760229, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: script.values.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099409727910760229, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: script.keys.Array.data[2]
+      value: safeAreaObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099409727910760229, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: script.unityValues.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099409727910760229, guid: 983578afae44d459d92e89fe01392623, type: 3}
+      propertyPath: script.unityValues.Array.data[2]
+      value: 
+      objectReference: {fileID: 1979119306}
     - target: {fileID: 6099409727952706426, guid: 983578afae44d459d92e89fe01392623, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -37383,6 +37403,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 983578afae44d459d92e89fe01392623, type: 3}
+--- !u!1 &1979119306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6099409727413139515, guid: 983578afae44d459d92e89fe01392623, type: 3}
+  m_PrefabInstance: {fileID: 1979119305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1996527214
 GameObject:
   m_ObjectHideFlags: 0

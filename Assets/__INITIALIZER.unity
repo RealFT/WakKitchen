@@ -1,0 +1,1344 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1652157745
+GameObject: 
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652157747}
+  - component: {fileID: 1652157746}
+  m_Name: ZepetoScriptContextInitializerComponent
+  m_IsActive: 1
+--- !u!114 &1652157746
+MonoBehaviour:  
+  m_GameObject: {fileID: 1652157745}
+  m_Enabled: 1
+  m_Script: {fileID: -820289043, guid: 921f0445823004a16a499d629dd566a6, type: 3}   
+  initializer: {fileID: 817983362}
+--- !u!4 &1652157747
+Transform:
+  m_GameObject: {fileID: 1652157745}
+--- !u!114 &817983362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2046837767, guid: 921f0445823004a16a499d629dd566a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assetBundle: {fileID: 0}
+  assets:
+  - assetPath: __STREAMINGASSETS
+    asset: {fileID: 0}
+  - assetPath: Assets/Scripts/CharacterController.ts
+    asset: {fileID: 4458252877524076426, guid: 2010355005c5d384b972a63b2ad7871a, type: 3}
+  - assetPath: Assets/Scripts/Cook.ts
+    asset: {fileID: 4458252877524076426, guid: d63b0a9d883fa434c8faa505f675d91b, type: 3}
+  - assetPath: Assets/Scripts/Cup.ts
+    asset: {fileID: 4458252877524076426, guid: 713cb99da32969846882ea6f68ff9bde, type: 3}
+  - assetPath: Assets/Scripts/DataManager.ts
+    asset: {fileID: 4458252877524076426, guid: c8aa2219ba0ed2641863883b651a275b, type: 3}
+  - assetPath: Assets/Scripts/Dispenser.ts
+    asset: {fileID: 4458252877524076426, guid: 3718fda636ccbab49a3e67c33670d077, type: 3}
+  - assetPath: Assets/Scripts/Employee/Card.ts
+    asset: {fileID: 4458252877524076426, guid: 8fe7194b6b6e1b54bb480294369c016c, type: 3}
+  - assetPath: Assets/Scripts/Employee/CardData.ts
+    asset: {fileID: 4458252877524076426, guid: 3303530ebeb3d6c40a8424d3b38ccc70, type: 3}
+  - assetPath: Assets/Scripts/Employee/CardInfoWindow.ts
+    asset: {fileID: 4458252877524076426, guid: 2e5b0fc4b19ede9438ae6c29ea25f4bc, type: 3}
+  - assetPath: Assets/Scripts/Employee/CardInventory.ts
+    asset: {fileID: 4458252877524076426, guid: a05551fcb4f9af7408e43118c9345980, type: 3}
+  - assetPath: Assets/Scripts/Employee/CardPool.ts
+    asset: {fileID: 4458252877524076426, guid: 5939b03edbe57794981271a98d273be0, type: 3}
+  - assetPath: Assets/Scripts/Employee/CardSlot.ts
+    asset: {fileID: 4458252877524076426, guid: ef39647c4c24c9b47909eb474f4d39b8, type: 3}
+  - assetPath: Assets/Scripts/Employee/EmployeeManager.ts
+    asset: {fileID: 4458252877524076426, guid: 5f832a3d001d0a94eb482fc329270d44, type: 3}
+  - assetPath: Assets/Scripts/Employee/EmployeeSlot.ts
+    asset: {fileID: 4458252877524076426, guid: 7ff1679e4e3ff81459dea9ea12abaf39, type: 3}
+  - assetPath: Assets/Scripts/Employee/EquipSlot.ts
+    asset: {fileID: 4458252877524076426, guid: 87a6d35c3b7524e4f841c208c9e88ec8, type: 3}
+  - assetPath: Assets/Scripts/Employee/EquipSlotController.ts
+    asset: {fileID: 4458252877524076426, guid: 98ca602668a519840a0407922b8a25ec, type: 3}
+  - assetPath: Assets/Scripts/Employee/Gacha.ts
+    asset: {fileID: 4458252877524076426, guid: 22c629a8765b1dc48897cc92337e2872, type: 3}
+  - assetPath: Assets/Scripts/Event/BookPanel.ts
+    asset: {fileID: 4458252877524076426, guid: 25ca325d693449f479d4559f37dfc7b4, type: 3}
+  - assetPath: Assets/Scripts/Event/DailyReward.ts
+    asset: {fileID: 4458252877524076426, guid: 7f19129ddec44064fb74c0f346343ffe, type: 3}
+  - assetPath: Assets/Scripts/Event/EventSlot.ts
+    asset: {fileID: 4458252877524076426, guid: eb607ff485c19b148a02e944264ac4f0, type: 3}
+  - assetPath: Assets/Scripts/Event/EventTimer.ts
+    asset: {fileID: 4458252877524076426, guid: 4b2a22358c407284aac95bea49d288e2, type: 3}
+  - assetPath: Assets/Scripts/Event/RedeemCodePanel.ts
+    asset: {fileID: 4458252877524076426, guid: d97e100c115e23449948333c3bae5574, type: 3}
+  - assetPath: Assets/Scripts/ExpandOrderReceipt.ts
+    asset: {fileID: 4458252877524076426, guid: 351c2d05924fe3c468e4b124e21a48e1, type: 3}
+  - assetPath: Assets/Scripts/FrySlot.ts
+    asset: {fileID: 4458252877524076426, guid: e52bff79fdf5abb4e8fcba25b6fa8f78, type: 3}
+  - assetPath: Assets/Scripts/GameManager.ts
+    asset: {fileID: 4458252877524076426, guid: bb375eb55cd9444488be4a7dd4186cbc, type: 3}
+  - assetPath: Assets/Scripts/GrillSlot.ts
+    asset: {fileID: 4458252877524076426, guid: 992bdce9d76c98841bd1a2c873ff18c3, type: 3}
+  - assetPath: Assets/Scripts/Help/HelpContents.ts
+    asset: {fileID: 4458252877524076426, guid: 850a8eef2b7367448823d123943d405c, type: 3}
+  - assetPath: Assets/Scripts/Help/HelpManager.ts
+    asset: {fileID: 4458252877524076426, guid: 508729b000a1bf8498bdcd489b9ff092, type: 3}
+  - assetPath: Assets/Scripts/Help/HelpPage.ts
+    asset: {fileID: 4458252877524076426, guid: daf074360024a5741a660dbbb3b155c1, type: 3}
+  - assetPath: Assets/Scripts/Help/HelpPanel.ts
+    asset: {fileID: 4458252877524076426, guid: beb40c6c9bd55bc48a5f9ed7c2af98b0, type: 3}
+  - assetPath: Assets/Scripts/Help/HelpWindow.ts
+    asset: {fileID: 4458252877524076426, guid: 139dd9d9641a5fc4f8bbaed51be6c6dc, type: 3}
+  - assetPath: Assets/Scripts/Interaction.ts
+    asset: {fileID: 4458252877524076426, guid: 3c6a5784c556e114e81b06bdfc774562, type: 3}
+  - assetPath: Assets/Scripts/Interaction_Fry.ts
+    asset: {fileID: 4458252877524076426, guid: cc31d61d807bd324e9e691e54fe9685e, type: 3}
+  - assetPath: Assets/Scripts/Interaction_Grill.ts
+    asset: {fileID: 4458252877524076426, guid: a18c520b2beb45a499994beee9f61926, type: 3}
+  - assetPath: Assets/Scripts/InteractionBase.ts
+    asset: {fileID: 4458252877524076426, guid: c73828f97cea44548ae7833e340a8787, type: 3}
+  - assetPath: Assets/Scripts/ItemManager.ts
+    asset: {fileID: 4458252877524076426, guid: e316eb0a15bed22428ac732987aab222, type: 3}
+  - assetPath: Assets/Scripts/Legacy/CookSlot.ts
+    asset: {fileID: 4458252877524076426, guid: 0993398902798a249a597a6d0abf7b70, type: 3}
+  - assetPath: Assets/Scripts/Legacy/MouseChaser.ts
+    asset: {fileID: 4458252877524076426, guid: 9eb5772e947130d478bc8f9f790fe584, type: 3}
+  - assetPath: Assets/Scripts/Notification/Mediator.ts
+    asset: {fileID: 4458252877524076426, guid: 121042ae03b674a4db128caf2b98c056, type: 3}
+  - assetPath: Assets/Scripts/Notification/NotifyTest.ts
+    asset: {fileID: 4458252877524076426, guid: c3906335f85f52f439a93606fab31ae3, type: 3}
+  - assetPath: Assets/Scripts/OrderManager.ts
+    asset: {fileID: 4458252877524076426, guid: 76394cc44e82a36469b218c9894fb533, type: 3}
+  - assetPath: Assets/Scripts/OrderReceipt.ts
+    asset: {fileID: 4458252877524076426, guid: cbd81cf0aba26b64cade05be518cdfad, type: 3}
+  - assetPath: Assets/Scripts/QuarterViewController.ts
+    asset: {fileID: 4458252877524076426, guid: 3977997758c83c74fbf7abc2100482c2, type: 3}
+  - assetPath: Assets/Scripts/Receipt.ts
+    asset: {fileID: 4458252877524076426, guid: e51ea9c31d383334b980370c24b7eafc, type: 3}
+  - assetPath: Assets/Scripts/SafeAreaForNotch.ts
+    asset: {fileID: 4458252877524076426, guid: a37ea45d18cea2b4bba0a2ab8be540d4, type: 3}
+  - assetPath: Assets/Scripts/SceneLoadManager.ts
+    asset: {fileID: 4458252877524076426, guid: bb1445786a3e125498a423199d7c4271, type: 3}
+  - assetPath: Assets/Scripts/SceneMove.ts
+    asset: {fileID: 4458252877524076426, guid: 900d3f591b300e64c9ef56de15c673e4, type: 3}
+  - assetPath: Assets/Scripts/SceneMove3D.ts
+    asset: {fileID: 4458252877524076426, guid: 88ac81f4b75e3aa42a490b648ca19a52, type: 3}
+  - assetPath: Assets/Scripts/Settlement.ts
+    asset: {fileID: 4458252877524076426, guid: 3be5c7b313a2b5a4da453620a4e110c9, type: 3}
+  - assetPath: Assets/Scripts/Shop/BalanceManager.ts
+    asset: {fileID: 4458252877524076426, guid: 9b47c7b7a6ff8e744863bfb3450a4784, type: 3}
+  - assetPath: Assets/Scripts/Shop/ItemSlot_Food.ts
+    asset: {fileID: 4458252877524076426, guid: e0f14e08ed6028c4f9f5808670d51c9c, type: 3}
+  - assetPath: Assets/Scripts/Shop/ItemSlot_Upgrade.ts
+    asset: {fileID: 4458252877524076426, guid: 5619f44d85f791842a329af299e534c9, type: 3}
+  - assetPath: Assets/Scripts/Shop/ITM_Inventory.ts
+    asset: {fileID: 4458252877524076426, guid: 94285e75124b40a42ab43e10d1450bac, type: 3}
+  - assetPath: Assets/Scripts/Shop/Shop.ts
+    asset: {fileID: 4458252877524076426, guid: 3327af4b14bde7745b5cfd2e6034277c, type: 3}
+  - assetPath: Assets/Scripts/Shop/Shop_Employee.ts
+    asset: {fileID: 4458252877524076426, guid: 8c81d0780d21f204089ae112693c0c52, type: 3}
+  - assetPath: Assets/Scripts/Shop/Shop_Food.ts
+    asset: {fileID: 4458252877524076426, guid: 1d6a90962531ab24c82a744b73232a59, type: 3}
+  - assetPath: Assets/Scripts/Shop/Shop_Test.ts
+    asset: {fileID: 4458252877524076426, guid: e28bbafb871d5e04e89822b622446e21, type: 3}
+  - assetPath: Assets/Scripts/Shop/Shop_Upgrade.ts
+    asset: {fileID: 4458252877524076426, guid: e05e0932d93802c48921f478b8fc1f77, type: 3}
+  - assetPath: Assets/Scripts/Slicable.ts
+    asset: {fileID: 4458252877524076426, guid: 73672cf056e6a97439ccdcd231306561, type: 3}
+  - assetPath: Assets/Scripts/SliceController.ts
+    asset: {fileID: 4458252877524076426, guid: 88a26045845c3d643a66e245d31d684d, type: 3}
+  - assetPath: Assets/Scripts/SoundManager.ts
+    asset: {fileID: 4458252877524076426, guid: dbb56e05bf51f7242ae36f329ef7a6b2, type: 3}
+  - assetPath: Assets/Scripts/Timer.ts
+    asset: {fileID: 4458252877524076426, guid: f6276c36d5a45fb4aab1bd2a88d20c79, type: 3}
+  - assetPath: Assets/Scripts/UIManager.ts
+    asset: {fileID: 4458252877524076426, guid: a8f7ec6e52914964bb9c6d76523ff580, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/GestureLodaer.ts
+    asset: {fileID: 4458252877524076426, guid: 956de2558fee74a0fa08a9adb2f63a37, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/Thumbnail.ts
+    asset: {fileID: 4458252877524076426, guid: 06e97c7be21f34ff7aad3f689044cbbf, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/UIController.ts
+    asset: {fileID: 4458252877524076426, guid: 56a43ef36b1e942fc80c98bba2d073aa, type: 3}
+  - assetPath: Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/IKController.ts
+    asset: {fileID: 4458252877524076426, guid: e2fb2ea499cb545fea08a6739dd8333a, type: 3}
+  - assetPath: Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/ScreenShotController.ts
+    asset: {fileID: 4458252877524076426, guid: 4ad7232826783c34082a0b7c2afabfba, type: 3}
+  - assetPath: Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/ScreenShotModeManager.ts
+    asset: {fileID: 4458252877524076426, guid: 96d23dd00996d474ebe24a05a1a1a1a6, type: 3}
+  - assetPath: Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/SelfieCamera.ts
+    asset: {fileID: 4458252877524076426, guid: fdad88fc98cff244f9806efff8493b4e, type: 3}
+  - assetPath: Assets/ZepetoScreenShot/ZepetoScripts/ScreenShotScripts/UIController.ts
+    asset: {fileID: 4458252877524076426, guid: 48432be9f833e8246b204afb0be42355, type: 3}
+  - assetPath: Packages/zepeto.world/Editor/Builds/QRCode.js
+    asset: {fileID: 4458252877524076426, guid: 17c98b61ae4046b5938df3de071ac4b9, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/Scripts/JS/Classes/ZepetoDefaultInputReceiver.js
+    asset: {fileID: 4458252877524076426, guid: bd46341e375f8420d891e82dd4fcc030, type: 3}
+  - assetPath: Assets/ProductSystem/UI/Common/white02.png
+    asset: {fileID: 2800000, guid: 356236d75183f4791a6f0ef14bc62f74, type: 3}
+  - assetPath: Assets/Scenes/00_Main/ReflectionProbe-0.exr
+    asset: {fileID: 8900000, guid: 6da815b564040d148a87d8722dfb2c77, type: 3}
+  - assetPath: Assets/Scenes/00_Main/LightingData.asset
+    asset: {fileID: 112000000, guid: 7197ac568213989479c9d21d33eaa4e3, type: 2}
+  - assetPath: Packages/com.unity.inputsystem/InputSystem/Editor/Icons/InputSystemUIInputModule@64.png
+    asset: {fileID: 2800000, guid: 3028dc075ba8c584d9bc7d1e0255e038, type: 3}
+  - assetPath: Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Input
+      Field Icon.psd
+    asset: {fileID: 2800000, guid: 3ee40aa79cd242a5b53b0b0ca4f13f0f, type: 3}
+  - assetPath: Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font
+      Asset Icon.psd
+    asset: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
+  - assetPath: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+    asset: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  - assetPath: Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text
+      Component Icon.psd
+    asset: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
+  - assetPath: Assets/Scenes/00_Main/00_Main.lighting
+    asset: {fileID: 4890085278179872738, guid: 1e85c9552d037264899545961b54fe37, type: 2}
+  - assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+    asset: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  - assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+    asset: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  - assetPath: Packages/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/DefaultInputActions.inputactions
+    asset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/pack_bag.FBX
+    asset: {fileID: 100000, guid: 8c9d4018849960a4385a0406de827e5b, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Images/touchpad_handle_base.png
+    asset: {fileID: 2800000, guid: 9ca194b00aabf473e8b0ca5a3eaafffe, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/UI/Controller/touchpad_handle_off.anim
+    asset: {fileID: 7400000, guid: af3a092ab50b042dda8d55bf57df89e2, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/InputActions/ZepetoInputControl.inputactions
+    asset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/landing_slight.anim
+    asset: {fileID: 7400000, guid: 34a1ea504fe4743649b7fda50421bed6, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/action1.anim
+    asset: {fileID: 7400000, guid: aba17ef185d9c42c095e153a36686ba5, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/trnsbg.png
+    asset: {fileID: 2800000, guid: d17e3ad99c922694abacab63c6d8906b, type: 3}
+  - assetPath: Assets/soda dispenser.fbx
+    asset: {fileID: 919132149155446097, guid: 6d994e6b740a17f4d89c0c708ee11304, type: 3}
+  - assetPath: "Assets/3D ASSETS/\uCEE4\uD2BC.fbx"
+    asset: {fileID: 919132149155446097, guid: 407403f81e1a3564fad70e89a62942e7, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_cameramode.png
+    asset: {fileID: 2800000, guid: 88613957c21ad794280a329ad9f3f8cf, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/UI/Controller/touchpad_handle_ziggle.anim
+    asset: {fileID: 7400000, guid: d16ef1916c85b4425a7d66ee8f375e19, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/UI/Controller/touchpad_handle_on.anim
+    asset: {fileID: 7400000, guid: 30e573d0c755644eaa5e1dfa86eb2462, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/walk.anim
+    asset: {fileID: 7400000, guid: e81fd0a5991d041a592274fbfceff5f6, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/ZepetoScreenShotRenderTexture.renderTexture
+    asset: {fileID: 8400000, guid: ed90a4d384b363548a7068a8beb384ac, type: 2}
+  - assetPath: Assets/Fast_food/Textures/fast_food_packaging_nmap.png
+    asset: {fileID: 2800000, guid: 062bb53acb532704f8c55cc86eb51950, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/tomatoe.FBX
+    asset: {fileID: 100000, guid: 023c7995ddc63a84882214039f2e750f, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/pack_french_fries.FBX
+    asset: {fileID: 100000, guid: 51fc3317984ccd94bab9fc6df0599fd1, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/ZepetoGestureTool_Horizontal.prefab
+    asset: {fileID: 6099409726689382886, guid: 983578afae44d459d92e89fe01392623, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/ToastAnim.anim
+    asset: {fileID: 7400000, guid: e4f93cc1adc5fd447a164f45aa603a4a, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/jump_move.anim
+    asset: {fileID: 7400000, guid: ad9db15bb97a241d3941e089707ae455, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Prefabs/UIController_Touchpad_Horizontal.prefab
+    asset: {fileID: 2787167779785370926, guid: 9b7a03709461140b4b3fc85aa8c5d741, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/landing_roll.anim
+    asset: {fileID: 7400000, guid: aef7b16c4a1b74b95b6f56d4ce91a801, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/AnimatorController/UIControllerTouchpadHandleOrigin.controller
+    asset: {fileID: 9100000, guid: 5f288db86f62c406988dd5a253fe2f94, type: 2}
+  - assetPath: Assets/Fast_food/Textures/fast_food_packaging_spec.tga
+    asset: {fileID: 2800000, guid: 75a838c27d382bb4b97b24c112f70940, type: 3}
+  - assetPath: Assets/Scripts/QuarterViewAction.inputactions
+    asset: {fileID: -944628639613478452, guid: 66d41432688ef1a42bbce72a28f9bf41, type: 3}
+  - assetPath: Assets/Fast_food/Textures/fast_food_food.png
+    asset: {fileID: 2800000, guid: cd95bc99ac728e6438da641d4c17294c, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/burger_bun_02.FBX
+    asset: {fileID: 100000, guid: 16502909ac2d5744885eef571b152f50, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/action2.anim
+    asset: {fileID: 7400000, guid: baa1362d8c18f49c6addf31b8a4c9021, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/SelfieStick/bundles/SelfieStick_Long.prefab
+    asset: {fileID: 1673898582022550, guid: c5793cd47ec51e94e998c5072cc55a03, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Prefabs/UIController_Touchpad_Vertical.prefab
+    asset: {fileID: 8523051459139762370, guid: 33446b9369e354b00a7ab43885afbe88, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/pack_cup.FBX
+    asset: {fileID: 100000, guid: 0a90dfd1d0e663948a5cc30700810726, type: 3}
+  - assetPath: Assets/Fast_food/Textures/fast_food_packaging.png
+    asset: {fileID: 2800000, guid: 92b9682fb3546a34dabc23bcec451140, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/AnimatorController/UIControllerTouchpadHandle.controller
+    asset: {fileID: 9100000, guid: 844524d99ff1945d1b2985e983f3775c, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/ToastErrorMessage.prefab
+    asset: {fileID: 783445681623887066, guid: ae2013e54f4c1b243aa96ec4dd92c9d4, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/jump_dash.anim
+    asset: {fileID: 7400000, guid: da3fb1523970c40e986536394f9ddb02, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/Materials/fast_food_packaging.mat
+    asset: {fileID: 2100000, guid: c451bca5e0906ec4dbbc940b2a5902a6, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/move_walk_fast.anim
+    asset: {fileID: 7400000, guid: 4d5c25496692b4602b422bc47c03aeee, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Prefabs/Shadow/CharacterShadow.prefab
+    asset: {fileID: 1025544020809228, guid: 4512418b2a1844f42961867ad8421ab8, type: 3}
+  - assetPath: Assets/Scenes/01_Stage/01_Stage.lighting
+    asset: {fileID: 4890085278179872738, guid: ff00172e289f31745b97b146b63001fe, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Images/touchpad_jump_base.png
+    asset: {fileID: 2800000, guid: 5b13d326a52d8420cb9e4b87f84da3a1, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/Image/ic_32_close.png
+    asset: {fileID: 2800000, guid: 221f1d9c5c4c1a841aff3cd2ec16c73c, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/jump_move.anim
+    asset: {fileID: 7400000, guid: 4ca7e1aa057824010b3a4417e05f0b3e, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/tray.FBX
+    asset: {fileID: 100000, guid: 35f2cbb6451004d47a0158761d204129, type: 3}
+  - assetPath: "Assets/3D ASSETS/\uC870\uB9AC\uB300.fbx"
+    asset: {fileID: 919132149155446097, guid: 3b56fe730b3aabc47a01336f25ef08d6, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_camera_bg.png
+    asset: {fileID: 2800000, guid: 721b4edc53d1fe74086d0f356afa831f, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/SelfieCamera.prefab
+    asset: {fileID: 467963277368399132, guid: 64ed1f4a89b3b184986ebbdab59d0349, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/gesture.anim
+    asset: {fileID: 7400000, guid: 298460fd2a0fd41f79d81cfd93cb37e5, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/AnimatorController/ZepetoAnimator.controller
+    asset: {fileID: 9100000, guid: 019901d3486cc411abc6c84594c03743, type: 2}
+  - assetPath: Assets/Scenes/01_Stage/ReflectionProbe-0.exr
+    asset: {fileID: 8900000, guid: e07f34d41d52a5e4a8b6eae70b5ae22e, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/UI/Controller/touchpad_handle_origin_on.anim
+    asset: {fileID: 7400000, guid: 17b22abf4273e432d99f5151291e7f95, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_camera.png
+    asset: {fileID: 2800000, guid: fc5cde90f9a07db42940ed5afc5be122, type: 3}
+  - assetPath: Assets/3D ASSETS/uploads_files_2903365_Crate.fbx
+    asset: {fileID: 919132149155446097, guid: dd8586ccc2754d34482a756b2ffbf066, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/pack_bigknight.FBX
+    asset: {fileID: 100000, guid: 7ae282442f284034ca9aed881528bc15, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_transparent.png
+    asset: {fileID: 2800000, guid: 5b61e50655463d8428d930bb1b5992be, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/burger_bun_01.FBX
+    asset: {fileID: 100000, guid: 74aa0bfcea550e14eafec1c1371a6999, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/prefThumb.prefab
+    asset: {fileID: 5726397593310087170, guid: be4c5779411af4ba19478deb1f57d7f1, type: 3}
+  - assetPath: Assets/Scenes/01_Stage/Lightmap-0_comp_dir.png
+    asset: {fileID: 2800000, guid: d40e1c1c977d0944792cfdcc611abeb0, type: 3}
+  - assetPath: Assets/Scenes/01_Stage/LightingData.asset
+    asset: {fileID: 112000000, guid: 471aee7a912144c42b600f2a2a697e18, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/image_ellipse_red.png
+    asset: {fileID: 2800000, guid: 39edfb5b3f4dfb7488a92efef4dd7d2c, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/idle.anim
+    asset: {fileID: 7400000, guid: 77b4b5d8cbed146578a40c13e9fb3e29, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/Materials/Red.mat
+    asset: {fileID: 2100000, guid: bb1f7d7196d0bf240b91ed2dcd16dec2, type: 2}
+  - assetPath: Assets/Pandazole_Ultimate_Pack/Pandazole Kitchen Food/Materials/Panda
+      Mat.mat
+    asset: {fileID: 2100000, guid: 9866fda0e61a7904087eb0ec5ab17e03, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/ToastSuccessMessage.prefab
+    asset: {fileID: 523064580509784242, guid: 6c1a233f6fdb20b45b13cde58d788a28, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_arlet.png
+    asset: {fileID: 2800000, guid: 9b42675f6b7407a4ca4bf70c54b2cba2, type: 3}
+  - assetPath: Assets/Fast_food/Textures/fast_food_food_spec.tga
+    asset: {fileID: 2800000, guid: 8353b8acffee9904f9998cc875dcde4f, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Prefabs/Shadow/FxT_BlobShadow.png
+    asset: {fileID: 2800000, guid: 395d040650de243eb9de0bd417e3b0e9, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/pack_cheesex2.FBX
+    asset: {fileID: 100000, guid: 06b4932c665bc9a45b4989a59a7a621b, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_share.png
+    asset: {fileID: 2800000, guid: 6d95e99b839d5e54cbdc50d53578987f, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/AnimatorController/ZepetoAnimatorV2.controller
+    asset: {fileID: 9100000, guid: d45416f714b4fe74d9ddc118caf5f7c9, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/Gesture/4_ok.anim
+    asset: {fileID: 7400000, guid: 3ac870d7ab2c84c5bad2ade6d493ac0a, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/move_run_fast.anim
+    asset: {fileID: 7400000, guid: b37b0c3443ebd4913a439b51a0a3d5a4, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/burger_bun_03.FBX
+    asset: {fileID: 100000, guid: 14662cc451e7c504fac6100dcc90a1f4, type: 3}
+  - assetPath: Assets/Pandazole_Ultimate_Pack/Pandazole Kitchen Food/Materials/Panda
+      Mat outline.mat
+    asset: {fileID: 2100000, guid: 68e5be533d69dd64caea0478144cfd9c, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/move_turn.anim
+    asset: {fileID: 7400000, guid: 93ca3738330d7459b9000923398ae217, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/image_ellipse_green.png
+    asset: {fileID: 2800000, guid: 70886a568bfa60b4eb07bf67de9f7d47, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/landing_deep.anim
+    asset: {fileID: 7400000, guid: 74f4980d8d3dc4a9ea0878dea7e21d06, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_selfiemode.png
+    asset: {fileID: 2800000, guid: 6acebe89249ad084187322a42d1e36d5, type: 3}
+  - assetPath: Assets/ZepetoScreenShot/ZepetoScreenShotModule.prefab
+    asset: {fileID: 7752097990732416413, guid: 89ba32aeb21e44d65ad852b8f5da47e4, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/Image/shape_interface_tab.png
+    asset: {fileID: 2800000, guid: a7049eb04d5e7704d98756928e6b77b7, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/SelfieStick/FBX/SelfieStick_Long.FBX
+    asset: {fileID: 100000, guid: 14bf89cfb636da742801e591a574d7fa, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/move_run.anim
+    asset: {fileID: 7400000, guid: 3ee8a1247c52648f5b43bb0e970fdbec, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_check.png
+    asset: {fileID: 2800000, guid: f90d75a3746c9cd4ebffa8c5d8193ba4, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/jump_idle.anim
+    asset: {fileID: 7400000, guid: 089578e3895fc4828923286f37714b31, type: 2}
+  - assetPath: Assets/ZepetoGestureAPI/Image/ic_gesture.png
+    asset: {fileID: 2800000, guid: 9211d1ecc4dfc457fa8d7710557fca06, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_save.png
+    asset: {fileID: 2800000, guid: 7c30c4eb68b71e24cb3c71a9dc3c75c8, type: 3}
+  - assetPath: Assets/_Resources/[Materials]/ColorTexture_001.mat
+    asset: {fileID: 2100000, guid: 6dd07da24f2e8454681970250471c5c7, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/UI/Controller/touchpad_handle_origin_off.anim
+    asset: {fileID: 7400000, guid: 99e7b142bf1c54f4997386f92637a746, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/Falling.anim
+    asset: {fileID: 7400000, guid: 9beb77817f50f4873bb8dd4a41726d06, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Images/touchpad_handle_icon.png
+    asset: {fileID: 2800000, guid: c958f44ee4c794bc4915476c48b2df0a, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/Stamp.anim
+    asset: {fileID: 7400000, guid: e7729cec6e85b463781eec8565e8fb7c, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Images/touchpad_jump_icon.png
+    asset: {fileID: 2800000, guid: da6db804593824177bb8ecaab3317f69, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/jump_Idle.anim
+    asset: {fileID: 7400000, guid: a42caac19eb044aa195dd25afd2eae3c, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/chopped_steak.FBX
+    asset: {fileID: 100000, guid: 635a7b868c4b17f42988056de3ae0836, type: 3}
+  - assetPath: Assets/Fast_food/Textures/fast_food_food_nmap.png
+    asset: {fileID: 2800000, guid: 35b704b945d1e2b47801072dd0bfde47, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_close.png
+    asset: {fileID: 2800000, guid: ea96f0fb9e2145249bf37da6d888fb68, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/Materials/fast_food_food.mat
+    asset: {fileID: 2100000, guid: ca1967ecab4182e46bbbeb38d05e2780, type: 2}
+  - assetPath: Assets/ZepetoGestureAPI/Image/shape_interface_background.png
+    asset: {fileID: 2800000, guid: 0cc80b21baee61d46a100888adeaebbb, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Camera/ZepetoCamera.prefab
+    asset: {fileID: 5806182858035002866, guid: 5be4eddc5b02f4ec0a07a69db26df962, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/run.anim
+    asset: {fileID: 7400000, guid: 69a037643fec04d539fab537f50f143a, type: 2}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_upload.png
+    asset: {fileID: 2800000, guid: 255b11ad4fc96154a9e98d9e8945f8c5, type: 3}
+  - assetPath: Packages/com.unity.inputsystem/InputSystem/Editor/Icons/InputAction.png
+    asset: {fileID: 2800000, guid: 40265a896a0f341bb956e90c59025a29, type: 3}
+  - assetPath: Assets/_Resources/[Materials]/Texture/ColorTexture_001.png
+    asset: {fileID: 2800000, guid: 37be44ec1dd9c1e48aa1beaa6f6f9b8c, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/move_walk.anim
+    asset: {fileID: 7400000, guid: 64a39a4a7a4cb4ba483524044641aa03, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/salad.FBX
+    asset: {fileID: 100000, guid: 235c934ddd577be4b86ef92b95399b44, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Prefabs/Shadow/FxT_BlobShadow.mat
+    asset: {fileID: 2100000, guid: 5104a9f86b024467999136edaf59654f, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Prefabs/EventSystem.prefab
+    asset: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/idle.anim
+    asset: {fileID: 7400000, guid: dd0408f906f6d4455bfcdea4f2c36bc0, type: 2}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/fall_end.anim
+    asset: {fileID: 7400000, guid: 7af54d170d4a4419e9af291140a5df9e, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/pack_cheeseburger.FBX
+    asset: {fileID: 100000, guid: 8bd937646d26bb24582b034e8ec8e56f, type: 3}
+  - assetPath: Assets/ZepetoGestureAPI/Image/ic_40_gesture_unselected.png
+    asset: {fileID: 2800000, guid: 6087c43bdd58b574397e3b3de7cb959e, type: 3}
+  - assetPath: Assets/Fast_food/Mod/food/ketchup.FBX
+    asset: {fileID: 100000, guid: 7317b0961ea27734eaaedbfe2c78b655, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/V2/jump_double.anim
+    asset: {fileID: 7400000, guid: 0d8dc1582dd594227be179efe817cac7, type: 2}
+  - assetPath: Assets/Fast_food/Mod/food/pickle.FBX
+    asset: {fileID: 100000, guid: 55611765a0fcacb4aacf6e2b3fb030c2, type: 3}
+  - assetPath: Assets/Scenes/01_Stage/Lightmap-0_comp_light.exr
+    asset: {fileID: 2800000, guid: 84320051f27898b45bae887d6dea7bf3, type: 3}
+  - assetPath: Assets/Pandazole_Ultimate_Pack/Pandazole Kitchen Food/Models/Demo/Pandazole
+      Kitchen Food.fbx
+    asset: {fileID: 919132149155446097, guid: e28308bcdd7692b4d9a7fdccc3ac83ee, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/base/hand_idle_01.anim
+    asset: {fileID: 7400000, guid: a8a227925c3f249ed87a8ceeb839e3d7, type: 2}
+  - assetPath: Assets/Pandazole_Ultimate_Pack/Pandazole Kitchen Food/Textures/PandaMat.png
+    asset: {fileID: 2800000, guid: 44921bbf175be50469073789ac922d7a, type: 3}
+  - assetPath: Assets/_Resources/ScreenShot/UI/Images/ic_shutter.png
+    asset: {fileID: 2800000, guid: 655f2a0a84a8deb42ad05519f2648628, type: 3}
+  - assetPath: Packages/zepeto.character.controller/Runtime/_Resources/Animations/UI/Controller/touchpad_handle_origin_ziggle.anim
+    asset: {fileID: 7400000, guid: 61185ec652c834c1e91f184f7348bc17, type: 2}
+  resources:
+  - assetPath: ProductSettings
+    asset: {fileID: 11400000, guid: 44f1bbb6be5fc5e4e8c9c3f61b3b3ffe, type: 2}
+  - assetPath: Animations/BellAnim
+    asset: {fileID: 9100000, guid: c39f7d12600f6ba498675029456a241e, type: 2}
+  - assetPath: Animations/EmployeeDone
+    asset: {fileID: 7400000, guid: 23b7b9c9a015fd74589143a0125df1a0, type: 2}
+  - assetPath: Animations/Help_Bake
+    asset: {fileID: 7400000, guid: f4de1023ef015634b84d4a962794b189, type: 2}
+  - assetPath: Animations/Help_Blink
+    asset: {fileID: 7400000, guid: 5605b3c2f4fe05746bbde37af4261046, type: 2}
+  - assetPath: Animations/Help_CupAnim_Respawn
+    asset: {fileID: 7400000, guid: b8d4cfa6ffd3c984092778262c94efe7, type: 2}
+  - assetPath: Animations/Help_CupAnim_Select
+    asset: {fileID: 7400000, guid: 576942c21b9956244ab02da5ee3a9c81, type: 2}
+  - assetPath: Animations/Help_Equip
+    asset: {fileID: 7400000, guid: 7055f46f09911e641b323911b99d7dbc, type: 2}
+  - assetPath: Animations/Help_Equip_Select
+    asset: {fileID: 7400000, guid: a576fd82f95264b4f85389c11639ef2f, type: 2}
+  - assetPath: Animations/Help_Equip_Upgrade
+    asset: {fileID: 7400000, guid: caca2cd7209304e4d913aa28ae229969, type: 2}
+  - assetPath: Animations/Help_Focus
+    asset: {fileID: 7400000, guid: 099c26b1baed7a44aa7f952e206f96d6, type: 2}
+  - assetPath: Animations/Help_Fryer_Click
+    asset: {fileID: 7400000, guid: e8e63ec6dd6f61d4994f2c321d41aa00, type: 2}
+  - assetPath: Animations/Help_Grill_Click
+    asset: {fileID: 7400000, guid: c4b4b20c59b203145b02fa3c250a3d93, type: 2}
+  - assetPath: Animations/Help_Guide_Dispenser
+    asset: {fileID: 7400000, guid: 6d1126d0b8d3bee429ac68edea6c4844, type: 2}
+  - assetPath: Animations/Help_Guide_Fryer
+    asset: {fileID: 7400000, guid: 75e44a5c46f60674d81e3d89d0088d7c, type: 2}
+  - assetPath: Animations/Help_Guide_Grill
+    asset: {fileID: 7400000, guid: 056d019c894cc9149aadbcbda6b59a66, type: 2}
+  - assetPath: Animations/Help_Guide_hand
+    asset: {fileID: 7400000, guid: 4e7ebeb9fc1a32d47aff1726784d26f0, type: 2}
+  - assetPath: Animations/Help_Guide_Plating
+    asset: {fileID: 7400000, guid: 7a11524b30eafb84bb80aa4f5db5ff1d, type: 2}
+  - assetPath: Animations/Help_hand_order
+    asset: {fileID: 7400000, guid: 71a57943620e3da43aad7e5f177b1cb7, type: 2}
+  - assetPath: Animations/Help_Prep
+    asset: {fileID: 7400000, guid: 0a327fd7a984ed24787b17907a4b5a4f, type: 2}
+  - assetPath: Animations/Result_Card
+    asset: {fileID: 7400000, guid: 90a42ea789ed35a45a9df27eabf4040c, type: 2}
+  - assetPath: Animations/Slice
+    asset: {fileID: 7400000, guid: f496f8110945a1a46ac5ac65bec89ec2, type: 2}
+  - assetPath: Animations/Slice_Effect_0
+    asset: {fileID: 9100000, guid: 73261fabecd46454d9824a8186360275, type: 2}
+  - assetPath: Animations/Start
+    asset: {fileID: 7400000, guid: 3776c66dabfa3594bb92d20f2df5c383, type: 2}
+  - assetPath: Animations/ZepetoAnimatorV2
+    asset: {fileID: 9100000, guid: 1cc8ac37daaca4947b69353b295b5cee, type: 2}
+  - assetPath: Fonts/NotoSansJP-Regular SDF
+    asset: {fileID: 11400000, guid: 11104a77862a0ae41ba6bf35629ffdd4, type: 2}
+  - assetPath: Fonts/NotoSansJP-Regular
+    asset: {fileID: 12800000, guid: 2421363c04c5fff46b4b5f5e1acb0d44, type: 3}
+  - assetPath: Fonts/SDSAMLIPHOPANGCHEBASIC
+    asset: {fileID: 12800000, guid: 3feb8170fa4b2964d9c1ce5f86ba0276, type: 3}
+  - assetPath: Fonts/SDSamliphopangcheTTFBasic SDF
+    asset: {fileID: 11400000, guid: b95ba08d8630b3843877f433b6b7f7fa, type: 2}
+  - assetPath: Fonts/SDSamliphopangcheTTFBasic SDF_Custom
+    asset: {fileID: 11400000, guid: 4d0aa727adc5a0c45b8fb2a6851c96a6, type: 2}
+  - assetPath: Fonts/SDSamliphopangcheTTFBasic
+    asset: {fileID: 12800000, guid: 58f6d9278734e624cbd613bffa6659aa, type: 3}
+  - assetPath: Materials/43decaa73a3d126048ecf33e4554e995
+    asset: {fileID: 2800000, guid: 2c014beb444125e4cbe14ba06c87d9fd, type: 3}
+  - assetPath: Materials/brown
+    asset: {fileID: 2100000, guid: c8ae71062d77dc945af6ced9b7a387a0, type: 2}
+  - assetPath: Materials/dispenser/aluminium
+    asset: {fileID: 2100000, guid: 2633124ddbce968439095fddcffeeeee, type: 2}
+  - assetPath: Materials/dispenser/black_dispenser
+    asset: {fileID: 2100000, guid: e3ca83c7fe608b74ebf5d6aa81fdf018, type: 2}
+  - assetPath: Materials/dispenser/drink_hotchs
+    asset: {fileID: 2100000, guid: 16ad8b3ef759cf64a82207ddf210b2d0, type: 2}
+  - assetPath: Materials/dispenser/drink_necksrite
+    asset: {fileID: 2100000, guid: 48c0307b8f80c65458cd8938a6606c8f, type: 2}
+  - assetPath: Materials/dispenser/drink_orange
+    asset: {fileID: 2100000, guid: c09442c6b395bf146be98a8ffa0ae16f, type: 2}
+  - assetPath: Materials/dispenser/drink_paenchi
+    asset: {fileID: 2100000, guid: ddfc469130a6fdd43864c9bd25df483f, type: 2}
+  - assetPath: Materials/dispenser/drink_pineapple
+    asset: {fileID: 2100000, guid: 57c30252d42df1844b9f606a75ec10b4, type: 2}
+  - assetPath: Materials/dispenser/red
+    asset: {fileID: 2100000, guid: 8e5dd82018908784ebec7ce8b5f28562, type: 2}
+  - assetPath: Materials/fast_food_food
+    asset: {fileID: 2100000, guid: ba8015d40518a9247890dca5ff9a220b, type: 2}
+  - assetPath: Materials/fast_food_packaging
+    asset: {fileID: 2100000, guid: 5c6e0423eac7f8c4ea58ce7fa02e1377, type: 2}
+  - assetPath: Materials/grey
+    asset: {fileID: 2100000, guid: 8a3a2cc4d5bef9441a0d34959c53702b, type: 2}
+  - assetPath: Materials/logo OP80%
+    asset: {fileID: 2800000, guid: be2fee6cc235ea24a855853559e7b9a0, type: 3}
+  - assetPath: Materials/oil
+    asset: {fileID: 2100000, guid: befda6e8efda9224892f11350eaa5951, type: 2}
+  - assetPath: Materials/OutlineShader
+    asset: {fileID: 4800000, guid: b16ab655e25944b4eb2f9e7d30b948f6, type: 3}
+  - assetPath: Materials/outside
+    asset: {fileID: 2800000, guid: aafc8e2fea1b5c946802cee9cfab51cd, type: 3}
+  - assetPath: Materials/outside
+    asset: {fileID: 2100000, guid: 8192dd1c188a6d24cb98bbb58f8f6303, type: 2}
+  - assetPath: Materials/red_darker
+    asset: {fileID: 2100000, guid: e393921429c500348b47e9a873567f85, type: 2}
+  - assetPath: Materials/tile
+    asset: {fileID: 2100000, guid: 9db70414f93bd7e4099c9527206091b2, type: 2}
+  - assetPath: Materials/UIMasked
+    asset: {fileID: 2100000, guid: 881a9f81df8d8854b9bb0ab2a353e76e, type: 2}
+  - assetPath: Materials/wall
+    asset: {fileID: 2100000, guid: 1bcdf7c4e87f16043ba3994ac85a0407, type: 2}
+  - assetPath: Materials/wall2
+    asset: {fileID: 2100000, guid: 3ed67a3b0f584b24d8374ad7a9f7c397, type: 2}
+  - assetPath: "Materials/\uB178\uB9D0\uB9F5"
+    asset: {fileID: 2800000, guid: 88118645ac7ebd74383d770db5de7f3a, type: 3}
+  - assetPath: "Materials/\uBCBD \uB178\uB9D0\uB9F5"
+    asset: {fileID: 2800000, guid: 30cfbd557c098e24aaa2d62d859a1096, type: 3}
+  - assetPath: "Materials/\uBCBD"
+    asset: {fileID: 2800000, guid: 1514983065058204ea5e33704233de75, type: 3}
+  - assetPath: Prefab/Card/Card
+    asset: {fileID: 5190417614692204312, guid: b449ce6ef4b394942b7e8b740798d59c, type: 3}
+  - assetPath: Prefab/Card/CardInfo
+    asset: {fileID: 2436527152538627868, guid: a8f60e5aaf8718a4eb381e2e7d9ae61f, type: 3}
+  - assetPath: Prefab/Card/CardSlot
+    asset: {fileID: 7396701654745154610, guid: 664c45b914543704e9e499adfaf93856, type: 3}
+  - assetPath: Prefab/Card/EquipSlot
+    asset: {fileID: 55042095429043955, guid: a6290c65507d23446a436636feee2765, type: 3}
+  - assetPath: Prefab/Escape
+    asset: {fileID: 865958549129717272, guid: 1c2312c5d09058e42b369270acbe2fed, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Bun
+    asset: {fileID: 2050398142682054621, guid: 14ff184e3b90c8c429b5f293b31384cc, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Cabbage
+    asset: {fileID: 8294620890170916223, guid: 1607b106f57b31d4f938f78309762ff0, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Cheese
+    asset: {fileID: 3225241982667148874, guid: 7d6c8d6850f3bcc40a179d9cd3f31c6d, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Onion
+    asset: {fileID: 3915022239002236998, guid: f4e9d8ebe94b5194eb321a2062f782d5, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Patty
+    asset: {fileID: 5361010317627133514, guid: 9c4d5b5ea489b4c44a9e20e1d9da9006, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Potato
+    asset: {fileID: 6820509289429411658, guid: 20727ea0246fe8f4ca40d69864fa4342, type: 3}
+  - assetPath: Prefab/FoodImages/FoodImg_Tomato
+    asset: {fileID: 338892874242014472, guid: e9d264ce2fa374b409e50ace86e9291a, type: 3}
+  - assetPath: Prefab/Manager/ItemManager
+    asset: {fileID: 7778997217873048286, guid: 852d4655343f39e4bbf0b2a436652984, type: 3}
+  - assetPath: Prefab/Manager/OrderManager
+    asset: {fileID: 4650924580582371896, guid: 43f9f734e7abe5046bf9a1378df9bb13, type: 3}
+  - assetPath: Prefab/Manager/SceneLoadManager
+    asset: {fileID: 7808169060001471541, guid: 2c8608ace9814c04686212a7fe01dd28, type: 3}
+  - assetPath: Prefab/Manager/UIManager
+    asset: {fileID: 9110106228465530052, guid: b895e16fa0819324a9551200f9385607, type: 3}
+  - assetPath: Prefab/Map
+    asset: {fileID: 8239300502239957687, guid: 9b15f408994900541a469a741f3f55e2, type: 3}
+  - assetPath: Prefab/SceneMoveBtn
+    asset: {fileID: 1541389905675158294, guid: ac4db49071164c746955066dcc8ccb18, type: 3}
+  - assetPath: Prefab/Shop/ItemSlot_Food
+    asset: {fileID: 6551029678575997506, guid: c93d35f183bc84a479f6e0eda2909cb6, type: 3}
+  - assetPath: Prefab/Shop/ItemSlot_Upgrade
+    asset: {fileID: 9043355229161650057, guid: 25968c5d56c68aa438070a702f115ac8, type: 3}
+  - assetPath: Prefab/Shop/RateInfo
+    asset: {fileID: 490249123324331753, guid: 22ed177135659ce4ab0183c44a188c8c, type: 3}
+  - assetPath: Prefab/Stage/Employee
+    asset: {fileID: 7740477990785507611, guid: c4b4b1e1e520f6242a9e27009187ecce, type: 3}
+  - assetPath: Prefab/Stage/Expand Order Receipt
+    asset: {fileID: 6459788421411680281, guid: f998a15c200783c409447dace822dfce, type: 3}
+  - assetPath: Prefab/Stage/Fry Slot
+    asset: {fileID: 8432500520700974493, guid: 01dae47c9799ae244b1bbae50eeef790, type: 3}
+  - assetPath: Prefab/Stage/Grill Slot
+    asset: {fileID: 394301539800145302, guid: 83d871a78ae64b8459080947974006a3, type: 3}
+  - assetPath: Prefab/Stage/Item Slot 0
+    asset: {fileID: 3600675538396595193, guid: 0b7e84a9ce3290647b42cd7abec35269, type: 3}
+  - assetPath: Prefab/Stage/Open_Section
+    asset: {fileID: 6036688555516194850, guid: 52775ae047189b244b76f43e09797772, type: 3}
+  - assetPath: Prefab/Stage/Order Receipt
+    asset: {fileID: 7551250795523159951, guid: f54b7284a3efd094d96447467e2501ea, type: 3}
+  - assetPath: Prefab/Stage/Slicable
+    asset: {fileID: 1163768469588619952, guid: de8895deeb6b12746a5e2f75967ffbd4, type: 3}
+  - assetPath: Prefab/Stage/Slice_Effect
+    asset: {fileID: 2980459526364488370, guid: 56ca6bc5e04ddc04bb6d5f56f13a0cff, type: 3}
+  - assetPath: Prefab/UI/Dropdown
+    asset: {fileID: 8614037108539310945, guid: ed5fc7f5016e44f439c63a191b93d1ea, type: 3}
+  - assetPath: Prefab/UI/GameMoney
+    asset: {fileID: 7966424733526562650, guid: cb2cd55019b645c4f80db4b493ce3749, type: 3}
+  - assetPath: Prefab/UI/Help_Page
+    asset: {fileID: 7918666397879232375, guid: 978dc4f0d96e9fc44a423751f1b90e17, type: 3}
+  - assetPath: Prefab/UI/Proficiency
+    asset: {fileID: 5340149091700557883, guid: 980e0282ff6eede46a1bc005c2835ba8, type: 3}
+  - assetPath: Prefab/UI/RewardSlot
+    asset: {fileID: 2316752432214958605, guid: 18460598a0b72554da56af6d910f5c27, type: 3}
+  - assetPath: Prefab/UI/stamp_icon
+    asset: {fileID: 9112494141057608870, guid: fc437331fb518824ab79c8c33915e64c, type: 3}
+  - assetPath: Prefab/UI/Time
+    asset: {fileID: 2607189331095998210, guid: 5a479d30909b1e3409bbd0db2e5d8c04, type: 3}
+  - assetPath: Prefab/UI/UnlockX2
+    asset: {fileID: 7643493656608465996, guid: 242e38fb98a937c48b7a53c41fd6c74b, type: 3}
+  - assetPath: Sounds/BGM/Kitchen/The Original Orchestra - Cojito
+    asset: {fileID: 8300000, guid: e4afc4d5f4d1a434e824e4cf86139e43, type: 3}
+  - assetPath: Sounds/BGM/Main
+    asset: {fileID: 8300000, guid: 161b20397dc99df43bc5846ee42cd849, type: 3}
+  - assetPath: Sounds/BGM/Settlement
+    asset: {fileID: 8300000, guid: 6b3ebab4e44e1a946b916aec7967bafa, type: 3}
+  - assetPath: Sounds/BGM/Shop/Shop_Hire
+    asset: {fileID: 8300000, guid: 212c4b8ba0272484f8503ac26427d966, type: 3}
+  - assetPath: Sounds/SFX/BakeTimer
+    asset: {fileID: 8300000, guid: 6074872ad38f156408c5398b8fcaaee4, type: 3}
+  - assetPath: Sounds/SFX/Button_Click
+    asset: {fileID: 8300000, guid: 07085e93a3f86c3408424fcf082474d6, type: 3}
+  - assetPath: Sounds/SFX/Button_Close
+    asset: {fileID: 8300000, guid: 335a699c184008f46816158081fd7fb8, type: 3}
+  - assetPath: Sounds/SFX/Button_Equip
+    asset: {fileID: 8300000, guid: e0f8d7c166b549047833945a25640029, type: 3}
+  - assetPath: Sounds/SFX/Button_Select
+    asset: {fileID: 8300000, guid: ef3236d3e70044b48ac31bf23ebd558d, type: 3}
+  - assetPath: Sounds/SFX/Card_Upgrade
+    asset: {fileID: 8300000, guid: 4e7319d1b42691b40a7425084bc0c11a, type: 3}
+  - assetPath: Sounds/SFX/Dispenser_liquid
+    asset: {fileID: 8300000, guid: d41a6818429ad0a43b9101be1aeb4f78, type: 3}
+  - assetPath: Sounds/SFX/Fryer_BakeTimer
+    asset: {fileID: 8300000, guid: f079a0c5937cb2149a65bd601fa6f1a8, type: 3}
+  - assetPath: Sounds/SFX/Fryer_level1
+    asset: {fileID: 8300000, guid: 7aaef569be8611e449bc5a88c010df4a, type: 3}
+  - assetPath: Sounds/SFX/Fryer_level2
+    asset: {fileID: 8300000, guid: ff938255f7e08f644a8db06ab5d8904b, type: 3}
+  - assetPath: Sounds/SFX/Fryer_level3
+    asset: {fileID: 8300000, guid: e8c720b9d4b7d384c9681ca1f7074442, type: 3}
+  - assetPath: Sounds/SFX/Grill_level1
+    asset: {fileID: 8300000, guid: 5fddd13c7812d0145a14b12d9386abbc, type: 3}
+  - assetPath: Sounds/SFX/Grill_level2
+    asset: {fileID: 8300000, guid: 99be51497a540e94cbe5c8dd831af379, type: 3}
+  - assetPath: Sounds/SFX/Grill_level3
+    asset: {fileID: 8300000, guid: 2aff4ce3ab55130489f2e5227c466901, type: 3}
+  - assetPath: Sounds/SFX/Purchase
+    asset: {fileID: 8300000, guid: 9ad0ce1349520d44f917fb6a55d3376d, type: 3}
+  - assetPath: Sounds/SFX/Selling_Items
+    asset: {fileID: 8300000, guid: 49c58167c7372e54196e30d1f1230072, type: 3}
+  - assetPath: Sounds/SFX/Slice
+    asset: {fileID: 8300000, guid: 6d636b21cfc43554db9ddfc17ba3cb45, type: 3}
+  - assetPath: Sounds/SFX/Tresh
+    asset: {fileID: 8300000, guid: c109bcfe510d4724eb06a482f807287b, type: 3}
+  - assetPath: Sounds/SFX/Type
+    asset: {fileID: 8300000, guid: da538ab005dc0da4788bbb4f6f9d950f, type: 3}
+  - assetPath: Sprites/Backgrounds/Main
+    asset: {fileID: 2800000, guid: e8fae2901cf430e469e1f426167b78c1, type: 3}
+  - assetPath: Sprites/Backgrounds/RANDOM
+    asset: {fileID: 2800000, guid: 8a700900f53c4084e9da3d457598a897, type: 3}
+  - assetPath: Sprites/Backgrounds/Shop 1
+    asset: {fileID: 2800000, guid: f8bcd2d0251307946b0acfbb9d02d09b, type: 3}
+  - assetPath: Sprites/Backgrounds/Shop 2
+    asset: {fileID: 2800000, guid: 86e0219ffec95dd458c22f3f62a0d014, type: 3}
+  - assetPath: Sprites/Card/BACKGRUND2
+    asset: {fileID: 2800000, guid: 51e7181001b685340b5a5647bc18747f, type: 3}
+  - assetPath: Sprites/Card/CARD Backgrund
+    asset: {fileID: 2800000, guid: daf2339dbacfd9146ab9255ab25bc02c, type: 3}
+  - assetPath: Sprites/Card/CARD frame
+    asset: {fileID: 2800000, guid: 70f6f55223dfbbf48a1caa075d6d0597, type: 3}
+  - assetPath: Sprites/Card/CARD frame2
+    asset: {fileID: 2800000, guid: e28cbe3a778a22c448979a28313faef7, type: 3}
+  - assetPath: Sprites/Card/CARD Gradation
+    asset: {fileID: 2800000, guid: 2b34001073637fa45b742b0ad48f1dae, type: 3}
+  - assetPath: Sprites/Card/card information
+    asset: {fileID: 2800000, guid: d133b913e889d134eaa3e91d51fb56a3, type: 3}
+  - assetPath: Sprites/Card/card information2
+    asset: {fileID: 2800000, guid: 180e29895c883db4f973778b621e1b53, type: 3}
+  - assetPath: Sprites/Card/CARD(blue)
+    asset: {fileID: 2800000, guid: f376e03b62795ce41bc2e8c21be04b6e, type: 3}
+  - assetPath: Sprites/Card/CARD(blue)backgrund
+    asset: {fileID: 2800000, guid: 673bcccc6928efc408f1b8f4bc43bb09, type: 3}
+  - assetPath: Sprites/Card/CARD(GOLD) Backgrund
+    asset: {fileID: 2800000, guid: a90e1c8bb4df0734388cc65507a809ed, type: 3}
+  - assetPath: Sprites/Card/CARD(GOLD)
+    asset: {fileID: 2800000, guid: 8deb79484675520498d97c75e0a93613, type: 3}
+  - assetPath: Sprites/Card/CARD(green) backgrund
+    asset: {fileID: 2800000, guid: cad5d7a27a2ca1e43aae032495ff91a8, type: 3}
+  - assetPath: Sprites/Card/CARD(green)
+    asset: {fileID: 2800000, guid: d499e2c32c1a45f4e9fae9ba5549a96c, type: 3}
+  - assetPath: Sprites/Card/CARD(white) backgrund
+    asset: {fileID: 2800000, guid: 54bb2e6b65dc5ad43b5d94d12905a1e9, type: 3}
+  - assetPath: Sprites/Card/CARD(white)
+    asset: {fileID: 2800000, guid: 2a8e4a22cb4d5864ea0dad81a498cc29, type: 3}
+  - assetPath: Sprites/Card/CARD
+    asset: {fileID: 2800000, guid: acf9c33fe8f897546840b93dd2f31a9c, type: 3}
+  - assetPath: Sprites/Card/card_slot
+    asset: {fileID: 2800000, guid: 90664e827c5d2b342843aed2596acce9, type: 3}
+  - assetPath: Sprites/Card/card_slot_frame
+    asset: {fileID: 2800000, guid: cc5239b9d114a884295d25e4b56c53e1, type: 3}
+  - assetPath: Sprites/Card/character list
+    asset: {fileID: 2800000, guid: fac0f5419eda1444d848b3cf818a2238, type: 3}
+  - assetPath: Sprites/Card/EQUIP
+    asset: {fileID: 2800000, guid: d500aa70110aa224dbe575b22af5ad36, type: 3}
+  - assetPath: Sprites/Card/GradeIcon/A
+    asset: {fileID: 2800000, guid: 03696930758f0e148a8ff360d8f31cf5, type: 3}
+  - assetPath: Sprites/Card/GradeIcon/B
+    asset: {fileID: 2800000, guid: 177f1eac1562a464eb3d8d6317bb4f22, type: 3}
+  - assetPath: Sprites/Card/GradeIcon/C
+    asset: {fileID: 2800000, guid: e3e3d519c905eb7468b40306528b3e4c, type: 3}
+  - assetPath: Sprites/Card/GradeIcon/D
+    asset: {fileID: 2800000, guid: b139c6094d74b18478acf0c5af9ac6d3, type: 3}
+  - assetPath: Sprites/Card/GradeIcon/S
+    asset: {fileID: 2800000, guid: 73ee92b132eaf6c4eb6f3017900aeb55, type: 3}
+  - assetPath: Sprites/Card/machine type chose
+    asset: {fileID: 2800000, guid: f9696804f7740aa4399ce4226d7dc75a, type: 3}
+  - assetPath: Sprites/Card/machine type
+    asset: {fileID: 2800000, guid: c54121790e2388d4eb8f0e9abd004ce8, type: 3}
+  - assetPath: Sprites/Card/mounting slot bar
+    asset: {fileID: 2800000, guid: 0354007535552c2429f18b9d2348d020, type: 3}
+  - assetPath: Sprites/Card/mounting slot
+    asset: {fileID: 2800000, guid: dc950b8b2e89cd0429e4dd610b1b4fc0, type: 3}
+  - assetPath: Sprites/Card/mounting_slot_backgrund
+    asset: {fileID: 2800000, guid: 844a0064109726246a12d9f6db9f1337, type: 3}
+  - assetPath: Sprites/Card/number gauge background
+    asset: {fileID: 2800000, guid: 26238ae7c56f69248be88f301aa38b26, type: 3}
+  - assetPath: Sprites/Card/number gauge
+    asset: {fileID: 2800000, guid: deda028fac56c2e4992b3ea02fead6e2, type: 3}
+  - assetPath: Sprites/Card/sort
+    asset: {fileID: 2800000, guid: f73f398997793ed4b8fc1c70d4088286, type: 3}
+  - assetPath: Sprites/Card/upgrade
+    asset: {fileID: 2800000, guid: fdc2e2d9f0778694fbd7b4b874bd38da, type: 3}
+  - assetPath: Sprites/Characters/14_HAKU0089
+    asset: {fileID: 2800000, guid: bc287b6262ad5024085e2daa837ac879, type: 3}
+  - assetPath: Sprites/Characters/15_CallyCarly
+    asset: {fileID: 2800000, guid: 20f8e50c420c9b74d8f4c7fd1161c45d, type: 3}
+  - assetPath: Sprites/Characters/16_Chunsik
+    asset: {fileID: 2800000, guid: 25d24a5cdf197274e91d47cfc6b48978, type: 3}
+  - assetPath: Sprites/Characters/17_DanDapBug
+    asset: {fileID: 2800000, guid: a2f89ce3afc37eb468024cda0fd7fb98, type: 3}
+  - assetPath: Sprites/Characters/18_DokkoHyeji
+    asset: {fileID: 2800000, guid: 0faf77386d606c14198ce38a2d339e24, type: 3}
+  - assetPath: Sprites/Characters/19_DrDopamine
+    asset: {fileID: 2800000, guid: b969a61d7e7b75146a4caa9afd832335, type: 3}
+  - assetPath: Sprites/Characters/20_Hikiking
+    asset: {fileID: 2800000, guid: 2841dae6b2d0d534d8619e009bf18a72, type: 3}
+  - assetPath: Sprites/Characters/21_Kimchimandu
+    asset: {fileID: 2800000, guid: 20565c7432b00f14a8882e65124b5cd1, type: 3}
+  - assetPath: Sprites/Characters/22_KwonMin
+    asset: {fileID: 2800000, guid: f7da72669e0033c4586fe63b0520adc1, type: 3}
+  - assetPath: Sprites/Characters/23_Roentgenium
+    asset: {fileID: 2800000, guid: aea598d49a46720448d6cfc87ab47b26, type: 3}
+  - assetPath: Sprites/Characters/24_RUSUK
+    asset: {fileID: 2800000, guid: b5741e6e79320ba4bb7d0f141bebf72f, type: 3}
+  - assetPath: Sprites/Characters/25_Secretto
+    asset: {fileID: 2800000, guid: feef30f80a8ac4d4ea664973876e3a14, type: 3}
+  - assetPath: Sprites/Characters/26_BusinessKim
+    asset: {fileID: 2800000, guid: 7f49d62704f872e479a29da020890912, type: 3}
+  - assetPath: Sprites/Characters/27_Wakphago
+    asset: {fileID: 2800000, guid: 5b2409fd770bc744280070dfba6b0837, type: 3}
+  - assetPath: Sprites/Characters/28_Wakgood
+    asset: {fileID: 2800000, guid: f10ff8df232e8c641bc1113469376251, type: 3}
+  - assetPath: Sprites/Characters/29_Pungsin
+    asset: {fileID: 2800000, guid: dcfe13d983e88264aa80b8ec3fd920bc, type: 3}
+  - assetPath: Sprites/Characters/30_Sophia
+    asset: {fileID: 2800000, guid: 981f6f60ae791b84e894161d40fd3680, type: 3}
+  - assetPath: Sprites/Characters/31_Freeter
+    asset: {fileID: 2800000, guid: 6e83cf79fb9a3ee438251ba148fee7c9, type: 3}
+  - assetPath: Sprites/Characters/32_CarnarJungtur
+    asset: {fileID: 2800000, guid: edf12f42a5e1bed4bab88ea9463759e2, type: 3}
+  - assetPath: Sprites/Characters/33_LeeDeoksu
+    asset: {fileID: 2800000, guid: 7fff3a6c7c4a5b54b8555e9b1ca7c1cc, type: 3}
+  - assetPath: Sprites/Characters/34_NosferatuHodd
+    asset: {fileID: 2800000, guid: 0728f98442c7a614fa1d6ad705199a0e, type: 3}
+  - assetPath: Sprites/Characters/35_Bujungingan
+    asset: {fileID: 2800000, guid: df76101d9e0a5194db08793c26cbd599, type: 3}
+  - assetPath: Sprites/Characters/36_Dove
+    asset: {fileID: 2800000, guid: 7fef3ba8c45a9df4b8055c4ebfee1132, type: 3}
+  - assetPath: Sprites/Characters/37_Parrot
+    asset: {fileID: 2800000, guid: 130af6dea9b46b34bb4647555a92fe9b, type: 3}
+  - assetPath: Sprites/Characters/38_Paenchi
+    asset: {fileID: 2800000, guid: 3f2e63ecd0d919d4e94ea0a2319662e2, type: 3}
+  - assetPath: Sprites/Characters/39_Lion
+    asset: {fileID: 2800000, guid: 9fdde6905ca1ebe40a4be5fc73f2fe5e, type: 3}
+  - assetPath: Sprites/Characters/CardImages/14_HAKU0089_card
+    asset: {fileID: 2800000, guid: 26ae89ec378317a44b5fb745bbc73856, type: 3}
+  - assetPath: Sprites/Characters/CardImages/15_CallyCarly_card
+    asset: {fileID: 2800000, guid: a6708ef987ec1e648a39be02647aeb95, type: 3}
+  - assetPath: Sprites/Characters/CardImages/16_Chunsik_card
+    asset: {fileID: 2800000, guid: 7e37270cd588ec94b873cb575f72dfae, type: 3}
+  - assetPath: Sprites/Characters/CardImages/17_DanDapBug_card
+    asset: {fileID: 2800000, guid: 72b10c50307727b408189d0608e92ae7, type: 3}
+  - assetPath: Sprites/Characters/CardImages/18_DokkoHyeji_card
+    asset: {fileID: 2800000, guid: 9bd14c0dddd39684abf6961116535b64, type: 3}
+  - assetPath: Sprites/Characters/CardImages/19_DrDopamine_card
+    asset: {fileID: 2800000, guid: 7fd71a502bb5f2a4498fd185231550c7, type: 3}
+  - assetPath: Sprites/Characters/CardImages/20_Hikiking_card
+    asset: {fileID: 2800000, guid: 4abf30991bbd60241b101c0b921fa5b1, type: 3}
+  - assetPath: Sprites/Characters/CardImages/21_Kimchimandu_card
+    asset: {fileID: 2800000, guid: d1d95760184bbf94191ff7a61343da3f, type: 3}
+  - assetPath: Sprites/Characters/CardImages/22_KwonMin_card
+    asset: {fileID: 2800000, guid: b6ff7ef3f90b46b4da3c32df1a02c796, type: 3}
+  - assetPath: Sprites/Characters/CardImages/23_Roentgenium_card
+    asset: {fileID: 2800000, guid: 817609b545156044db50d140cde57aab, type: 3}
+  - assetPath: Sprites/Characters/CardImages/24_RUSUK_card
+    asset: {fileID: 2800000, guid: ee3605dd2575c6548b17db89f896966b, type: 3}
+  - assetPath: Sprites/Characters/CardImages/25_Secretto_card
+    asset: {fileID: 2800000, guid: 26fecfcb72ad81c42a3616ebb19385e9, type: 3}
+  - assetPath: Sprites/Characters/CardImages/26_BusinessKim_card
+    asset: {fileID: 2800000, guid: 6a3eed96591531346b2c52db4a10d06b, type: 3}
+  - assetPath: Sprites/Characters/CardImages/27_Wakphago_card
+    asset: {fileID: 2800000, guid: f0029be0ae268fa4b815e25597245473, type: 3}
+  - assetPath: Sprites/Characters/CardImages/28_Wakgood_card
+    asset: {fileID: 2800000, guid: 5b8a1b958fbabe64595ba03ed9fe7797, type: 3}
+  - assetPath: Sprites/Characters/CardImages/29_Pungsin_card
+    asset: {fileID: 2800000, guid: 613c18ab2d08e634dbb5cf11414fcadb, type: 3}
+  - assetPath: Sprites/Characters/CardImages/30_Sophia_card
+    asset: {fileID: 2800000, guid: c8aad58f992748c4c8b4767f25eee848, type: 3}
+  - assetPath: Sprites/Characters/CardImages/31_Freeter_card
+    asset: {fileID: 2800000, guid: e1c9efab6a84e27468b6c2e350ec51f0, type: 3}
+  - assetPath: Sprites/Characters/CardImages/32_CarnarJungtur_card
+    asset: {fileID: 2800000, guid: 9e878a8678e169e4fb9c6c1ae8265019, type: 3}
+  - assetPath: Sprites/Characters/CardImages/33_LeeDeoksu_card
+    asset: {fileID: 2800000, guid: d9395ee946db02743b0d55243d52d772, type: 3}
+  - assetPath: Sprites/Characters/CardImages/34_NosferatuHodd_card
+    asset: {fileID: 2800000, guid: 9a8a9ddfe1ba09d46b67ff3d4c81b904, type: 3}
+  - assetPath: Sprites/Characters/CardImages/35_Bujungingan_card
+    asset: {fileID: 2800000, guid: b1ca60260bf3f474db1ca65deafd3745, type: 3}
+  - assetPath: Sprites/Characters/CardImages/36_Dove_card
+    asset: {fileID: 2800000, guid: a897226d7b9642344aae5451516d3119, type: 3}
+  - assetPath: Sprites/Characters/CardImages/37_Parrot_card
+    asset: {fileID: 2800000, guid: b9eccfd3c7d8fb941a6cba5755120d16, type: 3}
+  - assetPath: Sprites/Characters/CardImages/38_Paenchi_card
+    asset: {fileID: 2800000, guid: d6cbee7216a33f3449aa7a6e5da8b7b5, type: 3}
+  - assetPath: Sprites/Characters/CardImages/39_Lion_card
+    asset: {fileID: 2800000, guid: 4752e682afae44942a8e34dfb62dba38, type: 3}
+  - assetPath: Sprites/Characters/Characters
+    asset: {fileID: 4343727234628468602, guid: 67d9b95a02e723e49876cbe2462c1cc1, type: 2}
+  - assetPath: Sprites/Characters/Icons/14
+    asset: {fileID: 2800000, guid: 10704da2b87730b4d8a4f751a668d5d2, type: 3}
+  - assetPath: Sprites/Characters/Icons/15
+    asset: {fileID: 2800000, guid: 440df404f6e6c224f8504b6185fe3fdc, type: 3}
+  - assetPath: Sprites/Characters/Icons/16
+    asset: {fileID: 2800000, guid: 372521badc4bdb64fa5a86f2dd72ab23, type: 3}
+  - assetPath: Sprites/Characters/Icons/17
+    asset: {fileID: 2800000, guid: ba3a56cc18248084391d96c1fab7c55a, type: 3}
+  - assetPath: Sprites/Characters/Icons/18
+    asset: {fileID: 2800000, guid: 55a296f3cbe52464a9a6151389012e42, type: 3}
+  - assetPath: Sprites/Characters/Icons/19
+    asset: {fileID: 2800000, guid: 6abd062ad60d8f7479576b48c9fe7508, type: 3}
+  - assetPath: Sprites/Characters/Icons/20
+    asset: {fileID: 2800000, guid: d68e0efa235110c46b0ee69d300339f3, type: 3}
+  - assetPath: Sprites/Characters/Icons/21
+    asset: {fileID: 2800000, guid: 9cc756d1b07b9f4468cd0ed98f462c6a, type: 3}
+  - assetPath: Sprites/Characters/Icons/22
+    asset: {fileID: 2800000, guid: 639a0b25ed93830459485ef516cae660, type: 3}
+  - assetPath: Sprites/Characters/Icons/23
+    asset: {fileID: 2800000, guid: 4b36cba3a46ff174dbc427570d34ec9e, type: 3}
+  - assetPath: Sprites/Characters/Icons/24
+    asset: {fileID: 2800000, guid: ef6428c2fb6b8694e978d180fc578d66, type: 3}
+  - assetPath: Sprites/Characters/Icons/25
+    asset: {fileID: 2800000, guid: 183ae06c718a2714096f9435e10d237e, type: 3}
+  - assetPath: Sprites/Characters/Icons/26
+    asset: {fileID: 2800000, guid: 51bad5bcb234d7f42bb7e49369e58b27, type: 3}
+  - assetPath: Sprites/Characters/Icons/27
+    asset: {fileID: 2800000, guid: 48f1a79d2f009984e8d92082246c533e, type: 3}
+  - assetPath: Sprites/Characters/Icons/28
+    asset: {fileID: 2800000, guid: 7b4a2226a271c1c409d280e67199d9d1, type: 3}
+  - assetPath: Sprites/Characters/Icons/29
+    asset: {fileID: 2800000, guid: 56502b23550f29443907ea2e1857f5bc, type: 3}
+  - assetPath: Sprites/Characters/Icons/30
+    asset: {fileID: 2800000, guid: db4a16cc959b922459cdbe8a82cf6149, type: 3}
+  - assetPath: Sprites/Characters/Icons/31
+    asset: {fileID: 2800000, guid: 5e37cbe2947b2e946b24e1d0454f30a7, type: 3}
+  - assetPath: Sprites/Characters/Icons/32
+    asset: {fileID: 2800000, guid: d1c954b36823ae149bd9394d7f6a8258, type: 3}
+  - assetPath: Sprites/Characters/Icons/33
+    asset: {fileID: 2800000, guid: c8b953353fe19144683ef6cabb39478e, type: 3}
+  - assetPath: Sprites/Characters/Icons/34
+    asset: {fileID: 2800000, guid: dd60abcbbb8d6b949bf15de6b92e7e12, type: 3}
+  - assetPath: Sprites/Characters/Icons/35
+    asset: {fileID: 2800000, guid: 995d5dec6e894444a899a7f846c559b7, type: 3}
+  - assetPath: Sprites/Characters/Icons/36
+    asset: {fileID: 2800000, guid: 33055031ca6fe7048beecabb113ed31e, type: 3}
+  - assetPath: Sprites/Characters/Icons/37
+    asset: {fileID: 2800000, guid: d2985187b29669b4bb90416f1ee18a58, type: 3}
+  - assetPath: Sprites/Characters/Icons/38
+    asset: {fileID: 2800000, guid: 76dc7b5f04ed8a640b29c35cb30a8b94, type: 3}
+  - assetPath: Sprites/Characters/Icons/39
+    asset: {fileID: 2800000, guid: 01278a526d0a0c94abeaac6c09ab9e13, type: 3}
+  - assetPath: Sprites/Characters/Icons/Icons
+    asset: {fileID: 4343727234628468602, guid: de612b1819f910c41be394783fcd6103, type: 2}
+  - assetPath: Sprites/Drink/cup_default
+    asset: {fileID: 2800000, guid: 30a7a640d9529fc41b97c6413d868ee1, type: 3}
+  - assetPath: Sprites/Drink/cup_hotchs
+    asset: {fileID: 2800000, guid: bd04115fe32d1ec43a7a6a2b0cc71c56, type: 3}
+  - assetPath: Sprites/Drink/cup_necksrite
+    asset: {fileID: 2800000, guid: d3ec931220f709944bf44d232ae6781c, type: 3}
+  - assetPath: Sprites/Drink/cup_orange
+    asset: {fileID: 2800000, guid: ec3ae00c9a6ab1141bedbe70bde186f3, type: 3}
+  - assetPath: Sprites/Drink/cup_paenchi
+    asset: {fileID: 2800000, guid: e5b3a034ed7674c4c844f881633d9314, type: 3}
+  - assetPath: Sprites/Drink/cup_pineapple
+    asset: {fileID: 2800000, guid: b10b10ff15ef5364085c299e06651790, type: 3}
+  - assetPath: Sprites/Drink/dispenser
+    asset: {fileID: 2800000, guid: 16ddf98b0bcfa0546ba41cf6803752b3, type: 3}
+  - assetPath: Sprites/Drink/logo_hotchs
+    asset: {fileID: 2800000, guid: 2282971e951e06046b0ad62035cfa1fe, type: 3}
+  - assetPath: Sprites/Drink/logo_necksrite
+    asset: {fileID: 2800000, guid: a17d71c2c623b3a46955fe3674c10644, type: 3}
+  - assetPath: Sprites/Drink/logo_orange
+    asset: {fileID: 2800000, guid: dfcd6e2f6d405dc469fd48bf9b708d1d, type: 3}
+  - assetPath: Sprites/Drink/logo_paenchi
+    asset: {fileID: 2800000, guid: c59c4346bfc44c64aab7691dbc6ee30e, type: 3}
+  - assetPath: Sprites/Drink/logo_pineapple
+    asset: {fileID: 2800000, guid: 71a0ec90387a2384497dc4fd6b928e09, type: 3}
+  - assetPath: Sprites/Event/gift_badge
+    asset: {fileID: 2800000, guid: c75e3415a75c87241b9fb78c398a3db1, type: 3}
+  - assetPath: Sprites/Event/gift_clothes
+    asset: {fileID: 2800000, guid: e5f4b32b369b9d64091d37c57fcddf38, type: 3}
+  - assetPath: Sprites/Event/gift_hat
+    asset: {fileID: 2800000, guid: d7c246b27967f264f8198232f03420fb, type: 3}
+  - assetPath: Sprites/Foods/00_Bun_Bottom
+    asset: {fileID: 2800000, guid: 220d95c1bb6440a4d946f656211b09a7, type: 3}
+  - assetPath: Sprites/Foods/01_Cabbage
+    asset: {fileID: 2800000, guid: e346d11c193db5d4e9c1044874a9093a, type: 3}
+  - assetPath: Sprites/Foods/01_Cabbage_Slicable
+    asset: {fileID: 2800000, guid: fe6d1afd353abbd49adce6904a4644cc, type: 3}
+  - assetPath: Sprites/Foods/02_Tomato
+    asset: {fileID: 2800000, guid: d9d5b8df8b0bebc42beaa5de66ba37f7, type: 3}
+  - assetPath: Sprites/Foods/02_Tomato_Slicable
+    asset: {fileID: 2800000, guid: 5c5f741141bd4f24898ae1f32795f64c, type: 3}
+  - assetPath: Sprites/Foods/03_Patty
+    asset: {fileID: 2800000, guid: d73cd97dcc4bc70429633002e12b25b4, type: 3}
+  - assetPath: Sprites/Foods/04_Cheese
+    asset: {fileID: 2800000, guid: 6b67cde4f48540e4c8b8a8c4e17b14bf, type: 3}
+  - assetPath: Sprites/Foods/05_Onion
+    asset: {fileID: 2800000, guid: 122c62f8bd4f513438eec7aa16e6115b, type: 3}
+  - assetPath: Sprites/Foods/05_Onion_Slicable
+    asset: {fileID: 2800000, guid: 62a8cc2904c70474f9e82fb043d99256, type: 3}
+  - assetPath: Sprites/Foods/06_Bun_Top
+    asset: {fileID: 2800000, guid: b9359114493167b48973b9c2eef1444b, type: 3}
+  - assetPath: Sprites/Foods/13_Fry
+    asset: {fileID: 2800000, guid: 1d637df0fa0e9fa41966a0f5c8af1932, type: 3}
+  - assetPath: Sprites/Foods/Ingredients
+    asset: {fileID: 4343727234628468602, guid: b203102d134800b488cde9147267ebef, type: 2}
+  - assetPath: Sprites/Foods/Patty_Burnt
+    asset: {fileID: 2800000, guid: f2223ee23c040254491ba77c36a1752b, type: 3}
+  - assetPath: Sprites/Foods/Patty_Done
+    asset: {fileID: 2800000, guid: 25828c0f850207345a8e90c0ce092ad1, type: 3}
+  - assetPath: Sprites/Foods/Patty_Raw
+    asset: {fileID: 2800000, guid: d79e95803196b3241a680d540180c8b6, type: 3}
+  - assetPath: Sprites/Foods/Potato
+    asset: {fileID: 2800000, guid: 0ac879d6f32d29248af65d9764360d1c, type: 3}
+  - assetPath: Sprites/Help/Dispenser_0
+    asset: {fileID: 2800000, guid: d8d3ac0d58fd6654cbb464d5b770f2b3, type: 3}
+  - assetPath: Sprites/Help/Employee_Equip_1
+    asset: {fileID: 2800000, guid: aecce8d74b569ec4995116a859ba8de2, type: 3}
+  - assetPath: Sprites/Help/Employee_Equip_2
+    asset: {fileID: 2800000, guid: 2008dce1e0f5633429353206965e4613, type: 3}
+  - assetPath: Sprites/Help/Employee_Equip_3
+    asset: {fileID: 2800000, guid: 3855e877ba700ca42be1db9bc7979303, type: 3}
+  - assetPath: Sprites/Help/Employee_Equip_4
+    asset: {fileID: 2800000, guid: 05136792c373b384ab1d150cd6492c82, type: 3}
+  - assetPath: Sprites/Help/Employee_Equip_5
+    asset: {fileID: 2800000, guid: b11ea8323a8e35b4e8dbfa52a09a6f30, type: 3}
+  - assetPath: Sprites/Help/Employee_Upgrade_1
+    asset: {fileID: 2800000, guid: 3b9dd9575150b2c489aeb973c363fb92, type: 3}
+  - assetPath: Sprites/Help/Employee_Upgrade_2
+    asset: {fileID: 2800000, guid: b312a1592612e8c45812efc488d6bba2, type: 3}
+  - assetPath: Sprites/Help/Fryer_1
+    asset: {fileID: 2800000, guid: 8d4215d24da619a4e896dac4a5b28e99, type: 3}
+  - assetPath: Sprites/Help/Fryer_2
+    asset: {fileID: 2800000, guid: 20661fdddcd2a2748b9ff97ff08ef281, type: 3}
+  - assetPath: Sprites/Help/Fryer_Bake_1
+    asset: {fileID: 2800000, guid: 9f23e060cc6638e40925222dbcd4ea7d, type: 3}
+  - assetPath: Sprites/Help/Fryer_Bake_2
+    asset: {fileID: 2800000, guid: 1412e264b47bb464091e9ea67b048675, type: 3}
+  - assetPath: Sprites/Help/Fryer_Bake_3
+    asset: {fileID: 2800000, guid: 4d91a09b0e7c1f340acea6558660da82, type: 3}
+  - assetPath: Sprites/Help/Fryer_Smoke
+    asset: {fileID: 2800000, guid: a890390ecb7745f4487838b71e8e1ce1, type: 3}
+  - assetPath: Sprites/Help/Grill_Bake_1
+    asset: {fileID: 2800000, guid: c0520633c2c60814ca367ded99788114, type: 3}
+  - assetPath: Sprites/Help/Grill_Bake_2
+    asset: {fileID: 2800000, guid: 9ee0d6517f82ce94582b80a656abe5aa, type: 3}
+  - assetPath: Sprites/Help/Grill_Bake_3
+    asset: {fileID: 2800000, guid: ea40915d2a384c24095c521b6419bdb0, type: 3}
+  - assetPath: Sprites/Help/Grill_Bake_4
+    asset: {fileID: 2800000, guid: 7943f94f594e3f149900433f881024d6, type: 3}
+  - assetPath: Sprites/Help/Grill_Click_1
+    asset: {fileID: 2800000, guid: 900fb08c27f09554a8285f56a2831231, type: 3}
+  - assetPath: Sprites/Help/Grill_Click_2
+    asset: {fileID: 2800000, guid: 13818f11f106ae94c85564d13d5fa39a, type: 3}
+  - assetPath: Sprites/Help/Grill_Smoke
+    asset: {fileID: 2800000, guid: a5c5c74d7f4788a49b6d2ec3a7de60aa, type: 3}
+  - assetPath: Sprites/Help/hand
+    asset: {fileID: 2800000, guid: ecca5a9d51c8e0646aa57592947b3db4, type: 3}
+  - assetPath: Sprites/Help/hand_full
+    asset: {fileID: 2800000, guid: 37c641ba6cb42334eacb846b16c1c5d0, type: 3}
+  - assetPath: Sprites/Help/Plating_0
+    asset: {fileID: 2800000, guid: 1dc70e454a9c3e041932d0970b18e639, type: 3}
+  - assetPath: Sprites/Help/Plating_1
+    asset: {fileID: 2800000, guid: 0554e0f891c604646b992811d4f326f5, type: 3}
+  - assetPath: Sprites/Help/Plating_2
+    asset: {fileID: 2800000, guid: a5b79a1b98ca2ae4ca639aad12d77aa5, type: 3}
+  - assetPath: Sprites/Help/Plating_3
+    asset: {fileID: 2800000, guid: f63a01587f5d37c41b312dcca79e8cbf, type: 3}
+  - assetPath: Sprites/Help
+    asset: {fileID: 4343727234628468602, guid: ee9e641408e87ef4db43d53c1172300d, type: 2}
+  - assetPath: Sprites/Legacy/Arrow
+    asset: {fileID: 2800000, guid: 6d8994f08a8c2174589f13bd447b84d1, type: 3}
+  - assetPath: Sprites/Legacy/Main2
+    asset: {fileID: 2800000, guid: ec5e8f7543764c846aea888d2c1b0494, type: 3}
+  - assetPath: Sprites/Section/battery bar
+    asset: {fileID: 2800000, guid: d661ce4f76684e547a4c759b53565d0f, type: 3}
+  - assetPath: Sprites/Section/battery off
+    asset: {fileID: 2800000, guid: 908250d4dd32b7a4a9ced6d7804ba9e1, type: 3}
+  - assetPath: Sprites/Section/battery on
+    asset: {fileID: 2800000, guid: bc5ec443e0c2ec44c94201eac3a05d50, type: 3}
+  - assetPath: Sprites/Section/bell_body
+    asset: {fileID: 2800000, guid: dcd54431bafcd8542a3b17c29cf3ddb4, type: 3}
+  - assetPath: Sprites/Section/bell_head
+    asset: {fileID: 2800000, guid: f13e65aba0b42ca4f99a3aee0fea8233, type: 3}
+  - assetPath: Sprites/Section/Countertops_backgrund
+    asset: {fileID: 2800000, guid: bc7820582864729429b9c1982e2bd39e, type: 3}
+  - assetPath: Sprites/Section/Default_backgrund
+    asset: {fileID: 2800000, guid: 09c3bc53761918142ba70680f074a751, type: 3}
+  - assetPath: Sprites/Section/f47fe0c21d7283e5
+    asset: {fileID: 2800000, guid: a01e148e6b57ca543b934d8b91e7fd19, type: 3}
+  - assetPath: Sprites/Section/fry_burnt
+    asset: {fileID: 2800000, guid: f77ad7960c08546408a88c26afc9775b, type: 3}
+  - assetPath: Sprites/Section/fry_done
+    asset: {fileID: 2800000, guid: 1c839a2d65abeba42acafff6a0ad7256, type: 3}
+  - assetPath: Sprites/Section/fry_raw
+    asset: {fileID: 2800000, guid: 9bdb6bb20d7f58245a5e6a044450e5ff, type: 3}
+  - assetPath: Sprites/Section/Fryer
+    asset: {fileID: 2800000, guid: d1dc5b3b58fccbe46adb726906a775aa, type: 3}
+  - assetPath: Sprites/Section/Fryer3
+    asset: {fileID: 2800000, guid: 64b1e6745e810ee4f935aa486254086b, type: 3}
+  - assetPath: Sprites/Section/Fryer4
+    asset: {fileID: 2800000, guid: 25f90d9616885ab498d8840890d17e4f, type: 3}
+  - assetPath: Sprites/Section/Fryer5
+    asset: {fileID: 2800000, guid: a68718029138b0842b6af0012d180ea2, type: 3}
+  - assetPath: Sprites/Section/Fryer7
+    asset: {fileID: 2800000, guid: 0bd25b9f0ac4a5a4ca0c5a51e641eb29, type: 3}
+  - assetPath: Sprites/Section/Fryer33
+    asset: {fileID: 2800000, guid: 2aaed705149261f4182c066cf9f41072, type: 3}
+  - assetPath: Sprites/Section/lock open
+    asset: {fileID: 2800000, guid: 64ff2adb532df2f448800db69981d70a, type: 3}
+  - assetPath: Sprites/Section/lock open_patty
+    asset: {fileID: 2800000, guid: 90d4a220041d98744a852e6addda7c56, type: 3}
+  - assetPath: Sprites/Section/lock
+    asset: {fileID: 2800000, guid: 6fcdd266ce6dd244a8688382834f125f, type: 3}
+  - assetPath: Sprites/Section/lock_open
+    asset: {fileID: 2800000, guid: b9f9d651483a5944b981dffbed2d442b, type: 3}
+  - assetPath: Sprites/Section/locked
+    asset: {fileID: 2800000, guid: a87209eb217ccc1498fbb327963d1c9c, type: 3}
+  - assetPath: Sprites/Section/Patty_grow
+    asset: {fileID: 2800000, guid: dba74f1cbd962f14ea59df8eeea5857f, type: 3}
+  - assetPath: Sprites/Section/Plate
+    asset: {fileID: 2800000, guid: 1b60cd4cdfd795f43a0eaf0b095c0e5e, type: 3}
+  - assetPath: Sprites/Section/Section_Fryer
+    asset: {fileID: 2800000, guid: 7e9298ed758e0c449b591fc8ee3cb230, type: 3}
+  - assetPath: Sprites/Section/Section_Grill
+    asset: {fileID: 2800000, guid: d0257bf59756f1941966ec56d0dc78a2, type: 3}
+  - assetPath: Sprites/Section/Section_Plating
+    asset: {fileID: 2800000, guid: 13523bd713e172144a6b65e5207d9f57, type: 3}
+  - assetPath: Sprites/Section/Slice_Effect
+    asset: {fileID: 2800000, guid: a156f593070f4ce4c8f34c80d663b197, type: 3}
+  - assetPath: Sprites/Shop/EXIT
+    asset: {fileID: 2800000, guid: a0b8a4f3af28b3140b688911d057417f, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/BUY WINDOW
+    asset: {fileID: 2800000, guid: 1b67deaa7d8d6e84d922f076acffcfb0, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/Case_1
+    asset: {fileID: 2800000, guid: d26a998d752091542816d898e902b005, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/Case_2
+    asset: {fileID: 2800000, guid: ea4791a9136aae64e9a36e4a49936dfc, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/Case_3
+    asset: {fileID: 2800000, guid: e28f26fa00e208044a1cf9bd3771423c, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/purchase(eng)
+    asset: {fileID: 2800000, guid: 9d6bc1569eeaaaa4096d168bfeb19233, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/quantity
+    asset: {fileID: 2800000, guid: af3f4e1e071e0ce489153173612f5ec9, type: 3}
+  - assetPath: Sprites/Shop/FoodShop/SHOP
+    asset: {fileID: 2800000, guid: 8c15e33ca2c3efb458d18207946ba8c7, type: 3}
+  - assetPath: Sprites/Shop/Hire/500Wak
+    asset: {fileID: 2800000, guid: 0a60258bb2f217d429702cfce33dd0ff, type: 3}
+  - assetPath: Sprites/Shop/Hire/GET BACKGRUND
+    asset: {fileID: 2800000, guid: f5e5ef904ab436a429dc8228100038a1, type: 3}
+  - assetPath: Sprites/Shop/Hire/GET FONT
+    asset: {fileID: 2800000, guid: 990efcfe2a20cf64ea4fd1b38dc773b9, type: 3}
+  - assetPath: Sprites/Shop/Hire/MY CARD
+    asset: {fileID: 2800000, guid: 32010ecd10c79f14883fc6041f32f83e, type: 3}
+  - assetPath: Sprites/Shop/Hire/price tag
+    asset: {fileID: 2800000, guid: fc5e376b1ccbf564bb9207fc8640087b, type: 3}
+  - assetPath: Sprites/Shop/Hire/Random 500Wak
+    asset: {fileID: 2800000, guid: 6b1bb149c044496458638bf7ee8a7d91, type: 3}
+  - assetPath: Sprites/Shop/Hire/Random BACKGRUND
+    asset: {fileID: 2800000, guid: 2278b2b5970d7944d968611073efa3bc, type: 3}
+  - assetPath: Sprites/Shop/Hire/SHOP button(ENG)
+    asset: {fileID: 2800000, guid: cfff314434e0cc34aac4bd01fcc08567, type: 3}
+  - assetPath: Sprites/Shop/Hire/TABLE
+    asset: {fileID: 2800000, guid: df9f7fdcdd1fcab4f8ec602284caaf1c, type: 3}
+  - assetPath: Sprites/Shop/PLAY
+    asset: {fileID: 2800000, guid: 1f2d771797867514db231a246c5ff492, type: 3}
+  - assetPath: Sprites/Shop/Play_CARD
+    asset: {fileID: 2800000, guid: 5c75f34244164ee46861cb48d8f27368, type: 3}
+  - assetPath: Sprites/Shop/price tag
+    asset: {fileID: 2800000, guid: 709b7931f4f5bb043ae0c91a2d10535b, type: 3}
+  - assetPath: Sprites/Shop/Shop
+    asset: {fileID: 4343727234628468602, guid: acc2b357338c5464ba362c641932177d, type: 2}
+  - assetPath: Sprites/Shop/store category 1
+    asset: {fileID: 2800000, guid: 1840b92e6635ef546af6d3f224fbe15c, type: 3}
+  - assetPath: Sprites/Shop/store category 2
+    asset: {fileID: 2800000, guid: b27ca83f194b8ba48b4ab55ec62ada9e, type: 3}
+  - assetPath: Sprites/Shop/store category 3
+    asset: {fileID: 2800000, guid: 8e4ea8b2e68d11743979899358d61c2d, type: 3}
+  - assetPath: Sprites/Shop/store category(ENG)1
+    asset: {fileID: 2800000, guid: f3f968b7e019c4544ae7c096d1ef6674, type: 3}
+  - assetPath: Sprites/Shop/store category(ENG)2
+    asset: {fileID: 2800000, guid: 68014d9800049804bae2a1cd5f2c16ff, type: 3}
+  - assetPath: Sprites/Shop/store category(ENG)3
+    asset: {fileID: 2800000, guid: f44dd0b92b9de8d4cb02260bc5b7021e, type: 3}
+  - assetPath: Sprites/Shop/store category1(default)
+    asset: {fileID: 2800000, guid: 76b4ab543ac1e9245969bc332d96a6bd, type: 3}
+  - assetPath: Sprites/Shop/store category1
+    asset: {fileID: 2800000, guid: 561d3e241b34a7747bdb9d6926e82614, type: 3}
+  - assetPath: Sprites/Shop/store category2(default)
+    asset: {fileID: 2800000, guid: 3384b8e8a5fc323409551f3802e41d4b, type: 3}
+  - assetPath: Sprites/Shop/store category2
+    asset: {fileID: 2800000, guid: 57162d1ce219e92408f0a9780d85e728, type: 3}
+  - assetPath: Sprites/Shop/store category3
+    asset: {fileID: 2800000, guid: f2064ec97b3d56f43bf84f8f5de96f74, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/BuyButton
+    asset: {fileID: 2800000, guid: 9314a5d38a5442b4c804284c3b19186b, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/Dispenser
+    asset: {fileID: 2800000, guid: d64afce107928b74aa80c6a70c6e9727, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/Employee
+    asset: {fileID: 2800000, guid: 479aae353d5171b40b4f56ec19cd343f, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/Fryer
+    asset: {fileID: 2800000, guid: 884f2971752191d4fb465b86c4cb32a5, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/Grill
+    asset: {fileID: 2800000, guid: 345ba03904c57ed4baa940745ce54497, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/Ingredient
+    asset: {fileID: 2800000, guid: 4dd6d9a30cccdef4daee600341e3f090, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/Prep
+    asset: {fileID: 2800000, guid: c9ec3ce21df0d2d47b4ad8d48c8dd765, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/UP_WINDOW
+    asset: {fileID: 2800000, guid: 9cb88dd9ffb0af84e8da199a12c4396d, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/UPGRADE SHOP
+    asset: {fileID: 2800000, guid: 3e8ef66d5fa66334f8351bac8b758561, type: 3}
+  - assetPath: Sprites/Shop/Upgrade/UPGRADE(ENG)
+    asset: {fileID: 2800000, guid: 3368cc59d36d20e4cb38251c65ce148b, type: 3}
+  - assetPath: Sprites/UI/2X
+    asset: {fileID: 2800000, guid: fdc76aea9d70b024eb45f56328684b62, type: 3}
+  - assetPath: Sprites/UI/BAR
+    asset: {fileID: 2800000, guid: fdec733289ba9ec41b304c21641bba1e, type: 3}
+  - assetPath: Sprites/UI/BOOK
+    asset: {fileID: 2800000, guid: 6114031fd7e27ef4596e8b9e1b0580b5, type: 3}
+  - assetPath: Sprites/UI/buff frame2
+    asset: {fileID: 2800000, guid: 6fef7c5588487dd45bf6bcb9074617b2, type: 3}
+  - assetPath: Sprites/UI/buff frame2_2
+    asset: {fileID: 2800000, guid: 8f58238b6600070449c10f96cbbf040c, type: 3}
+  - assetPath: Sprites/UI/buff1
+    asset: {fileID: 2800000, guid: 83568b8910f26f94d8952b2fd351559e, type: 3}
+  - assetPath: Sprites/UI/buff2
+    asset: {fileID: 2800000, guid: 210761d58cb62eb48809e1d7a7940d41, type: 3}
+  - assetPath: Sprites/UI/Butten
+    asset: {fileID: 2800000, guid: 4a76fd1a78b32cb459b1f465c4c70df7, type: 3}
+  - assetPath: Sprites/UI/calculate
+    asset: {fileID: 2800000, guid: 0973f568ae2756248817536e4a09139d, type: 3}
+  - assetPath: Sprites/UI/circle_white
+    asset: {fileID: 2800000, guid: 778f0ebb6b9c2fd448e642bd07c0778b, type: 3}
+  - assetPath: Sprites/UI/CLOCK icon
+    asset: {fileID: 2800000, guid: f4883de0d03c2d742bcb7902da1965ce, type: 3}
+  - assetPath: Sprites/UI/Clock
+    asset: {fileID: 2800000, guid: df4985f10e0dabe44ba26131e3e4be41, type: 3}
+  - assetPath: Sprites/UI/closed
+    asset: {fileID: 2800000, guid: bd426ffa7f127b54e8592479df3552b6, type: 3}
+  - assetPath: Sprites/UI/EVENT
+    asset: {fileID: 2800000, guid: a43600ecf210fa0429d92f769053e809, type: 3}
+  - assetPath: Sprites/UI/Exitbutton
+    asset: {fileID: 2800000, guid: 79c6fc89276a9cf4fa459497be0bb5db, type: 3}
+  - assetPath: Sprites/UI/gift
+    asset: {fileID: 2800000, guid: 5a6623790bdd2fb45a2bfb685ba57f15, type: 3}
+  - assetPath: Sprites/UI/heart GROUP
+    asset: {fileID: 2800000, guid: db6a1499fbd0fa34ca55447816a5e749, type: 3}
+  - assetPath: Sprites/UI/HELP
+    asset: {fileID: 2800000, guid: 3f413dbf12857364bbee1c1906554a08, type: 3}
+  - assetPath: Sprites/UI/MENU
+    asset: {fileID: 2800000, guid: a3e2ad90d49b6504ab419321c77a8945, type: 3}
+  - assetPath: Sprites/UI/MONEY icon
+    asset: {fileID: 2800000, guid: 8ae6b2560863e724183baa9bc374e1d5, type: 3}
+  - assetPath: Sprites/UI/Money
+    asset: {fileID: 2800000, guid: 75c2acaf967e6dc4c94ba32fd2599e9e, type: 3}
+  - assetPath: Sprites/UI/music
+    asset: {fileID: 2800000, guid: e211995f80fb0ab4c83bae03096621f0, type: 3}
+  - assetPath: Sprites/UI/music_off
+    asset: {fileID: 2800000, guid: 206fa5c5a397e1e49b080a0f88e9f217, type: 3}
+  - assetPath: Sprites/UI/NEXT
+    asset: {fileID: 2800000, guid: 10f224bd17e52274aa6dbe4c94b34e13, type: 3}
+  - assetPath: Sprites/UI/OPEN
+    asset: {fileID: 2800000, guid: a2630f271cfe55c42a0b4699422d33e5, type: 3}
+  - assetPath: Sprites/UI/PLAY
+    asset: {fileID: 2800000, guid: a2b03b50b82f50941b7418fd20c80fc4, type: 3}
+  - assetPath: Sprites/UI/pop-up
+    asset: {fileID: 2800000, guid: 4c7846a16196f7b42a63e7d63fa0a908, type: 3}
+  - assetPath: Sprites/UI/pop-up_button
+    asset: {fileID: 2800000, guid: ba810bdb01b42e24281c7c3b42194597, type: 3}
+  - assetPath: Sprites/UI/pop-up_button2
+    asset: {fileID: 2800000, guid: 008b11d368d7a68488097700a6184610, type: 3}
+  - assetPath: Sprites/UI/push
+    asset: {fileID: 2800000, guid: 614e563ed2b7b9d46ae32a7e383f9e5e, type: 3}
+  - assetPath: Sprites/UI/question
+    asset: {fileID: 2800000, guid: cdaa1ffcf442ad94a8a264a5bc9910c9, type: 3}
+  - assetPath: Sprites/UI/receipt
+    asset: {fileID: 2800000, guid: e256f0084612b324eb1ad3f6242a71bd, type: 3}
+  - assetPath: Sprites/UI/receipt_no_barcode
+    asset: {fileID: 2800000, guid: 0d2d874933d545a439aa579fc8c1708d, type: 3}
+  - assetPath: Sprites/UI/SETTINGS
+    asset: {fileID: 2800000, guid: 60e402ef0fc772f45be5cf2c6c4b008c, type: 3}
+  - assetPath: Sprites/UI/Slider/gauge BACKGRUND
+    asset: {fileID: 2800000, guid: e6128fc2e94bd624e9270931b7713dee, type: 3}
+  - assetPath: Sprites/UI/Slider/Slider_Background
+    asset: {fileID: 2800000, guid: 3a30c8be4fbcab24c9566d53539ff3b3, type: 3}
+  - assetPath: Sprites/UI/Slider/Slider_BakeArea
+    asset: {fileID: 2800000, guid: 74f54821e4388f141896126fa68dedc2, type: 3}
+  - assetPath: Sprites/UI/Slider/Slider_frame
+    asset: {fileID: 2800000, guid: f4189034f9edd8641ab53d1614451e94, type: 3}
+  - assetPath: Sprites/UI/Slider/UI_MPbar
+    asset: {fileID: 2800000, guid: 3972cfccb71f07f478e173122a09a2eb, type: 3}
+  - assetPath: Sprites/UI/Slider/UI_Pbar
+    asset: {fileID: 2800000, guid: 42d86529dd0dd274ca1d06dc55add5fd, type: 3}
+  - assetPath: Sprites/UI/sound
+    asset: {fileID: 2800000, guid: 13b283492cfa60841831c3ffa5db8c5d, type: 3}
+  - assetPath: Sprites/UI/sound_off
+    asset: {fileID: 2800000, guid: 14b863ce7494e074c9d18ed6a0d83bea, type: 3}
+  - assetPath: Sprites/UI/STAMP
+    asset: {fileID: 2800000, guid: 5470298fc97ac1140a5abc8f12373062, type: 3}
+  - assetPath: Sprites/UI/stamp_icon
+    asset: {fileID: 2800000, guid: 4d351abd19e815246a8d563597e58349, type: 3}
+  - assetPath: Sprites/UI/STAR
+    asset: {fileID: 2800000, guid: 8ecd913dfc1bb78459f8751fd001e068, type: 3}
+  - assetPath: Sprites/UI/START BAR 1
+    asset: {fileID: 2800000, guid: 647fd7b2e49bfdc4ab20b53cc83e039b, type: 3}
+  - assetPath: Sprites/UI/START BAR
+    asset: {fileID: 2800000, guid: fcf479c742e70bf4ebdb26e9c5e80dc8, type: 3}
+  - assetPath: Sprites/UI/START BAR2
+    asset: {fileID: 2800000, guid: 6ae4402261d403b4cac5fad168e95b40, type: 3}
+  - assetPath: Sprites/UI/START BAR3
+    asset: {fileID: 2800000, guid: e8d069e7a277042438afc7a6038ee92e, type: 3}
+  - assetPath: Sprites/UI/START BAR4
+    asset: {fileID: 2800000, guid: d9accecab2c681a42b2162b797b8f264, type: 3}
+  - assetPath: Sprites/UI/TextBox
+    asset: {fileID: 2800000, guid: ee0175af83e16d947a1e79efa8ce3acc, type: 3}
+  - assetPath: Sprites/UI/trash
+    asset: {fileID: 2800000, guid: bca34668cbf078043a3c0578329338e1, type: 3}
+  - assetPath: Sprites/UI/UI
+    asset: {fileID: 4343727234628468602, guid: 618980003f7835149ba8c3665e9093d9, type: 2}
+  - assetPath: Sprites/UI/wak
+    asset: {fileID: 2800000, guid: 6491f4f706de58746a8a52fea6e72ea1, type: 3}
+  - assetPath: Sprites/UI/WakIcon
+    asset: {fileID: 2800000, guid: b7d78a76c0f0afa48ba8d6dcbcb6e800, type: 3}
+  - assetPath: TextData/cardDatas
+    asset: {fileID: 4900000, guid: b2985c505fa490e46a9709e05153f617, type: 3}
+  - assetPath: TextData/costs
+    asset: {fileID: 4900000, guid: 17fca27ee75b5c346b8646a39d8cce15, type: 3}
+  - assetPath: TextData/costs_cheat
+    asset: {fileID: 4900000, guid: ec26ddc7bf393fe4285c17b5b2538076, type: 3}
+  - assetPath: TextData/language_en
+    asset: {fileID: 4900000, guid: ff269f2f66dd169439b29cc35b078499, type: 3}
+  - assetPath: TextData/language_jp
+    asset: {fileID: 4900000, guid: 8f79431fab3b96c4e97121a057e6b1ae, type: 3}
+  - assetPath: TextData/language_ko
+    asset: {fileID: 4900000, guid: 6992c89da405e574bb7d8588cdfb6ea7, type: 3}
+  - assetPath: TextData/language_thai
+    asset: {fileID: 4900000, guid: 6cdbf13fe1c60d94c9b0e290e4a7ae38, type: 3}
+  - assetPath: TextData/receipts_total
+    asset: {fileID: 4900000, guid: 6b09362bcc575a448a68bccb2ad44a6a, type: 3}
+  - assetPath: TextData/receipts_use
+    asset: {fileID: 4900000, guid: 502a277dece810d48999fc1e0e07c03c, type: 3}
+  - assetPath: TextData/stages
+    asset: {fileID: 4900000, guid: e5f99d487b4296342ae548fd1ee30c2e, type: 3}
+  - assetPath: TextData/storeItems
+    asset: {fileID: 4900000, guid: 636bd913b04764c48aff97e093617ac6, type: 3}
+  - assetPath: TextData/unlockStages
+    asset: {fileID: 4900000, guid: 3edadbf19d88d2f42b7e45e495ee55b3, type: 3}
+  - assetPath: TextData/unlockStages_cheat
+    asset: {fileID: 4900000, guid: 4b63b1f7858ea1e4bba4626292f50782, type: 3}
+  - assetPath: TextData/unlockStages_empt
+    asset: {fileID: 4900000, guid: eb294efd798d7034dab4a19cb3ad0d82, type: 3}
+  - assetPath: Fonts & Materials/LiberationSans SDF - Drop Shadow
+    asset: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - assetPath: Fonts & Materials/LiberationSans SDF - Fallback
+    asset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  - assetPath: Fonts & Materials/LiberationSans SDF - Outline
+    asset: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  - assetPath: Fonts & Materials/LiberationSans SDF
+    asset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - assetPath: Fonts & Materials/LiberationSans SDF_custom
+    asset: {fileID: 11400000, guid: 574860127f7316c46b91fdd3736a4bc3, type: 2}
+  - assetPath: LineBreaking Following Characters
+    asset: {fileID: 4900000, guid: fade42e8bc714b018fac513c043d323b, type: 3}
+  - assetPath: LineBreaking Leading Characters
+    asset: {fileID: 4900000, guid: d82c1b31c7e74239bff1220585707d2b, type: 3}
+  - assetPath: Sprite Assets/EmojiOne
+    asset: {fileID: 11400000, guid: c41005c129ba4d66911b75229fd70b45, type: 2}
+  - assetPath: Style Sheets/Default Style Sheet
+    asset: {fileID: 11400000, guid: f952c082cb03451daed3ee968ac6c63e, type: 2}
+  - assetPath: TMP Settings
+    asset: {fileID: 11400000, guid: 3f5b5dff67a942289a9defa416b206f3, type: 2}
+  manifest: {fileID: 11400000, guid: 7c6750e876a3628418c154015e69faa5, type: 2}
+  enableCustomTags: 1
+  enableCustomLayers: 1
+  enableResources: 1
