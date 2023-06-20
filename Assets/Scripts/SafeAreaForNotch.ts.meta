@@ -19,16 +19,21 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nexports.SafeArea = void 0;\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
     ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nclass
-    SafeArea extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake() {\r\n       
-    const rectTransform = this.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
-    const safeArea = UnityEngine_1.Screen.safeArea;\r\n        let newAnchorMin =
-    safeArea.position;\r\n        let newAnchorMax = __UnityEngine__.Vector2.op_Addition(safeArea.position,
+    SafeAreaForNotch extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
+    {\r\n        // SafeArea Settings\r\n        let safeArea = UnityEngine_1.Screen.safeArea;\r\n       
+    let newAnchorMin = safeArea.position;\r\n        let newAnchorMax = __UnityEngine__.Vector2.op_Addition(safeArea.position,
     safeArea.size);\r\n        newAnchorMin.x /= UnityEngine_1.Screen.width;\r\n       
     newAnchorMax.x /= UnityEngine_1.Screen.width;\r\n        newAnchorMin.y /= UnityEngine_1.Screen.height;\r\n       
-    newAnchorMax.y /= UnityEngine_1.Screen.height;\r\n        rectTransform.anchorMin
-    = newAnchorMin;\r\n        rectTransform.anchorMax = newAnchorMax;\r\n    }\r\n}\r\nexports.SafeArea
-    = SafeArea;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2FmZUFyZWFGb3JOb3RjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNhZmVBcmVhRm9yTm90Y2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBMEQ7QUFFMUQsTUFBYSxRQUFTLFNBQVEscUNBQXFCO0lBQ2pELEtBQUs7UUFDSCxNQUFNLGFBQWEsR0FBa0IsSUFBSSxDQUFDLFlBQVksU0FBQywyQkFBYSxFQUFHLENBQUM7UUFDeEUsTUFBTSxRQUFRLEdBQVMsb0JBQU0sQ0FBQyxRQUFRLENBQUM7UUFDdkMsSUFBSSxZQUFZLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQztRQUNyQyxJQUFJLFlBQVksMkJBVW8vNUYsV0FBWSxDQVY3LzVGLFFBQVEsQ0FBQyxRQUFRLEVBQUcsUUFBUSxDQUFDLElBQUksQ0FBQSxDQUFDO1FBRXJELFlBQVksQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxLQUFLLENBQUM7UUFDL0IsWUFBWSxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLEtBQUssQ0FBQztRQUMvQixZQUFZLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsTUFBTSxDQUFDO1FBQ2hDLFlBQVksQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxNQUFNLENBQUM7UUFFaEMsYUFBYSxDQUFDLFNBQVMsR0FBRyxZQUFZLENBQUM7UUFDdkMsYUFBYSxDQUFDLFNBQVMsR0FBRyxZQUFZLENBQUM7SUFDekMsQ0FBQztDQUNGO0FBZkQsNEJBZUMifQ==","assetPath":"Assets/Scripts/SafeAreaForNotch.ts","manifest":{"properties":[],"name":"SafeArea","description":""},"isCompiled":true}'
-  typescriptHash: 160ecb139f96069136f5b3930893fe78
+    newAnchorMax.y /= UnityEngine_1.Screen.height;\r\n        let rect = this.safeAreaObject.GetComponent($typeof(UnityEngine_1.RectTransform));\r\n       
+    rect.anchorMin = newAnchorMin;\r\n        rect.anchorMax = newAnchorMax;\r\n       
+    // const rectTransform: RectTransform = this.GetComponent<RectTransform>();\r\n       
+    // const safeArea: Rect = Screen.safeArea;\r\n        // let newAnchorMin = safeArea.position;\r\n       
+    // let newAnchorMax = safeArea.position + safeArea.size;\r\n        // newAnchorMin.x
+    /= Screen.width;\r\n        // newAnchorMax.x /= Screen.width;\r\n        //
+    newAnchorMin.y /= Screen.height;\r\n        // newAnchorMax.y /= Screen.height;\r\n       
+    // rectTransform.anchorMin = newAnchorMin;\r\n        // rectTransform.anchorMax
+    = newAnchorMax;\r\n    }\r\n}\r\nexports.default = SafeAreaForNotch;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2FmZUFyZWFGb3JOb3RjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNhZmVBcmVhRm9yTm90Y2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFzRTtBQUV0RSxNQUFxQixnQkFBaUIsU0FBUSxxQ0FBcUI7SUFHakUsS0FBSztRQUNILG9CQUFvQjtRQUNwQixJQUFJLFFBQVEsR0FBUyxvQkFBTSxDQUFDLFFBQVEsQ0FBQztRQUNyQyxJQUFJLFlBQVksR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDO1FBQ3JDLElBQUksWUFBWSwyQkF1Qjg3NEYsV0FBWSxDQXZCdjg0RixRQUFRLENBQUMsUUFBUSxFQUFHLFFBQVEsQ0FBQyxJQUFJLENBQUEsQ0FBQztRQUNyRCxZQUFZLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsS0FBSyxDQUFDO1FBQy9CLFlBQVksQ0FBQyxDQUFDLElBQUksb0JBQU0sQ0FBQyxLQUFLLENBQUM7UUFDL0IsWUFBWSxDQUFDLENBQUMsSUFBSSxvQkFBTSxDQUFDLE1BQU0sQ0FBQztRQUNoQyxZQUFZLENBQUMsQ0FBQyxJQUFJLG9CQUFNLENBQUMsTUFBTSxDQUFDO1FBRWhDLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsWUFBWSxTQUFDLDJCQUFhLEVBQUcsQ0FBQztRQUM3RCxJQUFJLENBQUMsU0FBUyxHQUFHLFlBQVksQ0FBQztRQUM5QixJQUFJLENBQUMsU0FBUyxHQUFHLFlBQVksQ0FBQztRQUU5QiwyRUFBMkU7UUFDM0UsMENBQTBDO1FBQzFDLHdDQUF3QztRQUN4Qyx3REFBd0Q7UUFFeEQsa0NBQWtDO1FBQ2xDLGtDQUFrQztRQUNsQyxtQ0FBbUM7UUFDbkMsbUNBQW1DO1FBRW5DLDBDQUEwQztRQUMxQywwQ0FBMEM7SUFDNUMsQ0FBQztDQUNGO0FBOUJELG1DQThCQyJ9","assetPath":"Assets/Scripts/SafeAreaForNotch.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"safeAreaObject","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"SafeAreaForNotch","description":""},"isCompiled":true}'
+  typescriptHash: a51b3c2f85334193026b8c1331409803
   onlyWriteTrigger: 0

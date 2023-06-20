@@ -320,7 +320,7 @@ export default class UIManager extends ZepetoScriptBehaviour implements IListene
         this.informationObj.SetActive(false);
     }
     
-    private SetPossessionMoneyText(money: string) {
+    public SetPossessionMoneyText(money: string) {
         // Set the text of the possession money element to the given money value
         this.possessionMoneyTxt.text = money;
     }

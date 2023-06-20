@@ -60,7 +60,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         this.ClearOrderReceipts();
         this.InitProduct();
         /**/ 
-        if(this.waitTime == 0) this.setWaitTime(20);
+        if(this.waitTime == 0) this.setWaitTime(30);
     }
 
     public InitProduct() {
@@ -137,11 +137,11 @@ export default class OrderManager extends ZepetoScriptBehaviour {
         while (true) {
             if (this.maxOrderSize > this.curOrderNumber)
                 this.addOrder();
-            let waitTime = Math.max(2 + 8 * Math.random());
+            let newOrderTime = Math.max(2 + 8 * Math.random());
             if(this.curOrderNumber <= 1)
-                waitTime *= 0.5;
+            newOrderTime *= 0.5;
             // console.log("waitTime: " + waitTime);
-            yield new WaitForSeconds(waitTime);
+            yield new WaitForSeconds(newOrderTime);
         }
     }
 
@@ -171,7 +171,7 @@ export default class OrderManager extends ZepetoScriptBehaviour {
                 // stop wait Corutine
                 this.StopCoroutine(this.waitCoroutines[index]);
                 // earn this receipt's pay
-                BalanceManager.GetInstance().GainBalance(Currency.wak, this.receipts[index].pay);
+                BalanceManager.GetInstance().GainStageBalance(Currency.wak, this.receipts[index].pay);
                 // if waitSlider isn't 0, remove this receipt
                 this.removeOrder(index);
 

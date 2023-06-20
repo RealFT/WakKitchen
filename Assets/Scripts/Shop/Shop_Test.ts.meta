@@ -18,11 +18,12 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    BalanceManager_1 = require(\"./BalanceManager\");\r\nclass Shop_Test extends
-    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        this.buyBtn.onClick.AddListener(()
-    => {\r\n            BalanceManager_1.default.GetInstance().GainBalance(BalanceManager_1.Currency.wak,
-    10000);\r\n        });\r\n    }\r\n}\r\nexports.default = Shop_Test;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9UZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9UZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsaURBQXFEO0FBQ3JELHFEQUE0RDtBQUU1RCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBR3hELEtBQUs7UUFDRCxJQUFJLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ2pDLHdCQUFjLENBQUMsV0FBVyxFQUFFLENBQUMsV0FBVyxDQUFDLHlCQUFRLENBQUMsR0FBRyxFQUFFLEtBQUssQ0FBQyxDQUFDO1FBQ2xFLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztDQUVKO0FBVEQsNEJBU0MifQ==","assetPath":"Assets/Scripts/Shop/Shop_Test.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"buyBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Shop_Test","description":""},"isCompiled":true}'
-  typescriptHash: f48f114ca390c280e5062f2da5c6244d
+  compiledResult: '{"source":"// import { Button } from ''UnityEngine.UI'';\r\n//
+    import { ZepetoScriptBehaviour } from ''ZEPETO.Script''\r\n// import BalanceManager,
+    { Currency } from ''./BalanceManager'';\r\n// export default class Shop_Test
+    extends ZepetoScriptBehaviour {\r\n//     @SerializeField() private buyBtn: Button;\r\n//    
+    Start() {    \r\n//         this.buyBtn.onClick.AddListener(() => {\r\n//            
+    BalanceManager.GetInstance().GainBalance(Currency.wak, 10000);\r\n//        
+    });\r\n//     }\r\n// }\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2hvcF9UZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2hvcF9UZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDJDQUEyQztBQUMzQyx3REFBd0Q7QUFDeEQsK0RBQStEO0FBRS9ELGlFQUFpRTtBQUNqRSxnREFBZ0Q7QUFFaEQsb0JBQW9CO0FBQ3BCLGtEQUFrRDtBQUNsRCw2RUFBNkU7QUFDN0UsY0FBYztBQUNkLFFBQVE7QUFFUixJQUFJIn0=","assetPath":"Assets/Scripts/Shop/Shop_Test.ts","manifest":{"properties":[],"name":"Shop_Test","description":""},"isCompiled":true}'
+  typescriptHash: e08ebf4fae5f521cd8754f996774b02c
   onlyWriteTrigger: 0

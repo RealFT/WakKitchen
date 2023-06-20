@@ -1,10 +1,12 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { Random, Sprite, Resources, TextAsset, PlayerPrefs, Application, SystemLanguage } from 'UnityEngine';
+import { Random, Sprite, Resources, TextAsset, PlayerPrefs, Application, SystemLanguage, WaitForEndOfFrame, WaitForSeconds } from 'UnityEngine';
 import Receipt from './Receipt';
 import { GameObject, Object, Debug } from 'UnityEngine';
 import CardData from './Employee/CardData';
 import { RoomData, Room } from "ZEPETO.Multiplay";
 import { ZepetoWorldMultiplay } from 'ZEPETO.World';
+import BalanceManager, { Currency } from './Shop/BalanceManager';
+import UIManager from './UIManager';
 export enum Grade {
     D = 0,
     C = 1,
@@ -241,6 +243,30 @@ export default class DataManager extends ZepetoScriptBehaviour {
         this.LoadStageData();
         this.LoadUnlockStageData();
         this.LoadCardData();
+        this.StartCoroutine(this.LoadFailBalance());
+    }
+
+    public *LoadFailBalance() {
+        const failIncomes = DataManager.GetInstance().GetValue("fail_balance");
+        if(failIncomes <= 0) return;
+        const previousMoney = BalanceManager.GetInstance().GetPossessionMoney();
+        const fixedMoney = previousMoney + failIncomes;
+        BalanceManager.GetInstance().GainBalance(Currency.wak, failIncomes);
+
+        let limitTime = 4;
+        while (!BalanceManager.GetInstance().IsRefreshed() || limitTime > 0) {
+            yield new WaitForSeconds(0.4);
+            limitTime - 0.4;
+        }
+
+        if (fixedMoney === BalanceManager.GetInstance().GetPossessionMoney()) {
+            // 데이터 동기화 성공
+            DataManager.GetInstance().SetValue("fail_balance", 0);
+            UIManager.GetInstance().OpenInformation("info_success_restore_balance");
+        } else {
+            // 데이터 동기화 실패
+            UIManager.GetInstance().OpenInformation("info_fail_restore_balance");
+        }
     }
     // public DebugStage() {
     //     this.lastSavedStage = 1;
@@ -451,6 +477,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
             case SystemLanguage.Japanese:
                 this.langCode = "jp"; // 기본 언어 설정 (영어)
                 break;
+            default:
+                this.langCode = "en"; // 기본 언어 설정 (영어)
+                break;
         }
         PlayerPrefs.SetString("Language", this.langCode);
     }
@@ -471,8 +500,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             case "jp":
                 return this.textContents_jp?.get(key);
             default:
-                // console.log("langCode error");
-                return null;
+                return this.textContents_en?.get(key);
         }
     }
     // ----------- Language -------------

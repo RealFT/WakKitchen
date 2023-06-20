@@ -1,3 +1,4 @@
+import { GameObject, Transform, Vector2 } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 
 export enum CupState {
@@ -13,7 +14,6 @@ export default class Cup extends ZepetoScriptBehaviour {
 
 
     private cupState: CupState;
-
     Start(){
         this.cupState = CupState.DEFAULT;
     }

@@ -39,6 +39,8 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
     private _multiplay: ZepetoWorldMultiplay;
     private _room: Room
     private possessionMoney: number;
+    private isRefreshed: boolean;
+    public IsRefreshed(): boolean { return this.isRefreshed; }
 
     private Start() {
         Mediator.GetInstance().RegisterListener(this);
@@ -55,6 +57,7 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
     private InitMessageHandler() {
         this._room.AddMessageHandler<BalanceSync>("SyncBalances", (message) => {
             this.RefreshAllBalanceUI();
+            this.isRefreshed = true;
         });
         ProductService.OnPurchaseCompleted.AddListener((product, response) => {
             this.RefreshAllBalanceUI();
@@ -72,34 +75,48 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
             const possessionMoney = request.responseData.currencies?.ContainsKey(Currency.wak) ? request.responseData.currencies?.get_Item(Currency.wak).toString() :"0";
             // Mediator를 통해 UI 클래스에 possessionMoney값 전달
             this.possessionMoney = parseInt(possessionMoney);
-            Mediator.GetInstance().Notify(this, "PossessionMoneyUpdated", possessionMoney);
+            Mediator.GetInstance().Notify(this, EventNames.PossessionMoneyUpdated, possessionMoney);
         }
         else {
-            UIManager.GetInstance().OpenInformation("ERROR: BALANCE REQUEST FAIL");
+            UIManager.GetInstance().OpenInformation("ERROR: CURRENCY REQUEST FAIL");
         }
     }
 
-    public GainDebugBalance() {
-        const data = new RoomData();
-        data.Add("currencyId", "wak");
-        data.Add("quantity", 10000);
-        this._multiplay.Room?.Send("onCredit", data.GetObject());
+    public GainStageBalance(currencyId: string, quantity: number) {
+        // if in Game, Add balance to history
+        if (GameManager.GetInstance().isInGame) this.gainBalanceHistory.push({ currencyId, quantity });
+        UIManager.GetInstance().SetPossessionMoneyText((this.possessionMoney + this.GetTotalGainBalanceHistory()).toString());
+    }
+    public UseStageBalance(currencyId: string, quantity: number) {
+        // if in Game, Add balance to history
+        if (GameManager.GetInstance().isInGame) this.gainBalanceHistory.push({ currencyId, quantity });
+        UIManager.GetInstance().SetPossessionMoneyText((this.possessionMoney + this.GetTotalGainBalanceHistory()).toString());
     }
 
     public GainBalance(currencyId: string, quantity: number) {
+        this.isRefreshed = false;
         const data = new RoomData();
         data.Add("currencyId", currencyId);
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onCredit", data.GetObject());
         // if in Game, Add balance to history
-        if (GameManager.GetInstance().isInGame) this.gainBalanceHistory.push({ currencyId, quantity });
+        //if (GameManager.GetInstance().isInGame) this.gainBalanceHistory.push({ currencyId, quantity });
     }
 
     public GetPossessionMoney(): number{
+        this.GainBalance("wak", 0);
         return this.possessionMoney;
     }
 
+    public GetAvailableBalance(quantity: number): number {
+        if (this.possessionMoney < quantity) {
+            quantity = this.possessionMoney;
+        }
+        return quantity;
+    }
+
     public UseAvailableBalance(currencyId: string, quantity: number) {
+        this.isRefreshed = false;
         if (this.possessionMoney < quantity) {
             quantity = this.possessionMoney;
         }
@@ -112,13 +129,14 @@ export default class BalanceManager extends ZepetoScriptBehaviour implements ILi
             UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_nocurruncey"));
             return false;
         }
+        this.isRefreshed = false;
         const data = new RoomData();
         data.Add("currencyId", currencyId);
         data.Add("quantity", quantity);
         this._multiplay.Room?.Send("onDebit", data.GetObject());
-        console.warn("UseBalance: " + quantity);
+        // console.warn("UseBalance: " + quantity);
         // if in Game, Add balance to history
-        if(GameManager.GetInstance().isInGame) this.useBalanceHistory.push({ currencyId, quantity });
+        // if(GameManager.GetInstance().isInGame) this.useBalanceHistory.push({ currencyId, quantity });
         this.RefreshAllBalanceUI();
         return true;
     }

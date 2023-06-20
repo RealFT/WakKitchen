@@ -210,7 +210,7 @@ export default class extends Sandbox {
             }
             else{
                 //It's usually the case that there's no balance.
-                client.send("DebitError", "Currency Not Enough");
+                client.send("DebitError", "Network Error: Please try again later.");
             }
         }
         catch (e)

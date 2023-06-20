@@ -104,8 +104,10 @@ export default class Settlement extends ZepetoScriptBehaviour {
             yield* animation();
             this.animationInProgress = false;
         }
+        // 애니메이션 종료 후 행동
         this.doubleIncomeButton.gameObject.SetActive(true);
         this.toShopButton.gameObject.SetActive(true);
+
         if(GameManager.GetInstance().GetCurrentStage() == 2){
             HelpManager.GetInstance().GuideSettlement();
         }
@@ -123,11 +125,31 @@ export default class Settlement extends ZepetoScriptBehaviour {
     // Gets daily profit and cost information from the BalanceManager class and calculates net income.
     private GetPriceInformation() {
         this.totalSale = BalanceManager.GetInstance().GetTotalGainBalanceHistory();
-        this.ingredientsCost = BalanceManager.GetInstance().GetTotalUseBalanceHistory();
+        // this.ingredientsCost = BalanceManager.GetInstance().GetTotalUseBalanceHistory();
         this.employeeCost = EmployeeManager.GetInstance().GetTotalEmployeePay();
-        if(this.employeeCost > 0) BalanceManager.GetInstance().UseAvailableBalance(Currency.wak, this.employeeCost);
-        this.netIncome = this.totalSale - this.ingredientsCost - this.employeeCost;
+        this.netIncome = this.totalSale - this.employeeCost;
         this.netIncomeMoneyText.color = this.netIncome >= 0 ? this.totalSaleMoneyText.color : this.employeeMoneyText.color;
+        this.StartCoroutine(this.CheckErrorRoutine());
+    }
+
+    private *CheckErrorRoutine(){
+        const possessionMoney = BalanceManager.GetInstance().GetPossessionMoney() + this.totalSale;
+        // if player doesn't have enough possessionMoney, take as much as player have.
+        const realCost = (possessionMoney < this.employeeCost) ? possessionMoney : this.employeeCost;
+        BalanceManager.GetInstance().GainBalance(Currency.wak, this.totalSale - realCost);
+        
+        let limitTime = 4;
+        while (!BalanceManager.GetInstance().IsRefreshed() || limitTime > 0) {
+            yield new WaitForSeconds(0.4);
+            limitTime - 0.4;
+        }
+
+        // 뭔가의 오류!
+        if (possessionMoney - realCost != BalanceManager.GetInstance().GetPossessionMoney()) {
+            UIManager.GetInstance().OpenInformation("info_networkerror_balance");
+            const failIncomes = DataManager.GetInstance().GetValue("fail_balance");
+            DataManager.GetInstance().SetValue("fail_balance", failIncomes + this.totalSale - realCost);
+        }
     }
 
     // Doubles the current net income and displays the result using animation.

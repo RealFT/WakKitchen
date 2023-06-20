@@ -3,7 +3,6 @@ import { Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import Shop_Employee from './Shop_Employee';
 import Shop_Upgrade from './Shop_Upgrade';
-import Shop_Food from './Shop_Food';
 import GameManager from '../GameManager';
 import SoundManager from '../SoundManager';
 import DataManager from '../DataManager';

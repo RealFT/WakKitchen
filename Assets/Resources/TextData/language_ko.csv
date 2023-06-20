@@ -95,6 +95,9 @@ info_stampfull,도장이 가득 찼습니다.
 info_noselect_card,카드를 선택해야 합니다.
 info_notenough_card,업그레이드에 필요한 카드가 부족합니다.
 info_upgrade_full,이미 최고 등급입니다.
+info_networkerror_balance,네트워크 오류: 정산 정보 동기화에 실패했습니다.
+info_success_restore_balance,손실된 재화 데이터 복구에 성공하였습니다.
+info_fail_restore_balance,손실된 재화 복구에 실패하였습니다.
 event_time_next,다음 보상까지
 event_redeem_locked,잠김
 event_redeem_unlock,보상 수령!

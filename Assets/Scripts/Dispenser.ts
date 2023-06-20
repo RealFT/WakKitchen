@@ -23,6 +23,7 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
     @SerializeField() private cup: Cup;
     @SerializeField() private defaultCupSprite: Sprite;
     @SerializeField() private cupSprites: Sprite[];
+    @SerializeField() private cupCorrections: RectTransform[];  // 컵 보정 위치
     @SerializeField() private unlockDouble: GameObject;
     private curDrink: number;
     private quantity: number = 1;
@@ -116,6 +117,8 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
             const state = this.cup.GetState();
             if (state != CupState.DEFAULT) {
                 this.curDrink = this.GetDrinkByState(state);
+                const correctionPos = new Vector2(this.cupCorrections[this.curDrink - Drink.START].anchoredPosition.x, this.cupTransform.anchoredPosition.y);
+                this.cupTransform.anchoredPosition = correctionPos;
                 this.SetCupImage(this.curDrink);
                 this.cupBtn.interactable = true;
                 SoundManager.GetInstance().OnPlaySFX("Dispenser_liquid");
@@ -149,14 +152,15 @@ export default class Dispenser extends ZepetoScriptBehaviour implements IListene
 
     public DispenserUnlock(level:number){
         if(level >= 1){
-            this.speed = 340;
-            this.speedRange = 0.2;
+            this.speed = 360;
+            this.speedRange = 0.12;
         }
         if(level >= 2){
-            this.speed = 380;
+            this.speed = 420;
             this.speedRange = 0;
         }
         if(level >= 3){
+            this.speed = 480;
             this.quantity = 2;
             this.unlockDouble.SetActive(true);
         }
