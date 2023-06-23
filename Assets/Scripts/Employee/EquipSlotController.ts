@@ -105,7 +105,7 @@ export default class EquipSlotController extends ZepetoScriptBehaviour implement
             SoundManager.GetInstance().OnPlaySFX(SoundManager.GetInstance().keyBtnEquip);
         }
         else{
-            UIManager.GetInstance().OpenInformation("No slots available.");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_notenough_slot"));
             SoundManager.GetInstance().OnPlaySFX("Tresh");
         }
     }

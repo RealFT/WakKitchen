@@ -94,6 +94,7 @@ info_require_section,You must select a section for your employee.
 info_stampfull,The stamp is full.
 info_noselect_card,No card selected.
 info_notenough_card,Not enough cards to Upgrade.
+info_notenough_slot,No slots available.
 info_upgrade_full,Fully upgraded.
 info_networkerror_balance,Network error: Failed to synchronize currency data.
 info_success_restore_balance,Successfully restored lost currency data.

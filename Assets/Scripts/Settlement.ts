@@ -1,4 +1,4 @@
-import { Color, Mathf, Time, WaitForSeconds } from 'UnityEngine';
+import { Color, GameObject, Mathf, Time, WaitForSeconds } from 'UnityEngine';
 import { Text, Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import GameManager from './GameManager';
@@ -31,6 +31,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
     @SerializeField() private doubleConfirmButton: Button;
     @SerializeField() private toShopButton: Button;
     @SerializeField() private animationDuration: number;
+    @SerializeField() private highScoreEffect: GameObject;
     private animationInProgress: boolean = false;
 
     // Array of Generator functions that will be stored in the animations array.
@@ -60,6 +61,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
 
         this.ResetPriceTexts();
         this.GetPriceInformation();
+        this.highScoreEffect.SetActive(false);
         this.doubleIncomeButton.gameObject.SetActive(false);
         this.toShopButton.gameObject.SetActive(false);
         this.StartCoroutine(this.AnimationSequence());
@@ -67,7 +69,21 @@ export default class Settlement extends ZepetoScriptBehaviour {
         SoundManager.GetInstance().OnPlayOnceBGM(SoundManager.GetInstance().keySettlement);
     }
 
+    private CheckHighScore(score: number){
+        const highScore = DataManager.GetInstance().GetValue("highscore");
+
+        if (highScore < score){
+            DataManager.GetInstance().SetValue("highscore", score);
+            this.highScoreEffect.SetActive(true);
+        }
+        else{
+            this.highScoreEffect.SetActive(false);
+        }
+    }
+
     Start() {
+        this.highScoreEffect.SetActive(false);
+
         this.doubleConfirmButton.onClick.AddListener(() => {
             this.OnDoubleIncome();
             SoundManager.GetInstance().OnPlayButtonSFX("Purchase");
@@ -99,12 +115,14 @@ export default class Settlement extends ZepetoScriptBehaviour {
 
     //  Coroutine function that plays a sequence of animations stored in the animations array.
     private *AnimationSequence() {
+        this.highScoreEffect.SetActive(false);
         for (const animation of this.animations) {
             this.animationInProgress = true;
             yield* animation();
             this.animationInProgress = false;
         }
         // 애니메이션 종료 후 행동
+        this.CheckHighScore(this.netIncome);
         this.doubleIncomeButton.gameObject.SetActive(true);
         this.toShopButton.gameObject.SetActive(true);
 
@@ -115,7 +133,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
 
     // Resets all Text UI elements to empty strings.
     private ResetPriceTexts() {
-        this.dateText.text = `Day ${GameManager.GetInstance().GetCurrentStage()}`;
+        this.dateText.text = `DAY ${GameManager.GetInstance().GetCurrentStage()}`;
         this.totalSaleMoneyText.text = "";
         this.employeeMoneyText.text = "";
         // this.IngredientsMoneyText.text = "";
@@ -146,7 +164,7 @@ export default class Settlement extends ZepetoScriptBehaviour {
 
         // 뭔가의 오류!
         if (possessionMoney - realCost != BalanceManager.GetInstance().GetPossessionMoney()) {
-            UIManager.GetInstance().OpenInformation("info_networkerror_balance");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_networkerror_balance"));
             const failIncomes = DataManager.GetInstance().GetValue("fail_balance");
             DataManager.GetInstance().SetValue("fail_balance", failIncomes + this.totalSale - realCost);
         }

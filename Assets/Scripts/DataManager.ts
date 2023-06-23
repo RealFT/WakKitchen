@@ -262,10 +262,10 @@ export default class DataManager extends ZepetoScriptBehaviour {
         if (fixedMoney === BalanceManager.GetInstance().GetPossessionMoney()) {
             // 데이터 동기화 성공
             DataManager.GetInstance().SetValue("fail_balance", 0);
-            UIManager.GetInstance().OpenInformation("info_success_restore_balance");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_success_restore_balance"));
         } else {
             // 데이터 동기화 실패
-            UIManager.GetInstance().OpenInformation("info_fail_restore_balance");
+            UIManager.GetInstance().OpenInformation(DataManager.GetInstance().GetCurrentLanguageData("info_fail_restore_balance"));
         }
     }
     // public DebugStage() {

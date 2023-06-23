@@ -94,6 +94,7 @@ info_require_section,職員が作業するセクションを選択しなけれ�
 info_stampfull,スタンプがいっぱいです
 info_noselect_card,カードを選択する必要があります。
 info_notenough_card,アップグレードに必要なカードが足りません。
+info_notenough_slot,取り付け可能なスロットがありません。
 info_upgrade_full,すでに最高等級です。
 info_networkerror_balance,ネットワークエラー:精算情報を同期できませんでした。
 info_success_restore_balance,失われた残高データ復元に成功しました。

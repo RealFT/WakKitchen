@@ -23,6 +23,8 @@ export default class Shop extends ZepetoScriptBehaviour {
     @SerializeField() private cancelPlayText: TextMeshProUGUI;
     @SerializeField() private confirmPlayBtn: Button;
     @SerializeField() private cancelPlayBtn: Button;
+    @SerializeField() private dayText: TextMeshProUGUI;
+    @SerializeField() private scoreText: TextMeshProUGUI;
 
     OnEnable(){
         this.categoryTextEmployee.text = DataManager.GetInstance().GetCurrentLanguageData("shop_employee_category");
@@ -30,6 +32,8 @@ export default class Shop extends ZepetoScriptBehaviour {
         this.emptyPlayText.text = DataManager.GetInstance().GetCurrentLanguageData("panel_empty");
         this.confirmPlayText.text = DataManager.GetInstance().GetCurrentLanguageData("button_confirm");
         this.cancelPlayText.text = DataManager.GetInstance().GetCurrentLanguageData("button_cancel");
+        this.dayText.text = `Day - ${GameManager.GetInstance().GetCurrentStage()}`;
+        this.scoreText.text = `${DataManager.GetInstance().GetValue("highscore")}`;
     }
 
     Start() {
